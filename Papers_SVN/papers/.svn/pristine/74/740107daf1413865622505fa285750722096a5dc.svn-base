@@ -1,0 +1,32 @@
+\begin{tabular}{|l|l|l|l|l|l|l|}
+
+\hline
+\multicolumn{6}{|l|}{Mote}                                                   \\
+\hline
+Type		& Rene    & Mica2      & iMote      & btNode     & Telos     \\
+\hline
+Year		& 2000    & 2003       & 2003       & 2003       & 2004      \\
+\hline
+Institution	& UCB     & UCB        & Intel      & ETHZ       & UCB       \\
+\hline
+\hline
+\multicolumn{6}{|l|}{CPU}                                                    \\
+\hline
+$\mu$controller	& AVR     & AVR        & ARM        & AVR        & MSP430    \\
+\hline
+Clock		& 4 Mhz   & 8 Mhz      & 12 Mhz     & 8 Mhz      & 8 Mhz     \\
+\hline
+Program Memory	& 8 KB    & 128 KB     & 512 KB     & 128 KB     & 60 KB     \\
+\hline
+RAM		& 0.5 KB  & 4 KB       & 64 KB      & 4 KB       & 10 KB      \\
+\hline
+\hline
+\multicolumn{6}{|l|}{Radio Communication}                                    \\
+\hline
+Type		& RFM     & Chipcon    & Bluetooth  & Bluetooth  & 802.15.4  \\
+\hline
+Frequency (Mhz)	& 916     & 433/916    & 2400       & 2400       & 2400      \\
+\hline
+Rate (kbps)     & 10      & 40         & 700        & 700        & 250       \\
+\hline
+\end{tabular}

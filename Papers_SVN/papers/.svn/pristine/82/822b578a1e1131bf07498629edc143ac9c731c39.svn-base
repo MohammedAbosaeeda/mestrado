@@ -1,0 +1,300 @@
+%!PS-Adobe-2.0 EPSF-2.0
+%%Title: aop.fig
+%%Creator: fig2dev Version 3.2 Patchlevel 3d
+%%CreationDate: Sat Mar  9 15:01:41 2002
+%%For: guto@chaos.lisha.ufsc.br (Antonio Augusto Froehlich)
+%%BoundingBox: 0 0 102 141
+%%Magnification: 1.0000
+%%EndComments
+/$F2psDict 200 dict def
+$F2psDict begin
+$F2psDict /mtrx matrix put
+/col-1 {0 setgray} bind def
+/col0 {0.000 0.000 0.000 srgb} bind def
+/col1 {0.000 0.000 1.000 srgb} bind def
+/col2 {0.000 1.000 0.000 srgb} bind def
+/col3 {0.000 1.000 1.000 srgb} bind def
+/col4 {1.000 0.000 0.000 srgb} bind def
+/col5 {1.000 0.000 1.000 srgb} bind def
+/col6 {1.000 1.000 0.000 srgb} bind def
+/col7 {1.000 1.000 1.000 srgb} bind def
+/col8 {0.000 0.000 0.560 srgb} bind def
+/col9 {0.000 0.000 0.690 srgb} bind def
+/col10 {0.000 0.000 0.820 srgb} bind def
+/col11 {0.530 0.810 1.000 srgb} bind def
+/col12 {0.000 0.560 0.000 srgb} bind def
+/col13 {0.000 0.690 0.000 srgb} bind def
+/col14 {0.000 0.820 0.000 srgb} bind def
+/col15 {0.000 0.560 0.560 srgb} bind def
+/col16 {0.000 0.690 0.690 srgb} bind def
+/col17 {0.000 0.820 0.820 srgb} bind def
+/col18 {0.560 0.000 0.000 srgb} bind def
+/col19 {0.690 0.000 0.000 srgb} bind def
+/col20 {0.820 0.000 0.000 srgb} bind def
+/col21 {0.560 0.000 0.560 srgb} bind def
+/col22 {0.690 0.000 0.690 srgb} bind def
+/col23 {0.820 0.000 0.820 srgb} bind def
+/col24 {0.500 0.190 0.000 srgb} bind def
+/col25 {0.630 0.250 0.000 srgb} bind def
+/col26 {0.750 0.380 0.000 srgb} bind def
+/col27 {1.000 0.500 0.500 srgb} bind def
+/col28 {1.000 0.630 0.630 srgb} bind def
+/col29 {1.000 0.750 0.750 srgb} bind def
+/col30 {1.000 0.880 0.880 srgb} bind def
+/col31 {1.000 0.840 0.000 srgb} bind def
+/col32 {0.941 0.941 0.941 srgb} bind def
+/col33 {0.878 0.878 0.878 srgb} bind def
+/col34 {0.816 0.816 0.816 srgb} bind def
+/col35 {0.753 0.753 0.753 srgb} bind def
+/col36 {0.690 0.690 0.690 srgb} bind def
+/col37 {0.627 0.627 0.627 srgb} bind def
+/col38 {0.565 0.565 0.565 srgb} bind def
+/col39 {0.502 0.502 0.502 srgb} bind def
+/col40 {0.439 0.439 0.439 srgb} bind def
+/col41 {0.376 0.376 0.376 srgb} bind def
+/col42 {0.314 0.314 0.314 srgb} bind def
+/col43 {0.251 0.251 0.251 srgb} bind def
+/col44 {0.188 0.188 0.188 srgb} bind def
+/col45 {0.125 0.125 0.125 srgb} bind def
+/col46 {0.063 0.063 0.063 srgb} bind def
+/col47 {0.000 0.000 0.000 srgb} bind def
+/col48 {0.251 0.251 0.251 srgb} bind def
+/col49 {0.502 0.502 0.502 srgb} bind def
+/col50 {0.753 0.753 0.753 srgb} bind def
+/col51 {0.753 0.753 0.753 srgb} bind def
+/col52 {0.878 0.878 0.878 srgb} bind def
+/col53 {0.557 0.557 0.557 srgb} bind def
+/col54 {0.267 0.267 0.267 srgb} bind def
+/col55 {0.557 0.557 0.557 srgb} bind def
+/col56 {0.267 0.267 0.267 srgb} bind def
+
+end
+save
+newpath 0 141 moveto 0 0 lineto 102 0 lineto 102 141 lineto closepath clip newpath
+0.9 142.2 translate
+1 -1 scale
+
+/cp {closepath} bind def
+/ef {eofill} bind def
+/gr {grestore} bind def
+/gs {gsave} bind def
+/sa {save} bind def
+/rs {restore} bind def
+/l {lineto} bind def
+/m {moveto} bind def
+/rm {rmoveto} bind def
+/n {newpath} bind def
+/s {stroke} bind def
+/sh {show} bind def
+/slc {setlinecap} bind def
+/slj {setlinejoin} bind def
+/slw {setlinewidth} bind def
+/srgb {setrgbcolor} bind def
+/rot {rotate} bind def
+/sc {scale} bind def
+/sd {setdash} bind def
+/ff {findfont} bind def
+/sf {setfont} bind def
+/scf {scalefont} bind def
+/sw {stringwidth} bind def
+/tr {translate} bind def
+/tnt {dup dup currentrgbcolor
+  4 -2 roll dup 1 exch sub 3 -1 roll mul add
+  4 -2 roll dup 1 exch sub 3 -1 roll mul add
+  4 -2 roll dup 1 exch sub 3 -1 roll mul add srgb}
+  bind def
+/shd {dup dup currentrgbcolor 4 -2 roll mul 4 -2 roll mul
+  4 -2 roll mul srgb} bind def
+ /DrawEllipse {
+	/endangle exch def
+	/startangle exch def
+	/yrad exch def
+	/xrad exch def
+	/y exch def
+	/x exch def
+	/savematrix mtrx currentmatrix def
+	x y tr xrad yrad sc 0 0 1 startangle endangle arc
+	closepath
+	savematrix setmatrix
+	} def
+
+/$F2psBegin {$F2psDict begin /$F2psEnteredState save def} def
+/$F2psEnd {$F2psEnteredState restore end} def
+
+$F2psBegin
+10 setmiterlimit
+ 0.06000 0.06000 sc
+%
+% Fig objects follow
+%
+% Polyline
+7.500 slw
+n 1087 825 m 1312 825 l 1200 600 l
+ 1087 825 l  cp gs col0 s gr 
+% Polyline
+n 1163 1995 m 938 1882 l 938 2107 l
+ 1163 1995 l  cp gs col0 s gr 
+% Arc
+n 912.9 1994.0 32.5 -56.2 57.1 arcn
+gs col0 s gr
+
+% Arc
+n 913.2 1939.0 33.2 -57.5 57.5 arcn
+gs col0 s gr
+
+% Arc
+n 912.9 2049.0 32.5 -56.2 57.1 arcn
+gs col0 s gr
+
+% Arc
+n 593.1 1991.0 32.5 -123.8 122.9 arc
+gs col0 s gr
+
+% Arc
+n 592.8 1936.0 33.2 -122.5 122.5 arc
+gs col0 s gr
+
+% Arc
+n 593.1 2046.0 32.5 -123.8 122.9 arc
+gs col0 s gr
+
+% Rotated Ellipse
+gs
+751 1994 tr
+-270.001 rot
+n 0 0 119 119 0 360 DrawEllipse 270.001 rot
+gs col0 s gr
+gr
+
+% Polyline
+n 563 1882 m 563 2107 l 338 2107 l 338 1882 l
+ cp gs col0 s gr 
+% Ellipse
+n 1387 412 119 119 0 360 DrawEllipse gs col0 s gr
+
+% Polyline
+n 225 1200 m 375 1200 l 450 1275 l 1050 1275 l 1125 1200 l 1275 1200 l
+ 1050 1500 l 450 1500 l
+ 225 1200 l  cp gs col0 s gr 
+% Polyline
+30.000 slw
+gs  clippath
+705 1815 m 795 1815 l 795 1669 l 750 1789 l 705 1669 l cp
+eoclip
+n 750 1500 m
+ 750 1800 l gs col0 s gr gr
+
+% arrowhead
+7.500 slw
+n 705 1669 m 750 1789 l 795 1669 l 705 1669 l  cp gs 0.00 setgray ef gr  col0 s
+% Polyline
+30.000 slw
+gs  clippath
+1155 1215 m 1245 1215 l 1245 1069 l 1200 1189 l 1155 1069 l cp
+eoclip
+n 1200 900 m
+ 1200 1200 l gs col0 s gr gr
+
+% arrowhead
+7.500 slw
+n 1155 1069 m 1200 1189 l 1245 1069 l 1155 1069 l  cp gs 0.00 setgray ef gr  col0 s
+% Polyline
+30.000 slw
+gs  clippath
+255 1215 m 345 1215 l 345 1069 l 300 1189 l 255 1069 l cp
+eoclip
+n 300 900 m
+ 300 1200 l gs col0 s gr gr
+
+% arrowhead
+7.500 slw
+n 255 1069 m 300 1189 l 345 1069 l 255 1069 l  cp gs 0.00 setgray ef gr  col0 s
+% Polyline
+n 900 300 m 1125 300 l 1125 525 l 900 525 l
+ cp gs col0 s gr 
+/Helvetica ff 150.00 scf sf
+750 1425 m
+gs 1 -1 sc (weaver) dup sw pop 2 div neg 0 rm  col0 sh gr
+/Helvetica-Bold ff 150.00 scf sf
+750 2325 m
+gs 1 -1 sc (Program) dup sw pop 2 div neg 0 rm  col0 sh gr
+/Helvetica-Bold ff 150.00 scf sf
+300 150 m
+gs 1 -1 sc (Aspects) dup sw pop 2 div neg 0 rm  col0 sh gr
+/Helvetica-Bold ff 150.00 scf sf
+1200 150 m
+gs 1 -1 sc (Components) dup sw pop 2 div neg 0 rm  col0 sh gr
+% Arc
+n 128.2 744.2 62.5 98.5 -135.0 arcn
+gs col-1 s gr
+
+% Arc
+n 125.3 647.0 67.2 127.9 -127.9 arcn
+gs col-1 s gr
+
+% Arc
+n 125.1 541.0 67.1 127.8 -127.8 arcn
+gs col-1 s gr
+
+% Arc
+n 128.2 443.8 62.5 -98.5 135.0 arc
+gs col-1 s gr
+
+% Polyline
+n 119 876 m
+ 119 806 l gs col-1 s gr 
+% Polyline
+n 115 382 m 123 382 l gs col-1 s gr
+% Polyline
+n 119 382 m
+ 119 312 l gs col-1 s gr 
+% Arc
+n 269.2 744.2 62.5 98.5 -135.0 arcn
+gs col-1 s gr
+
+% Arc
+n 266.3 647.0 67.2 127.9 -127.9 arcn
+gs col-1 s gr
+
+% Arc
+n 266.1 541.0 67.1 127.8 -127.8 arcn
+gs col-1 s gr
+
+% Arc
+n 269.2 443.8 62.5 -98.5 135.0 arc
+gs col-1 s gr
+
+% Polyline
+n 260 876 m
+ 260 806 l gs col-1 s gr 
+% Polyline
+n 256 382 m 264 382 l gs col-1 s gr
+% Polyline
+n 260 382 m
+ 260 312 l gs col-1 s gr 
+% Arc
+n 419.2 744.2 62.5 98.5 -135.0 arcn
+gs col-1 s gr
+
+% Arc
+n 416.3 647.0 67.2 127.9 -127.9 arcn
+gs col-1 s gr
+
+% Arc
+n 416.1 541.0 67.1 127.8 -127.8 arcn
+gs col-1 s gr
+
+% Arc
+n 419.2 443.8 62.5 -98.5 135.0 arc
+gs col-1 s gr
+
+% Polyline
+n 410 876 m
+ 410 806 l gs col-1 s gr 
+% Polyline
+n 406 382 m 414 382 l gs col-1 s gr
+% Polyline
+n 410 382 m
+ 410 312 l gs col-1 s gr 
+$F2psEnd
+rs

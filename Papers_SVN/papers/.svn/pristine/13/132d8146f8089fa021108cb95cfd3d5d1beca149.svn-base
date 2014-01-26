@@ -1,0 +1,254 @@
+\documentclass[preprint,5p]{elsarticle}
+
+\usepackage[english]{babel}
+
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{lineno}
+
+\selectlanguage{english}
+
+\journal{Ad Hoc Networks}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{ADHOP: a Low Overhead Routing Protocol for Highly Mobile Wireless Sensor Networks}
+
+\cortext[cor]{Corresponding author. Phone/Fax: + 55 48 3721-9516}
+
+\author{Alexandre Massayuki Okazaki}
+\ead{alexandre@lisha.ufsc.br}
+\ead[url]{http://www.lisha.ufsc.br/alexandre}
+
+\author{Ant\^onio Augusto Fr\"ohlich\corref{cor}}
+\ead{guto@lisha.ufsc.br}
+\ead[url]{http://www.lisha.ufsc.br/guto}
+
+\address{Laboratory for Software and Hardware Integration (LISHA)\\}
+\address{Federal University of Santa Catarina (UFSC)\\}
+\address{P.O.Box 476, 88040-900 -- Florian\'opolis -- Brazil}
+
+\hyphenation{net-works MA-NET through meth-odologies pher-o-mone light-weight}
+
+\begin{abstract}
+%% Text of abstract
+\end{abstract}
+
+\begin{keyword}
+%% keywords here, in the form: keyword \sep keyword
+Mobile Wireless Sensor Networks \sep Ant Colony Optimization \sep Routing Protocols \sep Dynamic Topologies
+\end{keyword}
+
+\end{frontmatter}
+
+%%
+%% Start line numbering here if you want
+%%
+% \linenumbers
+
+%% main text
+
+\section{Introduction}
+\label{sec:introduction}
+
+\emph{Wireless Sensor Networks} (WSNs) are enabling a myriad of novel \emph{Information Technologies} and \emph{Communication Applications}.
+Our future \emph{Smart Cities} and \emph{Internet of Things} will also rely on technologies being developed in the realm of WSNs.
+It is now evident that planet Earth will soon be instrumented by billions or trillions of micro and nanosensors---hopefully biodegradable.
+For such a large scale deployment, application designers must consider a large number of failures, which will cause the network's topology to change constantly.
+Many applications will also require nodes to go mobile, either embedded in some ordinary device or specifically designed to move around, such as floating sensors on a lake.
+This class of WSN applications calls for routing algorithms able to deal with dynamic topologies and their resulting overhead.
+
+Many routing concepts for networks have been developed, mainly for \emph{Mobile Ad Hoc Networks} (MANETs) [].
+Protocols for mobile networks must be self-organizing and self-configuring to deal efficiently with dynamic topologies.
+However, most of these solutions relies in mechanisms that generate additional overhead to manage mobility.
+As a result, few of them can go with the low-resource and high-noise world of WSNs.
+
+Among the routing algorithms for MANETs, ant-based algorithms have been effective to deal with mobility-related overhead~[].
+Based on the \emph{Ant Colony Optimization} (ACO) metaheuristic, such algorithms employ pheromone as a metric to define the quality of routes.
+The goal of this method is to abstract routing operations into simpler operations of pheromone's deposit and evaporation.
+Many approaches based on ACO have been specifically designed for WSNs, due to such simplicity~[].
+
+In this paper, we explore ACO-based routing techniques to design a routing algorithm which aims at reducing the routing overhead in mobile WSN environments.
+We describe \emph{Ant-based Dynamic Hop Optimization Protocol} (ADHOP), a self-organizing and self-configuring routing algorithm for mobile networks~[].
+We compare it with the HOPNET, a routing protocol for MANETs that aims at handling mobility efficiently~[].
+We show in such comparison how to encompass many optimization criteria under the pheromone concept, thus allowing for a slim, yet configurable, implementation of a routing algorithm.
+We also compare ADHOP with the most significant related ones by means of a simulation performed with OMNeT++, using a high mobility scenario for IEEE 802.15.4 networks.
+We show how such optimizations help to achieve better results in terms of data delivery ratio and routing overhead.
+Besides corroborating our claims, this evaluation sets guidelines that can be used by other researches while designing WSN routing algorithms.
+
+\begin{itemize}
+    \item Paper organization.
+\end{itemize}
+
+\section{Related Work}
+\label{sec:related}
+
+WSNs are noisy and error prone; therefore, efficient routing techniques must deal with the communication limitations to achieve the application purpose.
+In mobile environments, the associated routing protocol must also be aware of the nodes' mobility to avoid additional overhead.
+
+The main problem for such networks is the breakage and regeneration of links at the routing layer as they consist of mobile nodes.
+\emph{Optimized Link State Routing Protocol} (OLSR) is a proactive link state routing protocol for wireless ad hoc networks~[].
+The protocol sends topology control messages intermittently to discover and then disseminate link state information throughout the network.
+Each node uses this topology information to compute the next hop.
+
+\emph{Destination-Sequenced Distance-Vector} (DSDV) is also a proactive routing protocol which guarantees loop-free routes~[].
+DSDV models cooperative nodes that periodically announces the interconnection topology among nodes to provide appropriate connectivity for mobile nodes in ad hoc networks.
+Nevertheless, in mobile networks, due to constant changes in topology, proactive routing algorithms is not feasible.
+The cost to maintain updated routes in mobile and ad hoc networks is still extremely high, mainly for WSNs.
+
+\emph{Ad hoc On Demand Distance Vector} (AODV) is a reactive routing protocol designed for MANETs~[].
+The protocol defines routes using a route request and route reply query cycle.
+Considering high mobility and high rate of data loss, AODV may increase the load of control packets.
+Each time a route breaks, AODV floods the network with these messages to notify and/or define a new route.
+\emph{Dynamic On-demand MANET routing protocol} (DYMO) is also a reactive routing for MANETs~[].
+This protocol is similar to AODV, but it uses more basic route discovery and maintenance procedures.
+However, DYMO presents the same overhead of AODV in regard to highly dynamic topologies.
+
+Haas [] proposed \emph{Zone Routing Protocol} (ZRP), a hybrid routing protocol that aims at reducing the control overhead of proactive protocols and the latency of reactive protocols.
+Each node maintains a proactive routing within its zone in order to obtain reliable link information among its neighbors.
+The reactive routing handles the packets to outside the zone.
+HOPNET is a multihop hybrid routing algorithm proposed by Thulasiram and others [].
+This protocol has features extracted from ZRP and involves ACO in the proactive routing in order to maintain and improve the existing routes or explore better options.
+HOPNET has obtained satisfactory results in environments of high scalability and high mobility.
+Because of its efficiency in dealing with dynamic topology networks, many HOPNET features influence the ADHOP algorithm.
+
+Data-centric routing protocols tend to be a favorable choice to reduce the transmitted redundant data due to the ability to select a set of sensor nodes during the relaying of information.
+\emph{Adaptive Ant Colony System} (AACS) is a data-centric routing protocol which uses \emph{Direct Diffusion} to distribute interest messages to construct the \emph{Minimum Steiner Tree} (MST) [].
+Data aggregation based on AACS, along with the MST, helps to reduce the amount of transmitted data in the network to save energy and prolong network lifetime.
+In dynamic topologies, the algorithm needs to reconstruct the MST periodically causing additional overhead and thus compromising both targeted metrics.
+Differently from ADHOP, most of this class of protocols does not consider dynamic topologies, hindering an efficient data flow in the network.
+
+\emph{Low-Energy Adaptive Clustering Hierarchy} (LEACH) is a hierarchical and cluster-based algorithm which minimizes energy consumption by distributing the network load at different points in time [].
+LEACH performs local computation in each cluster to reduce the amount of data that must be transmitted to the base station.
+Nonetheless, it relies on single-hop communication to the cluster-head and the sink.
+In dynamic topologies, it brings extra overhead to the cluster-head and diminish the gain in energy consumption.
+
+\emph{Energy Efficient Variable Area Routing} protocol (EE-VAR) is a cluster formation algorithm that aims at improving energy efficiency [].
+These clustering methods of sensor networks tend to reduce the network load.
+The proposed method minimizes energy consumption by prolonging a setup period and thus reducing to the least possible number the amount of nodes participating in setup.
+However, EE-VAR still presents the same limitations of LEACH in respect to dynamic topologies.
+
+\emph{Ant based Routing with Congestion Control} (ARCC) is an ant-based algorithm for WSNs which focuses on congestion control of the network [].
+This protocol is efficient in dealing with upstream congestion and performs better with respect to throughput, packet loss, and priority performance.
+However, ARCC uses Intelligent Congestion Detection as a mechanism to measure the time interval between two sequential packets arriving.
+ADHOP uses only pheromone to avoid transparently the probable congestion and additional overhead.
+
+\emph{Ant-Based On-Demand Energy Route} (AOER) is a routing algorithm for IEEE 802.15.4 mesh networks based on AODV [].
+Differently from other protocols based on ACO, AOER requires less memory storage, less processing power, and simpler data structures for ants and routing table.
+The algorithm maintains the routes by inserting pheromone according to the residual energy in the nodes to distribute the traffic or the data flow equally in the network.
+AOER has shown satisfactory results in prolonging the network lifetime and balancing energy consumption among nodes.
+The authors present a solution similar to ADHOP taking into account the reduction of memory usage and processing.
+However, AOER uses a mechanism that hinders the data delivery ratio to obtain an efficient energy consumption in the network.
+
+Vlajic and Stevanovic [] analyzed the pros and cons of deploying path-constrained mobile sinks in real IEEE 802.15.4 networks.
+They introduced two basic mechanisms for the reduction of mobility-related overhead in WSNs.
+They also demonstrated analytically and through simulation that, in idealist networks, mobile sinks can result in a better distribution of routing load and longer network lifetime.
+F\"orster and Murphy [] proposed \emph{Feedback Routing for Optimization Multiple Sinks} (FROMS), a routing protocol which supports node failure, sink mobility, and applies a model-free reinforcement learning technique to achieve suboptimal solutions.
+They present a formal definition of the multiple sink routing problem as a reinforcement learning task.
+They also show that the expense of learning and the low overhead to piggyback reward information significantly lowers routing costs.
+The authors also proposed the evaluation and discussion of FROMS implementation on \emph{ScatterWeb} sensor nodes [].
+They demonstrate the feasibility of implementing a machine learning protocol on real hardware, verifying its increased performance in comparison to traditional approaches.
+They also offer some general observations on properties and pitfalls of WSN implementations along with potential solutions.
+
+
+\section{ADHOP: The Proposed Routing Strategy}
+\label{sec:proposed}
+
+\begin{itemize}
+    \item Introduce ADHOP.
+    \item Tell the similarities between ADHOP and AOER (WSN; energy efficient and network flow protocol; ant-base protocol).
+    \item Explain why ADHOP is based on HOPNET (MANET; efficient hybrid protocol; ant-based protocol).
+    \item List the features that ADHOP changes in relation to HOPNET.
+\end{itemize}
+
+\subsection{Routing based on ACO}
+
+\begin{itemize}
+    \item Introduce the ant collective intelligence.
+    \item Briefly describe the ant behaviour.
+    \item How ants are used in routing protocol.
+    \item What is different in ADHOP? Response.
+\end{itemize}
+
+\subsection{Zones X Hops}
+
+\begin{itemize}
+    \item HOPNET, as a hybrid protocol, uses zones to perform routing.
+    \item Describe how zones are used. (proactive, reactive)
+    \item Point out the negatives.
+    \item Introduce dynamic hops.
+    \item Tell what changes in the routing decisions by using dynamic hops.
+\end{itemize}
+
+\subsection{Ants and Routing Tables}
+
+\begin{itemize}
+    \item Introduce the HOPNET ants (fields - functions).
+    \item Describe the relation between the HOPNET ants and the HOPNET routing tables.
+    \item Why the HOPNET routing tables are so bad.
+    \item Introduce the ADHOP routing table (similar to the AOER).
+    \item Introduce the ADHOP ants (fields - functions) (optimized to the routing table).
+\end{itemize}
+
+\subsection{ADHOP routing scheme}
+
+\begin{itemize}
+    \item Section that introduces the ADHOP routing scheme.
+    \item ADHOP is presented by comparing with HOPNET. Explain why.
+    \item Explain how a Data transmission happens in HOPNET (from the upper layer to the lower layer). - Sequence Diagram
+    \item Explain what happens when HOPNET receives the Data. - Sequence Diagram
+    \item Explain what happens when HOPNET receives the IF Ant. - Sequence Diagram
+    \item Explain what happens when HOPNET receives the EF Ant. - Sequence Diagram
+    \item Explain what happens when HOPNET receives the B Ant. - Sequence Diagram
+    \item Explain what happens when HOPNET receives the N Ant or E Ant.
+    \item Equations for pheromone deposing and evaporation.
+    \item Highlight the negatives of HOPNET and tell that ADHOP aims at having simple operations in order to deal with mobility in WSNs.
+    \item Explain how a Data transmission happens in ADHOP (from the upper layer to the lower layer). - Sequence Diagram
+    \item Explain what happens when HOPNET receives the ET Ant. - Sequence Diagram
+    \item Explain what happens when HOPNET receives the FT Ant. - Sequence Diagram
+    \item Equations for pheromone deposing and evaporation.
+    \item Explain why ADHOP equations and HOPNET equations are different.
+\end{itemize}
+
+\section{Implementation and Evaluation}
+\label{sec:evaluation}
+
+\begin{itemize}
+    \item Explain the stages of the experiments.
+\end{itemize}
+
+\subsection{Stage I: IEEE 802.11}
+\label{ieee80211}
+
+\begin{itemize}
+    \item GloMoSim. Explain why.
+    \item Explain the setup of simulation and the parameters.
+    \item Explain the Data Delivery Ratio.
+    \item Explain the Routing Overhead.
+\end{itemize}
+
+\subsection{IEEE 802.15.4}
+\label{ieee802154}
+
+\begin{itemize}
+    \item OMNeT++.
+    \item Explain the setup of simulation and the parameters.
+    \item Explain the Routing Overhead.
+    \item Explain the Data Delivery Ratio.
+\end{itemize}
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+\bibliographystyle{elsarticle-num}
+\bibliography{paper}
+
+\end{document}
+
+%%
+%% End of file `paper.tex'.

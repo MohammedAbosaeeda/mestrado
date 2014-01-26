@@ -1,0 +1,47 @@
+This is BibTeX, Version 0.99c (Web2C 7.5.4)
+The top-level auxiliary file: pm_epos.aux
+The style file: abbrv.bst
+Database file #1: pm_epos.bib
+Warning--to sort, need author or key in uclinux
+You've used 22 entries,
+            2118 wiz_defined-function locations,
+            655 strings with 8100 characters,
+and the built_in function-call counts, 9143 in all, are:
+= -- 943
+> -- 402
+< -- 13
++ -- 161
+- -- 136
+* -- 623
+:= -- 1404
+add.period$ -- 73
+call.type$ -- 22
+change.case$ -- 133
+chr.to.int$ -- 0
+cite$ -- 23
+duplicate$ -- 385
+empty$ -- 712
+format.name$ -- 136
+if$ -- 2031
+int.to.chr$ -- 0
+int.to.str$ -- 22
+missing$ -- 21
+newline$ -- 111
+num.names$ -- 42
+pop$ -- 159
+preamble$ -- 1
+purify$ -- 112
+quote$ -- 0
+skip$ -- 292
+stack$ -- 0
+substring$ -- 583
+swap$ -- 134
+text.length$ -- 13
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 86
+warning$ -- 1
+while$ -- 85
+width$ -- 24
+write$ -- 260
+(There was 1 warning)

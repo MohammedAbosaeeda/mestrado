@@ -1,0 +1,48 @@
+\subsubsection{Reusability evaluation}
+
+\tab[ht]{tab_results_code_scenarios}
+{Number of lines of code used to implement each scenario}
+
+\tabTC[ht]{tab_results_code_modules}
+{Number of lines of code used to implement the case studies modules}
+
+\tabTC[ht]{tab_results_code_cs}
+{Number of lines of code used to implement the scenarios adapters compared with the hand-coded
+versions}
+
+In order to provide an accurate evaluation, we have considered different code sections in the code
+analysis. \emph{Declarations} are the lines of code used for class's attributes declaration, which
+includes the declaration of constants, ports, modules, and signals. \emph{Behavior} includes only
+the body of methods implementing behavior. \emph{Interconnection} are the lines of code used to
+define the interconnection among modules and SystemC processes declaration (i.e. the content of the
+constructor method of classes which inherit from \emph{sc\_module}). \emph{Other} includes the
+remaining lines. Tables \ref{tab_results_code_scenarios} and \ref{tab_results_code_modules} show the
+number of lines of code for each scenario and for each SystemC module, respectively. In
+table \ref{tab_results_code_modules}, for modules which are implemented using more than one C++
+class, the respective column includes the information for the entire class hierarchy. The number of
+lines in common superclasses such as \emph{sc\_module} and \emph{Aspect\_Common} is not considered.
+
+
+Table \ref{tab_results_code_cs} compares the number of lines of code of the scenario
+adapters with the hand-coded versions of each case study. Column \emph{Scenarios-adapted}
+shows the number of lines in the class which implements the scenario adapter. Column
+\emph{Hand-coded} shows the number of lines when our approach is not used and the aspects are
+hand-coded in
+the core components. This column shows only the number of lines that were modified or added in
+order to include the additional behavior. The results show that the effort to write a scenario
+adapter is considerably smaller than directly modifying the components. The only code section that
+requires more effort is not related to the actual functionality of the design, but to the syntactic
+structure of SystemC (the \emph{Others} line in tables
+\ref{tab_results_code_scenarios}--\ref{tab_results_code_cs}). However, even when considering all
+code sections, the difference between the scenario-adapted and the hand-coded case studies ranges
+from $33\%$ to $71\%$.
+
+Table \ref{tab_results_code_total} shows the total number of lines of code when the three case
+studies are considered together. These results show that the \emph{total} number of lines written
+is actually smaller in the handed-coded design, highlighting the initial development overhead of
+providing a modular implementation of aspects and scenarios. This reusability is quantified by
+column \emph{Reusability factor} which shows that $33\%$ of the written code is reused in at least
+two of our three case studies. This factor is null in the hand-coded implementations.
+
+\tab[ht]{tab_results_code_total}
+{Total number of lines of code and reusability factor }

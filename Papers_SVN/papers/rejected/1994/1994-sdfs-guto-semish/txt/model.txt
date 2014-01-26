@@ -1,0 +1,29 @@
+%-------------------------------------------------------------------------------
+% MODELO ARQUITETURAL
+%-------------------------------------------------------------------------------
+\section{Modelo Arquitetural}
+
+Durante muito tempo os sistemas de arquivos foram trechos obscuros do código de sistemas operacionais monolíticos. A evolução natural da construção de sistemas operacionais levou primeiro aos sistemas operacionais modulares, mais claros e organizados, e culminou no modelo cliente-servidor, onde os sistemas operacionais são compostos por processos que se comunicam exclusivamente através de mensagens. Esse foi o modelo adotado para a implementação do {\sdfs}.
+
+Na maior parte dos sistemas operacionais, o sistema de arquivos é implementado por um único servidor. No caso do {\sdfs}, levou-se em conta a complexidade de
+um sistema de arquivos e, com vistas a aproveitar o seu paralelismo implícito, decidiu-se subdividí-lo em três servidores:
+
+\begin{itemize}
+
+\item Um servidor encarregado de traduzir nomes de arquivos em identificadores internos, implementando as estruturas de diretórios. Esse servidor é também responsável pela transparência de localidade dos arquivos, i. e., é ele quem conhece a localização dos arquivos e dos servidores associados.
+
+\item Um servidor responsável pela gerência de memória secundária, implementando o conceito de arquivo e estendendo o mesmo aos dispositivos de entrada e saída.
+
+\item Um servidor para armazenar, temporariamente, dados de memória secundária, visando otimizar o acesso a esses dados.
+
+\end{itemize}
+
+Além destes três servidores, deverão tomar parte na implementação do sistema de arquivos servidores específicos para cada tipo de dispositivo suportado. Esses servidores estão fora do escopo deste trabalho, mas foram desenvolvidos ou simulados para permitir a implementação do sistema. Uma visão parcial de um sistema computacional rodando {\sdfs} pode ser vista na figura \ref{model}.
+
+\putpict {../fig/model.ps} {10} {9.5} {O {\sdfs} em um sistema computacional} {model}
+
+A distribuição das tarefas do sistema de arquivos em três servidores pode, por si só, trazer grande ganho de desempenho ao sistema. Se, por exemplo, o {\sdfs} estiver executando em um multicomputador, pode-se ter o caso onde cada um dos servidores executa paralelamente em um processador, indubitavelmente elevando a taxa de execução de serviços do sistema de arquivos. Mesmo quando o {\sdfs} estiver rodando concorrentemente em um único processador, existem vantajens que compensam a perda de desempenho causada pela troca de mensagens, como por exemplo a facilidade de substituir-se ou acrescentar-se servidores com o sistema em execução, sem necessidade de religações de código.
+
+Pelo que foi descrito até o momento, não se pode fazer considerações sobre a execução paralela dos serviços do {\sdfs}, uma vez que a maior parte deles é de natureza seqüencial. Considere o exemplo do serviço utilizado para se obter um descritor de arquivo: primeiramente o processo de usuário (cliente) envia uma mensagem para o servidor de diretórios solicitando a tradução do nome do arquivo para um identifiador interno. Para efetuar a tradução, o servidor de diretórios solicita a leitura de diretórios, que são implementados como arquivos, ao servidor de arquivos. Isso termina bloqueando o servidor, não pela maneira como ocorre a comunicação, que é assíncrona, mas pela natureza seqüencial do serviço solicitado. O servidor de diretórios não pode responder a solicitação antes de ter recebido a resposta do servidor de arquivos.
+
+Para permitir que os servidores atendam a mais do que uma solicitação de serviço ao mesmo tempo, decidiu-se implementar cada um deles como uma {\task} com múltiplos {\threads} \cite{tan92}. Assim, sempre que um serviço puder bloquear um servidor por tempo considerável, ele será executado por um novo {\thread}. Mais especificamente, um novo {\thread} é gerado sempre que um serviço envolver alguma operação de entrada e saída. Então, um servidor é uma {\task} com um {\thread} básico que faz a inicialização das estruturas de dados e fica em um laço, recebendo mensagens de solicitação de serviços, chamando as respectivas funções (que podem ou não gerar um novo {\thread}) e, dependendo da situação, enviando mensagens de resposta (em geral a resposta de um serviço é enviada pela função que o executa).

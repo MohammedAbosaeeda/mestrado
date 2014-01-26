@@ -1,0 +1,104 @@
+Round-trip-time of a 64 byte packet.
+Results are in ms
+The ATMega1281 is clocked at 1 MHz
+
+
+
+BEACON DISABLE - CSMA-CA ON - ACK ON
+Latency: 80
+Latency: 78
+Latency: 80
+Latency: 78
+Latency: 80
+Latency: 80
+Latency: 80
+Latency: 80
+Latency: 78
+Latency: 80
+Average: 79
+
+BEACON DISABLE - CSMA-CA OFF - ACK ON
+Latency: 72
+Latency: 70
+Latency: 70
+Latency: 70
+Latency: 72
+Latency: 72
+Latency: 70
+Latency: 70
+Latency: 72
+Latency: 72
+Average: 71
+
+BEACON DISABLE - CSMA-CA ON - ACK OFF
+Latency: 70
+Latency: 68
+Latency: 68
+Latency: 68
+Latency: 70
+Latency: 68
+Latency: 70
+Latency: 70
+Latency: 68
+Latency: 68
+Average: 68
+
+
+BEACON DISABLE - CSMA-CA OFF - ACK OFF
+Latency: 62
+Latency: 60
+Latency: 60
+Latency: 60
+Latency: 60
+Latency: 62
+Latency: 62
+Latency: 60
+Latency: 60
+Latency: 60
+Average: 60
+
+BEACON ENABLE - CSMA-CA ON - ACK ON
+Due to some unknown issues, it was not possible to execute the same test in this case.
+So we just measured the send time from the coordinator. Since the latency is dominated 
+by the duration of the sleep cycle, the round trip time can be considered to be very close
+to the send time.
+Parameters used: (for a 12% duty cycle)
+DEFAULT_BEACON_ORDER	 	= 7,
+DEFAULT_SUPERFRAME_ORDER	= 4,
+Called send
+Sent data: E ae ?
+ - Time: 1894 - Avg: 1883
+Called send
+Sent data: E ae ?
+ - Time: 1894 - Avg: 1883
+Called send
+Sent data: E ae ?
+ - Time: 1894 - Avg: 1883
+Called send
+Sent data: E ae ?
+ - Time: 1864 - Avg: 1883
+Called send
+Sent data: E ae ?
+ - Time: 1894 - Avg: 1883
+Called send
+Sent data: E ae ?
+ - Time: 1864 - Avg: 1883
+Called send
+Sent data: E ae ?
+ - Time: 1864 - Avg: 1882
+Called send
+Sent data: E ae ?
+ - Time: 1894 - Avg: 1882
+Called send
+Sent data: E ae ?
+ - Time: 1864 - Avg: 1882
+Called send
+Sent data: E ae ?
+ - Time: 1864 - Avg: 1882
+
+We don't really need this ones
+BEACON ENABLE - CSMA-CA OFF - ACK ON
+BEACON ENABLE - CSMA-CA ON - ACK OFF
+BEACON ENABLE - CSMA-CA OFF - ACK OFF
+
+

@@ -1,0 +1,25 @@
+\begin{tabular}{llrrrr}
+\toprule
+\multicolumn{2}{c}{\multirow{2}{*}{Component}} & \multicolumn{2}{c}{Software ($\mu$s)} & \multicolumn{2}{c}{Hardware (cycles)} \\
+\cmidrule(l){3-4}
+\cmidrule(l){5-6}
+                              &                & SW-only & Unified                     & HW-only & Unified\\
+
+\midrule
+\multirow{5}{*}{Scheduler}    & insert         & ~~~6.0  & ~~~6.0                      & ~~19    & ~~21\\
+                              & remove         & ~~~2.9  & ~~~3.3                      & ~~10    & ~~11\\
+                              & suspend        & ~~~3.0  & ~~~3.1                      & ~~10    & ~~11\\
+                              & resume         & ~~~6.0  & ~~~6.0                      & ~~19    & ~~20\\
+                              & choose         & ~~~8.4  & ~~~8.5                      & ~~10    & ~~11\\
+\midrule
+\multirow{2}{*}{ADPCM}        & encode         & ~~~4.2  & ~~~4.2                      & ~~~2    & ~~~3\\                            
+                              & decode         & ~~~3.4  & ~~~3.6                      & ~~~2    & ~~~3\\                            
+\midrule
+DTMF                          & do\_dtmf       & 5878.3  & 6182.9                      & 7041    & 7741\\
+\bottomrule
+\end{tabular}
+
+%SW AVGs
+%Memory footprint = 4.19 %
+%Exec. time = 5.15 %
+

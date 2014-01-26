@@ -1,0 +1,21 @@
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\textit{Task} & \multicolumn{2}{c|}{\textit{Sense}} & \multicolumn{2}{c|}{\textit{Forward}} & \multicolumn{2}{c|}{\textit{Collector}} & \multicolumn{2}{c|}{\textit{LPL}} & \multicolumn{2}{c|}{\textit{Route}} \\
+\hline
+\textit{Parameter} & \textit{Runs} & \textit{Energy*} & \textit{Runs} & \textit{Energy*} & \textit{Runs} & \textit{Energy*} & \textit{Runs} & \textit{Energy*} & \textit{Runs} & \textit{Energy*} \\
+\hline
+\textit{None} & 98.72\% & 324.98 & 98.72\% & 8,230.49 & 98.85\% & 0.0256 & 98.85\% & 0.0068 & 98.4\% & 300,100.14 \\
+\hline
+\textit{Reserve} & 100\% & 329.20 & 100\% & 8,337.60 & 100\% & 0.0258 & 100\% & 0.0069 & 45.06\% & 137,420.02 \\
+\hline
+\textit{BGR} & 100\% & 329.20 & 100\% & 8,337.60 & 100\% & 0.0258 & 100\% & 0.0069 & 45.04\% & 137,367.82 \\
+\hline
+\textit{BWR} & 100\% & 329.20 & 100\% & 8,337.60 & 100\% & 0.0258 & 100\% & 0.0069 & 45.86\% & 137,875.18 \\
+\hline
+\textit{BWAR} & 100\% & 329.20 & 100\% & 8,337.60 & 100\% & 0.0258 & 100\% & 0.0069 & 69.67\% & 212,485.30 \\
+\hline
+\textit{BWDR} & 100\% & 329.20 & 100\% & 8,337.60 & 100\% & 0.0258 & 100\% & 0.0069 & 48.27\% & 147,230.12 \\
+\hline
+\multicolumn{11}{l}{* energy consumption in mAh.}\\
+\multicolumn{11}{l}{TODO: plot in bars!}
+\end{tabular}

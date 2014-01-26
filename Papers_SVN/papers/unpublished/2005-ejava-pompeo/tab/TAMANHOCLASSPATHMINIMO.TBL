@@ -1,0 +1,10 @@
+ \renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|c|}%|c}
+\hline
+                                                   & \begin{tiny}\textbf{N° de Classes}\end{tiny}    & \begin{tiny}\textbf{Tam. em bytes}\end{tiny}     \\
+\hline
+\begin{tiny}\textbf{CLASSPATH mínimo}\end{tiny}    & \begin{small}74 \end{small}                     & \begin{small}110346  \end{small}        \\
+\hline
+\begin{tiny}\textbf{CLASSPATH padrão} \end{tiny}   & \begin{small}98  \end{small}                    & \begin{small}149956\end{small}          \\
+\hline
+\end{tabular}

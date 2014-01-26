@@ -1,0 +1,833 @@
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{babel}
+\usepackage{times}
+\usepackage{latex8}
+\usepackage{graphics}
+
+%\twocolumn
+%\pagestyle{plain}
+%\setlength{\textheight}{8.875in}
+%\setlength{\textwidth}{6.875in}
+%\setlength{\columnsep}{0.3125in}
+%\setlength{\oddsidemargin}{-0.1in}
+%\setlength{\evensidemargin}{-0.1in}
+%\setlength{\topmargin}{1in}
+%\setlength{\headheight}{-0.1in}
+%\setlength{\headsep}{-0.1in}
+%\setlength{\parindent}{1pc}
+
+\onecolumn
+\pagestyle{plain}
+\linespread{1.4}
+\setlength{\textheight}{8.8in}
+\setlength{\textwidth}{6.5in}
+\setlength{\columnsep}{0.3125in}
+\setlength{\oddsidemargin}{-0.1in}
+\setlength{\evensidemargin}{-0.1in}
+\setlength{\topmargin}{1in}
+\setlength{\headheight}{-0.1in}
+\setlength{\headsep}{-0.1in}
+\setlength{\footskip}{.5in}
+\setlength{\parindent}{1pc}
+\fontsize{14}{16pt}
+
+\font\tenhv  = phvb at 10pt
+\font\elvbf  = ptmb scaled 1100
+
+\input{terms}
+
+\newcommand{\tm}[1]{\textsc{#1}}
+\newcommand{\sym}[1]{\texttt{#1}}
+\newcommand{\refsec}[1]{[section~\ref{sec:#1}]}
+
+\newcommand{\fig}[3][htbp]{
+  \begin{figure}[#1] {\centering\scalebox{0.8}{\includegraphics{fig/#2}}\par}
+    \caption{#3\label{fig:#2}}
+  \end{figure}
+}
+
+\title{A Strategy to Develop Component Frameworks\\
+  for Parallel Computing}
+%  \thanks{The research work described in this article has been partially
+%  supported by Fraunhofer FIRST.}}
+
+\author{
+  Antônio Augusto Fröhlich\\
+  UFSC/CTC/LISHA\\
+  PO Box 476\\
+  88049-900 Florianópolis - SC, Brazil\\
+  \texttt{guto@lisha.ufsc.br}\\
+  \texttt{http://www.lisha.ufsc.br/$\sim$guto}}
+
+%\author{
+%  Antônio Augusto Fröhlich\\
+%  Fraunhofer FIRST\\
+%  kekuléstraße 7\\
+%  12489 Berlin, Germany\\
+%  \texttt{guto@first.fhg.de}\\
+%  \texttt{http://www.first.fhg.de/$\sim$guto}}
+
+\date{}
+
+\bibliographystyle{latex8}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+  
+  Properly bridging a parallel architecture to a given class of parallel
+  applications is a defying task that calls for custom designed
+  \emph{run-time support systems}. Only in this way would applications
+  get minimal-overhead system services delivered through
+  application-oriented interfaces. Designing and implementing a new
+  run-time support system for each class of parallel applications,
+  however, would be impracticable in terms of costs. Notwithstanding,
+  software component engineering could help to meet a compromise with
+  applications by means of tailorable run-time systems.  This paper
+  describes a strategy to develop component frameworks for parallel
+  computing based on the \AOSD\ method proposed by
+  Fröhlich~\cite{Froehlich:2001}.  These frameworks are the substrata to
+  build tailorable run-time support systems.
+
+\end{abstract}
+
+
+%\section{Introduction}
+
+%The advent of software engineering techniques that support the
+%construction of systems as arrangements of software components might
+%incorrectly lead one to believe that, by adopting such techniques, it
+%would be possible to construct run-time support systems with a high
+%degree of customizability. In particular, parallel applications could
+%benefit from statically configurable run-time support systems, thus
+%avoiding the high price of dynamic reconfiguration.
+
+%Nevertheless, a repository of components and a mechanism to arrange them
+%together may not suffice to comply with the requirements of distributed
+%applications.  Ordinary run-time support systems frequently fail to
+%deliver the expected services, or the expected service
+%quality~\cite{Anderson:1992a, Maheshwari:1994}.  Slicing one such a
+%system in a set of components will certainly not improve the case for
+%applications.
+
+% The method explores commonality and
+%variability analysis during domain decomposition to model families of
+%highly reusable, adaptable, application-ready abstractions, isolating
+%scenario aspects and capturing fragments of reusable system
+%architectures.  The refinement of design entities identified during
+%domain analysis is subsequently approached, considering peculiarities in
+%regard to the organization of abstractions in families, the conciliation
+%of family members under a common interface, the modeling of scenario
+%aspects that can be transparently applied, and representation of
+%architectural aspects in component frameworks.  Afterwards,
+%considerations about the implementation of \aosds\ are stated,
+%emphasizing implementations in the \cpp\ programming language.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Introduction}
+
+
+% Suffocated by standards {Pike:2000}
+Historically, operating systems have been constructed aiming at
+abstracting physical resources in a way that is convenient to the
+hardware, not to applications.  Undoubtedly, the monolithic structure of
+early operating systems contributed to this scenario, for it must have
+been very difficult, if not impracticable, to customize such systems in
+order to accomplish the demands of particular applications. The notion
+that applications have to be adapted to the operating system was so
+established. Since then, a succession of standardizations has been
+freezing application program interfaces~(API), thus helping to
+consolidate the situation.  Consequently, contemporary operating systems
+are suffocated by thick layers of standards that prevent internal
+improvements from reaching applications~\cite{Pike:2000}.
+
+% Out of date with modern software engineering
+Besides failing to accompany the natural evolution of applications, many
+operating systems also fail to keep updated as regards software
+engineering. Perhaps this is also a consequence of extreme
+standardization, whereas there is little room for novel software
+engineering concepts in the constrained realm of operating systems.
+Astonishingly, this is a very complex software realm, that spans from
+hardware to applications, and would greatly profit from modern software
+engineering techniques. In reality, however, the obsolescence of the
+techniques deployed in some systems comes out to
+impact applications. % as it is the case with \windows\ infamous
+%crashes~\cite{Kabay:2000}.
+
+% Conceived for hardware + standards, not for applications
+Even modern systems that support customization have difficulties to
+match up with application requirements, mainly because they usually
+target the design of configurable features, the heart of any
+customization strategy, on standard compliance and on hardware aspects,
+and do not adequately address application requirements.  Hence, an
+application programmer may be invited to select features such as \posix\ 
+or \textsc{TCP/IP} compliance, or to select drivers for a certain
+hardware device, but seldom will have the chance to select a parallel
+object infrastructure. Deploying a general-purpose operating system to
+support parallel applications is likely to result in a situation where
+applications get uncountable services that are not needed, but still
+have to implement much of what is needed. This also leads to the
+phenomenon that transforms standard APIs, such as \mpi, in middleware
+layers.  A properly constructed run-time support system could deliver
+its services under a variety of APIs, eliminating such middleware
+layers.
+
+% How can CBSE fail?
+Building a system as an aggregate of reusable \emph{software components}
+has the potentiality to considerably improve the case for applications.
+Nevertheless, component-based software engineering is just a means to
+construct systems that can be customized to fulfill the demands of
+particular applications.  Inadequately modeled components, or inadequate
+mechanisms to select and combine components, may render the extra effort
+of building reusable software components unproductive. The goal of
+application-driven customization can only be achieved if the system as a
+whole is designed considering the fulfillment of application
+requirements.
+
+% Customizability = user-driven configuration
+Furthermore, the way customization is typically carried out in
+component-based systems makes it difficult to pair with application
+requirements.  As a rule, customization in these systems is delegated to
+end users, which are assisted by some sort of tool in selecting and
+combining components to produce an executable system.  In this case,
+successfully customizing the system becomes conditioned to the knowledge
+the user has about it. Hence, user-driven customization is entangled in
+the balance of component granularity:
+
+\begin{itemize}
+\item If components are \emph{coarse-grained}, the chance of an ordinary
+  user, i.e., a user without deep knowledge about the system, to
+  successfully conduct customizations grows, but the probability that
+  components will meet application requirements decreases
+  proportionally.
+\item If components are \emph{fine-grained}, the chance that the system
+  will match application requirement grows, but it is likely that users
+  will not be able to understand the peculiarities of such a large
+  collection of components, probably missing the most adequate
+  configurations.
+\end{itemize}
+
+% The Linux case
+Improvements in user-driven configuration have been pursued by enabling
+components to be selected indirectly. The \linux\ system, for instance,
+utilizes a mechanism to select kernel components through the features
+they implement.  Instead of pointing out which components will be
+included in the system, users can select the desired system features.
+Features, in turn, are interrelated by dependencies and mapped into
+components.  Nevertheless, even though \linux\ kernel components are
+coarse-grained (they are mainly device drivers and subsystems) and will
+seldom satisfy the specific requirements of individual applications,
+selecting features from a list with approximately 1450
+options\footnote{The number of \linux\ configurable kernel features has
+  been estimated by executing the following command in a system based on
+  kernel version 2.4.18: \sym{grep CONFIG /usr/src/linux/.config | wc
+    -l}.} is a sordid activity. A mechanism that allows applications
+themselves to guide the configuration process would be more appropriate.
+
+% SO only implements what is needed and delivers as requested
+%   Scales with architecture AND APPLICATIONS
+%   Automatic configuration and generation 
+Notwithstanding, software engineering seems to be mature enough to
+produce run-time support systems that, besides scaling with the
+hardware, also scale with applications; that deliver all the
+functionality required by applications in a form that is convenient for
+them; and that deduce application requirements to automatically
+configure itself. Many of the related issues have already been addressed
+in the context of all-purpose computing by \emph{reflective systems}. In
+order to comply with the requirements of high-performance parallel
+applications, the subject is approached in this paper from the
+perspective of statically configurable component-based systems. The
+paper elaborates on the \emph{\AOSD} method~\cite{Froehlich:2001} to
+delineate \emph{a strategy to develop component frameworks for parallel
+  computing}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Domain Engineering}
+%   + Domain Analysis
+%     - The operating system realm as seen by applications
+%     - Canonical partitioning X Families
+%     - Families of abstractions
+%     - Scenario independence
+%     - Scenario adapters
+%     - Reusable architectures
+%     - Case study
+
+% - OS -> conventions -> old -> standards -> solidified
+% - {Pike:2000}
+Although no design can go further than its perception of the
+corresponding problem domain, domain engineering and run-time support
+systems are subjects that seldom come together. The fact that the
+operating system domain is basically made of conventions, many of which
+established long ago in projects such as \thesys~\cite{Dijkstra:1968}
+and \multics~\cite{Organick:1972}, seems to have fastened it to a
+``canonical'' partitioning. This partitioning includes abstractions such
+as \emph{process}, \emph{file}, and \emph{semaphore}, and is taken
+``as-is'' by most designers. Indeed, it is now consolidated by standards
+on one side and by the hardware on the other, leaving very little room
+for new interpretations.
+
+% - New perspectives (active objects)
+% - Not as middleware!
+Notwithstanding this, revisiting the problem domain during the design of
+a new operating system would probably reveal abstractions that are
+better tuned with contemporary applications. For example, the triple
+\texttt{(process, file, socket)} could be replaced by \emph{persistent
+  communicating active objects}. Actually, most run-time platforms
+feature this perspective of the operating system domain through a
+middleware layer such as \corba~\cite{corba} and \java~\cite{java}.
+However, the middleware approach goes the opposite direction of
+application-orientation, whereas it further generalizes an already
+generic system.
+
+% - Traditional abstractions -> families
+% - Analysis => vocabulary
+% - Design => abstractions
+% - Domain Analysis => all applications in a domain
+Nevertheless, even if one endures domain analysis knowing that
+decomposition will have to be carried out respecting the boundaries
+dictated by standards, programming languages, and hardware, there is at
+least one important reason to do it: to avoid the monolithic
+representation of abstractions. If an \aoos\ is to be the output of
+design, capturing application-specific perspectives of each abstraction
+and modeling them as independently deployable units, as suggested by
+\emph{\sop}~\cite{Harrison:1993}, is far more adequate than the
+monolithic approach. After all, the product of domain engineering is not
+a single system, but a collection of reusable software artifacts that
+model domain entities and can be used to build several systems.
+
+
+\SubSection{Application-Oriented Domain Decomposition\label{sec:aodd}}
+
+% AODD And OOD
+An application-oriented decomposition of the problem domain can be
+obtained, in principle, following the guidelines of
+\emph{object-oriented decomposition}~\cite{Booch:1994}. However, some
+subtle yet important differences must be considered.  First,
+object-oriented decomposition gathers objects with similar behavior in
+class hierarchies by applying variability analysis to identify how one
+entity specializes the other.  Besides leading to the infamous ``fragile
+base class'' problem~\cite{Mikhajlov:1998}, this policy assumes that
+specializations of an abstraction (i.e. \emph{subclasses}) are only
+deployed in presence of their more generic versions (i.e.
+\emph{superclasses}).
+
+Applying variability analysis in the sense of
+\emph{\fbd}~\cite{parnas:1976} to produce independently deployable
+abstractions, modeled as members of a family, can avoid this restriction
+and improve on application-orientation.  Certainly, some family members
+will still be modeled as specializations of others, as in
+\emph{\isd}~\cite{habermann:1976}, but this is no longer an imperative
+rule. For example, instead of modeling connection-oriented as a
+specialization of connectionless communication (or vice-versa), what
+would misuse a network that natively operates in the opposite mode, one
+could model both as autonomous members of a family.
+
+% Scenario-independence
+A second important difference between application-oriented and
+object-oriented decomposition concerns environmental dependencies.
+Variability analysis, as carried out in object-oriented decomposition,
+does not emphasizes the differentiation of variations that belong to the
+essence of an abstraction from those that emanate from execution
+scenarios being considered for it. Abstractions that incorporate
+environmental dependencies have a smaller chance of being reused in new
+scenarios, and, given that an \aos\ will be confronted with a new
+scenario virtually every time a new application is defined, allowing
+such dependencies could severely hamper the system.
+
+Nevertheless, one can reduce such dependencies by applying the key
+concept of \emph{\aop}~\cite{Kiczales:1997}, i.e.  aspect separation, to
+the decomposition process.  By doing so, one can tell variations that
+will shape new family members from those that will yield scenario
+aspects.  
+%\footnote{The representation of scenario aspects will be
+%  discussed later in section~\ref{sec:sa}, for now it is only important
+%  to avoid modeling unnecessary family members.}.
+For example, instead of modeling a new member for a family of
+communication mechanisms that is able to operate in the presence of
+multiple threads, one could model multithreading as a scenario aspect
+that, when activated, would lock the communication mechanism (or some of
+its operations) in a critical section.
+
+% - Why it gets scenario-dependent?
+The phenomenon of mixing scenario aspects and abstractions seems to
+happen spontaneously in most other design methods, thus learning to
+avoid it might require some practice. Perhaps the most critical point is
+the fact that systems are often conceived with an implementation
+platform in mind, which is often better understood than the
+corresponding problem domain.  In principle, there is nothing wrong in
+studying the target platform in details before designing a system,
+actually it might considerably save time, but designers tend to
+misrepresent abstractions while considering how they will be implemented
+in the chosen platform. In an \aosd, this knowledge about implementation
+details should be driven to identify and isolate scenario aspects. In
+general, aspects such as identification, sharing, synchronization,
+remote invocation, authentication, access control, encryption,
+profiling, and debugging can be represented as scenario aspects.
+
+% Configurable features
+Building families of scenario-independent abstractions and identifying
+scenario aspects are the main activities in \aodd, but certainly not the
+only ones. The primary strategy to add functionality to a family of
+abstractions is the definition of new members, but sometimes it is
+desirable to extend the behavior of all members at once.  Specializing
+each member would double the cardinality of the family.  \Aosd\ deals
+with cases like this by modeling the extended functionality as a
+\emph{configurable feature}.  Just like scenario aspects, configurable
+features modify the behavior of all members of a family when activated,
+but, unlike those, are not transparent.  One could say that scenario
+aspects have ``push'' semantics, while configurable features have
+``pull''.
+
+A configurable feature encapsulates common data structures and
+algorithms that are useful to implement a family's feature, but leave
+the actual implementation up to each family member.  Abstractions are
+free to reuse, extend, or override what is provided in a configurable
+feature, but are requested to behave accordingly when the feature is
+enabled.
+
+\fig[t]{aod}{An overview of \aodd.}
+
+The case for configurable features can be illustrated with a family of
+networks and features such as multicasting, in-order delivery, and error
+detection.  If new family members were to be modeled for each such a
+feature, a family of 10 networks subjected to 10 features could grow up
+to $10^{10}$ members.  Modeling this kind of feature as a scenario
+aspect is usually not possible either, since its implementation would
+have to be specialized to consider particular network architectures.
+
+% Inter-family relationships
+Another relevant issue to be considered during domain decomposition is
+how abstractions of different families interact. Capturing ad-hoc
+relationships between families during design can be useful to model
+reusable software architectures, helping to solve one of the biggest
+problems in component-based software engineering: how to tell correct,
+meaningful component compositions from unusable ones. A reusable
+architecture avoids this question by only allowing predefined
+compositions to be carried out. For example, one could determine that
+the members of a family of process abstractions must use the family of
+memory to load code and data, avoiding an erroneous composition with
+members of the file family.  In \aosd, reusable architectures are
+captured in component frameworks that define how abstractions of
+distinct families interact.  Although such frameworks are defined much
+later in the design process, taking note of ad-hoc relationships during
+domain decomposition can considerably ease that activity.
+ 
+% Overview
+An overview of \aodd\ is presented in figure~\ref{fig:aod}. In summary,
+it is a multiparadigm domain engineering method that promotes the
+construction of \aoss\ by decomposing the corresponding domain in
+families of reusable, scenario-independent abstractions and the
+respective scenario aspects. Reusable system architectures are
+envisioned by the identification of inter-family relationships that will
+later build component frameworks.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Component Frameworks: capturing reusable system architectures\label{sec:aof}}
+
+% - What is a reusable system architecture?
+Along with the specification of abstraction families and scenario
+aspects, an \aosd\ delivers specifications of reusable system
+architectures, which define how abstractions can be arranged together in
+a functioning system. Reusable system architectures are usually defined
+considering the domain knowledge acquired during the design of previous
+systems.  After having developed some systems, or some versions of a
+system, for a certain problem domain, developers begin to agree on how
+to implement the abstractions that build up the domain; how they
+interact with each other, with the environment, and with applications;
+and how the implied non-functional requirements can be accomplished.
+Such an expertise can be captured in an architectural specification to
+be reused in upcoming systems.
+
+% - Why to reuse an architecure?
+Capturing reusable system architectures in a component-based system is
+fundamental, since a pile of components, by itself, is nothing but a
+pile of components. A component-based system is only achieved when
+components can be arranged together in an assemblage of predictable
+behavior. In \aosd, reusable architectures begin to be modeled yet
+during domain decomposition with the identification of relationships
+between families of abstractions. These relationships are enriched by
+scenario constraints during the specification of scenario aspects and
+serve as input for this phase, which aims at producing a detailed
+specification of reusable system architectures in the form of component
+frameworks.
+
+% - Component frameworks
+An \emph{\aocf} captures a reusable architecture by specifying the
+families of abstractions that take part in a certain kind of system, as
+well as rules that guide their interaction. Systems produced by
+component frameworks, when compared to arbitrary arrangements of
+components, are less prone to misbehavior, since only compositions that
+have been envisioned by system architects are allowed.  Although
+component frameworks are not the unique alternative to capture reusable
+architectures---among others, \emph{aspect programs}, \emph{subjects},
+and \emph{collaborations} could also be used for this purpose---they fit
+perfectly with application-orientation's notion of isolating scenario
+aspects from abstractions by means of scenario
+adapters~\cite{Froehlich:sci:2000}.
+
+% - AOSD framework
+An \aocf\ could be defined as a collection of interrelated scenario
+adapters as shown in figure~\ref{fig:aof}. Each scenario adapter would
+set up a ``socket'' for components of the corresponding family. Plugging
+components into the framework would be accomplished by binding the
+inflated interface of every used family to the desired family member.
+The way scenario adapters are arranged in the framework would define the
+basic architecture of resultant systems, while architectural elements
+that do not concern components could be hard-coded in the framework.
+
+\fig{aof}{An \aocf.}
+
+A component framework defined in terms of scenario adapters would also
+present advantages concerning \emph{system-wide properties}, which could
+be modeled as scenario aspects to be enforced on components by the
+respective scenario adapters~\cite{Szyperski:1998}. Moreover, a
+component framework of this kind does not require complex code
+manipulation tools to generate a system instance.  After all, the
+representation of a component framework as a socket board to which
+components can be plugged is well understood and accepted by users.
+
+% - example 
+Figure~\ref{fig:comm_fmk} shows a schematic representation of a
+component framework that embodies a plausible system architecture for
+the domain of high-performance communication in clusters of
+workstations.  It illustrates the relationships between three families
+of abstractions: \sym{Communication End-Point}, \sym{Communication
+  Strategy}, and \sym{Network}. Firstly, it shows a mutual dependency
+between the families of strategies and end-points, i.e., by selecting a
+certain strategy, one automatically selects the corresponding end-point,
+and vice-versa\footnote{In this model, \sym{Connection} is the end-point
+  for the \sym{Stream} strategy, \sym{Port} and \sym{Mailbox} for
+  \sym{Datagram}, \sym{Active Message Handler} for \sym{Active Message},
+  \sym{Asynchronous Remote Memory Segment} for \sym{Asynchornous Remote
+    Memory Read/Write/Copy}, and \sym{Dsitributed Shared Memory Segment}
+  is the end-point for the \sym{Distributed Shared Memory} strategy.}.
+It also shows that a network is \emph{used} by the members of the
+communication strategy family. The respective sets of components are
+also shown to illustrate the ``select-and-plug'' organization of the
+framework.
+
+\fig{comm_fmk}{A component framework for the domain of high-performance
+  communication.}
+
+Arbitrary compositions handled in the real of this component framework
+could be adapted to scenarios such as \emph{thread safe},
+\emph{buffered}, and \emph{reliable} simply by selecting the proper
+scenario aspects.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Case Study: \epos\ component framework}
+
+The \epos\ system was born in 1997 at the Research Institute for
+Computer Architecture and Software Engineering~(FIRST) of the German
+National Research Center for Information Technology~(GMD) as a project
+to experiment with the concepts and mechanisms of \aosd.  Indeed, \epos\
+and \aosd\ cannot be disassociated, since both have been evolving
+together from the very beginning.
+
+The acronym \epos\ stands for \emph{Embedded Parallel Operating System}.
+It was coined considering the main research goal established for the
+early system: to embed the operating system in a parallel application.
+The strategy followed to achieve this goal consisted in modeling the
+corresponding domain entities as a set of reusable and adaptable
+components, and developing a mechanism to allow parallel applications to
+easily specify constraints to guide the arrangement of these components
+in a functioning system. As the system evolved, it became clear that
+this strategy could be applied to a broader universe of applications.
+Concerning design and organization, \epos\ is inherently tied with
+dedicated computing and static configurability, but whether a platform
+is dedicated to an application temporarily (like in traditional parallel
+systems) or permanently (like in most embedded systems) does not play a
+significant role.  Hence, \emph{Embedded Parallel Operating System} can
+also be interpreted as a system that targets both embedded and parallel
+applications.
+
+\epos\ owes much of its philosophy to the \peace\ 
+system~\cite{Preikschat:1994a}, from which it inherited the notion that
+``generic'' and ``optimal'' are adjectives that cannot be simultaneously
+applied to the same operating system, besides a rich perception of \fbd.
+\epos\ implementation for the \intel\ architecture reuses some of the
+strategies adopted in \aboelha~\cite{Froehlich:intersymp:1996}, a former
+research operating system developed by the author. However, the design
+of \aboelha\ did not promote reuse, so these strategies had to be
+completely remodeled for \epos.
+
+\epos\ component framework is realized by a \emph{static metaprogram}
+and a set of \emph{composition rules}. The metaprogram is responsible
+for adapting system abstractions to the selected execution scenario and
+arranging them together during the compilation of an
+application-oriented version of \epos. Rules coordinate the operation of
+the metaprogram, specifying constraints and dependencies for the
+composition of system abstractions. Composition rules are not encoded in
+the metaprogram, but specified externally. They are interpreted by
+composition tools in order to adjust the parameters of the metaprogram.
+
+The separation of composition rules from the framework metaprogram
+allows a single framework to yield a variety of software architectures.
+Indeed, one could say that \epos\ has many frameworks, each
+corresponding to the execution of the metaprogram with a different set
+of arguments. Moreover, the use of static metaprogramming to compose
+system abstractions does not incur in run-time overhead, thus yielding
+composites whose performance is directly derived from their parts.
+
+
+\SubSection{Framework Metaprogram}
+
+\epos\ \emph{component framework metaprogram} is executed in the course
+of a system instance compilation, adapting selected abstractions to
+coexist with each other and with applications in the designated
+execution scenario.  During this process, scenario-independent
+abstractions have their original properties preserved, so that internal
+compositions can be carried out before scenario adaptation.  This is
+accomplished having the framework metaprogram to import
+scenario-independent abstractions in one namespace and export the
+corresponding scenario-adapted versions in another.
+
+For example, the cascaded aggregation of \sym{Communication End-Point},
+\sym{Communication Stra\-tegy}, and \sym{Network} illustrated in the
+previous section would take place at the scenario-independent level.
+The resultant composite would later be adapted to the selected scenario
+as a whole. 
+
+\fig{epos_fmk}{A top-view of \epos\ component framework metaprogram.}
+
+Figure~\ref{fig:epos_fmk} shows a top-view diagram of the component
+framework static metaprogram. Each of the elements represented in the
+figure will be subsequently described. A class diagram representing the
+\sym{Handle} framework element is depicted in
+figure~\ref{fig:epos_fmk_handle}.  Like most other elements,
+parameterized class \sym{Handle} takes a system abstraction (class of
+system objects) as parameter.  When instantiated, it acts as a
+``handle'' for the supplied abstraction, realizing its interface in
+order that invocations of its methods are forwarded to \sym{Stub}.
+Hence, system objects are manipulated by applications via their
+``handles''.
+
+\sym{Handle} provides additional operations to check if a system object
+was successfully created\footnote{The use of \cpp\ exceptions as a
+  mechanism to signalize system object creation failure was avoided
+  because it would make difficult the integration of \epos\ with
+  applications written in other programming languages.} and to obtain
+its id.  Besides, when the \sym{Shared} scenario aspect is enabled,
+\sym{Handle} provides the extra constructors used to designate sharing
+in that scenario. The aggregation relationship between \sym{Handle} and
+\sym{Stub} enables the system to enforce allocation via a system
+allocator (instead of a programming language one), thus allowing for the
+\sym{Allocated} scenario aspect\footnote{The allocator used with each
+  abstraction is selected by \sym{Adapter} after consulting
+  \sym{Traits<Abs>::allocated}.}.
+
+\fig{epos_fmk_handle}{\epos\ framework: the \sym{Handle} element.}
+
+The \sym{Stub} framework element is depicted in
+figure~\ref{fig:epos_fmk_stub}. This parameterized class is responsible
+for bridging \sym{Handle} either with the abstraction's scenario adapter
+or with its proxy.  It declares two formal parameters: an abstraction
+and a boolean flag that designates whether the abstraction is local or
+remote to the address space of the calling process.  By default,
+\sym{Stub} inherits the abstraction's scenario adapter, but it has a
+specialization, namely \sym{Stub<Abs, true>}, that inherits the
+abstraction's proxy.  Therefore, making \sym{Traits<Abstraction>::remote
+  = false} causes \sym{Handle} to take the scenario adapter as the
+\sym{Stub}, while making it \sym{true} causes \sym{Handle} to take the
+proxy.
+
+\fig{epos_fmk_stub}{\epos\ framework: the \sym{Stub} element.}
+
+The \sym{Proxy} framework element is deployed in a remote invocation
+scenario.  \sym{Proxy} realizes the interface of the abstraction it
+represents, forwarding method invocations to its \sym{Agent} (see
+figure~\ref{fig:epos_fmk_agent}).  Each instance of \sym{Proxy} has a
+private ROI message, which is initialized in such a way that forthcoming
+invocations only need to push parameters into the message.  Moreover,
+because \sym{Proxy} is metaprogrammed, parameters are pushed directly
+into the message, without being pushed into the stack first. \sym{Proxy}
+operations invoke method \sym{invoke}\footnote{The semantics of the
+  \sym{invoke} method varies according to the selected configuration.
+  In some cases, it causes the application process to ``trap'' into the
+  kernel, in others, it directly accesses a communicator to perform a
+  message exchange.} to perform a message exchange with \sym{Agent},
+which, likewise \sym{Handle} for a local scenario, forwards invocations
+to the abstraction's \sym{Adapter}.
+
+%\fig{epos_fmk_proxy}{\epos\ framework: \sym{Proxy} element.}
+\fig{epos_fmk_agent}{\epos\ framework: \sym{Proxy} and \sym{Agent}
+  elements.}
+
+The \sym{Adapter} framework element is depicted in the
+figure~\ref{fig:epos_fmk_adapter}. This parameterized class realizes a
+scenario adapter for the abstraction it takes as parameter, adapting its
+instances to perform in the selected scenario.  Adaptations are carried
+out by wrapping the operations defined by the abstraction within the
+\sym{enter} and \sym{leave} scenario primitives, and also by enforcing a
+scenario-specific semantics for creating, sharing, and destroying its
+instances. The role of \sym{Adapter} in \epos\ framework is to apply the
+primitives supplied by \sym{Scenario} to abstractions, without making
+assumptions about the scenario aspects represented in these primitives.
+In this way, \sym{Adapter} is able to enforce any combination of
+scenario aspects.
+
+\fig{epos_fmk_adapter}{\epos\ framework: the \sym{Adapter} element.}
+
+\fig{epos_fmk_scenario}{\epos\ framework: the \sym{Scenario}
+  element.}
+
+The execution scenario for \epos\ abstractions is ultimately shaped by
+the \sym{Scenario} framework element depicted in
+figure~\ref{fig:epos_fmk_scenario}. Each instance of parameterized class
+\sym{Scenario} delivers scenario primitives that are specific to the
+abstraction supplied as parameter.  Firstly, it incorporates the
+selected \sym{Id} aspect, which is common to all abstractions in a
+scenario; then it consults the abstraction's \sym{Traits} to determine
+which aspects apply to it, aggregating the corresponding scenario
+aspects. The strategy to cancel an aggregation is similar to the one
+used with \sym{Stub}, i.e. a parameterized class that inherits the
+selected aspect by default, but is specialized to inherit nothing in
+case the aspect is not selected for the abstraction.
+
+Besides designating which scenario aspects apply to each abstraction,
+the parameterized class \sym{Traits} maintains a comprehensive
+compile-time description of abstractions that is used by the metaprogram
+whenever an abstraction-specific element has to be configured.
+
+
+\SubSection{Composition Rules\label{sec:epos_fmk_rules}}
+
+\epos\ component framework metaprogram is able to adapt and assemble
+selected components to produce an \aoos. However, though the metaprogram
+knows about particular characteristics of each system abstraction from
+its \emph{traits}, it does not know of relationships between
+abstractions and hence cannot guarantee the consistency of the
+composites it produces. In order to generate a meaningful instance of
+\epos, the metaprogram must be invoked with a coherent parameter
+configuration.
+
+Therefore, the operation of the framework metaprogram is coordinated by
+a set of \emph{composition rules} that express elements of reusable
+system architecture captured during design.  A consistent instance of
+\epos\ comprises system abstractions, scenario aspects, hardware
+mediators, configurable features, and non-functional requirements.
+Composition rules specify dependencies and constraints on such elements,
+so that invalid configurations can be detected and rejected.
+Nevertheless, guarantying that a composite of \epos\ elements is
+``correct'' would depend on the formal specification and validation of
+each element, what is outside the scope of this research.
+
+Sometimes, composition rules are implicitly expressed during the
+implementation of components.  For example, by referring to the
+\sym{Datagram} channel, the \sym{Port} communicator implicitly specifies
+a dependency rule that requires \sym{Datagram} to be included in the
+configuration whenever \sym{Port} is deployed.  However, most
+composition rules, especially those designating constraints on combining
+abstractions, can only be expressed externally. For instance, the rule
+that expresses the inability of the \sym{Flat} address space to support
+the \sym{Mutual} task abstraction must be explicitly written.
+
+In order to support the external specification of composition rules,
+\epos\ elements are tagged with a \emph{configuration key}. When a key
+is asserted, the corresponding element is included in the configuration.
+Elements that are organized in families are selected by assigning a
+member's key to the family's key, causing the family's inflated
+interface to be bound to the designated realization. This mechanism
+implements the selective realize relationships modeled during design.
+For example, writing \sym{Synchronizer := Semaphore} causes the inflated
+interface of the \sym{Synchronizer} family of abstractions to be bound
+to member \sym{Semaphore} and writing \sym{Id := Capability} binds the
+\sym{Id} scenario aspect to \sym{Capability}.  Elements that do not
+belong to families have their keys asserted accordingly. For example,
+writing \sym{Busy\_Waiting := True} enables the \sym{Busy\_Waiting}
+configurable feature if the \sym{CPU\_Scheduler} abstraction.
+
+Composition rules are thus defined associating pre- and postconditions
+to configuration keys. For instance, the following rule for the
+\sym{Task} family of abstractions requires the \sym{Paged} address space
+to be selected before the \sym{Mutal} task can be selected:
+\begin{center}
+\sym{Mutual $\Rightarrow$ pre: Address\_Space = Paged}
+\end{center}
+\noindent Alternatively, this constraint could be expressed as a
+composition rule for the \sym{Address\_Space} family that selects the
+\sym{Exclusive} task whenever the \sym{Flat} address space is selected:
+\begin{center}
+  \sym{Flat $\Rightarrow$ pos: Task := Exclusive}
+\end{center}
+
+Composition rules are intended to be automatically processed by
+configuration tools. Hence, it is fundamental to keep them free of
+cycles.  The following rule, though understandable for a human, could
+bring a tool to deadlock:
+\begin{center}
+  \sym{A1 $\Rightarrow$ pre: B = B1\\B1 $\Rightarrow$ pre: A = A1}
+\end{center}
+
+%????
+
+In order to ensure that \epos\ composition rules build a direct
+acyclic graph, the following directives were observed:
+
+\begin{itemize}
+\item Configuration keys are \emph{totally ordered} according to an
+  arbitrary criterion;
+\item Preconditions are restricted to \emph{expressions} involving only
+  \emph{preceding} keys;
+\item Postconditions are restricted to \emph{assignments} involving only
+  \emph{succeeding} keys.
+\end{itemize}
+
+Along with the \emph{traits} of each abstraction, composition rules
+control the process of tailoring \epos\ to a particular application. The
+set of configuration keys selected by the user is validated and refined
+by means of composition rules, yielding a set of elements that are
+subsequently assembled by the framework metaprogram consulting the
+traits of abstractions. % A tool that is able to perform automatic
+%tailoring will be described later in section~\ref{sec:epos_conf}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Conclusions}
+
+Historically, applications have been adapted to the operating system,
+adhering to standardized application program interfaces that covey
+uncountable useless services (for each individual application), and yet
+fail to deliver much of what is necessary.  An application-oriented
+operating system ruptures with this notion, implementing services that
+emanate from application requirements and delivering them as a set of
+configurable components that can be assembled to produce
+application-tailored system instances.
+
+In this paper, a strategy to deploy the \aosd\ method in order to build
+component frameworks for parallel computing has been proposed.
+Frameworks produced under this strategy consist of intertwined scenario
+adapters that build a socket board for software components. The case
+study on \epos\ component framework illustrates the strategy, supplying
+run-time system designers with valuable guidelines to meet the parallel
+application challenge.
+
+
+%Such \aooss\ can be constructed deploying the \aosd\ method %, which is
+%%outlined in figure~\ref{fig:aosd}, 
+%to engineer the envisioned domain. In this way, the domain is decomposed
+%in abstractions that model application-specific perspectives of each
+%entity.  These abstractions are gathered in families according to what
+%they have in common, with variability analysis being deployed to
+%identify subsequent members of each family. During this process,
+%variations that belong to the essence of abstractions are separated from
+%those that emanate from execution scenarios, the former shaping family
+%members, and the latter yielding scenario aspects.  This separation
+%improves on reusability, for scenario-independent abstractions can be
+%reused in a larger variety of
+%scenarios. % Moreover, the complexity of individual abstractions is
+%%decreased, thus enhancing software quality in general.
+
+
+\bibliography{guto,se,os}
+
+\end{document}

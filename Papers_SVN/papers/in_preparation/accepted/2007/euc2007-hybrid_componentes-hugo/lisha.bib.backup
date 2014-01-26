@@ -1,0 +1,286 @@
+@BOOK{Czarnecki:2000,
+  AUTHOR = {Krysztof Czarnecki and Ulrich Eisenecker},
+  TITLE = {Generative Programming: Methods, Tools, and
+                  Applications},
+  PUBLISHER = {Addison-Wesley},
+  YEAR = 2000
+}
+
+@inproceedings{Marcondes:ETFA:2006b,
+  author    = {blind review},
+  title     = {ommited by blind review},
+}
+
+@inproceedings{Marcondes:ETFA:2006,
+  author    = {Hugo Marcondes and 
+               Arliones Stevert Hoeller Junior and 
+               Lucas Francisco Wanner and
+               Ant{\^o}nio Augusto Fr{\"o}hlich},
+  title     = {Operating Systems Portability: 8 bits and beyond},
+  booktitle = {11th IEEE International Conference on Emerging
+               Technologies and Factory Automation},
+  year      = {2006},
+  pages     = {124-130}
+}
+
+@inproceedings{Polpeta:2005b,
+  author    = {blind review},
+  title     = {ommited by blind review},
+}
+
+@inproceedings{Polpeta:2005,
+  author    = {Fauze Val{\'e}rio Polpeta and
+               Ant{\^o}nio Augusto Fr{\"o}hlich},
+  title     = {On the Automatic Generation of SoC-based Embedded Systems},
+  booktitle = {10th IEEE International Conference on Emerging
+	       Technologies and Factory Automation},
+  year      = {2005}
+}
+
+@inproceedings{Polpeta:2004b,
+  author    = {blind review},
+  title     = {ommited by blind review},
+}
+
+@inproceedings{Polpeta:2004,
+  author    = {Fauze Val{\'e}rio Polpeta and
+               Ant{\^o}nio Augusto Fr{\"o}hlich},
+  title     = {Hardware Mediators: A Portability Artifact for Component-Based
+               Systems.},
+  booktitle = {EUC},
+  year      = {2004},
+  pages     = {271-280},
+  crossref  = {CONF:EUC2004},
+  bibsource = {DBLP, http://dblp.uni-trier.de}
+}
+
+@inproceedings{Pereira:2004b,
+  author    = {blind review},
+  title     = {ommited by blind review},
+}
+
+@inproceedings{Pereira:2004,
+  author    = {Marcelo Trierveiler Pereira and
+               Ant{\^o}nio Augusto Fr{\"o}hlich and
+               Hugo Marcondes},
+  title     = {RIFFS: Reverse Indirect Flash File System.},
+  booktitle = {EUC},
+  year      = {2004},
+  pages     = {30-40},
+  crossref  = {CONF:EUC2004},
+  bibsource = {DBLP, http://dblp.uni-trier.de}
+}
+
+@proceedings{CONF:EUC2004,
+  editor    = {Laurence Tianruo Yang and
+               Minyi Guo and
+               Guang R. Gao and
+               Niraj K. Jha},
+  title     = {Embedded and Ubiquitous Computing, International Conference
+               EUC 2004, Aizu-Wakamatsu City, Japan, August 25-27, 2004,
+               Proceedings},
+  booktitle = {EUC},
+  publisher = {Springer},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {3207},
+  year      = {2004},
+  isbn      = {3-540-22906-X},
+  bibsource = {DBLP, http://dblp.uni-trier.de}
+}
+
+@inproceedings{Frohlich:2001b,
+  author    = {blind review},
+  title     = {ommited by blind review},
+}
+
+@book{Frohlich:2001,
+ title   ={Application-Oriented Operating Systems},
+ author  ={Ant\^onio Augusto Medeiros Fröhlich},
+ edition ={1},
+ publisher={GMD - Forschungszentrum Informationstechnik},
+ year    =2001
+}
+
+% Guto's Publications (1998 - 2000)
+
+@InProceedings{Froehlich:asplos:2000,
+  author =	 "Antônio Augusto Fröhlich and Wolfgang
+                  Schröder-Preikschat",
+  title =	 "{Operating Systems: are we finally ready to move
+                  forward after 30 years of stagnation?}",
+  booktitle =	 "Proceedings of the 9th International Conference on
+                  Architectural Support for Programming Languages and
+                  Operating Systems Wild and Crazy Ideas Session",
+  address =	 "Cambridge, U.S.A.",
+  month =	 nov,
+  year =	 2000
+}
+
+@InProceedings{Froehlich:gbwit:2000,
+  author =	 "Antônio Augusto Fröhlich and Philippe Olivier
+                  Alexander Navaux and Sérgio Takeo Kofuji and Wolfgang
+                  Schröder-Preikschat",
+  title =	 "SNOW: a Parallel Programming Environment for Clusters
+                  of Workstations",
+  booktitle =	 "Proceedings of the 7th German-Brazilian Workshop on
+                  Information Technology",
+  year =	 2000,
+  address =	 "Maria Farinha, Brazil",
+  month =	 sep
+}
+
+@InProceedings{Froehlich:sci:2000,
+  author = 	 "Antônio Augusto Fröhlich and Wolfgang Schröder-Preikschat",
+  title = 	 "{Scenario Adapters: Efficiently Adapting Components}",
+  booktitle = 	 "Proceedings of the 4th World Multiconference on Systemics,
+                  Cybernetics and Informatics",
+  pages = 	 "",
+  address = 	 "Orlando, U.S.A.",
+  month = 	 jul,
+  year = 	 2000
+}
+
+@InProceedings{Froehlich:hpcn:2000,
+  author = 	 "Antônio Augusto Fröhlich and Gilles P. Tientcheu and 
+                  Wolfgang Schröder-Preikschat",
+  title = 	 "{EPOS and Myrinet: Effective Communication Support for 
+                  Parallel Applications Running on Clusters of Commodity
+                  Workstations}",
+  booktitle = 	 "Proceedings of 8th International Conference on High
+                  Performance Computing and Networking",
+  pages = 	 "417-426",
+  address = 	 "Amsterdam, The Netherlands",
+  month = 	 may,
+  year = 	 2000
+}
+
+@InProceedings{Froehlich:sbac:1999,
+  author =	 "Antônio Augusto Fröhlich and Wolfgang Schröder-Preikschat",
+  title =	 "{High Performance Application-oriented Operating Systems
+                  -- the EPOS Aproach}",
+  booktitle =	 "Proceedings of the 11th Symposium on Computer
+                  Architecture and High Performance Computing",
+  pages =	 "3--9",
+  address =	 "Natal, Brazil",
+  month =	 sep,
+  year =	 1999
+}
+
+@InProceedings{Froehlich:ooosw:1999,
+  author =	 "Antônio Augusto Fröhlich and Wolfgang Schröder-Preikschat",
+  title =	 "{EPOS: an Object-Oriented Operating System}",
+  booktitle =	 "Proceedings of the 2nd ECOOP Workshop on
+                  Object-Orientation and Operating Systems",
+  pages =	 "38--43",
+  address =	 "Lisbon, Portugal",
+  month =	 jun,
+  year =	 1999
+}
+
+@InProceedings{Froehlich:dagstuhl:1999,
+  author =	 "Antônio Augusto Fröhlich and Wolfgang Schröder-Preikschat",
+  title =	 "{EPOS: Paving the Path for Parallel Applications}",
+  booktitle =	 "Report of the Dagstuhl Seminar 238 - High Level
+                  Parallel Programming: Applicability",
+  pages =	 "18",
+  address =	 "Dagstuhl Castle, Germany",
+  month =	 apr,
+  year =	 1999
+}
+
+@InProceedings{Froehlich:ehpc:1999,
+  author =	 "Antônio Augusto Fröhlich and Wolfgang Schröder-Preikschat",
+  title =	 "{Tailor-made Operating Systems for Embedded Parallel
+                  Applications}",
+  booktitle =	 "Proceedings of the 4th IPPS/SPDP Workshop on Embedded
+                  HPC Systems and Apllications",
+  pages =	 "1361-1373",
+  address =	 "San Juan, Puerto Rico",
+  month =	 apr,
+  year =	 1999
+}
+
+@InProceedings{Froehlich:euromicro:1998,
+  author =	 "Antônio Augusto Fröhlich and Wolfgang Schröder-Preikschat",
+  title =	 "{SMP PCs: A Case Study on Cluster Computing}",
+  booktitle =	 "Proceedings of the 24th Euromicro Conference -
+                  Workshop on Network Computing",
+  pages =	 "953--960",
+  address =	 "Västeras, Sweden",
+  month =	 aug,
+  year =	 1998,
+  isbn =	 "0-8186-8646-4"
+}
+
+@InProceedings{Froehlich:intersymp:1996,
+  author =	 "Antônio Augusto Fröhlich and Rafael B. Avila and Luciano Piccoli
+                  and Helder Savietto",
+  title =	 "{A Concurrent Programming Environment for the i486}",
+  booktitle =	 "Proceedings of the 5th International Conference on
+                  Information Systems Analysis and Synthesis",
+  address =	 "Orlando, USA",
+  month =	 jul,
+  year =	 1996
+}
+
+@ARTICLE{Parnas:1976,
+  AUTHOR = {David Lorge Parnas},
+  TITLE = {{On the Design and Development of Program Families}},
+  JOURNAL = {IEEE Transactions on Software Engineering},
+  VOLUME = {SE-2},
+  NUMBER = {1},
+  PAGES = {1--9},
+  MONTH = MAR,
+  YEAR = 1976,
+  PDF = {../cache/Software_Engineering/parnas-1976.pdf}
+}
+
+@INPROCEEDINGS{Kiczales:1997,
+  AUTHOR = {Gregor Kiczales and John Lamping and Anurag Mendhekar
+                  and Chris Maeda and Cristina Videira Lopes and
+                  Jean-Marc Loingtier and John Irwin},
+  TITLE = {{Aspect-Oriented Programming}},
+  BOOKTITLE = {Proceedings of the European Conference on
+                  Object-oriented Programming'97},
+  ADDRESS = {Jyväskylä, Finland},
+  SERIES = {Lecture Notes in Computer Science},
+  VOLUME = 1241,
+  PAGES = {220--242},
+  PUBLISHER = {Springer},
+  MONTH = JUN,
+  YEAR = 1997,
+  URL =
+{http://www.parc.xerox.com/csl/groups/sda/publications/papers/Kiczales-ECOOP97/f
+or-web.pdf},
+  ABSTRACT = {We have found many programming problems for which
+                  neither procedural nor object-oriented programming
+                  techniques are sufficient to clearly capture some of
+                  the important design decisions the program must
+                  implement. This forces the implementation of those
+                  design decisions to be scattered through-out the code,
+                  resulting in 'tangled' code that is excessively
+                  difficult to develop and maintain. We present an
+                  analysis of why certain design decisions have been so
+                  difficult to clearly capture in actual code. We call
+                  the properties these decisions address aspects, and
+                  show that the reason they have been hard to capture is
+                  that they cross-cut the system's basic
+                  functionality. We present the basis for a new
+                  programming technique, called aspect-oriented
+                  programming, that makes it possible to clearly express
+                  programs involving such aspects, including appropriate
+                  isolation, composition and re-use of the aspect
+                  code. The discussion is rooted in systems we have
+                  built using aspect-oriented programming.}
+}
+
+@inproceedings{Gajski:1999,
+  author    = {Daniel Gajski},
+  title     = {IP-based Design Methodology.},
+  booktitle = {DAC},
+  year      = {1999},
+  pages     = {43},
+  ee        = {http://doi.acm.org/10.1145/309847.309864},
+  bibsource = {DBLP, http://dblp.uni-trier.de}
+}
+

@@ -1,0 +1,15 @@
+\scriptsize{
+\begin{tabular}{c|c|c|c|c}
+%\multicolumn{4}{c}{\textbf{Periodic Timer Period ($\mu$s)}} \\
+%\hline
+\textbf{Number of}	& \multicolumn{4}{c}{\textbf{Interrupt Handling Time (us)}} \\
+\cline{2-5}
+\textbf{Threads}	& \textbf{Average}	& \textbf{Max} 	& \textbf{Min} & \textbf{Std} \\
+\hline
+\textbf{2} & 81  & 111   & 63   & 23 \\
+\textbf{3} & 84  & 117   & 63   & 25 \\
+\textbf{4} & 91  & 178   & 63   & 36 \\
+\textbf{5} & 97  & 190   & 63   & 41 \\
+\textbf{6} & 107 & 263   & 63   & 55 \\
+\end{tabular}
+}

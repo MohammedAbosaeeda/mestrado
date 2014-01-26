@@ -1,0 +1,14 @@
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Predictor} & \textbf{Average daily error (\%)} \\
+\hline
+\hline
+BEST               & $4.23~_{-}^{+}~2.41$ \\
+\hline
+Hits BEST          & $9.91~_{-}^{+}~14.45$ \\
+\hline
+Greedy BEST        & $41.15~_{-}^{+}~25.90$ \\
+\hline
+Conservative BEST  & $47.48~_{-}^{+}~27.29$ \\
+\hline
+\end{tabular}

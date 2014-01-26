@@ -1,0 +1,16 @@
+ \renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|c|}%|c}
+\hline
+                                                   & \begin{tiny}\textbf{N° de Classes}\end{tiny}    & \begin{tiny}\textbf{Tam. em bytes}\end{tiny}     \\
+\hline
+\begin{tiny}\textbf{HelloWorld} \end{tiny}         & \begin{small}28\end{small}                      & \begin{small}29.457\end{small}           \\
+\hline
+\begin{tiny}\textbf{AddMain}  \end{tiny}           & \begin{small}3\end{small}                       & \begin{small}4.349\end{small}            \\
+\hline
+\begin{tiny}\textbf{Add}\end{tiny}                 & \begin{small}2 \end{small}                      & \begin{small}948\end{small}             \\
+\hline
+\begin{tiny}\textbf{CLASSPATH mínimo}\end{tiny}    & \begin{small}75 \end{small}                     & \begin{small}110.848  \end{small}        \\
+\hline
+\begin{tiny}\textbf{CLASSPATH padrão} \end{tiny}   & \begin{small}98  \end{small}                    & \begin{small}149.956\end{small}          \\
+\hline
+\end{tabular}

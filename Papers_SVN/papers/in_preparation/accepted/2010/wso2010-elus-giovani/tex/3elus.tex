@@ -1,0 +1,96 @@
+\section{\elus{}}
+\label{sec:elus}
+
+Para que uma reconfiguração de software seja executada de maneira segura e sem comprometer o sistema como um todo, existem três \textbf{requisitos principais} que devem ser satisfeitos~\cite{Polakovic2008}:
+
+\begin{itemize}
+ \item \textbf{Estado quiescente}: para que uma reconfiguração possa acontecer corretamente, o sistema deve atingir um estado de execução considerado consistente, passível de reconfiguração, chamado de estado quiescente~\cite{bloom1993, soules03system}. Em um ambiente com múltiplas threads, como o \epos{}, o estado quiescente de um componente é atingido quando nenhuma das threads está invocando métodos deste componente~\cite{Polakovic2008}.
+
+ \item \textbf{Transferência de estado}: após o sistema atingir o estado quiescente, o estado (dados) do componente antigo deve ser transferido para o novo componente, se necessário. Isto pode ser realizado através da cópia dos dados privados do antigo componente para o novo, através da criação de um novo objeto passando os dados do objeto antigo para o construtor do componente e deletando o objeto antigo ou ainda através dos métodos \method{set} e \method{get}~\cite{Polakovic2008}.
+
+ \item \textbf{Ajuste das referências}: após a transferência de estado, as referências que o sistema utilizava para acessar o antigo código do componente devem ser atualizadas para apontarem para o novo código, de forma que a aplicação continue sua execução invocando os métodos corretamente.
+\end{itemize}
+
+Adicionalmente a esses requisitos, sistemas embarcados ainda apresentam sérias limitações em termos de memória e, quando são alimentados por bateria, deve-se respeitar limitações no consumo de energia. Por esta razão, o próprio sistema de reconfiguração deve utilizar o mínimo de recursos possíveis, pois estará compartilhando recursos com a(s) aplicação(ões). Reduzir o número de transferência de dados pela rede e o número de escritas/leituras na memória do sistema são \textbf{requisitos desejáveis} para que o sistema consiga realizar as suas atividades por um maior período de tempo. Da mesma forma, reduzir a quantidade de memória utilizada pelo mecanismo de reconfiguração resultará em maior espaço de memória livre para a aplicação.
+
+\subsection{Premissas}
+
+Em função dos requisitos apresentados na seção anterior, o projeto do \ELUS{} baseou-se nas seguintes premissas:
+
+\begin{itemize}
+  \item A unidade de reconfiguração do sistema é componente. Os componentes são classes que devem ser implementados na linguagem C++ e poderão ser marcados como reconfiguráveis ou não em tempo de compilação. Para aqueles componentes não reconfiguráveis nenhum sobrecusto deverá ser adicionado ao sistema. Somente os componentes que possuem reconfiguração habilitada no sistema são passíveis de atualização.
+
+  \item O estado quiescente do componente que está sendo reconfigurado deverá ser alcançado antes da sua reconfiguração. Desta forma, a reconfiguração de software será realizada de forma consistente e não comprometerá as atividades realizadas pela aplicação.
+
+  \item Não são permitidas mudanças na API do sistema. As assinaturas dos métodos dos componentes devem permanecer as mesmas em ambas versões. Esta característica restringe o escopo de reconfiguração, mas por outro lado, devido a resolução das dependências entre os componentes e a aplicação e pelas otimizações realizadas pelo compilador na compilação do sistema, o código gerado apresentará um bom desempenho.
+
+  \item O hardware do sistema não sofre mudanças. Tanto a versão que está sendo reconfigurada quanto a versão antiga executam sobre a mesma plataforma.
+
+  \item É tarefa do desenvolvedor garantir que o novo componente não remova nenhum método que está sendo utilizado por outros componentes. O \ELUS{} não será responsável por verificar dependências de chamadas de métodos entre componentes do sistema.
+
+  \item Os métodos reconfiguráveis do componente deverão ter sido declarados como virtuais. Ao declarar um método como virtual, o compilador irá gerar uma tabela de métodos virtuais (\vtable{}) que contém os endereços dos métodos do componente. A \vtable{} será utilizada para ajustar as referências para os métodos após uma reconfiguração.
+
+  \item Os atributos de um componente reconfigurável deverão ser acessados exclusivamente através dos métodos \componente{set} e \componente{get} relacionados ao atributo.
+\end{itemize}
+
+\subsection{Arquitetura}
+
+A arquitetura do \ELUS{} é apresentada na Figura~\ref{fig:architecture_v2_pt.pdf}. O framework original foi estendido para suportar reconfiguração de software. O elemento \agent{} é o único ciente da posição dos componentes em memória. Este elemento possui uma ``OS Box'' que armazena as mensagens enviadas pelo \proxy{} e controle o acesso aos métodos do componente através de um sincronizador (Semáforo) para cada componente, evitando que um método de um componente que esteja sendo reconfigurado seja chamado ao mesmo tempo. Essa ``Box'' também funciona como um ponto de acesso, chamando os métodos do componente no \agent{} através de uma tabela de métodos. O \agent{} encaminha a chamada ao \adapter{} que invoca os métodos do componente através da \vtable{} do objeto, após recuperá-lo em uma tabela hash.
+
+\fig{architecture_v2_pt.pdf}{Arquitetura do \ELUS{}.}{scale=0.6}
+
+%\fig{architecture_v2.pdf}{Arquitetura do \ELUS{}.}{totalheight=0.18\textheight, width=0.48\textwidth}
+
+O framework é um metaprograma, no qual todas as suas dependências entre um componente e os cenários de execuções são resolvidas durante a compilação do sistema. Portanto, o \proxy{} é dissolvido no código do cliente pelo compilador. Desta forma, chamadas do \proxy{} ao \agent{} são realizadas diretamente do cliente para a ``OS Box''. No código final gerado, os elementos \proxy{}, \handle{} e \stub{} não existem.
+
+A Figura~\ref{fig:proxy_agent.pdf} mostra os novos elementos \proxy{} e \agent{} do framework do \ELUS{}. Eles só estarão presentes se a reconfiguração estiver habilitada para um componente. A classe \proxy{} realiza os métodos do componente e usa a classe \msg{} para encaminhar uma invocação de método ao \agent{}. Quando o \proxy{} recebe um pedido do \handle{}, ele preenche a mensagem com os IDs do método e componente e com os parâmetros do método. A classe \msg{} possui uma interface para anexar e recuperar parâmetros e valor de retorno (métodos \textit{in} e \textit{out}). O método \textit{invoke} da classe chama a função \textsc{OS Box}, na qual usa um vetor (\textit{Dispatcher}) para entregar as chamadas ao \agent{}. O \agent{}, por sua vez, reconfigura o componente através de uma chamada ao método \textbf{update} que utiliza um gerenciador de código para realizar escritas e leituras na memória de programa. Uma Thread, chamada de \textsc{Reconfigurator}, criada na inicialização do sistema, recebe um pedido de reconfiguração e o novo código do componente por uma interface de rede (RS-232 ou rádio por exemplo). Esse pedido é enviado para o \agent{} através da ``OS Box'' em uma mensagem usando um formato específico, chamado de \etp{} (\ETP{}). Um novo componente ao ser atualizado é compilado e ligado com a imagem gerada do sistema e seu código enviado pela rede. Este novo código do componente é ligado usando o endereço da função \textsc{OS Box}, na qual é o ponto de entrada para a estrutura do framework. Consequentemente, esta função é o único elemento do sistema que \textbf{não é} reconfigurável.
+
+%\figspan{proxy_agent.pdf}{\ELUS{} Proxy and Agent elements.}{scale=.5}
+%\fig{proxy_agent.pdf}{\ELUS{} Proxy and Agent elements.}{totalheight=0.2\textheight, width=0.48\textwidth}
+
+O \ETP{} define 6 tipos de mensagens de reconfiguração: (a) adição de método em um componente; (b) remoção de método de um componente; (c) atualização de um componente; (d) atualização de um endereço de memória específico; (e) atualização da aplicação; e (f) adição de atributo. As Figuras~\ref{fig:msg_upd} e ~\ref{fig:msg_app} exemplificam as mensagens de atualização de componente e aplicação. O campo de controle identifica qual o tipo da mensagem. Um componente especial (\textit{Application Update}) foi criado para atualizar a aplicação e reiniciar o sistema após a sua atualização.
+
+% \begin{figure}
+%   \hspace{0.0\textwidth}
+%   \begin{minipage}{0.3\textwidth}
+%    \centering
+%    \includegraphics[scale=0.38]{fig/msg_upd_en}
+%    \caption{Mensagem de atualização de componente.}
+%    \label{fig:msg_upd}
+%    \includegraphics[scale=0.4]{fig/msg_app_en}
+%    \caption{Mensagem de atualização de aplicação.}
+%    \label{fig:msg_app}
+%  \end{minipage}
+%  \hspace{0.08\textwidth}
+%   \begin{minipage}{0.6\textwidth}
+%    \centering
+%  \includegraphics[totalheight=0.2\textheight, width=\textwidth]{fig/proxy_agent}
+%  \caption{Elementos \proxy{}, \agent{}, \adapter{} e \msg{} do framework do \ELUS{}.}
+%  \label{fig:proxy_agent.pdf}
+%  \end{minipage}
+%  \end{figure}
+
+\begin{figure}
+ \hspace{0.0\textwidth}
+  \begin{minipage}{0.6\textwidth}
+   \centering
+ \includegraphics[totalheight=0.2\textheight, width=\textwidth]{fig/proxy_agent}
+ \caption{Elementos \proxy{}, \agent{}, \adapter{} e \msg{} do framework do \ELUS{}.}
+ \label{fig:proxy_agent.pdf}
+ \end{minipage}
+\hspace{0.0\textwidth}
+  \begin{minipage}{0.3\textwidth}
+   \centering
+   \includegraphics[scale=0.38]{fig/msg_upd_pt}
+   \caption{Mensagem de atualização de componente.}
+   \label{fig:msg_upd}
+   \includegraphics[scale=0.4]{fig/msg_app_pt}
+   \caption{Mensagem de atualização de aplicação.}
+   \label{fig:msg_app}
+ \end{minipage}
+
+ \end{figure}
+
+
+%\fig{updateAgent.pdf}{Sequence diagram of the Agent update method when performing a component updating.}{totalheight=0.35\textheight, width=0.7\textwidth}
+

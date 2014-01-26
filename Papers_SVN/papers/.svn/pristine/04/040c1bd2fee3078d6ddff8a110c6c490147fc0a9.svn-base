@@ -1,0 +1,83 @@
+\section{Experimental Results}
+\label{sec:results}
+We evaluated our proposal in three aspects: memory consumption, encryption/decryption time, and energy consumption.
+For all experiments we used: GCC 4.4.4 to compile the application; the MC13224V clock set to 24 MHz; payload of 32 bytes when using encryption, and 7 (request) and 6 (reply) bytes without encryption; and 4.5 dBm of TX power.
+
+Figure~\ref{TestScenario} presents our test scenario.
+We used two EPOSMote II. One node is the base station and works as a gateway between the WSN and the user's network, and the other is a sensor node.
+The base station sends an encrypted temperature request every 10 seconds to the sensor node. 
+The sensor node must decrypt the request, collect the environment temperature, and answer with an encrypted packet.
+
+\fig{0.8}{TestScenario}{Evaluation test scenario.}
+
+\subsection{Results}
+
+In order to analyse the memory footprint we used the arm-size tool, from GNU Binutils version 2.20. 
+The results are shown in Table~\ref{tab:CodeSize}.
+The \textit{AES mediator} column represents the code size implemented in software to accomplish the encryption and decryption.
+Due to the hardware acceleration present in EPOSMote II, the code has a relatively small size.
+\textit{App using AES} and \textit{App without AES} columns presents the code size of the application using encryption or plain text, respectively.
+It is possible to notice that there is a difference between the value of \textit{App using AES} and the sum of \textit{App without AES} and \textit{AES mediator}.
+This is due to the fact that not all methods from the \textit{AES mediator} are executed in \textit{App using AES}.
+The methods not executed are not present in the \textit{App using AES} due to compiler optimizations.
+%This is due to the fact that besides including the mediator code the \textit{App using AES} has to call this code, so it can be executed, whereas \textit{App without AES} has no such calls.
+
+\begin{table}[htb] % [htb]-> here, top, bottom
+  \centering   % tabela centralizada
+  \setlength{\arrayrulewidth}{2\arrayrulewidth}  % espessura da linha
+  \setlength{\belowcaptionskip}{10pt}  % espa\c{c}o entre caption e tabela
+  \caption{Memory footprint.}
+  \begin{tabular}{|c|c|c|c|} % c=center, l=left, r=right 
+    \hline
+    \multicolumn{1}{|c|}{\textbf{Section}} & \multicolumn{1}{|c|}{\textbf{AES mediator}} & \multicolumn{1}{|c|}{\textbf{App using AES}} & \multicolumn{1}{|c|}{\textbf{App without AES}}\\
+    \hline \hline
+    .text & 1336 bytes & 47184 bytes & 45916 bytes \\
+    \hline
+    .data & 0 bytes & 217 bytes & 217 bytes \\
+    \hline
+    .bss  & 10 bytes & 5268 bytes & 5268 bytes \\
+    \hline
+    TOTAL & 1346 bytes & 52669 bytes & 51401 bytes \\
+    \hline
+  \end{tabular}
+  \label{tab:CodeSize}
+\end{table}
+
+To evaluate the encryption/decryption and message authentication code check time we used an oscilloscope.
+We set a General Purpose Input/Output (GPIO) pin of the MC13224V microcontroller to 1 before the encryption process and to 0 after it, measuring the time between.
+We run the experiment for one minute.
+Table~\ref{tab:ProcessingTime} shows the average time of each operation.
+These values also have an impact in the node's power consumption.
+
+\begin{table}[htb] % [htb]-> here, top, bottom
+  \centering   % tabela centralizada
+  \setlength{\arrayrulewidth}{2\arrayrulewidth}  % espessura da linha
+  \setlength{\belowcaptionskip}{10pt}  % espa\c{c}o entre caption e tabela
+  \caption{Encryption/decryption and MAC check processing time.}
+  \begin{tabular}{|c|c|c|c|} % c=center, l=left, r=right 
+    \hline
+    \multicolumn{1}{|c|}{\textbf{}} & \multicolumn{1}{|c|}{\textbf{Encryption}} & \multicolumn{1}{|c|}{\textbf{Decryption}} & \multicolumn{1}{|c|}{\textbf{MAC Check}} \\
+    \hline \hline
+    Time & 17 $\mu$s & 15 $\mu$s & 12 $\mu$s \\
+    \hline
+  \end{tabular}
+  \label{tab:ProcessingTime}
+\end{table}
+
+Figure~\ref{EnergyConsumption} shows the energy consumed by both applications, with and without AES, over time.
+As expected, the graph shows that the energy consumption behaves the same way in both applications, with \textit{App using AES} consuming slightly more than \textit{App without AES}.
+After 7 minutes executing, the applications have consumed 37.2 J and 36.8 J, respectively, a difference of 1\%.
+
+\fig{0.74}{EnergyConsumption}{Energy consumption.}
+
+\subsection{Discussion}
+For the sake of rigorous limits in WSN devices, \textit{Huai et al.}~\cite{Huai:2009} proposes to cut down duty cycles and decrease the energy consumption of executing the AES algorithm, by running both CTR and CBC-MAC in parallel.
+Similar to our scheme, their proposed design employs a full-hardware implementation to offload CPU.
+It uses an 8-bit data path, and a shared key expansion module with both AES cores, encryption and authentication, to guarantee rigorous requirements of area and energy.
+They achieved an encryption time of 71.6 ns for a payload of 17 bytes.
+Their parallel hardware acceleration provides better results when compared with the MC13224V hardware acceleration which works in a sequential execution mode.
+
+\textit{Lee et al.}~\cite{Lee:2010} measures the encryption and decryption performance of AES-128 CBC algorithm on an 8-bit microcontroller.
+As a result, the time and CPU cycle grows proportional to the data size.
+They achieved an encryption/decryption time of 898 and 912 ms when using 32 bytes of data size.
+%Furthermore, this paper analyses the communication efficiency through the total delay per hop, and it shows that when the scale of the sensor networks grows, the delay has been doubled and energy consumption has also increased accordingly.

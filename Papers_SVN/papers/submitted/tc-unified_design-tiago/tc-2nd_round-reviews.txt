@@ -1,0 +1,149 @@
+TC-2012-06-0397.R1, "Unified Design of Hardware and Software Components  "
+Manuscript Type: Regular
+
+Dear Dr. Mück,
+
+We now have reviews of your above referenced submission to IEEE Transactions on Computers. Copies of the review comments are enclosed.
+
+Unfortunately, based on these reviews, we are not able to recommend this submission for publication.
+
+You may resubmit your paper, but it will be treated as a NEW submission and given a new log number. If you choose to resubmit your paper please include this original log number (TC-2012-06-0397.R1) when submitting and include a detailed summary of all changes you have made in response to the AE and reviewers. We will include your previous manuscript's  history in its files and forward the necessary information to the staff. The  manuscript will then undergo a new review process.
+
+The Associate Editor has the following comments for you:
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+Editor
+Comments to the Author:
+The reviewers agreed that the paper has improved in terms of content and presentation.
+However, Reviewer 1 is not happy with the revised version in terms of how your examples and the general applicability of your approach are discussed. Reviewer 3 asked for a minor revision, but his/her review is still fairly critical of your work, by also being concerned with the general applicability of your approach. I hope these problems can be adequately addressed in your revised version.
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+We hope that you will find the comments from the reviewers to be useful in your future work.  If you have any questions, feel free to contact the editor or myself.
+
+As always, we appreciate that you chose to submit your work to TC and we thank you for your interest in TC.  We hope that you will continue to submit your work to TC in the future.
+
+Sincerely,
+
+Albert Zomaya, EIC
+Transactions on Computers
+albert.zomaya@sydney.edu.au
+
+
+=======================================REVIEWS
+Please note that some reviewers may have included additional comments in a separate file. If a review contains the note "see the attached file" under Section III A - Public Comments, you will need to log on to ScholarOne Manuscripts to view the file. After logging in, select the Author Center, click on the "Manuscripts with Decisions" queue and then clicking on the "view decision letter" link for this manuscript. You must scroll down to the very bottom of the letter to see the file(s), if any. This will open the file that the reviewer(s) or the Associate Editor included for you along with their review.
+
+Reviewer: 1
+
+Recommendation: Revise and Resubmit as "new"
+
+Comments:
+The authors improved the paper. However, in my opinion the authors did not address my concerns expressed in my review:
+1) The examples are not discussed very well. Instead of giving some details, the authors add some basic literature on programming. For me, this is not a satisfactory response to review and I cannot understand why the authors did not simply explain their examples.
+2) An important conecern in my review was that the proposed approach is only useful when using a high-level synthesis tool, which supports synthesis of functions. The authors responded to this concern by simply adding a sentence that their proposed approach could be used with other synthesis tools as well. So far, so good, but I am not interested in reading that the proposed approach could be used with other tools I am interested in understanding how it works.
+
+
+Additional Questions:
+1. Which category describes this manuscript?: Practice / Application / Case Study / Experience Report
+
+How relevant is this manuscript to the readers? Explain under Public Comments: Interesting - but not very relevant
+
+1. Please explain how this manuscript advances this field of research and/or contributes something new to the literature. : The key contributions of the paper are in my opinion the usage of safe pointers and static polymorphism in high-level synthesis as well as dispatching of hardware functions using aspect-oriented programming.
+
+2. Is the manuscript technically sound? Please explain your answer under Public Comments below.: Yes
+
+1. Are the title, abstract, and keywords appropriate? Please explain under Public Comments below.: Yes
+
+2. Does the manuscript contain sufficient and appropriate references? Please explain under Public Comments below.: References are sufficient and appropriate
+
+3. Does the introduction state the objectives of the manuscript in terms that encourage the reader to read on? Please explain your answer under Public Comments below.: Yes
+
+4. How would you rate the organization of the manuscript? Is it focused? Is the length appropriate for the topic? Please explain under Public Comments below.: Satisfactory
+
+5. Please rate the readability of the manuscript. Explain your rating under Public Comments below.: Easy to read
+
+6. Should the supplemental material be included? (Click on the Supplementary Files icon to view files): Does not apply, no supplementary files included
+
+7. If yes to 6, should it be accepted:
+
+Please rate the manuscript. Explain your choice.: Fair
+
+
+Reviewer: 2
+
+Recommendation: Author Should Prepare A Minor Revision
+
+Comments:
+The authors have adopted many suggestions from the reviewers. Now the manuscript has improved considerably.
+
+The only complain I have is a minor style issue. We now have section 4.2.1, but there is no section 4.2.2. The authors may want to merge section 4.2.1 into section 4.2.
+
+Additional Questions:
+1. Which category describes this manuscript?: Technology
+
+How relevant is this manuscript to the readers? Explain under Public Comments: Very Relevant
+
+1. Please explain how this manuscript advances this field of research and/or contributes something new to the literature. : See comments from the previous revision.
+
+2. Is the manuscript technically sound? Please explain your answer under Public Comments below.: Yes
+
+1. Are the title, abstract, and keywords appropriate? Please explain under Public Comments below.: Yes
+
+2. Does the manuscript contain sufficient and appropriate references? Please explain under Public Comments below.: References are sufficient and appropriate
+
+3. Does the introduction state the objectives of the manuscript in terms that encourage the reader to read on? Please explain your answer under Public Comments below.: Yes
+
+4. How would you rate the organization of the manuscript? Is it focused? Is the length appropriate for the topic? Please explain under Public Comments below.: Satisfactory
+
+5. Please rate the readability of the manuscript. Explain your rating under Public Comments below.: Readable - but requires some effort to understand
+
+6. Should the supplemental material be included? (Click on the Supplementary Files icon to view files): Does not apply, no supplementary files included
+
+7. If yes to 6, should it be accepted: As is
+
+Please rate the manuscript. Explain your choice.: Excellent
+
+
+Reviewer: 3
+
+Recommendation: Author Should Prepare A Minor Revision
+
+Comments:
+The authors have spent good effort to address the reviewer's comments.
+Some sections have been completely revised and strongly improved.
+
+Last minor comments:
+
+References to Wikipedia should be replaced by well recognised literature.
+
+The article still has a strong touch of a case-study. This is not a problem, since the general applicability of the proposed concepts would be difficult to evaluate. Moreover, the approach is technically based on C++. For this reason I would propose to modify the title of the article in the following way:
+"Towards a Unified C++-based Design of Hardware and Software Components"
+
+Moreover, the overall approach is targeted for a specific implemenation platform, as described in Section 5.2. Still it becomes not clear how the proposed approach supports a separation of the behaviour/functionality and the mapping to the implementation platform (including certain artefacts). For instance, a real-time operating system could be considered as platform artefact. For reuseablilty of the behaviour model (i.e. retargeting to another platform with a different or even without an operating system) the separation of functionality and structure should be as explicit as possible. The approach presented in the article seems to be very tailored to the EPOS environment. If this should be a remaining limitation of the work I would appreciate if you would metion this in the future work.
+
+In general the conclusion could be significantly improved by a summary of the advantages and drawbacks of the proposed approach. In an outlook on future work possible solutions for the mitigation of existing drawbacks could be described. This would definitely further enhance the quality of the article.
+
+
+Additional Questions:
+1. Which category describes this manuscript?: Practice / Application / Case Study / Experience Report
+
+How relevant is this manuscript to the readers? Explain under Public Comments: Very Relevant
+
+1. Please explain how this manuscript advances this field of research and/or contributes something new to the literature. : The paper discusses ideas for a unified C++ description for embedded HW/SW systems. The presented techniques contribute to a unified C++ system description that can be used as input to system synthesis, building on existing platform configuration tools, operating systems, cross compilers, and high-level synthesis tools.
+
+2. Is the manuscript technically sound? Please explain your answer under Public Comments below.: Yes
+
+1. Are the title, abstract, and keywords appropriate? Please explain under Public Comments below.: Yes
+
+2. Does the manuscript contain sufficient and appropriate references? Please explain under Public Comments below.: References are sufficient and appropriate
+
+3. Does the introduction state the objectives of the manuscript in terms that encourage the reader to read on? Please explain your answer under Public Comments below.: Yes
+
+4. How would you rate the organization of the manuscript? Is it focused? Is the length appropriate for the topic? Please explain under Public Comments below.: Satisfactory
+
+5. Please rate the readability of the manuscript. Explain your rating under Public Comments below.: Easy to read
+
+6. Should the supplemental material be included? (Click on the Supplementary Files icon to view files): Does not apply, no supplementary files included
+
+7. If yes to 6, should it be accepted: After revisions.  Please include explanation under Public Comments below.
+
+Please rate the manuscript. Explain your choice.: Good

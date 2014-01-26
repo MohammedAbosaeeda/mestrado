@@ -1,0 +1,11 @@
+\begin{tabular}{l|c}
+\hline
+\textbf{Desafio}  & \textbf{WCET (ciclos)} \\
+\hline
+Tabela Hash & 54.272\\
+Float bit a bit & 2.870\\
+Transformada Discreta de Fourier & --\\
+Codec ADPCM & --\\
+%cnt.c & 12.881\\
+\hline
+\end{tabular}

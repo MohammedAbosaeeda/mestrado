@@ -1,0 +1,164 @@
+\documentclass[12pt,a4]{article}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+
+\geometry{left=30mm,right=20mm,top=30mm,bottom=20mm}
+
+\newcommand{\litmus}{LITMUS$^{\mathrm{RT}}$}
+
+\title{Projeto e implementação do escalonador C-EDF no EPOS}
+\author{Murilo Ferreira Vitor\\
+\small Laboratório de Integração Software/Hardware (LISHA)\\
+\small Universidade Federal de Santa Catarina (UFSC)\\
+\small 880400-900 - Florianópolis - SC - Brazil\\
+murilo@lisha.ufsc.br}
+\date{}
+
+\hyphenation{me-lhor par-ti-cu-la-ri-da-des es-ca-lo-na-dor}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+
+{\bf Palavras-chave:} Escalonamento de tempo real, Processadores \textit{multicore}, Sistemas operacionais de tempo real, \textit{clustered} EDF
+\end{abstract}
+
+\section{Introdução}
+
+O desenvolvimento de algoritmos para o escalonamento de processos em plataformas \textit{multicore} vem crescendo a cada ano, principalmente para aplicações de tempo real. As plataformas \textit{multicore} estão sendo cada vez mais usadas em aplicações de tempo real devido às limitações impostas pela estagnação no aperfeiçoamento de processadores \textit{single-core}. As fabricantes de chips chegaram praticamente no limite do melhoramento de processadores \textit{single-core} devido ao superaquecimento dos chips.
+
+Diferentemente dos sistemas em geral, os sistemas de tempo real possuem um tempo de resposta, isto é, as tarefas tem um prazo para serem cumpridas. Baseados nisso, diversos algoritmos de escalonamento foram propostos. Os principais e mais conhecidos são o \textit{Rate Monotonic} (RM) e o \textit{Earliest Deadline First} (EDF)\cite{Liu:1973}. Esses algoritmos apresentam algumas características que visam o cumprimento desses prazos, como por exemplo, ambos possuem testes de escalonabilidade para conjuntos de tarefas.
+
+O RM é um algoritmo que executa tarefas periodicas e preemptivas, sendo que o período da tarefa é igual ao seu \textit{deadline}\footnote{Deadline é o tempo limite que o sistema deve responder e/ou atuar para garantir sua consistência.}. O RM trabalha baseado em prioridades, onde são os períodos que definem a ordem das tarefas. Quanto menor o \textit{deadline}, maior a prioridade. Essa atribuição de prioridades é feita de forma estática, antes do início da execução das tarefas.
+
+O EDF é um algoritmo que executa tarefas preemptivas, sendo estas, periódicas ou não. O EDF, assim como o RM, também trabalha baseado em prioridades. As prioridades no EDF são atribuídas de forma dinâmica, em tempo de execução. A determinação das prioridades das tarefas é baseada em seus \textit{deadlines} absolutos, que são calculados somando-se o instante no tempo de chegada com o seu \textit{deadline} relativo (relacionado à periodicidade da tarefa). A tarefa mais prioritária é aquela cujo \textit{deadline} absoluto está mais próximo do tempo atual. A fila de requisições prontas é reordenada cada vez que uma nova requisição chega ao sistema, fazendo com que a ordem das prioridades esteja sempre atualizada.
+
+Os algoritmos descritos acima são ótimos escalonadores para plataformas \textit{single-core}. Entretanto, o uso desses escalonadores em plataformas \textit{multicore} não é possível sem que haja algumas modificações, como por exemplo, decidir qual processador deve executar cada tarefa. 
+
+Algumas abordagens foram propostas, porém, a maioria foi implementada e avaliada baseando-se em extensões de tempo real para o Linux \cite{Calandrino:2006} \cite{Bastoni:2010} \cite{Bastoni:2011}. Uma das desvantagens desses trabalhos é a utilização de um Sistema Operacional (SO) de propósito geral, devido à imprevisibilidade e maior sobrecusto em tempo de execução \cite{Gracioli:2013}.
+
+O \textit{Embedded Parallel Operating System} (EPOS) é o primeiro Sistema Operacional de Tempo Real (RTOS) capaz de suportar os algoritmos de escalonamento global e particionado, que são algoritmos para plataformas \textit{multicore} de tempo real, como por exemplo, o \textit{Global Earliest Deadline First }(G-EDF) e o \textit{Partitioned Earliest Deadline First} (P-EDF) \cite{Gracioli:2013}. Entretanto, ainda é possível implementar outras classes de algoritmos de escalonamento \textit{multicore} no EPOS, e assim, expandir o seu suporte \textit{multicore} de tempo real.
+
+O objetivo principal deste trabalho é implementar e analisar algoritmos de escalonamento para tempo real no EPOS. O foco será em abordagens que propõe modificações no EDF, como por exemplo, o \textit{Clustered Earliest Deadline First} (C-EDF) \cite{Bastoni:2010}. O EDF foi escolhido por apresentar algumas vantagens em relação ao RM, como por exemplo, uma maior taxa de utilização do processador \cite{Liu:1973}. A avaliação dos algoritmos será realizada em termos do sobrecusto em tempo de execução, e comparação com o \litmus, visando assim, melhorar o suporte do EPOS para plataformas \textit{multicore} de tempo real.
+
+\section{Conceitos teóricos}
+	
+Esta seção apresenta alguns conceitos necessários para a compreensão do estudo apresentado nas seções seguintes. Será feito uma breve descrição do que são os Sistemas Operacionais e o que é um Sistema de Tempo Real.
+
+\subsection{Sistemas Operacionais}
+		
+Com o intuito de facilitar o desenvolvimento de \textit{softwares}, os SO foram desenvolvidos. O SO é o responsável pelo gerenciamento dos dispositivos físicos de um computador (\textit{hardware}), servindo como um intermediador. Desta forma, a criação de outros programas torna-se mais simples.	
+
+O SO fornece um conjunto de comandos, chamados de \textit{system calls} (chamadas de sistema). As \textit{system calls} são as responsáveis pela comunicação dos recursos de \textit{hardware}, permitindo assim, o uso desses recursos de uma maneira mais simples. As \textit{system calls} escondem dos programadores a complexidade dos comandos em linguagem de máquina\footnote{Linguagem de máquina é uma linguagem formada por diversas instruções baseadas em números binários.}.
+
+O \textit{kernel} (núcleo) é o responsável pela implementação das \textit{system calls}. O \textit{kernel} faz parte do SO e possui como principais componentes, a gerência de processador, a gerência de memória, o sistema de arquivos, e a gerência de entrada e saída.
+
+\subsubsection{Gerenciador de Processos}
+
+Antes de entender como funciona o gerenciador de processos, é necessário conhecer o conceito de um processo. Um processo é basicamente um programa em execução.
+	
+Em um sistema multiprogramado, diversos programas são executados ao mesmo tempo. Esse modelo está presente na maioria dos computadores. E associado a cada programa em execução, existe um espaço reservado na memória. 
+
+Vários programas necessitam constantemente dos mesmos recursos para poderem realizar suas tarefas, como por exemplo, acessar a memória interna do computador para manipular alguns arquivos. É nesse momento que percebemos o quão importante é o gerenciador de processos, pois é ele que decide quem acessará cada recurso.
+
+A maioria dos computadores aparentemente pode executar diversos programas ao mesmo tempo. Porém, o que está acontecendo na verdade é chamado de pseudoparalelismo, onde apesar de os programas não estarem executando em paralelo, eles se alternam de forma tão rápida que eles parecem estar sendo executados simultaneamente. Isso é possível graças ao gerenciador de processos, que de acordo com a sua fila de processos, decide qual processo será executado a cada instante. Os algoritmos de escalonamento são os responsáveis pela ordenação da fila de processos.
+
+\subsection{Sistemas de tempo real}
+		
+O número de aplicações com restrições temporais vem aumentando a cada ano. Temos como exemplo, o controle de tráfego aéreo, a eletrônica embarcada em carros, os sistemas multimídia, entre outros. Essas aplicações fazem parte de um grupo identificado como Sistemas de Tempo Real \cite{Farines}. 	
+
+Diferentemente dos outros sistemas, os sistemas de tempo real tem como principal objetivo cumprir prazos temporais, onde a velocidade de execução do processo só é interessante para a aplicação desde que a aplicação seja executada dentro do seu prazo (\textit{deadline}). Por essa razão, os sistemas de tempo real apresentam diferenças em relação às suas interrupções de \textit{hardware} e ao escalonamento entre os seus processos.
+	
+Baseado no cumprimento dos seus \textit{deadlines}, os sistemas de tempo real podem ser classificados em \textit{hard} (críticos) e \textit{soft} (não críticos). Os sistemas \textit{hard} são aqueles em que o prazo para execução das tarefas são vitais e não podem ser descumpridos, pois acarretariam em prejuízos econômicos e/ou humanos. Já os sistemas \textit{soft} são mais tolerantes às perdas de deadlines, onde uma perda no cumprimento da tarefa não impede que o processo continue executando, desde que essas perdas sejam ocasionais, senão há o risco de o sistema ficar inconsistente. Exemplos de \textit{Hard Real Time }(HRT) podem ser encontrados no controle de tráfego aéreo, sistemas de navegação de mísseis, entre outros. Já os \textit{Soft Real Time }(SRT) são encontrados em transmissões de áudio, vídeo, entre outros.	
+
+\subsubsection{Algoritmos de escalonamento para plataformas \textit{multicore}}
+			
+Como já foi dito anteriormente, as plataformas \textit{multicore} estão sendo cada vez mais usadas em RTOS fazendo com que os algoritmos antes usados, como o EDF e RM, tenham que ser modificados. Sendo assim, algumas modificações foram propostas, e as mais conhecidas são as abordagens particionadas, globais e agrupadas \cite{Calandrino:2006} \cite{Bastoni:2010}.
+
+Na abordagem particionada cada tarefa é atribuída estaticamente para cada processador, e as migrações não são permitidas. Isto é, as tarefas não podem mudar de processador, devem ser executadas apenas nos processadores aos quais elas foram atribuídas. Isso porque, para cada processador, existe uma fila de processos exclusiva a ele.
+	
+Na abordagem global, as tarefas podem migrar livremente entre os processadores, podendo assim, serem executadas em qualquer um deles. Isso é possível graças a sua fila de processos, que é única para todos os processadores.
+
+Na abordagem agrupada (\textit{clustered}) as tarefas são atribuídas estaticamente para um grupo de processadores, formando assim, agrupamentos de processos, semelhante ao particionado. Em cada agrupamento, as tarefas são livres para migrar entre os processadores, assim como ocorre no global. 
+
+É possível notar que tanto o particionado, quanto o global, são particularidades do agrupado, onde no particionado, o agrupamento de processadores é formado por apenas um processador, e no global, o número de agrupamentos, se resume a apenas um grupo, formado por todos os processadores.
+
+O EPOS possui atualmente suporte para o G-EDF e P-EDF. Este trabalho visa implementar e avaliar o C-EDF no EPOS.
+
+\subsubsection{\textit{Overheads} dos RTOS}
+			
+Os SO apresentam algumas fontes de \textit{overhead} (sobrecustos) para poderem executar suas atividades. Quatro das seis principais fontes de \textit{overhead} encontradas em RTOS são mostradas na \underline{\textbf{FIGURA}}.
+
+Quando uma tarefa é liberada, ocorre o \textit{released overhead} (sobrecusto de liberação), que é o tempo necessário para atender a rotina de interrupção responsável pela liberação das tarefas no tempo correto. Sempre que uma decisão de escalonamento é tomada, o \textit{scheduling overhead} (sobrecusto de escalonamento) ocorre, ele é o responsável por selecionar o próximo processo a ser executado e re-enfileirar a fila de processos. O \textit{context-switch overhead} (sobrecusto de troca de contexto) ocorre quando troca-se a pilha de execução e os registradores de processos. \textit{Inter-processor interrupt} (IPI) \textit{latency} (latência de interrupção entre processadores) ocorre quando uma tarefa é liberada em um processador diferente da qual a tarefa foi escalonada. \textit{Tick overhead} é o tempo necessário para gerenciar o temporizador de interrupções para escalonamento periódico. \textit{Cache-related Preemption and Migration Delay} (CPMD) é o atraso relacionado à retomada da execução de um processo, após uma preempção ou migração gerar uma perda de afinidade do processo com a \textit{cache}.
+
+Em um sistema de tempo real é extremamente importante conhecer todos os sobrecustos introduzidos pelo SO, a fim de garantir o cumprimento dos requisitos de tempo real do sistema.
+
+\section{\litmus}
+
+Com o intuito de cumprir o objetivo principal deste trabalho, o \textit{Linux Testbed for Multiprocessor Scheduling in Real-Time Systems} (\litmus) foi utilizado para auxiliar no estudo de formas de implementar algumas abordagens de escalonamento de tarefas para RTOS \cite{Calandrino:2006}. 
+
+O \litmus é uma extensão do \textit{kernel} do Linux para tempo real, com foco em escalonamento de tempo real para plataformas \textit{multicore}. O \textit{kernel} do Linux foi modificado para suportar o modelo de tarefas esporádicas, além de suportar os escalonadores particionado, agrupado e global. Os escalonadores são baseados principalmente no EDF.
+	
+Algumas ferramentas que auxiliam no desenvolvimento e análise de tarefas para tempo real em plataformas \textit{multicore} são encontradas juntamente ao \litmus. São elas, a \textit{liblitmus} e o \textit{Feather-Trace}. 
+
+A \textit{liblitmus} possui diversos códigos de exemplos de uso que facilitam no desenvolvimento de testes para tarefas de tempo real. Já o \textit{Feather-Trace} é uma ferramenta usada para coletar os \textit{overheads} encontrados no \litmus \cite{Brandenburg:2007}.
+
+\subsection{Exemplo de aplicação utilizando a \textit{libltimus}}
+		
+A \textbf{\underline{FIGURA}} (a) mostra a criação de múltiplas tarefas para uma aplicação da \textit{liblitmus}. As tarefas são criadas normalmente chamando a função \texttt{pthread\_create} da biblioteca \texttt{pthread}. Entretanto, antes de executar a tarefa, a \textit{liblitmus} oferece uma chamada para alterar o modo da tarefa criada para ela ser uma tarefa de tempo real.Cada tarefa é criada com alguns parâmetros, como o \textit{deadline}, o período, e o tempo de computação. 
+
+Na \textbf{\underline{FIGURA}} (b) é mostrada a função responsável por executar todas as tarefas criadas. Pode-se notar também, que o tempo de execução total das tarefas é calculado a partir da função \texttt{run\_exec\_time}. 
+
+A \textbf{\underline{FIGURA}} (c) mostra o que acontece com cada tarefa. Cada uma é executada 500 vezes pelo \texttt{for}, e para cada uma das iterações é calculado o tempo de execução a partir da função \texttt{read\_tsc\_us}. A função de cada tarefa é a de executar um \textit{loop} de 50 iterações através da função \texttt{loop\_for}.
+
+Concluindo a execução de todas as tarefas, são realizados os cálculos da média do tempo de execução (AVG), o desvio padrão (STD) e o pior tempo de execução (WCET) do conjunto das tarefas, gerando assim, um arquivo com os resultados. 	
+
+\subsection{\textit{Overhead} introduzido pela coleta dos dados}
+		
+A coleta e o armazenamento dos \textit{overheads} presentes no \litmus feita pelo \textit{Feather-Trace}, é possível graças à implementação de um \textit{buffer} FIFO (\textit{First In, First Out}) sem bloqueio (\textit{wait-free}). Essa coleta é feita a partir do \textit{TimeStamp Counter} (TSC) \cite{Brandenburg:2007}.
+
+Com o propósito de descobrir se o \textit{Feather-Trace} introduz um \textit{overhead} considerável nas tarefas de tempo real do \litmus, \textbf{\underline{a aplicação da seção 3.1}} foi utilizada para realizar essa avaliação. O tempo necessário para a execução de todas as tarefas, e o tempo de execução individual de cada tarefa (variando o número de tarefas de 5 a 125) foi medido com e sem o \textit{Feather-Trace} (habilitado para medir os \textit{overheads} de liberação, escalonamento, troca de contexto, \textit{tick} e IPI \textit{latency} no processador Intel i7-2600). Cada grupo de tarefa foi executado 100 vezes, e a partir disso, foi extraída a média do tempo de execução. A \textbf{\underline{FIGURA}} (a) mostra a média do tempo total de execução da aplicação. Já a \textbf{\underline{FIGURA}} (b) mostra a média do tempo de execução de cada tarefa. Pode-se notar que o \textit{Feather-Trace} não introduz um \textit{overhead} considerável para o tempo de execução das tarefas. Mais detalhes sobre essa comparação podem ser encontrados em \cite{Gracioli:2013}.
+
+\section{EPOS}
+
+O EPOS é uma multi-plataforma, orientada a objetos, baseada em componentes, e um \textit{framework} de sistemas embarcados \cite{Froehlich:2001} \cite{epos}. Componentes independentes do EPOS implementam serviços tradicionais do SO, como \textit{threads} (tarefas) e semáforos. Nos últimos anos, o EPOS tem sido usado em várias pesquisas acadêmicas e no desenvolvimento de alguns projetos industriais, como redes de sensores \textit{wireless} \cite{Wanner:JCS:2008}, e TV digital \cite{Ludwich:IADIS_AC:2011}.
+
+\subsection{Escalonamento}
+
+Os três principais componentes que compõe o suporte para escalonamento de tempo real no EPOS estão presentes na \textbf{\underline{FIGURA}}. A classe \texttt{Thread} representa uma tarefa aperiódica e define o seu fluxo de execução, com seu próprio contexto e pilha. A classe implementa funções tradicionais das \textit{threads}, como as operações de suspender, resumir, dormir, e acordar. A classe \texttt{Periodic\_Thread} estende a classe \texttt{Thread} para permitir o suporte de tarefas periódicas no EPOS. Para isso, adiciona mecanismos relacionados à re-execução das tarefas periódicas, como o método \texttt{wait\_next}, que obriga a tarefa a dormir no tempo referente ao seu período, e também a classe \texttt{Alarm}, que é responsável por acordar a tarefa.
+
+A classe \texttt{Scheduler} e a subclasse \texttt{Criterion} definem a estrutura que realiza o escalonamento das tarefas. O EPOS promove a reutilização de código, separando a política de escalonamento (representada pela subclasse \texttt{Criterion}) do seu mecanismo (e.g., as implementações de estrutura de dados como listas e pilhas). A ordenação das tarefas é realizada pela estrutura de dados presente na classe \texttt{Scheduler}, baseada no critério de escalonamento.
+
+A classe \texttt{Trait}\footnote{A classe \texttt{Trait} é uma classe \textit{template} que associa informação de um componente em tempo de compilação.} define o critério de escalonamento em tempo de compilação (e.g., \texttt{typedef Scheduling\_Criteria::GEDF Criterion} define o critério de escalonamento como G-EDF). O \texttt{Scheduler} consulta as informações fornecidas pela subclasse \texttt{Criterion} para definir o uso adequado das listas e operações. Cada subclasse \texttt{Criterion} essencialmente define a prioridade de uma tarefa, que é mais tarde usada pelo escalonador para mudar a tarefa. O \texttt{Scheduler} recebe um componente como parâmetro, como a \texttt{Thread}, e é esse componente que define um critério, que tem as características de um critério, como número de filas, preempção, etc. O \texttt{Scheduler} usa uma \texttt{Scheduling\_Queue} para realizar as operações de escalonamento, como mudar, inserir, e remover. A \textbf{\underline{FIGURA}} mostra um exemplo da interação entre as classes \texttt{Criterion, Trait, e Scheduler}.
+
+O critério G-EDF é uma extensão do EDF e é suportado pelo EPOS. Uma \textit{flag} chamada \texttt{GLOBAL\_SCHEDULER} é usada para informar ao escalonador quando o critério é global ou não. Se o critério é global, o escalonador usa uma versão especializada da classe \texttt{Scheduling\_Queue}, com apenas uma fila global para o sistema. Todas as dependências entre o critério e o escalonador são resolvidas em tempo de compilação, não gerando assim, \textit{overhead} em tempo de execução. 
+
+O escalonador \texttt{CPU\_Affinity} usa uma especialidade da \texttt{Scheduling\_Queue} diferente, que cria uma fila para cada processador. O método \texttt{Criterion::Current} retorna o processador que está executando a tarefa atual. Deste modo, o escalonador é capaz de manipular corretamente a inserção e remoção de/para uma fila específica. Este é o mesmo mecanismo usado em outros escalonadores particionados que são suportados pelo EPOS, como o P-EDF e o \textit{Partitioned Rate Monotonic} (P-RM).
+
+\subsection{Cálculo dinâmico das prioridades no EDF}
+
+Este trabalho identificou que o EDF implementado no EPOS não suportava o cálculo dinâmico das prioridades, por essa razão algumas modificações foram realizadas. A \textbf{\underline{FIGURA}} mostra como é realizado o cálculo e a atribuição da prioridade dinâmica no EDF. Primeiramente obtém-se o tempo atual na execução da tarefa. Após isso, é realizada a soma do tempo medido com o \textit{deadline} definido pela tarefa. Por fim, é atribuída a nova prioridade à tarefa, e a fila de escalonamento é reordenada.
+
+\subsection{Projeto e implemetação do C-EDF}
+
+Com a separação das preocupações entre escalonador, critério, e tarefa (\underline{\textbf{seção 4.1}}), torna-se simples a inserção de novas políticas de escalonamento. Baseado nisso, nesse trabalho foi estendido o critério de escalonamento EDF para suportar o C-EDF.
+
+Para entender como o C-EDF foi implementado, primeiramente é necessário entender melhor o funcionamento dos escalonadores G-EDF e P-EDF no EPOS. O P-EDF usa uma especialização diferente da \texttt{Scheduling\_Queue}, onde é criada uma fila para cada processador. A escolha da \texttt{Scheduling\_Queue} depende da variável \texttt{QUEUES}, presente na definição do P-EDF e do G-EDF. Para o escalonador P-EDF, a variável \texttt{QUEUES} é definida baseada no número máximo de processadores presentes na máquina. Com isso, o \texttt{Scheduler} é capaz de manipular uma lista específica que é usada para inserir e/ou remover os processos de cada processador. Já o G-EDF, define a variável \texttt{QUEUES} com o valor um, desse modo o \texttt{Scheduler} pode utilizar uma versão especializada da \texttt{Scheduling\_Queue} com apenas uma fila para todo o sistema. Uma outra variável é definida pelo G-EDF, ela é chamada de \texttt{HEADS}, e é definida com o número máximo de processadores. Ela é usada por uma lista específica para o escalonamento global com objetivo de identificar em que processador está sendo executado cada \textit{thread}. Desse modo, a lista específica para o escalonamento global pode inserir e/ou remover as \textit{threads} de cada processador da maneira correta.
+
+Na implementação do C-EDF, foram criadas duas variáveis para permitir que as particularidades referentes ao agrupamento das tarefas fossem atendidas. A primeira delas foi a variável \texttt{N\_CLUSTERS}, pertencente à classe \texttt{Traits}, e que representa o número de \textit{clusters} que serão usados na aplicação, associando seu valor à variável \texttt{QUEUES}. Baseado nisso, o escalonador pode utilizar a mesma \texttt{Scheduling\_Queue} usada pelo P-EDF, podendo assim, criar uma fila para cada \textit{cluster}. A segunda variável foi chamada de \texttt{CPUS\_PER\_CLUSTER}, também pertencendo à classe \texttt{Traits}, e que representa o número de processadores por \textit{cluster}, associando seu valor a variável \texttt{HEADS}. Para que o escalonamento dentro de cada \textit{cluster} seja realizado como no escalonamento global, a \textit{flag} \texttt{GLOBAL\_SCHEDULER} foi definida como \textit{true}. Baseado nos valores das variáveis \texttt{HEADS} e \texttt{GLOBAL\_SCHEDULER}, a classe \texttt{Scheduler} é capaz de utilizar a lista específica para o escalonamento global para inserir e/ou remover os processos dentro de cada \textit{cluster}. O escalonador C-EDF é mostrado na \textbf{\underline{FIGURA}}.
+
+\section{Considerações Finais}
+
+Este trabalho mostrou que é razoavelmente simples projetar e implementar novos algoritmos de escalonamento no EPOS. Isso graças à sua estrutura ser baseada em componentes e ser orientada a objetos. Dessa forma, foi possível contribuir com o suporte \textit{multicore} de tempo real do EPOS, acrescentando o escalonador C-EDF a sua plataforma e o cálculo dinâmico do EDF.
+
+\subsection{Direções futuras}
+
+Como trabalho futuro serão considerados outras abordagens para o escalonamento \textit{multicore}, como a proposta de escalonamento semi-particionado. A intenção será a de implementar e analisar seus comportamentos no EPOS, comparando com trabalhos já realizados, como as implementações no \litmus.
+
+\bibliographystyle{abnt-num}
+\bibliography{bibliografia}
+
+\end{document}

@@ -1,0 +1,16 @@
+\begin{tabular}{@{}c@{\hspace{1mm}}c@{\hspace{1mm}}ccccccccc@{}}
+\toprule
+\multicolumn{3}{c}{Partitioning}   & \multicolumn{2}{l}{\vplatuntimed}              & \multicolumn{3}{c}{\vplattimed}                           & \multicolumn{3}{c}{\phyplat}\\
+\cmidrule(l){1-3}\cmidrule(l){4-5}\cmidrule(l){6-8}\cmidrule(l){9-11}
+DTMF & ADPCM & AES                 &         SW foot.      &     Sim. time        &  Exec. time &   Area rating   &  Sim. time      &  Exec. time & Avg. FPGA area &  Sim. time \\
+\midrule
+SW  &   SW  &  SW                 & 10820 &  $2.16\times 10^{2}$  &  26.77  & ~~~274.80  &   $5.04\times 10^{4}$  &  33.33  & 0.02\% &    $1.37\times 10^{7}$\\
+ SW  &   SW  &  HW                 &   ~7896 &   $1.68\times 10^{1}$ &  ~8.42  & 259991.93 & $4.39\times 10^{3}$    &   ~9.90  & 0.90\% &     $1.13\times 10^{6}$\\
+ SW  &   HW  &  SW                 & 10592 &  $2.36\times 10^{2}$  &  34.67  & ~~2090.49  &  $6.53\times 10^{4}$  &    38.52 & 0.23\% &    $1.89\times 10^{7}$\\
+ SW  &   HW  &  HW                 &   ~6828 &   $2.75\times 10^{1}$ &  ~9.76  & 261097.72 & $1.88\times 10^{4}$    &    10.73 & 1.05\% &    $5.33\times 10^{6}$\\
+ HW  &   SW  &  SW                 & ~8008 &   $2.02\times 10^{2}$ &   27.14 & ~~3733.59 &   $5.11\times 10^{4}$  &    31.93 & 0.32\% &    $1.39\times 10^{7}$\\
+ HW  &   SW  &  HW                 & ~5084 &   $4.96\times 10^{0}$  &  ~1.70 & 263450.72 & $3.27\times 10^{3}$    &    ~1.79 & 1.20\% &     $8.85\times 10^{5}$\\
+ HW  &   HW  &  SW                 &  ~6940 &   $7.39\times 10^{1}$  &  25.14 & ~~4839.38  &  $4.84\times 10^{4}$  &    27.94 & 0.47\% &    $1.31\times 10^{7}$\\
+ HW  &   HW  &  HW                 &  ~3176 &    $1.18\times 10^{-1}$ &  ~0.04 & 263846.61 & $7.70\times 10^{1}$   &    ~0.05 & 1.28\% &    $1.99\times 10^{4}$\\
+\bottomrule
+\end{tabular}

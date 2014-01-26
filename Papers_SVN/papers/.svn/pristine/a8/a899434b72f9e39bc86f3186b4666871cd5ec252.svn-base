@@ -1,0 +1,14 @@
+
+\begin{tabular}{lllll}
+\hline\noalign{\smallskip}
+Parameter & Normal scheduler & Debugged scheduler & Debugged scheduler & VHDL scheduler\\
+ &  &  hand coded & scenario adapter & \\
+\noalign{\smallskip}
+\hline
+\noalign{\smallskip}
+4-input LUTs & 3719 & 3853 & 3980 & 1974 \\
+Flip Flops & 768 & 965 & 1080 & 662 \\
+Occupied Slices & 1910 & 2237 & 2348 & 1069 \\
+Longest path delay (ns) & 22.26 & 18.35 & 17.74 & 11.84 \\
+\hline
+\end{tabular}

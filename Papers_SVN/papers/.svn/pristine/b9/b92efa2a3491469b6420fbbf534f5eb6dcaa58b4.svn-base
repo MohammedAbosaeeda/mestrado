@@ -1,0 +1,21 @@
+\begin{tabular}{l@{\hspace{1mm}}r@{\hspace{2mm}}r@{\hspace{3mm}}r@{\hspace{2mm}}r}
+\toprule
+\multirow{3}{*}{Component}  & \multicolumn{2}{c}{Software}                              & \multicolumn{2}{c}{Hardware} \\
+                            & \multicolumn{2}{c}{(code/data/total)}                     & \multicolumn{2}{c}{(LUT/FF)} \\
+\cmidrule(l){2-3}
+\cmidrule(l){4-5}
+                            & \multicolumn{1}{c}{SW-only} & \multicolumn{1}{c}{Unified} & \multicolumn{1}{c}{HW-only} & \multicolumn{1}{c}{Unified} \\
+\midrule
+Scheduler                   & 2344~/~~144                 & 2436~/~~192                 & 2119~/~1849                 & 2540~/~2766\\
+                            & ~~~~~~~2488                 & ~~~~~~~2628                 &  & \\
+ADPCM                       & ~632~/~~436                 & ~708~/~~440                 & ~524~/~~208                 & ~615~/~~368\\
+                            & ~~~~~~~1068                 & ~~~~~~~1148                 &  & \\                                            
+DTMF                        & ~508~/~3144                 & ~564~/~3152                 & ~387~/~~331                 & ~443~/~~431\\
+                            & ~~~~~~~3652                 & ~~~~~~~3716                 &  & \\
+\bottomrule
+\end{tabular}
+
+%SW AVGs
+%Memory footprint = 4.19 %
+%Exec. time = 5.15 %
+

@@ -1,0 +1,9 @@
+%-------------------------------------------------------------------------------
+% CONCLUSÃO
+%-------------------------------------------------------------------------------
+\section {Conclusão}
+
+Este artigo apresentou o {\SDFS}, um sistema de arquivos distribuído, portável, com alto grau de paralelismo e desenhado de forma a permitir sua execução em ambientes com diferentes níveis de distribuição. A proposta original desse sistema de arquivos descrita em \cite{fro93} supunha a existência de um núcleo de sistema operacional que suportaria a execução de seus servidores. Esse núcleo se encontra em desenvolvimento no {\cpgcc} e só deverá estar operacional no fim deste ano. Decidiu-se então simular esse núcleo sobre um outro sistema operacional, o {\sunos} da {\sun}, o que impossibilitou a avaliação do desempenho do sistema, que ficou condicionado ao do sistema hospedeiro.
+
+Os resultados até agora obtidos são muito satisfatórios. Existe uma versão completamente operacional do {\sdfs} e a simplicidade e clareza de sua implementação permitirão que muito em breve o sistema seja migrado para um plataforma própria, possivelmente integrando um projeto cooperativo, envolvendo {\ufsc}, {\ufrgs} e {\ufsm}, para o desenvolvimento de um multicomputador e de um ambiente de programação paralela sobre ele.
+

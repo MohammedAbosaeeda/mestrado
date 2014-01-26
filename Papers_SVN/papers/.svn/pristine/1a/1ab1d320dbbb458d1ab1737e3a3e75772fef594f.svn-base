@@ -1,0 +1,122 @@
+@ARTICLE{Roundy:2005,
+author={Roundy, S. and Leland, E.S. and Baker, J. and Carleton, E. and Reilly, E. and Lai, E. and Otis, B. and Rabaey, J.M. and Wright, P.K. and Sundararajan, V.},
+journal={Pervasive Computing, IEEE}, title={Improving power output for vibration-based energy scavengers},
+year={2005},
+month={jan},
+volume={4},
+number={1},
+pages={28-36},
+keywords={Batteries;Energy consumption;Frequency;Fuel cells;Geometry;Peer to peer computing;Piezoelectric materials;Piezoelectric transducers;Power conditioning;Wireless sensor networks; capacitor storage; direct energy conversion; electric generators; peer-to-peer computing; piezoelectric materials; piezoelectric transducers; ubiquitous computing; wireless sensor networks; autonomous electronic devices; capacitive storage; low-level ambient vibration sources; peer-to-peer wireless nodes; pervasive networks; piezoelectric materials; power conditioning; vibration-based energy scavengers; wireless sensor network; Energy scavenging; energy harvesting; piezoelectric materials; vibrational energy; wireless sensor networks;},
+ISSN={1536-1268}
+}
+
+@article{Bergonzini:2010,
+title = "Comparison of energy intake prediction algorithms for systems powered by photovoltaic harvesters",
+journal = "Microelectronics Journal",
+volume = "41",
+number = "11",
+pages = "766 - 777",
+year = "2010",
+issn = "0026-2692",
+author = "Carlo Bergonzini and Davide Brunelli and Luca Benini"
+}
+
+@article{Kansal:2007,
+ author = {Kansal, Aman and Hsu, Jason and Zahedi, Sadaf and Srivastava, Mani B.},
+ title = {Power management in energy harvesting sensor networks},
+ journal = {ACM Trans. Embed. Comput. Syst.},
+ issue_date = {September 2007},
+ volume = {6},
+ number = {4},
+ month = sep,
+ year = {2007},
+ issn = {1539-9087},
+ articleno = {32},
+ acmid = {1274870},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {Adaptive duty cycling, Heliomote, energy neutrality, lifetime, power management},
+}
+
+@INPROCEEDINGS{Moser:2008, 
+author={Moser, C. and Thiele, L. and Brunelli, D. and Benini, L.}, 
+booktitle={Design, Automation and Test in Europe, 2008. DATE '08},
+title={Robust and Low Complexity Rate Control for Solar Powered Sensors}, 
+year={2008}, 
+month={mar},
+pages={230 -235}, 
+keywords={Constraint optimization;Control design;Degradation;Heuristic algorithms;Large-scale systems;Optimal control;Photovoltaic cells;Robust control;Runtime;Solar energy;energy consumption;feedback;robust control;sensors;solar power;time-varying systems;energy consumptions;feedback control;low complexity rate control;prediction uncertainty;robust control;solar energy measurement;solar powered sensors;time-varying energy;}, 
+}
+
+@article{Hocaoglu:2008,
+title = "Hourly solar radiation forecasting using optimal coefficient 2-D linear filters and feed-forward neural networks",
+journal = "Solar Energy",
+volume = "82",
+number = "8",
+pages = "714 - 726",
+year = "2008",
+issn = "0038-092X",
+author = "Fatih O. Hocaoğlu and Ömer N. Gerek and Mehmet Kurban",
+keywords = "Solar radiation, Forecasting, Linear filter"
+}
+
+@ARTICLE{Karunanithi:1992,
+author={Karunanithi, N. and Whitley, D. and Malaiya, Y.K.}, 
+journal={Software, IEEE}, title={Using neural networks in reliability prediction}, 
+year={1992}, 
+month={jul}, 
+volume={9}, 
+number={4}, 
+pages={53 -59}, 
+keywords={Biological neural networks;Biological systems;Failure analysis;History;Intelligent networks;Neural networks;Predictive models;Probability;Software systems;Testing;computational complexity;neural nets;software reliability;debugging data;failure history;model complexity;neural networks;reliability prediction;}, 
+ISSN={0740-7459}
+}
+
+@INPROCEEDINGS{Piorno:2009, 
+author={Piorno, J.R. and Bergonzini, C. and Atienza, D. and Rosing, T.S.}, 
+booktitle={Wireless Communication, Vehicular Technology, Information Theory and Aerospace Electronic Systems Technology, 2009. Wireless VITAE 2009. 1st International Conference on}, title={Prediction and management in energy harvested wireless sensor nodes}, 
+year={2009}, 
+month={may},
+pages={6 -10}, 
+keywords={Batteries;Capacitors;Energy management;Energy storage;Monitoring;Prediction algorithms;Sensor systems;Solar energy;Weather forecasting;Wireless sensor networks;energy harvesting;patient monitoring;solar power;wireless sensor networks;Shimmer node;energy harvesting;energy management algorithm;exponential weighted moving average;solar panels;solar prediction algorithm;structural health monitoring;weather-conditioned moving average;wireless sensor nodes;}
+}
+
+@Misc{NREL:2013,
+  author = 	 "{National Renewable Energy Laboratory}",
+  title = 	 {Custom Monthly Solar Radiation Data},
+  howpublished = {Internet},
+  month = 	 {feb},
+  year = 	 {2013},
+  note = 	 {http://www.nrel.gov/midc/srrl\_bms/historical/custom/}
+}
+
+@Article{Slongo:2013,
+  author = 	 {Leonardo Kessler Slongo and Arliones {Hoeller Jr.} and Antônio Augusto Fröhlich and Eduardo Augusto Bezerra},
+  title = 	 {Improving task-scheduling in solar energy harvesting wireless sensor network systems},
+  journal = 	 {IEEE Sensors Journal},
+  year = 	 {2013},
+  pages = 	 {8 pages},
+  note = 	 {to appear}
+}
+
+@article{Cox:1961,
+     title = {Prediction by Exponentially Weighted Moving Averages and Related Methods},
+     author = {Cox, D. R.},
+     journal = {Journal of the Royal Statistical Society. Series B (Methodological)},
+     volume = {23},
+     number = {2},
+     year = {1961},
+     pages = {pp. 414-422},
+     ISSN = {0035-9246},
+     publisher = {Wiley for the Royal Statistical Society}
+}
+
+@InProceedings{Okazaki:Sensors:2012,
+  author =	"Alexandre Massayuki Okazaki and Antônio Augusto Fröhlich",
+  title =	"{ADHOP: an Energy Aware Routing Algorithm for Mobile Wireless Sensor Networks}",
+  booktitle =	"IEEE SENSORS 2012",
+  year =	2012,
+  address =	"Taipei, Taiwan",
+  month =	Oct,
+  url =		"http://www.lisha.ufsc.br/pub/Okazaki_Sensors_2012.pdf"
+}

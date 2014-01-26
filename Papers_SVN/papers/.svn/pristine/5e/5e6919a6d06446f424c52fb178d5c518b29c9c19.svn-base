@@ -1,0 +1,211 @@
+\documentclass{kapproc} 
+\usepackage{graphicx}
+\usepackage{listings}
+
+\usepackage{cite}
+
+\usepackage[latin1]{inputenc}
+\upperandlowercase
+
+\newcommand{\wsns}{Wireless Sensor Networks}
+\newcommand{\epos}{\textsc{EPOS}}
+
+\newcommand{\fig}[4][tb]{
+  \begin{figure}[#1] {\centering{\includegraphics[#4]{fig/#2}}\par}
+    \caption{#3\label{fig:#2}}
+  \end{figure}
+}
+
+\kluwerbib 
+
+\setcounter{secnumdepth}{2}
+
+
+\begin{document}
+
+\articletitle{Integrating Wireless Sensor Networks and the Grid through POP-C++}
+
+\author{Augusto B. de Oliveira\altaffilmark{1}, Lucas F. Wanner\altaffilmark{1}, Pierre Kuonen\altaffilmark{2} and Antônio A. Fröhlich\altaffilmark{1}}
+
+\altaffiltext{1}{Laboratory for Software and Hardware Integration\\
+    Federal University of Santa Catarina\\
+    PO Box 476 -- 88049-900 -- Florian\'{o}polis, SC, Brazil\\
+    \{augusto, lucas, guto\}@lisha.ufsc.br\\}
+
+\altaffiltext{2}{Grid and Ubiquitous Computing Group\\
+    University of Applied Sciences of Fribourg\\
+    PO Box 32 -- CH-1705 -- Fribourg, FR, Switzerland\\
+    pierre.kuonen@eif.ch\\}
+
+\begin{abstract}
+The topic of interaction between Wireless Sensor Networks (WSNs) and other computation systems has received relatively low scientific attention, and the interface between the data source and the applications that use that data remains a problem for the application programmer. This work extends POP-C++, a programming language and runtime support system for Grid programming, to enable Grid applications to seamlessly and concurrently use WSNs' sensing and processing capabilities.
+\end{abstract}
+
+\begin{keywords}
+WSN, Grid, Remote Objects
+\end{keywords}
+
+\section{Introduction}
+
+Even though Wireless Sensor Networks (WSNs) have been the focus of many research effors in recent years, the topic of interaction of WSNs with other computing systems has received relatively low attention. The research efforts that do address this issue, such as TinyDB and Cougar, abstract the individual sensor nodes and give access to the WSN as a whole, allowing the applications to perform queries as they would to a database; while this level of abstraction allows for the optimization of queries, minimizing the amount of messages to be sent over the wireless link, we feel that it takes power away from the application programmer, as further exploration of the WSN nodes' processing capabilities becomes difficult. Furthermore, such a solution does not hide the frontier between the WSN and the rest of the computing system.
+
+In contrast to these approaches, we integrate WSNs and the Grid seamlessly without removing power from the application programmer by extending POP-C++~\cite{Kuonen}. POP-C++ is a pre-existing object-oriented grid programming language and runtime support system, capable of supporting distributed, parallel objects over a network. The specific goals of our extension are to allow:
+
+\begin{itemize}
+\item Grid applications to communicate with WSNs seamlessly: By hiding all network interaction under a remote method call interface, details of the network stack and physical medium are transparent to the application;
+\item Concurrent use of the WSN sensing capabilities by multiple Grid applications: By allowing multiple objects to run on each node and each object to be used by multiple interfaces, concurrent use of the WSN by multiple applications is made possible;
+\item Application independent sensor node software: by allowing applications to use a common set of methods, we hope to minimize the need for costly re-programming of node program memory and allow additional applications to be initiated after the WSN is deployed.
+\end{itemize}
+
+The structure of this article is the following: In section 2 we introduce the POP-C++ programming language and runtime support system; in section 3 we detail how POP-C++ was extended into WSNs; in section 4 we evaluate our implementation; in section 5 we present the design challenges found in WSNs; section 6 presents related works that share our goal; finally, in section 7 we present our conclusions.
+
+\section{POP-C++}
+
+POP-C++ is an extension of C++ created to support requirement driven, distributed parallel objects. In POP-C++'s object model, parallel objects have the ability to describe their resource needs at runtime and are allocated in any of the remote nodes that can support its execution. The process of finding a suitable node and transmitting the object code is transparent to the programmer. POP-C++ also has special method invocation semantics, but syntatically the method invocation statements do not differ between local and remote invocations. Furthermore, parallel objects are shareable, that is, references to an object can be passed in any method, be it local or remote.
+
+The POP-C++ runtime architecture consists of three actual objects for each parallel class the user implements: the Interface, the Broker and the actual Object. The Interface is an object itself, instantiated in the caller side; it shares the method interface of the actual Object, giving the transparency of interaction for the application.% Its purpose is to pack method call data, send it over the network to the Broker, then receive the return value and return it to the caller.
+
+The Broker is the callee-side correspondent to the Interface, it receives method calls from the network, unpacks the data, calls the method on the actual Object and then repacks the return value and sends it back to the Interface. The actual Object is the implementation of the user, with the code that is to be distributed.
+
+%The POP-C++ parser generates the Interface and the Broker based on the implementation of the actual Object, so that the Interface shares the method declarations of the Object and that the Broker knows how to unpack the method call data.
+
+POP-C++ introduces two syntax extensions to C++ in addition to the declaration of parallel classes: Requirement descriptions and Method Semantics.
+
+\begin{itemize}
+\item Requirement descriptions: Using an associated object description, the developer can express resource requirements in the form of a hostname, the number of MFlops needed, the amount of memory needed and the communication bandwidth needed between itself and its interfaces.
+
+\item Method invocation semantics: The invocation semantic options are defined at compile time by the application programmer and can be classified in two types, Interface-side and Object-side:
+
+\begin{itemize}
+\item Interface side semantics can be either Synchronous or Asynchronous; they control at which time the Interface-side method returns. In Synchronous mode, the caller waits until the method on the Object returns; this is analogous to traditional method invocation. Asynchronous methods return immediately, allowing the caller to continue execution.
+
+\item Object side semantics can be either Mutex, Sequential or Concurrent. Mutex semantics guarantee no concurrency on the object, Sequencial semantics guarantee no concurrency on the particular method it is applied to, and Concurrent semantics allow full multi-threaded execution.
+\end{itemize}
+
+\end{itemize}
+
+\section{Extending POP-C++ into WSNs}
+
+To give the system architect an uniform model with which to program grid applications that use WSNs, we extended the POP-C++ model to WSNs. That means that not only should the programmer be able to instantiate Interfaces in sensor nodes to Objects running in other nodes, but also instantiate Interfaces to those Objects from inside the Grid. There should be no difference between "normal" Grid-to-Grid remote method calls and those performed from the Grid to the WSN.
+
+Figure \ref{fig:sensorcode} illustrates the implementation and instantiation of an Object that runs on the WSN and receives function calls from the Grid. The implementation has methods to read temperature sensor values and set a value to be displayed on the LEDs of the node. Any node on the Grid may instantiate an Interface to this object and transparently call methods to it.
+
+\begin{figure*}[t]
+\begin{center}
+\begin{footnotesize}
+
+\lstset{language=c++,frame=lrtb}
+\lstset{basicstyle=\ttfamily}
+\lstset{commentstyle=\textit}
+
+\begin{minipage}{12cm}
+\lstinputlisting{fig/code/sensor.h}
+\end{minipage}
+
+\caption{Basic SensorNode POP-C++ Class}
+\label{fig:sensorcode}
+\end{footnotesize}
+\end{center}
+\end{figure*}
+
+
+\subsection{Compromises}
+
+Due to the low-resource nature of WSN nodes, the WSN implementation of the POP-C++ runtime support system had to occupy as little program and main memory as possible. This has caused us to make some compromises in the implementation:
+
+\begin{itemize}
+\item No interchangeable communication protocols: When in a Grid environment, it is not only interesting but necessary to support multiple, interchangeable communication protocols. When in WSNs, though, the communication protocol over the wireless link is very likely to be constant and global. Therefore, our implementation does not support multiple communication protocols at runtime.
+
+\item No dynamic resource allocation: While in Grid nodes the process of dynamic resource allocation is just a matter of downloading and executing a binary, re-writing program memory on WSN nodes is a very costly procedure, in terms of energy\cite{1182810}. To diminish the need for re-programming, the system architect is encouraged to provide low level functions in addition to his applications' high-level routines; if a problem is found on the high-level code or a new application is to be run on the Grid, similar functionality can be attained from the aggregation of lower level calls.
+
+\item Limited Parallelism: Because of the very small amount of main memory available on sensor nodes, the amount of concurrent threads that can run on a node is also very small. This means a limited amount of method calls, regardless of semantic, will be able to execute in real concurrency, and that the following incoming calls will have to be queued.
+\end{itemize}
+
+\subsection{Addressing}
+
+To allow direct access to each individual sensor node, we had to extend the addressing method for POP-C++ objects. There is the possibility for POP-C++ Interfaces to be instantiated with a hostname parameter, forcing the Object to be allocated in that machine. We expanded this method to the sensor nodes, requiring two addresses:
+
+\begin{itemize}
+\item Address 1 - Point of contact between Grid and WSN: All WSNs must have at least one point of contact to the Grid. This point of contact must be able to communicate in both the protocol used by the Grid and the protocol used by the WSN, so it will most likely require special hardware such as the radio transceiver found in the sensor nodes. By taking this parameter we are able to instantiate a Proxy Broker in the appropriate Grid node, creating the logical bridge that forwards the method calls directed at the WSN. 
+\item Address 2 - WSN Node: This address enables the Proxy Broker to direct the method calls to the correct sensor node. Its format is left open because different addressing methods can be used inside different WSNs.
+\end{itemize}
+
+\subsection{The Proxy Broker}
+
+To allow the method calls to be forwarded into the WSN, a special Broker object has been created. This is a generic Broker that simply receives method calls from the Grid as if it was the Object's real broker, then forwards them to the WSN node. Once the WSN node returns from the method call, this Broker forwards the return value to the original caller. This creates the effect of transparency to the Interfaces of that Object; to them, the method calls are never leaving the Grid.
+
+Figure \ref{fig:pop-c_grid} shows the Grid connected to the WSN through the Proxy Brokers; note that there may be more than one point of contact between the Grid and each WSN.
+
+\fig{pop-c_grid}{Proxy Brokers integrating the wired Grid and the WSN nodes}{}
+
+\section{Evaluation of POP-C++ over WSNs}
+
+In this section we evaluate the overhead that our POP-C++ runtime system introduces by comparing two implementations of the following application: getting and setting an 8-bit value, that is to be displayed at the node's LEDs. One version was implemented over POP-C++ and the other directly on top of the operating system. In the case of the POP-C++ implementation, the client instantiates an Interface to a ``SensorNode'' Object that is executed on the other node, and calls the \texttt{get()} and \texttt{set()} methods to retrieve and set the data. In the native implementation, the client sends pre-formatted packets that are opened by the server and replied to with the data as payload.
+
+\subsection{Hardware testbed}
+
+The tests were made using two Mica2 sensor nodes developed at Berkeley; they use a single-channel CC1000 radio, an 8MHz Atmel Atmega128 8-bit microcontroller, 4KB of main memory and 128KB of program flash memory.
+
+\subsection{Runtime support}
+
+To provide the communication, memory management and concurrency support that both applications need we used the Embedded Parallel Operating System\cite{Froehlich:OOOSWS:1999} (EPOS). It consists in a component-based framework for generating runtime support for dedicated computing applications. For this test EPOS' MAC protocol was configured for reliability, ensuring packet delivery through acknowledgements and minimizing network delays through an always-on duty cycle.
+
+\subsection{Benchmarks}
+\begin{itemize}
+%            \item Code/Data-size: Figure [todo] compares code and data sizes of the two implementations of the application, operating system included. The POP-C++ version is actually smaller [WHY?? OH GOD WHY?] with 18.328 bytes of code and 402 bytes of data, compared to the 21.664 bytes of code and 446 bytes of data of the native version. [insert reason here]
+\item Packet size: Figure \ref{fig:packet} details the network packet size and content for both implementations of this aplication; POP-C++ packets are larger for 2 reasons:
+\begin{itemize}
+\item Object Field: To allow for more than one Object to be executed in each node, packets are individually addressed;
+\item Semantic Value Field: The semantic values of the method to be called are also represented in the header.
+\end{itemize}
+The addition of equivalent functionality on the native implementation would result in a similar packet size, which is justified by the additional information that must be transferred when supporting a complex set of applications.
+
+\item Grid-Sensor Requests-per-Second: To evaluate the overall overhead of the POP-C++ runtime system on this application we conducted a performance test that measured the Requests-per-Second that could be made from the client node to the server node. Figure \ref{fig:requests} shows that the POP-C++ implementation could perform 6.875 remote method calls per second, and the native implementation was able to perform 7.046 requests per second. This difference of 2.42\% is due to the additional processing performed by the POP-C++ runtime system as method calls arrive from the network.
+\end{itemize}
+
+\fig{packet}{Packet Size Comparison}{}
+\fig{requests}{Requests-per-Second Comparison}{}
+
+
+\section{Design Challenges}
+
+In this section we discuss the new issues brought by the environment POP-C++ would now work in.
+
+\subsection{Network Load}
+
+\begin{itemize}
+\item Payload Data Overhead: To transport the additional fields necessary to make the function call, we include them in the header of our packets. This is an overhead that the original POP-C++ system also has, but it has a greater negative effect in the WSN implementation because of the high energy cost of transmitting data over the wireless link. To minimize this issue we reduced the size of each of these fields from the original 32 bit values, expecting sensor nodes to host a smaller amount of objects and methods.
+
+\item Packet Exchange Overhead: While the original POP-C++ system used additional ACKs, in the WSN implementation we leave any error correction or flow control up to the network stack of the operating system; this way, the medium access and routing protocols can handle communication in the way they see fit.% This is a compromise because it can generate false timeouts when the computation is time consuming and the return values take too long to come back to the caller, but we expect the procedures that are executed on the sensor nodes to be short enough so that this does not become a problem.
+\end{itemize}
+
+\subsection{Scalability}
+
+If all method calls from the Grid to the WSN are routed through a single Grid node, failure of that node would cause all Objects running on the sensor network to become incommunicable. Under very heavy loads it may also become a network bottleneck, causing heavy contention at the physical level. To circumvent that, we allow multiple, concurrent points of contact between the Grid and the WSN, ideally physically separated so all can transmit concurrently.% When a Proxy Broker fails, the application can switch to another Proxy Broker and continue communication. % after checking for consistency.
+
+%        The Proxy Broker node may also be used to cache equivalent function calls to a same sensor Object from Interfaces instantiated on the Grid; if, for example, two applications need a temperature reading from sensor 1, the Proxy Broker could generate the actual call only once and replicate them to the Interfaces, cutting transmission energy costs in half.
+
+\subsection{Security/QoS}
+
+The issues of Security and QoS in WSNs are still relatively unexplored, but current research on these areas propose solutions at the network level, specially at the routing layer. There are groups working on methods to protect WSNs against DoS attacks~\cite{1102235}, guarantee packet confidentiality~\cite{1142709} and provide QoS~\cite{1163682} on a shared WSN. POP-C++ uses the network stack of its underlying operating system as an application would, and in a similar way to the Grid implementation, we rely on EPOS to provide this kind of functionality.
+
+\section{Related Work}
+
+In this section we briefly discuss other projects of note that share our goal of allowing the Grid to communicate with WSNs, and discuss how their approach relates to ours.
+
+TinyDB~\cite{872817}, Cougar~\cite{601861} and other research efforts~\cite{844142}\cite{746944} implement distributed query processors, putting great effort into query optimization and efficient routing. Using these techniques they have achieved considerable reduction in power consumption in addition to externalizing a more friendly SQL-like interface to the application programmer. Our extension of POP-C++ does share all these goals, but instead of active optimization, it gets out of the way of the application programmer allowing full access to the sensor nodes' hardware. Also, we see the possibility of implementing the query optimization features of TinyDB and Cougar as POP-C++ object code, yielding similar functionality.
+
+Hourglass~\cite{1018125} inserts a Data-Collection Network (DCN) between the application and the sensor networks they acquire data from. Hourglass abstracts the internals of the sensor networks completely, and provides traditional functionality such as service registration and discovery, as well as routing the data from the sensor networks to the applications. Hourglass' approach is very internet-oriented, and uses several estabilished standards such as XML, SOAP and OGSA. In this scheme, our POP-C++ extension could be used behind the Sensor Entry Point to perform all communication in the WSNs and provide a data stream to the DCN.
+
+\section{Conclusion}
+
+In this article we describe a way to use remote parallel objects to integrate the Grid and WSNs, by extending the POP-C++ runtime system into the sensor network. We believe that by using POP-C++ to perform this integration we enable the application programmer to use the WSN for multiple applications transparently, by using locally instantiated interfaces to objects that run on the sensor nodes.
+
+When comparing a functionally equivalent application implemented with and without POP-C++, our runtime system showed a small overhead cost that was justified by the ability to support multiple applications concurrently.
+
+
+\bibliographystyle{apalike}
+\chapbblname{paper}
+\chapbibliography{meusbib}
+
+\end{document}

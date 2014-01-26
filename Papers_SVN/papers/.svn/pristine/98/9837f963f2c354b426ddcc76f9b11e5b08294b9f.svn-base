@@ -1,0 +1,337 @@
+\documentclass[10pt]{sigplanconf}
+\usepackage{amsmath}
+\usepackage{graphicx,url}
+
+\newcommand{\epos}{\textsc{Epos}}
+\newcommand{\aosd}{\textsc{AOSD}}
+\newcommand{\tos}{\textsc{TinyOS}}
+\newcommand{\proxy}{\textit{Proxy}}
+\newcommand{\agent}{\textit{Agent}}
+
+\newcommand{\fig}[4][tb]{
+  \begin{figure}[#1] {\centering{\includegraphics[#4]{figures/#2}}\par}
+    \caption{#3\label{fig:#2}}
+  \end{figure}
+}
+
+
+\begin{document}
+
+\authorpermission
+\conferenceinfo{HotSWUp'08,} {October 20, 2008, Nashville, Tennessee, USA.}
+\CopyrightYear{2008}
+\copyrightdata{978-1-60558-304-4/08/10}
+
+
+%\titlebanner{banner above paper title}        % These are ignored unless
+%\preprintfooter{short description of paper}   % 'preprint' option specified.
+
+\title{An Operating System Infrastructure for Remote Code Update in Deeply Embedded Systems}
+%\subtitle{Subtitle Text, if any}
+
+\authorinfo{Giovani Gracioli and Ant\^{o}nio A. Fr\"{o}hlich\\}
+           {Federal University of Santa Catarina (UFSC)\\Laboratory for Software and Hardware Integration (LISHA)\\ PO Box 476 - 88049-900 - Florian\'{o}polis, SC, Brazil}
+           {\{giovani,guto\}@lisha.ufsc.br}
+
+\maketitle
+
+\begin{abstract}
+  Deeply Embedded Systems are designed to perform a determined set of
+  specific tasks, usually on low-cost, high-reliability platforms. In
+  order to support on-site firmware updates, such systems are subject
+  to severe resource limitation, like processing power, memory and
+  energy, since the update mechanism itself
+  must share the sparse resources with running applications.  This
+  work presents a low-overhead operating system infrastructure for
+  remote code update. By using sophisticate C++ static metaprogramming techniques,
+  the infrastructure and the code update become fully transparent to applications. 
+  Moreover, the infrastructure allows the system components to be marked as updatable or not
+  at compilation time, and for those components that are not marked as updatable, no
+  overhead is added. The infrastructure was
+  implemented in \epos{}, a multi-platform, component-based, embedded
+  operating system~\cite{Froehlich:2001}, with positive preliminary
+  results that show that the proposed strategy is a feasible solution 
+  for software update in deeply embedded systems.
+\end{abstract}
+
+\category{C.3}{Real-time systems and embedded systems}{}
+\category{D.4.7}{Or\-gan\-i\-za\-tion and Design}{Real-time systems and embedded systems}
+\category{D.4.9}{Systems Programs and Utilities}{Loaders}
+
+\terms{Design, Experimentation}
+
+\keywords{Embedded Systems, Operating Systems, Remote Update}
+
+\section{Introduction}
+Deeply Embedded Systems are designed to perform a determined set of
+specific tasks, usually on low-cost, high-reliability platforms with
+severe resource limitation, including processing power, memory and
+energy.  Yet, it is highly desirable that such systems be able to
+undergo online software updates, be it to correct bugs,
+add new features, or adapt the system to varying execution environments.
+
+In this scenario, whichever update mechanism devised, it will have to
+operate under even more severe resource limitations, for it will compete
+for resources with the target embedded system and yet must not disrupt
+the embedded system operation~\cite{update}. Modern automotive systems, for instance, feature
+hundreds of dedicated microcontroller units that interact to perform
+specific functions, such as ABS (Anti-lock Brake System) and PCM (Powertrain Control Module).
+A study by Daimler-Chrysler has pointed
+out that updating such distributed embedded systems on-wheels in an
+authorized garage takes over 8 hours, with extremely high
+costs~\cite{DC-2003}. Another example are Wireless Sensor Networks,
+which comprise a large number of small sensors scattered throughout a
+given environment. %~\cite{asada98wireless}. 
+Very often, collecting such
+sensors back for in-lab reprogramming is unpractical. In both cases,
+remote update mechanisms would be of great value, yet they would have
+to operate along with the target embedded systems on platforms that
+seldom exceed an 8-bit processor, some few kilobytes of memory and
+an interconnect (e.g., RS-485, CAN, ZigBee).
+
+In this context, this paper presents a low-overhead infrastructure for
+remote code update developed around \epos{}, a multi-platform,
+component-based, embedded operating system~\cite{Froehlich:2001}. By 
+using sophisticate C++ static metaprogramming techniques, the 
+infrastructure and the code update become fully transparent to applications. 
+The proposed code update mechanism is build within \epos{} component
+framework, around the \emph{remote invocation} aspect program, thus
+also giving the possibility to mark a system component as updatable or not at compile-time, 
+and for those components that are not marked as updatable, no overhead is added.
+The infrastructure makes the component memory position independent, eliminating 
+the need for a bootloader and/or linker to be installed in each node in order to perform update.
+%Due to the memory position independent of each component, the infrastructure 
+%eliminates the need for a bootloader and/or linker to be
+%installed in each node in order to perform update.
+
+%The rest of this paper is organized as follows: section 2 discusses related work; section 3 presents the infrastructure for code update; section 4 presents preliminary results; and section 5 brings authors conclusion about the research work along with a brief discussion about forthcoming steps.
+
+\section{Related Works}
+
+Reijers and Langendoen created an infrastructure that reduces the
+amount of data transferred over the network and also the energy
+consumed by each node by receiving only the difference between the new
+and the old system images~\cite{reijers03efficient}. After receiving
+the new image and checking for transmission errors, the system is
+restarted and the new image is loaded. Besides requiring a system
+restart, this technique is limited to binary updates and requires the
+whole setup of nodes to be stored at a central station. %(in order to extract the differences between software versions). 
+
+\textsc{FlexCUP} is an update system for \textsc{TinyCubus}. It relies
+on meta-data collected during the compilation of components in order
+to support updates~\cite{flexcup}. Meta-data include symbol and
+relocation tables that are subsequently used by a linker installed on
+each node in order to merge updates into the final image.  The system
+must be restarted after updating. One major disadvantage of this
+approach is the dependency established between the compiler and the
+update infrastructure, since both must work together for an update to
+succeed. 
+
+Felser also uses information collected by compiler to identify
+situations in which a ``safe'' update is possible~\cite{update}.  When
+an unsafe update is found (e.g. an update involving a function
+currently being executed), the system first asks for human
+intervention before proceeding with the update and thus tries to
+preserve the system state.  Besides being dependent on the compiler,
+this solution assumes that the person caring out the update has
+deep knowledge about the software architecture while deciding whether
+an upgrade is safe or not. Koshy and Pandey try to reduce upgrade overhead by partitioning the
+update among nodes and base stations with higher processing
+capacities~\cite{koshy}. It relies on an incremental linker that is
+able to control where updates (i.e., modified functions) must be
+placed on the node's memory. %The system is restarted after the update.
+
+\subsection{Virtual Machines}
+
+\textsc{Mat\'{e}}~\cite{mate} is a virtual machine that runs on top of
+\textsc{TinyOS} \cite{hill00system}. It provides a few high-level
+instructions (e.g. sense, halt) that enables applications to
+be easily coded. The reduced instruction set imply in small
+bytecode images, which in turn reduces transmission time and energy
+consumed during updates. Nevertheless, it also considerably limits the
+number of applications that can be built~\cite{sensorware}. Moreover,
+for long-running applications, the energy spent to interpret the
+bytecode can outweigh the benefits~\cite{mate}. \textsc{Mat\'{e}}'s
+\texttt{forw} instruction is used to broadcast code to neighbor nodes.
+
+\textsc{SensorWare} implements a VM that supports node programming
+through a sensor script language~\cite{sensorware}. The language
+features commands to replicate and migrate code and data across nodes.
+Its deployment in the scenario of deeply embedded systems, however, is
+compromised by excessive resource utilization (according to authors,
+\textsc{SensorWare} is too large to run on a traditional AVR-based mote). 
+
+\textsc{DVM} is a VM built on top of \textsc{SOS}~\cite{sos}. The VM
+interprets high-level scripts written in a language that is compile to
+a portable bytecode format~\cite{multi-level}.  It relies on
+\textsc{SOS} modules to load and unload VM extensions at run-time.
+Similarly to other VMs, \textsc{DVM} is usually too resource consuming
+to support a deeply embedded system. Any VM-based solution
+for this scenario is limited by the challenge of having to implement a
+bytecode interpreter in such an extremely constrained environment and
+therefore is seldom used~\cite{koshy}.
+
+\subsection{Data Dissemination Protocols}
+
+Although not directly addressed by this paper, data dissemination
+protocols are fundamental for any update infrastructure that aims at
+addressing mass updates (i.e. updates of several nodes at the same
+time).  Partitioning, routing, propagation, and reliability are some
+of the main guidelines of such protocols. \textsc{MOAP}~\cite{stathopoulos03remote} and
+\textsc{Deluge}~\cite{deluge} are data dissemination protocols
+implemented in the realm of \textsc{TinyOS}. These protocols implement
+packet retransmission, segment management and sender selection to
+reduce energy and memory consumption during update operations.
+\textsc{MNP} uses a sender-centered scheduling mechanism to avoid
+collisions and message losses~\cite{mnp}. In order to reduce overall
+energy consumption, nodes not involved in an update are put in sleep
+mode whenever a segment is transmitted. 
+
+The infrastructure proposed in this 
+paper could benefit from any of these dissemination protocols.
+
+\subsection{Operating Systems}
+
+\textsc{Contiki} is an operating system for wireless sensor networks
+that implements special processes, called \emph{services}, that
+provide functionality to other processes~\cite{dunkels04contiki}.
+Services can be replaced at run-time through a \emph{stub interface}
+that is responsible for redirecting function calls to a \emph{service
+  interface}, which holds the actual pointers to the functions
+implementing the corresponding services.  The \emph{service interface}
+also keeps track of versions during updates.
+
+\textsc{SOS} is an operating system for sensor networks that allows
+nodes to be updated on-the-fly~\cite{sos}. The operating system is
+built around modules that can be inserted, removed or replaced at
+run-time. By using relative calls, the code in each module becomes
+position independent.  References to functions and data outside the
+scope of a module are implemented through an indirection table and, in
+some cases, are simply not allowed. This approach is conceptually
+similar to the one proposed in this paper, but the update
+infrastructure presented in the next section takes advantage of static
+metaprogramming techniques to eliminate part of the overhead
+associated to indirection tables, thus yielding a slimmer mechanism
+and also achieving application transparency.
+
+\section{Assumptions}
+
+The following assumptions are made for our code update mechanism: \textit{(i)} it supports online updates and the update unit is a component. The system components can be marked as updatable or not at compile-time and only those marked as updatable can be updated. For those that are not marked as updatable, no overhead is added. It also guarantees the upgrading of a component that is not being used at the moment of an updating; \textit{(ii)} the method signatures of the updatable component must be the same in the two versions (no API changes). Since a component is marked as updatable at compile-time, all dependencies between this component and the rest of the system are already resolved, allowing a good performance at run-time. On the other hand, this limits the update scope. Then, we decided to have a good performance at run-time instead of a big update scope; \textit{(iii)} the hardware is not modified, and both hardware and software have the same endianess; \textit{(iv)} the system does not have virtual memory; and \textit{(v)} it is up to the developer to certify that the new component upgrade does not remove any method that is being used by other components.
+
+\section{Infrastructure for Remote Code Update}
+
+Embedded Parallel Operating System (\epos{})~\cite{Froehlich:2001} is a multi-platform, component-based operating system for embedded systems. Although no infrastructure for remote update exists in EPOS, the operating system has a C++ static metaprogrammed framework for remote invocation, where characteristics like confinement and isolation are found. Both characteristics are important to encapsulate the system components by creating an indirection level between every component method call configured as remote. This makes the components memory position independent and allows the components' replacement without restarting the system.
+
+\subsection{EPOS Remote Method Invocation}
+
+An overview of the EPOS metaprogrammed framework is presented in Figure \ref{fig:framework.pdf}. In this Figure, the Client wants to invoke a method of an Abstraction (e.g. a system component that can a Thread, UART, etc). The parameterized class \textit{Handle} receives a system abstraction as parameter. It acts as a handle for the supplied abstractions, forwarding the method invocations to \textit{Stub} element. %In addition, \textit{Handle} checks if the object was successfully created.
+
+\fig{framework.pdf}{EPOS metaprogrammed framework overview~\cite{Froehlich:2001}.}{width=6cm}
+%{width=\columnwidth}
+
+The \textit{Stub} element is a parameterized class responsible for verifying whether the aspect of remote invocation is active for that abstraction (the remote invocation aspect is selected by the abstraction through its \textit{Traits Class}~\cite{Stroustrup:1997}). If it is not, the \textit{Stub} will inherit the abstraction's scenario adapter~\cite{Froehlich:sci:2000}. Otherwise, a \textit{Stub's} specialization, namely \textit{Stub$<$Abstraction, true$>$}, will inherit the abstraction's \proxy{}. Therefore, when \textit{Traits$<$Abstraction$>$::remote = false}, makes \textit{Handle} to take the scenario adapter as the \textit{Stub}, while making it true makes \textit{Handle} to take \proxy{}.
+
+The \proxy{} is responsible for sending a message with the abstraction method invocation to its \agent{}. A message contains the object, method and class IDs that are used by \agent{} to invoke the correct method, associating them to a method table. The object ID is used to get the correct object before the method call. The \agent{} receives the message and invokes the method through the \textit{Adapter} class.
+
+\textit{Adapter} class is responsible for applying the aspects supplied by \textit{Scenario} before and after of the real method call. Each instance of \textit{Scenario} consults the abstraction's \textit{Traits} to verify which aspects are enabled to that abstraction, aggregating the corresponding scenario aspect. When an aspect is not selected to abstraction, an empty implementation is used. In this case, no code is generated.
+
+%The \proxy{} and \agent{} structure described creates two important characteristics: the confinement and isolation of the system components. This is achieved because every component method call configured as remote invocation passes by \proxy{}, creating an indirection level between the method call and making its address space position independent. These two characteristics are important for the creation of the remote code update infrastructure, which is presented below.
+
+\subsection{Support for Code Update}
+
+The framework infrastructure was extended according to Figure~\ref{fig:update.pdf}. The invocation of a component method of the client application passes through \proxy{} which sends a message to the \agent{}. After the method execution, a message with the return value is sent back to the application. With this structure, an indirection level is created among the application method call, making the \agent{} the only one aware of the component's position in the system memory. The \textit{OS Box} at \agent{} controls the access to the component method through a synchronizer (\textit{Semaphore}), avoiding the invocation of the component method while it is being updated.
+
+\fig{update.pdf}{A method invocation with code update support.}{width=5.5cm}
+
+A Thread created during the system's bootstrapping is responsible for receiving an update request and the new component's code (the code must be in an object file). This request is sent to the \agent{} and contains the class, method and object IDs, the new component code to be updated, the new relative addresses inside of the object file and the code size. The \agent{} has a vector with the methods' position related to the component methods (object file). The external references used in this new component are solved by making the linking of the new component with the old image system, that has not changed. 
+
+In the remote update scenario, the ID method is referring to the \textit{Update} method. Inside this method, the \agent{} allocates memory for the new code, copies the received code to this new position, updates the received addresses of the new methods, destroys the old object, creates the new object and adds the new object to the objects table. Figure~\ref{fig:memory_3_eng.pdf} shows the system memory before and after a component update. Although the creation of a new object demands a memory allocation/release, this process in \epos{} does not aggregate much overhead to the application, as the memory management is designed to be extremely efficient, as exemplified in the next section comparison.
+
+The framework infrastructure with the update system is transparent to application. However, each addition of a new component to the system requires that its method are placed in the framework infrastructure to allow the update support for this new component. With the update support enabled in the system, there is additional memory consumption and the components method call suffers a little delay.
+%These metrics are measured below.
+
+\fig{memory_3_eng.pdf}{System memory example. (a) before updating (b) after updating.}{width=6cm}
+
+\section{Preliminary Results}
+
+In order to evaluate the applicability of the described infrastructure, was used a dining philosopher's application in the Mica2 Platform \cite{mica2}. From the test application, were evaluated two metrics compiling the system with the GNU g++ 4.0.2: the memory amount needed by the framework and the performance overhead generated by the indirection level. Table \ref{tab:mem} presents the framework memory usage for all non-empty sections. The framework adds 1710 bytes to the application, in which 362 bytes are added to bootloader section due to the function responsible for writing in the flash memory, 192 and 1132 bytes to data and text sections respectively, due to pointers and code and finally 24 bytes to bss section. When a new component is selected to support the update mechanism, the added memory space depends on the number of the component methods, because each method must have its address stored, increasing the table size that saves these addresses and consequently the framework size.
+
+\begin{table}[ht]
+\caption{Infrastructure memory consumption for the Thread component.} 
+\centering
+\footnotesize{
+\begin{tabular}{|l|c|c|c|}\hline
+\it Section 	& \it Without (bytes) & \it With (bytes) & \it Overhead (bytes)\cr\hline
+.bootloader 	& 0	& 362   & 362 \cr\hline
+%.hash 		& 0	& 0	& 0   \cr\hline
+.data 		& 476 	& 668	& 192  \cr\hline
+.text 		& 28386 & 29518 & 1132 \cr\hline
+.bss  		& 278 	& 302 	& 24   \cr\hline
+%.noinit	 	& 0 	& 0	& 0  \cr\hline
+%.eeprom		& 0 	& 0	& 0  \cr\hline
+\textbf{TOTAL} 	& \textbf{29140} & \textbf{30850} & \textbf{1710} \cr\hline
+\end{tabular}
+}
+\label{tab:mem}
+\end{table}
+
+Table~\ref{tab:per} shows the overhead generated by the remote update support infrastructure when a method of the \textit{Thread} component is invoked. These values were measured by using the system \textit{Chronometer} abstraction. The results are the representation of the values average obtained in 10 executions, disregarding the highest and lowest values. The \textit{Thread} constructor time incurred an overhead of 100\% of the original latency due to the \textit{Thread} function passed to the framework and the \textit{Thread} creation through the memory allocation. As the method's computation time increase, the influence of remote update infrastructure is minimized. It is what occurs in the \textit{Yield} and \textit{Pass} methods. This little overhead is achieved due to static metaprogramming which resolves all framework dependencies among system components, execution scenarios, and applications at compile-time.
+
+\begin{table}[ht]
+\caption{Time to invoke a Thread component method with and without code update support enabled.}
+\centering
+\footnotesize{
+\begin{tabular}{|l|c|c|c|}\hline
+\it Method &\it Without (us) &\it With (us) &\it Overhead(\%)\cr\hline
+Constructor	& 95  & 190 & 100\%\cr\hline
+Suspend 	& 34  & 52  & 52.94\%\cr\hline
+Resume 		& 69  & 86  & 24.64\%\cr\hline
+Yield 		& 20,254.5 & 20,329 & 0.37\%\cr\hline
+Pass 		& 7,715.5 & 7,728.5 & 0.17\% \cr\hline
+\end{tabular}
+}
+\label{tab:per}
+\end{table}
+
+Figure~\ref{fig:mica2.pdf} presents a comparison between the allocation and release memory functions in \epos{}~\cite{Froehlich:2001}, \textit{MantisOS 1.0}~\cite{mantis}  and \textit{SOS 2.0.1}~\cite{sos} OSs. The number of bytes allocated/released were 8, 32, 64, 128, 256, 512 and 1024. \textit{Contiki} was not evaluated because its version in the ATMega128 microcontroller is unstable. \textit{SOS} was chosen because it implements remote update support and \textit{MantisOS} was selected because it is widely known in the embedded systems scenario. \tos{} was not used in comparisons because it does not support memory allocation/release~\cite{hill00system}. The test values were measured using the memory allocation/release and time measure functions present in each operating system. The results are the representation of the average of the values obtained in 1000 experimental runs. The Figure \ref{fig:mica2.pdf} shows that \epos{} presented a better performance in terms of memory allocation. In terms of memory release the three OSs have similar behavior. \textit{MantisOS} memory allocation has proven to be dependent on the number of bytes allocated. \epos{} memory management does not depends on memory size and the good performance is achieved due to the C++ metaprogrammed list that is used to handle the memory free spaces. Therefore, the destruction and creation of a new object at the moment of an update is not a performance problem. Furthermore, static allocation presumes that all objects are always in memory and sometimes the embedded system cannot have enough memory for all objects.
+
+%\begin{table*}[ht]
+%\caption{Main \epos{}, \textit{MantisOS} and \textit{SOS} features.}
+%\centering
+%\begin{tabular}{|l|c|c|c|c|}\hline
+%\it OS &\it Main Supported Architectures &\it OS Architecture &\it Memory Management Interface &\it Time Interface\cr\hline
+%\epos{} & AVR, IA32, PowerPC, MIPS & Multi-threading & malloc(), free() & Chronometer.read() \cr\hline
+%MantisOS & AVR, MSP430, IA32, XScale & Multi-threading & mos\_mem\_alloc(), mos\_mem\_free() & mos\_get\_realtime() \cr\hline
+%SOS & AVR, MSP430, IA32, XScale & Event-driven & sys\_malloc(), sys\_free() & sys\_time32() \cr\hline
+%\end{tabular}
+%\label{tab:sos}
+%\end{table*}
+
+\fig{mica2.pdf}{EPOS x MantisOS X SOS memory allocation and release comparison in the Mica2 platform.}{width=6cm}
+
+\section{Conclusion and Future Work}
+
+This work presented a infrastructure for remote code update developed
+around \epos{} component framework, which was modified in order to
+enable the confinement and isolation of system components in physical
+modules, thus making them memory position independent. The infrastructure also
+allows the developer choose which components can be updated.
+
+A preliminary prototype evaluation has shown that the remote update
+infrastructure adds little memory and processing overhead to
+components marked as updatable and therefore does not compromise the availability of
+system resources and services at the application level. This is mainly
+due to the use of sophisticate static metaprogramming techniques,
+which enable the remote update infrastructure to resolve dependencies
+among system components, execution scenarios, and applications at
+compile-time.
+
+The next step in the project is to extend remote code update mechanism
+to support code distribution over the network through a dissemination
+protocol focused on incremental differences between new and old versions
+of components.
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

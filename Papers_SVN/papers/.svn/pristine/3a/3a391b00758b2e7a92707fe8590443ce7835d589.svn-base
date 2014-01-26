@@ -1,0 +1,43 @@
+
+\section{UML notations used in the paper}
+The \textit{Unified Modeling Language}~(UML)~\cite{OMG:UML} is a standardized modeling language. UML
+includes a set of diagrams to specify both the structural and the behavioral view of 
+object-oriented systems. The former emphasizes the static structure of the system using objects,
+attributes, operations and relationships. The structural view includes class diagrams and composite
+structure diagrams. The latter emphasizes the dynamic behavior of the system by showing
+collaborations among objects and changes to the internal states of objects. It includes sequence
+diagrams, activity diagrams and state machine diagrams.
+
+This appendix provides a summary of UML notations used througout the paper to represent
+object-oriented concepts. The reader may refer to \cite{Larman:2005} for a more complete explanation
+about the use of UML in OOP.
+
+\subsection{Class diagram}
+Figure showing a complete class with public and private attributtes.
+Also mention here the naming convention class<->component<->object
+
+\subsubsection{Relationships}
+Use OO model of figure 2. Explain the 'short' class definition. Extend the diagram to contain all
+associations.
+
+\noindent\textbf{Association:}
+
+\noindent\textbf{Aggregation:}
+
+\noindent\textbf{Composition:}
+
+\noindent\textbf{Generalization:}
+
+\subsection{Other notations}
+In the paper we use other notations that are not defined in the standard.
+
+\subsubsection{Conditional inheritance}
+Show a simplified version of the new figure 4
+
+\subsubsection{Scenario diagram}
+Show the old figure 4
+
+
+
+
+

@@ -1,0 +1,114 @@
+Hi Wosch,
+
+You're mail made things much clearer. As I was in Erlangen people was
+talking about WindowsCE, now we're talking about embedded
+microcontrollers with a bare flashloader.  Unfortunately, time is
+passing by and I'm still stuck with exams to review and two CNPq
+projects to get through with. I offered the guys working on the study
+some extra cash to check the items you pointed out, but they refused
+saying the time to do MS2 was January and they wouldn't cancel their
+vacations (what I agreed upon). So I tried to do something by my self
+during Carnival. But we would need a bulk of real flash images to
+analyze before we can say compression is a good thing. I guess the
+section on `update support' we sent you earlier is not that far away
+(for 6 years maybe).  Well, here you have it:
+
+--
+
+Data compression for embedded microcontrollers
+
+Based on the conclusion that a considerable fraction of time taken to
+update (reflash) an automotive embedded system is up to the low
+bandwidth networks that interconnect the microcontrollers in the system,
+we decided to investigate possibilities to compress the images that will
+be flashed before sending them over the network. In this way, several
+compressed fragments could be sent to different microcontrollers in
+parallel, hopefully helping the decrease to total update time.
+Certainly, compressing the images is a straightforward operation, but
+decompressing them in a platform with severe resource limitation has
+shown to be a complex task.
+
+While analyzing typical compressing algorithms, we took into
+consideration these four constraints:
+
+1 - Ordinary microcontrollers used in the field have limited processing
+power, so decompressing algorithms must be light (compression is done
+outside and does not suffer from this constraint).
+
+2 - Ordinary automotive systems have limited scratch memory (RAM), so
+compression algorithms that rely on large data structures such as
+dictionaries aren't adequate. Ideally, the data stream received from the
+network (e.g. a flash sector) should be immediately decompressed, thus
+allowing for on-the-fly programming of flash memory units.
+
+3 - Typical flash images for embedded automotive systems contains more
+code than data. Moreover, it contains virtually no strings or graphical
+data, since such systems will seldom interact with human beens directly.
+Therefore, compression algorithms that rely on the repetition of single
+values shan't achieve the desired compression rate.
+
+4 - The compression rate must be relatively high to compensate for the
+increased complexity. Perhaps the most crucial factor here is the
+protocol overhead needed to deliver compressed fragments to several
+microcontrollers in parallel. This protocol will have to handle at least
+fragmentation, identification and recovery of packets, thus incurring in
+considerable bandwidth consumption. It wouldn't help having a 10\% gain
+in transmission time due to compression if the software infrastructure
+necessary to achieve that outdo it.
+
+With these three constraints in mind, we run over the traditional
+compression algorithms: RLE, Huffman, and dictionary-based.
+
+Run-length encoding (RLE) is a very simple form of data compression
+encoding. It consists in replacing sequences of repeated data values by
+a count and a single value. Although this intuitive technique matches
+constraints 1 and 2, for it is simple and can be decompress data
+on-place, it will hardly match constraints 3 and 4, since the
+probability that the binary images under consideration contain repeated
+individual values is low.
+
+Huffman codes belongs to a family of codes with a variable codeword
+length. That means that individual symbols which makes a message are
+represented (encoded) with bit sequences that have distinct lengths.
+This characteristic of the code words helps to decrease the amount of
+redundancy in message data, for distinct symbols have distinct
+probabilities of incidence. Symbols with higher probabilities of
+incidence are coded with shorter code words, while symbols with lower
+probabilities are coded with longer code words. A compressor based on
+Huffman codes can be a simple piece of software and it would be able to
+decompress a data stream without requiring much main memory (just a code
+tree is necessary, data can be decompressed on-place). Therefore, such a
+compressor would likely match our first and second constraints.
+However, judging constraints 3 and 4 is more complicated. Binary images
+will more likely contain a wide range of symbols with similar incidence
+(resulting from compiling the embedded program). Whether the
+distribution of incidence probabilities in such images would be good
+enough to achieve the desired compression rate can only be determined by
+a concrete analysis of a significant sample.
+
+Dictionary-based compression algorithms such as Lempel-Ziv-Welch rely on
+the property of many data types to contain repeating code sequences.
+These sequences, or phrases, are gathered in a dictionary. During
+compression, any occurrence of a phrase is encoded as a reference to the
+dictionary. Dictionaries does not need to be explicit. The original
+Lempel-Ziv algorithm uses the previously processed phrases as an
+implicit dictionary, so that new occurrences simply set a pointer back
+to the first one. A dictionary-based compressor cold probably match our
+third and fourth constraints, since even binary images contain repeating
+code sequences (e.g. procedure entrance, context saving, device
+interaction, etc). Nevertheless, a compressor of this kind needs to keep
+the whole dictionary in memory during the whole decompression process.
+Even if a light implementation could be engineered, it is unlikely that an
+average automotive embedded system would have the amount of memory
+needed.
+
+
+
+
+
+
+
+
+
+
+

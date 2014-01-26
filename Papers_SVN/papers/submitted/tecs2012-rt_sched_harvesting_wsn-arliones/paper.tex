@@ -1,0 +1,168 @@
+\documentclass[prodmode,acmtecs]{acmsmall}
+
+% Package to generate and customize Algorithm as per ACM style
+\usepackage[ruled]{algorithm2e}
+\renewcommand{\algorithmcfname}{ALGORITHM}
+\SetAlFnt{\small}
+\SetAlCapFnt{\small}
+\SetAlCapNameFnt{\small}
+\SetAlCapHSkip{0pt}
+\IncMargin{-\parindent}
+
+% Metadata Information
+\acmVolume{12}
+\acmNumber{4}
+\acmArticle{1}
+\acmYear{2013}
+\acmMonth{9}
+
+
+
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+% \usepackage{subfigure}
+
+
+% % Arliones' defined commands
+
+\newcommand{\fig}[4][tb]{
+  \begin{figure}[#1]
+    {\centering{\includegraphics[#4]{fig/#2}}\par}
+    \caption{#3}
+    \label{fig:#2}
+  \end{figure}
+}
+
+\newcommand{\wfig}[4][tb]{
+  \begin{figure*}[#1]
+    {\centering{\includegraphics[#4]{fig/#2}}\par}
+    \caption{#3}
+    \label{fig:#2}
+  \end{figure*}
+}
+
+\newcommand{\figtwo}[8]{
+\begin{figure}[tb]
+	\centering
+	\begin{subfigure}[b]{#8}
+		\centering
+		\includegraphics[#3]{fig/#1}
+		\caption{#2}
+	\end{subfigure}%
+	\begin{subfigure}[b]{#8}
+		\centering
+		\includegraphics[#6]{fig/#4}
+		\caption{#5}
+	\end{subfigure}
+	
+    \caption{#7\label{figtwo:#1#4}}
+\end{figure}
+}
+
+\newcommand{\mytabwnote}[4][h]{
+  \begin{table}%
+  \tbl{#3\label{tab:#2}}{%
+    \input{fig/#2.tab}
+  }
+  \input{fig/#2.tabnote}%
+  \end{table}
+}
+
+\newcommand{\mytab}[4][h]{
+  \begin{table}%
+  \tbl{#3\label{tab:#2}}{%
+    \input{fig/#2.tab}
+  }
+  \end{table}
+}
+
+\newcommand{\mywtab}[4][h]{
+  \begin{table*}%
+  \tbl{#3\label{tab:#2}}{%
+    \input{fig/#2.tab}
+  }
+  \end{table*}
+}
+
+\newcommand{\epos}{\textsc{Epos}}
+\newcommand{\adesd}{\textsc{Adesd}}
+\newcommand{\emote}{\textsc{EposMote}}
+\newcommand{\adhop}{\textsc{ADHOP}}
+\newcommand{\bgr}{\emph{BET Global Rate}}
+\newcommand{\bwr}{\emph{BET Window Rate}}
+\newcommand{\bwar}{\emph{BET Window Average Rate}}
+\newcommand{\bwdr}{\emph{BET Window Derivative Rate}}
+
+% Document starts
+\begin{document}
+
+% Page heads
+\markboth{Arliones Hoeller Jr. and Ant{\^o}nio Augusto Fr{\"o}hlich}{Scheduling of energy usage for real-time WSN systems with energy-harvesting capability}
+
+% Title portion
+\title{Scheduling of energy usage for real-time wireless sensor network systems with the energy-harvesting capability}
+% \title{RT scheduling in energy-harvesting WSN}
+\author{ARLIONES HOELLER JR.
+\affil{Federal University of Santa Catarina}
+ANT{\^O}NIO AUGUSTO FR{\"O}HLICH
+\affil{Federal University of Santa Catarina}}
+
+
+\begin{abstract}
+Wireless sensor network (WSN) systems present serious limitations in terms of energy availability and processing power.
+To cope with the energy availability issue, WSN nodes equip energy harvesters (e.g. photovoltaic modules) and energy buffers (e.g. rechargeable batteries).
+This approach, besides increasing energy availability, also brings uncertainty to the system when the efficiency of the energy harvester depends on variables that are difficult to predict (e.g. solar irradiation, temperature).
+This paper presents a set of heuristics to schedule energy utilization of critical applications running on wireless sensor networks.
+Experiments consider the impact of the scheduling heuristics on timing correctness and network quality.
+We propose and evaluate four energy scheduling heuristics based on the recent history of harvested energy.
+Results of simulations based on a real system implementation show the performance of the heuristics.% and compared to related work.
+% One of the proposed heuristics is shown to perform better that others under large oscillations on energy availability.
+%
+% % 100-words abstract
+% WSN systems present limitations in terms of energy availability.
+% To cope with this limitation, WSN nodes equip energy harvesters (e.g. photovoltaic modules) and energy buffers (e.g. batteries).
+% Although increasing the amount of energy available, the harvesters introduce uncertainty to the system because their efficiency depends on variables that are difficult to predict (e.g. solar irradiation, temperature).
+% This paper evaluates the use of energy predictors when scheduling real-time tasks on WSNs.
+% The predictors are heuristics based on recent history of harvested energy.
+% Simulations based on a real system implementation consider the impact of the approach on real-time requirements and network quality.
+\end{abstract}
+
+\category{D.4.7}{Organization and Design}{Real-time systems and embedded systems}
+
+\terms{Design, Experimentation, Performance}
+
+\keywords{wireless sensor networks, energy harvesting, real-time scheduling}
+
+\acmformat{Hoeller Jr., A., Fr{\"o}hlich, A.A. 2013. Scheduling of energy usage for real-time wireless sensor network systems with energy-harvesting capability.}
+
+\begin{bottomstuff}
+This work is supported in part by Brazilian RNP/CTIC effort towards the \textit{Internet of Things}.
+A. Hoeller Jr. is also supported in part by CAPES, under grant RH-TVD 006/2008.
+
+Author's addresses:
+Arliones Hoeller Jr., Department of Automation and Systems Engineering, Federal University of Santa Catarina;
+Ant{\^o}nio Augusto Fr{\"o}hlich, Department of Computer Science, Federal University of Santa Catarina.
+\end{bottomstuff}
+
+\maketitle
+
+\input{files/intro.tex}
+\input{files/models.tex}
+\input{files/system.tex}
+\input{files/adaptation.tex}
+\input{files/case.tex}
+\input{files/related.tex}
+\input{files/conclusion.tex}
+
+% Bibliography
+\bibliographystyle{acmsmall}
+\bibliography{paper}
+
+% History dates
+\received{October 2012}{}{}
+
+
+
+\end{document}

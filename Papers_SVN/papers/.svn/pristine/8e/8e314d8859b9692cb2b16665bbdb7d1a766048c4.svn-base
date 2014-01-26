@@ -1,0 +1,619 @@
+@article{Wilhelm:2008,
+ author = {Wilhelm, Reinhard and Engblom, Jakob and Ermedahl, Andreas and Holsti, Niklas and Thesing, Stephan and Whalley, David and Bernat, Guillem and Ferdinand, Christian and Heckmann, Reinhold and Mitra, Tulika and Mueller, Frank and Puaut, Isabelle and Puschner, Peter and Staschulat, Jan and Stenstr\"{o}m, Per},
+ title = {The worst-case execution-time problem - overview of methods and survey of tools},
+ journal = {ACM Trans. Embed. Comput. Syst.},
+ volume = {7},
+ issue = {3},
+ month = {May},
+ year = {2008},
+ issn = {1539-9087},
+ pages = {36:1--36:53},
+ articleno = {36},
+ numpages = {53},
+ url = {http://doi.acm.org/10.1145/1347375.1347389},
+ doi = {http://doi.acm.org/10.1145/1347375.1347389},
+ acmid = {1347389},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {Hard real time, worst-case execution times},
+}
+
+@ARTICLE{Fay:2010,
+author={Fay, D. and Ringwood, J.V.},
+journal={Power Systems, IEEE Transactions on},
+title={On the Influence of Weather Forecast Errors in Short-Term Load Forecasting Models},
+year={2010},
+month={aug. },
+volume={25},
+number={3},
+pages={1751 -1758},
+keywords={load forecasting models;parameter estimation;short-term load forecasting models;weather forecast errors;load forecasting;},
+doi={10.1109/TPWRS.2009.2038704},
+ISSN={0885-8950},}
+
+@INPROCEEDINGS{Liu:2011,
+author={Yu Liu and Wei Zhang},
+booktitle={Green Computing and Communications (GreenCom), 2011 IEEE/ACM International Conference on},
+title={Static Worst-Case Lifetime Estimation of Vigil Net},
+year={2011},
+month={aug.},
+pages={1 -8},
+keywords={VigilNet;WSN node;battery lifetime;domain-specific scenarios analysis;fixed initial energy budget;integer linear programming method;static analysis approach;static worst-case lifetime estimation;wireless sensor networks;worst-case CPU energy consumption;worst-case radio energy consumption;integer programming;linear programming;telecommunication network reliability;wireless sensor networks;},
+doi={10.1109/GreenCom.2011.9}
+}
+
+@book{Buttazzo:2011,
+  title={Hard Real-Time Computing Systems: Predictable Scheduling Algorithms and Applications},
+  author={Buttazzo, G.C.},
+  isbn={9781461406754},
+  series={Real-Time Systems},
+  url={http://books.google.com.br/books?id=h6q-e4Q\_rzgC},
+  year={2011},
+  publisher={Springer}
+}
+
+@INPROCEEDINGS{Koren:1995,
+author={Koren, G. and Shasha, D.}, 
+booktitle={Real-Time Systems Symposium, 1995. Proceedings., 16th IEEE}, title={Skip-Over: algorithms and complexity for overloaded systems that allow skips}, 
+year={1995}, 
+month={dec}, 
+pages={110 -117}, 
+keywords={Skip-Over;algorithms;complexity;overloaded systems;periodic tasks;rate monotonic scheduling;schedulability bounds;skips;uniprocessor scheduling;computational complexity;processor scheduling;real-time systems;scheduling;}, 
+doi={10.1109/REAL.1995.495201},
+}
+
+@ARTICLE{Ramanathan:1995, 
+author={Ramanathan, P.}, 
+journal={Parallel and Distributed Systems, IEEE Transactions on}, 
+title={Overload management in real-time control applications using (m, k)-firm guarantee}, 
+year={1999}, 
+month={jun}, 
+volume={10}, 
+number={6}, 
+pages={549 -559}, 
+keywords={fault-tolerant controllers;overload management;processor failures;real-time control;real-time scheduling;processor scheduling;real-time systems;}, 
+doi={10.1109/71.774906}, 
+ISSN={1045-9219},}
+
+@ARTICLE{Ramanathan:1999, 
+author={Ramanathan, P.}, 
+journal={Parallel and Distributed Systems, IEEE Transactions on}, 
+title={Overload management in real-time control applications using (m, k)-firm guarantee}, 
+year={1999}, 
+month={jun}, 
+volume={10}, 
+number={6}, 
+pages={549 -559}, 
+keywords={fault-tolerant controllers;overload management;processor failures;real-time control;real-time scheduling;processor scheduling;real-time systems;}, 
+doi={10.1109/71.774906}, 
+ISSN={1045-9219},}
+
+@INPROCEEDINGS{Buttazzo:1998,
+author={Buttazzo, G.C. and et al.},
+booktitle={Proc. of the 19th IEEE Real-Time Systems Symp.},
+title={Elastic task model for adaptive rate control},
+year={1998},
+month={dec},
+pages={286-295},
+keywords={adaptive control systems;adaptive rate control;classical real time theory;current load;elastic coefficients;elastic task model;execution rate;multimedia;novel periodic task model;overload conditions;periodic tasks;quality of service;real time applications;springs;task periods;adaptive control;multimedia systems;quality of service;real-time systems;scheduling;},
+doi={10.1109/REAL.1998.739754}
+}
+
+@INPROCEEDINGS{Kuo:1991, 
+author={Kuo, T.-W. and Mok, A.K.}, 
+booktitle={Real-Time Systems Symposium, 1991. Proceedings., Twelfth}, 
+title={Load adjustment in adaptive real-time systems}, 
+year={1991}, 
+month={dec},
+pages={160 -170}, 
+keywords={NP-complete;adaptive real-time systems;adjustable periodic processes;approximation algorithm;configuration selection problem;harmonics;period assignment problem;preemptive fixed priority scheduler;process set;process transformations;schedulability;timing parameters;utilization factor;adaptive systems;programming theory;real-time systems;resource allocation;scheduling;}, 
+doi={10.1109/REAL.1991.160369}
+}
+
+@INPROCEEDINGS{Seto:1998, 
+author={Seto, D. and Lehoczky, J.P. and Liu Sha}, 
+booktitle={Real-Time Systems Symposium, 1998. Proceedings., The 19th IEEE}, 
+title={Task period selection and schedulability in real-time systems}, 
+year={1998}, 
+month={dec}, 
+pages={188 -198}, 
+keywords={application related timing specifications;application tasks;computer controlled systems;dynamic priority scheduling methods;latency requirements;maximal acceptable latency;maximal acceptable latency requirements;optimal design;optimal periods;period selection problem;rate monotonic scheduling;real time applications;real time systems;small latency;static priority scheduling methods;system wide performance measure;task period selection;task periods;task set schedulability;computerised control;performance evaluation;real-time systems;scheduling;}, 
+doi={10.1109/REAL.1998.739745}
+}
+
+@INPROCEEDINGS{Abdelzaher:1997, 
+author={Abdelzaher, T.F. and Atkins, E.M. and Shin, K.G.}, 
+booktitle={Real-Time Technology and Applications Symposium, 1997. Proceedings., Third IEEE}, 
+title={QoS negotiation in real-time systems and its application to automated flight control}, 
+year={1997}, 
+month={jun}, 
+pages={228 -238}, 
+keywords={F-16 fighter aircraft;admission control schemes;application-perceived system utility;automated flight control;automated flight control system;quality-of-service negotiation;real-time guarantees;real-time middleware service;real-time systems;shared computing resources;traditional schedulability analysis;aircraft control;distributed processing;real-time systems;}, 
+doi={10.1109/RTTAS.1997.601361}
+}
+
+@ARTICLE{Liu:1991, 
+author={Liu, J.W.S. and Lin, K.-J. and Shih, W.-K. and Yu, A.C.-s. and Chung, J.-Y. and Zhao, W.}, 
+journal={Computer}, 
+title={Algorithms for scheduling imprecise computations}, 
+year={1991}, 
+month={may}, 
+volume={24}, 
+number={5}, 
+pages={58 -68}, 
+keywords={graceful degradation;imprecise computations;parallelizable tasks;periodic jobs;queuing-theoretical formulation;real-time environments;timing faults;queueing theory;real-time systems;scheduling;}, 
+doi={10.1109/2.76287}, 
+ISSN={0018-9162},}
+
+@ARTICLE{Wanner:2011, 
+author={Lucas Wanner and Charwak Apte and Rahul Balani and Puneet Gupta and Mani Srivastava}, 
+journal={IEEE Transactions on Very Large Scale Integration (VLSI) Systems}, 
+title={Hardware Variability-Aware Duty Cycling for Embedded Sensors}, 
+year={2012}, 
+pages={1 -11},
+note={(to appear)}
+}
+
+@inproceedings{Rumble:2009,
+ author = {Rumble, Stephen M. and Stutsman, Ryan and Levis, Philip and Mazi\`{e}res, David and Zeldovich, Nickolai},
+ title = {Apprehending joule thieves with cinder},
+ booktitle = {Proceedings of the 1st ACM workshop on Networking, systems, and applications for mobile handhelds},
+ series = {MobiHeld '09},
+ year = {2009},
+ isbn = {978-1-60558-444-7},
+ location = {Barcelona, Spain},
+ pages = {49--54},
+ numpages = {6},
+ url = {http://doi.acm.org/10.1145/1592606.1592618},
+ doi = {http://doi.acm.org/10.1145/1592606.1592618},
+ acmid = {1592618},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {capacitor, energy, hierarchical}
+}
+
+@inproceedings{Lachenmann:2007,
+ author = {Lachenmann, Andreas and Marr\'{o}n, Pedro Jos\'{e} and Minder, Daniel and Rothermel, Kurt},
+ title = {Meeting lifetime goals with energy levels},
+ booktitle = {Proceedings of the 5th international conference on Embedded networked sensor systems},
+ series = {SenSys '07},
+ year = {2007},
+ isbn = {978-1-59593-763-6},
+ location = {Sydney, Australia},
+ pages = {131--144},
+ numpages = {14},
+ url = {http://doi.acm.org/10.1145/1322263.1322277},
+ doi = {http://doi.acm.org/10.1145/1322263.1322277},
+ acmid = {1322277},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {energy, lifetime goal, programming abstraction, wireless sensor network}
+}
+
+@ARTICLE{Zeng:2005,
+ author={Zeng, H. and Ellis, C.S. and Lebeck, A.R.},
+ journal={Pervasive Computing, IEEE},
+ title={Experiences in managing energy with ECOSystem},
+ year={2005},
+ month={jan},
+ volume={4},
+ number={1},
+ pages={62-68},
+ keywords={ ECOSystem; Energy-Centric Operating System prototype; currentcy model; energy consumption; mobile devices; power-management techniques; systems-design; wireless sensor networks; battery management systems; energy management systems; mobile computing; operating systems (computers); power consumption; processor scheduling; resource allocation; wireless sensor networks;},
+ doi={10.1109/MPRV.2005.10},
+ ISSN={1536-1268}
+}
+
+@Article{Frohlich:IJDSN:2011,
+  author =	"Ant{\^o}nio Augusto Fr{\"o}hlich",
+  title =	"{A Comprehensive Approach to Power Management in Embedded Systems}",
+  journal =	"International Journal of Distributed Sensor Networks",
+  year =	2011,
+  volume =	"2011",
+  number =	"1",
+  pages =	"19",
+  url =		"http://www.hindawi.com/journals/ijdsn/2011/807091/",
+  issn =	"1550-1477"
+}
+
+@InProceedings{Hoeller:SMC:2011,
+  author =	"Arliones {Hoeller Jr.} and Ant{\^o}nio Augusto Fr{\"o}hlich",
+  title =	"{On the Monitoring of System-Level Energy Consumption of Battery-Powered Embedded Systems}",
+  booktitle =	"2011 IEEE International Conference on Systems, Man, and Cybernetics",
+  pages =	"2608-2613",
+  year =	2011,
+  address =	"Anchorage, AK, USA",
+  month =	oct,
+  isbn =	"978-1-4577-0651-6"
+}
+
+@Book{Frohlich:2001,
+  author =	"Ant{\^o}nio Augusto Fr{\"o}hlich",
+  title =	"{Application-Oriented Operating Systems}",
+  publisher =	"GMD - Forschungszentrum Informationstechnik",
+  year =	2001,
+  address =	"Sankt Augustin",
+  pages =	"200",
+  isbn =	"3-88457-400-0"
+}
+
+@InProceedings{Czarnecki:1998,
+  author =	 "Krzysztof Czarnecki and Ulrich Eisenecker and Robert
+                  Gl�ck and David Vandevoorde and Todd Veldhuizen",
+  title =	 "{Generative Programming and Active Libraries}",
+  booktitle =	 "Report of the Dagstuhl Seminar on Generic Programming",
+  address =	 "Schlo� Dagstuhl, Germany",
+  month =	 apr,
+  year =	 1998,
+  abstract =	 "We describe generative programming, an approach to
+                  generating customized programming components or
+                  systems, and active libraries, which are based on this
+                  approach. In contrast to conventional libraries,
+                  active libraries may contain metaprograms implementing
+                  domain-specific code generation, optimizations,
+                  debugging, profiling and testing. Several working
+                  examples (Blitz++, GMCL, Xroma) are presented to
+                  illustrate the potential of active libraries. We
+                  discuss relevant implementation technologies."
+}
+
+@InProceedings{Kiczales:1997,
+  author =   "Gregor Kiczales and John Lamping and Anurag Mendhekar
+                  and Chris Maeda and Cristina Videira Lopes and
+                  Jean-Marc Loingtier and John Irwin",
+  title =    "{Aspect-Oriented Programming}",
+  booktitle =    "Proceedings of the European Conference on
+                  Object-oriented Programming'97",
+  address =  "Finland",
+  series =   "Lecture Notes in Computer Science",
+  volume =   1241,
+  pages =    "220--242",
+  publisher =    "Springer",
+  month =    "jun",
+  year =     "1997",
+  url = "http://www.parc.xerox.com/csl/groups/sda/publications/papers/Kiczales-ECOOP97/for-web.pdf",
+  abstract =     "We have found many programming problems for which
+                  neither procedural nor object-oriented programming
+                  techniques are sufficient to clearly capture some of
+                  the important design decisions the program must
+                  implement. This forces the implementation of those
+                  design decisions to be scattered through-out the code,
+                  resulting in 'tangled' code that is excessively
+                  difficult to develop and maintain. We present an
+                  analysis of why certain design decisions have been so
+                  difficult to clearly capture in actual code. We call
+                  the properties these decisions address aspects, and
+                  show that the reason they have been hard to capture is
+                  that they cross-cut the system's basic
+                  functionality. We present the basis for a new
+                  programming technique, called aspect-oriented
+                  programming, that makes it possible to clearly express
+                  programs involving such aspects, including appropriate
+                  isolation, composition and re-use of the aspect
+                  code. The discussion is rooted in systems we have
+                  built using aspect-oriented programming."
+}
+
+@InProceedings{Hoeller:DIPES:2006,
+  author =	"Arliones {Hoeller Jr.} and Lucas Francisco Wanner and Ant{\^o}nio Augusto Fr{\"o}hlich",
+  title =	"{A Hierarchical Approach For Power Management on Mobile Embedded Systems}",
+  booktitle =	"5th IFIP Working Conference on Distributed and Parallel Embedded Systems",
+  pages =	"265-274",
+  year =	2006,
+  address =	"Braga, Portugal",
+  month =	"oct",
+  isbn =	"0-387-39361-7"
+}
+
+@Misc{Project:EPOS:2012,
+  author =   "LISHA",
+  title =    "{EPOS} Project Website",
+  howpublished = "Internet",
+  month =    "oct",
+  year =     "2012",
+  url =     "http://epos.lisha.ufsc.br",
+  note =     "http://epos.lisha.ufsc.br"
+}
+
+@ARTICLE{Cucinotta:2010,
+author={Cucinotta, T. and Palopoli, L. and Abeni, L. and Faggioli, D. and Lipari, G.},
+journal={Industrial Informatics, IEEE Transactions on},
+title={On the Integration of Application Level and Resource Level QoS Control for Real-Time Applications},
+year={2010},
+month={nov},
+volume={6},
+number={4},
+pages={479 -491},
+keywords={adaptive resource allocation policy;application level QoS control;energy consumption;nested feedback loops;quality-of-service control;reservation-based scheduler;resource level QoS control;quality of service;resource allocation;scheduling;software architecture;},
+doi={10.1109/TII.2010.2072962},
+ISSN={1551-3203}
+}
+
+@ARTICLE{Yuan:2006,
+author={Wanghong Yuan and Nahrstedt, K. and Adve, S.V. and Jones, D.L. and Kravets, R.H.},
+journal={Mobile Computing, IEEE Transactions on},
+title={GRACE-1: cross-layer adaptation for multimedia quality and battery energy},
+year={2006},
+month={july},
+volume={5},
+number={7},
+pages={ 799 - 815},
+keywords={ GRACE-1; battery energy; cross-layer adaptation; mobile devices; multimedia quality; multiple system layers; video quality; mobile computing; multimedia communication; quality of service;},
+doi={10.1109/TMC.2006.98},
+ISSN={1536-1233}
+}
+
+@INPROCEEDINGS{Cornea:2003,
+author={Cornea, R. and Dutt, N. and Gupta, R. and Krueger, I. and Nicolau, A. and Schmidt, D. and Shukla, S.},
+booktitle={Parallel and Distributed Processing Symposium, 2003. Proceedings. International},
+title={FORGE: a framework for optimization of distributed embedded systems software},
+year={2003},
+month={april},
+pages={ 13 pp.},
+keywords={ ADL; CompOSEIQ middleware services; FORGE; RDL; architectural modeling; collaborative specifications; distributed embedded systems software; message sequence charts; real-time systems; software architecture; embedded systems; formal specification; middleware; quality of service; software architecture;},
+doi={10.1109/IPDPS.2003.1213381},
+ISSN={1530-2075 }
+}
+
+@article{Liu:1973,
+ author = {Liu, C. L. and Layland, James W.},
+ title = {Scheduling Algorithms for Multiprogramming in a Hard-Real-Time Environment},
+ journal = {J. ACM},
+ issue_date = {Jan. 1973},
+ volume = {20},
+ number = {1},
+ month = jan,
+ year = {1973},
+ issn = {0004-5411},
+ pages = {46--61},
+ numpages = {16},
+ url = {http://doi.acm.org/10.1145/321738.321743},
+ doi = {10.1145/321738.321743},
+ acmid = {321743},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+} 
+
+@inproceedings{Pillai:2001,
+  author =	 {Padmanabhan Pillai and Kang G. Shin},
+  title =	 {Real-time dynamic voltage scaling for low-power embedded operating systems},
+  booktitle =	 {SOSP '01: Proceedings of the eighteenth ACM symposium on Operating systems principles},
+  year =	 {2001},
+  isbn =	 {1-58113-389-8},
+  pages =	 {89--102},
+  location =	 {Banff, Alberta, Canada},
+  doi =		 {http://doi.acm.org/10.1145/502034.502044},
+  publisher =	 {ACM Press},
+  address =	 {New York, NY, USA},
+  pdf =          {../cache/Power_Management/Pillai-2001.pdf},
+}
+
+@InProceedings{Okazaki:SCPA:2011,
+  author =	{Alexandre Massayuki Okazaki and Ant{\^o}nio Augusto Fr{\"o}hlich},
+  title =	{Ant-based Dynamic Hop Optimization Protocol: a Routing Algorithm for Mobile Wireless Sensor Networks},
+  booktitle =	{Joint Workshop of SCPA 2011 and SaCoNAS 2011 - IEEE GLOBECOM 2011},
+  pages =	{1179--1183},
+  year =	{2011},
+  address =	{Huston, Texas, USA},
+  month =	dec,
+  isbn =	{978-1-4673-0038-4},
+  url =		{http://www.lisha.ufsc.br/pub/Okazaki\_SCPA\_2011.pdf}
+}
+
+@article{Kansal:2007,
+ author = {Kansal, Aman and Hsu, Jason and Zahedi, Sadaf and Srivastava, Mani B.},
+ title = {Power management in energy harvesting sensor networks},
+ journal = {ACM Trans. Embed. Comput. Syst.},
+ issue_date = {September 2007},
+ volume = {6},
+ number = {4},
+ month = sep,
+ year = {2007},
+ issn = {1539-9087},
+ articleno = {32},
+ url = {http://doi.acm.org/10.1145/1274858.1274870},
+ doi = {10.1145/1274858.1274870},
+ acmid = {1274870},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {Adaptive duty cycling, Heliomote, energy neutrality, lifetime, power management},
+} 
+
+@inproceedings{Zhang:2004,
+ author = {Zhang, Pei and Sadler, Christopher M. and Lyon, Stephen A. and Martonosi, Margaret},
+ title = {Hardware design experiences in ZebraNet},
+ booktitle = {Proceedings of the 2nd international conference on Embedded networked sensor systems},
+ series = {SenSys '04},
+ year = {2004},
+ isbn = {1-58113-879-2},
+ location = {Baltimore, MD, USA},
+ pages = {227--238},
+ numpages = {12},
+ url = {http://doi.acm.org/10.1145/1031495.1031522},
+ doi = {10.1145/1031495.1031522},
+ acmid = {1031522},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {GPS, ZebraNet, sensor deployment, sensor networks},
+} 
+
+@INPROCEEDINGS{Moser:2007,
+author={Moser, C. and Thiele, L. and Brunelli, D. and Benini, L.},
+booktitle={Design, Automation Test in Europe Conference Exhibition, 2007. DATE '07}, title={Adaptive Power Management in Energy Harvesting Systems},
+year={2007},
+month={april},
+pages={1 -6},
+keywords={adaptive power management;energy consumption;energy harvesting systems;on-line controller;power consumption;regenerative sources;sensor node;solar cells;circuit optimisation;integrated circuit design;low-power electronics;},
+doi={10.1109/DATE.2007.364689}
+}
+
+@inproceedings{Ali:2010,
+ author = {Ali, Mustafa Imran and Al-Hashimi, Bashir M. and Recas, Joaqu\'{\i}n and Atienza, David},
+ title = {Evaluation and design exploration of solar harvested-energy prediction algorithm},
+ booktitle = {Proceedings of the Conference on Design, Automation and Test in Europe},
+ series = {DATE '10},
+ year = {2010},
+ isbn = {978-3-9810801-6-2},
+ location = {Dresden, Germany},
+ pages = {142--147},
+ numpages = {6},
+ url = {http://dl.acm.org/citation.cfm?id=1870926.1870962},
+ acmid = {1870962},
+ publisher = {European Design and Automation Association},
+ address = {3001 Leuven, Belgium, Belgium},
+} 
+
+@ARTICLE{Paradiso:2005,
+author={Paradiso, J.A. and Starner, T.},
+journal={Pervasive Computing, IEEE}, title={Energy scavenging for mobile and wireless electronics},
+year={2005},
+month={jan.-march},
+volume={4},
+number={1},
+pages={ 18 - 27},
+keywords={ battery-powered electronics; energy harvesting; low-power electronics; mobile electronics; power management; renewable energy resources; sensor networks; water wheel; windmill; electric power generation; energy management systems; low-power electronics; mobile computing; renewable energy sources; thermoelectric conversion; wireless sensor networks;},
+doi={10.1109/MPRV.2005.9},
+ISSN={1536-1268}
+}
+
+@INPROCEEDINGS{Rusu:2003,
+author={Rusu, C. and Melhem, R. and Mosse, D.},
+booktitle={Real-Time Systems, 2003. Proceedings. 15th Euromicro Conference on}, title={Multiversion scheduling in rechargeable energy-aware real-time systems},
+year={2003},
+month={july},
+pages={ 95 - 104},
+keywords={ battery-powered real-time system; energy-aware real-time system; multiversion scheduling; quality of service; rechargeable real-time system; worst-case task execution; power supply circuits; real-time systems;},
+doi={10.1109/EMRTS.2003.1212732}
+}
+
+@article{ELGhor:2011,
+ author = {EL Ghor, Hussein and Chetto, Maryline and Chehade, Rafic Hage},
+ title = {A real-time scheduling framework for embedded systems with environmental energy harvesting},
+ journal = {Comput. Electr. Eng.},
+ issue_date = {July, 2011},
+ volume = {37},
+ number = {4},
+ month = jul,
+ year = {2011},
+ issn = {0045-7906},
+ pages = {498--510},
+ numpages = {13},
+ url = {http://dx.doi.org/10.1016/j.compeleceng.2011.05.003},
+ doi = {10.1016/j.compeleceng.2011.05.003},
+ acmid = {2007771},
+ publisher = {Pergamon Press, Inc.},
+ address = {Tarrytown, NY, USA}
+} 
+
+@ARTICLE{Sharma:2010,
+author={Sharma, V. and Mukherji, U. and Joseph, V. and Gupta, S.},
+journal={Wireless Communications, IEEE Transactions on}, title={Optimal energy management policies for energy harvesting sensor nodes},
+year={2010},
+month=apr,
+volume={9},
+number={4},
+pages={1326 -1336},
+keywords={buffer;data queue;data rate;energy harvesting sensor node;greedy policy;mean delay;optimal energy management policy;random field;sensor network;throughput optimal;energy harvesting;queueing theory;telecommunication network management;wireless sensor networks;},
+doi={10.1109/TWC.2010.04.080749},
+ISSN={1536-1276}
+}
+
+@Article{Schulter:JOT:2007,
+  author =	"Alexandre Schulter and Rafael Cancian and Marcelo Ricardo Stemmer and Ant{\^o}nio Augusto Medeiros Fr{\"o}hlich",
+  title =	"{A Tool for Supporting and Automating the Development of Component-based Embedded Systems}",
+  journal =	"Journal of Object Technology",
+  year =	2007,
+  volume =	"6",
+  number =	"9",
+  pages =	"399-416",
+  month =	oct,
+  url =		"http://www.jot.fm/issues/issue_2007_10/paper20/index.html",
+  issn =	"1660-1769"
+}
+
+@Book{GangOfFour:1994,
+  author = 	 {Erich Gamma and Richard Helm and Ralph Johnson and John Vlissides},
+  title = 	 {Design Patterns: Elements of Reusable Object-Oriented Software},
+  publisher = 	 {Addison-Wesley},
+  year = 	 {1994},
+  isbn = 	 {0-201-63361-2},
+  address = 	 {USA},
+  OPTedition = 	 {1}
+}
+
+@INPROCEEDINGS{Lohmann:2005,
+author={Lohmann, D. and Schroder-Preikschat, W. and Spinczyk, O.},
+booktitle={Object-Oriented Real-Time Dependable Systems, 2005. WORDS 2005. 10th IEEE International Workshop on}, title={Functional and non-functional properties in a family of embedded operating systems},
+year={2005},
+month={feb},
+pages={413-420},
+keywords={ aspect-oriented programming; embedded operating systems; reusable system software solutions; software design; standard software packets; embedded systems; operating systems (computers); software reusability;},
+doi={10.1109/WORDS.2005.37},
+ISSN={1530-1443}
+}
+
+@InProceedings{Frohlich:SCI:2000,
+  author =	"Ant{\^o}nio Augusto Fr{\"o}hlich and Wolfgang Schr{\"o}der-Preikschat",
+  title =	"{Scenario Adapters: Efficiently Adapting Components}",
+  booktitle =	"4th World Multiconference on Systemics, Cybernetics and Informatics",
+  year =	2000,
+  address =	"Orlando, USA",
+  month =	jul
+}
+
+@inproceedings{Mens:1997,
+ author = {Kim Mens and Cristina Videira Lopes and Bedir Tekinerdogan and Gregor Kiczales},
+ title = {Aspect-Oriented Programming Workshop Report},
+ booktitle = {Proceedings of the Workshops on Object-Oriented Technology},
+ series = {ECOOP '97},
+ year = {1998},
+ isbn = {3-540-64039-8},
+ pages = {483--496},
+ numpages = {14},
+ url = {http://portal.acm.org/citation.cfm?id=646777.706037},
+ acmid = {706037},
+ publisher = {Springer-Verlag},
+ address = {London, UK}
+} 
+
+@ARTICLE{IEEE802154:2006,
+author={IEEE},
+journal={IEEE Std 802.15.4-2006 (Revision of IEEE Std 802.15.4-2003)},
+title={IEEE Standard for Information technology-- Local and metropolitan area networks-- Specific requirements-- Part 15.4: Wireless Medium Access Control (MAC) and Physical Layer (PHY) Specifications for Low Rate Wireless Personal Area Networks (WPANs)},
+year={2006},
+month={7},
+pages={1 -320},
+doi={10.1109/IEEESTD.2006.232110}
+}
+
+@Article{Frohlich:COMPELECENG:2011,
+  author =	"Ant{\^o}nio Augusto Fr{\"o}hlich and Giovani Gracioli and Jo{\~a}o Felipe dos Santos",
+  title =	"{Periodic Timers Revisited: the Real-time Embedded System Perspective}",
+  journal =	"Computers and Electrical Engineering",
+  year =	2011,
+  volume =	"37",
+  number =	"3",
+  pages =	"365-375",
+  url =		"http://www.sciencedirect.com/science/article/B6V25-52G7HNY-3/2/d898c7aa640eb6d587c4cec69f177d51",
+  issn =	"0045-7906"
+}
+
+@book{Czarnecki:2000,
+ author = {Czarnecki, K. and Eisenecker, U.~W.},
+ title = {Generative programming: methods, tools, and applications},
+ year = {2000},
+ isbn = {0-201-30977-7},
+ publisher = {ACM Press/Addison-Wesley Publishing Co.},
+ address = {New York, NY, USA}
+}
+
+@InProceedings{Marcondes:EPS:2009,
+  author =	"Hugo Marcondes and Rafael Cancian and Marcelo Stemmer and Ant{\^o}nio Augusto Fr{\"o}hlich",
+  title =	"{On design of flexible real time schedulers for embedded systems}",
+  booktitle =	"International Symposium on Embedded and Pervasive Systems",
+  pages =	"382-387",
+  year =	2009,
+  address =	"Vancouver, Canada",
+  month =	aug,
+  isbn =	"978-0-7695-3823-5"
+}

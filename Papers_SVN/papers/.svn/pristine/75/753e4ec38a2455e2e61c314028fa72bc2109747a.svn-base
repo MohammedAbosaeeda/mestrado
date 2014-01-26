@@ -1,0 +1,268 @@
+%!PS-Adobe-2.0 EPSF-2.0
+%%Title: fig_topology.fig
+%%Creator: fig2dev Version 3.2 Patchlevel 5c
+%%CreationDate: Thu Sep 16 14:56:14 2010
+%%For: okazaki@okazaki (Alexandre Massayuki Okazaki,,,)
+%%BoundingBox: 0 0 1125 153
+%Magnification: 1.0000
+%%EndComments
+%%BeginProlog
+/$F2psDict 200 dict def
+$F2psDict begin
+$F2psDict /mtrx matrix put
+/col-1 {0 setgray} bind def
+/col0 {0.000 0.000 0.000 srgb} bind def
+/col1 {0.000 0.000 1.000 srgb} bind def
+/col2 {0.000 1.000 0.000 srgb} bind def
+/col3 {0.000 1.000 1.000 srgb} bind def
+/col4 {1.000 0.000 0.000 srgb} bind def
+/col5 {1.000 0.000 1.000 srgb} bind def
+/col6 {1.000 1.000 0.000 srgb} bind def
+/col7 {1.000 1.000 1.000 srgb} bind def
+/col8 {0.000 0.000 0.560 srgb} bind def
+/col9 {0.000 0.000 0.690 srgb} bind def
+/col10 {0.000 0.000 0.820 srgb} bind def
+/col11 {0.530 0.810 1.000 srgb} bind def
+/col12 {0.000 0.560 0.000 srgb} bind def
+/col13 {0.000 0.690 0.000 srgb} bind def
+/col14 {0.000 0.820 0.000 srgb} bind def
+/col15 {0.000 0.560 0.560 srgb} bind def
+/col16 {0.000 0.690 0.690 srgb} bind def
+/col17 {0.000 0.820 0.820 srgb} bind def
+/col18 {0.560 0.000 0.000 srgb} bind def
+/col19 {0.690 0.000 0.000 srgb} bind def
+/col20 {0.820 0.000 0.000 srgb} bind def
+/col21 {0.560 0.000 0.560 srgb} bind def
+/col22 {0.690 0.000 0.690 srgb} bind def
+/col23 {0.820 0.000 0.820 srgb} bind def
+/col24 {0.500 0.190 0.000 srgb} bind def
+/col25 {0.630 0.250 0.000 srgb} bind def
+/col26 {0.750 0.380 0.000 srgb} bind def
+/col27 {1.000 0.500 0.500 srgb} bind def
+/col28 {1.000 0.630 0.630 srgb} bind def
+/col29 {1.000 0.750 0.750 srgb} bind def
+/col30 {1.000 0.880 0.880 srgb} bind def
+/col31 {1.000 0.840 0.000 srgb} bind def
+
+end
+
+/cp {closepath} bind def
+/ef {eofill} bind def
+/gr {grestore} bind def
+/gs {gsave} bind def
+/sa {save} bind def
+/rs {restore} bind def
+/l {lineto} bind def
+/m {moveto} bind def
+/rm {rmoveto} bind def
+/n {newpath} bind def
+/s {stroke} bind def
+/sh {show} bind def
+/slc {setlinecap} bind def
+/slj {setlinejoin} bind def
+/slw {setlinewidth} bind def
+/srgb {setrgbcolor} bind def
+/rot {rotate} bind def
+/sc {scale} bind def
+/sd {setdash} bind def
+/ff {findfont} bind def
+/sf {setfont} bind def
+/scf {scalefont} bind def
+/sw {stringwidth} bind def
+/tr {translate} bind def
+/tnt {dup dup currentrgbcolor
+  4 -2 roll dup 1 exch sub 3 -1 roll mul add
+  4 -2 roll dup 1 exch sub 3 -1 roll mul add
+  4 -2 roll dup 1 exch sub 3 -1 roll mul add srgb}
+  bind def
+/shd {dup dup currentrgbcolor 4 -2 roll mul 4 -2 roll mul
+  4 -2 roll mul srgb} bind def
+ /DrawEllipse {
+	/endangle exch def
+	/startangle exch def
+	/yrad exch def
+	/xrad exch def
+	/y exch def
+	/x exch def
+	/savematrix mtrx currentmatrix def
+	x y tr xrad yrad sc 0 0 1 startangle endangle arc
+	closepath
+	savematrix setmatrix
+	} def
+
+/$F2psBegin {$F2psDict begin /$F2psEnteredState save def} def
+/$F2psEnd {$F2psEnteredState restore end} def
+
+/pageheader {
+save
+newpath 0 153 moveto 0 0 lineto 1125 0 lineto 1125 153 lineto closepath clip newpath
+-167.8 178.0 translate
+1 -1 scale
+$F2psBegin
+10 setmiterlimit
+0 slj 0 slc
+ 0.06000 0.06000 sc
+} bind def
+/pagefooter {
+$F2psEnd
+restore
+} bind def
+%%EndProlog
+pageheader
+%
+% Fig objects follow
+%
+% 
+% here starts figure with depth 50
+% Ellipse
+45.000 slw
+gs
+8177 896 tr
+-270.001 rot
+n 0 0 437 437 0 360 DrawEllipse 270.001 rot
+gs col0 s gr
+gr
+
+% Ellipse
+n 6587 2497 437 437 0 360 DrawEllipse gs col0 s gr
+
+% Ellipse
+n 11462 2484 437 437 0 360 DrawEllipse gs col0 s gr
+
+% Ellipse
+n 14586 2484 437 437 0 360 DrawEllipse gs col0 s gr
+
+% Ellipse
+gs
+21077 894 tr
+-180.000 rot
+n 0 0 437 437 0 360 DrawEllipse 180.000 rot
+gs col0 s gr
+gr
+
+% Ellipse
+n 21036 2499 437 437 0 360 DrawEllipse gs col0 s gr
+
+% Ellipse
+n 17912 2499 437 437 0 360 DrawEllipse gs col0 s gr
+
+% Ellipse
+n 19487 2499 437 437 0 360 DrawEllipse gs col0 s gr
+
+% Ellipse
+gs
+3264 918 tr
+-90.000 rot
+n 0 0 437 437 0 360 DrawEllipse 90.000 rot
+gs col0 s gr
+gr
+
+% Ellipse
+gs
+3264 2493 tr
+-90.000 rot
+n 0 0 437 437 0 360 DrawEllipse 90.000 rot
+gs col0 s gr
+gr
+
+% Ellipse
+n 8162 2497 437 437 0 360 DrawEllipse gs col0 s gr
+
+% Ellipse
+gs
+13052 883 tr
+-270.001 rot
+n 0 0 437 437 0 360 DrawEllipse 270.001 rot
+gs col0 s gr
+gr
+
+% Ellipse
+n 13037 2484 437 437 0 360 DrawEllipse gs col0 s gr
+
+% Ellipse
+gs
+19502 898 tr
+-270.001 rot
+n 0 0 437 437 0 360 DrawEllipse 270.001 rot
+gs col0 s gr
+gr
+
+% Polyline
+2 slj
+0 slc
+7.500 slw
+n 3264 2043 m
+ 3264 1368 l gs col0 s gr 
+% Polyline
+n 8177 1346 m
+ 8177 2021 l gs col0 s gr 
+% Polyline
+n 7037 2497 m
+ 7712 2497 l gs col0 s gr 
+% Polyline
+n 11912 2484 m
+ 12587 2484 l gs col0 s gr 
+% Polyline
+n 13052 1333 m
+ 13052 2008 l gs col0 s gr 
+% Polyline
+n 13461 2484 m
+ 14136 2484 l gs col0 s gr 
+% Polyline
+n 21062 2045 m
+ 21062 1370 l gs col0 s gr 
+% Polyline
+n 20653 894 m
+ 19978 894 l gs col0 s gr 
+% Polyline
+n 19911 2499 m
+ 20586 2499 l gs col0 s gr 
+% Polyline
+n 18362 2499 m
+ 19037 2499 l gs col0 s gr 
+% Polyline
+n 19502 1348 m
+ 19502 2023 l gs col0 s gr 
+% Polyline
+15.000 slw
+gs  clippath
+5349 1787 m 5490 1787 l 5490 1607 l 5349 1607 l 5349 1607 l 5469 1697 l 5349 1787 l cp
+eoclip
+n 4275 1697 m
+ 5475 1697 l gs col0 s gr gr
+
+% arrowhead
+0 slj
+7.500 slw
+n 5349 1787 m 5469 1697 l 5349 1607 l 5349 1787 l  cp gs 0.00 setgray ef gr  col0 s
+% Polyline
+2 slj
+15.000 slw
+gs  clippath
+10224 1787 m 10365 1787 l 10365 1607 l 10224 1607 l 10224 1607 l 10344 1697 l 10224 1787 l cp
+eoclip
+n 9150 1697 m
+ 10350 1697 l gs col0 s gr gr
+
+% arrowhead
+0 slj
+7.500 slw
+n 10224 1787 m 10344 1697 l 10224 1607 l 10224 1787 l  cp gs 0.00 setgray ef gr  col0 s
+% Polyline
+2 slj
+15.000 slw
+gs  clippath
+16599 1787 m 16740 1787 l 16740 1607 l 16599 1607 l 16599 1607 l 16719 1697 l 16599 1787 l cp
+eoclip
+n 15525 1697 m
+ 16725 1697 l gs col0 s gr gr
+
+% arrowhead
+0 slj
+7.500 slw
+n 16599 1787 m 16719 1697 l 16599 1607 l 16599 1787 l  cp gs 0.00 setgray ef gr  col0 s
+% here ends figure;
+pagefooter
+showpage
+%%Trailer
+%EOF

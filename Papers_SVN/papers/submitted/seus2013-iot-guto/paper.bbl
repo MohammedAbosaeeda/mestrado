@@ -1,0 +1,191 @@
+\begin{thebibliography}{10}
+
+\bibitem{Elrahim:2011}
+Salwa El~Ramlf Adel Gaafar A.~Elrahim, Hussein A.~Elsayed and Ibrahim Magdy~M.
+\newblock {Improving TCP congestion control for wireless sensor networks}.
+\newblock In {\em 4th Annual Caneus Fly by Wireless Workshop}, pages 1--6,
+  Montreal, QC, Canada, June 2011.
+
+\bibitem{Skipjack:1998}
+National~Security Agency.
+\newblock Skipjack and kea algorithm specifications, may 1998.
+
+\bibitem{ZIGBEE}
+ZigBee Alliance.
+\newblock {ZigBee Specification}.
+\newblock {online}, 2007.
+
+\bibitem{Bernstein:2005}
+Daniel~J. Bernstein.
+\newblock The poly1305-aes message authentication code.
+\newblock In {\em Proceedings of Fast Software Encryption}, pages 32--49,
+  Paris, France, Feb 2005.
+
+\bibitem{Diffie:1976}
+W.~Diffie and M.~Hellman.
+\newblock New directions in cryptography.
+\newblock {\em IEEE Transactions on Information Theory}, 22(6):644--654, 1976.
+
+\bibitem{Fu:2003}
+Xinwen Fu, Bryan Graham, Riccardo Bettati, and Wei Zhao.
+\newblock Active traffic analysis attacks and countermeasures.
+\newblock In {\em Proceedings of the 2003 International Conference on Computer
+  Networks and Mobile Computing}, ICCNMC '03, pages 31--, Washington, DC, USA,
+  2003. IEEE Computer Society.
+
+\bibitem{Gay:2003}
+David Gay, Philip Levis, Robert von Behren, Matt Welsh, Eric Brewer, and David
+  Culler.
+\newblock The nesc language: A holistic approach to networked embedded systems.
+\newblock In {\em Proceedings of the ACM SIGPLAN 2003 conference on Programming
+  language design and implementation}, PLDI '03, pages 1--11, New York, NY,
+  USA, 2003. ACM.
+
+\bibitem{Balakrishnan:1995}
+Elan~Amir Hari~Balakrishnan, Srinivasan~Seshan and Randy~H. Katz.
+\newblock Improving tcp/ip performance over wireless networks.
+\newblock In {\em Proceedings of the 1st annual international conference on
+  Mobile computing and networking}, pages 2--11, New York, NY, USA, 1995. ACM.
+
+\bibitem{Huai:2009}
+Lian Huai, Xuecheng Zou, Zhenglin Liu, and Yu~Han.
+\newblock An energy-efficient aes-ccm implementation for ieee802.15.4 wireless
+  sensor networks.
+\newblock {\em Networks Security, Wireless Communications and Trusted
+  Computing, International Conference on}, 2:394--397, 2009.
+
+\bibitem{Jardak:2008}
+C.~Jardak, E.~Meshkova, J.~Riihijarvi, K.~Rerkrai, and P.~Mahonen.
+\newblock {Implementation and Performance Evaluation of nanoIP Protocols:
+  Simplified Versions of TCP, UDP, HTTP and SLP for Wireless Sensor Networks}.
+\newblock In {\em IEEE Wireless Communications and Networking Conference},
+  pages 2474--2479, March 2008.
+
+\bibitem{Jinwala:2009}
+D.~Jinwala, D.~Patel, S.~Patel, and K.S. Dasgupta.
+\newblock Replay protection at the link layer security in wireless sensor
+  networks.
+\newblock In {\em Computer Science and Information Engineering, 2009 WRI World
+  Congress on}, volume~1, pages 160 --165, 31 2009-april 2 2009.
+
+\bibitem{Karlof:2004}
+Chris Karlof, Naveen Sastry, and David Wagner.
+\newblock Tinysec: a link layer security architecture for wireless sensor
+  networks.
+\newblock In {\em Proceedings of the 2nd international conference on Embedded
+  networked sensor systems}, SenSys '04, pages 162--175, New York, NY, USA,
+  2004. ACM.
+
+\bibitem{EPOSMote}
+Software/Hardware~Intergration Lab.
+\newblock {EPOS Project}.
+
+\bibitem{Lee:2010}
+Hyeopgeon Lee, Kyounghwa Lee, and Yongtae Shin.
+\newblock {Implementation and Performance Analysis of AES-128 CBC algorithm in
+  WSNs}.
+\newblock In {\em The 12th International Conference on Advanced Communication
+  Technology}, pages 243--248, 2010.
+
+\bibitem{Luk:2007}
+M.~Luk, G.~Mezzour, A.~Perrig, and V.~Gligor.
+\newblock Minisec: A secure sensor network communication architecture.
+\newblock In {\em Information Processing in Sensor Networks, 2007. IPSN 2007.
+  6th International Symposium on}, pages 479 --488, april 2007.
+
+\bibitem{AES:2001}
+NIST.
+\newblock {Advanced Encryption Standard (AES)}.
+\newblock {Federal Information Processing Standards Publication 197}, November
+  2001.
+
+\bibitem{Okazaki:SCPA:2011}
+Alexandre~Massayuki Okazaki and Antônio~Augusto Fröhlich.
+\newblock {Ant-based Dynamic Hop Optimization Protocol: a Routing Algorithm for
+  Mobile Wireless Sensor Networks}.
+\newblock In {\em Joint Workshop of SCPA 2011 and SaCoNAS 2011 - IEEE GLOBECOM
+  2011}, pages 1179--1183, Huston, Texas, USA, December 2011.
+
+\bibitem{Okazaki:Sensors:2012}
+Alexandre~Massayuki Okazaki and Antônio~Augusto Fröhlich.
+\newblock {ADHOP: an Energy Aware Routing Algorithm for Mobile Wireless Sensor
+  Networks}.
+\newblock In {\em IEEE SENSORS 2012}, Taipei, Taiwan, October 2012.
+
+\bibitem{Oliveira:SBESC:2012}
+Peterson Oliveira, Alexandre~Massayuki Okazaki, , and Antônio~Augusto
+  Fröhlich.
+\newblock {Sincronização de Tempo a nível de SO utilizando o protocolo
+  IEEE1588}.
+\newblock In {\em Brazilian Symposium on Computing System Engineering}, Natal,
+  Brazil, November 2012.
+
+\bibitem{Perkins:1999}
+Charles~E. Perkins and et~al.
+\newblock Optimized smooth handoffs in mobile ip.
+\newblock In {\em IN PROCEEDINGS OF ISCC}, pages 340--346, 1999.
+
+\bibitem{Pires:INDIN:2008}
+Rafael~Pereira Pires, Lucas~Francisco Wanner, and Antônio~Augusto Fröhlich.
+\newblock {An Efficient Calibration Method for RSSI-based Location Algorithms}.
+\newblock In {\em 6th International IEEE Conference on Industrial Informatics},
+  pages 1183--1188, Daejeon, Korea, July 2008.
+
+\bibitem{Reghelin:MSWIM:2006}
+Ricardo Reghelin and Antônio~Augusto Fröhlich.
+\newblock {A Decentralized Location System for Sensor Networks Using
+  Cooperative Calibration and Heuristics}.
+\newblock In {\em 9th ACM/IEEE International Symposium on Modeling, Analysis
+  and Simulation of Wireless and Mobile Systems}, pages 139--146, Torremolinos,
+  Malaga, Spain., October 2006.
+
+\bibitem{Ganesh:2009}
+R.~Amutha S.~Ganesh.
+\newblock {Energy efficient transport protocol for wireless sensor networks}.
+\newblock In {\em 2nd IEEE International Conference on Computer Science and
+  Information Technology}, pages 464--468, August 2009.
+
+\bibitem{Shuang:2009}
+Bing Shuang, Zhenbo Li, and Jiapin Chen.
+\newblock An ant-based on-demand energy route protocol for ieee 802.15.4 mesh
+  network.
+\newblock {\em International Journal of Wireless Information Networks},
+  16:225--236, 2009.
+
+\bibitem{Steiner:Sensors:2010}
+Rodrigo Steiner, Tiago~Rogério Mück, and Antônio~Augusto Fröhlich.
+\newblock {C-MAC: a Configurable Medium Access Control Protocol for Sensor
+  Networks}.
+\newblock In {\em 9th IEEE Sensors}, pages 845--848, Waikoloa, HI, USA,
+  November 2010.
+
+\bibitem{Sun:2010}
+Hung-Min Sun, Shih-Ying Chang, A.B. Tello, and Yen-Hsuen Chen.
+\newblock An authentication scheme balancing authenticity and transmission for
+  wireless sensor networks.
+\newblock In {\em Computer Symposium (ICS), 2010 International}, pages 222
+  --227, dec. 2010.
+
+\bibitem{Braun:2007}
+Thiemo~Voigt Torsten~Braun and Adam Dunkels.
+\newblock {TCP support for sensor networks}.
+\newblock In {\em Fourth Annual Conference on Wireless on Demand Network
+  Systems and Services}, pages 162--169, January 2007.
+
+\bibitem{CCM}
+D.~Whiting, R.~Housley, and N.~Ferguson.
+\newblock {\em RFC 3610 - Counter with CBC-MAC}.
+\newblock online, Sep 2003.
+
+\bibitem{Zen:2008}
+K.~Zen, D.~Habibi, A.~Rassau, and I.~Ahmad.
+\newblock Performance evaluation of ieee 802.15.4 for mobile sensor networks.
+\newblock In {\em 5th IFIP International Conference on Wireless and Optical
+  Communications Networks}, pages 1--5, may. 2008.
+
+\bibitem{Zhou:2008}
+Yun Zhou, Yuguang Fang, and Yanchao Zhang.
+\newblock Securing wireless sensor networks: A survey.
+\newblock {\em IEEE Communications Surveys \& Tutorials}, 10:6--28, 2008.
+
+\end{thebibliography}

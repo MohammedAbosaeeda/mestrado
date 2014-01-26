@@ -1,0 +1,10 @@
+\chapter{Revisão Bibliográfica}
+    \label{revisao}
+    
+    O uso de DVS para redução no consumo de energia, principalmente em sistemas de propósito geral, recebeu grande foco até meados da década passada. Em sua grande maioria, os algoritmos responsáveis por este ganho, são baseados em mecanismos de \emph{feedback} que não consideram tarefas que devam ser executadas em tempo-real \cite{Chen:2007}. Neste sentido, as primeiras prototipagens de escalonadores RT-DVS, com foco em sistemas embarcados, baseadas nos clássicos \emph{Rate Monotonic} e \emph{Earliest Deadline-First}, foram realizados na pesquisa de \citeonline{Pillai:2001}, onde este trabalho se fundamenta.
+    
+    \citeonline{Chen:2007} sumarizam o estado da arte no desenvolvimento de algoritmos utilizados em escalonamento de tempo real energeticamente eficiente. O autor indica abordagens para tarefas de tempo real aperiódicas, tarefas de tempo real periódicas, tarefas de tempo real não preemptivas, dentre outras. Segundo a classificação de Chen, as abordagens que serão utilizadas neste trabalho se concentram no aproveitamento da folga no prazo de execução de tarefas (\emph{slack reclamation}). Nesta técnica, a ideia principal é explorar esta folga de modo a poder estender o término das tarefas, como também é realizado por \citeonline{Aydin:2001b}. Outros trabalhos tentam explorar a folga desligando o processador, como os resultados mais recentes de \citeonline{Jejurikar:2005}.
+    
+    O que foi possível perceber, durante grande parte da pesquisa bibliográfica deste trabalho, é a tendência de incorporação de técnicas de escalonamento RT-DVS em sistemas multiprocessados \cite{Chen:2007b, Chang:2008, Cong:2009} e a integração entre RT-DVS e outras possibilidades para gerenciamento de energia, como DPM (\emph{Dynamic Power Management}) \cite{Zhao:2009, Santinelli:2010, Zhuo:2007}. Por fim, a quantidade de possibilidades que se abrem para a exploração da técnica são várias. Espera-se, então, que este trabalho oriente futuras pesquisas sobre o tema.
+    
+    

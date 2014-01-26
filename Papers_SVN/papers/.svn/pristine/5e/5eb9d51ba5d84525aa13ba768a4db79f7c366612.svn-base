@@ -1,0 +1,6 @@
+pdf:
+	latexmk -pvc -pdf -view=pdf
+
+clean:
+	rm -f *.log *.aux *.bbl *.blg *.toc *.idx *.lof *.lot *.out *.rtf *.spl *.fls *.fdb_latexmk *~ *.dvi 2
+

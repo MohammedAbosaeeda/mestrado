@@ -1,0 +1,534 @@
+\section{QoS: papel da Energia}
+\label{sc:proposta}
+
+%- Atender o tempo de duração do sistema. Através da utilização de técnicas da computação imprecisa. Parte obrigatória e Parte opcional... (Explicar o que é em 2 ou 3 parágrafos). 
+
+Este trabalho tem como proposta o desenvolvimento de uma abordagem para 
+garantir que o tempo de vida da bateria de sistemas embarcados possa durar o 
+tempo desejado pela aplicação com os \deadlines{} atendidos de, no mínimo, tarefas
+essenciais especificadas previamente pelo usuário. Para isso, nosso 
+escalonador deve realizar diminuições controladas dos níveis de 
+\qos{} da aplicação com objetivo de economizar energia quando é detectada 
+que a carga da bateria não será suficiente para atender o tempo especificado 
+pela aplicação. Neste trabalho, o controle da diminuição dos níveis de 
+\qos{} da aplicação é inspirado nos mecanismos da computação 
+imprecisa~\cite{Liu:1994}, que divide as tarefas em duas partes: uma parte
+obrigatória e outra parte opcional. O escalonador proposto é baseado no 
+algoritmo de escalonamento \textsc{EDF} (\emph{Earliest Deadline First}) 
+com objetivo de atender os \deadlines{} das partes obrigatórias. 
+
+A seção~\ref{sc:proposta:imprecisa} descreve a
+computação imprecisa e a inspiração para a energia. 
+Seção~\ref{sc:proposta:edf} aborda o algoritmo de escalonamento \textsc{EDF}. 
+Seção~\ref{sc:proposta:proposta} apresenta a proposta com maiores
+detalhes, bem como o algoritmo do escalonador e as equações que devem ser
+respeitadas para as tarefas serem escalonáveis.
+%Seção~\ref{sc:proposta:estimativa} descreve a proposta da estimativa do
+%consumo de energia e os testes em tempo de execução para determinar se a energia
+%restante é suficiente.
+
+\subsection{Computação Imprecisa}
+\label{sc:proposta:imprecisa}
+
+A computação imprecisa é uma técnica de escalonamento originalmente proposta
+para atender os requisitos temporais das tarefas de tempo real através de
+diminuições controladas dos níveis de \qos{}. 
+%As tarefas imprecisas são divididas em duas partes: uma parte obrigatória e outra parte opcional. 
+O controle dos
+níveis de \qos{} realizado pela computação imprecisa diminui a qualidade do
+resultado, não executando as partes opcionais, com objetivo de garantir que
+nenhum \deadline{} de execução das partes obrigatórias seja perdido. 
+
+Com a divisão de cada tarefa em duas partes, a computação imprecisa une a 
+computação de tempo real e as técnicas de ``melhor esforço'' para, 
+respectivamente, a parte obrigatória e a parte opcional.
+A parte obrigatória das tarefas gera resultados imprecisos que
+refletem o mínimo de \qos{} para garantir que esses resultados sejam
+úteis. Os resultados imprecisos têm suas qualidades elevadas quando as partes
+opcionais são executadas, com a geração de resultados precisos. 
+
+%
+%- Explicar sobre os estados possíveis das partes das tarefas. Figura~\ref{fig:diagramaAutomatosFinitos} é um diagrama ...
+%
+A figura~\ref{fig:diagramaAutomatosFinitos} apresenta as transições de estados
+da parte obrigatória e da parte opcional. O estado \textit{Esperando} indica as
+tarefas que esperam por um novo período. O estado \textit{Pronto} indica as
+tarefas que estão prontas para executarem e aguardam serem escalonadas. A 
+tarefa no estado \textit{Executando} é aquela que está utilizando o processador.
+Nessa figura é possível observar que a
+diferença entre as transições de estados da obrigatória e da opcional é do 
+estado \textit{Pronto} para o estado \textit{Esperando}. Essa diferença indica 
+que a parte opcional pode ser cancelada antes mesmo de ser executada, pois ela
+estaria no estado \textit{Pronto} e não no estado \textit{Executando}. Além
+disso, a parte opcional pode ser cancelada durante a execução, ou seja, do
+estado \textit{Executando} para o estado \textit{Esperando}, mesmo que não tenha
+terminado a sua execução. A parte obrigatória só pode ir para o estado 
+\textit{Esperando} depois que passar pelo estado \textit{Executando} e 
+finalizar a execução no seu período.
+
+
+\begin{figure}[!ht]
+\centering
+     {\includegraphics[scale=0.45]{figuras/diagramaAutomatosFinitos.eps}}
+     \caption{Transições de estados da parte obrigatória e da parte opcional.}
+     \label{fig:diagramaAutomatosFinitos}
+\end{figure}
+
+Na literatura existem diversas possibilidades de aplicações da computação
+imprecisa, como, por exemplo, o processamento de imagens. Neste exemplo, as
+partes obrigatórias gerariam uma imagem com uma qualidade mínima aceitável,
+enquanto que as partes opcionais aumentariam a qualidade dessa imagem.
+Os algoritmos ``a qualquer tempo'' são outras possibilidades de aplicações 
+para a
+computação imprecisa, que incluem: os métodos numéricos, os cálculos de raízes, 
+os cálculos de polinômios, as aproximações numéricas, e entre outros. Esses
+algoritmos, normalmente, implementam métodos iterativos que refinam os
+resultados depois de cada iteração. Nesse caso, quanto mais tempo o algoritmo é
+executado, melhor é a qualidade do resultado. As aplicações de
+controle\&conforto são outras possibilidades para a computação imprecisa.
+
+%- Explicar a possibilidade para energia na figura~\ref{fig:energiaComputacaoImprecisa}.
+
+A partir desse conceito de divisão de cada tarefa em parte obrigatória e parte
+opcional, a computação imprecisa mostra-se favorável para a utilização em nossa
+proposta em relação à energia. A figura~\ref{fig:energiaComputacaoImprecisa}
+apresenta uma tarefa que consumiria \textsc{X} unidades de energia
+obrigatoriamente, e quando
+dividida em parte obrigatória (\textsc{Y} unidades de energia) e parte opcional
+(\textsc{Z} unidades de energia) permite a economia de 
+\textsc{Z} unidades de energia caso a parte opcional não seja executada.
+
+\begin{figure}[!ht]
+\centering
+     {\includegraphics[scale=0.58]{figuras/energiaComputacaoImprecisa.eps}}
+     \caption{Computação imprecisa em relação à energia consumida.}
+     \label{fig:energiaComputacaoImprecisa}
+\end{figure}
+
+
+
+\subsection{\textsc{EDF}}
+\label{sc:proposta:edf}
+
+
+%- Utilização do algoritmo EDF para atender as partes obrigatórias. (Explicar sobre o EDF) (Posso colocar figura)
+
+O algoritmo \textsc{EDF} (\emph{Earliest Deadline First})~\cite{Liu:1973} é um
+mecanismo de escalonamento tempo real baseado em prioridades dinâmicas e muito
+utilizado na literatura. \textsc{EDF}
+distribui maiores prioridades para as tarefas com \deadlines{} mais curtos.
+Em tempo de projeto, um teste de escalonabilidade avalia a possibilidade de
+alguma tarefa perder o seu respectivo \deadline{}. Em tempo de execução, um
+escalonador preemptivo escolhe a tarefa em estado \textit{Pronto} de mais alta
+prioridade.
+
+%O modelo de tarefas para esse teste é: tarefas periódicas e independentes com o \deadline{} igual ao período.
+Um teste de escalonabilidade exato para o algoritmo \textsc{EDF} é apresentado
+a seguir. O sistema de tempo real considerado contém $n$ tarefas periódicas e
+independentes, {\Large $\tau$} = $\{\tau_0,\tau_1,...,\tau_{n-1}\}$. Cada
+$\tau_i$ é caracterizado por três parâmetros, $(P_i, D_i, C_i)$, onde, $P_i$ é o
+período em que a tarefa $i$ é escalonada, $D_i$ é o prazo (\emph{deadline})
+máximo de conclusão relativo ao instante da liberação da 
+tarefa $i$ e $C_i$ é o tempo de 
+execução da tarefa $i$ no pior caso (incluído tempos de espera pela inversão de
+prioridades). Para este teste é suposto 
+que $\forall\tau_i$, $D_i=P_i$ . 
+A utilização $U_i$ de uma tarefa $i$ em termos de processamento é representada
+pela equação (\ref{eq:edf:u}).
+
+\begin{equation}
+U_i = \frac{C_i}{D_i}
+\label{eq:edf:u}
+\end{equation}
+
+
+%\[ U_i = \frac{C_i}{D_i} \]
+
+A capacidade de um processador é definida como 1, ou seja, 100\%. Um
+sistema com $\omega$ processadores possui capacidade $\omega$. Dessa forma,
+para as tarefas serem escalonáveis no algoritmo \textsc{EDF}, o somatório das
+utilizações de todas as tarefas deve ser menor ou igual a capacidade dos 
+processadores, ou seja, 
+
+\begin{equation}
+\sum_{i=1}^n \left (\frac{C_i}{D_i} \right) \le \omega
+\label{eq:edf:formalizacao}
+\end{equation}
+
+%\[ \sum_{i=1}^n \left (\frac{C_i}{D_i} \right) \le \omega \]
+
+onde $\omega = 1$ para um sistema com mono-processador. Caso 
+$\sum_{i=1}^n U_i > \omega$, o processador estará sobrecarregado e as
+tarefas não são escalonáveis nesse algoritmo.
+
+%\input{figuras/teste.tex}
+
+
+\subsection{Escalonador}
+\label{sc:proposta:proposta}
+
+%- Deixar claro: caso seja constatado a falta de energia para atender o tempo de duração do sistema, a proposta é não executar as partes opcionais, somente as partes obrigatórias. No momento em que a energia torna-se suficiente, as partes opcionais voltam a ser executadas no devido tempo. Explicar a figura~\ref{fig:energiaTempo}.
+
+O nosso escalonador baseado no algoritmo \textsc{EDF} garante a execução das 
+partes obrigatórias com os 
+seus respectivos \deadlines{} atendidos sem levar em consideração o nível de energia 
+do sistema. A execução das partes opcionais, entretanto, não é garantida. Nesta 
+proposta, as partes opcionais são executadas somente se os \deadlines{} das partes
+obrigatórias e o tempo de duração da bateria desejado são sustentados. 
+A figura~\ref{fig:energiaTempo} representa as tarefas que atendem ao 
+parâmetro de energia (tempo de duração do sistema) e as tarefas que atendem 
+ao parâmetro do tempo (\deadline{} das partes obrigatórias). A intersecção dessas
+representações indica as tarefas que podem ser executadas e que serão 
+atendidas em relação aos dois parâmetros desejados (energia e tempo). 
+As tarefas fora dessa intersecção não são escalonáveis neste algoritmo. 
+
+
+\begin{figure}[!ht]
+\centering
+     {\includegraphics[scale=0.5]{figuras/energia.eps}}
+     \caption{Intersecção entre a energia e o tempo.}
+     \label{fig:energiaTempo}
+\end{figure}
+
+
+%- Objetivo não é apenas economizar energia, mas otimizar a funcionalidade do sistema. Executar partes opcionais... 
+
+O objetivo deste escalonador não é apenas economizar a energia consumida no 
+sistema, pois, caso contrário, a técnica seria simplesmente nunca executar 
+as partes opcionais. A partir disso, o objetivo é atender o tempo especificado 
+pela aplicação
+com a execução dentro dos \deadlines{} das partes obrigatórias e com a execução do
+máximo possível das partes opcionais, ou seja, otimizar a funcionalidade do
+sistema. 
+
+%- Formalizar o algoritmo de escalonamento. (diagrama de sequencia seria interessante)
+
+O algoritmo do escalonador proposto neste trabalho é apresentado na
+figura~\ref{fig:algoritmo}. Neste algoritmo, $\pi$ é o intervalo entre 
+medições da carga da bateria que pode ser especificado pelo programador da 
+aplicação e que deve levar em consideração que cada medição também 
+consome energia para ser realizada. Esse intervalo depende do
+estado de energia da bateria constatado na última medição. Caso a última medição
+constate que existe energia suficiente e que ultrapasse um determinado \thr{}, o
+valor do intervalo será maior, pois o sistema não necessita que sejam realizadas
+medições freqüentes. Entretanto, caso a última medição constate que a energia
+existente não é suficiente para atender o tempo de duração especificado, as
+medições devem ser mais freqüentes, pois tarefas opcionais estão 
+sendo descartadas.
+
+%\begin{center}  
+%$D$ = $\left [ \frac{n-1}{n+1}N\sqrt{2} \right]$
+%\end{center}
+
+\begin {scriptsize}
+\begin {center}
+ \rule[0.1ex]{35em}{0.2ex}
+\end {center}
+
+\noindent 1: {\textbf{A cada tarefa que entra no estado de \textit{Pronto}:}}\\
+2:\indent calcula o novo \deadline{} absoluto de acordo com o tempo decorrido\\
+3:\indent calcula a prioridade baseada no \deadline{} absoluto \\
+4:\indent adiciona na fila de acordo com a prioridade calculada\\
+5:\\
+\noindent 6: {\textbf{A cada $\pi$ unidades de tempo:}}
+\hfill{/* $\pi$ especificado pelo programador e depende do estado de energia */}\\
+7:\indent afere a bateria\\
+8:\indent verifica se existe energia suficiente para atender o tempo desejado pela aplicação\\
+9:\\
+\noindent 10: {\textbf{A cada reescalonamento:}}\\
+11:\indent seleciona na fila a tarefa com estado \textit{Pronto} de mais alta prioridade \\
+12:\indent \textbf{SE}, tarefa é \emph{hard} de tempo real,\\
+13:\indent \hspace{2em} executa a tarefa selecionada\\
+14:\indent \textbf{SENAO}, 
+\hfill{/* tarefa é melhor esforço */}\\
+15:\indent \hspace{2em} \textbf{SE}, existe energia suficiente para atender o
+tempo de duração requerido,\\
+16:\indent \hspace{4em} executa a tarefa selecionada\\
+17:\indent \hspace{2em} \textbf{SENAO}, 
+\hfill{/* bateria não possui energia suficiente */}\\
+18:\indent \hspace{4em} executa a gerência de energia\\
+19:\\
+
+\begin {center}
+ \rule[0.1ex]{35em}{0.2ex}
+\end {center}
+
+\begin {figure}[!h] 
+\centering 
+\caption {Algoritmo do escalonador proposto.}
+\label {fig:algoritmo}
+\end {figure}
+\end {scriptsize}
+
+%\input{figuras/algoritmo.tex}
+
+%A formalização matemática do escalonador pode ser observada com relação ao tempo
+%e à energia, respectivamente, na figura~\ref{fig:formalizacaoTempo} e na 
+%figura~\ref{fig:formalizacaoEnergia}.
+
+Nós apresentamos algumas equações que verificam em tempo de projeto e 
+em tempo de execução se as tarefas são escalonáveis no nosso algoritmo. 
+As equações em tempo de projeto são descritas com maiores detalhes na
+seção~\ref{sc:proposta:proposta:projeto}. A
+seção~\ref{sc:proposta:proposta:execucao} apresenta as equações em tempo de 
+execução.
+
+\subsubsection{Em Tempo de Projeto}
+\label{sc:proposta:proposta:projeto}
+
+Como o escalonador proposto é baseado no algoritmo \textsc{EDF}, é possível
+seguir a mesma lógica para o cálculo da escalonabilidade das tarefas em tempo de
+projeto com algumas adaptações. Supondo que o sistema de tempo real considerado 
+possua $n$ tarefas periódicas e independentes, {\Large $\tau$} =
+$\{\tau_0,\tau_1,...,\tau_{n-1}\}$, sendo $\forall\tau_i$, $D_i=P_i$ . No 
+modelo da computação imprecisa, cada $\tau_i$ é dividida em parte obrigatória
+e parte opcional com tempos de execuções nos piores casos, respectivamente, de 
+$\mu_i$ e $\theta_i$. Com isso, o tempo total de execução de $\tau_i$ no 
+pior caso é $C_i = \mu_i + \theta_i$ . 
+
+Para atender o nosso objetivo em relação aos \deadlines{} das 
+partes obrigatórias, a equação (\ref{eq:escalonador:m}) deve ser respeitada
+
+\begin{equation}
+\sum_{i=1}^n \left (\frac{\mu_i}{D_i} \right) + \sigma \le \omega
+\label{eq:escalonador:m}
+\end{equation}
+
+%\[ \sum_{i=1}^n \left (\frac{\mu_i}{D_i} \right) + \sigma \le \omega \]
+
+onde $\omega = 1$ para um sistema com mono-processador, 
+e $\sigma$ representa o pior caso de interferências, que inclui:
+tempo gasto no sistema operacional, nas trocas de contexto, no próprio algoritmo
+de escalonamento, entre outros. 
+A equação (\ref{eq:escalonador:m}) deve ser atendida para as tarefas serem 
+escalonáveis em relação aos \deadlines{} das partes obrigatórias, 
+caso contrário 
+($\sum_{i=1}^n \left (\frac{\mu_i}{D_i} \right) + \sigma > \omega$), 
+o processador estará sobrecarregado.
+
+Com a inclusão do tempo de execução da parte opcional na equação 
+(\ref{eq:escalonador:m}), podemos
+determinar se as tarefas, como um todo, serão executadas (parte obrigatória e
+parte opcional). Entretanto, é importante observar que isso não é um requisito 
+fundamental no nosso algoritmo e será relevante, apenas, quando a equação
+(\ref{eq:escalonador:m}) é válida, caso contrário, as tarefas já não seriam 
+escalonáveis. 
+
+\begin{equation}
+\sum_{i=1}^n \left (\frac{\mu_i + \theta_i}{D_i} \right) + \sigma \le \omega
+\label{eq:escalonador:mo}
+\end{equation}
+
+
+%\[ \sum_{i=1}^n \left (\frac{\mu_i + \theta_i}{D_i} \right) + \sigma \le \omega \]
+
+Quando a equação (\ref{eq:escalonador:mo}) for respeitada, as tarefas 
+são 100\% escalonáveis (parte obrigatória e parte opcional) em relação aos 
+seus \deadlines{}. 
+Caso contrário, uma certa fração $\chi$ das partes opcionais é descartada. A
+equação (\ref{eq:escalonador:x}) apresenta como encontrar a fração $\chi$. 
+
+\begin{equation}
+\chi = \frac{\sum_{i=1}^n \left (\frac{\mu_i + \theta_i}{D_i} \right)
++ \sigma - \omega}{\sum_{i=1}^n \left (\frac{\theta_i}{D_i}
+\right)}
+\label{eq:escalonador:x}
+\end{equation}
+
+%\[ \chi = \frac{\sum_{i=1}^n \left (\frac{\mu_i + \theta_i}{D_i} \right)
+%+ \sigma - \omega}{\sum_{i=1}^n \left (\frac{\theta_i}{D_i}
+%\right)} \] 
+
+%\[ \chi = \frac{\left (\sum_{i=1}^n \left (\frac{\mu_i + \theta_i}{D_i} \right)
+%+ \sigma - \omega \right ) \times 100}{\sum_{i=1}^n \left (\frac{\theta_i}{D_i}
+%\right)} \] 
+
+O objetivo em relação à energia pode ser alcançado seguindo o mesmo tipo de
+raciocínio lógico que foi realizado até o presente momento, mas tendo em vista a
+taxa do consumo de energia das tarefas. O consumo de energia
+de $\tau_i$ no pior caso, $E_i$, é dado pela soma dos consumos de energia da
+parte obrigatória e da parte opcional nos piores casos, respectivamente, 
+$E_{\mu i}$ e $E_{\theta i}$ , ($E_i = E_{\mu i} + E_{\theta i}$). O número
+máximo possível de execuções, $\eta_i$, de $\tau_i$ no tempo 
+requerido pela aplicação, $T_t$, é dado pela divisão entre o tempo requerido 
+e o intervalo de execução de $\tau_i$, ou seja, $\eta_i = \frac{T_t}{D_i}$ .
+
+Com o intuito de atender, no mínimo, as partes obrigatórias das tarefas, temos a
+equação (\ref{eq:escalonador:en}) que indica se o conjunto das tarefas será
+escalonável em relação à energia. 
+
+\begin{equation}
+\sum_{i=1}^n \left (\frac{E_{\mu i} \times \eta_i}{E_t} \right) + \epsilon \le 1
+\label{eq:escalonador:en}
+\end{equation}
+
+
+%\[ \sum_{i=1}^n \left (\frac{E_{\mu i} \times \eta_i}{E_t} \right) + \epsilon \le
+%1 \]
+
+Onde $E_t$ é a energia total do sistema (especificação da bateria), ou seja, a
+capacidade da bateria, $\epsilon$ representa o pior caso do consumo de energia
+de diferentes fatores, como, a energia consumida pelo sistema operacional, pelas
+trocas de contexto, pelo próprio algoritmo de escalonamento, entre outros. A
+capacidade do sistema em relação à energia é definida como 1, ou seja, 100\%. 
+Substituindo $\eta_i$ de $\tau_i$ na equação (\ref{eq:escalonador:en}) temos a
+equação (\ref{eq:escalonador:e}). 
+%$\varrho = 1$
+
+\begin{equation}
+\sum_{i=1}^n \left (\frac{E_{\mu i} \times T_t}{D_i \times E_t} \right) + \epsilon \le 1
+\label{eq:escalonador:e}
+\end{equation}
+
+
+%\[ \sum_{i=1}^n \left (\frac{E_{\mu i} \times T_t}{D_i \times E_t} \right) + \epsilon \le
+%1 \]
+
+As tarefas são escalonáveis em relação à energia no nosso algoritmo se a 
+equação (\ref{eq:escalonador:e}) for atendida. 
+Caso contrário ($\sum_{i=1}^n \left (\frac{E_{\mu i}
+\times T_t}{D_i \times E_t} \right) + \epsilon > 1$), o sistema não 
+atenderá ao tempo de duração requerido pela aplicação para esse conjunto de 
+tarefas.
+
+A inclusão da energia consumida pelas partes opcionais no pior caso na equação 
+(\ref{eq:escalonador:e}) possibilita que verifiquemos se as tarefas, 
+como um todo (parte obrigatória e
+parte opcional), são executadas. Como já explicado anteriormente, isso não é um
+requisito obrigatório e a equação (\ref{eq:escalonador:eo}) só deve ser 
+calculada se a equação (\ref{eq:escalonador:e}) é respeitada 
+(partes obrigatórias atendidas).
+
+\begin{equation}
+\sum_{i=1}^n \left (\frac{\left (E_{\mu i} + E_{\theta i} \right ) \times T_t}{D_i
+\times E_t} \right) + \epsilon \le 1
+\label{eq:escalonador:eo}
+\end{equation}
+
+
+%\[ \sum_{i=1}^n \left (\frac{\left (E_{\mu i} + E_{\theta i} \right ) \times T_t}{D_i
+%\times E_t} \right) + \epsilon \le 1 \]
+
+Caso a equação (\ref{eq:escalonador:eo}) seja respeitada, todas as partes 
+obrigatórias e opcionais das 
+tarefas são executadas em relação à energia do sistema. Caso contrário, uma 
+determinada fração $\gamma$ das partes opcionais não será executada, pois o 
+sistema
+não atenderia ao tempo de duração desejado pela aplicação. A equação
+(\ref{eq:escalonador:y})
+fornece a fração de partes opcionais descartadas em relação à energia.
+
+\begin{equation}
+\gamma = \frac{\sum_{i=1}^n \left (\frac{ \left (E_{\mu i} + E_{\theta i} \right ) \times T_t}{D_i \times E_t} \right) + \epsilon - 1 }{\sum_{i=1}^n \left (\frac{E_{\theta i} \times T_t}{D_i \times E_t} \right)}
+\label{eq:escalonador:y}
+\end{equation}
+
+
+%\[ \gamma = \frac{\sum_{i=1}^n \left (\frac{ \left (E_{\mu i} + E_{\theta i} \right ) \times T_t}{D_i \times E_t} \right) + \epsilon - 1 }{\sum_{i=1}^n \left (\frac{E_{\theta i} \times T_t}{D_i \times E_t} \right)} \] 
+
+%\[ \gamma = \frac{\left (\sum_{i=1}^n \left (\frac{ \left (E_{\mu i} + E_{\theta i} \right ) \times T_t}{D_i \times E_t} \right) + \epsilon - 1 \right ) \times 100}{\sum_{i=1}^n \left (\frac{E_{\theta i} \times T_t}{D_i \times E_t} \right)} \] 
+
+Neste algoritmo, o objetivo é atender os dois parâmetros em relação ao tempo e
+à energia, respectivamente, os \deadlines{} das partes obrigatórias e o tempo de
+duração da bateria especificado pela aplicação. Com isso, 
+(\ref{eq:escalonador:te}) é a equação completa do nosso escalonador que deve 
+ser verdadeira para as tarefas serem escalonáveis.
+
+\begin{equation}
+\left [ \sum_{i=1}^n \left (\frac{\mu_i}{D_i} \right) + \sigma \le \omega
+\right ]  \wedge  \left [ \sum_{i=1}^n \left (\frac{E_{\mu i} \times T_t}{D_i \times E_t}
+\right) + \epsilon \le 1 \right ]
+\label{eq:escalonador:te}
+\end{equation}
+
+
+%\[ \left [ \sum_{i=1}^n \left (\frac{\mu_i}{D_i} \right) + \sigma \le \omega
+%\right ]  \wedge  \left [ \sum_{i=1}^n \left (\frac{E_{\mu i} \times T_t}{D_i \times E_t}
+%\right) + \epsilon \le 1 \right ] \]
+
+Caso a equação (\ref{eq:escalonador:te}) seja respeitada, as partes 
+obrigatórias das tarefas tem as 
+execuções garantidas no nosso escalonador em relação aos dois parâmetros
+desejados neste trabalho. A fração máxima $\lambda$ possível de
+tarefas opcionais perdidas em relação aos dois parâmetros pode ser obtida
+através da equação (\ref{eq:escalonador:l}).
+
+\begin{equation}
+\lambda = \max \left ( \chi , \gamma  \right)
+\label{eq:escalonador:l}
+\end{equation}
+
+
+%\[ \lambda = \max \left ( \chi , \gamma  \right)\]
+
+Cada $\tau_i$ nesta abordagem com os dois parâmetros (tempo e energia) é 
+caracterizado neste modelo por oito parâmetros, $(P_i, D_i, C_i, \mu_i,
+\theta_i, E_i, E_{\mu i}, E_{\theta i})$, mencionados anteriormente. 
+
+
+
+%\input{figuras/tempo.tex}
+%\input{figuras/energia.tex}
+
+
+%\subsection{Estimativa do Tempo de Duração do Sistema}
+%\label{sc:proposta:estimativa}
+
+\subsubsection{Em Tempo de Execução}
+\label{sc:proposta:proposta:execucao}
+
+%- Proposta para a estimativa do tempo restante de duração da bateria. Utilizo uma técnica para estimar o tempo restante da bateria. Estimativa do tempo restante na figura~\ref{fig:energiaTempoRestante}.
+
+Com objetivo de prover \qos{} em termos de energia e aproveitar melhor os
+recursos com a utilização das partes opcionais é necessário verificar 
+periodicamente, em tempo de execução, se o
+tempo de duração do sistema requerido pela aplicação, $T_{t \kappa}$, no
+instante $\kappa$ pode ser alcançado. Para isso, $T_{t \kappa}$ é recalculado 
+no instante $\kappa$ de acordo com o tempo decorrido. A energia
+total do sistema (carga da bateria), $E_{t \kappa}$, também, deve ser 
+recalculada no instante $\kappa$ . As plataformas dos sistemas embarcados,
+normalmente, provêm mecanismos para obter a carga da bateria. Os novos valores
+podem realimentar a equação (\ref{eq:escalonador:ek}) com o intuito de 
+verificar se $T_{t \kappa}$ pode ser atendido. 
+
+\begin{equation}
+\sum_{i=1}^n \left (\frac{E_{\mu i} \times T_{t \kappa}}{D_i \times E_{t \kappa}}
+\right) + \epsilon \le 1
+\label{eq:escalonador:ek}
+\end{equation}
+
+
+%\[ \sum_{i=1}^n \left (\frac{E_{\mu i} \times T_{t \kappa}}{D_i \times E_{t \kappa}}
+%\right) + \epsilon \le 1 \]
+
+Caso a equação (\ref{eq:escalonador:ek}) seja atendida, todas as partes das 
+tarefas são executadas (partes obrigatórias e partes opcionais),
+pois essa equação indica que existe energia suficiente para atender 
+$T_{t \kappa}$. Caso contrário, as partes opcionais serão descartadas. O
+escalonador chama um gerente do consumo de energia no tempo em que as partes
+opcionais estariam em execução, aproveitando o tempo ocioso do sistema para
+economizar energia. Quando for constatado que a equação
+(\ref{eq:escalonador:ek}) volta a ser verdadeira, as partes opcionais das
+tarefas voltam a ser executadas.
+
+
+%Um monitor lê a carga da bateria
+%periodicamente e estima o tempo de duração da bateria considerando que a
+%velocidade de descarga é constante. Apesar desta técnica apresentar uma baixa
+%precisão, uma vez que a velocidade de descarga não é constante em todos os
+%casos, ela é uma solução com um baixo \ov{} para a aplicação. 
+%A figura~\ref{fig:formalizacaoEstimativaEnergia} apresenta a formalização 
+%matemática da estimativa de energia para o teste em tempo de execução.
+
+
+
+%\input{figuras/estimativa.tex}
+
+%Será que precisa a figura~\ref{fig:energiaTempoRestante}.
+
+%\begin{figure}[!ht]
+%\centering
+%     {\includegraphics[scale=0.5]{figuras/energiaTempoRestante.eps}}
+%     \caption{Tempo restante}
+%     \label{fig:energiaTempoRestante}
+%\end{figure}

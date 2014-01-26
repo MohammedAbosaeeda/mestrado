@@ -1,0 +1,25 @@
+
+\begin{tabular}{|r|c|}
+\cline{2-2}
+\multicolumn{1}{c|}{} & SW footprint (code+data) \\
+\hline
+PABX controller       & 254 bytes \\
+EPOS                  & 145 bytes\\
+EPOS w/o comp. mgmt.  & ~54 bytes\\
+\hline
+%\cline{2-2}
+\multicolumn{1}{c|}{} & HW footprint (Avg. rsc. use) \\
+\hline
+RTSNoC router      & 233\% \\
+Proc. node         & 254\% \\
+IO. node           & 145\% \\
+DTMF generator     & ~54\% \\
+425 Hz generator   & ~54\% \\
+Commutation matrix & ~54\% \\
+\hline
+
+
+\end{tabular}
+
+
+

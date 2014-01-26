@@ -1,0 +1,64 @@
+\begin{thebibliography}{12}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{DOI~\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{DOI~\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem[{Cesar(2005)}]{Cesar:2005}
+Cesar P (2005) A graphics software architecture for high-end interactive tv
+  terminals. PhD thesis, Helsinky University of Technology
+
+\bibitem[{Committee(2003)}]{DASE}
+Committee ATS (2003) ATSC: DTV Application Software Environment Level 1 - Part
+  1: Introduction, Architecture, and Common Facilities
+
+\bibitem[{Crampton(2006)}]{Crampton:2006}
+Crampton T (2006) In the developing world, broadband spans the digital divide.
+  On-line, [http://www.iht.com/articles/2006/12/03/technology/btdivide.php]
+  (Jan 30, 2007)
+
+\bibitem[{Duncan(2006)}]{Duncan:2006}
+Duncan G (2006) Dsl dominates global broadband. On-line,
+  [http://news.digitaltrends.com/article11921.html] (Jan 30, 2007)
+
+\bibitem[{Hong-Guang and Shi-Bao(2004)}]{Guang:2004}
+Hong-Guang Z, Shi-Bao Z (2004) An extensible digital television middleware
+  architecture based on hardware abstraction layer. In: Proceedings of the IEEE
+  International Conference on Multimedia and Expo, Taipei, Taiwan, vol~1, pp
+  711--714
+
+\bibitem[{Institute(2003)}]{MHP}
+Institute ETS (2003) Digital Vídeo Broadcasting: Multimedia Home Platform
+  Specification 1.1.1. France, v.1.1.2. rev.1. edn
+
+\bibitem[{Institute(2005)}]{GEM}
+Institute ETS (2005) Digital Vídeo Broadcasting: Globaly Executable MHP
+  Specification 1.0.2. France
+
+\bibitem[{Monte(2006)}]{Monte:2006}
+Monte F (2006) Brasil tem 4,7 mil conexões de banda larga, mas taxa de
+  penetração é de 2,2\%. On-line,
+  [http://wnews.uol.com.br/site/noticias/materia.php?id\_secao=4\&id\_conteudo%
+=5853] (Jan 30, 2007)
+
+\bibitem[{PUC-Rio(2006)}]{NCL}
+PUC-Rio LT (2006) Main Profile Specification of NCL 2.3
+
+\bibitem[{PUC-Rio(2007)}]{GINGA}
+PUC-Rio LT (2007) Middleware ginga. On-line, [http://www.ginga.org.br/] (Jan
+  30, 2007)
+
+\bibitem[{Rayside et~al(1999)Rayside, Mamas, and Hons}]{Rayside:1999}
+Rayside D, Mamas E, Hons E (1999) Compact java binaries for embedded systems.
+  In: Proceedings of the 9th NRC/IBM Centre for Advanced Studies Conference,
+  Toronto, Canada, pp 1--14
+
+\bibitem[{Union(2005)}]{ITU-T:J.202}
+Union IT (2005) Harmonization of procedural content formats for interactive TV
+  applica tions
+
+\end{thebibliography}

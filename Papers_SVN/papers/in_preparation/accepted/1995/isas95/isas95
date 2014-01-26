@@ -1,0 +1,14 @@
+#!/bin/csh
+acsun < isas95.txt	>isas95.tex
+
+platex isas95.tex
+rm -f isas95.tex
+if ($1) then
+  if ($2) then
+    dvips -t letter -p $1 -n $2 -o isas95.ps isas95.dvi
+  else
+    dvips -t letter -p $1 -o isas95.ps isas95.dvi
+  endif
+else
+  dvips -t letter -o isas95.ps isas95.dvi
+endif

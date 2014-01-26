@@ -1,0 +1,105 @@
+\section{Introdução}
+
+%Análise estática
+Tradicionalmente, o desempenho de tarefas de tempo-real é verificada por
+medições do tempo de execução de um conjunto de casos de testes. Definir os
+cenários de execução de pior caso é frequentemente difícil, e a definição de
+um conjunto de testes realísticos é uma tarefa pesada~\cite{Wilhelm:2008}. Neste
+cenário, as ferramentas de análise estática, como o
+\boundt~\cite{Tidorum:BoundT}, eliminam a necessidade deste tipo de configuração
+para os testes.
+
+O \boundt~é uma ferramenta de análise estática de código de máquina desenvolvido
+pela Tidorum Ltd. Através do \boundt~é possível computar limites superiores
+(\textit{upper bounds}) de tempo de execução no pior caso (WCET -
+\textit{Worst-Case Execution Time}) e de uso de pilha de tarefas de tempo-real.
+Além destes limites, a ferramenta permite extrair grafos de controle de fluxo
+(CFG) e árvores de chamadas dos programas analisados. Neste trabalho,
+apresentaremos um estudo de caso do emprego da ferramenta \boundt~na análise de
+tarefas de tempo-real.
+
+A Figura~\ref{fig:context} apresenta uma visão geral do funcionamento do
+\boundt.
+%Entradas
+Como uma ferramenta que realiza analise de código binário, o principal dado de
+entrada do \boundt~é um arquivo binário contendo código de máquina, totalmente
+ligado (\textit{linked}), em formato ELF. Informações acerca do código que gerou
+este binário são extraídos pelo \boundt~a partir de informações de depuração
+presentes da imagem ELF. Adicionalmente, pode ser dado como entrada ao
+\boundt~um arquivo de anotações contendo dados complementares para viabilizar a
+análise de trechos de código para os quais faltam informações suficientes para
+determinar cenários de pior caso.
+%Saídas
+As saídas do \boundt, assim como a interface para sua execução, é em modo texto.
+Isto permite uma fácil integração com outras ferramentas e sistemas, podendo ter
+seus resultados facilmente analisados por um parser externo. No exemplo da
+Figura~\ref{fig:context} estão representados alguns dos dados de saída da
+ferramenta: grafo de fluxo do programa analisado, grafo de chamadas de funções e
+WCET para o programa (\texttt{main}) e para funções individuais. Outra
+informação importante derivada da análise estática realizada pelo \boundt~é a
+análise de profundidade de pilha. Abaixo um exemplo do resultado emitido pelo
+\boundt~ao analisar um programa simples. O resultado foi um WCET de 12.680
+ciclos (linha 1) e uma profundidade máxima da pilha de 44 bytes (linha 2).
+\begin{verbatim}
+1. Wcet:test:main.c:main:6-24:12680
+2. Stack:test:main.c:main:6-24:SP:44
+\end{verbatim}
+
+\fig{context}{Visão geral do funcionamento do
+\boundt~\cite{Tidorum:BoundT}.}{width=0.5\columnwidth}
+
+O \boundt~foca especialmente em processadores embarcados de pequeno e médio
+porte. Ele permite modelar o comportamento de pipelines mas, atualmente, não
+modela o comportamento real de caches ou outros mecanismos dinâmicos, o que leva
+a resultados conservadores (superestimados) para tais características.
+Atualmente, as arquiteturas suportadas incluem a família de processadores de
+sinais digitais ADSP21020 da Analog Devices, ARM7-TDMI, AVR 8-bits da Atmel,
+8051 da Intel, H8/300 da Renesas e Sparc V7/ERC32.
+
+Como o problema da análise estática da execução de um programa é, em geral,
+indecidível, os programas submetidos à análise pelo \boundt~não podem ter
+recursão e precisam ter uma estrutura de laços reduzível.
+%Análise automática de laços
+O \boundt~emprega métodos sofisticados de análise de fluxo de dados e modelagem
+aritmética para encontrar as variáveis vinculadas aos contadores de laços,
+definindo os limites de valores iniciais e finais, permitindo determinar o
+número máximo de vezes que um laço baseado em contador poderá ser repetido.
+
+%Independência de linguagem de programação
+O \boundt~analisa o código executável, logo, ele é independente da linguagem de
+programação. Ele é capaz de tratar, inclusive, programas que utilizam mais de
+uma linguagem. Em alguns casos, o \boundt~pode ser sensível ao compilador
+utilizado. Alguns compiladores usam bibliotecas com sequências de chamada de
+funções que fogem ao padrão, ou ``idiomas'' especiais para estruturas como
+switch/case. O \boundt~é, geralmente, compatível com o compilador mais utilizado
+para cada plataforma que suporta.
+
+%Código-fonte é opcional
+A análise de código-fonte pode ser utilizada pelo \boundt~para facilitar a
+especificação dos trechos do programa que se pretende utilizar, mas não é sempre
+necessário. Para o Gnu GCC, por exemplo, o \boundt~pode extrair as informações
+relativas ao código-fonte do binário ligado em formato ELF contendo informações
+de depuração.
+
+%Anotações permitem controlar a análise
+Eventos raros, como falhas de hardware, podem ser excluídos do cenário de pior
+caso através de anotações feitas pelo usuário. Estas anotações podem definir
+previamente valores de variáveis, limites de laços, e o número de vezes que uma
+chamada específica é executada. Estas anotações ainda suportam a análise de
+programas complexos para os quais a análise estática automática não é possível.
+As anotações são feitas em arquivos de texto em separado. Modificações nestas
+anotações permitem a realização da análise em cenários diferentes permitindo,
+por exemplo, encontrar os WCET de um programa para diferentes entradas.
+
+Este artigo foca em identificar cenários em que a análise automática do
+\boundt~não consegue determinar o WCET de aplicações automaticamente e analisar
+o conjunto de anotações capazes de resolver estes casos indeterminados. Para
+isso, primeiramente analisamos um exemplo constante da documentação da
+ferramenta. Posteriormente, classificamos e selecionamos aplicações integrantes
+do \textit{benchmark} de WCET do MRTC (\textit{Mälardalen Real-Time research
+Centre})~\cite{Gustafsson:2010}. Finalmente, avaliamos o desempenho do
+\boundt~ao analisar desafios propostos por colegas da disciplina de tempo-real
+do Programa de Pós-Graduação em Engenharia de Automação e Sistemas da
+Universidade Federal de Santa Catarina. Todos os testes neste artigo foram
+realizados considerando um processador ARM7-TDMI com cache de instruções apenas.
+O compilador utilizado foi o Gnu GCC 4.4.4~\cite{Gnu:GCC}.

@@ -1,0 +1,12 @@
+context UART::constructor(baud : Integer, 
+           data_bits : Integer, parity : Integer, 
+           stop_bits : Integer, unit : Integer)
+pre :
+pos :
+context UART::get() Char
+pre :
+pos :
+context UART::put(c : Char)
+pre :
+pos :
+

@@ -1,0 +1,117 @@
+\begin{thebibliography}{10}
+
+\bibitem{mantis}
+H.~Abrach, S.~Bhatti, J.~Carlson, H.~Dai, J.~Rose, A.~Sheth, B.~Shucker,
+  J.~Deng, and R.~Han.
+\newblock Mantis: system support for multimodal networks of in-situ sensors.
+\newblock In {\em Proc. of the 2nd ACM int. conf. on Wireless sensor networks
+  and applications}, pages 50--59, NY, USA, 2003. ACM.
+
+\bibitem{multi-level}
+Rahul Balani, Chih-Chieh Han, Ram~Kumar Rengaswamy, Ilias Tsigkogiannis, and
+  Mani Srivastava.
+\newblock Multi-level software reconfiguration for sensor networks.
+\newblock In {\em Proc. of the 6th int. conf. on Embedded software}, pages
+  112--121, NY, USA, 2006. ACM.
+
+\bibitem{sensorware}
+Athanassios Boulis, Chih-Chieh Han, and Mani~B. Srivastava.
+\newblock Design and implementation of a framework for efficient and
+  programmable sensor networks.
+\newblock In {\em Proc. of the 1st int. conf. on Mobile systems, applications
+  and services}, pages 187--200, NY, USA, 2003. ACM Press.
+
+\bibitem{dunkels04contiki}
+Adam Dunkels, Bj�rn Gr�nvall, and Thiemo Voigt.
+\newblock Contiki - a lightweight and flexible operating system for tiny
+  networked sensors.
+\newblock In {\em Proc. of the First IEEE Workshop on Embedded Networked
+  Sensors}, Tampa, USA, 2004.
+
+\bibitem{DC-2003}
+Friedrich-Alexander-Universit�t Erlangen-N�rnberg.
+\newblock Technologie roadmap: Software-verwaltung im farzeug.
+\newblock Technical report, DaimlerChrysler, Erlangen, Germany, Sep 2003.
+
+\bibitem{update}
+Meik Felser, R\"{u}diger Kapitza, J\"{o}rgen Klein\"{o}der, and Wolfgang
+  Schr\"{o}der-Preikschat.
+\newblock Dynamic software update of resource-constrained distributed embedded
+  systems.
+\newblock In {\em International Embedded Systems Symposium}, 2007.
+
+\bibitem{Froehlich:2001}
+Ant{\^{o}}nio~A. Fr{\"{o}}hlich.
+\newblock {\em Application-Oriented Operating Systems}.
+\newblock Number~17 in GMD Research Series. GMD - Forschungszentrum
+  Informationstechnik, Sankt Augustin, August 2001.
+
+\bibitem{sos}
+Chih-Chieh Han, Ram Kumar, Roy Shea, Eddie Kohler, and Mani Srivastava.
+\newblock A dynamic operating system for sensor nodes.
+\newblock In {\em MobiSys '05: Proc. of the 3rd int. conf. on Mobile systems,
+  applications, and services}, pages 163--176, NY, USA, 2005. ACM.
+
+\bibitem{mica2}
+Jason Hill, Mike Horton, Ralph Kling, and Lakshman Krishnamurthy.
+\newblock The platforms enabling wireless sensor networks.
+\newblock {\em Commun. ACM}, 47(6):41--46, 2004.
+
+\bibitem{hill00system}
+Jason Hill, Robert Szewczyk, Alec Woo, Seth Hollar, David~E. Culler, and
+  Kristofer S.~J. Pister.
+\newblock System architecture directions for networked sensors.
+\newblock In {\em Architectural Support for Programming Languages and Operating
+  Systems}, pages 93--104, 2000.
+
+\bibitem{deluge}
+Jonathan~W. Hui and David Culler.
+\newblock The dynamic behavior of a data dissemination protocol for network
+  programming at scale.
+\newblock In {\em Proc. of the 2nd int. conf. on Embedded networked sensor
+  systems}, pages 81--94, NY, USA, 2004. ACM.
+
+\bibitem{koshy}
+J.~Koshy and R.~Pandey.
+\newblock Remote incremental linking for energy-efficient reprogramming of
+  sensor networks.
+\newblock In {\em Proc. of the second European Workshop on Wireless Sensor
+  Networks}, pages 354--365, Jan 2005.
+
+\bibitem{mate}
+P.~Levis and D.~Culler.
+\newblock Mate: A tiny virtual machine for sensor networks.
+\newblock In {\em International Conference on Architectural Support for
+  Programming Languages and Operating Systems, San Jose, CA, USA}, Oct. 2002.
+
+\bibitem{flexcup}
+Pedro~Jos{�} Marr{�}n, Matthias Gauger, Andreas Lachenmann, Daniel Minder,
+  Olga Saukh, and Kurt Rothermel.
+\newblock Flexcup: A flexible and efficient code update mechanism for sensor
+  networks.
+\newblock In {\em Proc. of the Third European Workshop on Wireless Sensor
+  Networks}, pages 212--227, February 2006.
+
+\bibitem{reijers03efficient}
+Niels Reijers and Koen Langendoen.
+\newblock Efficient code distribution in wireless sensor networks.
+\newblock In {\em Proc. of the 2nd ACM int. conf. on Wireless sensor networks
+  and applications}, pages 60--67, NY, USA, 2003. ACM.
+
+\bibitem{stathopoulos03remote}
+T.~Stathopoulos, J.~Heidemann, and D.~Estrin.
+\newblock A remote code update mechanism for wireless sensor networks.
+\newblock Technical report, LA, CA, USA, 2003.
+
+\bibitem{Stroustrup:1997}
+Bjarne Stroustrup.
+\newblock {\em {The C++ Programming Language}}.
+\newblock Addison-Wesley, 3 edition, 1997.
+
+\bibitem{mnp}
+Limin Wang.
+\newblock Mnp: multihop network reprogramming service for sensor networks.
+\newblock In {\em Proc. of the 2nd int. conf. on Embedded networked sensor
+  systems}, pages 285--286, 2004.
+
+\end{thebibliography}

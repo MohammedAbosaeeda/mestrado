@@ -1,0 +1,101 @@
+----------------------- REVIEW 1 ---------------------
+PAPER: 255
+TITLE: On AOP techniques for C++-based HW/SW component implementation
+AUTHORS: Tiago Rogério Mück and Antônio Augusto Fröhlich
+
+This paper presents some C++ guidelines for unified implementation of hardware and software components in embedded system design methodology. The approach is well described and the results show the feasibility of the approach.
+
+The major concern about the paper is novelty of the proposed methodology. It appeared as a case study paper instead of a research article. For a strong case study paper, solid results are needed using industrial-strength benchmarks associated with interesting insights and observations. Given that a vast community uses some combination of SpecC, SystemC and UML based specifications for hardware/software codesign, it is important to highlight their limitations to convince the need for the proposed methodology. Most importantly, the results need to compare with SystemC or SpecC based modeling instead of providing stand-alone results.
+
+Specific comments:
+
+Section I: Need to explain whether the proposed method can be included in general design methodologies or to be used for specific application only.
+
+Section III: Need to explain why the proposed techniques was built on ADESD methodology
+
+Section IV: This section seems to provide a few examples of  unified C++ definition for readability but also need to provide some intuition why this is universally true for all scenarios. For example, how to describe memory management for both HW and SW.
+
+Section V: Compares with SW-only and HW-only. Comparison between the proposed technique and HW/SW partitioned implementation and with SpecC/SystemC based models would be helpful.
+
+Several typos:  PDB -> PBD, propose -> proposes, in section IV-A1, Classes can derived from -> Classes can be derived from, in section IV-A2, whom -> which, in section V, are shown appear, etc
+
+
+----------------------- REVIEW 2 ---------------------
+PAPER: 255
+TITLE: On AOP techniques for C++-based HW/SW component implementation
+AUTHORS: Tiago Rogério Mück and Antônio Augusto Fröhlich
+
+The authors describe a C metaprogramming approach for the implementation
+of components at system level which allows these components to be
+synthesized to hardware or software. In order to mix HW/SW components,
+communication interfaces are automatically synthesized.
+
+The paper is well written and easily understandable. Perhaps each section
+should shortly summarize its goal in the beginning. Especially the first
+paragraph in Section III is not really "self-contained", i.e., can be
+understood without reading the related work. What exactly is "commonality
+and variability analysis"?
+Instead, this section should probably give a short introduction to AOP,
+followed by how ADESD leverages AOP, which is only shortly mentioned in
+the introduction. However, AOP is not mentioned in Section III where
+ADESD is introduced in more detail.
+
+While the HW/SW aspect encapsulation described in Section IV.b is certainly
+the way to go, the encapsulation of storage allocation/deallocation is already
+available in the form of allocators defined by the CSTL. Using the
+std::allocator interface, the custom HW allocator may even work for the
+CSTL containers. Moreover, std::allocator provides a typedef for the
+pointer type, which seems to correspond to the Maybe type which is
+also introduced in this chapter. So I think these concepts are already
+available in the CSTL.
+
+I understand that the proposed design flow does not aim at design space
+exploration. However, in this case, the mapping of components to HW/SW
+is usually already determined, and it seems not necessary to implement
+both HW and SW aspects for a given component. On the other hand, if the
+model is used during design space exploration to determine performance
+values (latency, throughput), it may be inefficient if the model has to
+be recompiled for different configurations? (However, it seems that the
+components are fed as source code and in isolation to the HW/SW generation
+synthesis flow anyway). Perhaps this step could be explained slightly
+more detailed.
+
+Overall, while the presentation and results are adequate, the contribution
+in form of the AOP techniques seems marginal.
+
+Minor remarks:
+Page 3: "C implementation a resource scheduler" -> "C implementation
+       of a resource scheduler"
+Page 4: "toll" -> "tool"
+
+
+----------------------- REVIEW 3 ---------------------
+PAPER: 255
+TITLE: On AOP techniques for C++-based HW/SW component implementation
+AUTHORS: Tiago Rogério Mück and Antônio Augusto Fröhlich
+
+This paper presents a design specification method that seeks to utilize aspect oriented programming methods to provide a single design from which both software and hardware implementations can be generated. Using this approach, a single application specification can be utilized within automated hardware/software partitioning methods to produce the resulting software and hardware for the final implementation.
+
+A significant portion of the ideas presented in this paper was previously presented by the author’s in [17]. Not only did the authors fail to make a blind submission, but also a significant portion of the paper is directly copied from this previous paper. Further, no attempt was made to clarify what new contributions are presented in this paper compared to the previous work.
+
+Upon examination, the new contributions of this work focus on the evaluation of the case studied considering in Section V. Within this case study, the author highly a system comprised of three main tasks including a scheduler, adpcm, and DTMF components that were modeled using the proposed aspect oriented programming. The results demonstrate the codes size, execution time, and area requirements for software only, hardware only, and hardware/software implementations. For the most part, the results demonstrate the expected overheads with increase code size and runtime (compared to SW only implementation) and increase hardware execution time (compared to HW only implementation).
+
+However, the unified DTMF implementation appears to yield higher performance compared to the hardware only implementation, but no explanation is provided. A discussion of this result is imperative to understanding both how the systems were implemented and why the unified approach yields higher performance.
+
+Furthermore, the presented overview does not provide an indication as the designer productivity of the proposed approach. As one of the goals was to avoid having designers implement software specific and hardware specific code independently, such an evaluation is merited. Although reporting man-hours for development of the various systems would be ideal, at a minimum the resulting lines of code required for the software only, hardware only, and unified implementations should be provided.
+
+The limitation mentioned for pointers is not broadly applicable to all high-level synthesis approaches. Several approaches and tools can efficiently utilize pointers as implemented within C/C++ programs.
+
+
+----------------------- REVIEW 4 ---------------------
+PAPER: 255
+TITLE: On AOP techniques for C++-based HW/SW component implementation
+AUTHORS: Tiago Rogério Mück and Antônio Augusto Fröhlich
+
+The paper presents a design methodology for unified hardware/software design. The approach makes use of aspect-oriented programming, which is able to capture domain specific aspects.
+
+The methodology is built on top of C/C++, which makes it compatible with existing C/C++ synthesis flows.
+
+The paper is well structured and easy to follow. I would suggest moving Figure 6 and the associated discussion towards the beginning of the paper (the overview is useful--you could point to the details in the later sections).
+
+The evaluation is decent. However, a major drawback is the lack of evaluation of the  human effort involved: how much time is saved compared to using other methodologies, for example.

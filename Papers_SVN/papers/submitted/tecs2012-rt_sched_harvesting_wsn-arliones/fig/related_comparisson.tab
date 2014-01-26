@@ -1,0 +1,36 @@
+% \begin{tabular}{|l|c|c|c|c|}
+% \hline
+% \textbf{Trabalho} & \textbf{\textsc{Vadc}} & \textbf{\textsc{Cinder}} & \textbf{\textsc{Levels}} & \textbf{\textsc{ECOSystem}} \\
+% \hline
+% Classe & AP (DC) & AS & AS (MVS) & AS \\
+% \hline
+% Suporte a tempo real & Não & Não & Sim & Sim \\
+% \hline
+% Medição de energia & NT & CS & CS & HW \\
+% \hline
+% Energia renovável & Sim & Sim & Sim & Sim \\
+% \hline
+% Variabilidade & Sim & Não & Não & Não \\
+% \hline
+% Implementação & S + R & R & S + R & R \\
+% \hline
+% \end{tabular}
+
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{\textsc{Vadc}} & \textbf{\textsc{Cinder}} & \textbf{\textsc{Levels}} & \textbf{\textsc{ECOSystem}} \\
+\hline
+Period     & Service    & Multi-version & Service    \\
+Adaptation & Adaptation & Scheduling    & Adaptation \\
+\hline
+RT Sched. & - & RT Sched. & RT Sched. \\
+\hline
+NT & CS & CS & HW \\
+\hline
+Sim & Sim & Sim & Sim \\
+\hline
+Sim & Não & Não & Não \\
+\hline
+S + R & R & S + R & R \\
+\hline
+\end{tabular}

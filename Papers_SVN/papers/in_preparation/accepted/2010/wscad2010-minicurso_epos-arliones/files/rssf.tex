@@ -1,0 +1,134 @@
+\section{\Rssf}
+\label{sec:rssf}
+
+%introdução
+Avanços recentes nos projetos de dispositivos eletrônicos e a miniaturização
+levou ao surgimento de um novo conjunto de aplicações para computadores na forma
+de microsensores sem-fio de baixa potência. Estes microsensores são equipados
+com dispositivos de sensoriamento analógicos ou digitais (e.g., temperatura,
+campo magnético, som), um processador digital, um transceptor de comunicação
+sem-fio (e.g., rádio de baixa potência, infra-vermelho) e um módulo de
+alimentação (e.g., bateria, célula foto-sensível). Cada sensor, individualmente,
+é capaz de obter uma visão local de seu ambiente e de coordenar e se comunicar
+com outros sensores para criar uma visão global do objeto de estudo alvo da
+aplicação.
+
+\fig{wsn}{\Rssf.}{width=\columnwidth}
+
+A ideia de uma rede auto-gerenciada composta por dispositivos autônomos que
+coletam e enviam dados através de um enlace sem-fio traz à tona uma série de
+novos desafios ao projeto das plataformas (hardware). Para que não sejam
+intrusivos e operem autonomamente por longos períodos de tempo, os nodos
+sensores precisam ser pequenos e consumir pouca energia. Além disso, nodos
+sensores precisam ser modulares e permitir uso de diferentes tipos de
+dispositivos sensores para permitir que uma única plataforma possa ser empregada
+nos diversos tipos de aplicações, podendo assim serem adaptados de acordo com as
+especificidades de cada aplicação. De modo similar, o hardware de comunicação
+deve permitir ampla configuração do canal de dados, possibilitando que
+diferentes aplicações se beneficiem de diferentes esquemas de modulação ou de
+controle de acesso ao meio (MAC). Com o aumento da complexidade das tecnologias
+de \rssf a necessidade de software para suporte à execução composto por sistemas
+operacionais e componentes abstratos de alto nível (e.g., middleware) se torna
+essencial.
+
+Neste contexto, desde o ano de 2003 o \lisha (Laboratório de Integração
+Software/Hardware) vem trabalhando com \rssf. Trabalhos desenvolvidos no \lisha
+no escopo do Projeto EPOS~\cite{Project:Emote:2010} desenvolveram suporte de
+sistema operacional para a abstração dos mecanismos de:
+\begin{itemize}
+    \item aquisição de dados~\cite{Wanner:ETFA:2006};
+    \item comunicação~\cite{Wanner:IESS:2007};
+    \item gerência do consumo de energia~\cite{Hoeller:WSO:2006};
+    \item outros serviços comuns de sistema operacional como alocação de
+    memória e escalonamento de tarefas~\cite{Marcondes:ETFA:2006};     
+\end{itemize}
+
+Mais recentemente, o \lisha passou a dedicar esforços no desenvolvimento de
+plataformas próprias de \rssf, o que culminou com o projeto dos módulos de
+sensoriamento \emote I, baseado em uma arquitetura \textsc{Avr} de 8 bits, em
+2009 e \emote II, baseado em uma arquitetura \textsc{Arm7} de 32 bits, em 2010.
+
+Este curso prevê uma revisão dos aspectos das tecnologias de \rssf, buscando
+descrever as tecnologias e apresentar como estas foram tratadas tanto na
+implementação do sistema operacional \epos quanto no projeto dos módulos de
+sensoriamento \emote I e II. Para isso, esta primeira seção apresenta uma
+contextualização da tecnologia seguido de exemplos de aplicações das \rssf. A
+seção~\ref{sec:modulos} apresenta requisitos comumente procurados em módulos de
+\rssf e apresenta alternativas de módulos disponíveis. A seção~\ref{sec:sensores}
+apresenta tipos de sensores, métodos de interfaceamento e técnicas de aquisição
+de dados. A seção~\ref{sec:MAC} revisa técnicas de controle de acesso ao meio,
+apresenta topologias e descreve alguns dos MACs mais utilizados em \rssf. A
+seção~\ref{sec:so} apresenta características de sistemas operacionais para
+\rssf. A seção~\ref{sec:exercicios} lista alguns exercícios para utilização do
+\epos na plataforma \emote.
+
+%aplicações
+\subsection{As aplicações de \rssf}
+
+Novas tecnologias, sistemas ou plataformas surgem, quase que exclusivamente, por
+um único motivo: atender a uma determinada demanda, ou seja, uma aplicação! No
+caso das \rssf não poderia ser diferente. A criação das \rssf foi motivada por
+aplicações militares como vigilância de campos de batalha e são hoje utilizados
+em diversas áreas de aplicações civis e industriais, incluindo monitoramento e
+controle de processos industriais, supervisão de maquinário, monitoramento de
+ambientes ou habitats, automação doméstica, entre outras.
+
+Esta variada gama de aplicações implica na existência de grande variação no
+conjunto de requisitos que uma \rssf precisa atender, incluindo requisitos
+possivelmente conflitantes, ou seja, características das quais um determinado
+tipo de aplicação se beneficia, eventualmente, pode tornar o uso da tecnologia
+proibitiva a outra aplicação. Para dar conta desta variabilidade, \rssf precisam
+ser amplamente configuráveis. E, para ser configurável, um sistema de \rssf
+precisa levar em consideração as características específicas dos diferentes
+tipos de aplicações existentes.
+
+\fig{mottola_taxonomy}{Uma taxonomia para aplicações de
+\rssf~\cite{Mottola:2010}}{width=\columnwidth}
+
+\tab{mottola_classification}{Exemplos de aplicações classificadas segundo a
+taxonomia proposta por Mottola~\cite{Mottola:2010}.}
+
+Motolla e Picco~\cite{Mottola:2010} publicaram um excelente estudo em que,
+dentre outras coisas, classificaram diferentes aplicações de \rssf com o
+objetivo de destacar as diferenças entre estas aplicações. A
+Figura~\ref{fig:mottola_taxonomy} apresenta uma taxonomia pela qual as
+características das aplicações podem ser classificadas. Neste trabalho, os
+autores ainda analisam uma série de aplicações publicadas em canais científicos,
+classificando-as segundo a taxonomia proposta. Alguns exemplos destas
+classificações estão na Tabela~\ref{tab:mottola_classification}. Cada uma das
+características da taxonomia por eles proposta podem ser assim interpretadas:
+\begin{itemize}
+    \item \textit{Objetivo:} dependendo do objetivo das redes, isto é, apenas
+    monitorar um objeto de estudo ou, além de monitorar, também atuar sobre este
+    objeto, a topologia empregada pode sofrer modificações, especialmente devido
+    à inclusão, neste último tipo de objetivo, de módulos atuadores capazes de
+    interagir com o objeto de estudo.
+    \item \textit{Padrão de interação:} é, normalmente, dependente do
+    \textit{objetivo}. ``Muitos-para-um'', mais comumente empregado, é utilizado
+    quando dados de diversos nodos são coletados por um nodo central.
+    Comunicação ``um-para-muitos'' é normalmente utilizada para envio de
+    comandos de configuração nas redes, e ``muitos-para-muitos'' é mais comum em
+    situações onde há múltiplos concentradores de informação, o que geralmente
+    ocorre na presença de atuadores.
+    \item \textit{Mobilidade:} em configurações ``estáticas'' nenhum elemento da
+    rede se move após a implantação. Em configurações com ``nodos móveis''
+    alguns elementos das redes são móveis, como, por exemplo, em aplicações de
+    monitoramento de habitats em que alguns nodos estão implantados em animais.
+    Já em configurações com ``concentradores móveis'', normalmente, são
+    indiferentes quanto à mobilidade dos demais nodos já que, neste caso, a
+    diferença básica reside no fato de que a coleta de dados é realizada de modo
+    oportunístico quando os concentradores se aproximam dos demais nodos.
+    \item \textit{Espaço:} diz respeito à semântica dos dados recolhidos.
+    Configurações ``globais'' são aquelas em que dados de sensores individuais
+    não são úteis, sendo úteis apenas as informações extraídas da análise das
+    medições realizadas por todos os sensores em uma rede. Já configurações
+    ``regionais'' são aquelas o objeto de interesse está localizado em uma
+    região limitada, sendo, neste caso, leituras individuais relevantes.
+    \item \textit{Tempo:} do ponto de vista temporal a operação dos nodos em uma
+    \rssf pode ser classificada em ``periódica'', quando nodos realizam
+    leituras de seus sensores e enviam os dados para processamento na rede
+    periodicamente, ou ``orientada a eventos'', quando nodos sensores permanecem
+    em modo quiescente observando os dados lidos por seus sensores e enviam
+    dados na rede apenas quando um determinado evento é detectado (e.g., o
+    valor lido em um determinado sensor ultrapassa um limite pré-definido).
+\end{itemize}

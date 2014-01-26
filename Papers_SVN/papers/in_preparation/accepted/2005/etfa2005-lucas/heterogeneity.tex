@@ -1,0 +1,560 @@
+\hyphenation{EmNets}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{abstract}
+
+  Developments in \wsn{} (WSN) hardware have led
+  to a diversity of sensing devices, ranging from simple,
+  micro-controlled boards to complex, highly integrated
+  sensor-transceiver ICs. While this is a desirable effect, it brings
+  about a question about sensor application portability. The lack of
+  proper abstraction and encapsulation mechanisms at the operating
+  system level often forces developers to re-implement their sensing
+  applications whenever a different sensor, radio or processor is
+  deployed. 
+  
+  In this paper we introduce a novel strategy for abstracting WSN
+  hardware, based on the \emph{\aosd{}}
+  method. The strategy was implemented for the \epos{} operating
+  system and consists in providing application programmers with an
+  \emph{inflated interface} for sensing components --- a high-level
+  collection of methods and structures derived from the actual
+  components implemented in the system. This interface can latter be
+  bound to pre-existing components that are adapted on demand at system
+  generation time to fulfill application requirements, thus enabling
+  programmers to code portable sensing applications in spite of the
+  hardware diversity and without significant overhead.
+
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+
+\wsn{} (WSN) hardware is, by its very own nature, heterogeneous and
+modular.  Application-specific requirements drive the entire hardware
+design, from processing capabilities to radio bandwidth and sensor
+modules.  Even in a same family of sensor nodes (e.g. the Berkeley
+\emph{motes} family \cite{Polastre:2005,Hill:2004}) one can find
+architectural differences that cannot be trivially abstracted.  
+In this scenario, a sensor application developed for a given platform
+will seldom be portable to a different one, unless the run-time support
+systems on those platforms deliver mechanisms that abstract and
+encapsulate the sensor platform in an adequate manner.
+Indeed, a proper abstraction of sensor platforms becomes a key issue in
+the face of modern \textsc{SoC} (\emph{system-on-a-chip}) solutions,
+which integrate micro-controller, radio and sensor modules on single ICs
+that can usually be configured according to user
+demands~\cite{Rabaey:2002,Atmel:rf:2003,Hill:2003}.  
+Table \ref{tbl:hwcomponents} presents characteristics of some
+representative WSN hardware modules.  Architectural differences aside,
+sensor modules (e.g. temperature, light, motion sensors) present an even
+wider range of variability.  Sensor modules presenting the same
+functionality often vary in their access interface, operational
+characteristics and parameters.
+
+
+\begin{table*}[tbh]
+\begin{center}
+\input{tbl/motes.tbl}
+\end{center}
+\caption{Typical Wireless Sensor Networks  Hardware}
+\label{tbl:hwcomponents}
+\end{table*}
+
+
+%Table~\ref{tbl:sensors} presents these characteristics for a sample
+%family of temperature sensors commonly used in sensor nodes.
+
+%\begin{table*}[htb]
+%\begin{center}
+%\input{tbl/sensor.tbl}
+%\end{center}
+%\caption{Sensor Module Characteristics}
+%\label{tbl:sensors}
+%\end{table*}
+
+A properly designed run-time support system could free application
+programmers from such architectural dependencies and promote application
+portability among different  sensing platforms.  Given a sensing
+application implemented for a certain platform, there is no strong
+reason why it should not be reused with another platform that fulfills
+its requirements (e.g. presence of a certain sensor, non-volatile
+memory capabilities, etc.).  For instance, an operating system could
+deliver a temperature sensor abstraction that would be instantiated by
+applications giving a range and scale (e.g. linear, logarithmic,
+Poisson, user-defined, etc). The system would thus ensure proper
+behavior independently from the physical sensor that exists in the
+platform.
+
+In the following sections we present current strategies for handling
+heterogeneity in \emph{\wsn{}} and introduce a novel model based on the
+\emph{\aosd{}} (AOSD) methodology \cite{Froehlich:2001}.  AOSD
+introduces the concepts of \emph{hardware mediators}, and \emph{system
+  abstractions} that implement \emph{scenario independent} system
+constructs.  These abstractions are exported to the application through
+\emph{inflated interfaces} and adapted according to the applications
+needs through \emph{scenario adapters}.  We introduce the model of
+\emph{sensing abstractions} used in \epos{}, an experimental
+\emph{application oriented} operating system.  We then show that this
+model is capable of properly abstracting WSN hardware heterogeneity with
+virtually no overhead and producing a very small system footprint.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Related Work}
+
+Most of the current effort in development of operating systems and
+hardware abstraction for Wireless Sensor Networks is focused on
+\emph{\tos{}}~\cite{Hill:2004}.
+Initially developed by the University of California at Berkeley and now
+an open-source project maintained by several institutions,
+it is the most widely used OS for \wsn{}.
+\tos{} was written in NesC~\cite{Gay:2003}, 
+a high-level programming language that emulates the syntax and
+functionality of hardware description languages, and
+provides components for communication, thread coordination, and, of
+our special interest, hardware abstraction.
+
+Nonetheless, while implementing a complete and functional
+{hardware abstraction layer}, the original \tos system presented a
+series of structural problems that hindered application
+portability. Each hardware platform had a complete and separate HAL
+implementation. 
+While it is true that architectural
+differences between platforms may require separate implementations,
+system interfaces should remain uniform whenever
+possible. The original \tos{} did not provide a uniform interface for
+most high level system abstractions (e.g. sensors, timers, etc.), thus
+forcing the application programmer to understand the nuts and bolts of
+the underlying hardware platform and compromising application
+portability between platforms.
+
+\tos{} tried to solve these problems by introducing a three-tiered hardware
+abstraction architecture, comprised by a \emph{Hardware Presentation Layer}, a
+\emph{Hardware Adaptation Layer} and a \emph{Hardware Interface Layer}. 
+The Hardware
+Presentation Layer is placed directly over the underlying hardware, and
+\emph{presents} the hardware to the operating system. Components in the
+Hardware Presentation Layer are unique for each device they present, but may
+share a common structure. The Hardware Adaptation Layer groups the 
+hardware-specific components into domain-specific models, such as 
+\texttt{Alarm} or \texttt{ADC Channel}. The Hardware Adaptation Layer 
+provides the ``best'' possible abstraction in terms of effective resource
+usage, but also tries not to hinder application portability. The Hardware
+Interface Layer uses the adapted components to implement
+platform-independent abstractions. The \tos{} application developer may
+choose to use any of the available interface levels, trading off 
+application portability and efficient resource usage.
+
+The \emph{Mantis Operating System}~\cite{Abrach:2003}, developed by the
+University of Colorado, aims at making the task of programming a sensor
+network as close as possible to the one of programming a PC.
+Thus, \mos{} uses the classical model of multi-layered operating systems,
+witch includes multi-threading, preemptive scheduling, and a network
+stack. Hardware is abstracted through a \emph{UNIX-like} API of device
+drivers, with a monolithic hardware abstraction layer.
+
+While it us true that the classical OS structure used in \mos{} may
+lower the learning curve for novice sensor network developers familiar
+with an \emph{UNIX-like} system, it is uncertain whether this model translates
+well to such resource-restricted hardware as sensor nodes. The minimal
+hardware requirements for \mos{} are small when compared to classical
+embedded operating systems \cite{Massa:2003}, they may be too restrictive for
+tiny devices.
+
+Higher level abstractions often rely on Virtual Machines that abstract
+the physical hardware into an ideal Virtual Architecture. An
+underlying translation mechanism ensures correct operation, regardless
+of specific physical hardware platform details.  Thus even highly
+efficient Virtual Machine implementations, such as \emph{Mat\'{e}}
+\cite{Levis:2002} introduce overhead into the system. {Mat\'{e}}
+introduces a high-level interface that allows programs to be
+replicated throughout the network, reprogramming the nodes in an
+energy-efficient way. It also provides a safe execution environment, 
+implementing a user/kernel boundary on devices that lack hardware 
+protection mechanisms. In spite of its advantages, {Mat\'{e}}
+suffers from the problems inherent to virtual machines, which are
+especially critical for highly constrained hardware such as sensor
+nodes, as practical high level abstractions for Wireless Sensor
+Networks hardware must make efficient use of the sensor node's low
+memory, processing and energy capabilities.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{\aosd}
+
+In this section we introduce the concepts of \emph{system
+abstractions} and \emph{hardware mediators} in the context of
+\emph{Application-Oriented System Design} as efficient, high level,
+reusable hardware abstraction components for sensor networks.
+\emph{Application-Oriented System Design}~(AOSD)~\cite{Froehlich:2001}
+was proposed as a multi-paradigm methodology for software design that
+makes use of several programming and software engineering techniques
+that can be combined in order to generate run-time support systems
+configured and optimized for specific applications. The \textsc{Epos}
+operating system was implemented following AOSD techniques, and has
+since been successfully used in several
+environments~\cite{Froehlich:HPCN:2000,Polpeta:EUC:2004}.
+
+The main goal of the \textsc{Epos} system is to allow application
+programmers to write architecture-independent applications, and, through
+the application analysis, deliver run-time support that complies all the
+resources that specific application needs, and nothing else.  
+In order to achieve these goals, \textsc{Epos} relies on
+the concepts of \emph{Inflated Interfaces}, \emph{System Abstractions}, 
+\emph{Scenario Aspects}, \emph{Configurable Features}, 
+and \emph{Hardware Mediators}.
+%as defined in \cite{Froehlich:2001}.
+\textsc{Epos} makes  use of \emph{Static Meta programming} and 
+\emph{Aspect-Oriented Programming} techniques to implement software 
+components, thus conferring them a
+significant advantage over the classic approaches of VMs and HALs.
+From the definition of the scenario in which the component will be
+deployed, it is possible to adapt it to perform accordingly without
+compromising its interface nor aggregating useless code.
+
+\subsection{Hardware Mediators}
+
+
+
+\emph{Hardware mediators} are proposed as
+software constructs that mediate the interaction between operating
+system components, called \emph{system abstractions}, and hardware
+components.  The main idea behind hardware mediators is not building
+universal hardware abstraction layers and virtual machines, but
+sustaining the \emph{``interface contract''} between system and
+machine.
+
+Differently from ordinary \textsc{HAL}s, hardware mediators do not build
+a monolithic layer encapsulating the resources available in the hardware
+platform. Each hardware component is handled via its own mediator, thus
+granting the portability of abstractions that use it without creating
+unnecessary dependencies. Hardware mediators are intended to be
+mostly meta programmed and therefore dissolve themselves in the
+abstractions as soon as the interface contract is met. In other words, a
+hardware mediator delivers the functionality of the corresponding
+hardware component through a system-oriented interface.
+
+\fig{family}{A family of hardware mediators.}{width=7.6cm}
+
+\begin{figure}[htbp]
+\lstset{language=c++,frame=lrtb}
+\lstset{basicstyle=\ttfamily}
+\lstset{commentstyle=\textit}
+\lstinputlisting{fig/avr_gpio.cc}
+\caption{The AVR\_GPIO hardware mediator}
+\label{fig:hm_gpio}
+\end{figure}
+
+
+Hardware mediators are organized in families whose 
+members represent the significant entities in the domain. For
+instance, a family of \texttt{CPU} mediators would feature members such
+as \texttt{ARM}, \texttt{AVR8}, and \texttt{PPC}. % (figure~\ref{fig:family}). 
+A simple hardware mediator for the GPIO bus in the AVR processor
+is presented in figure ~\ref{fig:hm_gpio}. This mediator abstracts
+the assembly language operations responsible for
+reading and writing to IO ports into high level C++ operators
+without any overhead.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{System Abstractions and Inflated Interfaces}
+
+AOSD relies on \emph{Scenario-Independent System Abstractions} to
+implement the operating system components. These components define the
+system functionalities, and their implementations rely on several
+techniques such as \emph{Static Meta programming} and
+\emph{Aspect-Oriented Programming},  allowing these abstractions 
+to be strongly configurable.
+
+System Abstractions are collected from an \emph{Application-Oriented
+Domain Analysis and Decomposition} process. This analysis process is
+quite similar to \emph{object-oriented decomposition}. The main
+difference is that the Application-Oriented System Design is a
+multi-paradigm design methodology, so other entities, such as aspects
+and configurable features must come out from this analysis.
+
+Each system abstraction is composed by a set of similar operating
+system components. These components are organized according to the
+\emph{Family-Based Design} paradigm, and have their \emph{commonalities}
+and \emph{variabilities} explored through different class hierarchies.
+An \emph{inflated interface} exports the family as though a ``super''
+component, that implements all responsibilities assigned to the
+family. This component is derived from the interfaces of individual
+family members, and realized through their implementations. In \textsc{Epos},
+the system framework automatically selects interface realizations,
+taking into account the target hardware configuration and a cost model
+for components.
+
+
+\subsection{Scenario Aspects and Configurable Features}
+
+In AOSD, non-functional aspects
+and cross-cutting properties are factored out as \emph{scenario aspects}
+that can be applied to family members as required. For instance,
+families like \texttt{UART} and \texttt{Ethernet} must often operate in
+exclusive-access mode.  This could be achieved by applying a
+share-control aspect to the families.
+
+\emph{Configurable features}, on the other hand,
+designate features of mediators that can be switched
+on and off according to the requirements dictated by abstractions.  
+A configurable feature is not restricted to a flag indicating whether a
+preexisting hardware feature must be activated or not. Usually, it
+also incorporates a \emph{Generic Programmed}~\cite{Musser:1989}
+implementation of the algorithms and data structures that are
+necessary to implement that feature when the hardware itself does not
+provide it.  An example of configurable feature is the generation of
+CRC codes in an \texttt{Ethernet} mediator.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{\textsc{Epos} Sensing Components }
+
+The main goal of the \textsc{Epos} system is to allow application
+programmers to write architecture-independent applications, and, through
+the application analysis, deliver run-time support that complies all the
+resources that specific application needs, and nothing else.  In order
+to match its goal, \textsc{Epos} relies on the
+\emph{\aosd{}}~(AOSD)~\cite{Froehlich:2001}
+method to guide the development of system abstractions as families of
+software components, each of which implements a
+\emph{scenario-independent abstraction} that can latter be adapted to a
+given execution scenario with the aid of \emph{scenario adapters}.
+Software components are collected in a repository and are exported to
+the application programmers via \emph{inflated interfaces}, which hide
+the peculiarities of each member in a family as though the whole family
+was a component. This strategy, in addition to drastically reducing the
+number of exported abstractions, enables programmers to easily express
+their application's requirements regarding the operating system.
+
+In order to preserve the portability of its software components,
+\textsc{Epos} relies on hardware mediators. In principle, none of
+\textsc{Epos}'s abstractions interact directly with the hardware,
+utilizing the corresponding hardware mediators instead. In this way, a
+context switch done in the realm of a \texttt{Thread} abstraction
+concerns mainly the decision of which thread should occupy the
+\textsc{CPU} next, leaving the operation of saving and restoring the
+\textsc{CPU}'s context to the corresponding mediator. 
+%This might seem an
+%obvious example, but defining the interface for \texttt{CPU} mediator
+%becomes a hard task if one considers the variability of \textsc{CPU}
+%cores and the different environments in which they are used (e.g.
+%multithread, multitask, multiprocessor, etc).
+
+%Relevant hardware mediators for \textsc{EmNets} in \textsc{Epos}
+%include, in addition to the usual modules (e.g. \texttt{CPU},
+%\texttt{MMU}, \texttt{Timer}, etc.), \texttt{Radio} and
+%\texttt{Sensor}. A more substantial example of System
+%Abstractions for these platforms can be found in the
+%\texttt{Network} and 
+%\texttt{Sentient} family of abstractions. 
+%The following sections will describe such abstractions.
+
+%\subsection{\textsc{EmNets} Components}
+
+%Aiming to deliver to the application programmer a way to write their
+%applications without caring about which type of sensor the target
+%platform is using, the \textsc{Epos} operating system defines a set of
+%sensing abstractions and mediators. One important factor that allows
+%this design is the use of static metaprogramming and C++ operator
+%overriding techniques to allow hardware-independent access to hardware
+%registers and buses~\cite{Polpeta:2004}.
+
+\subsection{Sensors and Sentients}
+
+
+
+There are several different architectures of sensors in use today, which
+makes a hard job to define a common way to access such devices.  These
+devices range from simple, digital integrated circuits to complex and
+(usually) analog devices.
+
+\figspan{families}{Set of relevant sensing components.}{width=16cm}
+
+Devices in the first category are usually simple, digital integrated
+circuits and are generally implemented over a serial bus (e.g. I2C,
+SPI). In this kind of sensors, the data acquisition process is initiated
+by a specific signal or by read and write operations. Another characteristic
+of these sensors is that there is a regular time period in which new
+values are sensed. Examples of these sensors are the Texas TMP family of
+temperature sensors, most Honeywell Magnetometers, the STM
+Accelerometers and most A/D converters.
+On the other end, we have very specific and, generally, analog circuits.
+Examples of this category of sensors are the Berkley's Mica Sensor Board
+light and temperature sensors. These sensors share the same analog
+circuit, making its use and management a complex issue. This circuit is
+composed by two thermistors and one photo resistor, which are managed
+through 3 GPIO pins, and deliver their results to the same A/D
+pin. Even being a simple circuit, it has operation and timing
+constraints. Another example is the Mica Magnetometer. It is implemented
+by a complex analog and digital circuit and in spite of being configured
+by a simple I2C potentiometer, it has an analog output and complex
+semantics and timing characteristics.
+
+Even with all these differences between sensing hardware, it is possible
+to affirm that sensor operation does follow a \emph{regular pattern}.
+This pattern is constituted by an ``start sensing'' command, followed by
+an optional configuration phase. Once configured, there is a period of
+waiting for the sensor's data acquisition phase. When data acquisition
+is done, data is finally read.  The sensing routine can then be stopped,
+or may be kept in a ``wait acquisition / get data'' loop.
+
+In order to contemplate all possible kinds of sensing hardware,
+\textsc{Epos} implements the families of mediators and abstractions
+shown in Figure~\ref{fig:families}. The \texttt{Bus} mediator family of
+components implements a uniform way to access peripheral devices. The
+\texttt{ADC} family of A/D Converters mediators also implements an
+uniform access to such devices. These two basic mediators' families are
+the key to a modular implementation of the \textsc{Epos}'s sensing
+sub-system, once it allows the \texttt{Sensor} family of
+mediators to be composed by highly configurable and reusable components.
+Some of the implemented mediators for the \texttt{Sensor} family
+are also shown in the figure. Every other implementation just needs to
+extend the \texttt{Sensor} component and make its hardware
+dependent implementation.
+
+
+
+These hardware mediators structures allow the design of a higher-level,
+architecture-independent family of abstractions, which can be used by
+applications without affecting its portability. The \texttt{Sentient}
+family is comprised by software components that aims in abstracting the
+sensors finality, and not its implementation (which is considered in the
+\texttt{Sensor} mediator). Example members of this family are the
+\texttt{Temperature\_Sentient} and the \texttt{Light\_Sentient} components. 
+These components
+implement not only transparent access for sensors, but also some
+functionalities such as unit conversion, threshold comparison of
+results, and data logging, which are mapped as configurable features or
+aspects. 
+Once the application uses a member of the \texttt{Sentient} family, it
+is up to the \textsc{Epos} framework composition rules to maintain the
+sensing sub-system coherence, by granting that, for example, the
+\texttt{Temperature\_Sentient} abstraction will use an available
+temperature \texttt{Sensor} mediator. This is ensured by the
+system configuration and generation process, which takes into account
+the application analysis results and the hardware platform
+description~\cite{Tondello:2005}.
+
+
+
+\section{Evaluation}
+
+
+
+In order to test the expressibility, portability and cost of the
+\textsc{Epos} sensing subsystem, we implemented a simple sensing
+application using three different operating systems: TinyOS, Mantis e
+\textsc{Epos}. The application in question implements a loop that
+constantly reads data from a sensor and redirects the data read to a
+\texttt{UART} interface. Whenever it was necessary to implement
+architecture-dependent code, the Berkeley Mica2 mote~\cite{Hill:2000}
+was considered as the target platform. In order to better compare the
+overhead in the different implementations, the applications used the
+least possible operating system resources. Figure~\ref{fig:app} presents
+the implementation of this application for the three analyzed
+operating systems. 
+
+\input{fig/code.tex}
+
+
+The application for TinyOS was written in the \texttt{NesC}
+programming language, and its implementation consists simply in
+connecting inputs and outputs of interfaces (\texttt{ADC} and
+\texttt{UART}, in this particular case). Had it been necessary, the
+implementation of algorithms could be done in \texttt{NesC}, with
+\emph{C-like} syntax. The application for Mantis was implemented in
+\texttt{C}, including the headers defining Mantis's device access and
+communication APIs. The application for \textsc{Epos} was implemented
+in \texttt{C++}, importing the sensing abstraction and the
+\texttt{UART} mediator headers.
+
+In the Mica2 platform, the TinyOS system reflects the hardware design
+and exports the temperature sensor as an ADC (in the physical platform 
+this sensor is analog and is connected to the micro-controllers ADC). 
+This dependency between hardware and operating system will certainly 
+bring implications to the application portability when, for example,
+it is ported to a platform in which the temperature sensor is digital
+and is connected directly to microcontroler IO pins. Even if the application
+functionality remains the same, it will have to be altered taking into
+account the details of the hardware platform in which it will be executed.
+
+A similar problem occurs in the implementation for the Mantis
+operating system. The temperature sensor is read through a device
+access function, which takes as a parameter the physical device the
+application wishes to read. Evidently the physical sensor model may
+vary from platform to platform, and the application will not be
+portable between different platforms, even when it maintains the same
+functionality. This problem could be partially solved in the Mantis
+system by indicating through a series of \texttt{define} statements
+that would indicate that, for example, in the Mica platform, the
+\texttt{Temperature\_Sensor} symbol denotes \texttt{DEV\_MICA2\_TEMP}.
+Nevertheless, this would still be an inefficient and inelegant solution,
+as the \texttt{dev\_read} method aggregates code for the reading
+of every device available in the platform, even when some of them
+are not used by the application.
+
+The implementation for the \textsc{Epos} system does not present
+any dependency to the target hardware, except for the requirement of
+an available temperature sensor, and is perfectly portable between 
+platforms the satisfy this requirement. The selection of hardware
+mediators is resolved by the system framework, taking into consideration
+the interfaces used by the application and the target platform 
+specified by the programmer.
+
+Table~\ref{tbl:overhead} presents the code and data sizes for the
+three generated applications. The \textsc{Epos} system presented the
+smallest cost in bytes between the three test systems, for both
+data memory and code size.
+
+
+
+\begin{table}[h]
+\begin{center}
+\input{tbl/overhead.tbl}
+\end{center}
+\caption{Generated application sizes}
+\label{tbl:overhead}
+\end{table}
+
+Evidently, an evaluation based simply in program code and data sizes is
+incomplete, but in resource-limited systems such as sensor nodes, these
+values are of uttermost importance. Future evaluations of this work will
+include performance and energy-consumption measurements.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Conclusions}
+
+We discussed the problem of heterogeneity in sensor
+networks hardware, and presented a novel technique to handle
+application portability in these systems. We used the concepts of
+\emph{hardware mediators} and \emph{system abstractions} to model and 
+implement the \textsc{Epos} sensing subsystem, which allows sensing
+applications to be ported between different sensor networks hardware
+platforms.  A sample sensing application was implemented for the
+\textsc{Epos} operating system, as well for other available operating
+systems for sensor networks. The \textsc{Epos} system presented the
+smallest size int terms of code and data size. These results position
+\textsc{Epos} as a very viable alternative for operating systems for
+sensing devices.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "heterogeneity_master"
+%%% End: 

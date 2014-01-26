@@ -1,0 +1,36 @@
+\begin{figure*}[t!]
+\begin{center}
+\begin{footnotesize}
+%
+\lstset{language=c++,frame=lrtb}
+\lstset{basicstyle=\ttfamily}
+\lstset{commentstyle=\textit}
+\begin{minipage}{16.5cm}
+\lstinputlisting{fig/app_tos.cc}
+\end{minipage}
+%
+%
+    \mbox{
+      \subfigure{
+      \begin{minipage}{10cm}
+        \lstset{language=c++,frame=lrtb}
+        \lstset{basicstyle=\ttfamily}
+        \lstset{commentstyle=\textit}
+        \lstinputlisting{fig/app_mantis.cc}  
+      \end{minipage}   
+      } \quad
+      \subfigure{
+      \begin{minipage}{6cm}     
+        \lstset{language=c++,frame=lrtb}
+        \lstset{basicstyle=\ttfamily}
+        \lstset{commentstyle=\textit}
+        \lstinputlisting{fig/app_epos.cc}  
+      \end{minipage}     
+      } 
+      }
+%
+\caption{Sample sensing applications}
+\label{fig:app}
+\end{footnotesize}
+\end{center}
+\end{figure*}

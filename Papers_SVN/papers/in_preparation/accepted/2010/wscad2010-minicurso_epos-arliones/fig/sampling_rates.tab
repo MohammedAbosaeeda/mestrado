@@ -1,0 +1,11 @@
+\begin{tabular}{l|c|c|c}
+\hline
+\textbf{Sensor}      & \textbf{TinyOS}  & \textbf{MANTIS OS}  & \textbf{EPOS} \\
+\hline
+\textbf{AVR ADC}     & 8084             & 3685                & 24597         \\
+\textbf{ADXL202}     & 7657             & 3401                & 21711         \\
+\textbf{Thermistor}  & 5766             & 3107                & 10999         \\
+\textbf{Photocell}   & 6009             & 3117                & 11121         \\
+\textbf{HMC1002}     & 7494             & 3408                & 23024         \\
+\hline
+\end{tabular}

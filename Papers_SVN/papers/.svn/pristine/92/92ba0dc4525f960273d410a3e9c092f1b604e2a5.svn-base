@@ -1,0 +1,126 @@
+\section{ADHOP}
+\label{sec:adhop}
+
+%- Introduce the original ADHOP~\cite{OkazakiA:2011}.
+%In mobile WSNs, the routing problem is hard to solve because it is worsened by the constant topology changes, lack of central control, and low bandwidth of the wireless channel~\cite{DiCaro:2004}.
+ADHOP (\emph{Ant-based Dynamic Hop Optimization Protocol})~\cite{OkazakiA:2011} is a routing protocol for mobile ad-hoc networks that uses ACO (\emph{Ant Colony Optimization})~\cite{Dorigo:2006} to drive its routing decisions.
+%- What is the focus of such protocol?
+ADHOP makes the route selection decisions based on the pheromone levels -- routes with higher levels of pheromone are preferred.
+Figure~\ref{fig:ant_return} shows a general view of this mechanism.
+At each hop, ants deposit an amount of pheromone in the links they use.
+As time goes by, pheromone evaporates.
+Ants are piggybacked on data packets and carry metadata about the routes they take.
+ADHOP uses this metadata to define the amount of pheromone each ant deposit in a link and the evaporation rate.
+This adapts the routing mechanism to changing topologies.
+For instance, if a node fails or moves breaking a link, routes using that link will also break, and the pheromone levels in the affected routes will reduce gradually.
+Ants can thereby monitor connectivity changes by inspecting the variation of pheromone, and decide to take alternate routes to reach their destination.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{fig/ant_return.pdf}
+\caption{ACO-based route selection in ADHOP.}
+\label{fig:ant_return}
+\end{figure}
+
+%- How the ACO metaheuristic supports the routing in ADHOP?
+%  - Explain the heuristics in the operations of deposit and evaporation of pheromone.
+ADHOP labels each entry of the routing table with a pair of node identifiers.
+For instance, the entry $(A,B)$ labels a route to node $A$ using the link with the neighbor node $B$.
+ADHOP updates the amount of pheromone in a route based on the information brought by the ants using the equation~\cite{Dorigo:2006}:
+\begin{equation} \tau_{A,B} = \left ( 1 - \varphi \right ) \cdot \tau_{A,B} + \varphi \cdot \tau _{0} \label{eq:pheromone_increasing} \end{equation}
+where $\varphi \in \left [ 0,1  \right ]$ is the pheromone decay coefficient,
+$\tau _{0}$ is the initial amount of pheromone in the route,
+and $\tau_{A,B}$ is the current amount of pheromone in the route.
+Pheromone evaporation occurs periodically in all routes according to the equation~\cite{Dorigo:2006}:
+\begin{equation} \tau _{A,B} = \left ( 1 - \rho \right ) \cdot \tau _{A,B} \label{eq:evaporation} \end{equation}
+where $\rho \in \left [ 0,1  \right ]$ is the evaporation rate.
+
+%- Explain how the ADHOP Routing Table works.
+The structure of the ADHOP \emph{Routing Table} is similar to the structures used by HOPNET Intra Routing Table~\cite{Wang:2009} and AOER Inverted Routing Table~\cite{Shuang:2009}.
+In ADHOP, however, operations over the routing table are simpler and faster.
+This happens because ADHOP does not store the entire routes, thus reducing in-node memory usage and the size of the data structures.
+Additionally, ADHOP uses a hash table where destination addresses are the keys ($A$ in the Equation~\ref{eq:pheromone_increasing}).
+
+Figure~\ref{fig:routing_table} shows an instance of ADHOP routing table for a hypothetic node $i$.
+Each bucket in the hash table holds a list of entries sorted by the quantity of pheromone on the link.
+Each entry in these lists keep the neighbor node (prefixed by ``Nei.'') to which a packet should be forwarded to reach its destination (prefixed by ``Dst.'').
+The algorithm will always choose the first entry matching the final destination of the packet, i.e. the route with more pheromone and, therefore, with the higher probability of performing a successful delivery.
+The neighbor can be the targeted destination, as happens in the figure with destinations 00 and 06, or a hop in the direction of the destination ($B$ in the Equation~\ref{eq:pheromone_increasing}).
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{fig/routing_table.pdf}
+\caption{ADHOP Routing Table Structure.}
+\label{fig:routing_table}
+\end{figure}
+
+%- Explain the ADHOP ants.
+%  - Structure.
+ADHOP uses two types of ants to perform operations over the routing tables: \emph{Forward Transport Ant} (FTA) and \emph{Exploratory Transport Ant} (ETA).
+Both ants share the data structure shown in Figure~\ref{fig:protocol}.
+The data structure includes traditional fields such as the \emph{Source} and \emph{Destination} addresses.
+The \emph{Previous} field stores the address of the previous node.
+ADHOP uses the \emph{SequenceNO} field for sequence control.
+The \emph{Type} field indicates the ant category, and the \emph{Hops} field indicates the number of hops the ant has done.
+The field \emph{Heuristic Inf.} stores the necessary heuristic information to support the pheromone evaporation and deposit functions.
+These ants help to reduce the complexity by offering better tactics to diffuse and check pheromone along the network.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{fig/protocol.pdf}
+\caption{ADHOP Ant Structure.}
+\label{fig:protocol}
+\end{figure}
+
+%  - Data Transmission.
+The UML sequence diagram in Figure~\ref{fig:data_tx} shows the data transmission procedure.
+Both FTA and ETA deliver data while depositing pheromone on the routes they use.
+This ensures that sudden changes in the network topology do not interfere with data transportation.
+Ants unwittingly notice the changes in topology as the amount of pheromone in a link varies.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{fig/data_tx.pdf}
+\caption{ADHOP - Data Transmission.}
+\label{fig:data_tx}
+\end{figure}
+
+%  - FTA.
+Figure~\ref{fig:rx_fta} shows a UML sequence diagram depicting the reception of a FTA.
+Upon the reception of a FTA, if the packet has reached its destination, ADHOP delivers the data to the upper layer.
+If the destination has not been reached yet, ADHOP looks up for the next hop in the ADHOP-RT and forwards the FTA.
+It forwards a new ETA if there is no known route to the destination.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{fig/rx_fta.pdf}
+\caption{ADHOP - Reception of a Forward Transport Ant (FTA).}
+\label{fig:rx_fta}
+\end{figure}
+
+%  - ETA.
+ETAs are responsible for discovering routes to unknown nodes.
+Each node retransmits the ETAs to all of its neighbors until the ant reaches either the destination or a node that has a route to the destination.
+At the destination, the ETA delivers the data packet and returns to the source node.
+Figure~\ref{fig:rx_eta} shows the sequence diagram for the reception of an ETA.
+On the way back, the ant reinforces the pheromone trail.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{fig/rx_eta.pdf}
+\caption{ADHOP - Reception of an Exploratory Transport Ant (ETA).}
+\label{fig:rx_eta}
+\end{figure}
+
+%- Explain how different heuristics can affect the routing in ADHOP changing such operations.
+It is possible to extend the routing mechanism of ADHOP using the \emph{Heuristic Inf.} field of the protocol header (Figure~\ref{fig:protocol}) to transmit relevant information among nodes.
+The information exchanged through the \emph{Heuristic Inf.} field may be used in modified versions of the equations for deposit and evaporation of pheromone (Equations~\ref{eq:pheromone_increasing} and~\ref{eq:evaporation}) to affect the routing.
+For instance, the battery charge of the neighbor nodes may affect the deposit function so that links to nodes with more energy have more pheromone than links to nodes with less energy.
+This would balance energy utilization across the network and help to extend the lifetime of the network as a whole.
+
+%- Explain how ADHOP can use other information to achieve the goal for a particular application.
+% Some routing protocols have been specifically designed for WSNs, but most of them aim at optimizing packet delivery focusing on a single network aspect, such as latency, bandwidth, channel quality, or energy consumption.
+% The goal of this algorithm is to self-configure according to the network or application needs.
+
+% section adhop (end)
+

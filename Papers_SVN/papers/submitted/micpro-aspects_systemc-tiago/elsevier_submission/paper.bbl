@@ -1,0 +1,171 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{Panda:2001}
+P.~R. Panda, {SystemC: a modeling platform supporting multiple design
+  abstractions}, in: Proceedings of the 14th international symposium on Systems
+  synthesis, ISSS '01, ACM, New York, NY, USA, 2001, pp. 75--80.
+
+\bibitem{VHDL:2000}
+IEEE, Std 1076-2000: IEEE Standard VHDL Language Reference Manual (2000).
+
+\bibitem{Verilog:2001}
+IEEE, Std 1364-2001: IEEE Standard Verilog Hardware Description Language
+  (2001).
+
+\bibitem{Engel:2008}
+M.~Engel, O.~Spinczyk, {Aspects in hardware: what do they look like?}, in:
+  Proceedings of the 2008 AOSD workshop on Aspects, components, and patterns
+  for infrastructure software, ACP4IS '08, ACM, New York, NY, USA, 2008, pp.
+  5:1--5:6.
+
+\bibitem{Endoh:2011}
+Y.~Endoh, {ASystemC: an AOP extension for hardware description language}, in:
+  Proceedings of the tenth international conference on Aspect-oriented software
+  development companion, AOSD '11, ACM, New York, NY, USA, 2011, pp. 19--28.
+
+\bibitem{Kiczales:1997}
+G.~Kiczales, J.~Lamping, A.~Mendhekar, C.~Maeda, C.~V. Lopes, J.-M. Loingtier,
+  J.~Irwin, {Aspect-Oriented Programming}, in: Proceedings of the European
+  Conference on Object-oriented Programming'97, Vol. 1241 of Lecture Notes in
+  Computer Science, Springer, Jyväskylä, Finland, 1997, pp. 220--242.
+
+\bibitem{Kiczales:2001}
+G.~Kiczales, E.~Hilsdale, J.~Hugunin, M.~Kersten, J.~Palm, W.~G. Griswold, {An
+  Overview of AspectJ}, in: Proceedings of the 15th European Conference on
+  Object-Oriented Programming, ECOOP '01, Springer-Verlag, London, UK, UK,
+  2001, pp. 327--353.
+
+\bibitem{Spinczyk:2002}
+O.~Spinczyk, A.~Gal, W.~Schr\"{o}der-Preikschat, {AspectC++: an aspect-oriented
+  extension to the C++ programming language}, in: Proceedings of the Fortieth
+  International Conference on Tools Pacific: Objects for internet, mobile and
+  embedded applications, CRPIT '02, Australian Computer Society, Inc.,
+  Darlinghurst, Australia, Australia, 2002, pp. 53--60.
+
+\bibitem{Kallel:2010}
+M.~Kallel, Y.~Lahbib, R.~Tourki, A.~Baganne, Verification of systemc
+  transaction level models using an aspect-oriented and generic approach, in:
+  Design and Technology of Integrated Systems in Nanoscale Era (DTIS), 2010 5th
+  International Conference on, 2010, pp. 1 --6.
+
+\bibitem{Liu:2010}
+F.~Liu, Q.~Tan, X.~Song, N.~Abbasi, {AOP-based high-level power estimation in
+  SystemC}, in: Proceedings of the 20th symposium on Great lakes symposium on
+  VLSI, GLSVLSI '10, ACM, New York, NY, USA, 2010, pp. 353--356.
+
+\bibitem{Vachharajani:2004}
+M.~Vachharajani, N.~Vachharajani, D.~I. August, {The liberty structural
+  specification language: a high-level modeling language for component reuse},
+  in: Proceedings of the ACM SIGPLAN 2004 conference on Programming language
+  design and implementation, PLDI '04, ACM, New York, NY, USA, 2004, pp.
+  195--206.
+
+\bibitem{FengLiu:2009}
+F.~Liu, O.~A. Mohamed, X.~Song, Q.~Tan, {A case study on system-level modeling
+  by aspect-oriented programming}, in: Proceedings of the 2009 10th
+  International Symposium on Quality of Electronic Design, IEEE Computer
+  Society, Washington, DC, USA, 2009, pp. 345--349.
+
+\bibitem{Jun:2009}
+Y.~Jun, L.~Tun, T.~Qingping, {The application of Aspectual Feature Module in
+  the development and verification of SystemC models}, in: Specification Design
+  Languages, 2009. FDL 2009. Forum on, 2009, pp. 1 --6.
+
+\bibitem{Deharbe:2006}
+D.~D\'{e}harbe, S.~Medeiros, {Aspect-oriented design in systemC: implementation
+  and applications}, in: Proceedings of the 19th annual symposium on Integrated
+  circuits and systems design, SBCCI '06, ACM, New York, NY, USA, 2006, pp.
+  119--124.
+
+\bibitem{systemc_subset}
+{OSCI}, \href{http://www.systemc.org/}{{SystemC Synthesizable Subset Draft
+  1.3}} (2010).
+\newline\urlprefix\url{http://www.systemc.org/}
+
+\bibitem{Bainbridge-Smith:2005}
+A.~Bainbridge-Smith, S.-H. Park, {ADH: an aspect described hardware programming
+  language}, in: Field-Programmable Technology, 2005. Proceedings. 2005 IEEE
+  International Conference on, 2005, pp. 283 -- 284.
+
+\bibitem{Burapathana:2005}
+P.~Burapathana, P.~Pitsatorn, B.~Sowanwanichkul, {An Applying Aspect-Oriented
+  Concept to Sequential Logic Design}, in: Proceedings of the International
+  Conference on Information Technology: Coding and Computing (ITCC'05) - Volume
+  II - Volume 02, ITCC '05, IEEE Computer Society, Washington, DC, USA, 2005,
+  pp. 819--820.
+
+\bibitem{Cai:2003}
+L.~Cai, D.~Gajski, {Transaction level modeling: an overview}, in: Proceedings
+  of the 1st IEEE/ACM/IFIP international conference on Hardware/software
+  codesign and system synthesis, CODES+ISSS '03, ACM, New York, NY, USA, 2003,
+  pp. 19--24.
+
+\bibitem{Meier:2012}
+M.~Meier, S.~Hanenberg, O.~Spinczyk,
+  \href{http://doi.acm.org/10.1145/2162024.2162028}{Aspectvhdl stage 1: the
+  prototype of an aspect-oriented hardware description language}, in:
+  Proceedings of the 2012 workshop on Modularity in Systems Software, MISS '12,
+  ACM, New York, NY, USA, 2012, pp. 3--8.
+\newblock \href {http://dx.doi.org/10.1145/2162024.2162028}
+  {\path{doi:10.1145/2162024.2162028}}.
+\newline\urlprefix\url{http://doi.acm.org/10.1145/2162024.2162028}
+
+\bibitem{Vax:2007}
+M.~Vax, {Conservative aspect-orientated programming with the e language}, in:
+  Proceedings of the 6th international conference on Aspect-oriented software
+  development, AOSD '07, ACM, New York, NY, USA, 2007, pp. 149--160.
+
+\bibitem{Apel:2008}
+S.~Apel, T.~Leich, G.~Saake, {Aspectual Feature Modules}, IEEE Trans. Softw.
+  Eng. 34 (2008) 162--180.
+
+\bibitem{Froehlich:2001}
+A.~A. Fröhlich, {Application-Oriented Operating Systems}, no.~17 in GMD
+  Research Series, GMD - Forschungszentrum Informationstechnik, Sankt Augustin,
+  2001.
+
+\bibitem{Froehlich:2000}
+A.~A. Fröhlich, W.~Schröder-Preikschat, {Scenario Adapters: Efficiently
+  Adapting Components}, in: Proceedings of the 4th World Multiconference on
+  Systemics, Cybernetics and Informatics, Orlando, USA, 2000.
+
+\bibitem{Coplien:1995}
+J.~O. Coplien, Curiously recurring template patterns, C++ Rep. 7 (1995) 24--27.
+
+\bibitem{Czarnecki:2000}
+K.~Czarnecki, U.~W. Eisenecker, {Generative programming: methods, tools, and
+  applications}, ACM Press/Addison-Wesley Publishing Co., New York, NY, USA,
+  2000.
+
+\bibitem{EPOS}
+{The EPOS Project}, \href{http://epos.lisha.ufsc.br/}{{Embedded Parallel
+  Operating System}} (2012).
+\newline\urlprefix\url{http://epos.lisha.ufsc.br/}
+
+\bibitem{Marcondes:2009:2}
+H.~Marcondes, R.~Cancian, M.~Stemmer, A.~A. Fröhlich, {On the Design of
+  Flexible Real-Time Schedulers for Embedded Systems}, in: Proceedings of the
+  2009 International Conference on Computational Science and Engineering -
+  Volume 02, CSE '09, IEEE Computer Society, Washington, DC, USA, 2009, pp.
+  382--387.
+
+\bibitem{Xinyi:2010}
+Z.~Xinyi, {The FPGA Implementation of Modified Goertzel Algorithm for DTMF
+  Signal Detection}, in: Proc. of the 2010 International Conference on
+  Electrical and Control Engineering, Wuhan, China, 2010, pp. 4811--4815.
+
+\bibitem{Williams:1983}
+T.~Williams, K.~Parker, {Design for testability--A survey}, Proceedings of the
+  IEEE 71~(1) (1983) 98--112.
+
+\bibitem{adpcm}
+{ITU-T}, \href{http://www.itu.int}{{ITU-T Recommendation G.726: 40, 32, 24, 16
+  kbit/s Adaptive Differential Pulse Code Modulation (ADPCM)}} (1990).
+\newline\urlprefix\url{http://www.itu.int}
+
+\end{thebibliography}

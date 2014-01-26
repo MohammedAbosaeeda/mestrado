@@ -1,0 +1,55 @@
+Título: Escalonadores RT-DVS no sistem EPOS
+
+Resumo
+
+Introdução
+    Energia e soluções.
+    
+    Justificativa (não se aprofundar)
+            Dizer o que é DVS.
+            Mostrar por que DVS é bom (pra embarcados).
+            Mostrar que muitos embarcados precisam de TR.
+            Mostrar que isso causa um problema.
+            Mostrar como Pillai solucionou o problema.
+            Mostrar que é RT-DVS é bom.
+ 
+    Objetivos
+            Portar o EPOS para hardware com DVS.
+            Implementar os escalonadores propostos por Pillai.
+            
+Fudamentos
+    Energia.
+    DVS.
+    Aplicações de tempo real.
+    O problema RT-DVS.
+    Como Pillai combateu RT-DVS.
+    O sistema operacional EPOS.
+                
+Trabalhos Correlatos (procurar os que citam Pillai)
+    Classificação dos trabalhos RT-DVS (survey)
+    Em qual enquadra o trabalho.
+    Sistemas equivalentes que implementam.
+    O que se tem feito ultimamente.
+                
+Desenvolvimento (duas partes)
+    Criando suporte a DVS.
+        Plataforma de Hardware Escolhida
+            Trabalho preliminar com MC13224V
+            Gumstix e PXA255
+        Porte do EPOS
+            Alteração do CRT
+            MMU
+    Utilizando suporte a DVS.
+        Possíveis modificações no EPOS
+
+Experimentação.
+
+Resultados.
+
+Conclusão.
+    
+
+    
+    
+
+

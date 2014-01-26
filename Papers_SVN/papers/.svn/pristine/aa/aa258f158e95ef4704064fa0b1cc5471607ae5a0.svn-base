@@ -1,0 +1,1409 @@
+From lutz.wohlrab@informatik.tu-chemnitz.de Mon Apr 19 08:00:29 1999
+Received: from obelix.hrz.tu-chemnitz.de (obelix.hrz.tu-chemnitz.de [134.109.132.55])
+	by prosun.first.gmd.de (8.9.1a/8.9.1) with ESMTP id IAA19189
+	for <guto@first.gmd.de>; Mon, 19 Apr 1999 08:00:25 +0200 (MEST)
+Received: from sunnyboy.informatik.tu-chemnitz.de by obelix.hrz.tu-chemnitz.de 
+          with Local SMTP (PP); Mon, 19 Apr 1999 07:59:53 +0200
+Received: from mykonos.informatik.tu-chemnitz.de.informatik.tu-chemnitz.de (mykonos.informatik.tu-chemnitz.de [134.109.184.25]) 
+          by sunnyboy.informatik.tu-chemnitz.de (8.8.8/8.8.8) with ESMTP 
+          id HAA18885; Mon, 19 Apr 1999 07:59:51 +0200 (METDST)
+From: Lutz Wohlrab <lutz.wohlrab@informatik.tu-chemnitz.de>
+Received: by mykonos.informatik.tu-chemnitz.de.informatik.tu-chemnitz.de (8.8.5/client-1.5) 
+          id HAA13022; Mon, 19 Apr 1999 07:59:49 +0200 (MET DST)
+Message-Id: <199904190559.HAA13022@mykonos.informatik.tu-chemnitz.de.informatik.tu-chemnitz.de>
+Subject: Your paper for ECOOP-OOOSWS'99
+To: danilo@wotan.CS.Uni-Magdeburg.De, Christophe.Gransart@lifl.fr,
+        gel@cs.city.ac.uk, f-kon@cs.uiuc.edu, hof@ssw.uni-linz.ac.at,
+        mwc@comp.lancs.ac.uk, Ian.Piumarta@inria.fr, guto@first.gmd.de,
+        darioa@pinon.ccu.uniovi.es
+Date: Mon, 19 Apr 1999 07:59:49 +0200 (MET DST)
+Cc: lutz.wohlrab@informatik.tu-chemnitz.de (Lutz Wohlrab),
+        wosch@wotan.CS.Uni-Magdeburg.De
+Return-Receipt-To: lwo@informatik.tu-chemnitz.de
+Reply-To: lutz.wohlrab@informatik.tu-chemnitz.de
+X-Mailer: ELM [version 2.4 PL21]
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Mozilla-Status: 8001
+X-Mozilla-Status2: 00800000
+
+Hi all,
+
+Your papers have been received by the ECOOP-OOOSWS'99 organizing team.
+All except Dario's, Ian's, and Antonio Augusto's I already printed
+successfully. The PostScript code of the rest looks OK, so I expect no 
+printing problems.
+
+All I can say now from reading a couple of submitted papers is that we can
+look forward to a real nice workshop. The submissions are less diverse than
+in '97, more lively discussions can be anticipated.
+
+Thanks a lot for your support of ECOOP-OOOSWS'99.
+
+-- 
+Cheers Lutz.
+lwo@informatik.tu-chemnitz.de
+
+From nemo@gsyc.inf.uc3m.es Fri Apr 30 20:12:29 1999
+X-UIDL: 03cb3d71182e8fb4e3aaaa10f7f86754
+Received: from ordago.gsyc.inf.uc3m.es (ordago.gsyc.inf.uc3m.es [163.117.137.150
+])
+        by prosun.first.gmd.de (8.9.1a/8.9.1) with SMTP id UAA01847
+        for <guto@first.gmd.de>; Fri, 30 Apr 1999 20:12:28 +0200 (MEST)
+Received: from gsyc.inf.uc3m.es (nemo@nautilus.gsyc.inf.uc3m.es [163.117.137.171
+]) by ordago.gsyc.inf.uc3m.es (8.6.12/8.6.12) with ESMTP id UAA24030; Fri, 30 Ap
+r 1999 20:02:55 +0200
+Received: (from nemo@localhost)
+        by gsyc.inf.uc3m.es (8.8.7/8.8.5) id UAA18320;
+        Fri, 30 Apr 1999 20:07:26 +0200
+Date: Fri, 30 Apr 1999 20:07:26 +0200
+Message-Id: <199904301807.UAA18320@gsyc.inf.uc3m.es>
+From: "Fco. J. Ballesteros" <nemo@gsyc.inf.uc3m.es>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+To: guto@first.gmd.de
+Subject: ECOOP OOOSWS'99 submission status
+X-Mailer: VM 6.31 under Emacs 20.3.1
+Content-Transfer-Encoding: 8bit
+X-MIME-Autoconverted: from quoted-printable to 8bit by prosun.first.gmd.de id UA
+A01847
+Status: RO
+X-Mozilla-Status: 8001
+X-Mozilla-Status2: 00000000
+ 
+ 
+We are happy to let you know that your submission "EPOS: Status Report
+99/1" has been accepted for ECOOP-OOOSWS'99.  A 15 minutes
+presentation slot will be allocated for you.
+
+We will publish a 5 pages long (final) version of your paper. However,
+due to new ECOOP workshop reader editor requirements, we cannot do
+that within the ECOOP workshop reader. We will publish the workshop
+proceedings with an ISSN as part of the series "Chemnitzer
+Informatik-Berichte". As soon as we get detailed instructions we will
+let you know how to format the camera-ready version of your paper.
+
+A page with abstracts for accepted papers will be set up soon in the
+workshop web site
+(http://www.tu-chemnitz.de/informatik/osg/ecoopooosws/ecoop-ooosws99).
+Later,
+final versions for such papers will be placed there too. Please, take
+some time to read papers from others to make workshop interaction more
+fruitful. 
+
+Finally, remember that deadline for your camera-ready paper is
+Jun-7th. Early registration for ECOOP is also approaching.
+
+We are looking forward to meeting you in Lisbon.
+
+Kind regards,
+Francisco Ballesteros,
+Henning Schmidt,
+Frank Schubert,
+Ashish Singhai,
+Lutz Wohlrab.
+From lutz.wohlrab@informatik.tu-chemnitz.de Wed Apr 28 07:28:53 1999
+X-UIDL: 854d9dd8fbf8244472d6406341602ed8
+Received: from obelix.hrz.tu-chemnitz.de (obelix.hrz.tu-chemnitz.de [134.109.132.55])
+	by prosun.first.gmd.de (8.9.1a/8.9.1) with ESMTP id HAA11437
+	for <guto@first.gmd.de>; Wed, 28 Apr 1999 07:28:52 +0200 (MEST)
+Received: from sunnyboy.informatik.tu-chemnitz.de by obelix.hrz.tu-chemnitz.de 
+          with Local SMTP (PP); Wed, 28 Apr 1999 07:28:28 +0200
+Received: from mykonos.informatik.tu-chemnitz.de.informatik.tu-chemnitz.de (mykonos.informatik.tu-chemnitz.de [134.109.184.25]) 
+          by sunnyboy.informatik.tu-chemnitz.de (8.8.8/8.8.8) with ESMTP 
+          id HAA00320; Wed, 28 Apr 1999 07:28:24 +0200 (METDST)
+From: Lutz Wohlrab <lutz.wohlrab@informatik.tu-chemnitz.de>
+Received: by mykonos.informatik.tu-chemnitz.de.informatik.tu-chemnitz.de (8.8.5/client-1.5) 
+          id HAA16129; Wed, 28 Apr 1999 07:28:22 +0200 (MET DST)
+Message-Id: <199904280528.HAA16129@mykonos.informatik.tu-chemnitz.de.informatik.tu-chemnitz.de>
+Subject: Number of participants
+To: danilo@wotan.CS.Uni-Magdeburg.De, Christophe.Gransart@lifl.fr,
+        gel@cs.city.ac.uk, f-kon@cs.uiuc.edu, hof@ssw.uni-linz.ac.at,
+        mwc@comp.lancs.ac.uk, carine.baillarguet@inria.fr, guto@first.gmd.de,
+        darioa@pinon.ccu.uniovi.es, nemo@gsyc.inf.uc3m.es,
+        nemo@gsyc.inf.uc3m.es, Ashish.Singhai@ACM.ORG,
+        Frank.Schubert@informatik.tu-chemnitz.de,
+        hesch@haiti.cs.uni-potsdam.de
+Date: Wed, 28 Apr 1999 07:28:22 +0200 (MET DST)
+Cc: lutz.wohlrab@informatik.tu-chemnitz.de (Lutz Wohlrab)
+Return-Receipt-To: lwo@informatik.tu-chemnitz.de
+Reply-To: lutz.wohlrab@informatik.tu-chemnitz.de
+X-Mailer: ELM [version 2.4 PL21]
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+Status: RO
+X-Status: A
+X-Mozilla-Status: 8001
+X-Mozilla-Status2: 00800000
+
+Dear submitters of papers to ECOOP-OOOSWS'99,
+
+1. 
+The workshop chair requests the estimated number of participants from us, in
+order to allocate workshop reader space to workshops. Please tell me how
+many people from your group would like to attend ECOOP-OOOSWS'99 in case
+your paper was accepted.
+
+2.
+Please send me the ASCII source of your paper abstracts. They will be needed
+for the preparation of the publication and probably the web site.
+
+Kind regards,
+Lutz. 
+lwo@informatik.tu-chemnitz.de
+
+From nemo@gsyc.inf.uc3m.es Fri Apr 30 20:12:29 1999
+X-UIDL: 03cb3d71182e8fb4e3aaaa10f7f86754
+Received: from ordago.gsyc.inf.uc3m.es (ordago.gsyc.inf.uc3m.es [163.117.137.150])
+	by prosun.first.gmd.de (8.9.1a/8.9.1) with SMTP id UAA01847
+	for <guto@first.gmd.de>; Fri, 30 Apr 1999 20:12:28 +0200 (MEST)
+Received: from gsyc.inf.uc3m.es (nemo@nautilus.gsyc.inf.uc3m.es [163.117.137.171]) by ordago.gsyc.inf.uc3m.es (8.6.12/8.6.12) with ESMTP id UAA24030; Fri, 30 Apr 1999 20:02:55 +0200
+Received: (from nemo@localhost)
+	by gsyc.inf.uc3m.es (8.8.7/8.8.5) id UAA18320;
+	Fri, 30 Apr 1999 20:07:26 +0200
+Date: Fri, 30 Apr 1999 20:07:26 +0200
+Message-Id: <199904301807.UAA18320@gsyc.inf.uc3m.es>
+From: "Fco. J. Ballesteros" <nemo@gsyc.inf.uc3m.es>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+To: guto@first.gmd.de
+Subject: ECOOP OOOSWS'99 submission status
+X-Mailer: VM 6.31 under Emacs 20.3.1
+Content-Transfer-Encoding: 8bit
+X-MIME-Autoconverted: from quoted-printable to 8bit by prosun.first.gmd.de id UAA01847
+Status: RO
+X-Mozilla-Status: 8001
+X-Mozilla-Status2: 00000000
+
+
+We are happy to let you know that your submission "EPOS: Status Report
+99/1" has been accepted for ECOOP-OOOSWS'99.  A 15 minutes
+presentation slot will be allocated for you.
+
+We will publish a 5 pages long (final) version of your paper. However,
+due to new ECOOP workshop reader editor requirements, we cannot do
+that within the ECOOP workshop reader. We will publish the workshop
+proceedings with an ISSN as part of the series "Chemnitzer
+Informatik-Berichte". As soon as we get detailed instructions we will
+let you know how to format the camera-ready version of your paper.
+
+A page with abstracts for accepted papers will be set up soon in the
+workshop web site
+(http://www.tu-chemnitz.de/informatik/osg/ecoopooosws/ecoop-ooosws99). Later,
+final versions for such papers will be placed there too. Please, take
+some time to read papers from others to make workshop interaction more
+fruitful. 
+
+Finally, remember that deadline for your camera-ready paper is
+Jun-7th. Early registration for ECOOP is also approaching.
+
+We are looking forward to meeting you in Lisbon.
+
+The reviewers suggest the following improvements of your paper before it
+gets published:
+----------------------------------------------------------------------
+comment #1:
+
+The title looks like that of a first deliverable. I don't like that. 
+I miss a cite for exo. 
+Some english pitfalls. 
+After all, it's not clear to me how automatic generation could be done.
+
+Second par. of section#4. I understand, but it's hard for me to understand. 
+
+Are system abs. rep. and building-block rep. different reps? Otherwise
+they're making the rep grow. 
+
+Shouldn't their rep abstractions provide hooks so they could be (let's
+say, e.g.) locked for concurrent access and so on? Otherwise might
+lead to inefficiencies. Besides, how to avoid deadlocks in the
+generated blocks in this example?
+
+Who writes adapters? Won't they suffer an explosion of scenarios (zero
+copy transport vs non-zero copy, U-net vs traditional devices, etc.). 
+
+fix english.
+
+comment #2:
+
+I think we should not mix OS for massively parallel systems with widely used
+systems used only on machines with one up to 64 processors, mostly on single
+processor systems running a multitude of applications simultaneously.
+On a single processor machine a system statically tailored to the needs of a
+single application makes sense only if this application is the only one.
+Live and let others live. 
+
+As I understand this paper, the purpose of EPOS is twofold: (1) bring Pure
+to another target system (massively parallel system instead of deeply
+embedded system) and (2) provide building blocks of coarser grain to be
+handled by application programmers
+
+Scenario independent abstractions and inflated interfaces are proposed as
+means for providing OS abstractions as building blocks/providing flavours of
+them whose interfaces of them compatible to specific implementations.
+
+The scenario adaptor´s purpose remains unclear until the last few sentences.
+They should be more clearly explained at the point they are introduced.
+
+How does a OS blueprint look like? How does the application analyzer work?
+I miss something about WABE and EPOS´ relation to it.
+
+The paper still needs some proofreading, there are a few grammar problems.
+
+Tell him to ask someone to proofread the paper :-)
+
+comment #3:
+
+Surprisingly, though EPOS is nearby (or related) to our project
+work, I do not know much about it. So I am hopeful to learn
+more about it during the workshop ...:-)
+I met A.A. Froehlich (by the way: despite his german-sounding name,
+he is from Brazil) twice at GMD and we had both times interesting
+discussions. He surely will be an enrichment for the workshop
+(I admit, this is absolutely not an objective opinion).
+----------------------------------------------------------------------
+
+Kind regards,
+Francisco Ballesteros,
+Henning Schmidt,
+Frank Schubert,
+Ashish Singhai,
+Lutz Wohlrab.
+
+
+From nemo@gsyc.inf.uc3m.es Tue May 18 20:46:10 1999
+Received: from ordago.gsyc.inf.uc3m.es (ordago.gsyc.inf.uc3m.es [163.117.137.150])
+	by prosun.first.gmd.de (8.9.1a/8.9.1) with SMTP id UAA23999
+	for <guto@first.gmd.de>; Tue, 18 May 1999 20:46:08 +0200 (MEST)
+Received: from gsyc.inf.uc3m.es (nemo@nautilus.gsyc.inf.uc3m.es [163.117.137.171]) by ordago.gsyc.inf.uc3m.es (8.6.12/8.6.12) with ESMTP id UAA11984; Tue, 18 May 1999 20:35:25 +0200
+Received: (from nemo@localhost)
+	by gsyc.inf.uc3m.es (8.8.7/8.8.5) id UAA03675;
+	Tue, 18 May 1999 20:39:55 +0200
+Date: Tue, 18 May 1999 20:39:55 +0200
+Message-Id: <199905181839.UAA03675@gsyc.inf.uc3m.es>
+From: "Fco. J. Ballesteros" <nemo@gsyc.inf.uc3m.es>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+To: lwo@informatik.tu-chemnitz.de, mwc@comp.lancs.ac.uk,
+        hof@ssw.uni-linz.ac.at, carine.baillarguet@inria.fr, f-kon@cs.uiuc.edu,
+        darioa@pinon.ccu.uniovi.es, danilo@wotan.CS.Uni-Magdeburg.De,
+        Christophe.Gransart@lifl.fr, guto@first.gmd.de,
+        rm@haiti.cs.uni-potsdam.de, fsc@informatik.tu-chemnitz.de,
+        nemo@gsyc.inf.uc3m.es
+Subject: ECOOP OOOSWS'99 program (preliminary)
+X-Mailer: VM 6.31 under Emacs 20.3.1
+X-Mozilla-Status: 8001
+X-Mozilla-Status2: 00000000
+
+
+Dear ECOOP OOOSWS'99 participants, 
+
+in the worshop home page
+http://www.tu-chemnitz.de/informatik/osg/ecoopooosws/ecoop-ooosws99/index.html
+you can find two useful links: 
+
+    * `Accepted position papers', with the list of authors and papers
+presented at the workshop. 
+
+    * `Timetable', with the (preliminary) schedule for the workshop.
+
+We kindly request you to read papers from others to make the workshop
+more fruitful. 
+
+We will e-mail you soon detailed instructions on how to format the
+camera ready final version of your paper.
+
+Regards,
+    ECOOP OOOSWS'99 organizers.
+
+From lutz.wohlrab@informatik.tu-chemnitz.de Fri May 28 08:06:21 1999
+Received: from asterix.hrz.tu-chemnitz.de (asterix.hrz.tu-chemnitz.de [134.109.132.84])
+	by prosun.first.gmd.de (8.9.1a/8.9.1) with ESMTP id IAA13968
+	for <guto@first.gmd.de>; Fri, 28 May 1999 08:05:21 +0200 (MEST)
+Received: from sunnyboy.informatik.tu-chemnitz.de by asterix.hrz.tu-chemnitz.de 
+          with Local SMTP (PP); Fri, 28 May 1999 08:04:59 +0200
+Received: from mykonos.informatik.tu-chemnitz.de.informatik.tu-chemnitz.de (mykonos.informatik.tu-chemnitz.de [134.109.184.25]) 
+          by sunnyboy.informatik.tu-chemnitz.de (8.8.8/8.8.8) with ESMTP 
+          id IAA15019; Fri, 28 May 1999 08:04:54 +0200 (MET DST)
+From: Lutz Wohlrab <lutz.wohlrab@informatik.tu-chemnitz.de>
+Received: by mykonos.informatik.tu-chemnitz.de.informatik.tu-chemnitz.de (8.8.5/client-1.5) 
+          id IAA03705; Fri, 28 May 1999 08:04:57 +0200 (MET DST)
+Message-Id: <199905280604.IAA03705@mykonos.informatik.tu-chemnitz.de.informatik.tu-chemnitz.de>
+Subject: Re: sample document
+To: nemo@gsyc.inf.uc3m.es, Ashish.Singhai@ACM.ORG,
+        Frank.Schubert@informatik.tu-chemnitz.de,
+        hesch@haiti.cs.uni-potsdam.de, danilo@wotan.CS.Uni-Magdeburg.De,
+        Christophe.Gransart@lifl.fr, gel@cs.city.ac.uk, f-kon@cs.uiuc.edu,
+        hof@ssw.uni-linz.ac.at, mwc@comp.lancs.ac.uk,
+        carine.baillarguet@inria.fr, guto@first.gmd.de,
+        darioa@pinon.ccu.uniovi.es, nemo@gsyc.inf.uc3m.es,
+        rm@haiti.cs.uni-potsdam.de, Frank.Schubert@informatik.tu-chemnitz.de
+Date: Fri, 28 May 1999 08:04:57 +0200 (MET DST)
+Cc: lutz.wohlrab@informatik.tu-chemnitz.de (Lutz Wohlrab)
+Return-Receipt-To: lwo@informatik.tu-chemnitz.de
+Reply-To: lutz.wohlrab@informatik.tu-chemnitz.de
+X-Mailer: ELM [version 2.4 PL21]
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Mozilla-Status: 8011
+X-Mozilla-Status2: 00800000
+
+Hi,
+
+I'll have a look during the weekend at the suggested sample, and email you
+on Monday. Should be OK, there need not be undue hurry in that issue.
+
+-- 
+Cheers Lutz.
+lwo@informatik.tu-chemnitz.de
+
+From ALEXANDRA@traducta.pt Fri May 28 11:31:43 1999
+Received: from mail2.ip.pt (mail2.ip.pt [194.79.69.132])
+	by prosun.first.gmd.de (8.9.1a/8.9.1) with ESMTP id LAA17446
+	for <guto@first.gmd.de>; Fri, 28 May 1999 11:29:36 +0200 (MEST)
+Received: from traducta.pt (s00060.lisboa.net.ip.pt [195.23.27.188])
+	   by mail2.ip.pt with SMTP
+	   id KAA09322 for <guto@first.gmd.de>; Fri, 28 May 1999 10:29:15 +0100 (WEST)
+Received: from TRADDO-Message_Server by traducta.pt
+	with Novell_GroupWise; Fri, 28 May 1999 10:14:29 +0200
+Message-Id: <s74e6c85.027@traducta.pt>
+X-Mailer: Novell GroupWise 5.2
+Date: Fri, 28 May 1999 11:14:09 +0200
+From: ALEXANDRA <ALEXANDRA@traducta.pt>
+To: guto@first.gmd.de
+Subject: ECOOP REGISTRATION'99 - REGISTRATION
+Mime-Version: 1.0
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+X-MIME-Autoconverted: from quoted-printable to 8bit by prosun.first.gmd.de id LAA17446
+X-Mozilla-Status: 8001
+X-Mozilla-Status2: 00000000
+
+Dear Sir
+
+Thanks for your mail 
+
+We confirm that we've received your registration for the above conference.We have a big allotment at all the hotels, so you w'ont have any problem, there´s a pre-reservation at Hotel Continental, double, from 13th until 18th June. 
+
+Next week, when we charge the payments we will send you an officialy confirmation of your registration at the above conference.
+
+Best Regards
+
+
+Alexandra Lourenço
+
+
+
+From lutz.wohlrab@informatik.tu-chemnitz.de Fri May 28 20:22:19 1999
+X-UIDL: 42afd34f53c88efe417186888f93a847
+Received: from asterix.hrz.tu-chemnitz.de (asterix.hrz.tu-chemnitz.de [134.109.132.84])
+	by prosun.first.gmd.de (8.9.1a/8.9.1) with ESMTP id UAA25863
+	for <guto@first.gmd.de>; Fri, 28 May 1999 20:22:16 +0200 (MEST)
+Received: from sunnyboy.informatik.tu-chemnitz.de by asterix.hrz.tu-chemnitz.de 
+          with Local SMTP (PP); Fri, 28 May 1999 20:21:39 +0200
+Received: from mykonos.informatik.tu-chemnitz.de.informatik.tu-chemnitz.de (mykonos.informatik.tu-chemnitz.de [134.109.184.25]) 
+          by sunnyboy.informatik.tu-chemnitz.de (8.8.8/8.8.8) with ESMTP 
+          id UAA28673; Fri, 28 May 1999 20:21:37 +0200 (MET DST)
+From: Lutz Wohlrab <lutz.wohlrab@informatik.tu-chemnitz.de>
+Received: by mykonos.informatik.tu-chemnitz.de.informatik.tu-chemnitz.de (8.8.5/client-1.5) 
+          id UAA04434; Fri, 28 May 1999 20:21:36 +0200 (MET DST)
+Message-Id: <199905281821.UAA04434@mykonos.informatik.tu-chemnitz.de.informatik.tu-chemnitz.de>
+Subject: Sorry
+To: nemo@gsyc.inf.uc3m.es, Ashish.Singhai@ACM.ORG,
+        Frank.Schubert@informatik.tu-chemnitz.de,
+        hesch@haiti.cs.uni-potsdam.de, danilo@wotan.CS.Uni-Magdeburg.De,
+        Christophe.Gransart@lifl.fr, gel@cs.city.ac.uk, f-kon@cs.uiuc.edu,
+        hof@ssw.uni-linz.ac.at, mwc@comp.lancs.ac.uk,
+        carine.baillarguet@inria.fr, guto@first.gmd.de,
+        darioa@pinon.ccu.uniovi.es, nemo@gsyc.inf.uc3m.es,
+        rm@haiti.cs.uni-potsdam.de, Frank.Schubert@informatik.tu-chemnitz.de
+Date: Fri, 28 May 1999 20:21:36 +0200 (MET DST)
+Cc: lutz.wohlrab@informatik.tu-chemnitz.de (Lutz Wohlrab)
+Return-Receipt-To: lwo@informatik.tu-chemnitz.de
+Reply-To: lutz.wohlrab@informatik.tu-chemnitz.de
+X-Mailer: ELM [version 2.4 PL21]
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+Status: RO
+X-Mozilla-Status: 8001
+X-Mozilla-Status2: 00800000
+
+Dear all,
+please forget the mail I sent this morning. Instead of sending it to the
+organizers only (ooosws99org) it somehow :-)  got to the principal authors
+mailing list (ooosws99).
+Please accept my apologies.
+-- 
+Cheers Lutz.
+lwo@informatik.tu-chemnitz.de
+
+From lutz.wohlrab@informatik.tu-chemnitz.de Wed Jun  2 06:57:32 1999
+Received: from obelix.hrz.tu-chemnitz.de (obelix.hrz.tu-chemnitz.de [134.109.132.55])
+	by prosun.first.gmd.de (8.9.1a/8.9.1) with ESMTP id GAA20021
+	for <guto@first.gmd.de>; Wed, 2 Jun 1999 06:57:31 +0200 (MEST)
+Received: from sunnyboy.informatik.tu-chemnitz.de by obelix.hrz.tu-chemnitz.de 
+          with Local SMTP (PP); Wed, 2 Jun 1999 06:57:07 +0200
+Received: from mykonos.informatik.tu-chemnitz.de.informatik.tu-chemnitz.de (mykonos.informatik.tu-chemnitz.de [134.109.184.25]) 
+          by sunnyboy.informatik.tu-chemnitz.de (8.8.8/8.8.8) with ESMTP 
+          id GAA24554; Wed, 2 Jun 1999 06:57:05 +0200 (MET DST)
+From: Lutz Wohlrab <lutz.wohlrab@informatik.tu-chemnitz.de>
+Received: by mykonos.informatik.tu-chemnitz.de.informatik.tu-chemnitz.de (8.8.5/client-1.5) 
+          id GAA25779; Wed, 2 Jun 1999 06:57:05 +0200 (MET DST)
+Message-Id: <199906020457.GAA25779@mykonos.informatik.tu-chemnitz.de.informatik.tu-chemnitz.de>
+Subject: Sample document for the preparation of camera-ready version
+To: nemo@gsyc.inf.uc3m.es, Ashish.Singhai@ACM.ORG,
+        Frank.Schubert@informatik.tu-chemnitz.de,
+        hesch@haiti.cs.uni-potsdam.de, danilo@wotan.CS.Uni-Magdeburg.De,
+        Christophe.Gransart@lifl.fr, gel@cs.city.ac.uk, f-kon@cs.uiuc.edu,
+        hof@ssw.uni-linz.ac.at, mwc@comp.lancs.ac.uk,
+        carine.baillarguet@inria.fr, guto@first.gmd.de,
+        darioa@pinon.ccu.uniovi.es, nemo@gsyc.inf.uc3m.es,
+        rm@haiti.cs.uni-potsdam.de, Frank.Schubert@informatik.tu-chemnitz.de
+Date: Wed, 2 Jun 1999 06:57:05 +0200 (MET DST)
+Return-Receipt-To: lwo@informatik.tu-chemnitz.de
+Reply-To: lutz.wohlrab@informatik.tu-chemnitz.de
+X-Mailer: ELM [version 2.4 PL21]
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Mozilla-Status: 8003
+X-Mozilla-Status2: 00c00000
+
+Forwarded message:
+>From lwo@sunnyboy.informatik.tu-chemnitz.de Wed Jun  2 06:56:29 1999
+From: Lutz Wohlrab <lwo@sunnyboy.informatik.tu-chemnitz.de>
+Date: Wed, 2 Jun 1999 06:56:28 +0200 (MET DST)
+MIME-Version: 1.0
+To: lwo@sunnyboy.informatik.tu-chemnitz.de
+Subject: Sample document for the preparation of camera-ready version
+Message-ID: <1336_25685_928299388_1@mykonos>
+Content-type: multipart/mixed;
+	boundary="PART.BOUNDARY.1336.25685.mykonos.928299388.1"
+Content-Length: 48111
+
+> THIS IS A MESSAGE IN 'MIME' FORMAT.  Your mail reader does not support MIME.
+> Some parts of this will be readable as plain text.
+> To see the rest, you will need to upgrade your mail reader.
+
+--PART.BOUNDARY.1336.25685.mykonos.928299388.1
+Content-ID: <1336_25685_928299388_2@mykonos>
+Content-type: text/plain
+Content-Description: Hi and what this is about
+
+Hi,
+as the sample document does not seem to have raised complaints, I suggest a
+text for the mailing to the main authors.
+
+If there are no replies till tomorrow morning, I am going to ship it.
+
+Cheers Lutz.
+
+
+Dear main authors of ECOOP-OOOSWS'99 papers,
+
+As we mentioned in our mail accepting your papers, we will publish our own
+workshop proceedings (In the ECOOP workshop reader there will only be a
+summary, no single papers permitted.).
+
+Please find attached to this mail a sample document how to format your paper
+according to the guidelines of the series "Chemnitzer Informatik-Berichte",
+the series where our proceedings will appear.
+
+For the camera ready version, we request you to submit LaTeX sources.
+Pictures should be included in the paper with psfig or epsfig macros. For
+each picture, there should be one PostScript file.
+
+If you have problems with LaTeX, please contact us in order that we can
+assist you.
+
+After having put together the whole workshop proceedings (maybe except the
+cover) we will provide you with an URL to the PostScript file, so you can
+check how your presentation looks like before it goes to printing.
+
+Kind regards,
+Lutz Wohlrab,
+Ashish Singhai,
+Francisco Ballesteros,
+Frank Schubert,
+Henning Schmidt.
+
+
+--PART.BOUNDARY.1336.25685.mykonos.928299388.1
+Content-ID: <1336_25685_928299388_3@mykonos>
+Content-type: application/octet-stream;
+	name="sampledoc.tar.gz"
+Content-Transfer-Encoding: base64
+Content-Description: targzipped sample document
+
+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
+sxEAaAEA
+
+--PART.BOUNDARY.1336.25685.mykonos.928299388.1--
+
+
+
+-- 
+Cheers Lutz.
+lwo@informatik.tu-chemnitz.de
+
+From lutz.wohlrab@informatik.tu-chemnitz.de Thu Jun  3 07:07:31 1999
+X-UIDL: d5915df3a117de82037f538a21950151
+Received: from obelix.hrz.tu-chemnitz.de (obelix.hrz.tu-chemnitz.de [134.109.132.55])
+	by prosun.first.gmd.de (8.9.1a/8.9.1) with ESMTP id HAA09719
+	for <guto@first.gmd.de>; Thu, 3 Jun 1999 07:06:34 +0200 (MEST)
+Received: from sunnyboy.informatik.tu-chemnitz.de by obelix.hrz.tu-chemnitz.de 
+          with Local SMTP (PP); Thu, 3 Jun 1999 07:06:09 +0200
+Received: from mykonos.informatik.tu-chemnitz.de.informatik.tu-chemnitz.de (mykonos.informatik.tu-chemnitz.de [134.109.184.25]) 
+          by sunnyboy.informatik.tu-chemnitz.de (8.8.8/8.8.8) with ESMTP 
+          id HAA14323; Thu, 3 Jun 1999 07:06:04 +0200 (MET DST)
+From: Lutz Wohlrab <lutz.wohlrab@informatik.tu-chemnitz.de>
+Received: by mykonos.informatik.tu-chemnitz.de.informatik.tu-chemnitz.de (8.8.5/client-1.5) 
+          id HAA04162; Thu, 3 Jun 1999 07:06:05 +0200 (MET DST)
+Message-Id: <199906030506.HAA04162@mykonos.informatik.tu-chemnitz.de.informatik.tu-chemnitz.de>
+Subject: sample document available from papers page
+To: nemo@gsyc.inf.uc3m.es, Ashish.Singhai@ACM.ORG,
+        Frank.Schubert@informatik.tu-chemnitz.de,
+        hesch@haiti.cs.uni-potsdam.de, danilo@wotan.CS.Uni-Magdeburg.De,
+        Christophe.Gransart@lifl.fr, f-kon@cs.uiuc.edu, hof@ssw.uni-linz.ac.at,
+        mwc@comp.lancs.ac.uk, carine.baillarguet@inria.fr, guto@first.gmd.de,
+        darioa@pinon.ccu.uniovi.es, nemo@gsyc.inf.uc3m.es,
+        rm@haiti.cs.uni-potsdam.de, Frank.Schubert@informatik.tu-chemnitz.de
+Date: Thu, 3 Jun 1999 07:06:05 +0200 (MET DST)
+Cc: lutz.wohlrab@informatik.tu-chemnitz.de (Lutz Wohlrab)
+Return-Receipt-To: lwo@informatik.tu-chemnitz.de
+Reply-To: lutz.wohlrab@informatik.tu-chemnitz.de
+X-Mailer: ELM [version 2.4 PL21]
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+Status: RO
+X-Mozilla-Status: 8001
+X-Mozilla-Status2: 00800000
+
+Hi all,
+
+As there has been a complaint that the MIME attachment of the mail I sent
+yesterday is broken (I could not verify this yet), I uploaded
+sampledoc.tar.gz to our web site. It is accessible via the position papers
+page or directly:
+http://www.tu-chemnitz.de/informatik/osg/ecoopooosws/ecoop-ooosws99/papers/sampledoc.tar.gz
+
+Hope this helps.
+
+-- 
+Cheers Lutz.
+lwo@informatik.tu-chemnitz.de
+
+From SILVIA@traducta.pt Wed Jun  9 13:07:38 1999
+Received: from mail2.ip.pt (mail2.ip.pt [194.79.69.132])
+	by prosun.first.gmd.de (8.9.1a/8.9.1) with ESMTP id NAA19354
+	for <guto@First.gmd.de>; Wed, 9 Jun 1999 13:07:35 +0200 (MEST)
+Received: from traducta.pt (s00060.lisboa.net.ip.pt [195.23.27.188])
+	   by mail2.ip.pt with SMTP
+	   id MAA18067 for <guto@First.gmd.de>; Wed, 9 Jun 1999 12:07:24 +0100 (WEST)
+Received: from TRADDO-Message_Server by traducta.pt
+	with Novell_GroupWise; Wed, 09 Jun 1999 12:04:43 +0200
+Message-Id: <s75e585b.011@traducta.pt>
+X-Mailer: Novell GroupWise 5.2
+Date: Wed, 09 Jun 1999 13:04:13 +0200
+From: SILVIA <SILVIA@traducta.pt>
+To: guto@First.gmd.de
+Subject: ECOOP ' 99
+Mime-Version: 1.0
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+X-MIME-Autoconverted: from quoted-printable to 8bit by prosun.first.gmd.de id NAA19354
+X-Mozilla-Status: 8001
+X-Mozilla-Status2: 00000000
+
+Dear Sir/Madam,
+
+We are pleased to confirm your registration at ECCOP'99 as follows: 
+
+Number -79
+
+Conference Fee - EUR 500
+
+Tutorial Fee - EUR 0 
+
+Workshops-Only Fee - EUR 0 
+
+Workshop Reader - EUR 0 
+
+Accommodation:  arrival - 13/06,departure - 18/06  (Double), total number of nights - 6
+
+
+Hotel Continental ****
+Rua Laura Alves, 9 1050 Lisboa
+Tel: 00 351 1 793 66 22  Fax: 00 351 1 796 21 30
+
+
+Social Programs:
+Get-Together (14 June), number of persons: 2
+Welcome Reception (16 June), number of persons: 2
+Banquet (17 June),number of persons: 2
+
+Pre- and Post-Conference Tours
+Santarém e Tomar, 13 June - 0 x EUR 65 =
+Fátima, Nazaré and Óbidos, 19 June - 0 x EUR 65 =
+
+Tours - Accompanying persons
+Half day in Lisbon, 15 June - 0 x EUR 30 =
+Three Castles Tour, 16 June- 0 x EUR 55 =
+Évora Circuit, 17 June - 0 x EUR 65 =
+Queluz, Sintra and Cascais, 18 June - 0 x 60 =
+
+Total Amount: EUR  925
+
+(Payment made by Credit Card)
+
+Please acknowledge if everything is correct.
+
+We look forward to welcoming you to ECOOP'99. 
+
+Best Regards
+
+Alexandra Lourenço
+Nazaré Ferreira
+
+TRADUCTA - Professional Congress Organiser  
+Rua Rodrigo da Fonseca nº 127, 1º Dto.,  P-1070-240 Lisboa
+Phone +351 1 388 3384;  Fax  +351 1  385 78 86 
+e-mail: nazare@traducta.pt  or  alexandra@traducta.pt
+
+
+
+From lutz.wohlrab@informatik.tu-chemnitz.de Wed Jun  9 14:34:51 1999
+Received: from asterix.hrz.tu-chemnitz.de (asterix.hrz.tu-chemnitz.de [134.109.132.84])
+	by prosun.first.gmd.de (8.9.1a/8.9.1) with ESMTP id OAA21444
+	for <guto@first.gmd.de>; Wed, 9 Jun 1999 14:34:45 +0200 (MEST)
+Received: from sunnyboy.informatik.tu-chemnitz.de by asterix.hrz.tu-chemnitz.de 
+          with Local SMTP (PP); Wed, 9 Jun 1999 14:33:11 +0200
+Received: from mykonos.informatik.tu-chemnitz.de.informatik.tu-chemnitz.de (mykonos.informatik.tu-chemnitz.de [134.109.184.25]) 
+          by sunnyboy.informatik.tu-chemnitz.de (8.8.8/8.8.8) with ESMTP 
+          id OAA04539; Wed, 9 Jun 1999 14:33:07 +0200 (MET DST)
+From: Lutz Wohlrab <lutz.wohlrab@informatik.tu-chemnitz.de>
+Received: by mykonos.informatik.tu-chemnitz.de.informatik.tu-chemnitz.de (8.8.5/client-1.5) 
+          id OAA12958; Wed, 9 Jun 1999 14:33:07 +0200 (MET DST)
+Message-Id: <199906091233.OAA12958@mykonos.informatik.tu-chemnitz.de.informatik.tu-chemnitz.de>
+Subject: Sunday evening get-together
+To: danilo@wotan.CS.Uni-Magdeburg.De, Christophe.Gransart@lifl.fr,
+        f-kon@cs.uiuc.edu, hof@ssw.uni-linz.ac.at, mwc@comp.lancs.ac.uk,
+        carine.baillarguet@inria.fr, guto@first.gmd.de,
+        darioa@pinon.ccu.uniovi.es, nemo@gsyc.inf.uc3m.es,
+        rm@haiti.cs.uni-potsdam.de, Frank.Schubert@informatik.tu-chemnitz.de
+Date: Wed, 9 Jun 1999 14:33:07 +0200 (MET DST)
+Cc: lutz.wohlrab@informatik.tu-chemnitz.de (Lutz Wohlrab)
+Return-Receipt-To: lwo@informatik.tu-chemnitz.de
+Reply-To: lutz.wohlrab@informatik.tu-chemnitz.de
+X-Mailer: ELM [version 2.4 PL21]
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Mozilla-Status: 8001
+X-Mozilla-Status2: 00800000
+
+Hi everybody,
+
+We are planning to go into some pub or restaurant on Sunday evening.
+Every ECOOP-OOOSWS participant is invited to come. We will meet at hotel
+Marques de Sa, Av. Miguel Bombarda 130,  at 7 pm. From there we will go to
+some pub together, hopefully the reception desk will recommend a good one
+and tell those of us who are late where to find the crowd. Av. Miguel
+Bombarda is not far from Av. Conde de Valbom, where most of the restaurants
+are located. 
+
+Please inform your co-authors about this get-together.
+
+We are looking forward to meeting you in Lisbon.
+
+Kind regards,
+ECOOP-OOOSWS'99 organizing team
+Lutz Wohlrab
+Francisco Ballesteros
+Frank Schubert
+Henning Schmidt
+Ashish Singhai
+
+From lutz.wohlrab@informatik.tu-chemnitz.de Tue Jul 27 06:39:10 1999
+Received: from asterix.hrz.tu-chemnitz.de (asterix.hrz.tu-chemnitz.de [134.109.132.84])
+	by prosun.first.gmd.de (8.9.1a/8.9.1) with ESMTP id GAA00633
+	for <guto@first.gmd.de>; Tue, 27 Jul 1999 06:39:06 +0200 (MEST)
+Received: from sunnyboy.informatik.tu-chemnitz.de by asterix.hrz.tu-chemnitz.de 
+          with Local SMTP (PP); Tue, 27 Jul 1999 06:38:30 +0200
+Received: from mykonos.informatik.tu-chemnitz.de.informatik.tu-chemnitz.de (mykonos.informatik.tu-chemnitz.de [134.109.184.25]) 
+          by sunnyboy.informatik.tu-chemnitz.de (8.8.8/8.8.8) with ESMTP 
+          id GAA12939; Tue, 27 Jul 1999 06:38:27 +0200 (MET DST)
+From: Lutz Wohlrab <lutz.wohlrab@informatik.tu-chemnitz.de>
+Received: by mykonos.informatik.tu-chemnitz.de.informatik.tu-chemnitz.de (8.8.5/client-1.5) 
+          id GAA19980; Tue, 27 Jul 1999 06:38:28 +0200 (MET DST)
+Message-Id: <199907270438.GAA19980@mykonos.informatik.tu-chemnitz.de.informatik.tu-chemnitz.de>
+Subject: Have a look on the preliminary version of the proceedings
+To: olaf@wotan.CS.Uni-Magdeburg.De, Christophe.Gransart@lifl.fr,
+        f-kon@cs.uiuc.edu, hof@ssw.uni-linz.ac.at, mwc@comp.lancs.ac.uk,
+        carine.baillarguet@inria.fr, guto@first.gmd.de,
+        darioa@pinon.ccu.uniovi.es, nemo@gsyc.inf.uc3m.es,
+        rm@haiti.cs.uni-potsdam.de, Frank.Schubert@informatik.tu-chemnitz.de
+Date: Tue, 27 Jul 1999 06:38:28 +0200 (MET DST)
+Cc: lutz.wohlrab@informatik.tu-chemnitz.de (Lutz Wohlrab)
+Return-Receipt-To: lwo@informatik.tu-chemnitz.de
+Reply-To: lutz.wohlrab@informatik.tu-chemnitz.de
+X-Mailer: ELM [version 2.4 PL21]
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Mozilla-Status: 8001
+X-Mozilla-Status2: 00800000
+
+Hello authors for ECOOP-OOOSWS'99,
+
+Find a preliminary version of the proceedings under
+http://www.tu-chemnitz.de/informatik/osg/ecoopooosws/ecoop-ooosws99/papers/ooosws99proc.ps.gz
+
+I edited the paper heads to make them look alike, everything else should be
+unchanged. Have a look. As soon as Frank returns from his holidays in
+mid-August we hope to go to printing. Email any complaints ASAP.
+Enjoy.
+-- 
+Cheers Lutz.
+lwo@informatik.tu-chemnitz.de
+

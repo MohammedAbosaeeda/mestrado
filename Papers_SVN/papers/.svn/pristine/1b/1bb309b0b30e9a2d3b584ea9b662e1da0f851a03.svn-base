@@ -1,0 +1,197 @@
+@MANUAL{Atmel:rf:2003,
+  author = {{Atmel~Corporation}},
+  YEAR = {2003},
+  TITLE = {AT86RF401 Datasheet},
+  address = {San Jose, CA},
+  month = DEC
+}
+
+@MANUAL{Moteiv:2004,
+  author = {Moteiv~Corporation},
+  YEAR = {2004},
+  TITLE = {Telos Datasheet},
+  address = {Albany, CA},
+}
+
+
+
+@Book{Massa:2003,
+  author = 	 "Anthony Massa",
+  title = 	 "Embedded Software Development with eCos",
+  publisher = 	 "Prentice Hall",
+  year = 	 "2003",
+  edition = 	 "1",
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@BOOK{Froehlich:2001,
+  AUTHOR = {Antônio Augusto Fröhlich},
+  TITLE = {Application-Oriented Operating Systems},
+  PUBLISHER = {GMD - Forschungszentrum Informationstechnik},
+  YEAR = 2001,
+  NUMBER = 17,
+  SERIES = {GMD Research Series},
+  ADDRESS = {Sankt Augustin},
+  MONTH = AUG
+}
+
+@InProceedings{Polpeta:2004,
+  author =	"Fauze Valério Polpeta and Antônio Augusto Fröhlich and Arliones Stevert Hoeller Junior and Tiago Stein D'Agostini",
+  title =	"{Portabilidade em Sistemas Operacionais Baseados em Componentes de Software}",
+  booktitle =	"First Brazilian Workshop on Operating System",
+  pages =	"1466-1475",
+  year =	2004,
+  address =	"Salvador, Brazil",
+  month =	Aug,
+  url =		"http://www.lisha.ufsc.br/~guto/publications/wso2004.pdf"
+}
+
+@InProceedings{Tondello:2004,
+  author =	"Gustavo Fortes Tondello and Antônio Augusto Fröhlich",
+  title =	"{Configuration Management of Embedded Operating Systems using Application-Oriented System Design}",
+  booktitle =	"5th Argentine Symposium on Computing Technology (part of the 33rd Argentine Conference on Computer Science and Operational Research)",
+  year =	2004,
+  address =	"Córdoba, Argentine",
+  month =	Sep
+}
+
+
+@InProceedings{Tondello:2005,
+  author =	"Gustavo Fortes Tondello and Antônio Augusto Fröhlich",
+  title =	"{On the Automatic Configuration of Application-Oriented Operating Systems}",
+  booktitle =	"3rd ACS/IEEE International Conference on Computer Systems and Applications",
+  year =	2005,
+  address =	"Cairo, Egypt",
+  month =	Jan,
+}
+
+@InProceedings{Polpeta:EUC:2004,
+  author =	"Fauze Valério Polpeta and Antônio Augusto Fröhlich",
+  title =	"{Hardware Mediators: a Portability Artifact for Component-Based Systems}",
+  booktitle =	"International Conference on Embedded and Ubiquitous Computing",
+  pages =	"271-280",
+  year =	2004,
+  volume =	"3207",
+  series =	"Lecture Notes in Computer Science",
+  address =	"Aizu, Japan",
+  month =	Aug,
+  publisher =	"Springer",
+  url =		"http://www.lisha.ufsc.br/~guto/publications/euc2004a.pdf"
+}
+
+@InProceedings{Froehlich:HPCN:2000,
+  author =	"Antônio Augusto Fröhlich and Gilles P. Tientcheu and Wolfgang Schröder-Preikschat",
+  title =	"{EPOS and Myrinet: Effective Communication Support for Parallel Applications Running on Clusters of Commodity Workstations}",
+  booktitle =	"8th International Conference on High Performance Computing and Networking Europe",
+  pages =	"417-426",
+  year =	2000,
+  volume =	"1823",
+  series =	"Lecture Notes in Computer Science",
+  address =	"Amsterdam, The Netherlands",
+  month =	May,
+  publisher =	"Springer",
+  url =		"http://www.lisha.ufsc.br/~guto/publications/hpcn2000.pdf"
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+@InProceedings{Musser:1989,
+  author      = {David R. Musser and Alexander A. Stepanov},
+  title       = {Generic Programming},
+  booktitle   = {Proceedings of the First International Joint`
+                 Conference of ISSAC and AAECC},
+  pages       = {13--25},
+  year        = {1989},
+  number      = {358},
+  series      = {Lecture Notes in Computer Science},
+  address     = {Rome, Italy},
+  month       = {July},
+  publisher   = {Springer}, 
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+@INPROCEEDINGS{Gay:2003,
+  AUTHOR = {David Gay and Phil Levis and Rob von Behren and  Matt Welsh and
+            Eric Brewer and David Culler},
+  TITLE={The nesC Language: A Holistic Approach to Networked Embedded Systems},
+  BOOKTITLE = {Proceedings of Programming Language Design and Implementation},
+  ADDRESS = {San Diego, CA},
+  MONTH = JUN,
+  YEAR = 2003
+}
+
+
+@PHDTHESIS{Hill:2003,
+  AUTHOR = {Jason Hill},
+  YEAR = {2003},
+  TITLE = {System Architecture for Wireless Sensor Networks},
+  SCHOOL = {University of California},
+  address = {Berkeley}
+}
+
+
+@INPROCEEDINGS{Rabaey:2002,
+  AUTHOR = {J. Rabaey and J. Ammer and T. Karalar and  S. Li and  B. Otis and 
+            M. Sheets and T. Tuan},
+  TITLE ={PicoRadios for Wireless Sensor Networks: The Next Challenge in 
+           Ultra-Low-Power Design},
+  BOOKTITLE={Proceedings of the International Solid-State Circuits Conference},
+  MONTH = FEB,
+  YEAR = 2002,
+  ADDRESS = "San Francisco, CA"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

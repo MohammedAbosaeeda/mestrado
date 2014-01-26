@@ -1,0 +1,19 @@
+\begin{tabular}{l|c}
+\textbf{Device/Mode}  & \textbf{Current (${\mu}A$)} \\
+\hline
+\textit{CPU}          &                             \\
+\hline
+~~~Active             & $2,200$                      \\
+\hline
+~~~Sleep              & $40$                        \\
+\hline
+~~~Power Down         & $3.4$                       \\
+\hline
+\textit{Radio}        &                             \\
+\hline
+~~~Tx only            & $19,300$                    \\
+\hline
+~~~Rx only            & $16$                        \\
+\hline
+~~~Low Power Listen   & $0.8$                       \\
+\end{tabular}

@@ -1,0 +1,49 @@
+@misc{KeinHong:2006,
+author = {Man, Kein-Hong},
+title = {{Lua Forge: ChunkSpy: Project Info}},
+howpublished = {\url{http://luaforge.net/projects/chunkspy/}},
+year = {2006},
+month = MAR
+}
+
+@article{Barros:2008,
+  author =	 {Alexandra Barros and Roberto Ierusalimschy},
+  title =	 {{Eliminating Cycles in Weak Tables}},
+  journal =	 {Journal of Universal Computer Science},
+  volume =	 {14},
+  number =	 {21},
+  year =	 {2008},
+  pages =	 {3481--3497},
+}
+
+@inproceedings{Ierusalimschy:2007,
+ author = {Ierusalimschy, Roberto and de Figueiredo, Luiz Henrique and Celes, Waldemar},
+ title = {{The evolution of Lua}},
+ booktitle = {HOPL III: Proceedings of the third ACM SIGPLAN conference on History of programming languages},
+ year = {2007},
+ isbn = {978-1-59593-766-X},
+ pages = {2-1--2-26},
+ location = {San Diego, California},
+ doi = {http://doi.acm.org/10.1145/1238844.1238846},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ }
+
+@Article{Ierusalimschy:2005,
+  author =     "R. Ierusalimschy and L.H. de Figueiredo and W. Celes",
+  title =      "{The Implementation of Lua 5.0}",
+  abstract =   "We discuss the main novelties of the   implementation of Lua 5.0: its register-based virtual machine, the   new algorithm for optimizing tables used as arrays, the   implementation of closures, and the addition of   coroutines.",
+  journal =    "Journal of Universal Computer Science",
+  year =       "2005",
+  volume =     "11",
+  number =     "7",
+  pages =      "1159--1176",
+}
+
+@book{Ierusalimschy:2006,
+ author = {Ierusalimschy, Roberto},
+ title = {{Programming in Lua, Second Edition}},
+ year = {2006},
+ isbn = {85-903798-2-5},
+ publisher = {Lua.org},
+ }

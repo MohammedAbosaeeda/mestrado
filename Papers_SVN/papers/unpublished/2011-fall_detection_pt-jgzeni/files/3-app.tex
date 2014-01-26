@@ -1,0 +1,46 @@
+\section{A aplicação de detecção de queda}
+
+A Figura~\ref{fig:Planta_baixa} apresenta uma visão geral da aplicação proposta.
+Em um determinado local, diversas pessoas (usuários) utilizam pulseiras capazes
+de detectar uma eventual queda. Ao detectar uma determinada queda, a pulseira
+deve emitir um sinal sonoro e aguardar alguns segundos (e.g., 5 segundos) para
+que o usuário, eventualmente, sinalize, pressionando um botão, a ocorrência de
+um falso positivo, ou seja, de que a detecção foi indevida. Não ocorrendo a
+sinalização no tempo esperado, a pulseira deve emitir um sinal (pacote de dados)
+que deve chegar até um gateway capaz de remeter esta informação a um servidor,
+onde um sistema de monitoramento se encarregaria de providenciar atendimento
+adequado à vítima da queda. Neste trabalho, focaremos no fluxo da informação
+sobre a queda da pulseira até o sistema de monitoramento. Não aboradamos, ainda,
+integração com serviços de emergência ou de comunicação extra para providenciar
+a prestação de socorro.
+
+\fig{Planta_baixa}{Planta baixa mostrando o funcionamento da
+aplicação}{width=0.8\columnwidth}
+
+Os requisitos da aplicação são apresentados na Tabela~\ref{tab:requisitos}.
+Neste ponto ressalta-se a importância do uso de uma plataforma completa. Muitos
+dos requisitos da aplicação são resolvidos praticamente de imediato com a
+seleção do hardware a ser utilizado e com a configuração adequada do sistema
+operacional.
+
+\tab{requisitos}{Tabela de requisitos da aplicação de detecção de quedas.}
+
+O hardware de sensoriamento precisava possuir um tamanho reduzido e um formato
+que pudesse ser usado por uma pessoa, optou-se por uma pulseira, alem dos
+requisitos de forma precisava da funçao de monitor de queda, a qual foi
+realizada usando um acelerômetro de três eixos, uma interface com o usuário que
+consistia de um botão e de um LED que seriam ativado em caso de falso positivo,
+e por final a capacidade de enviar os dados sem fio a outros dispositivos.
+
+O hardware de recepção precisava ser capas de receber o sinal de queda enviado e
+enviar esse sinal para a internet de modo a ser visualizado pela pessoa
+responável por monitorar os dispositivos.
+
+Com base nas informações supra citadas inicio-se o projeto utilizando o hardware
+do \emote~para o desenvolvimento das aplicações de software, após a validação do
+software em cima do \emote~houve a necessidade do desenho de um hardware
+reduzido visto que o hardware de \emote~possui características que não eram
+úteis ao projeto e e demasiado grande para a finalidade desejada do projeto,
+sendo assim se projetou um hardware derivado do antigo de modo a não ser
+necessário refazer o software ja validado e para que esse hardware atende-se as
+necessidades de projeto tanto de tamanho quanto de funcionalidade.

@@ -1,0 +1,22 @@
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+% Summarize paper
+This paper presented the evaluation of four heuristic approaches for energy allocation in real-time wireless sensor network systems that harvest energy from the environment.
+A specific task model is assumed in which system tasks may be classified as critical or noncritical.
+Critical parts are hard real-time tasks and must be assured energy and processing time for execution.
+Noncritical parts are best-effort tasks and have they execution granted when there is enough energy for doing so.
+The four heuristics were evaluated in a realistic simulation environment considering a dense, mobile, wireless sensor network application.
+Simulations show that all heuristics respect the real-time constraints of the system.
+The efficiency metric used for evaluation was the rate of best-effort tasks executed by the system.
+
+% Summarize contribution results
+Results show that two of the heuristics, \bwr~(BWR) and \bwar~(BWAR), behave in much better way when compared with others.
+BWR shows a highly stable behavior at the cost of higher demand of battery size.
+BWAR, although showing a large operating amplitude, was able to execute more best-effort tasks than the others.
+Also, during the whole year, the rate calculated by BWAR was never zero.
+
+% On-going/future work
+Ongoing work is evaluating the same approaches using wind turbines instead of solar panels as the energy source.
+It is expected that the behavior of the schedulers will be considerably distinct from the ones shown here because of the chaotic behavior of wind speed.

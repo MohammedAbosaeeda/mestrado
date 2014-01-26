@@ -1,0 +1,318 @@
+%!PS-Adobe-2.0 EPSF-2.0
+%%Title: DomainModel.fig
+%%Creator: fig2dev Version 3.2 Patchlevel 5-alpha5
+%%CreationDate: Wed Mar 29 18:43:04 2006
+%%For: hugom@sagan (Hugo Marcondes,,,)
+%%BoundingBox: 0 0 562 349
+%Magnification: 1.0000
+%%EndComments
+/$F2psDict 200 dict def
+$F2psDict begin
+$F2psDict /mtrx matrix put
+/col-1 {0 setgray} bind def
+/col0 {0.000 0.000 0.000 srgb} bind def
+/col1 {0.000 0.000 1.000 srgb} bind def
+/col2 {0.000 1.000 0.000 srgb} bind def
+/col3 {0.000 1.000 1.000 srgb} bind def
+/col4 {1.000 0.000 0.000 srgb} bind def
+/col5 {1.000 0.000 1.000 srgb} bind def
+/col6 {1.000 1.000 0.000 srgb} bind def
+/col7 {1.000 1.000 1.000 srgb} bind def
+/col8 {0.000 0.000 0.560 srgb} bind def
+/col9 {0.000 0.000 0.690 srgb} bind def
+/col10 {0.000 0.000 0.820 srgb} bind def
+/col11 {0.530 0.810 1.000 srgb} bind def
+/col12 {0.000 0.560 0.000 srgb} bind def
+/col13 {0.000 0.690 0.000 srgb} bind def
+/col14 {0.000 0.820 0.000 srgb} bind def
+/col15 {0.000 0.560 0.560 srgb} bind def
+/col16 {0.000 0.690 0.690 srgb} bind def
+/col17 {0.000 0.820 0.820 srgb} bind def
+/col18 {0.560 0.000 0.000 srgb} bind def
+/col19 {0.690 0.000 0.000 srgb} bind def
+/col20 {0.820 0.000 0.000 srgb} bind def
+/col21 {0.560 0.000 0.560 srgb} bind def
+/col22 {0.690 0.000 0.690 srgb} bind def
+/col23 {0.820 0.000 0.820 srgb} bind def
+/col24 {0.500 0.190 0.000 srgb} bind def
+/col25 {0.630 0.250 0.000 srgb} bind def
+/col26 {0.750 0.380 0.000 srgb} bind def
+/col27 {1.000 0.500 0.500 srgb} bind def
+/col28 {1.000 0.630 0.630 srgb} bind def
+/col29 {1.000 0.750 0.750 srgb} bind def
+/col30 {1.000 0.880 0.880 srgb} bind def
+/col31 {1.000 0.840 0.000 srgb} bind def
+
+end
+save
+newpath 0 349 moveto 0 0 lineto 562 0 lineto 562 349 lineto closepath clip newpath
+-5.8 355.8 translate
+1 -1 scale
+
+/cp {closepath} bind def
+/ef {eofill} bind def
+/gr {grestore} bind def
+/gs {gsave} bind def
+/sa {save} bind def
+/rs {restore} bind def
+/l {lineto} bind def
+/m {moveto} bind def
+/rm {rmoveto} bind def
+/n {newpath} bind def
+/s {stroke} bind def
+/sh {show} bind def
+/slc {setlinecap} bind def
+/slj {setlinejoin} bind def
+/slw {setlinewidth} bind def
+/srgb {setrgbcolor} bind def
+/rot {rotate} bind def
+/sc {scale} bind def
+/sd {setdash} bind def
+/ff {findfont} bind def
+/sf {setfont} bind def
+/scf {scalefont} bind def
+/sw {stringwidth} bind def
+/tr {translate} bind def
+/tnt {dup dup currentrgbcolor
+  4 -2 roll dup 1 exch sub 3 -1 roll mul add
+  4 -2 roll dup 1 exch sub 3 -1 roll mul add
+  4 -2 roll dup 1 exch sub 3 -1 roll mul add srgb}
+  bind def
+/shd {dup dup currentrgbcolor 4 -2 roll mul 4 -2 roll mul
+  4 -2 roll mul srgb} bind def
+/$F2psBegin {$F2psDict begin /$F2psEnteredState save def} def
+/$F2psEnd {$F2psEnteredState restore end} def
+
+$F2psBegin
+10 setmiterlimit
+0 slj 0 slc
+ 0.06000 0.06000 sc
+%
+% Fig objects follow
+%
+% 
+% here starts figure with depth 50
+% Polyline
+0 slj
+0 slc
+7.500 slw
+n 399 1184 m 999 1184 l 999 959 l 399 959 l
+ cp gs col0 s gr 
+% Polyline
+n 399 1184 m 1599 1184 l 1599 1709 l 399 1709 l
+ cp gs col0 s gr 
+/Helvetica-Bold ff 166.67 scf sf
+564 1139 m
+gs 1 -1 sc (NIC) col0 sh gr
+% Polyline
+n 399 2047 m 999 2047 l 999 1822 l 399 1822 l
+ cp gs col0 s gr 
+% Polyline
+n 399 2047 m 1599 2047 l 1599 2572 l 399 2572 l
+ cp gs col0 s gr 
+/Helvetica-Bold ff 166.67 scf sf
+489 2002 m
+gs 1 -1 sc (UART) col0 sh gr
+% Polyline
+n 399 2896 m 999 2896 l 999 2671 l 399 2671 l
+ cp gs col0 s gr 
+% Polyline
+n 399 2896 m 1599 2896 l 1599 3421 l 399 3421 l
+ cp gs col0 s gr 
+/Helvetica-Bold ff 166.67 scf sf
+504 2851 m
+gs 1 -1 sc (Flash) col0 sh gr
+% Polyline
+n 307 859 m 1705 859 l 1705 3514 l 307 3514 l
+ cp gs col0 s gr 
+% Polyline
+n 307 854 m 1055 854 l 1055 620 l 307 620 l
+ cp gs col0 s gr 
+/Helvetica-Bold ff 166.67 scf sf
+417 806 m
+gs 1 -1 sc (Devices) col0 sh gr
+% Polyline
+n 1851 1025 m 2451 1025 l 2451 800 l 1851 800 l
+ cp gs col0 s gr 
+% Polyline
+n 1851 1025 m 3051 1025 l 3051 1550 l 1851 1550 l
+ cp gs col0 s gr 
+/Helvetica-Bold ff 166.67 scf sf
+1956 980 m
+gs 1 -1 sc (TSC) col0 sh gr
+% Polyline
+n 3218 1025 m 3818 1025 l 3818 800 l 3218 800 l
+ cp gs col0 s gr 
+% Polyline
+n 3218 1025 m 4418 1025 l 4418 1550 l 3218 1550 l
+ cp gs col0 s gr 
+/Helvetica-Bold ff 166.67 scf sf
+3323 980 m
+gs 1 -1 sc (CPU) col0 sh gr
+% Polyline
+n 3206 1980 m 3806 1980 l 3806 1755 l 3206 1755 l
+ cp gs col0 s gr 
+% Polyline
+n 3206 1980 m 4406 1980 l 4406 2505 l 3206 2505 l
+ cp gs col0 s gr 
+/Helvetica-Bold ff 166.67 scf sf
+3311 1935 m
+gs 1 -1 sc (MMU) col0 sh gr
+% Polyline
+n 1851 1980 m 2451 1980 l 2451 1755 l 1851 1755 l
+ cp gs col0 s gr 
+% Polyline
+n 1851 1980 m 3051 1980 l 3051 2505 l 1851 2505 l
+ cp gs col0 s gr 
+/Helvetica-Bold ff 166.67 scf sf
+1956 1935 m
+gs 1 -1 sc (Timer) col0 sh gr
+% Polyline
+n 1851 2976 m 2451 2976 l 2451 2751 l 1851 2751 l
+ cp gs col0 s gr 
+% Polyline
+n 1851 2976 m 3051 2976 l 3051 3501 l 1851 3501 l
+ cp gs col0 s gr 
+/Helvetica-Bold ff 166.67 scf sf
+1956 2931 m
+gs 1 -1 sc (Bus) col0 sh gr
+% Polyline
+n 192 461 m 4586 461 l 4586 3660 l 192 3660 l
+ cp gs col0 s gr 
+% Polyline
+n 192 461 m 1950 461 l 1950 225 l 192 225 l
+ cp gs col0 s gr 
+/Helvetica-Bold ff 166.67 scf sf
+258 421 m
+gs 1 -1 sc (Hardware Mediators) col0 sh gr
+% Polyline
+n 6226 762 m 7399 762 l 7399 540 l 6226 540 l
+ cp gs col0 s gr 
+% Polyline
+n 6226 762 m 7699 762 l 7699 1380 l 6226 1380 l
+ cp gs col0 s gr 
+/Helvetica-Bold ff 166.67 scf sf
+6291 717 m
+gs 1 -1 sc (Task) col0 sh gr
+% Polyline
+n 7816 762 m 9289 762 l 9289 1380 l 7816 1380 l
+ cp gs col0 s gr 
+% Polyline
+n 7816 762 m 9120 762 l 9120 540 l 7816 540 l
+ cp gs col0 s gr 
+/Helvetica-Bold ff 166.67 scf sf
+7881 717 m
+gs 1 -1 sc (AddressSpace) col0 sh gr
+% Polyline
+n 6226 1677 m 7399 1677 l 7399 1455 l 6226 1455 l
+ cp gs col0 s gr 
+% Polyline
+n 6226 1677 m 7699 1677 l 7699 2295 l 6226 2295 l
+ cp gs col0 s gr 
+/Helvetica-Bold ff 166.67 scf sf
+6291 1632 m
+gs 1 -1 sc (Thread) col0 sh gr
+% Polyline
+n 7816 1677 m 9289 1677 l 9289 2295 l 7816 2295 l
+ cp gs col0 s gr 
+% Polyline
+n 7816 1677 m 9135 1677 l 9135 1455 l 7816 1455 l
+ cp gs col0 s gr 
+/Helvetica-Bold ff 166.67 scf sf
+7881 1632 m
+gs 1 -1 sc (Communicator) col0 sh gr
+% Polyline
+n 7801 2607 m 8974 2607 l 8974 2385 l 7801 2385 l
+ cp gs col0 s gr 
+% Polyline
+n 7801 2607 m 9274 2607 l 9274 3225 l 7801 3225 l
+ cp gs col0 s gr 
+/Helvetica-Bold ff 166.67 scf sf
+7866 2562 m
+gs 1 -1 sc (Synchronizer) col0 sh gr
+% Polyline
+n 6226 2592 m 7399 2592 l 7399 2370 l 6226 2370 l
+ cp gs col0 s gr 
+% Polyline
+n 6226 2592 m 7699 2592 l 7699 3210 l 6226 3210 l
+ cp gs col0 s gr 
+/Helvetica-Bold ff 166.67 scf sf
+6291 2547 m
+gs 1 -1 sc (Timepiece) col0 sh gr
+% Polyline
+n 7006 3582 m 8179 3582 l 8179 3360 l 7006 3360 l
+ cp gs col0 s gr 
+% Polyline
+n 7006 3582 m 8479 3582 l 8479 4200 l 7006 4200 l
+ cp gs col0 s gr 
+/Helvetica-Bold ff 166.67 scf sf
+7071 3537 m
+gs 1 -1 sc (File) col0 sh gr
+% Polyline
+n 9364 4290 m 6154 4290 l 6154 480 l 9364 480 l
+ cp gs col0 s gr 
+% Polyline
+n 6154 240 m 7980 240 l 7980 480 l 6154 480 l
+ cp gs col0 s gr 
+/Helvetica-Bold ff 166.67 scf sf
+6199 435 m
+gs 1 -1 sc (System Abstractions) col0 sh gr
+% Polyline
+n 844 5217 m 1444 5217 l 1444 4992 l 844 4992 l
+ cp gs col0 s gr 
+% Polyline
+n 844 5217 m 2044 5217 l 2044 5742 l 844 5742 l
+ cp gs col0 s gr 
+/Helvetica-Bold ff 166.67 scf sf
+949 5172 m
+gs 1 -1 sc (Boot) col0 sh gr
+% Polyline
+n 2185 5230 m 2785 5230 l 2785 5005 l 2185 5005 l
+ cp gs col0 s gr 
+% Polyline
+n 2185 5230 m 3385 5230 l 3385 5755 l 2185 5755 l
+ cp gs col0 s gr 
+/Helvetica-Bold ff 166.67 scf sf
+2290 5185 m
+gs 1 -1 sc (Setup) col0 sh gr
+% Polyline
+n 720 4875 m 3499 4875 l 3499 5835 l 720 5835 l
+ cp gs col0 s gr 
+% Polyline
+n 2175 4875 m 720 4875 l 720 4650 l 2175 4650 l
+ cp gs col0 s gr 
+/Helvetica-Bold ff 166.67 scf sf
+792 4813 m
+gs 1 -1 sc (System Startup) col0 sh gr
+% Polyline
+ [60] 0 sd
+gs  clippath
+4736 1117 m 4564 1117 l 4564 1222 l 4736 1222 l 4736 1222 l 4601 1170 l 4736 1117 l cp
+eoclip
+n 6154 1170 m
+ 4579 1170 l gs col0 s gr gr
+ [] 0 sd
+% arrowhead
+n 4736 1117 m 4601 1170 l 4736 1222 l  col0 s
+% Polyline
+ [60] 0 sd
+gs  clippath
+2239 4720 m 2239 4890 l 2359 4890 l 2359 4720 l 2359 4720 l 2299 4855 l 2239 4720 l cp
+eoclip
+n 2299 3675 m
+ 2299 4875 l gs col0 s gr gr
+ [] 0 sd
+% arrowhead
+n 2239 4720 m 2299 4855 l 2359 4720 l  col0 s
+/Helvetica-Bold ff 166.67 scf sf
+4969 1110 m
+gs 1 -1 sc (<<depends>>) col0 sh gr
+/Helvetica-Bold ff 166.67 scf sf
+2374 4245 m
+gs 1 -1 sc (<<depends>>) col0 sh gr
+% here ends figure;
+$F2psEnd
+rs
+showpage
+%%Trailer
+%EOF

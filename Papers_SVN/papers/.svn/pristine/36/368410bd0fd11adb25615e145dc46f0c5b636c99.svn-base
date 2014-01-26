@@ -1,0 +1,15 @@
+#!/bin/csh
+acsun < ../txt/clei.txt		>clei.tex
+acsun < ../txt/introduction.txt	>introduction.tex
+acsun < ../txt/goals.txt	>goals.tex
+acsun < ../txt/model.txt	>model.tex
+acsun < ../txt/location.txt	>location.tex
+acsun < ../txt/distribution.txt	>distribution.tex
+acsun < ../txt/tree.txt		>tree.tex
+acsun < ../txt/auth.txt		>auth.tex
+acsun < ../txt/conclusion.txt	>conclusion.tex
+acsun < ../txt/bib.txt		>bib.tex
+
+platex clei.tex
+rm -f *.tex
+dvips clei.dvi -o

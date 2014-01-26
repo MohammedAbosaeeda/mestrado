@@ -1,0 +1,236 @@
+============================================================================
+CODES+ISSS 2011 Reviews for Submission #10
+============================================================================
+
+Title: An AOP-based approach for hardware design
+
+Authors: Tiago Rogério Mück and Antônio Augusto Fröhlich
+============================================================================
+                           REVIEWER #1
+============================================================================
+
+
+---------------------------------------------------------------------------
+Reviewer's Scores
+---------------------------------------------------------------------------
+
+                                Overall: 2
+                    Reviewer confidence: 2
+                                Novelty: 3
+                             Usefulness: 2
+             Writing and figure quality: 4
+
+
+---------------------------------------------------------------------------
+Comments
+---------------------------------------------------------------------------
+
+This paper presents a new framework for modeling hardware in SystemC. It has
+exploited aspect oriented software programming (AOP) model to provide more
+flexible and easy code-reuse in hardware.  The authors provide a design
+methodology based on an existing software design methodology, and have applied
+the same method to develop AOP model of hardware components.  In addition, they
+propose a synthesizable modeling method for describing AOP-based hardware
+components. At the end, they evaluate their approach on a hardware task
+scheduler by implementing a debugging interface using AOP-based approach.
+
+Since SystemC has provided a powerful means for hardware/software co-design,
+this work looks interesting and promising.  The authors provide inclusive set
+of related work and a clear introduction to AOP-based programming. However,
+their desired design methodology needs to be explained in more detail even if
+it is based on a well-known design methodology (Application-driven Embedded
+System design in section 4). As it is written, it is very hard if not
+impossible to understand what is actually going on or how the approach works in
+detail. It would be nice to see a set of guidelines specifically for designing
+hardware components based on the proposed method. In fact, their design
+methodology is not clearly mentioned in the paper. Is it all manual, is there
+any kind of automation, what is the complexity of writing code in this style
+(compare to a traditional way), etc.?
+
+Furthermore, it is not clear how or where this approach is truly useful. In the
+experimental results part, the authors explain the structure of a task
+scheduler and its online debugger comprehensively and their results show that
+the proposed approach does not add much overhead in the synthesized hardware.
+But, the missing part is that they don’t show the advantages of using their
+approach. They have used their proposed AOP-bases methodology for implementing
+a debugger which is closed to the related work for verification. Since they
+have claimed this method provides more flexibility and code-reuse for modeling
+hardware, they need to apply this method to model the complete task scheduler
+or any other applications to show how it eases hardware modeling and provides
+more flexibility.
+
+Overall, the paper is written well, the idea potentially interesting, but it
+needs more details and a clear demonstration of the actual benefits/usefulness.
+
+============================================================================
+                           REVIEWER #2
+============================================================================
+
+
+---------------------------------------------------------------------------
+Reviewer's Scores
+---------------------------------------------------------------------------
+
+                                Overall: 2
+                    Reviewer confidence: 2
+                                Novelty: 4
+                             Usefulness: 2
+             Writing and figure quality: 3
+
+
+---------------------------------------------------------------------------
+Comments
+---------------------------------------------------------------------------
+
+The authors propose an aspect-oriented approach for hardware design. The design
+language is SystemC. An example of a hardware scheduler is used to illustrate
+the proposed method.
+
+The paper is well written and organized. Using aspect-oriented programming in
+the context of hardware design is very interesting and might be useful.
+However, in my opinion the authors failed to clearly identify (or name)
+examples of crosscutting concerns that are promising candidates to be handled
+by AOP. Without these examples the proposed approach is too abstract and the
+paper itself is simply an introduction into AOP (without a clear link to
+hardware design). For the same reason it is somehow hard to follow the paper.
+
+============================================================================
+                           REVIEWER #3
+============================================================================
+
+
+---------------------------------------------------------------------------
+Reviewer's Scores
+---------------------------------------------------------------------------
+
+                                Overall: 2
+                    Reviewer confidence: 2
+                                Novelty: 2
+                             Usefulness: 2
+             Writing and figure quality: 3
+
+
+---------------------------------------------------------------------------
+Comments
+---------------------------------------------------------------------------
+
+The authors fail to articulate specific advantages of the use of AOP concepts
+in this context of the hardware synthesis and implementation from SystemC.  The
+paper provides a good review of AOP concepts and their applications to the
+areas relevant to this topic, such as verification languages.  However, they do
+not provide clear evidence of values provided by AOP for modeling the
+functionality of hardware components using SystemC, which cannot be easily
+provided without using AOP.
+
+In general, there might be such values, by capturing scenarios to be
+implemented using enter() and leave() APIs.  But at the end, those APIs are
+implemented using the regular C++ constructs, and the whole modeling is reduced
+to the plain C++ or SystemC.  I would expect that to provide values of AOP to
+designers who model their hardware functionalities, one would create a library
+of basic building blocks of the AOP so that the user can natively write the
+models using the AOP concepts, such as specifying a set of scenarios, their
+causality relations etc.
+
+The authors do not do any of this, and none of the tools used in the paper can
+natively understand such AOP building blocks, but simply elaborate the
+underlying C++.   The example given in the paper even does not use AOP for the
+core functionality of the hardware, but rather uses it for debugging packages.
+
+============================================================================
+                           REVIEWER #4
+============================================================================
+
+
+---------------------------------------------------------------------------
+Reviewer's Scores
+---------------------------------------------------------------------------
+
+                                Overall: 2
+                    Reviewer confidence: 3
+                                Novelty: 3
+                             Usefulness: 3
+             Writing and figure quality: 3
+
+
+---------------------------------------------------------------------------
+Comments
+---------------------------------------------------------------------------
+
+This paper describes an aspect-oriented programming approach for SystemC
+and synthesizes hardware. The idea is AOP is more crosscutting (e.g., bus
+interaction, nonfunctional aspect). Previous work used AOP either for
+code instrumentation and verification rather than for synthesis.  The
+authors extend the methodlogy of ADESD methodology to SystemC by adding
+scenario adapters (enter/leave), and limiting the use of channels to
+sc_in/sc_out to remain synthesizable. The authors argue that enter/leave in
+conjunction with explicit handshaking is more reusable because it is
+independent of number of clock cycles. The results show that the
+AOP-synthesized debugger has only 1% higher overhead than hand-coded.
+
+This reviewer feels that the proposed AOP design style is promising and the
+initial results appear good, but both the paper and the work as presented
+appear preliminary and should be elaborated. The main contribution here
+seems to be the Scenario Adapter class, where the use of simple enter/leave
+methods can add a lot of cross-cutting low-overhead customization. However,
+results only show the debugger; what else can it be good at? The authors
+mention compress/decompress, but the experimental results did not show it.
+Power efficiency is also another benefit that was mentioned as a potential
+benefit but was not evaluated.              Given that there is a 10-page limit, the
+authors really could use the extra 3 pages for such material.
+
+Evaluation should also include other metrics. I would assume one of the
+purposes of AOP is to save effort in making cross-cutting modifications, so
+it would be useful to show how many lines a piece of code needs to be
+modified, or how much less time it takes the designer to successfully reuse
+a module.
+
+============================================================================
+                           REVIEWER #5
+============================================================================
+
+
+---------------------------------------------------------------------------
+Reviewer's Scores
+---------------------------------------------------------------------------
+
+                                Overall: 2
+                    Reviewer confidence: 2
+                                Novelty: 2
+                             Usefulness: 2
+             Writing and figure quality: 3
+
+
+---------------------------------------------------------------------------
+Comments
+---------------------------------------------------------------------------
+
+The paper is intended to propose the use of aspect-oriented programming
+(AOP) for HW design by using SystemC.
+
+State of the art is well analyzed, and the authors observe how existing
+approaches use AOP only for code instrumentation and verification, but
+not for HW design.
+
+The authors proposes an extension to the state of the art, trying to
+analyze the impact of AOP on the final synthesized design.
+This would be a very interesting analysis, if the authors proposed a clear
+set of rules to apply AOP in HW design.
+Unfortunately, the paper does not present such rules, but only a very
+simple case study.
+The authors rely on already published material (the application-driven embedded
+system design methodology [19] and scenario adapters [20]) to implement a
+simple task scheduler in SystemC.
+It seems the contribution of the paper is just to have adopted SystemC to
+implement the idea proposed in [19] and [20].
+
+Concerning experimental results:
+- they are not well commented. The text does not report what "4-input LUTs"
+means in tables 1 and 2. Also the meaning of "occupied slices" is not reported.
+They are not so well-known concepts to skip a brief sentence
+describing their meaning.
+- It is impossible to understand wether the gained results have general
+validity without presenting a larger number of results.
+- A section showing the advantages of using AOP instead of OOP for modeling
+the proposed case study is missing. For example, the authors could show
+the benefit of using AOP instead of OOP during design space exploration
+or code reuse.

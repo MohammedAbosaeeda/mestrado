@@ -1,0 +1,153 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Universidade Federal de Santa Catarina             
+% Biblioteca Universitária                     
+%----------------------------------------------------------------------
+% Exemplo de utilização da documentclass ufscThesis
+%----------------------------------------------------------------------                                                           
+% (c)2010 Roberto Simoni (roberto.emc@gmail.com)
+%         Carlos R Rocha (cticarlo@gmail.com)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{ufscThesis} % Definicao do documentclass ufscThesis
+
+%----------------------------------------------------------------------
+% Pacotes usados especificamente neste documento
+\usepackage{graphicx} % Possibilita o uso de figuras e gráficos
+\usepackage{color}    % Possibilita o uso de cores no documento
+
+%----------------------------------------------------------------------
+% Comandos criados pelo usuário
+\newcommand{\afazer}[1]{{\color{red}{#1}}} % Para destacar uma parte a ser trabalhada
+
+%----------------------------------------------------------------------
+% Identificadores do trabalho
+% Usados para preencher os elementos pré-textuais
+\instituicao[a]{Universidade Federal de Santa Catarina} % Opcional
+\departamento[a]{Biblioteca Universitária}
+\curso[o]{Curso de Aperfeiçoamento na Elaboração de Documentos Científicos}
+\documento[o]{Exemplo} % Opcional (Tese é o padrão)
+\titulo{Exemplo de Uso do documentclass ufscThesis}
+\subtitulo{Versão Básica} % Opcional
+\autor{Carlos R Rocha, Roberto Simoni}
+\grau{Apoiadores ao Uso de Software Livre}
+\local{Florianópolis(SC)} % Opcional (Florianópolis é o padrão)
+\data{04}{junho}{2010}
+\orientador[Orientadora]{Narcisa de Fátima Amboni, Dr.Eng.}
+\coorientador[Coorientadora]{Roberta Moraes de Bem, M.Eng.}
+\coordenador[Coordenador]{João Ninguém}
+
+\numerodemembrosnabanca{6} % Isso decide se haverá uma folha adicional
+\orientadornabanca{nao} % Se faz parte da banca definir como sim
+\coorientadornabanca{sim} % Se faz parte da banca definir como sim
+\bancaMembroA{Presidente da banca} %Nome do presidente da banca
+\bancaMembroB{Segundo membro}      % Nome do membro da Banca
+\bancaMembroC{Terceiro membro}     % Nome do membro da Banca
+\bancaMembroD{Quarto membro}       % Nome do membro da Banca
+%\bancaMembroE{Prof. quinto membro}       % Nome do membro da Banca
+%\bancaMembroF{Prof. sexto membro}        % Nome do membro da Banca
+%\bancaMembroG{Prof. sétimo membro}       % Nome do membro da Banca
+
+\dedicatoria{A todos os usuários e apoiadores do uso de software livre}
+
+\agradecimento{Aos colegas da Biblioteca Universitária da UFSC,
+cujas críticas e análises possibilitaram o aperfeiçoamento do modelo.
+
+Aos nossos orientadores e professores que apoiaram a iniciativa.
+
+A todos os que contribuiram com sugestões, críticas ou dicas de como resolver
+alguns dos problemas que apareceram durante o desenvolvimento deste documentclass.}
+
+\epigrafe{Aprender é a única coisa de que a mente nunca se cansa, nunca tem medo e nunca se arrepende.}
+{Leonardo da Vinci}
+
+\textoResumo {Este é um documento para exemplificar o uso do documentclass \emph{ufscThesis},
+que pretende implementar as normas de formatação de documentos científicos da Biblioteca
+Universitária da Universidade Federal de Santa Catarina. Sugere-se que quem for começar a
+escrever uma tese, dissertação ou outro documento necessário para a conclusão de um curso
+da UFSC utilize este exemplo como base para sua redação, substituindo o seu conteúdo original.
+Com isso, deve-se obter um documento o mais próximo possível das normas de formatação em vigor
+na UFSC.}
+\palavrasChave {Exemplo. LaTeX. Gabarito. UFSC. Biblioteca Universitária.}
+ 
+\textAbstract {This document exemplifies the use of the \emph{ufscThesis} documentclass,
+which aims to implement the scientific document formatting norms of the University Library of
+Federal University of Santa Catarina. Is is sugested that whoever is beginning to write a thesis,
+dissertation or other document necessary to conclude an UFSC course uses this example as a basis,
+replacing its original content. In this way, the documento obtained will be as close as possible
+of the formatting norms vigorating in UFSC.}
+\keywords {Example. LaTeX. Template. UFSC. University Library.}
+
+%----------------------------------------------------------------------
+% Início do documento                                
+\begin{document}
+%--------------------------------------------------------
+% Elementos pré-textuais
+\capa  
+\folhaderosto[comficha] % Se nao quiser imprimir a ficha, é só não usar o parâmetro
+\folhaaprovacao
+\paginadedicatoria
+\paginaagradecimento
+\paginaepigrafe
+\paginaresumo
+\paginaabstract
+%\pretextuais % Substitui todos os elementos pre-textuais acima
+%\listadefiguras % as listas dependem da necessidade do usuário
+%\listadetabelas 
+%\listadeabreviaturas
+%\listadesimbolos
+\sumario
+%--------------------------------------------------------
+% Elementos textuais
+\chapter{Introdução}
+Este documento ilustra o uso do documentclass \emph{ufscThesis}. O \emph{gabarito} para
+\LaTeX~ foi  criado para atender a demanda de formatação de documentos científicos
+de conclusão de curso em conformidade com as normas vigentes da Biblioteca Universitária
+da Universidade Federal de Santa Catarina \afazer{citações das regulamentações}.
+
+Um fator que chama a atenção neste padrão é o tamanho da folha empregada (A5) e os consequentes
+ajustes em fontes, margens e espaçamentos necessários. Ao mesmo tempo, o padrão preconiza
+obediência às normas da ABNT nos pontos em que não são definidas as modificações, ou seja, no caso
+de referências bibliográficas, ordem dos elementos pré e pós-textuais, numeração de páginas, etc\afazer{citações das normas}.
+
+Para a implementação deste documentclass, o ponto de partida foi o ABNTex, classe de documentos criada por
+\afazer{definir autores}, que procura implementar as normas de redação de documentos da ABNT \afazer{Citar documentos}. Assim, a classe ufscThesis é uma derivação da classe ABNTex, e portanto este também deve ser instalado. A versão a partir da qual o ufscThesis foi criado é a 0.8-2, considerada a última estável pelos mantenedores do projeto ABNTex.
+Diferenças de formatação e funcionalidades foram reportadas quando a versão do ABNTex instalada diferia da apontada (versões superiores, em fase beta). Assim, aconselha-se aos usuários do ufscThesis que procurem usar a versão estável do ABNTex para evitarem problemas futuros. Futuras versões do ufscThesis procurarão gerenciar esses problemas.
+
+Observa-se que esta é uma versão inicial do ufscThesis, que ainda nem foi \emph{versionada}. Uma possível designação seria ``0.1-alpha'', na melhor das hipóteses. Assim, o usuário deve esperar pequenos problemas de avisos (warnings e badboxes) na compilação do documento. Da mesma forma, ainda existem algumas coisas a serem resolvidas em questão de gerenciamento de bibliografia. Recomenda-se que sempre que a estrutura do documento for alterada, ou que a bibliografia seja bastante modificada, realize-se pelo menos duas compilações, para após ver o resultado do texto formatado. Este é um fato conhecido dos usuários do \LaTeX.
+
+Por fim, o documentclass foi criado tendo em mente usuários que já tiveram contato com o LaTeX e já criaram pelo menos um documento. Não se espera, porém, fluência nos comandos do LaTeX e muito menos que se conheçam os mecanismos de modificações de classes. A ideia de ter uma classe específica para os documentos da BU/UFSC foi justamente evitar complexidades na elaboração destes. Da mesma forma, não há dependência de qualquer software para a redação dos documentos. Cada autor desta classe um software diferente, inclusive (Kile e Emacs). Assim, sinta-se livre para usar o que melhor lhe aprouver.
+
+Se desejar reportar problemas, curiosidades, sugerir melhorias ou modificações, sinta-se à vontade para escrever para Carlos R Rocha (cticarlo@gmail.com) ou Roberto Simoni (roberto.emc@gmail.com). Fique livre para modificar a classe (ainda estamos definindo a licença, mas a princípio pode considerar a GPL) como quiser, desde que mantenha as informações de autoria da versão original. Gostaríamos de receber as modificações feitas para poder melhorar a ufscThesis.
+
+\chapter{Elementos Pré-Textuais}
+\section{Definição das Variáveis do Documento}
+\section{Geração dos Elementos Pré-Textuais}
+\subsection{Elementos introdutórios}
+\subsubsection{Capa e Folha de Rosto}
+\subsubsection{Folha de Aprovação}
+\subsubsection{Dedicatória, Agradecimento e Epígrafe}
+\subsubsection{Resumo e Abstract}
+\subsection{Listas}
+\subsubsection{Sumário}
+\subsubsection{Listas de Figuras e Tabelas}
+\subsubsection{Lista de Abreviaturas e Siglas}
+\subsubsection{Lista de Símbolos}
+\subsubsection{Outras Listas}
+\chapter{Elementos Textuais}
+\section{Organização do Texto}
+\section{Figuras}
+\section{Tabelas}
+\section{Equações}
+\section{Citações}
+\section{Referências Bibliográficas}
+\chapter{Elementos Pós-Textuais}
+\chapter{Algumas Dicas de Uso do Documentclass}
+\chapter{Conclusão}
+Texto de conclusão
+%--------------------------------------------------------
+% Elementos pós-textuais
+\apendice
+\chapter{Exemplificando um Apêndice}
+\anexo
+\chapter{Gnu Public License}
+Incluir a GPL aqui.
+\end{document}

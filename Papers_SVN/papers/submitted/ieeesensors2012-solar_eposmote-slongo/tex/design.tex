@@ -1,0 +1,94 @@
+% ------------------------------------------------------------------------------
+\section{Design Considerations} \label{design}
+
+This section explains how the proposed solar harvesting circuit was designed.
+It presents a reasoning about technical decisions and modifications implemented on the Heliomote project~\cite{Raghunathan:2005}, in order to support motes based on low power wireless platforms.
+Finally, the performance of the harvesting circuit is evaluated through outdoor experiments.
+
+\subsection{Solar Cell and Energy Storage Unit} \label{scell_stunit}
+
+The relation between the solar cell and the energy storage unit is a crucial issue for the proposed harvesting circuit. This highlights the need of working as close as possible to the MPP, in order to extract the maximum amount of energy available. Since the circuit has no maximum power point tracker (the solar cells are directly coupled to the battery), the battery operating voltage should be as close as possible to the $V_{MPP}$ for the selected solar cell.
+
+The two available technologies to store energy, in a rechargeable way, are batteries and super capacitors. Although super capacitors are improving, they are not  recommended for solar harvesting circuits yet due to intrinsic leakage, losses on parasitic paths in the external circuitry \cite{Raghunathan:2005}, and low energy density. Among all the battery technologies available (e.g., Sealed Lead Acid, Nickel Cadmium, Nickel Metal Hydride, Lithium based), the Nickel Metal Hydride (NiMH) was chosen mainly for the low complexity on the recharging circuit and the absence of memory effect. Consequently, the system is powered by two common AA NiMH batteries with a nominal charge capacity of $2100~mA$.  
+
+The PV module is composed by two $4~V-100~mA$ solar cells measuring $60$~x~$60~mm$. The solar cell’s characterization curves were plotted (Figures \ref{fig:cv_cha} and \ref{fig:pv_cha}) based on data collected outdoor, on March 08, 2012 at 1:15 pm, with an average irradiance of $954~W/m^{2}$. The goal of the test was to find out the open circuit voltage ($V_{OC}$), the short circuit current ($I_{SC}$) and the $V_{MPP}$ in a real scenario. Table \ref{tab:solar_cha} shows the obtained values.
+
+\fig{0.25}{cv_cha}{Solar panel characterization carried outside - current-voltage curve}
+\fig{0.25}{pv_cha}{Solar panel characterization carried outside - power-voltage curve}
+
+\begin{table}[!t]
+\renewcommand{\arraystretch}{1.3}
+\caption{Solar Panel Measured Parameters}
+\label{tab:solar_cha}
+\centering
+\begin{tabular}{c||c}
+\hline
+\bfseries Parameter & \bfseries Measured Value	\\
+\hline\hline
+$V_{OC}$ 		& $4.15~V$							\\
+$I_{SC}$   		& $122.3~mA$  						\\
+$V_{MPP}$		& $3.25~V$   						\\
+\hline
+\end{tabular}
+\end{table}
+ 
+\subsection{Adaptation for an Low Power Wireless Platform} \label{adaptation}
+
+In order to understand the adaptations proposed for low power wireless platforms, it is essential to know some of their characteristics.
+Table~\ref{tab:mcu_cha} shows three different examples that have motivated the changes applied to Helimote's circuit.
+They are typical Platform-in-Package (PiP) which features a $2.4~GHz$ radio frequency transceiver.
+As shown in Table~\ref{tab:mcu_cha}, all these PiPs may operate with voltages lower than $3.3~V$.
+Therefore, there is no need for the step-up converter used in Heliomote's project.
+The new generation of PiPs normally operates at $1.8~V$, having a built-in buck regulator.
+Hence, the harvesting circuit efficiency is improved by eliminating the step-up converter.
+
+%\begin{center}
+%\begin{threeparttable}
+%\caption{Wireless MCU's Electrical Characteristics}
+%\label{tab:mcu_cha}
+%\begin{tabular}{llll}
+%\hline
+%Model		& Manufacturer				& Voltage	& Consumption		\\
+%\hline
+%MC1322	& Freescale Semiconductor	& 2.1V - 3.6V		& 29mA~\tnote{a}	\\
+%STM32W	& Texas Instruments			& 2V - 3.6V			& 29mA~\tnote{b}	\\
+%CC2530	& STMicroelectronics		& 2.1V - 3.6V		& 31mA~\tnote{c}	\\
+%\hline
+%\end{tabular}
+%\begin{tablenotes}
+%\item[a] transmit current, CPU clock at 2 MHz.
+%\item[b] transmit current at +3 dBm, CPU idle.
+%\item[c] transmit current at 1 dBm, w/CPU.
+%\end{tablenotes}
+%\end{threeparttable}
+%
+%\end{center}
+
+
+\begin{table}[!t]
+\renewcommand{\arraystretch}{1.3}
+\caption{Wireless MCU's Electrical Characteristics}
+\label{tab:mcu_cha}
+\centering
+\begin{tabular}{l||l||l||l}
+\hline
+\bfseries Model & \bfseries Manufacturer & \bfseries Voltage	& \bfseries Current* \\
+\hline\hline
+MC1322	 		& Freescale Semiconductor 	& $2V-3.6V$					& $29mA$				\\
+STM32W   		& Texas Instruments			& $2V-3.6V$					& $29mA$				\\
+CC2530			& STMicroelectronics		& $2.1V-3.6V$				& $31mA$				\\
+\hline
+\multicolumn{4}{l}{* current drain in transmit mode.}
+\end{tabular}
+\end{table}
+
+\subsection{Circuit Design} \label{circ_design}
+
+The harvesting circuit is planned to charge the NiMH batteries until a predefined threshold voltage. This voltage is set by external resistors in a voltage monitor (ICL7665). The threshold voltage selected was based on the charging behavior of the NiMH battery provided by the manufacturer (see Figure \ref{fig:bat_cha}). This battery is considered fully charged when it reaches a voltage around $1.45~V$ ($0.1~C$ curve). The selected threshold voltage was $2.9~V$, since the two AA cells were aranged in-serie. An analog switch short circuits the solar panel to ground when this value is reached. The overvoltage signal provided by the ICL7665 controls the analog switch. This prevents battery overcharges. A normally opened (MAX4614) analog switch were used instead of a normally closed one. Hence, if the initial battery voltage is bellow $2~V$ it is charged by the solar panel instead of being short circuited to the ground as in the case of using a normally closed one. 
+
+The circuit must also take care of the undercharge situation. There are two different reasons to avoid that. First, there is a minimum voltage threshold from which batteries do not operate properly. In this case, it is recommended to disconnect the load in order to avoid battery degradation. The second reason is that the input voltage of the wireless MCU's should not be lower than $2~V$. Thus, the under voltage pin of the ICL7665 is connected to a transistor. Then, when the battery voltage drops below $2.1~V$ the transistor is opened, disconnecting the mote. A simplified block diagram of the harvesting circuit is shown in Figure \ref{fig:circ_diagram}.
+
+Besides the already mentioned features, the circuit has a battery monitor (DS2438). This IC communicates trhough a protocol called 1-Wire. It provides the battery's information (battery voltage, battery current, remaining capacity and temperature) that may be used by a energy-aware task scheduler. The DS2438 also has an integrated current accumulator, which informs the total current going in and out of the battery.
+
+\fig{0.26}{bat_cha}{Charging curves for AA Nickel Metal Hidryde battery \cite{Panasonic:2000}.}
+\fig{0.45}{circ_diagram}{Simplified block diagram of a sensing platform solar harvesting circuit.}

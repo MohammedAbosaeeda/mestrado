@@ -1,0 +1,102 @@
+% ------------------------------------------------------------------------------
+\section{Introduction} \label{intro}
+% + The increasing complexity of embedded systems is pushing their design to the
+% System-Level, leading to the convergence between software and hardware.
+%
+% + In such scenario, it is highly desirable to formally verify
+% properties of
+% such systems regardless of whether their components are going to be implemented
+% in software or hardware.
+%
+% + In this paper we introduce an approach to formally verify
+% functional correctness properties of
+% embedded systems components at System-Level.
+% Dizer que nosso trabalho verifica corretude funcional a partir de pre e pos
+% requisitos de métodos e invariantes de classe, escritas em C++.
+% Que a abordagem utilizada é bounded model checking, onde a especificação dos
+% metodos e também a implementação dos mesmos é traduzida para uma formula
+% matemática a ser verificada pelo model checker.
+%
+% + In order to demonstrate our approach, we present a task scheduler of an
+% embedded operating system showing that such scheduler follows its specification
+% regardless of the domain it is instantiated.
+%
+% + Next sections...
+%
+
+% + The increasing complexity of embedded systems is pushing their design to the
+% System-Level, leading to the convergence between software and hardware.
+The increasing complexity of embedded systems is pushing their design to higher
+levels of abstraction, leading to the development of
+methodologies that are known to work at the \emph{System-Level},
+where there is no distinction between software and hardware
+\cite{Gerstlauer:2009,Froehlich:2001}.
+% \cite{Gerstlauer:2009,Panda:2001,Froehlich:2001}.
+%
+% + In such scenario, it is highly desirable to formally verify
+% properties of
+% such systems regardless of whether their components are going to be implemented
+% in software or hardware.
+In such scenario, it is highly desirable to verify system properties formally,
+regardless of whether their components are going to be implemented
+in software or hardware.
+
+Two main classes of properties for formal verification are
+functional correctness and safety.
+Functional correctness aims to check if a given implementation follows its
+specification (also referred as \emph{contract}).
+Safety aims to check if there is an execution path which
+leads the component to an error state.
+An error state can be caused, for example, by buffer overflows
+(e.g. while array bounds are surpassed), and by violating pointer safety
+(e.g. while dereferencing a null pointer).
+
+% + In this paper we introduce an approach to formally verify
+% functional correctness properties of
+% embedded systems components at System-Level.
+% Dizer que nosso trabalho verifica corretude funcional a partir de pre e pos
+% requisitos de métodos e invariantes de classe, escritas em C++.
+% Que a abordagem utilizada é bounded model checking, onde a especificação dos
+% metodos e também a implementação dos mesmos é traduzida para uma formula
+% matemática a ser verificada pelo model checker.
+In this paper, we introduce an approach to verify
+functional correctness properties, and safety properties of
+embedded system components formally and at System-Level.
+% Functional correctness aims to check if a given implementation follows its
+% specification.
+In our proposal, a contract is composed by class invariants
+and method preconditions and postconditions as it is proposed by
+\emph{contract programming} \cite{Meyer:2003}.
+Such contract is specified in C++, the same language used for the
+implementation of components.
+Both specification and implementation are translated to the internal
+representation of the C Bounded Model Checker (CBMC)
+\cite{Kroehning:CBMC} and then, formally checked.
+Besides verifying functional correctness properties, specified by the
+component contract, CBMC also checks for safety properties such as
+the absence of buffer overflows, and pointer safety.
+% It is possible then, to generate 
+% By using High-Level Synthesis (HLS) tools is possible to generate hardware from
+% the C++ description
+
+% + In order to demonstrate our approach, we present a task scheduler of an
+% embedded operating system showing that such scheduler follows its specification
+% regardless of the domain it is instantiated.
+In order to demonstrate our approach, we describe the scheduler of the
+Embedded Parallel Operating System (EPOS)
+\cite{Froehlich:2001}
+% embedded operating system
+showing that it follows its specification
+regardless of being instantiated in software or hardware.
+
+% + Next sections...
+The remaining of this paper is organized as follows:
+Section~\ref{sota} makes an overview of
+formal verification techniques for System Level Design (SLD), and formal
+verification of embedded systems components;
+Section~\ref{proposal} presents our approach for System-Level verification;
+Section~\ref{eval} evaluates our approach for the scheduler of an
+embedded operating system;
+Section~\ref{concl} closes the paper with our final considerations.
+
+% ------------------------------------------------------------------------------

@@ -1,0 +1,179 @@
+\documentclass[english,10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{babel}
+\usepackage[letterpaper,right=2.5cm,left=2.5cm,top=2.5cm,bottom=1.9cm,noheadfoot]{geometry}
+\usepackage[dvips]{graphics}
+
+\newcommand{\fig}[2]{
+  \begin{figure}[htb]
+  {\centering\scalebox{.8}{\includegraphics{#1.eps}}\par}
+  \caption{#2\label{fig:#1}}
+  \end{figure}
+}
+
+\pagestyle{empty}
+
+\begin{document}
+
+\title{On Application-Oriented Parallel Run-time Systems}
+
+\author{
+  Antônio Augusto Fröhlich\\
+  GMD-FIRST\\
+  Kekuléstraße 7\\
+  12489 Berlin, Germany\\
+  guto@first.gmd.de \and
+  Wolfgang Schröder-Preikschat\\
+  University of Magdeburg\\
+  Universitätsplatz 2\\
+  39106 Magdeburg, Germany\\
+  wosch@ivs.cs.uni-magdeburg.de }
+
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\section*{\centering Extended Abstract for SPAA Revue}
+
+% - Cluster computing X communication
+The parallel computing community has been using clusters of commodity
+workstations as an alternative to expensive massively parallel
+processors (MPP) for several years by now. While MPPs can rely on custom
+hardware to achieve high performance, their development follows a slow
+pace, mainly due to the limited production scale. Clusters, on the other
+hand, benefit from the frenetic pace with which the workstation market
+evolves. As a matter of fact, when an MPP comes to the market, it is
+very likely that processor, memory, and interconnection systems with
+similar features will already be available at the commodity market.
+Hence, it seems evident that both technologies are going to merge soon.
+ 
+Nevertheless, when we compare the performance of parallel applications
+running on clusters and on MPPs, the figures show a different scenario:
+clusters are still quite behind their expensive relatives~\cite{npb}. We
+believe the origin of this shortcoming to be in the software environment
+normally used in clusters. While MPPs rely on custom software,
+especially developed to support parallel applications, clusters often
+apply the ``commodity'' principle to the software also.  Commodity
+workstation software, however, has not been designed to support parallel
+computing.  Indeed, every parallel application has particular run-time
+demands that will never be adequately covered by all-purpose operating
+systems, for their generality prevents most optimizations.  This
+contradiction between generic and optimal is consequently discussed
+in~\cite{Preikschat:1994}.
+
+In the context of project \textsc{Epos} (\emph{Embedded Parallel
+  Operating System})~\cite{Froehlich:ehpc:1999}, we developed a novel
+operating system design method that is able to produce run-time support
+systems that can be customized to closely match the requirements of
+particular parallel applications. Because of its strong compromise with
+applications, we named this method \emph{Application-Oriented System
+  Design} (AOSD). The design of an application-oriented operating system
+begins with the decomposition of the operating system domain in
+abstractions that are natural to application programmers. This is
+exactly the decomposition strategy promoted by \emph{Object-Oriented
+  Design}~\cite{Booch:1994} and may sound obvious to application
+designers, but most system designers simply neglect the problem domain
+and let implementation details, such as target architecture, programming
+languages, and standardized interfaces, guide the design
+process~\cite{Pike:2000}. Application programmers, not seldom, get
+run-time systems that barely resemble the corresponding domain.
+
+The next step is to model software components that properly represent
+the abstractions from the decomposed domain. Extensive components, that
+encapsulate all perspectives of an abstraction in a single entity, are
+not an alternative, since we want components to closely match the
+requirements of particular applications. A more adequate approach would
+be to apply the commonality and variability analysis of
+\emph{Family-Based Design}~\cite{Parnas:1976} to yield a family of
+abstractions, with each member capturing a significant variation and
+shaping a component.  Nonetheless, this approach has the inconvenient of
+generating a high number of components, thus considerably increasing
+complexity.  We handle this drawback by exporting all members of a
+family through a single \emph{inflated interface}.  In a system designed
+accordingly, adequate members of each required family could be
+automatically select by a tool that performs syntactical analysis of the
+corresponding application's source code. Moreover, application
+programmers should feel comfortable to use these inflated interfaces,
+for they emanate directly from the problem domain.
+
+Another important factor to be considered while modeling abstractions is
+scenario independence. When a designer realizes that an abstraction has
+to to be specialized in order to join a given scenario, for instance a
+\emph{mailbox} abstraction in a \emph{multithreaded} scenario, he has to
+choose between modeling a new family member and capturing this scenario
+dependency in a separate construct.  As remarked by
+\emph{Aspect-Oriented Programming}~\cite{Kiczales:1997}, allowing
+abstractions to incorporate scenario dependencies reduces their degree
+of reusability and produces an explosion of scenario-dependent
+components. Therefore, an application-oriented design should try to
+avoid it, only allowing those variations that are inherent to the family
+to shape new members.  The resulting \emph{scenario-independent
+  abstractions} shall be reusable in a larger variety of scenarios, some
+of them unknown at the time they were modeled. Scenario specificities,
+in turn, can be captured in constructs like the \emph{scenario adapters}
+described in~\cite{Froehlich:sci:2000}. Because scenario adapters share
+the semantics of collaborations in \emph{Collaboration-Based
+  Design}~\cite{Reenskaug:1992}, one could say that an abstraction
+collaborates in a scenario.
+
+In order to produced a run-time support system, the components resulting
+from the process described above have to assembled together correctly
+and efficiently. By correct assembly we mean preserving the individual
+semantics of each component in the presence of others and under the
+constraints of an execution scenario.  By efficient assembly we mean
+preserving their individual efficiency in the resulting composite. One
+possibility to produce the desired compositions is to capture a reusable
+system architecture in a \emph{component framework}. A framework enables
+system designers to predefine the relationships between abstractions and
+therefore can prevent misbehaved compositions.  Furthermore, a framework
+defined in terms of scenario adapters can achieve a high degree of
+adaptability. Efficient composition can be accomplished if the framework
+uses \emph{Generative Programming} techniques~\cite{Czarnecki:2000},
+such as \emph{static metaprogramming}.  Since static metaprograms are
+executed at compile-time, a statically metaprogrammed framework can
+avoid most of the overhead typical of traditional object-oriented
+frameworks.  It is also important to notice that, though component
+composition would take place at compile-time, nothing would prevent
+components from using dynamic reconfiguration mechanisms to internally
+adapt themselves.
+
+\fig{aosd}{An overview of Application-Oriented System Design.}
+
+In brief, \emph{Application-Oriented System Design}
+(figure~\ref{fig:aosd}) is a multiparadigm design method that supports
+the construction of customizable run-time support systems by decomposing
+the system domain in families of reusable, scenario-independent
+abstractions and the corresponding scenario adapters. Reusable system
+architectures are modeled as component frameworks that can guide the
+compilation of the target system. Application programmers interact with
+the system through inflated interfaces, without having to know details
+about the organization of families or scenarios.
+
+We are applying Application-Oriented System Design in project
+\textsc{Epos}, which aims at delivering automatically generated run-time
+support systems for dedicated applications (parallel and embedded).
+\textsc{Epos} consists of a collection of components, a component
+framework, and a set of tools that support application programmers in
+generating run-time support systems for their applications. It is
+currently being implemented for a cluster of PCs interconnected with
+32-bits \textsc{Myrinet}. A preliminary evaluation of this
+system~\cite{Froehlich:hpcn:2000} revealed unprecedented performance
+figures, reaching a bandwidth of 119 MB/s in a machine limited to
+approximately 130 MB/s. This results corroborate the guidelines of
+\emph{Application-Oriented System Design}, as well as \textsc{Epos}
+design decisions. Nevertheless, \textsc{Epos} is a long term project
+that aims at delivering application-oriented run-time systems to a large
+universe of applications. Thus, several system abstractions, scenario
+adapters, and tools are still to be implemented or improved.
+
+\bibliographystyle{abbrv}
+\bibliography{se,os,network,cluster,parallel,guto}
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

@@ -1,0 +1,32 @@
+Para obter a carga da bateria, o monitor do \epos{} é baseado na 
+observação da tensão da mesma, pois as baterias possuem a característica de 
+ter suas tensões reduzidas conforme a utilização. 
+Entretanto, a tensão amostrada não é relacionada linearmente com a taxa de 
+descarga da bateria, o sistema não tem a 
+capacidade de converter toda a tensão fornecida em recurso utilizável e, também,
+existe uma tensão mínima em que o sistema opera.
+A figura~\ref{fig:graficoBateria} apresenta o gráfico Tensão X Tempo, 
+no qual pode ser observado que a diminuição da tensão é variável no tempo.
+A partir disso, o monitor estabelece uma relação discreta entre a tensão obtida
+e a carga da bateria, através da divisão das tensões obtidas em 10 fatias de
+tempo, chamadas épocas, nas quais as tensões possuem diferentes 
+variações, como apresentado no gráfico. Cada época corresponde a uma
+porcentagem da capacidade nominal da bateria utilizada.
+
+Determinados sistemas embarcados possuem a possibilidade de configurar um
+perfiférico, chamado conversor analógico digital(\textsc{ADC}), para realizar
+as leituras da tensão da bateria.
+
+O monitor do \epos{} não realiza um acompanhamento constante da tensão real 
+da bateria, apesar de isso ser possível, pois cada leitura consome energia 
+para ser realizada, além de um sobrecusto considerável para a aplicação. Para
+diminuir esses efeitos, o monitor utiliza uma estrutura com informações
+conhecidas previamente que permmite acompanhar o consumo de energia de uma forma
+aproximada. As informações são a respeito das características específicas da
+bateria e dos consumos de energia pelos componentes de \emph{hardware} do 
+sistema a ser monitorado. 
+No início da execução o monitor verifica a carga da bateria através da tensão,
+como mencionado anteriormente, e durante a execução atualiza esse valor com as
+energias consumidas pelos periféricos do sistema.
+
+

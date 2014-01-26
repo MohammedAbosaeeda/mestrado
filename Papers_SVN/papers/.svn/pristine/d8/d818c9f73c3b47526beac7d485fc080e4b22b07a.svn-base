@@ -1,0 +1,42 @@
+@InProceedings{Polpeta:euc:2004,
+  author 	= {Fauze Val\'erio Polpeta and Ant\^onio Augusto Fr\"ohlich},
+  title 	= "{Hardware Mediators: a Portability Artifact for Component-Based Systems}",
+  booktitle 	= {Proceedings of the International Conference on Embedded and Ubiquitous Computing},
+  OPTcrossref 	= {},
+  OPTkey 	= {},
+  pages 	= {271-280},
+  year 		= {2004},
+  OPTeditor 	= {},
+  volume 	= {3207},
+  OPTnumber 	= {},
+  series 	= {LNCS},
+  address 	= {Aizu,Japan},
+  month 	= {Aug.},
+  OPTorganization = {},
+  publisher 	= {Springer},
+  OPTnote 	= {},
+  OPTannote 	= {},
+  isbn 		= {3-540-22906-X}
+}
+
+@InProceedings{Polpeta:wso:2004,
+  author 	= {Fauze Val\'erio Polpeta and Ant\^onio Augusto Fr\"ohlich and
+                  Arliones S. Hoeller Junior and Tiago Stein D'Agostini},   
+  title 	= "{Portabilidade em Sistemas Operacionais Baseados em 
+                   Componentes de Software}",
+  booktitle 	= {First Brazilian Workshop on Operating System},
+  OPTcrossref 	= {},
+  OPTkey 	= {},
+  OPTpages 	= {},
+  year 		= {2004},
+  OPTeditor 	= {},
+  OPTvolume 	= {},
+  OPTnumber 	= {},
+  OPTseries 	= {},
+  address 	= {Salvador, Brazil},
+  month 	= {Aug.},
+  organization 	= {SBC - Brazilian Computer Society},
+  OPTpublisher 	= {},
+  OPTnote 	= {},
+  OPTannote 	= {}
+}

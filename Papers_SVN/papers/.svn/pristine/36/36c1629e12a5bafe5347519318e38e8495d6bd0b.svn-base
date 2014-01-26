@@ -1,0 +1,24 @@
+#FIG 3.2
+Landscape
+Center
+Inches
+Letter  
+100.00
+Single
+-2
+1200 2
+2 2 0 1 0 7 50 -1 -1 0.000 0 0 -1 0 0 5
+	 1200 1500 8100 1500 8100 5475 1200 5475 1200 1500
+4 0 0 50 -1 0 12 0.0000 4 180 4965 1500 1800 template <> struct Traits<PC_NIC>: public Traits<PC_Common>\001
+4 0 0 50 -1 0 12 0.0000 4 180 90 1500 2025 {\001
+4 0 0 50 -1 0 12 0.0000 4 180 3360 1500 2250     typedef LIST<PCNet32, PCNet32> NICS;\001
+4 0 0 50 -1 0 12 0.0000 4 180 6165 1500 2700     static const unsigned int PCNET32_UNITS = NICS::Count<PCNet32>::Result;\001
+4 0 0 50 -1 0 12 0.0000 4 180 4665 1500 2925     static const unsigned int PCNET32_SEND_BUFFERS = 8;\001
+4 0 0 50 -1 0 12 0.0000 4 180 4965 1500 3150     static const unsigned int PCNET32_RECEIVE_BUFFERS = 8;\001
+4 0 0 50 -1 0 12 0.0000 4 180 5490 1500 3600     static const unsigned int E100_UNITS = NICS::Count<E100>::Result;\001
+4 0 0 50 -1 0 12 0.0000 4 180 4290 1500 3825     static const unsigned int E100_SEND_BUFFERS = 8;\001
+4 0 0 50 -1 0 12 0.0000 4 180 4590 1500 4050     static const unsigned int E100_RECEIVE_BUFFERS = 8;\001
+4 0 0 50 -1 0 12 0.0000 4 180 5490 1500 4500     static const unsigned int C905_UNITS = NICS::Count<C905>::Result;\001
+4 0 0 50 -1 0 12 0.0000 4 180 4290 1500 4725     static const unsigned int C905_SEND_BUFFERS = 8;\001
+4 0 0 50 -1 0 12 0.0000 4 180 4590 1500 4950     static const unsigned int C905_RECEIVE_BUFFERS = 8;\001
+4 0 0 50 -1 0 12 0.0000 4 180 135 1500 5175 };\001

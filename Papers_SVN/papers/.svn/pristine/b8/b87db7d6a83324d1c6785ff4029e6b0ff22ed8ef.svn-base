@@ -1,0 +1,136 @@
+\documentclass[a4paper,11pt,portuguese]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage[margin=2cm,nohead,]{geometry}
+\usepackage{babel}
+\usepackage{times}
+\usepackage{graphics}
+
+\begin{document}
+\pagestyle{empty}
+
+\title{JAVA em Sistemas Embutidos\\[1ex]
+  \large{--- Projeto de Pesquisa ---}
+}
+
+\author{Antônio Augusto Fröhlich, Leandro Becker}
+ 
+\maketitle                         
+
+\begin{abstract}
+
+\end{abstract}
+
+\section{Motivação}
+
+% Todo mundo quer Java
+A tecnologia JAVA, introduzida pela Sun Microsystems em 199x, vem tendo
+grande aceitação por parte da indústria de software. Portabilidade,
+facilidade de integração com a Web e alta produtividade são algumas das
+características que tornaram JAVA popular na indústria e induziram um
+fenômeno de formação nas universidades. ......
+
+% A indústria de software embarcado também quer
+Com tamanha popularidade, é natural que JAVA atraísse também o interesse
+da indústria de sistemas embutidos, historicamente atrelada à linguagem
+C. A linguagem JAVA, em sua própria definição, traz soluções para uma
+série de problemas recorrentes no desenvolvimento de software, tais como
+portabiliade, concorrência, sincronização, reuso e componentização.
+Outro fator que motiva a indústria é a estimativa de que hoje há mais
+alunos nos cursos de informática aprendendo JAVA do que qualquer outra
+linguagem. Além disso, JAVA, desde seu nascimento, almeja ser uma
+tecnologia para o desenvolvimento de sistemas embutidos e, por
+conseguinte, vem fomentando um grande número de projetos de pesquisas
+sobre processadores, máquinas virtuais e otimizadores de
+código~\cite{x,y,z}.
+
+% Motivos distorcidos
+Ironicamente, a maioria dos projetos de pesquisa que focalizam a
+utilização de JAVA em sistemas embutidos se concentram na solução de
+problemas inerentes a própria tecnologia JAVA: imprevisibilidade
+temporal e uso exagerado de recursos. Em outras palavras, se não
+utilizássemos JAVA não teríamos tais problemas. Contudo, a indústria
+parece convencida de que tais deficiências são compensadas pelas
+vantagens associadas à JAVA e como tal, não nos cabe discutir tal
+predileção. O papel dos pesquisadores, neste contexto, é o de viabilizar
+o uso de JAVA no contexto de sistemas embutidos.
+
+% O que é mesmo um sistema embutido? Não é (apenas) celular!
+A primeira grande barreira para o uso de JAVA em sistemas embutidos é a
+falta de previsibilidade temporal. Existem várias tipos de sistemas
+embutidos: alguns poucos são muito similares a sistemas computacionais
+de propósito geral (não embutidos) e convivem relativamente bem com a
+imprevisibilidade temporal de JAVA. Nesta categoria, podemos incluir
+algumas aplicações que rodam em telefones celulares como agendas e bloco
+de notas (mas não o celular em si), ou que rodam em \emph{set-top
+  boxes}, como guias eletrônicos de programação. No outro extremo da
+escala, temos os sistemas profundamente embutidos, que fazem parte de
+sistemas maiores, como máquinas, automóveis, robôs e até mesmo fábricas.
+Estes sistemas normalmente têm requisitos temporais muito fortes e se
+caracterizam como sistemas de tempo real. A utilização de JAVA neste
+contexto ainda é problemática e, normalmente, se dá ao custo de
+restrições fucionais. Entretanto, de acordo com
+Tennenhouse~\cite{Tennenhouse:2000}, esses sistemas contabilizam 98\%
+dos processadores fabricados atualmente, perfazendo a esmagadora
+maioria. Este estudo mostra ainda que 97\% dos processadores são de 4, 8
+ou 16 bits e possuem recursos (e.g. memória, capacidade de
+processamento) extremamente limitados, estando portanto sujeitos a
+segunda grande limitação de JAVA: uso descomedido de recursos.
+
+% Temos partes da solução e acreditamos ser capazes de bolar o faltante
+Embora o cenário para o emprego de JAVA em sistemas embutidos não seja
+tão animador como freqüentemente se anuncia, vários grupos de pesquisa
+no mundo inteiro têm apresentado soluções específicas para este ou
+aquele problema~\cite{x,y,z}. Isto nos permite acreditar que, no futuro
+próximo, será possível oferecer uma solução definitiva à problemática do
+uso de JAVA em sistemas profundamente embutidos. Uma vez que os
+proponentes deste projeto vêm trabalhando em diversos aspectos da
+questão, não nos parece arrogante propor um projeto exatamente com este
+objetivo: consolidar os diversos fragmentos da solução do problema,
+desenvolvendo as partes que, por ventura, ainda estejam a ser
+desenvolvidas.
+
+
+\section{Objetivos}
+
+% Objetivo geral: JAVA em SE
+
+\subsection{Plataforma de Hardware}
+
+% UFRGS: FemtoJAVA
+% LISHA: SoCs
+
+\subsection{Máquina Virtual}
+
+% LISHA: EPOS-J
+% UFRGS: trabalho do Marco
+% DAS: RTSJ
+
+\subsection{Otimizadores}
+
+% LISHA: JMinimizer
+% UFRGS: Sashimi
+% DAS: 
+
+\subsection{Ambiente de Desenvolvimento}
+
+% LISHA: PDSCE
+% UFRGS:
+% DAS:
+
+\section{Metodologia}
+
+\section{Resultados Esperados}
+
+\section{Cronograma}
+
+\section{Orçamento}
+
+\section{Capacitação dos Proponentes}
+
+
+
+
+
+
+\end{document}

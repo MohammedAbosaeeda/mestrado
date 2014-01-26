@@ -1,0 +1,178 @@
+\documentclass[10pt,english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage[letterpaper,tmargin=1.5cm,noheadfoot,textwidth=17.7cm,
+            textheight=23.9cm]{geometry}
+\usepackage{babel}
+\usepackage{epsfig}
+\usepackage{listings}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{2ex}
+\setlength{\columnsep}{1.5cm}
+%\setlength{\footnotesep}{2ex}
+
+\lstset{language=C++,basicstyle=\normalsize,keywordstyle=\ttfamily\textbf,
+  nonkeywordstyle=\ttfamily,flexiblecolumns=true,labelstep=0}
+
+\newcommand{\tild}{\raisebox{-.75ex}{\~{}}}
+
+\newcommand{\putfig}[5]{
+  \begin{figure}[htbp]
+  {\centering\resizebox*{#2}{#3}{\includegraphics{#1}}\par}
+  \caption{#5\label{#4}}
+  \end{figure}
+}
+
+\newcommand{\putprog}[5]{
+  \begin{figure}[htbp]
+  {\centering\fbox{\lstbox\lstinputlisting[first=#2,last=#3]{#1}}\par}
+  \caption{#5\label{#4}}
+  \end{figure}
+}
+
+\newcommand{\prog}[3]{
+  \mbox{\lstbox\lstinputlisting[first=#2,last=#3]{#1}}
+%  \vspace{-2ex}
+}
+
+\renewcommand{\thesection}{\arabic{section}.\hspace{-0.75em}}
+\renewcommand{\thesubsection}{
+  \arabic{section}.\arabic{subsection}.\hspace{-0.75em}
+}
+
+\begin{document}
+\pagestyle{empty}
+
+\title{Scenario Adapters: Efficiently Adapting Components\thanks{This research has been partially supported by the Federal University of Santa Catarina, by CAPES Foundation grant no. BEX 1083/96-1, by Deutsche Forschungsgemeinschaft grant no. SCHR 603/1-2, and by the Bundesministerium für Bildung und Forschung grant no. 01 IS 903 D2.}}
+
+\author{
+  Antônio Augusto Fröhlich\\[-0.5ex]
+  \small{GMD-FIRST}\\[-0.5ex]
+  \small{Kekuléstraße 7, 12489 Berlin, Germany}\\[-0.5ex]
+  \small\texttt{guto@first.gmd.de}\\[1ex]
+  \small{and}\\[1ex]
+  Wolfgang Schröder-Preikschat\\[-0.5ex]
+  \small{University of Magdeburg}\\[-0.5ex]
+  \small{Universitätsplatz 2, 39106 Magdeburg, Germany}\\[-0.5ex]
+  \small\texttt{wosch@ivs.cs.uni-magdeburg.de}
+}   
+
+\date{}
+\maketitle
+\thispagestyle{empty}
+ 
+\sloppy
+
+\section*{\protect\centering Abstract}
+
+In this paper we consider the utilization of com\-po\-nent-ba\-sed software engineering techniques for the development of adaptable systems compromised with performance. The \textsc{Scenario Adapter} construct is proposed as an effective means to achieve this goal. It can be used to adapt scenario-independent abstractions to an execution scenario known at compile-time. The efficiency of \textsc{Scenario Adap\-ters} has been demonstrated in the Project \textsc{Epos}, which aims to deliver, whenever possible automatically, a tailored run-time support system for each application.
+
+Keywords: component-based software engineering, static adaptation, template metaprogramming.
+
+
+\section{\protect\centering Introduction}
+
+Object-orientation together with component-based software engineering is enabling the long dreamed production of software as an assemblage of ordinary components. Similarly to other industries, software developers can nowadays reuse components, reducing costs and accelerating production. Moreover, in comparison to other assembly lines, for instance to the largely acclaimed automotive industry, component-based software engineering shows an expressive advantage: software components, besides being reused, can easily be adapted to match particular requirements. This, for the car industry, would mean having a single engine that could be adapted either to propel a limousine or a small city car.
+
+Conceiving a system as an assemblage of adaptable components, however, brings about new challenges. To begin with, few software engineers would dare to suggest a definition for the term software component. Module, class, class category, object file, and server are just some of the constructs commonly referred to as component. Perhaps a dictionary definition, such as the one from the Oxford English Dictionary, which defines a component as ``any of the parts of which something is made'', would be more adequate. Nevertheless, the lack of a clear definition for the term does not seem to prevent this technology from been successfully used. Other open questions have a more restrictive impact. For instance: What is a good size for a component? How can a component be adapted? How can it be glued together with other components? How to grant that a component composition yields a system that matches the requisites? Questions like these have to be answered in order to make component-based software engineering really effective. 
+
+The main concern of this paper is the adoption of component-based software engineering techniques to construct efficiently adaptable systems. The paper begins with some considerations about adaptable components, after what the \textsc{Scenario Adapter} construct is described in details. Scenario adapters can be used to efficiently adapt an existing component to join a specific execution scenario. Next a case study about the use of scenario adapters in the project \textsc{Epos} is presented.
+
+
+\section{\protect\centering Adaptable Abstractions}
+
+Despite the controversy about what a component is (or should be), in this paper we will assume any plausible abstraction in the system's application domain to be a component. Considering an operating system, abstractions such as \texttt{thread} and \texttt{mailbox} could be our components, be them classes, servers, or any other kind of ``part''. If an abstraction can be adjusted to satisfy the requisites of several execution scenarios, we say it is an adaptable abstraction. Based on these assumptions, a strategy to implement efficiently adaptable abstractions is described next.
+
+
+\subsection{Scenario Independence}
+
+The advantage of a system in which abstractions are independent from the execution scenario they run in is obvious: it can be adapted to join many scenarios. Whenever the system is requested to join a new scenario, some sort of adapter has to be implemented, but the basic abstractions remain untouched. Achieving this goal, however, is not a trivial matter, since abstractions tend to embed several scenario peculiarities.
+
+The pollution of abstractions with scenario specific aspects happens naturally along the abstraction life-cycle. During the analysis phase, whenever the application domain is successfully partitioned, abstractions are assigned clear responsibilities that are completely independent from execution scenarios. These responsibilities are eventually translated into behavior and structure specifications during the design phase. If carried out properly, this phase can still yield scenario-independent abstractions, with dependencies isolated in proper constructs. However, the migration to the implementation phase tends to extend each abstraction's specification to satisfy the predicted execution scenarios, thus breaking down scenario-independence.
+
+ As an example, consider a \texttt{mailbox} abstraction in an operating system. From the analysis phase, we could have got that a \texttt{mailbox} is the abstraction responsible for supporting \mbox{$n$-to-$n$}, bidirectional communication among active objects. During design, this specification would probably have been extended to accommodate operations such as the sending and receiving of messages, as well as relations to constructs that will enable \texttt{mailbox} identification and location, message buffering, operation synchronization, etc. However, it would not be unusual if, along the implementation phase, questions regarding possible underlying networks, buffer management, security, and many others, had distorted the \texttt{mailbox} abstraction, transforming it into a scenario-specific abstraction.
+ 
+This phenomenon has several implications on software quality metrics. First, it impacts reusability, since abstractions that are polluted with execution scenario details are seldom reusable in other scenarios. Very often different versions of an abstraction have to be implemented, one for each execution scenario. This impacts maintainability and increases the complexity of system configuration, since there are now several realizations for each abstraction. Therefore, it is very important to keep abstractions as independent from execution scenarios as possible. 
+
+Aspect-independence is also the main appeal behind \emph{Aspect-Oriented Programming} (AOP)~\cite{Kiczales:ecoop:1997}. However, although AOP suggests means to adapt aspect-independent abstractions according to an aspect program, AOP itself does not enforce a design policy that yields aspect-independent abstractions. 
+
+\subsection{Component Granularity}
+
+When talking about efficient adaptation of components, granularity becomes an important matter, since it directly impacts performance, configurability and maintainability. On the one hand, a system made up of a large amount of fine components will certainly achieve better performance than one made up of a couple of coarse components, because each coarse component brings along functionality that will not always be used. The component functionality that is not used often turns into overhead for the applications ~\cite{Parnas:1976,Cordsen:iwooos:1991}. On the other hand, a set of fine grain components is harder to configure and to maintain.
+
+We do not propose components to have this or that size, but it is certainly more difficult to efficiently adapt a large component. Besides, extremely large components usually result from poor application domain partitioning during system analysis.
+
+
+\section{\protect\centering Scenario Adapters}
+
+Several alternatives to achieve scenario-independence have been proposed by the software engineering community, ranging from simple implementation constructs, to special languages and complete methodologies. Nevertheless, as adaptability is considered one of the ``noble'' qualities a software can have, paying a high price for it, specially in terms of performance, is usually acceptable. This condition often prevents adaptation techniques from being used in high performance computing system. Next we describe a low-overhead construct that can be used to efficiently adapt a scenario-independent abstraction to a given execution scenario: the \textsc{Scenario Adapter}.
+
+The basic structure of a \textsc{Scenario Adapter} is depicted in figure \ref{fig:adapter}. At a first glance, it may resemble the \textsc{Adapter} design pattern from \cite{Gamma:1995}. There are, however, important differences. While the \textsc{Adapter} pattern suggests a polymorphic implementation, in which \texttt{Implementor} and \texttt{Scenario} are only bound at run-time, the \textsc{Scenario Adapter} is designed to be bound at compile-time.
+
+\putfig{fig/scenario_adapter.eps}{!}{!}{fig:adapter}{The basic organization of a \textsc{Scenario Adapter}.}
+ 
+The special care for static binding arises from the fact that many abstractions in a system have a single \texttt{Implementor}. In such cases, there is no sense in paying the high price of polymorphism. Moreover, even if an abstraction have several \texttt{Implementors}, many low-level scenarios are mutually exclusive. For example, a well configured \texttt{thread} should exist either in the \texttt{multiprocessor} or in the \texttt{uniprocessor} scenario, since ordinary computers have either one or more than one processors when the system starts up and this situation is not expected to change during execution. In some other cases, abstractions refrain from changing execution scenarios at run-time just for the sake of performance. In this way, statically binding \textsc{Scenario Adapters} usually does not imply in flexibility loss and yields quite better performing systems.
+
+Each of the elements in figure \ref{fig:adapter} will now be described in details. For the sample code, we select the C++ language because it is the most accepted object-oriented language in the system software community. Care has been taken to consider language characteristics and not compiler-dependent aspects. Nevertheless, in order to be sure that the compiler is not misinterpreting some language definitions or generating inefficient code\footnote{Some compilers generate code (and the respective calls) for empty methods, including constructors.}, some code generation checks may be convenient. We proceeded such checks for the GNU C++ compiler (egcs-1.1.2) with positive results, i.e., \textsc{Scenario Adapters} did not incur in any overhead over scenario-independent abstractions.
+
+
+\paragraph{\texttt\textbf{Interface}:} exports the abstraction functionality and defines what an \texttt{Implementor} has to implement. Although a true interface declaration is missing in C++, it is possible to achieve a similar effect with a tricky class declaration. First, declaring the constructor \texttt{protected} avoids class instantiation and defining it to be empty cancels any influence over the realizations. Second, declaring all member functions to be private forces derived classes to implement them. The realize relationship between \texttt{Interface} and \texttt{Implementor} is then implemented via inheritance \footnote{Note that implementing a realize relationship via inheritance, for all the compilers we had access to, has the undesirable side-effect of enlarging the resulting object by the size of an integer. This side-effect results from the C++ language definition that two pointers to two distinct objects may never have the same value, what is usually granted by having the compiler to assign a minimum size of 1 to any object. However, as the instantiation of the class \texttt{Interface} is prevented by declaring its constructor \texttt{protected}, having a zero size assigned to it would never break any language definition.}.
+
+An interface declared in this fashion is not as semantically strong as a pure abstract base class, since the compiler will not complain if an \texttt{Implementor} fails to implement an operation until it is instantiated. Nevertheless, it has the advantage of avoiding virtual function calls and run-time type information.
+
+Sample code:\\[2ex]
+\indent\prog{prg/scenario_adapter.h}{9}{14}
+
+\paragraph{\texttt\textbf{Implementor}:} realizes the \texttt{Interface} in a sce\-na\-rio-independent fashion. There may be several \texttt{Implementors} for each \texttt{Interface}.
+
+Sample code:\\[2ex]
+\indent\prog{prg/scenario_adapter.h}{16}{20}
+
+\paragraph{\texttt\textbf{Scenario}:} gathers aspects that are common to all abstractions running in a scenario. Since all abstractions inherit the \texttt{Scenario} via the \texttt{Adapter}, it can also be used to decorate abstractions with scenario specific constructs. This could be useful, for example, to tag all abstractions with an authentication key in a secure scenario. A scenario has at least two methods: \texttt{enter} and \texttt{leave}. They are invoked by the \texttt{Adapter} respectively before and after each abstraction's method invocation. In the previous example about a secure scenario, \texttt{enter} would be responsible for authenticating all operations, while \texttt{leave} would probably be empty.
+
+It is also usual for a \texttt{Scenario} to redefine common system methods with scenario-optimized versions, so that \texttt{Abstractions} can transparently access them. For example, a \texttt{Scenario} may redefine the \texttt{operator new} in order to optimize the memory allocation according to the current execution conditions.
+
+\noindent Sample code:\\[2ex]
+\noindent\prog{prg/scenario_adapter.h}{1}{7}
+
+\paragraph{\texttt\textbf{Adapter}:} adapts an \texttt{Implementor} to to join a \texttt{Scenario}. It is implemented as a parametrized class (\texttt{template}) that inherits from the \texttt{Implementor} given as parameter. It defines all member functions declared in the \texttt{Interface} in such a way that \texttt{Implementor} operations are wrapped between the \texttt{enter}/\texttt{leave} pair. The \texttt{Adapter} is also the ideal place to carry out operations such as tracing, profiling, and \emph{Remote Object Invocation}. 
+
+Sample code:\\[2ex]
+\indent\prog{prg/scenario_adapter.h}{22}{33}
+
+\paragraph{\texttt\textbf{Abstraction}:} is the construct that will be instantiated by the system clients. We say that an abstraction has an \texttt{Interface} and one or more \texttt{Implementors}, and that it is adapted to a \texttt{Scenario} via an \texttt{Adapter}. It is implemented by the instantiation of the parametrized \texttt{Adapter} with an \texttt{Implementor}.
+
+Sample code:\\[2ex]
+\indent\prog{prg/scenario_adapter.h}{35}{35}
+
+
+\section{\protect\centering Discussion}
+
+The \textsc{Scenario Adapter} mechanism described above has proved to produce very efficient code. If the operations in \texttt{Scenario} and \texttt{Adapter} are declared \texttt{inline}, the result of an abstraction method invocation will be a direct call to the corresponding \texttt{Implementor}'s operation surrounded by the \texttt{enter} and \texttt{leave} primitives. Therefore, not only virtual function calls are avoided, but function calls at all. Another advantage of these statically metaprogrammed scenario adapters is that they can easily be optimized by the compiler: segments of the metaprogram that are not used are not included in the output. 
+
+A collection of \textsc{Scenario Adapters} can be arranged to form a statically metaprogrammed framework~\cite{Veldhuizen:1995}. Such a framework would define scenario-independent relationships among abstractions, letting open ``holes'' where \textsc{Implementors} can be plugged in. 
+
+
+\section{\protect\centering The \textsc{Epos} System}
+
+The project \textsc{Epos}~\cite{Froehlich:sbac:1999} aims at the construction of highly adaptable run-time system to support parallel computing on distributed memory machines, particularly clusters of workstations. In order to deliver each application a tailored operating system, \textsc{Epos} takes on \textsc{Pure}~\cite{Schoen:98} building blocks to implement a set of scenario-independent system abstractions that can be adapted to a given execution scenario with the aid of \textsc{Scenario Adapters}. These abstractions are collected in a repository and are exported to the application programmers via \textsc{Inflated Interfaces}. This strategy, besides drastically reducing the number of exported abstractions, enables programmers to easily express their application's requirements regarding the operating system. 
+
+An application designed and implemented according to the strategy proposed by \textsc{Epos} can be submitted to a tool that will proceed syntactical analysis to extract a blueprint for the operating system to be generated. The blueprint is then refined by dependency analysis against information about the execution scenario acquired from the user via visual tools. The outcome of this process is a set of keys that will support the compilation of an application-oriented operating system.
+
+\textsc{Scenario Adapters} are used in \textsc{Epos} to define a metaprogrammed framework. System abstractions such as tasks, threads, communicators, synchronizers, memory, and peripherals have their interrelations defined in the framework, and can be arranged in systems for the following scenarios: kernel, library, local, remote, protected, single/multi-task, single/multi-thread. Several application-oriented systems have already been generated and evaluated, corroborating the efficiency of \textsc{Scenario Adapters}.
+
+
+\section{\protect\centering Conclusion}
+
+In this paper we considered the utilization of com\-po\-nent-based software engineering for the development of adaptable systems compromised with performance. The \textsc{Scenario Adapter} construct was proposed as an effective alternative to achieve this goal. The adoption of \textsc{Scenario Adapters} in the Project \textsc{Epos} helped to demonstrate the potentiality of this construct to support parallel applications running on cluster of workstations. Its use in deeply embedded system is now being considered. 
+
+The successful use of \textsc{Scenario Adapters}, however, is a small achievement when one considers the amount of problems that are still to be solved in order to make component-based software engineering a leading software development strategy.
+
+
+\nocite{Coplien:1999}
+
+\bibliographystyle{plain}
+\bibliography{cluster_computing,operating_systems,communication,processors,parallel_machines,software_engineering,guto}
+
+\end{document}

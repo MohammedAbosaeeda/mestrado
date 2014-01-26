@@ -1,0 +1,17 @@
+
+\begin{tabular}{l@{\hspace{1mm}}r@{\hspace{1mm}}r@{\hspace{1mm}}r@{\hspace{1mm}}r@{\hspace{1mm}}r@{\hspace{1mm}}r}
+\toprule
+\multirow{2}{*}{Resource} & \multicolumn{2}{c}{Scheduler} & \multicolumn{2}{c}{ADPCM} & \multicolumn{2}{c}{DTMF} \\
+\cmidrule(l){2-7}
+                 & HW-only & Unified & HW-only & Unified & HW-only & Unified \\
+\midrule
+6-input LUT      & 2119    & 2540    &  524    & 615     & 387     &  443    \\
+Flip-flops       & 1849    & 2766    &  208    & 368     & 331     &  431    \\
+36Kb BRAM        & ~~~0    & ~~~0    &  ~~1    & ~~1     & ~~2     &  ~~1    \\
+DSP slice        & ~~~0    & ~~~0    &  ~~0    & ~~0     & ~~6     &  ~~6    \\
+%Others                    & ~~34    & ~~49    &  ~36    & ~45     & ~~7     &  ~15    \\
+Max. Freq.       & 126 MHz & 114 MHz & 118 MHz & 124 MHz & 102 MHz & 101 MHz \\ 
+\bottomrule
+\end{tabular}
+
+

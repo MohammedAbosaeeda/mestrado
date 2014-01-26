@@ -1,0 +1,45 @@
+\select@language {brazil}
+\contentsline {chapter}{\numberline {1}\MakeUppercase {Introdu\c c\~ao}}{7}
+\contentsline {section}{\numberline {1.1}Contextualiza\c c\~ao e defini\c c\~ao do problema}{7}
+\contentsline {section}{\numberline {1.2}Abordagem proposta}{9}
+\contentsline {section}{\numberline {1.3}Objetivos}{9}
+\contentsline {section}{\numberline {1.4}Organiza\c c\~ao do texto}{10}
+\contentsline {chapter}{\numberline {2}\MakeUppercase {Conceitos b\'asicos em computa\c c\~ao distribu\IeC {\'\i }da}}{11}
+\contentsline {section}{\numberline {2.1}Ambiente de computa\c c\~ao distribu\IeC {\'\i }da}{11}
+\contentsline {subsection}{\numberline {2.1.1}Modelo de sistema}{11}
+\contentsline {subsubsection}{\numberline {2.1.1.1}Modelo de intera\c c\~ao}{12}
+\contentsline {subsubsection}{\numberline {2.1.1.2}Modelo de falhas}{12}
+\contentsline {subsubsection}{\numberline {2.1.1.3}Modelo de seguran\c ca}{13}
+\contentsline {subsubsection}{\numberline {2.1.1.4}Processos}{14}
+\contentsline {subsubsection}{\numberline {2.1.1.5}Sincronismo}{14}
+\contentsline {subsubsection}{\numberline {2.1.1.6}Tipos de falhas}{17}
+\contentsline {subsubsection}{\numberline {2.1.1.7}Canais de comunica\c c\~ao}{19}
+\contentsline {subsection}{\numberline {2.1.2}Problemas de acordo}{20}
+\contentsline {subsubsection}{\numberline {2.1.2.1}Difus\~ao com ordem total}{20}
+\contentsline {subsubsection}{\numberline {2.1.2.2}Consenso}{21}
+\contentsline {subsubsection}{\numberline {2.1.2.3}Acordo bizantino}{22}
+\contentsline {subsection}{\numberline {2.1.3}Replica\c c\~ao de m\'aquinas de estados (RME)}{23}
+\contentsline {subsection}{\numberline {2.1.4}Mem\'oria compartilhada emulada}{25}
+\contentsline {subsection}{\numberline {2.1.5}Modelo h\IeC {\'\i }brido de toler\^ancia a faltas}{26}
+\contentsline {section}{\numberline {2.2}Tecnologia de virtualiza\c c\~ao}{28}
+\contentsline {chapter}{\numberline {3}\MakeUppercase {Trabalhos correlatos}}{33}
+\contentsline {section}{\numberline {3.1}Abordagens homog\^eneas}{34}
+\contentsline {subsection}{\numberline {3.1.1}Practical Byzantine Fault Tolerance}{34}
+\contentsline {subsection}{\numberline {3.1.2}Zyzzyva}{36}
+\contentsline {subsection}{\numberline {3.1.3}Separando o acordo da execu\c c\~ao}{38}
+\contentsline {subsubsection}{\numberline {3.1.3.1}Separating agreement from execution for byzantine fault tolerant services}{38}
+\contentsline {subsubsection}{\numberline {3.1.3.2}Espa\c co aumentado de tuplas e protegido por pol\IeC {\'\i }ticas}{39}
+\contentsline {section}{\numberline {3.2}Abordagens h\IeC {\'\i }bridas}{42}
+\contentsline {subsection}{\numberline {3.2.1}Attested append-only memory: Making adversaries stick to their word}{42}
+\contentsline {subsection}{\numberline {3.2.2}Componente inviol\'avel atrav\'es do uso de \textit {Hardware}}{43}
+\contentsline {subsubsection}{\numberline {3.2.2.1}CheapBFT: Resource-efficient Byzantine Fault Tolerance}{44}
+\contentsline {subsubsection}{\numberline {3.2.2.2}Efficient Byzantine Fault Tolerance}{46}
+\contentsline {subsection}{\numberline {3.2.3}Abordagens com virtualiza\c c\~ao}{49}
+\contentsline {subsubsection}{\numberline {3.2.3.1}VM-FIT: Supporting intrusion tolerance with virtualisation technology}{50}
+\contentsline {subsubsection}{\numberline {3.2.3.2}Remus: High Availability via Asynchronous Virtual Machine Replication}{51}
+\contentsline {subsubsection}{\numberline {3.2.3.3}ZZ: Cheap practical BFT using virtualization}{52}
+\contentsline {subsubsection}{\numberline {3.2.3.4}Diverse replication for single-machine byzantine-fault tolerance}{54}
+\contentsline {subsection}{\numberline {3.2.4}Usando canal confi\'avel}{55}
+\contentsline {subsubsection}{\numberline {3.2.4.1}How to tolerate half less one byzantine nodes in practical distributed systems}{55}
+\contentsline {section}{\numberline {3.3}Servidor \textit {web} tolerante a intrus\~oes}{58}
+\contentsline {chapter}{Refer\^encias Bibliogr\'aficas}{61}

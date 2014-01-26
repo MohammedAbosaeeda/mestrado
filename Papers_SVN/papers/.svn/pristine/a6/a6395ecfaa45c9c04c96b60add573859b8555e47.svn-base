@@ -1,0 +1,161 @@
+@inproceedings{Gilsinn:2001,
+ author = {Gilsinn, J. D. and Lee, K.},
+ title = {Wireless interfaces for IEEE 1451 sensor networks},
+ booktitle = {Proceedings of the First ISA/IEEE Conference Sensor for Industry},
+ year = {2001},
+ isbn = {0-7803-6659-X},
+ pages = {45--50},
+ location = {Rosemont, IL , USA},
+ doi = {http://doi.acm.org/10.1109/SFICON.2001.968497},
+% publisher = {ACM},
+% address = {New York, NY, USA},
+}
+
+@conference{Song:2008,
+  author =	{Eugene Y. Song and Kang Lee},
+  title =	{{Understanding IEEE 1451-Networked Smart Transducer Interface Standard - What Is a Smart Transducer?}},
+  booktitle =	{IEEE Instrumentation \& Measurement Magazine},
+  volume =	{11},
+  number =	{2},
+  year =	{2008},
+  month =	{April},
+  pages =	{11--17}
+}
+
+@conference{Oostdyk:2006,
+ title={{A Kennedy Space Center implementation of IEEE 1451 networked smart sensors and lessons learned}},
+ author={Oostdyk, R. L. and Mata, C. T. and Perotti, J. M.},
+ booktitle={IEEE Aerospace Conference},
+ volume={2},
+ pages={20},
+ year={2006}
+}
+
+@inproceedings{Lee:XXX,
+  author =	{Kang Lee},
+  title =	{{A Synopsis of the IEEE P1451- Standards for Smart Transducer Communication}},
+  url =		{ieee1451.nist.gov/1451synosis-599F.pdf}
+% booktitle = {Proceedings of the 17th IEEE Instrumentation and Measurement Technology Conference},
+% year = {2000},
+% isbn = {0-7803-5890-2},
+% pages = {525--528},
+% address = {Baltimore, MD},
+% doi = {http://doi.acm.org/10.1109/IMTC.2000.848791},
+% publisher = {IEEEXPLORE},
+% address = {New York, NY, USA},
+}
+
+@inproceedings{Lee:2000,
+  author =	{Kang Lee},
+  title =	{{IEEE 1451: A Standard in Support of Smart Transducer Networking}},
+  booktitle =	{17th IEEE Instrumentation and Measurement Technology Conference},
+  volume =	{2},
+  year =	{2000},
+  month =	{May},
+  pages =	{525--528},
+  address =	{Baltimore, MD, USA},
+  isbn =	{0-7803-5890-2}
+}
+
+@manual{IEEE1451.0:2007,
+  author =	{{IEEE 1451.0}},
+  title =	{{IEEE Standard for a Smart Transducer Interface for Sensors and Actuators - Common Functions, Communication Protocols, and Transducer Electronic Data Sheet (TEDS) Formats}},
+  year =	{2007},
+  month =	{September},
+  pages =	{335},
+  isbn =	{978-0-7381-5598-2}
+}
+
+@manual{IEEE1451.5:2007,
+  author =	{{IEEE 1451.5}},
+  title =	{{IEEE Standard for a Smart Transducer Interface for Sensors and Actuators - Wireless Communication Protocols and Transducer Electronic Data Sheet (TEDS) Formats}},
+  year =	{2007},
+  month =	{October},
+  pages =	{236},
+  isbn =	{978-0-7381-5600-2}
+}
+
+@inproceedings{Song:2006,
+ author = {Song, E. Y. and Lee, K.},
+ title = {An Implementation of the Proposed IEEE 1451.0 and 1451.5 Standards},
+ booktitle = {Proceedings of the 2006 IEEE Sensors Applications Symposium},
+ year = {2006},
+ isbn = {0-7803-9580-8},
+ pages = {72--77},
+ location = {Rosemont, IL , USA},
+ doi = {http://doi.acm.org/10.1109/SAS.2006.1634240},
+% publisher = {ACM},
+% address = {New York, NY, USA},
+}
+
+@conference{Lee:2007,
+ title={{Wireless Sensor Network Based on IEEE 1451.0 and IEEE 1451.5-802.11}},
+ author={Lee, K. and Song, E.},
+ booktitle={8th International Conference on Electronic Measurement and Instruments},
+% volume={11},
+ pages={4--7},
+ year={2007},
+% organization={Citeseer}
+}
+
+@book{Frohlich:2001,
+  author =	{Ant\^onio Augusto Fr\"ohlich},
+  title =	{{Application-Oriented Operating Systems}},
+  publisher =	{GMD - Forschungszentrum Informationstechnik},
+  year =	{2001},
+  address =	{Sankt Augustin},
+  pages =	{200},
+  isbn =	{3-88457-400-0},
+  url =		{http://www.lisha.ufsc.br/~guto/publications/aoos.pdf}
+}
+
+@inproceedings{Marcondes:2006,
+  author =	{Hugo Marcondes and Arliones Stevert Hoeller Junior and Lucas Francisco Wanner and Rafael Luiz Cancian and Danillo Moura Santos and Ant\^onio Augusto M. Fr\"ohlich},
+  title =	{{EPOS: Um Sistema Operacional Port\'avel para Sistemas Profundamente Embarcados}},
+  booktitle =	{III Workshop de Sistemas Operacionais},
+  year =	{2006},
+  month =	{Julho},
+  pages =	{31--45},
+  address =	{Campo Grande, MS, Brasil}
+}
+
+@misc{Lisha:2010,
+  author =	{LISHA},
+  title =	{{EPOS Project}},
+  howpublished = {website},
+  year =	{2010},
+  url =		{http://epos.lisha.ufsc.br}
+%[Accessed 12 Nov 2010]
+}
+
+@article{Frohlich:2008,
+  author =	{Ant\^onio Augusto Fr\"ohlich and Lucas Francisco Wanner},
+  title =	{{Operating System Support for Wireless Sensor Networks}},
+  journal =	{Journal of Computer Science},
+  volume =	{4},
+  number =	{4},
+  year =	{2008},
+  pages =	{272--281}
+}
+
+@InProceedings{Steiner:2010,
+  author =	{Rodrigo Steiner and Tiago Rog\'erio M\"uck and Ant\^onio Augusto Fr\"ohlich},
+  title =	{{A Configurable Medium Access Control Protocol for IEEE 802.15.4 Networks}},
+  booktitle =	{International Congress on Ultra Modern Telecommunications and Control Systems},
+  pages =	{1-8},
+  year =	{2010},
+  address =	{Moscow, Russia},
+  month =	{October},
+  isbn =	{978-1-4244-7284-0},
+  url =		{http://www.lisha.ufsc.br/pub/icumt2010.pdf}
+}
+
+@conference{Mainwaring:2002,
+  author =	{Alan Mainwaring and Joseph Polastre and Robert Szewczyk and David Culler and John Anderson},
+  title =	{{Wireless Sensor Networks for Habitat Monitoring}},
+  booktitle =	{International Workshop on Wireless Sensor Networks and Applications},
+  year =	{2002},
+  pages =	{88--97},
+  address =	{Atlanta, Georgia, USA},
+  isbn =	{1-58113-589-0}
+}

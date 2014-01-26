@@ -1,0 +1,21 @@
+
+\begin{tabular}{cll}
+\toprule
+\multirow{2}{*}{Direction} & \multicolumn{2}{c}{Type of communication}\\
+\cmidrule(l){2-3}
+                           & \multicolumn{1}{c}{Caller} & \multicolumn{1}{c}{Callee}\\
+\midrule
+SW$\rightarrow$HW   & \parbox{3cm}{HAL sends commands to the HW using a communication infrastructure (e.g. a bus or a NoC).}&  
+                      \parbox{3cm}{Communication interface receives commands and triggers the operations.}\\
+&&\\
+HW$\rightarrow$SW   & \parbox{3cm}{HW interrupts SW and waits for the operation to finish. It may transfer data to/from the main memory (e.g. DMA).}&
+                      \parbox{3cm}{An ISR calls the requested operation and signalizes HW when finished.}\\
+&&\\
+SW$\rightarrow$SW   & \multicolumn{2}{c}{Function call interface}\\
+&&\\
+HW$\rightarrow$HW   & \multicolumn{2}{c}{Signals/Handshaking}\\
+\bottomrule
+\end{tabular}
+
+
+

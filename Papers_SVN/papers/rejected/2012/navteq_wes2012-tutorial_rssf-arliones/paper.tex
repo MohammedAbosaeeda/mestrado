@@ -1,0 +1,190 @@
+\documentclass[12pt]{article}
+
+\usepackage{sbc-template}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+\newcommand{\epos}{\textsc{Epos}}
+\newcommand{\emote}{\textsc{EposMote}}
+\newcommand{\lisha}{\textsc{Lisha}}
+
+\title{Redes de Sensores Sem Fio Sob a Perspectiva do \textsc{Epos}}
+
+\author{Arliones Hoeller Jr. e Antônio Augusto Fröhlich}
+
+\address{Software/Hardware Integration Lab\\
+Federal University of Santa Catarina\\
+Florianópolis, Brazil\\
+\{arliones,guto\}@lisha.ufsc.br}
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\begin{abstract}
+Wireless sensor networks and other pervasive systems are getting common place in
+our daily life. This technology made it possible the deployment of a new class
+of applications encompassing a set of new challenges. To cope with these new
+requirements, developments in the last decade enhanced the integration level of
+components for processing (e.g., CPU) and communication (e.g., radio). Also, new
+approaches emerged to address specific requirements for routing and medium
+access control (MAC) in the network. In contrast with what has been done in the
+past, these new approaches had now to deal with severe limitations in terms of
+processing power, data transfer power, and, the most important, energy
+consumption. New operating systems emerged to target these issues. These
+operating systems abstract domain-specific functionalities such as sensing,
+communication, and power management, thus speeding up the application
+development process. This tutorial will present the fundamentals behind the
+development of wireless sensor network applications. Special focus will be given
+to application-dependent system parameters. The practical experience obtained in
+the development of \epos~\cite{Froehlich:2001} and \emote~\cite{EPOSMote:2012}
+projects will be shared, including some hands-on exercises.
+\end{abstract}
+
+\begin{resumo}
+Redes de sensores sem fio e outros sistemas pervasivos têm se tornado comuns em
+nosso dia-a-dia. Esta tecnologia torna possível a implantação de uma nova classe
+de aplicações que incluem um novo conjunto de desafios. Para tratar estes novos
+requisitos das aplicações, novos desenvolvimentos na última década aumentaram o
+nível de integração dos componentes de processamento (e.g., CPU) e comunicação
+(e.g., radio). Além disso, surgiram novas abordagens que tratam dos requisitos
+específicos de roteamento e controle de acesso ao meio (MAC) nestas redes. Em
+contraste com o que foi feito no passado, estas novas abordagens lidam agora com
+sérias limitações em termos de recursos nos nós da rede. Estas limitações
+incluem poder de processamento, potência de transmissão e disponibilidade de
+energia. Ainda, novos sistemas operacionais surgiram para este cenário. Estes
+sistemas operacionais abstraem funcionalidades específicas do domínio como
+sensoriamento, comunicação e gerência de energia, acelerando o processo de
+desenvolvimento de aplicações. Este minicurso apresenta os fundamentos por trás do desenvolvimento
+de aplicações de redes de sensores sem fio. Um foco especial é dado aos
+parâmetros do sistema que interferem na operação das aplicações. A experiência
+prática obtida nos projetos \epos~\cite{Froehlich:2001} e
+\emote~\cite{EPOSMote:2012} será compartilhada, incluindo atividades práticas e
+demonstrações.
+\end{resumo}
+
+\section{Identificação}
+
+\begin{itemize}
+  \item \textbf{Título do minicurso:}\\
+        Redes de sensores sem fio sob a perspectiva do \textsc{Epos}
+  \item \textbf{Autores:}\\
+        Arliones Hoeller Jr. e Antônio Augusto Fröhlich
+  \item \textbf{Apresentador:}\\
+        Arliones Hoeller Jr.
+\end{itemize}
+
+\section{Dados gerais}
+
+Redes de sensores sem fio e outros sistemas pervasivos são cada vez mais comuns
+em nosso dia-a-dia. Esta tecnologia traz, junto das novas possibilidades de
+aplicações, um grande conjunto de desafios, o que deu margem ao surgimento de
+novas soluções de integração de componentes de processamento (CPU) e rádio,
+novos algoritmos de roteamento, variadas implementações de controle de acesso
+ao meio (MAC), sempre atendendo às rígidas restrições em termos de capacidade
+de processamento, potência de transmissão e, de modo especial, consumo de
+energia. Para tratar tudo isso, uma série de novos sistemas operacionais focou
+no domínio de redes de sensores sem fio, abstraindo as funcionalidades de
+sensoriamento e comunicação, e agilizando o processo de desenvolvimento de
+aplicações. Este minicurso visa apresentar as principais características das
+redes de sensores sem fio, focando em temas importantes a serem considerados
+durante o desenvolvimento de aplicações, utilizando-se para isso dos trabalhos
+desenvolvidos para implementação do \epos~\cite{Froehlich:2001} e do
+\emote~\cite{EPOSMote:2012}.
+
+O minicurso reúne informações relevantes das tecnologias envolvidas na aquisição
+de dados e comunicação em redes de sensores sem fio, analisando estas
+tecnologias e apresentando como estas foram implementadas em um módulo de
+sensores sem fio, o \emote, e um sistema operacional, o \epos, desenvolvidos
+pelo \lisha~(Laboratório de Integração Software/Hardware da UFSC). O \epos~é um
+sistema operacional com mais de 10 anos de constante desenvolvimento. O grupo
+que desenvolve o EPOS tem trabalhado com redes de sensores sem fio desde 2003, e
+os resultados alcançados estão apresentados em mais de 30 publicações
+relacionadas ao sistema~\cite{LISHAPubs:2012}. As informações apresentadas neste
+curso devem permitir a especificação e dimensionamento de redes de sensores
+sem fio para aplicações específicas.
+
+Deste modo, o objetivo do minicurso é dotar os participantes dos conceitos
+envolvidos na especificação de uma rede de sensores sem fio, incluindo
+características dos módulos de sensoriamento, da(s) rede(s) de comunicação e dos
+sistemas operacionais existentes.
+
+São objetivos específicos do curso apresentar os seguintes tópicos: redes
+de sensores sem fio e os principais problemas associados; arquitetura padrão de
+um módulo de sensoriamento; tipos de sensores (analógicos/digitais) e aquisição
+de dados; comunicação sem fio; controle de acesso ao meio (MAC) e topologias;
+sistemas operacionais para redes de sensores sem fio; atividade prática
+utilizando módulos de sensoriamento sem fio.
+
+
+\section{Conteúdo do minicurso}
+\label{sec:conteudo}
+
+Esta seção apresenta a estrutura do minicurso.
+
+\begin{itemize}
+  \item \textbf{Redes de sensores sem fio: } Inicialmente é realizada uma  
+  introdução de conceitos relacionados a redes de sensores sem fio, apresentando
+  exemplos de aplicações e revisando os problemas tratados pelas tecnologias que
+  serão discutidas durante o restante do curso.
+
+  \item \textbf{Módulos de sensoriamento: } Em seguida serão abordadas questões
+  relativas a arquitetura dos módulos de sensoriamento. Será discutida a
+  arquitetura básica (sensores + processador +
+  transceptor)~\cite{Pottie:2000,Barr:2002}, assim como abordagens de integração
+  destes componentes. Também serão discutidos os requisitos de um módulo de
+  sensoriamento (dimensões, consumo de energia, modularidade, adaptabilidade do
+  canal de comunicação).
+
+  \item \textbf{Sensores e aquisição de dados: } Sensores são dispositivos que
+  medem uma quantidade de alguma grandeza física e convertem esta medição em
+  um sinal que pode ser lido por um observador ou um instrumento. Nesta parte do
+  minicurso serão abordados os tipos de sensores (mecânicos, elétricos,
+  eletrônicos, óticos), bem como os modelos de interfaceamento destes sensores
+  com processadores (i.e., sensores analógicos e digitais).
+
+  \item \textbf{Controle de acesso ao meio (MAC) e topologias: } Em seguida será
+  feita uma revisão de mecanismos de controle de acesso ao meio (TDMA, FDMA,
+  CDMA, CSMA) e a apresentação de exemplos de protocolos MAC utilizados em redes
+  de sensores sem fio (B-MAC, S-MAC, T-MAC, Z-MAC, C-MAC, IEEE 802.15.4).
+
+  \item \textbf{Sistemas Operacionais para RSSF: } Finalmente, será realizada
+  uma revisão sobre características necessárias aos sistemas operacionais de
+  redes de sensores sem fio (gestão de recursos, portabilidade,
+  configurabilidade, multitarefa, co\-mu\-ni\-ca\-ção).
+
+  \item \textbf{Exercícios práticos: } O minicurso incluirá atividades práticas
+  envolvendo o sistema operacional \epos~\cite{Froehlich:2001} em uma plataforma
+  de sensoriamento desenvolvida pelo \lisha, o \emote~\cite{EPOSMote:2012}.
+\end{itemize}
+
+\section{Material de referência}
+
+Dentre referências bibliográficas apresentadas abaixo há um texto incluindo os
+tópicos apresentados na seção~\ref{sec:conteudo}~\cite{Hoeller:WSCAD:2010}. Este
+texto descreve em detalhes os tópicos abordados no minicurso e apresenta a
+solução desenvolvida para cada um destes tópicos no \epos~ou no \emote.
+
+\section*{Agradecimentos}
+
+Este minicurso não seria possível sem os importantes desenvolvimentos sobre a
+plataforma \emote~e o sistema operacional \epos~realizados pelas pessoas que
+passaram pelo \lisha~nos últimos 10 anos. Os autores reconhecem a importância do
+trabalho realizado por estes colaboradores para o desenvolvimento deste
+material.
+
+\nocite{Froehlich:2001}
+\nocite{Wiedenhoft:OSR:2008}
+\nocite{Wanner:JCC:2008}
+\nocite{Hoeller:DIPES:2006}
+\nocite{Marcondes:ETFA:2006}
+\nocite{Lin:2004}
+\nocite{Mottola:2010}
+
+\bibliographystyle{sbc}
+\bibliography{lisha,wsn}
+
+\end{document}

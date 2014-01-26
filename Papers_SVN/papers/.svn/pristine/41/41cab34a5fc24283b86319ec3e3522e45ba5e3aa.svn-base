@@ -1,0 +1,105 @@
+\begin{thebibliography}{10}
+
+\bibitem{Barreto:1998}
+M.~Barreto, P.~Navaux, and M.~Rivière.
+\newblock {DECK: a New Model for a Distributed Kernel Integrating Communication
+  and Multithreading for Support of Distributed Object-Oriented Applications
+  with Fault Tolerance}.
+\newblock In {\em Proceedings of IV CACIC}, Neuquén, Argentina, 1998.
+
+\bibitem{Barreto:2000a}
+M.~Barreto, R.~Ávila, R.~Cassali, A.~Carissimi, and P.~Navaux.
+\newblock {Implementation of the DECK Environment with BIP}.
+\newblock In {\em Proceedings of the First Myrinet User Group Conference},
+  pages 82--88, Lyon, France, Sept. 2000. Rocquencourt, INRIA.
+
+\bibitem{Barreto:2000}
+M.~Barreto, R.~Ávila, and P.~Navaux.
+\newblock {The MultiCluster Model to the Integrated Use of Multiple Workstation
+  Clusters}.
+\newblock In {\em Proceedings of PC-NOW'2000}, Cancun, Mexico, May 1999.
+
+\bibitem{Bernal:1999}
+V.~B. Bernal, S.~T. Kofuji, G.~M. Sipahi, and A.~Anderson.
+\newblock {PAD Cluster: an open, modular and low cost high performance
+  computing system}.
+\newblock In {\em Proceedings of the 11th Symposium on Computer Architecture
+  and High Performance Computing}, Natal, Brazil, Sept. 1999.
+
+\bibitem{Buettner:1999}
+L.~Büttner, J.~Nolte, and W.~Schröder-Preikschat.
+\newblock {ARTS of PEACE: A High-Performance Middleware Layer for Parallel
+  Distributed Computing}.
+\newblock {\em Journal of Parallel and Distributed Computing}, 59(2), 1999.
+
+\bibitem{Cavalheiro:1993}
+G.~Cavalheiro and P.~Navaux.
+\newblock {DPC++: uma Linguagem para Processamento Distribuído}.
+\newblock In {\em Proceedings of the 5th Symposium on Computer Architecture and
+  High Performance Computing}, Florianópolis, Brazil, 1993.
+
+\bibitem{Froehlich:intersymp:1996}
+A.~A. Fröhlich, R.~B. Avila, L.~Piccoli, and H.~Savietto.
+\newblock {A Concurrent Programming Environment for the i486}.
+\newblock In {\em Proceedings of the 5th International Conference on
+  Information Systems Analysis and Synthesis}, Orlando, USA, July 1996.
+
+\bibitem{Froehlich:euromicro:1998}
+A.~A. Fröhlich and W.~Schröder-Preikschat.
+\newblock {SMP PCs: A Case Study on Cluster Computing}.
+\newblock In {\em Proceedings of the 24th Euromicro Conference - Workshop on
+  Network Computing}, pages 953--960, Västeras, Sweden, Aug. 1998.
+
+\bibitem{Froehlich:ooosw:1999}
+A.~A. Fröhlich and W.~Schröder-Preikschat.
+\newblock {EPOS: an Object-Oriented Operating System}.
+\newblock In {\em Proceedings of the 2nd ECOOP Workshop on Object-Orientation
+  and Operating Systems}, pages 38--43, Lisbon, Portugal, June 1999.
+
+\bibitem{Froehlich:sbac:1999}
+A.~A. Fröhlich and W.~Schröder-Preikschat.
+\newblock {High Performance Application-oriented Operating Systems -- the EPOS
+  Aproach}.
+\newblock In {\em Proceedings of the 11th Symposium on Computer Architecture
+  and High Performance Computing}, pages 3--9, Natal, Brazil, Sept. 1999.
+
+\bibitem{Froehlich:ehpc:1999}
+A.~A. Fröhlich and W.~Schröder-Preikschat.
+\newblock {Tailor-made Operating Systems for Embedded Parallel Applications}.
+\newblock In {\em Proceedings of the 4th IPPS/SPDP Workshop on Embedded HPC
+  Systems and Apllications}, pages 1361--1373, San Juan, Puerto Rico, Apr.
+  1999.
+
+\bibitem{Horta:1998}
+E.~Horta and S.~T. Kofuji.
+\newblock {Using a reconfigurable switch to improve MPI performance}.
+\newblock In {\em Proceedings of JICS'98}, volume~3, North Caroline, U.S.A.,
+  Oct. 1998.
+
+\bibitem{Nolte:1998}
+J.~Nolte and W.~Schröder-Preikschat.
+\newblock {Dual Objects -- An Object Model for Distributed System Programming}.
+\newblock In {\em Proceedings of the Eigth ACM SIGOPS European Workshop,
+  Support for Composing Distributed Applications}, 1998.
+
+\bibitem{Schoen:1998}
+F.~Schön, W.~Schröder-Preikschat, O.~Spinczyk, and U.~Spinczyk.
+\newblock {Design Rationale of the PURE Object-Oriented Embedded Operating
+  System}.
+\newblock In {\em Proceedings of the International IFIP WG 10.3/WG 10.5
+  Workshop on Distributed and Parallel Embedded Systems}, Paderborn, Germany,
+  Oct. 1998.
+
+\bibitem{Preikschat:1994}
+W.~Schröder-Preikschat.
+\newblock {\em {The Logical Design of Parallel Operating Systems}}.
+\newblock Prentice-Hall, Englewood Cliffs, U.S.A., 1994.
+
+\bibitem{Torres:1997}
+M.~Torres and S.~T. Kofuji.
+\newblock {The barrier Synchronization Impact on the MPI-Programs performance
+  using a cluster of workstations}.
+\newblock In {\em Proceedings of the International Symposium on Parallel
+  Architecture, Algorithms and Networks}, Taipei, Taiwan, 1997.
+
+\end{thebibliography}

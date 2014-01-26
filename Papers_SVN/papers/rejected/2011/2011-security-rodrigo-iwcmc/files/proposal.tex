@@ -1,0 +1,107 @@
+\section{Building a Trustful Infrastructure for Future Internet}
+\label{sec:solution}
+The Internet architecture demonstrate inefficiency and problems in several and large areas, such as mobility, real-time applications,
+failures (e.g. equipment, software bugs, and configuration mistakes), and especially in pervasive security problems \cite{Rexford:2010}.
+Moreover, the Internet lacks effective solutions in terms of scalability and sustainability, 
+consuming much more energy and hindering the management of countless sensor devices that are so important for several applications in the Future Internet.
+Hence, we propose the use of a stack of communication protocols (UDP@NDN@C-MAC), in the scope of the EPOSMote project,
+designed specifically to guarantee a trustful communication
+%Our solution also includes EPOSMote II, an embedded platform. Thus, 
+while still compromised with the low utilization of resources (processing, memory, power and communication bandwidth).
+%and the use of EPOSMote II which is an embedded platform and represents a typical Future Internet device.
+
+\subsection{EPOSMote}
+The EPOSMote is an open hardware project~\cite{eposmote}. Initially it aimed at 
+the development of a wireless sensor network module, and focused on environment 
+monitoring. Its first version, the EPOSMote I, features an 8-bit AVR microcontroller, 
+IEEE 802.15.4 communication capability and a small set of sensors.
+
+As the project evolved a second version arose, with the objective of delivering a 
+hardware platform to allow research on energy harvesting, biointegration, and 
+MEMS-based sensors. The EPOSMote II focus on modularization, and thus is composed 
+by interchangeable modules for each function.
+
+Figure \ref{emote2-block_diagram} shows an overview of the EPOSMote II architecture.
+Its hardware is designed as a layer architecture composed by a main module,
+a sensoring module, and a power module. The main module is responsible for processing
+and communication. It is based on the Freescale MC13224V microcontroller~\cite{mc13224v}, which possess 
+a 32-bit ARM7 core, an IEEE 802.15.4-compliant transceiver, 128kB of flash memory, 80kB of ROM memory
+and 96kB of RAM memory. We have developed a startup sensoring module, which contains some sensors  
+(temperature and accelerometer), leds, switches, and a micro USB (that can also be used as power supply). 
+Figure \ref{emote2-mc13224v-pictures-real_white_background} shows the development kit which is slightly 
+larger than a R\$1 coin, on the left the sensoring module, and on the right the main module.
+
+\fig{.45}{emote2-block_diagram}{Architectural overview of EPOSMote II.}
+
+\fig{.07}{emote2-mc13224v-pictures-real_white_background}{EPOSMote II SDK side-by-side with a R\$1 coin.}
+
+\subsection{C-MAC}
+C-MAC is a highly configurable MAC protocol for WSNs realized as a framework of
+medium access control strategies that can be combined to produce
+application-specific protocols~\cite{steiner:2010}. It enables application
+programmers to configure several communication parameters (e.g.  synchronization,
+contention, error detection, acknowledgment, packing, etc) to adjust the protocol
+to the specific needs of their applications. The framework was implemented in C++ 
+using static metaprogramming techniques (e.g. templates, inline functions, and 
+inline assembly), thus ensuring that configurability does not come at expense of 
+performance or code size. The main C-MAC configuration points include:
+
+\textbf{Physical layer configuration:} These are the configuration points defined
+by the underlying transceiver (e.g. frequency, transmit power, date rate).
+
+\textbf{Synchronization and organization:} Provides mechanisms to send or receive
+synchronization data to organize the network and synchronize the nodes duty
+cycle.
+
+\textbf{Collision-avoidance mechanism:} Defines the contention mechanisms used to
+avoid collisions. May be comprised of a carrier sense algorithm (e.g. CSMA-CA),
+the exchange of contention packets (\emph{Request to Send} and \emph{Clear to
+Send}), or a combination of both.
+
+\textbf{Acknowledgment mechanism:} The exchange of \emph{ack} packets to
+determine if the transmission was successful, including preamble acknowledgements.
+
+\textbf{Error handling and security:} Determine which mechanisms will be used to
+ensure the consistency of data (e.g. CRC check) and the data security.
+
+The Future Internet will be composed by a wide range of both applications and devices, 
+each with its own requirements and available resources. Through C-MAC configurability we
+can provide the most adequate MAC functionalities for each case, instead of providing a 
+general non-optimal solution for all of them.
+
+\subsection{NDN}
+Communication in NDN is impelled by the data consumers.
+Nodes that are interested in a content transmit \emph{Interest} packets, which contains the name of the requested data. %selector, nonce
+Every node that receives the \emph{Interest} and have the requested data can respond with a \emph{Data} packet that follows back the path from which the \emph{Interest} came. %content name, signature, signed info, data
+It is important to notice that one \emph{Data} satisfies one \emph{Interest}, thus ensuring flow balance in the network.
+Since the content being exchanged is identified by its name, all nodes interested in the same content can share transmissions (considering a broadcast medium, which is the case for most Future Internet devices).
+
+NDN packet forwarding engine has three main data structures: the FIB (Forwarding Information Base), which is used to forward \emph{Interest} packets to potential sources; 
+the ContentStore, which is a buffer memory used to maximize the sharing of packets; 
+and the PIT (Pending Interest Table), which is used to keep track of \emph{Interest} packets so that \emph{Data} packets can be sent to its requester(s).
+
+When a node receives an \emph{Interest} packet it searches for its content name, looking for a match primarily at the ContentStore, then the PIT, and ultimately at the FIB.
+If there is a match at the ContentStore, it is sent and the \emph{Interest} discarded.
+Otherwise, if there is a match at the PIT, the set of requesting interfaces for that data is updated, and the \emph{Interest} discarded (at this point an \emph{Interest} in this data has already been sent).
+Otherwise, if there is a match at the FIB, the \emph{Interest} is sent towards the data, and a new PIT entry is created. 
+In case there is no match for the \emph{Interest} then it is discarded.
+
+As for the \emph{Data} packet they simply follow the chain of PIT entries back to the original requester(s).
+When a node receives a \emph{Data} packet it searches for its content name. 
+If there is a ContentStore match, then the \emph{Data} is a duplicate and is discarded.
+%A FIB match means there are no matching PIT entries, so the \emph{Data} is unsolicited and it is discarded.
+In case of a PIT match, the data is validated, added to the ContentStore, and sent to the set of requesting interfaces from the corresponding PIT entry.
+
+In NDN the name in every packet is bound to its content with a signature.
+This enables data integrity and provenance, allowing consumers to trust the data they receive regardless of how the data came to them.
+To provide content protection and access control NDN uses encryption.
+The encryption of content or names is transparent to the network, since to NDN it is all just named binary data.
+%The signature algorithm used may be selected by the content publisher, 
+%and chosen to meet performance requirements such as latency or computational cost of signature generation or verification.
+Nevertheless, NDN does not mandate any particular key distribution scheme, signature, or encryption algorithm.
+
+\subsection{UDP}
+The User Datagram Protocol has been chosen for its simplicity. Its simple transmission 
+model avoids unnecessary overhead, since it does not handle reliability, ordering, 
+and data integrity, leaving these characteristics to be treated in other layers if necessary, which is a 
+perfect blend with the rest of our protocol stack.

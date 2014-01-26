@@ -1,0 +1,286 @@
+ \documentclass[a4paper, 12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{times}
+\usepackage[brazilian]{babel}
+\usepackage[dvips]{graphicx}
+\usepackage[tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm,noheadfoot]{geometry}
+
+\title{Infra-Estrutura para Recepção de TV Interativa Baseada em {\em
+    SetTopBox} para o Projeto I2TV\\
+   \normalsize{Proposta de apresentação de trabalho na área de Vídeo Digital para o 4\textdegree Workshop RNP2}}
+
+\author{\footnotesize{\begin{tabular}[b]{c}
+\begin{tabular}[b]{c}
+Leonardo A. Ribeiro\\
+\texttt{leoar@lisha.ufsc.br}
+\end{tabular}
+\begin{tabular}[b]{c}
+Marcos F. Caetano\\
+\texttt{caetano@lisha.ufsc.br}
+\end{tabular}
+\begin{tabular}[b]{c}
+Alexandre Schulter\\
+\texttt{schulter@inf.ufsc.br}
+\end{tabular}\\ 
+\begin{tabular}[b]{c}
+Valdecir Becker\\
+\texttt{valdecir@nurcad.ufsc.br}
+\end{tabular}
+\begin{tabular}[b]{c}
+Calos Montez\\
+\texttt{montez@das.ufsc.br}
+\end{tabular}\\
+\begin{tabular}[b]{c}
+Edison Melo\\
+\texttt{melo@npd.ufsc.br}
+\end{tabular}
+\begin{tabular}[b]{c}
+Antônio A. M. Frohlich\\
+\texttt{guto@lisha.fsc.br}
+\end{tabular}\\\\
+\begin{tabular}[b]{c}
+\small{Laboratório de Integração Software e Hardware - LISHA}\\
+\small{Núcleo de Redes de Alta Velocidade e Computação de Alto Desempenho - NURCAD}\\
+\small{Centro Tecnológico - Universidade Federeral de Santa Catarina - UFSC/CTC}\\
+\small{Caixa Postal 476 - 88040-900 - Florianópolis - SC}
+\end{tabular}
+\end{tabular}}}
+
+
+%\author{Leonardo A. Ribeiro, Marcos F. Caetano, Antônio A. M. Frohlich, \\
+%Alexandre Schulter, Valdeci Becker, Carlos Montez, Edison Melo \\
+%\texttt{\{leor|caetano|guto\}@lisha.ufsc.br,} \\ \texttt{ chulter@inf.ufc.br,
+%valdecir@nurcad.ufsc.br,} \\ \texttt{ montez@das.ufsc.br, melo@npd.ufsc.br} \\
+%   Universidade Federal de Santa Catarina \\
+%      Laboratório de Integração Software/Hardware \\
+%        88040-900 Florianópolis - SC\\
+	  
+
+\date{}
+
+\sloppy
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+  
+  As soluções encontradas atualmente para plataformas receptoras de TV
+  digital, chamados {\em SetTopBoxes}, são caracterizadas por serem
+  produtos proprietários, de soluções fechadas. O presente artigo
+  apresenta os trabalhos iniciais realizados com o intuito de desenvolver 
+  um {\em SetTopBox} utilizando soluções abertas e que seja portável entre diferentes
+  arquiteturas de {\em hardware} e fontes de conteúdo. O conjunto de
+  tarefas foi dividido basicamente em duas frentes: a escolha,
+  preparação e aprimoramento da plataforma de {\em Hardware} e sistema
+  operacional responsável por receber e decodificar o {\em streaming} de
+  dados de TV Digital, e o ambiente de software que provê o controle
+  semântico sobre as informações de mídia e aplicações desenvolvidas
+  especialmente para possibilitar interatividade.\\ 
+  
+
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introdução}
+
+Sistemas de TV Digital requerem uma plataforma receptora para tratamento
+do conteúdo digital compreendo componentes de {\em hardware} dedicados e
+uma ampla e flexível camada de {\em software} para prover todos os novos
+recursos que este sistema oferece, por exemplo, aplicações
+interativas multiplexadas junto com fluxo de mídia.  Os dispositivos que
+implementam esta plataforma são comumente chamados de \emph{SetTopBoxes}, sendo
+comercializados em países que utilizam TV Digital, como
+Estados Unidos, Japão e diversos países europeus.  O Brasil, por sua
+parte, vem avaliando tecnologias, definindo políticas e executando
+projetos pilotos, como o \textsc{i2tv}, projeto que fomentou os
+experimentos que conduziram a este artigo.
+
+O projeto \textsc{i2tv} almeja desenvolver tecnologias e ferramentas de
+suporte à TV Interativa no ambiente Internet2 \cite{i2tv}. 
+Este artigo descreve o estado atual do projeto nos trabalhos em infra-estrutura de 
+recepção baseada em \emph{SetTopBox}, o qual vem sendo desenvolvido no LISHA/UFSC com
+enfoque na utilização e criação de tecnologias ``abertas''. Esta decisão
+de projeto conduziu  à  escolha do sistema operacional \textsc{Linux} e
+da API \textsc{JavaTV} como componentes fundamentais da plataforma ao
+lado do padrão \emph{MPG2 TS} que é consenso nas discussões sobre
+televisão digital.
+
+A próxima seção descreve a infra-estrutura de hardware 
+e sistema operacional que compõem a subcamada receptora de TV digital. Em
+seguida são descritos o conjunto de APIs JavaTV que desempenham o papel 
+de {\emph middleware} entre as aplicações e a subcamada de hardware e as
+adaptações realizadas na mesma para adequá-la aos objetivos do trabalho.
+Finalmente a última seção descreve o protótipo inicial desenvolvido e os
+trabalhos futuros a serem realizados. Este artigo visa principalmente 
+registrar a metodologia utilizada nesse processo, bem
+como as dificuldades e soluções apresentadas para as mesmas.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Infra-Estrutura\label{sec:infra}}
+
+Partindo-se da necessidade de se criar uma infra-estrutura de recepção
+de TV Interativa, baseada na recepção de {\em streams} de video
+MPG2, definiu-se uma arquitetura de {\em SetTopBox}. Dentre todos
+modelos pesquisados algumas características básicas foram observadas,
+as quais apresentam-se na primeira camada da {\em Figura \ref{figura1}}
+
+
+\begin{figure} [ht] 
+\centering
+\includegraphics{overview.eps}
+\caption{Disponibilização da Plataforma {\em SetTopBox}}
+\label{figura1}
+\end{figure}
+
+Examinando o diagrama da {\em Figura \ref{figura1}}, destaca-se seus aspectos mais pertinentes:
+
+\begin{itemize}
+
+\item A primeira camada corresponde ao {\em hardware}, ainda
+destacamos a {\em interface} de {\em video}, Codificador e/ou
+Decodificador MPG2 e {\em interface} de rede.
+
+
+\item A segunda camada no diagrama representa o sistema operacional
+{\em Linux}, destacando-se os {\em drivers} necessários para realizar
+a conexão entre os aplicativos e as {\em interfaces de hardware}.
+
+\item A quinta camada refere-se aos aplicativos para TV
+digital. Estes realizam interação com a quarta e terceira camadas, 
+seja para obter ponto de acesso para serviços através da \emph{API JavaTV}
+ou acesso as bibliotecas de decodificação \emph{MPEG2}.
+
+\end{itemize}
+
+ A necessidades dos recursos necessários para a execução de um aplicativo
+ é determinada pela aplicação que irá executar na plataforma, em
+ nosso caso o \emph{aplicativo TV}. É fornecido um conjunto de
+ \emph{APIs JavaTV} a qual irá utilizar dos recursos fornecidos pelo
+ \emph{kernel} do \emph{linux}. São necessários uma interface de rede,
+ um decodificador de \emph{MPG2} e uma placa de \emph{video}
+ juntamente com seus respectivos \emph{drivers} para fornecer a
+ aplicação a capacidade de receber, decodificar e exibir os
+ \emph{streams} de vídeo.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{A plataforma JavaTV}
+
+A escolha da utilização o do conjunto de APIs JavaTV ~\cite{jtv-ov}, que constituem a extensão da
+plataforma Java para o desenvolvimento de conteúdo destinado à televisão
+interativa, foi motivada principalmente pela existência de uma
+Implementação de Referência (IR) gratuita e de código fonte 
+aberto disponibiliza pela Sun no final do ano de 2000. 
+Outro motivo foram os trabalhos anteriores realizados pelos parceiros do
+projeto I2TV sediados em Natal que utilizavam esta mesma IR, o que
+garante um conhecimento prévio do assunto para o projeto. 
+
+Sob ponto de vista da adoção do JavaTV pelo mercado, pode-se considerar 
+que isto vem ocorrendo de maneira indireta através do padrão Multimedia Home 
+Plataform (MHP), produzido pelo consórcio europeu {\em Digital Video
+Broadcasting} (DVB), o mesmo que produz especificações para codificação de
+canal de transmissão. Além da Europa, o MHP vem sendo difundido em
+países que utilizam padrões de transmissão diferentes do DVB, e caminha para tornar-se
+um padrão de fato no desenvolvimento de conteúdo para TV digital. O MHP
+suporta boa parte das APIs do JavaTV, que é considerado um subconjunto do
+mesmo.  Diversos pontos em comum entre o MHP e o JavaTV, como a utilização do
+{\em Java Media Framework} (JMF), o gerenciamento dos serviços e  controle do ciclo 
+de vida de aplicações, possibilitam o desenvolvimento de conteúdo para
+JavaTV que requeira pouca  modificação para ser compatível com
+plataformas MHP.
+
+Na IR do JavaTV, o setTopBox, como fonte de informações pertinentes ao 
+conteúdo (e não o conteúdo em si), é abstraído pelas classes do pacote 
+\emph{com.sun.tv.receiver}. As informações sobre as fontes transmissoras,
+serviços, programação, detalhes de componentes são obtidas de um arquivo em formato
+\emph{Xtended Markup Language} (XML). Este arquivo XML é interpretado pela
+classe \emph{ReceiverFile}, durante a inicialização da IR.  
+
+O principal problema enfrentado nos testes com o IR do JavaTV foi a 
+falta de suporte para decodificação o MPEG2 com multiplexação TS
+(Transport Stream) pelo JMF. Buscando a resolução deste problema, duas abordagens poderiam
+ser utilizadas. A primeira é a utilização do {\emph Java Native Interface} (JNI)
+para acesso às bibliotecas ou mesmo acesso direto ao {\emph drivers} 
+de uma placa decodificadora MPEG2. A vantagem desta abordagem é
+a grande flexibilidade para acesso aos recursos do sistema providos pelo sistema operacional e
+portabilidade entre diferentes plataformas. A desvantagem é a dificuldade de
+implementação. A outra abordagem é a utilização de um aplicativo externo ao controle do ambiente
+Java. A principal vantagem desta solução é a facilidade de implementação. 
+Esta solução possui como desvantagem a perda do controle sobre o fluxo de mídia e da janela de
+reprodução, o que não ocorre na primeira abordagem, onde é possível utilizar o código nativo Java
+apenas na implementação do {\emph front-end} gráfico.
+
+Como o objetivo dos trabalhos, neste estágio do projeto, é o desenvolvimento de um protótipo,
+obtou-se pela utilizaçào de um aplicativo externo, que nos permitiu dispor mais rapidamente de uma
+infra-estrutura para testes de aplicações de TV interativa.  Foi escolhido {\emph Video
+Lan Client} (VLC) desenvolvido em \emph{Ecole Centrale
+Paris}. A motivação para esta escolha, além do código aberto, foi o suporte
+a fonte de dados em {\em multicast} e o trabalho já desenvolvido pelos
+parceiros do projeto na geração de conteúdo usando o {\em Video Lan
+Server} (VLS) \cite{videolan}. Para contornar parte dos problemas citados 
+anteriormente em utilizar aplicativos externos 
+serão realizadas alterações no código do VLC para usa-lo como 
+{\emph backend} do JavaTV. Especificamente será retirado do VLC seu tratamento aos eventos 
+gerados pelo teclado para que o mesmo possa receber comando simples de sua entrada padrão. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Protótipo}
+
+A fim de demonstrar os conceitos e técnicas descritas anteriormente, um
+protótipo da plataforma foi implementado.  Este protótipo faz uso de
+duas arquiteturas peculiares como \emph{SetTopBox}: o \textsc{TiVo-2} \cite{tivo} da
+\emph{Tivo} baseado em \textsc{Mips} e o \textsc{XBox}  da
+\emph{Microsoft} baseado na \textsc{Intel Architecture 32}. Este último, que
+originalmente trata-se de um video game, passou por adaptações de hardware para que
+pudesse desemplenhar o papel de um \emph{SetTopBox}. O sistema operacional \textsc{Linux} com
+\emph{kernel} 2.4 foi instalado em ambas as plataformas de hardware,
+definindo assim a segunda camada da arquitetura descrita na
+seção~\ref{sec:infra}.
+
+A quarta e a terceira camada da arquitetura, são constituídas pelo \textsc{Java2}
+\emph{SDK} da Sun Microsystems, pelo \emph{JavaTV} 1.0 e pelas bibliotecas nativas do VLC, respectivamente. Estas camadas da
+arquitetura mostraram ser peças fundamentais na definição do desempenho geral
+do sistema, pois grande parte destes componentes de software foram
+desenvolvido para serem utilizado em computadores pessoais com recursos
+abundantes, o que não é o caso dos \emph{SetTopBoxes} escolhidos.
+
+A camada de aplicação desenvolvida é baseada em aplicações Java chamadas {\emph Xlets}, 
+que são análogas aos {\emph applets}, mas com escopo de execução em receptores de TV digital. 
+Como primeiro experimento, foi implementado um Guia de Programação Eletrônico, que é atualizado sempre que 
+ocorre alguma mudança na grade de programação. Modificações foram necessárias 
+no ambiente JavaTV para integra-lo com a janela de reprodução de mídia.
+
+
+\section{Considerações finais}
+
+Com trabalhos descritos neste artigo, possuímos o protótipo de uma
+plataforma receptora de TV interativa. Mais testes de perfomance e avaliações à 
+respeito sobre o consumo de recursos ainda precisam ser realizados para 
+aprimoramentos da plataforma descrita, mas de um modo geral dispomos de um 
+ambiente para o desenvolvimento e testes de conteúdo de TV interativa.
+Dentre os trabalhos futuros, está a implementação de componentes da
+especificação MHP à partir da IR do JavaTV, desenvolvimento de aplicações
+Java mais complexas e com maior sincronização com o fluxo MPEG2.
+
+\begin{thebibliography}{15}
+
+\bibitem{jtv-ov} ~CALDER B.; COURTNEY J.; et al.
+\textbf{JavaTV{\footnotesize\texttrademark} API
+Technical Overview}, v.1.0. Disponível em
+\underline{http://www.java.sun.com/proucts/javatv/}. Acesso em 18 jan. 2003.
+\bibitem{tivo} Disponível em \underline{http://www.tivo.com}. Acesso em 31 mar 2003.
+\bibitem{i2tv} Disponível em \underline{http://www.i2tv.ufsc.br}. Acesso em 20 fev 2003.
+\bibitem{videolan} Disponível em \underline{http://www.videolan.org}. Acesso em 20 fev 2003.
+
+\end{thebibliography}
+
+
+
+\end{document}

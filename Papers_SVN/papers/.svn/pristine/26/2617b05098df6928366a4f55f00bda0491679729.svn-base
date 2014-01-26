@@ -1,0 +1,562 @@
+@Manual{AMBA,
+  title        = "{The de facto Standard for On-Chip Bus}",
+  organization = {Advanced RISC Machines Limited - ARM},
+  edition      = {Online Document},
+  year         = {2003},
+  note         = {http://www.arm.com/ products/ solutions/ AMBAHomePage.html},
+}
+
+
+@InProceedings{Barreto:2004,
+  author    = {Raimundo Barreto and Meuse Oliveira J\'unior and Mar\'ilia Neves 
+               and Eduardo Tavares and Paulo Maciel and Ricardo Lima},
+  title     = "{A Formal Software Synthesis Approach for Embedded Hard RealTime Systems}",
+  booktitle = {Proceedings of the 17th Brazilian Symposium on Integrated 
+               Circuits and Systems Design (SBCCI'2004)},
+  year      = {2004},
+  month     = {September},
+  pages     = {163--168},
+  publisher = {ACM Press} 
+}
+
+
+@InProceedings{Bergamaschi:2000,
+  author    = {Reinaldo A.~Bergamaschi and Subhrajit Bhattacharya and
+               Ronoldo Wagner and Colleen Fellenz and Michael Muhlada
+               and William R. Lee and Foster White and Jean-Marc Daveau},
+  title     = "{Coral - Automating the Design of Systems-on-Chip Using Cores}",
+  booktitle = {IEEE Custom Integrated Circuits Conference},
+  year      = {2000},
+  address   = {Orlando, USA},
+  isbn      = {0-7803-5809-0},
+  pages	    = {109--112},
+  month     = {May},
+  doi       = {10.1109/CICC.2000.852628},
+  publisher = {IEEE Computer Society Press},
+}
+
+
+@inproceedings{Bergamaschi:dac:2000,
+  author    = {Reinaldo A.~Bergamaschi and William R. Lee},
+  title     = "{Designing Systems-on-Chip Using Cores}",
+  booktitle = {DAC '00: Proceedings of the 37th conference on Design automation},
+  year      = {2000},
+  isbn      = {1-58113-187-9},
+  pages     = {420--425},
+  location  = {Los Angeles, California, United States},
+  doi       = {http://doi.acm.org/10.1145/337292.337526},
+  publisher = {ACM Press},
+  address   = {New York, NY, USA},
+ }
+
+
+@article{Bergamaschi:2001,
+  author    = {Reinaldo A.~Bergamaschi and Subhrajit Bhattacharya and 
+               Ronoldo Wagner and Colleen Fellenz and Michael Muhlada 
+               and William R. Lee and Foster White and Jean-Marc Daveau},
+  title     = "{Automating the Design of SOCs Using Cores}",
+  journal   = {IEEE Des. Test},
+  volume    = {18},
+  number    = {5},
+  year      = {2001},
+  issn      = {0740-7475},
+  pages     = {32--45},
+  doi       = {http://dx.doi.org/ 10.1109/ 54.953270},
+  publisher = {IEEE Computer Society Press},
+}
+
+
+@inproceedings{Bergamaschi:2002,
+  author    = {Reinaldo A. Bergamaschi and John Cohn},
+  title     = "{The A to Z of SoCs}",
+  booktitle = {ICCAD '02: Proceedings of the 2002 IEEE/ACM international conference on Computer-aided design},
+  year      = {2002},
+  isbn      = {0-7803-7607-2},
+  pages     = {790--798},
+  location  = {San Jose, California},
+  doi       = {http://doi.acm.org/10.1145/774572.774689},
+  publisher = {ACM Press},
+  address   = {New York, NY, USA},
+ }
+
+
+@inproceedings{Bergamaschi:2004,
+  author    = {Reinaldo A. Bergamaschi},
+  title     = "{Early and Accurate Analysis of SoCs: Oxymoron or Real?}",
+  booktitle = {SLIP '04: Proceedings of the 2004 international workshop on System level interconnect prediction},
+  year      = {2004},
+  isbn      = {1-58113-818-0},
+  pages     = {3--6},
+  location  = {Paris, France},
+  doi       = {http://doi.acm.org/10.1145/966747.966749},
+  publisher = {ACM Press},
+  address   = {New York, NY, USA},
+ }
+
+
+@InProceedings{Beuche:2000,
+  author    = {Danilo Beuche and Ant\^onio Augusto Fr\"ohlich and
+               Reinhard Meyer and Holger Papajewski and Friedrich
+               Sch\"on and Wolfgang Schr\"oder-Preikschat and Olaf
+               Spinczyk and Ute Spinczyk},
+  title     = "{On Architecture Transparency in Operating Systems}",
+  booktitle = {Proceedings of the 9th SIGOPS European Workshop ``Beyond
+               the PC: New Challenges for the Operating System''},
+  pages     = {147--152},
+  address   = {Kolding, Denmark},
+  month     = {Sep.},
+  year      = {2000}
+}
+
+
+@Manual{Coreconnect,
+  title        = "{CoreConnect Bus Architecture}",
+  organization = "{IBM Microeletronics}",
+  edition      = {Online Document},
+  year         = {1999},
+  note         = {http://www.ibm.com/ chips/ products/ coreconnect/},
+}
+
+
+@inproceedings{Damasevicius:2003,
+  author       = {Robertas Dama\"sevi\"cius and Giedrius Majauskas and Vytautas Stuikys},
+  title        = "{Application of Design Patterns for Hardware Design}",
+  booktitle    = {DAC '03: Proceedings of the 40th conference on Design automation},
+  year         = {2003},
+  isbn         = {1-58113-688-9},
+  pages        = {48--53},
+  location     = {Anaheim, CA, USA},
+  doi          = {http://doi.acm.org/10.1145/775832.775847},
+  publisher    = {ACM Press},
+  address      = {New York, NY, USA},
+}
+
+
+@inproceedings{Damasevicius:2004,
+  author    = {Robertas Dama\"sevi\"cius and Vytautas Stuikys},
+  title     = "{Application of UML for hardware design based on design process model}",
+  booktitle = {ASP-DAC '04: Proceedings of the 2004 conference on Asia South Pacific design automation},
+  year      = {2004},
+  isbn      = {0-7803-8175-0},
+  pages     = {244--249},
+  location  = {Yokohama, Japan},
+  doi       = {http://dx.doi.org/10.1109/ASP-DAC.2004.53},
+  publisher = {IEEE Press},
+  address   = {Piscataway, NJ, USA},
+ }
+
+
+@inproceedings{Desmet:2000,
+  author    = {Dirk Desmet and D. Verkest and Hugo De Man},
+  title     = "{Operating system based software generation for systems-on-chip}",
+  booktitle = {DAC '00: Proceedings of the 37th conference on Design automation},
+  year      = {2000},
+  isbn      = {1-58113-187-9},
+  pages     = {396--401},
+  location  = {Los Angeles, California, United States},
+  doi       = {http://doi.acm.org/10.1145/337292.337509},
+  publisher = {ACM Press},
+  address   = {New York, NY, USA},
+}
+
+
+@MastersThesis{Eisele:2002,
+  author   = {Konrad Eisele},
+  title    = "{Design of a Memory Management Unit for System-on-a-Chip Platform "LEON"}",
+  school   = {University of Stuttgart},
+  year     = {2002}
+}
+
+
+@inproceedings{Gajski:1999,
+  author    = {Daniel D. Gajski},
+  title     = "{IP-Based Design Methodology}",
+  booktitle = {DAC '99: Proceedings of the 36th Annual Conference on Design Automation (DAC'99)},
+  year      = {1999},
+  isbn      = {1-58113-109-7},
+  pages     = {43--43},
+  doi       = {http://dx.doi.org/10.1109/DAC.1999.102},
+  publisher = {IEEE Computer Society},
+  address   = {Washington, DC, USA},
+}
+
+
+@InProceedings{Gauthier:2001,
+  author    = {Lovic Gauthier and },
+  title     = "{Automatic generation and targeting of application specific operating systems and embedded systems software}",
+  booktitle = {Design Automation and Testing in Europe},
+  year      = {2001},
+  address   = {Munich, Germany},
+  month     = {March 13-16},
+  publisher = {IEEE CS Press}
+}
+
+
+@InProceedings{Grunewald:2003,
+  author       = {Matthias Gr\"unewald and J\"org-Christian Niemann and
+                  Ulrich R\"uckert},
+  title        = "{A performance evaluation method for optimizing 
+                  embedded applications}",
+  booktitle    = {IWSOC2003 The 3rd IEEE International Workshop on 
+                  System-on-Chip for Real-Time Applications},
+  year         = {2003},
+  address      = {Alberta, Canada},
+  month        = {June}
+}
+
+
+@InProceedings{Herrera:2003,
+  author    = {Fernando Herrera and Hector Posadas and Eugenio Villar},
+  title     = "{Systematic Embedded Software Generation from SystemC}",
+  booktitle = {Proceedings of Design, Automation and Test in Europe},
+  pages     = {142},
+  year      = {2003},
+  address   = {Munich, Germany},
+  publisher = {IEEE CS Press},
+  isbn      = {1-4020-7528-6}
+}
+
+
+@Manual{ISE,
+  title        = "{Xilinx ISE 6 Software Manuals and Help}",
+  organization = {Xilinx~Inc.},
+  edition      = {Online Document},
+  month        = {May},
+  year         = {2004},
+  note         = {http://www.xilinx.com/ support/ sw\_manuals/ xilinx6/ index.htm},
+}
+
+
+@article{Keutzer:2000,
+  author  = {K. Keutzer and S. Malik and A. R. Newton and J. Rabaey and
+              A. Sangiovanni-Vincentelli},
+  title   = "{System Level Design: Orthogonolization of Concerns
+              and Platform-Based Design}",
+  journal = {IEEE Transactions on Computer-Aided Design of
+              Integrated Circuits and Systems},
+  volume  = {19},
+  number  = {12},
+  month   = {December},
+  year    = {2000}
+}
+
+
+@Manual{LEON2:2004,
+  title        = "{LEON2 XST User's Manual}",
+  organization = {Gaisler Research Laboratory},
+  edition      = {1.0.22},
+  month        = {May},
+  year         = {2004},
+}
+
+
+@TechReport{LeonuClinux:2003,
+  author      = {Michael Wurm},
+  title       = "{uClinux for Sparc-MMUless with Ethernet MAC}",
+  institution = {Graz University of Technology},
+  year        =	{2003},
+  note        = {http://www.sbox.tugraz.at/ home/ m/ miwu/ sparc/}
+}
+
+
+@inproceedings{Liu:2001,
+  author    = {X. Liu and C. Papaefthymiou},
+  title     = "{A static power estimation methodolodgy for IP-based design}",
+  booktitle = {DATE '01: Proceedings of the conference on Design, automation and test in Europe},
+  year      = {2001},
+  isbn      = {0-7695-0993-2},
+  pages     = {280--289},
+  location  = {Munich, Germany},
+  publisher = {IEEE Press},
+  address   = {Piscataway, NJ, USA},
+}
+
+
+@inproceedings{Martin:2001,
+  author    = {G. Martin and R. Seepold and T. Zhang and L. Benini and G. De Micheli},
+  title     = "{Component selection and matching for IP-based design}",
+  booktitle = {DATE '01: Proceedings of the conference on Design, automation and test in Europe},
+  year      = {2001},
+  isbn      = {0-7695-0993-2},
+  pages     = {40--46},
+  location  = {Munich, Germany},
+  publisher = {IEEE Press},
+  address   = {Piscataway, NJ, USA},
+}
+
+
+@inproceedings{Martin:2002,
+  author    = {G. Martin},
+  title     = "{UML for Embedded Systems Specification and Design: Motivation and Overview}",
+  booktitle = {DATE '02: Proceedings of the conference on Design, automation and test in Europe},
+  year      = {2002},
+  pages     = {773},
+  publisher = {IEEE Computer Society},
+  address   = {Washington, DC, USA},
+}
+
+
+@TechReport{Mattsson:2004,
+  author       = {Daniel Mattsson and Marcus Christensson},
+  title        = "{Evaluation of synthesizable CPU cores}",
+  institution  = {Chalmers University Of Technology},
+  year         = {2004}
+}
+
+
+@inproceedings{McUmber:1999,
+  author    = {William E. McUmber and Betty H. C. Cheng},
+  title     = "{UML-Based Analysis of Embedded Systems Using a Mapping to VHDL}",
+  booktitle = {HASE '99: The 4th IEEE International Symposium on High-Assurance Systems Engineering},
+  year      = {1999},
+  isbn      = {0-7695-0418-3},
+  pages     = {56--63},
+  publisher = {IEEE Computer Society},
+  address   = {Washington, DC, USA},
+}
+
+
+@article{Neville:2003,
+  author       = {George Neville-Neil and Telle Whitney},
+  title        = "{SoC: Software, Hardware, Nightmare, Bliss}",
+  journal      = {ACM Queue},
+  volume       = {1},
+  number       = {2},
+  year         = {2003},
+  issn         = {1542-7730},
+  pages        = {24},
+  doi          = {http://doi.acm.org/10.1145/644254.644265},
+  publisher    = {ACM Press},
+}
+
+
+@inproceedings{Nguyen:2004,
+  author    = {Kathy Dang Nguyen and Zhenxin Sun and P. S. Thiagarajan and Weng-Fai Wong},
+  title     = "{Model-Driven SoC Design via Executable UML to SystemC}",
+  booktitle = {Proceedings of the 25th IEEE Real-Time Systems Symposium
+               (RTSS 2004)},
+  year      = {2004},
+  pages     = {459-468},
+  ee        = {http://csdl.computer.org/comp/proceedings/rtss/2004/2247/00/22470459abs.htm},
+}
+
+
+@Manual{OpenRisc1200:2001,
+  title        = "{OpenRISC 1200 IP Core Specification}",
+  author       = {Damjan Lampret},
+  organization = {OpenCores},
+  edition      = {0.6},
+  month        = {jun},
+  year         = {2001}
+}
+
+
+@TechReport{Pelgrims:bus:2003,
+  author       = {Patrick Pelgrims and Tom Tierens and Dries Driessens},
+  title        = "{Overview: AMBA, AVALON, CoreConnect, Wishbone}",
+  institution  = {DE NAYER Instituut},
+  year         = {2003}
+}
+
+
+@TechReport{Pelgrims:cpu:2003,
+  author       = {Patrick Pelgrims and Tom Tierens and Dries Driessens},
+  title        = "{Overview: Excalibur, LEON, Microblaze, Nios, OpenRisc, VirtexII Pro}",
+  institution  = {DE NAYER Instituut},
+  year         = {2003}
+}
+
+
+@inproceedings{Rowson:1997,
+  author       = {James A. Rowson and Alberto Sangiovanni-Vincentelli},
+  title        = "{Interface-based Design}",
+  booktitle    = {Proceedings of the 34th annual conference on Design automation},
+  year         = {1997},
+  isbn         = {0-89791-920-3},
+  pages        = {178--183},
+  location     = {Anaheim, California, United States},
+  doi          = {http://doi.acm.org/10.1145/266021.266060},
+}
+
+
+@inproceedings{Rutenbar:2001,
+  author       = {Rob A. Rutenbar and Max Baron and Thomas Daniel and 
+                  Rajeev Jayaraman and Zvi Or-Bach and Jonathan Rose 
+                  and Carl Sechen},
+  title        = "{(When) Will FPGAs kill ASICs?}",
+  booktitle    = {Proceedings of the 38th conference on Design automation},
+  year         = {2001},
+  isbn         = {1-58113-297-2},
+  pages        = {321--322},
+  location     = {Las Vegas, Nevada, United States},
+  doi          = {http://doi.acm.org/10.1145/378239.378499},
+  publisher    = {ACM Press},
+}
+
+
+@InProceedings{Schirrmeister:2002,
+  author    = 	 {Frank Schirrmeister and Martin Meindl and Stan Krolikoski},
+  title     = 	 {IP Authoring and Integration for HW/SW Co-design and Reuse - Lessons Learned},
+  booktitle = 	 {Proceeding of the Ninth IEEE/DATC Eletronic Desing Process Workshop},
+  year      = 	 {2002},
+  address   = 	 {Montery, CA, USA},
+  month     = 	 {April}
+}
+
+
+@inproceedings{Schumacher:1996,
+  author    = {G. Schumacher and W. Nebel},
+  title     = "{Object-oriented hardware modelling---where to apply and what are the objects?}",
+  booktitle = {EURO-DAC '96/EURO-VHDL '96: Proceedings of the conference on European design automation},
+  year      = {1996},
+  isbn      = {0-8186-7573-X},
+  pages     = {428--433},
+  location  = {Geneva, Switzerland},
+  publisher = {IEEE Computer Society Press},
+  address   = {Los Alamitos, CA, USA},
+ }
+
+
+@inproceedings{Smith:2004,
+  author     = {Gary Smith},
+  title      = "{Platform based design: does it answer 
+                the entire SoC challenge?}",
+  booktitle  = {Proceedings of the 41st annual conference 
+                on Design automation},
+  year       = {2004},
+  isbn       = {1-58113-828-8},
+  pages      = {407--407},
+  location   = {San Diego, CA, USA},
+  doi        = {http://doi.acm.org/10.1145/996566.996682},
+  publisher  = {ACM Press},
+}
+	    
+
+@Manual{SOPCBuilder,
+  title        = "{SOPC Builder}",
+  organization = {Altera Corporation},
+  year         = {2004},
+  month        = {May},
+  note         = {http://www.altera.com/ products/ 
+                  software/ system/ products/ 
+		  sopc/sop-index.html},
+}
+
+
+@InProceedings{Viana:2003,
+  author       = {Pablo Viana and Edna Barros and  Sandro Rigo, Rodolfo Azevedo 
+            	  and Guido Araujo},
+  title        = "{Exploring Memory Hierarchy with ArchC}",
+  booktitle    = {Proceedings of the 15th Symposium on Computer Architecture 
+               	  and High Performance Computing},
+  month        = {October},
+  year         = {2003},
+  address      = {S\~ao Paulo, Brazil},
+  publisher    = {IEEE CS}
+}
+
+
+@article{Vincentelli:2002,
+  author  = {Alberto Sangiovanni Vincentelli},
+  title   = "{Defining Platform-based Design}",
+  journal = {EEDesign of EETimes},
+  month   = {February},
+  year    = {2002}
+}
+
+
+@inproceedings{Vincentelli:2004,
+  author       = {Alberto Sangiovanni-Vincentelli and Luca Carloni and
+                  Fernando {De Bernardinis} and Marco Sgroi},
+  title        = "{Benefits and challenges for platform-based design}",
+  booktitle    = {Proceedings of the 41st annual conference on Design automation},
+  year         = {2004},
+  isbn         = {1-58113-828-8},
+  pages        = {409--414},
+  address      = {San Diego, CA, USA},
+  doi          = {http://doi.acm.org/10.1145/996566.996684},
+  publisher    = {ACM Press},
+}
+
+
+@inproceedings{Visarius:2003,
+  author    = {Markus Visarius and Johannes Lessmann and Wolfram Hardt and Frank Kelso and Wolfgang Thronicke},
+  title     = "{An XML Format Based Integration Infrastructure for IP Based Design}",
+  booktitle = {SBCCI '03: Proceedings of the 16th symposium on Integrated circuits and systems design},
+  year      = {2003},
+  isbn      = {0-7695-2009-X},
+  pages     = {119},
+  publisher = {IEEE Computer Society},
+  address   = {Washington, DC, USA},
+}
+
+
+@article{Wagner:2004,
+  author    = {Fl\'avio R. Wagner and Wander O. Ces\'ario and Luigi Carro and Ahmed A. Jerraya},
+  title     = "{Strategies for the integration of hardware and software IP components in embedded systems-on-chip}",
+  journal   = {Integr. VLSI J.},
+  volume    = {37},
+  number    = {4},
+  year      = {2004},
+  issn      = {0167-9260},
+  pages     = {223--252},
+  doi       = {http://dx.doi.org/10.1016/j.vlsi.2003.12.005},
+  publisher = {Elsevier Science Publishers B. V.},
+  address   = {Amsterdam, The Netherlands, The Netherlands},
+}
+
+
+@inproceedings{Wang:2003,
+  author    = {Shaojie Wang and Sharad Malik},
+  title     = "{Synthesizing operating system based device drivers in embedded systems}",
+  booktitle = {CODES+ISSS '03: Proceedings of the 1st IEEE/ACM/IFIP international 
+               conference on Hardware/Software codesign and system synthesis},
+  year      = {2003},
+  isbn      = {1-58113-742-7},
+  pages     = {37--44},
+  location  = {Newport Beach, CA, USA},
+  doi       = {http://doi.acm.org/10.1145/944645.944655},
+  publisher = {ACM Press},
+  address   = {New York, NY, USA},
+ }
+
+
+@Manual{Wishbone,
+  title        = "{The WISHBONE Service Center}",
+  organization = {Silicore Corporation},
+  edition      = {Online Document},
+  month        = {Sep.},
+  year         = {2003},
+  note         = {http://www.silicore.net/ wishbone.htm/},
+}
+
+
+@Manual{XMB:2002,
+  title        = "{MicroBlaze and Multimedia Development Board User Guide}",
+  organization = {Xilinx~Inc.},
+  edition      = {UG020 (v1.0)},
+  year         = {2002}
+}
+
+
+@inproceedings{Yu:2004,
+  author    = {Haobo Yu and Rainer D\"omer and Daniel Gajski},
+  title     = "{Embedded software generation from system level design languages}",
+  booktitle = {ASP-DAC '04: Proceedings of the 2004 conference on
+               Asia South Pacific design automation},
+  year      = {2004},
+  isbn      = {0-7803-8175-0},
+  pages     = {463--468},
+  location  = {Yokohama, Japan},
+  doi       = {http://dx.doi.org/10.1109/ASP-DAC.2004.92}},
+}
+
+
+@Unpublished{Zeidman:2005,
+  author    = {Bob Zeidman},
+  title     = "{Software synthesis for embedded systems}",
+  note      = {Article from D\&R Headline News},
+  month     = {January},
+  year      = {2005},
+}
+

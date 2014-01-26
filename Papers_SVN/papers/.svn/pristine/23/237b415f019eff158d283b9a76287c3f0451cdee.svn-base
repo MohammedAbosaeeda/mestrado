@@ -1,0 +1,26 @@
+%-------------------------------------------------------------------------------
+% MODELO ARQUITETURAL %-------------------------------------------------------------------------------
+\section {Modelo Arquitetural do Sistema de Arquivos}
+
+Tendo um núcleo que implemente a funcionalidade descrita na seção anterior, podemos passar à descrição do sistema de arquivos. Definimos como principais metas as seguintes:
+
+\begin{itemize}
+
+\item Para um melhor aproveitamento do paralelismo intrínseco de um sistema de arquivos, decidimos implementá-lo como três servidores autônomos: servidor de nomes de objetos, servidor de arquivos e servidor de {\em buffers};
+
+\item Deve haver uma grande flexibilidade no que diz respeito a distribuição dos servidores do sistema de arquivos, podendo este executar em ambientes que vão de processadores acoplados através de memória compartilhada até uma coleção de computadores conectados por uma rede;
+
+\item A interface com o usuário será implementada como uma biblioteca de funções compatíveis com a norma número 1003.1 (POSIX) definida pelo {\em Institute of Eletrical and Electronics Engineer} \cite{ieee88}. Estas funções serão responsáveis pela geração das mensagens necessárias para a solicitação de serviços aos servidores.
+
+\end{itemize}
+
+\subsection {Estrutura Interna de um Servidor}
+
+Cada servidor implementará suas próprias funções para prestar os serviços devidos. Entretando, existe uma estrutura básica que é comum a todos eles. Um servidor nada mais é do que um processo repetindo indefinidamente um ciclo de três etapas: esperar por uma mensagem de solicitação de serviço, executar as funções correspondentes ao serviço e enviar uma mensagem com o resultado do serviço ao cliente. Quando uma mensagem de requisição de serviço é recebida por um servidor ele chama uma função associada ao respectivo serviço. O que acontece nesse ponto varia com o tipo do serviço. Um exemplo de solicitação de serviço pode ser visto na figura \ref{servers}.
+
+\putpict {../fig/servers.ps} {14} {3.7} {Exemplo de solicitação de serviço} {servers}
+
+Existem vários tipos de serviços no que diz respeito ao seu custo, i. e., quantidade de recursos necessários à sua execução. Existem serviços que sempre demandam poucos recursos, como por exemplo, o serviço que modifica o estado do ponteiro de um arquivo. Por outro lado, existem serviços que são sempre caros, como por exemplo a carga de um programa para ser executado. Alguns serviços podem ter um custo de execução variável, como por exemplo a leitura de um bloco de dados de um arquivo: se o bloco estiver em um {\em buffer} esse serviço pode ser uma ordem de grandeza mais rápido do que quando o bloco precisa ser trazido de disco.
+
+Pretendemos dar ao sistema de arquivos um grau razoável de paralelismo. Para tal, decidimos que cada serviço com possibilidade de bloquear algum servidor por tempo considerável deverá criar um novo fluxo de execução sobre a tarefa servidora.
+

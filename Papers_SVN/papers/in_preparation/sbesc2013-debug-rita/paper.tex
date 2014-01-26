@@ -1,0 +1,243 @@
+\documentclass[conference]{IEEEtran}
+\usepackage[lined,ruled,linesnumbered,portuguese]{algorithm2e}
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc} % for use utf8
+\usepackage{color,graphicx}
+\usepackage{listings}
+\lstset{keywordstyle=\bfseries, flexiblecolumns=true}
+\lstloadlanguages{[ANSI]C++,HTML}
+\lstdefinestyle{prg} {basicstyle=\small\sffamily, lineskip=-0.2ex, showspaces=false}
+\usepackage{color}
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+\makeatletter
+\def\markboth#1#2{\def\leftmark{\@IEEEcompsoconly{\sffamily}\MakeUppercase{\protect#1}}%
+\def\rightmark{\@IEEEcompsoconly{\sffamily}\MakeUppercase{\protect#2}}}
+\makeatother
+
+\newcommand{\fig}[4][h]{
+  \begin{figure}[#1] {\centering{\includegraphics[#4]{fig/#2}}\par}
+    \caption{#3\label{fig:#2}}
+  \end{figure}
+}
+
+\newcommand{\progcpp}[3][h]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=C++,style=prg]{fig/#2.h}
+   \caption{#3\label{progcpp:#2}}
+ \end{figure}
+}
+
+\newcommand{\progxml}[3][h]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=XML,style=prg]{fig/#2.xml}
+   \caption{#3\label{progxml:#2}}
+ \end{figure}
+}
+
+\SetKwInput{KwData}{Dados}
+\SetKwInput{KwResult}{Resultado}
+\SetKwInput{KwIn}{Entrada}
+\SetKwInput{KwOut}{Sa\'{i}da}
+\SetKw{KwTo}{para}
+\SetKw{KwRet}{retorne}
+\SetKw{Return}{retorne}
+\SetKwBlock{Begin}{in\'{i}cio}{fim}
+\SetKwComment{tcc}{/*}{*/}
+\SetKwComment{tcp}{//}{}
+\SetKwIF{If}{ElseIf}{Else}{se}{ent\~{a}o}{sen\~{a} se}{sen\~{a}o}{fim}
+\SetKwSwitch{Switch}{Case}{Other}{comute}{faça}{caso}{caso contr\'{a}rio}{fim da comutaç\~{a}o}
+\SetKwFor{For}{para}{fa\c{c}a}{fim}
+\SetKwFor{While}{enquanto}{fa\c{c}a}{fim}
+\SetKwFor{ForEach}{para cada}{fa\c{c}a}{fim}
+\SetKwRepeat{Repeat}{repita}{at\'{e}}
+
+\begin{document}
+\title{TAP - Teste e Depuração de Software Embarcado}
+
+\author{
+\IEEEauthorblockN{Rita de Cássia Cazu Soldi e Antônio Augusto Medeiros Fröhlich}
+\IEEEauthorblockA{Universidade Federal de Santa Catarina (UFSC)\\
+ Florianópolis, SC, Brasil\\
+ {rita,guto}@lisha.ufsc.br}
+}
+\maketitle
+
+\begin{abstract}
+The process of testing and debugging embedded software is non-trivial, once it needs a thorough inspection of the entire source code to make sure that there is no behavior beyond expectations. Perform these activities on embedded software is even more defiant, once developers need to find out how to optimize the use of the scarce resources since the test itself will compete with the application under test by the scarce system resources. This paper presents \texttt{TAP}, a tool for helping developers in the process of testing and debugging embedded systems. The main idea of this tool is emulating various possible system configurations to try to find errors in the application. Once detected an unspecified behavior, \texttt{TAP} automatically perform compilation, emulation and debugging accordingly to a XML specification file.
+\end{abstract}
+
+
+\section{Introdução}
+Sempre que um desenvolvedor começa a escrever um novo código fonte, existem especificações e comportamentos que o \textit{software} deve apresentar. Todo este processo deve ser acompanhado do teste, cujo objetivo é operar o sistema sob condições específicas e avaliar se resultados correspondem aos requisitos esperados. O teste de \textit{software} é importante para aumentar a qualidade do produto e em alguns casos chegam a representar mais de 50\% do custo do desenvolvimento~\cite{bertolino07softwaretesting}. 
+
+Quando o teste encontra algum comportamento atípico (não especificado), deve-se depurar o \textit{software} para procurar a causa do erro e corrigi-lo. A depuração é uma das atividades mais morosas do desenvolvimento de um \textit{software}, uma vez que encontrar a razão para um comportamento inesperado e resolver o problema não é um processo trivial~\cite{parnin2011automated}.
+
+Erros em \textit{software} podem causar problemas para as empresas envolvidas. A economia norte americana, por exemplo, pagou cerca de 60 bilhões de dólares devido a \textit{bugs} encontrados tardiamente, sendo que este preço poderia ser reduzido para 22,5 bilhões de dólares caso fossem utilizadas técnicas mais consistentes para os testes~\cite{ tassey2002economic}. 
+
+Perdas materiais causam um grande transtorno, mas colocar em risco o meio ambiente e a vida de seres vivos é um risco inaceitável. Sendo assim, é imprescindível ter certeza do bom funcionamento de sistemas que influenciam diretamente na vida das pessoas, como por exemplo os sistemas embarcados.
+
+Teste de \textit{software} embarcado é uma atividade bastante desafiadora, uma vez que os recursos deste tipo de sistema são escassos e o teste estará competindo com a própria aplicação sob teste por estes recursos. Além disso, esta atividade precisa ser remodelada para cada plataforma, que depende de sistemas operacionais, arquitetura, fornecedores, ferramenta de depuração, entre outros~\cite{schneider2004ten}. Toda esta variabilidade faz com que os sistemas embarcados estejam mais susceptível a erros e falhas de especificação.
+
+A automação de todo o processo de teste e depuração sem qualquer intervenção humana ainda é um desafio para os pesquisadores, embora existam alguns estudos que podem automatizar grande parte do processo a partir de dados obtidos diretamente da aplicação sob teste~\cite{Larson:2013:MDAT,JSWjsw0803603616}.
+
+A principal contribuição deste artigo é portanto, uma ferramenta de automação de teste e depuração de \textit{software} embarcado, a troca automática de parâmetros de configuração (\texttt{TAP}). A \texttt{TAP} consegue capturar todas as informações necessárias a partir de uma especificação em XML, gerando assim variações dos parâmetros de configurações do software sob teste. A ferramenta também suporta a depuração e emulação da aplicação, oferecendo um relatório dos testes realizados para que o desenvolvedor consiga corrigir o problema.
+
+\section{TAP - Troca Automática de Parâmetros de Software}
+\label{sec:tap}
+
+A ideia da troca de parâmetros surgiu extrapolando-se conceitos da metodologia de projeto orientado aplicação (AOSD - \textit{Application-Oriented System Design}) e do uso de programação genérica para a área de testes. O projeto orientado à aplicação fornece um sistema embarcado desenvolvido a partir de componentes especificamente adaptados e configurados de acordo com os requisitos da aplicação alvo. O fato de existir uma aplicação que fornece a certeza de que tudo que a compõe é essencial para seu funcionamento pode tornar o teste dos requisitos mais assertivo. Ainda, a programação genérica fornece uma maior adaptação do sistema às várias implementações de uma especificação. 
+
+No desenvolvimento para sistemas embarcados é frequente que uma única especificação seja reimplementada para atender a variabilidade de um componente de \textit{software} ou \textit{hardware}. Para cada uma destas implementações, um novo conjunto de testes é realizado. A vantagem de unir a AOSD com programação genérica ao desenvolvimento e teste de sistemas embarcados está em poder fazer uma única aplicação e um único teste para todas as implementações que seguem a mesma especificação, modificando apenas a configuração desejada.
+
+O algoritmo de \texttt{TAP} é independente do sistema operacional e plataforma. No entanto, trabalhamos com a premissa de que este sistema seja orientado a aplicação, com modelagem baseada em \textit{features} e parametrização. Também é desejável que cada abstração do sistema seja configurada conforme necessário através de \textit{traits} de um modelo de templates, como o definido por Stroustrup \cite{Stroustrup:c++}. 
+
+No algoritmo~\ref{algoritmo_AEP} são apresentados os passos a realizar a partir do momento em que se tem uma aplicação alvo até o retorno do relatório para o desenvolvedor. A entrada do algoritmo é o arquivo de configuração que possui o caminho da aplicação sob teste e de seus \textit{traits}. A partir destas informações o algoritmo flui no sentido de tentar encontrar a característica desejada, trocá-la por uma valor predeterminado, executar a nova aplicação e recolher o retorno da aplicação.
+
+
+\begin{algorithm}
+\caption{Algoritmo de Troca dos Parâmetros de Configuração}\label{algoritmo_AEP}
+\KwIn{arquivo \# Arquivo de configura\c{c}\~{a}o do teste  }
+\KwOut{relat\'{o}rio \# Relat\'{o}rio de tentativas }
+propriedades $\Leftarrow$ GetTraitFile(arquivo)\;
+\eIf{ o arquivo possui valor de configura\c{c}\~{a}o }{
+  \ForEach{configura\c{c}\~{a}o no arquivo}{
+     	linha $\Leftarrow$ GetTheConfiguration(configura\c{c}\~{a}o, propriedades)\;
+\ForEach{valor entre os da configura\c{c}\~{a}o}{
+        novoPropriedade$\Leftarrow$ ExchangeValue(linha, propriedades) \;
+        novaApp$\Leftarrow$ Compile(aplica\c{c}\~{a}o, novoPropriedade) \;
+        relat\'{o}rio$\Leftarrow$ relat\'{o}rio + Emulate(novaApp) \;
+     	}
+}
+}{ 
+\eIf{ o arquivo possui n$\circ$ m\'{a}ximo de tentativas}{
+        numMaxTentativas$\Leftarrow$ GetMaxSize(arquivo)\;
+}{
+        numMaxTentativas$\Leftarrow$ GetRandomNumber()\;
+  }
+\While{tentativas $<$ numMaxTentativas}{
+    linha$\Leftarrow$ GetRandomNumber()\;
+novoPropriedade$\Leftarrow$ ExchangeValue(linha, propriedades)\;
+    novaApp$\Leftarrow$ Compile(aplica\c{c}\~{a}o, novoPropriedade)\;
+    relat\'{o}rio$\Leftarrow$ relat\'{o}rio + Emulate(novaApp)\;
+  }
+}
+\Return relat\'{o}rio;
+\end{algorithm}
+
+A implementação atual utiliza o sistema operacional (\texttt{EPOS})~\cite{Froehlich:2001}, uma vez que adiciona uma grande capacidade de configuração do sistema, o que é muito adequado para avaliar o \textit{script}. Para um melhor entendimento da implementação do algoritmo de \texttt{TAP} será necessária uma breve explicação de como configurar as abstrações no EPOS.
+
+\subsection{Abstrações no \texttt{EPOS}}
+\texttt{EPOS} é um \textit{framework} baseado em componentes que fornece todas as abstrações tradicionais de sistemas operacionais e serviços como: gerenciamento de memória, comunicação e gestão do tempo. Além disso, possui vários projetos industriais e pesquisas acadêmicas que o utilizam como base \footnote{http://www.lisha.ufsc.br/pub/index.php?key=EPOS}.
+
+Este sistema operacional é instanciado apenas com o suporte básico para sua aplicação dedicada. É importante salientar que todas as características dos componentes também são características da aplicação, desta maneira, a escolha dos valores destas propriedades tem influência direta no comportamento final da aplicação. Neste contexto, a troca automatizada destes parâmetros pode ser utilizada tanto para a descoberta de um \textit{bug} no programa quanto para melhorar o desempenho para a aplicação através da seleção de uma melhor configuração.
+
+Cada aplicação tem seu próprio arquivo de configuração de abstrações para definir o seu comportamento. A Figura~\ref{progcpp:trait_build} mostra um trecho desta configuração para uma aplicação que simula um componente de estimativa de movimento para codificação H.264, o \texttt{DMEC}. Este trecho mostra como construir a aplicação, que neste caso foi configurada para executar no modo biblioteca para a arquitetura \texttt{IA-32} (\textit{Intel Architecture, 32-bit}), através de um \texttt{PC} (\textit{Personal Computer}).
+
+\progcpp{trait_build}{Trecho do \textit{trait} da aplicação o componente DMEC.}
+
+\subsection{Ambiente Compartilhado de Teste e Depuração}
+O ambiente utilizado por \texttt{TAP} conta com um emulador para simular a execução da aplicação e rodar os testes. No caso de algum teste falhar, automaticamente uma ferramenta de depuração é iniciada e o resultado de todas as operações é passada para o usuário.
+
+As ferramentas utilizadas neste ambiente podem ser substituídas por qualquer outra equivalente. A configuração será apresentada apenas para que o experimento possa ser reproduzido. Nele foi utilizado o \texttt{QEMU} para emular a máquina com a aplicação alvo a partir de outra máquina, usando tradução dinâmica. Desta forma torna-se possível utilizar um computador pessoal para testar aplicações compiladas para algum outro sistema embarcado. Para dar suporte também à depuração, foi necessário procurar um aliado para ver quais os passos do programa foi executado um momento antes de um \textit{crash}. O GBD - o GNU Project Debugger se encaixou no papel, pois nele é possível especificar qualquer regra que possa afetar seu comportamento de maneira estática.
+ 
+A integração de ambos é particular para cada máquina anfitriã e alvo. A Figura~\ref{fig:qemu_gdb_gray} apresenta as atividades necessárias para executar a depuração remota usando a arquitetura IA-32 como máquina anfitriã.
+
+\fig{qemu_gdb_gray}{Integração entre QEMU e GDB.}{scale=.3}
+
+Primeiramente deve-se compilar com informações de depuração, depois emular a aplicação na arquitetura alvo correta. Os testes são realizados e caso algum deles falhe, o depurador deve ser iniciado. Se necessário, as informações de depuração podem ser recuperadas para ajudar a encontrar o erro. A partir desta etapa, o desenvolvedor pode definir \textit{breakpoints, watchpoints} e até mesmo controlar a execução do programa. Todas estas atividades podem ser realizadas manualmente ou incorporadas pela \texttt{TAP} através do arquivo de configuração do teste.
+
+\subsection{Configuração do Teste/Depuração}
+Para melhorar a usabilidade do \textit{script}, é possível definir um arquivo de configuração com as informações necessárias para executar os testes unitários e de tipagem. Nós escolhemos XML para definir as configurações de teste, pois pode definir todas as regras necessárias para executar o \textit{script} de forma legível e, além disso, também é facilmente interpretado pelo computador.
+
+A Figura~\ref{progxml:philosopher_xml} traz um exemplo do arquivo de configuração de \texttt{TAP} para a aplicação \texttt{DMEC}.
+
+\progxml{philosopher_xml}{Exemplo do arquivo de configuração do teste para a \texttt{TAP}.}
+
+O arquivo do configuração é responsável pelo teste, então seu conteúdo deve estar sempre atualizado e em concordância com os requisitos da aplicação. O ajuste inicial é manual e simples, uma vez que este arquivo pode ser lido quase como um texto: há um teste para a aplicação (\textit{philosopher\_dinner\_app}), dentro dela deseja-se especificar duas propriedades. A primeira é a propriedade identificada como \textit{ARCH} que pode assumir os valores \textit{IA32} ou \textit{AVR8}. A segunda está relacionada à depuração, é um arquivo que contém \textit{breakpoints} que está no seguinte caminho: "\textit{/home/breakpoints.txt}".
+
+Cada configuração do teste interfere diretamente com o tempo e eficácia do \textit{script}. Prevendo este comportamento, \texttt{TAP} oferece três granularidades de configuração para o teste: determinada, parcialmente aleatória e aleatória. Elas devem ser escolhidas de acordo com a finalidade do usuário ao executar o \textit{script} de troca de parâmetros, do tipo de teste e das características de aplicação.
+
+Quando se deseja testar uma especificação bem definida, é possível determinar qual valor uma propriedade deve atingir. Toda a especificação pode ser traduzida no arquivo de configuração e \texttt{TAP} só considerará sucesso no teste as execuções que seguirem fielmente o descrito. O modo determinado também é interessante quando se deseja otimizar uma configuração, pois uma vez que o comportamento da aplicação e todas suas configurações sejam conhecidas, a única variável do sistema afetará o resultado final.
+
+Testes parcialmente aleatórios são usados para verificar as configurações do sistema que não possuem um valor determinado, ou seja, mais de um valor pode ser considerado correto. Neste caso, a informação faltante na configuração será atribuída pelo \textit{script} no momento do teste. Sem nenhuma informação prévia, o algoritmo não garante que os valores gerados serão válidos e distintos uns dos outros, desta forma pode ser que o teste seja repetido e gere resultados com falsos negativos.
+
+Teste aleatório foi desenvolvido como o pior caso. Ele só deve ser usado quando deseja-se testar valores fora do convencional para verificar a robustez da aplicação. Também é útil caso a aplicação falhe ao passar nos testes e não se tenha dica alguma sobre onde poderia estar o erro no momento de iniciar a depuração. Através dele pode-se encontrar valores errados de configuração e ajudar os desenvolvedores menos experientes a depurar pequenas aplicações.
+
+\section{Teste/depuração de uma aplicação real com TAP}
+\label{sec:case_study}
+A troca automática de parâmetros foi utilizada para testar e depurar o componente de estimativa de movimento para codificação H.264, o \textit{Distributed Motion Estimation Component} (\texttt{DMEC}). Este componente executa uma estimativa de movimento explorando a semelhança entre imagens adjacentes numa sequência de vídeo que permite que as imagens sejam codificadas diferencialmente, aumentando a taxa de compressão da sequência de \textit{bits} gerada. Estimativa de movimento é uma fase importante para codificação H.264 já que consome cerca de 90\% do tempo total do processo de codificação ~\cite{DMEC}.
+
+Teste de DMEC verifica o desempenho de estimativa de movimento usando uma estratégia de particionamento de dados, enquanto os trabalhadores (\texttt{Workers}) realizam a estimativa e o coordenador (\texttt{Coordinator}) processa os resultados.
+
+A Figura~\ref{fig:dmec} apresenta a interação entre as \textit{threads} coordenador e trabalhadoras. O coordenador é responsável por definir o particionamento de imagem, fornecer a imagem a ser processada e retornar resultados gerados para o codificador, enquanto cada trabalhador deve calcular o custo de movimento e os vetores de movimento.
+
+\fig{dmec}{Interação entre o coordenador e os trabalhadores na aplicação teste do DMEC~\cite{DMEC}.}{scale=.4}
+
+Um dos requisitos do projeto era produzir as estimativas consumindo o menor tempo possível. Para tanto, houve a tentativa de aumentar o número de trabalhadores para tentar paralelizar o trabalho da estimativa. A configuração \texttt{NUM\_WORKERS} foi então testada para números entre 6 e 60. O teste do limite inferior e superior são demonstrados, respectivamente, na Figura~\ref{fig:qemu_dmec_6_workers} e na Figura~\ref{fig:qemu_dmec_60_workers}. 
+
+\fig{qemu_dmec_6_workers}{Teste do DMEC com configuração \texttt{NUM\_WORKERS} = 6}{scale=.4} \fig{qemu_dmec_60_workers}{Teste do DMEC com configuração \texttt{NUM\_WORKERS} = 60}{scale=.4}
+
+Apesar do \textit{script} de troca de parâmetros gerar várias configurações para o teste, apenas compilar o código não garante que a aplicação é livre de \textit{bugs}. No caso do número de trabalhadores igual a 60, o programa foi compilado, mas não foi possível emular sua execução. Nestes casos o depurador é automaticamente chamado para que se possa descobrir o porquê deste comportamento. 
+
+O \textit{script} foi configurado para adicionar pontos de interrupção depois de iniciar cada uma das 5 funções da aplicação, inclusive na função principal, para descobrir se o problema encontrado era resultado de alguma delas. Foram consideradas corretas as execuções que contivessem então a resposta (\textit{continue}) de cada uma delas. A Figura~\ref{fig:gdb_dmec_60_workers} mostra que não havia nenhuma resposta para a aplicação, informando que nem mesmo a função principal era atingida. 
+
+\fig{gdb_dmec_60_workers}{DMEC debug with GDB execution with \texttt{NUM\_WORKERS} = 60}{scale=.4}
+
+Observando o relatório final do \textit{script} foi possível descobrir que sempre que a configuração \texttt{NUM\_WORKERS} apresentava um número maior que 10 a aplicação se comportava de maneira anômala. Neste caso o conjunto de testes, depuração e relatório foi crucial para determinar o limite máximo de trabalhadores da aplicação. 
+
+\section{Resultados}
+\label{sec:eval}
+Os testes foram realizados com a aplicação \texttt{DMEC}, executando sob EPOS 1.1 e compilado com GNU 4.5.2 e cross-compilados através de um computador pessoal com a arquitetura IA32. O ambiente integrado é composto por GDB 7.2 e QEMU 0.14.0. 
+
+A qualidade da informação de retorno é inerente à qualidade de informação de configuração do \textit{script} de \texttt{TAP}. A Figura~\ref{fig:comp_report_partial} apresenta um trecho de relatório com algumas configurações geradas.
+
+\fig{comp_report_partial}{Trecho do relatório com a troca da propriedade \texttt{NUM\_WORKERS} por valores gerados aleatoriamente.}{scale = 0.55}
+
+Em casos como o do teste completamente aleatório qualquer propriedade pode mudar, por exemplo, o tamanho da pilha de aplicativos, o valor de um \textit{quantum}, a quantidade de ciclos de relógio, etc. Estes relatórios são normalmente repetitivos e possuem informações espalhadas. Já nos relatórios gerados com mais dados tendem a ser mais organizados e repetirem menos informações.
+
+As Figuras \ref{fig:dmec_results} e \ref{fig:dmec_time_results} apresentam, respectivamente, os resultados dos experimentos relacionados à qualidade da informação devolvida para o usuário e ao consumo de tempo. Neste experimento foram realizadas 50 tentativas para cada tipo de granularidade. Para o teste parcialmente aleatório, foi modificada a propriedade \texttt{NUM\_WORKERS} com valores em aberto e para o teste determinado foi alterada esta mesma propriedade com valores de 1 a 60.
+
+\fig{dmec_results}{Classificação das tentativas realizadas versus a configuração da granularidade.}{scale = 0.7}
+\fig{dmec_time_results}{Classificação das tentativas realizadas versus o consumo de tempo.}{scale = 0.4}
+
+A diferença entre as tentativas totalmente aleatórias e as outras duas granularidades foi grande. Este resultado já era esperado, visto que a depuração de uma aplicação sem informação nenhuma à priori tem a sua efetividade ligada à probabilidade de encontrar tanto a falha quanto a sua causa.
+
+Entretanto não houve muita alteração entre os tipos determinado e parcialmente aleatório. Isto ocorreu devido à limitação na quantidade de propriedades e de seus possíveis valores de troca da aplicação, ou seja, com tal restrição as trocas com sucesso foram semelhantes nas duas configurações.
+
+Conforme apresentado na Figura~\ref{fig:dmec_size_results}, a aplicação não tem uma imagem grande, mas quando adicionamos a informação extra em tempo de compilação, o consumo de memória foi aumentado em cerca de 200\%. Em um sistema embarcado real, o tamanho desta nova imagem seria proibitivo.
+
+\fig{dmec_size_results}{Consumo de memória extra para armazenar as informações de depuração.}{scale = 0.7}
+
+
+\section{Trabalhos relacionados}
+\label{sec:relacionados}
+A área de automação de testes possui uma vasta literatura de apoio, sendo a maioria relacionada a sistemas de propósito geral. Tanto o \textit{script} de troca de parâmetros quando o ambiente integrado de teste e depuração tiveram seu projeto inspirado nela.
+
+Seo et al.~\cite{seo} propuseram uma ferramenta que gera e executa casos de teste para sistemas embarcados. Sua técnica que consegue identificar e classificar as interfaces das camadas do sistema embarcado, gerando testes específicos para cada uma delas. A similaridade deste trabalho com \texttt{TAP} encontra-se na maneira em que é realizada a depuração e do foco utilizado na execução dos testes, uma vez que podemos formar um paralelo entre as interfaces das camadas e as interfaces dos componentes do \texttt{EPOS}. Entretanto a vantagem de  \texttt{TAP} está em utilizar o mesmo ambiente para o teste e a depuração sem precisar de intervenção manual.
+
+\texttt{ATEMES}~\cite{atemes} é uma ferramenta para automação de teste para sistemas embarcados. Dentre os tipos de teste suportados estão os aleatórios, de unidade, cobertura, desempenho e condições de corrida. A ferramenta também prevê instrumentação do código, geração de casos de uso e geração de dados de entrada para sistemas de múltiplos núcleos. \texttt{ATEMES} é semelhante ao presente trabalho por também executar automaticamente os testes aleatórios em ambiente de depuração cruzada para \textit{software} embarcado. No entanto, além do teste e depuração, o ambiente integrado da \texttt{TAP} permite também a busca de pontos de melhoria na configuração da aplicação.
+
+Trabalhos com a técnica de \textit{statistical debugging}~\cite{zheng2006statistical,zhang2009capturing,parsa2011statistical} utilizam dados estatísticos relacionados a várias execuções do sistema para isolar um \textit{bug}. Esta análise estatística pode reduzir as possíveis origens de um erro apontando um \textit{ranking} de desconfiança e identificando qual parte do sistema gerou o erro. Devido ao grande volume de dados necessários para guardar todas as execuções e realizar a análise, esta técnica não poderia ser utilizada em um sistema embarcado real. Entretanto, o \textit{ranking} proposto pode facilitar o trabalho do desenvolvedor, assim o projeto do ambiente da \texttt{TAP} foi desenvolvido para que seja possível incorporar esta técnica para melhorar o relatório fornecido ao desenvolvedor.
+
+Em \textit{program slicing}~\cite{sasirekha2011program, Xu:2005:BSP:1050849.1050865,artho2011iterative} a ideia principal é a partição do código e a remoção de estados ou caminhos que não levam ao erro. Esta técnica possui duas abordagens: estática e dinâmica. De um lado, a partição estática é mais rápida e aponta apenas uma aproximação do conjunto final de caminhos que podem levar ao erro. Do outro existe a partição dinâmica, que considera o conjunto de entrada inicial para decidir como fatiar o código, fornecendo uma maior precisão no conjunto de saída. Esta técnica é interessante porque necessita apenas de uma execução errada do sistema para simplificar o grupo de entradas a serem examinadas. A \texttt{TAP} suporta ambas abordagens através dos \textit{traits} que podem modificar o sistema inteiro ou apenas uma parte da aplicação.
+
+Em trabalhos que utilizam \textit{capture and replay}~\cite{burger2008replaying,qi2011locating,orso2005selective} a ideia é capturar toda a execução do programa até o final e armazenar as operações envolvidas em um \textit{log}. Burger e Zeller se destacaram por desenvolver uma ferramenta \texttt{JINSI} que consegue capturar e reproduzir as interações intercomponentes e intracomponentes. Assim, todas as operações relevantes são observadas e executadas passo a passo, considerando-se todas as comunicações entre dois componentes até encontrar o \textit{bug}. A proposta de \texttt{TAP} é executar teste e depuração em um sistema operacional no qual um componente possui uma interface que pode ser implementada de diferentes maneiras, tornando inviável manter um \textit{log} diferente para cada implementação.
+
+\section{Conclusão}
+\label{sec:conclusao}
+Introduzimos neste artigo a troca automática de parâmetros de configuração (\texttt{TAP}) e mostramos como criar um ambiente de desenvolvimento de aplicações embarcadas baseadas em requisitos de \textit{hardware}  e \textit{software} específicos.
+
+O ambiente de desenvolvimento integrado fornece independência, em relação à plataforma física de destino, para o desenvolvimento e teste. Além disso, os desenvolvedores não precisam gastar tempo compreendendo uma nova plataforma de desenvolvimento sempre que alguma característica de sistemas embarcados mudar. Este é um passo importante, pois alguns sistemas embarcados podem não ser capazes de armazenar os dados adicionais necessários para apoiar a depuração. 
+
+Foi confirmada que a eficácia do algoritmo está intimamente ligada à eficácia da configuração recebida quando \texttt{TAP} testou e depurou o \texttt{DMEC} com as três granularidades da ferramenta. A avaliação do impacto da informação de depuração no tamanho do código da aplicação foi de mais de 500\% e a sobrecarga para o tempo de execução é de cerca de 60\%.
+
+A ferramenta suporta testes unitários e testes de tipagem, mas os resultados encontrados ainda podem ser melhorados em trabalhos futuros. Além de ampliar a variedade de testes, uma possível melhoria é o uso de retroalimentação do relatório de retorno de \texttt{TAP}.
+
+
+\bibliographystyle{abbrv}
+\bibliography{references}
+
+\end{document}

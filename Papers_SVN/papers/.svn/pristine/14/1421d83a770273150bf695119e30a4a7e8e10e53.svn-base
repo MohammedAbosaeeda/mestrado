@@ -1,0 +1,16 @@
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Harvesting technology} & \textbf{Power density}   \\
+\hline
+\hline
+Solar cells (outdoors at noon)         & $15~mW/cm^2$     \\
+\hline
+Piezoelectric (shoe inserts)           & $330~\mu W/cm^3$ \\
+\hline
+Vibration (small microwave oven)       & $116~\mu W/cm^3$ \\
+\hline
+Thermoelectric ($10^\circ C$ gradient) & $40~\mu W/cm^3$  \\
+\hline
+Acoustic noise ($100~dB$)              & $330~nW/cm^3$    \\
+\hline
+\end{tabular}

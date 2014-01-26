@@ -1,0 +1,68 @@
+Dear author,
+
+We are happy to inform you that your paper (details below) has been accepted for presentation at the XXVII International Conference of the Chilean Computer Science Society (SCCC 2008).
+
+Attached are a number of referee reports. You will be contacted soon with specific instructions to follow so as to prepare the final version of your paper. Please take the refereee reports into consideration when preparing it.
+
+We congratulate you and look forward to your presentation at the conference.
+
+With best regards,
+
+SCCC 2008 Conference Chair.
+
+---------------------------------------------
+Paper: 11
+Title: One-shot Time Management Analysis in EPOS
+-------------------- review 1 --------------------
+PAPER: 11
+TITLE: One-shot Time Management Analysis in EPOS
+
+OVERALL RATING: 2 (accept)
+Presentation: 5 (excellent)
+Soundness: 5 (excellent)
+Originality: 5 (excellent)
+Technical merit: 5 (excellent)
+Relevance: 5 (excellent)
+----------------------- REVIEW --------------------
+Paper overview:
+
+Comments to authors:
+
+Excellent paper for this conference, no further comments.
+
+-------------------- review 2 --------------------
+PAPER: 11
+TITLE: One-shot Time Management Analysis in EPOS
+
+OVERALL RATING: 0 (neutral)
+Presentation: 3 (fair)
+Soundness: 3 (fair)
+Originality: 3 (fair)
+Technical merit: 3 (fair)
+Relevance: 3 (fair)
+----------------------- REVIEW --------------------
+
+Comments to authors:
+-------------------- review 3 --------------------
+PAPER: 11
+TITLE: One-shot Time Management Analysis in EPOS
+
+OVERALL RATING: 1 (weak accept)
+Presentation: 3 (fair)
+Soundness: 3 (fair)
+Originality: 2 (poor)
+Technical merit: 3 (fair)
+Relevance: 3 (fair)
+----------------------- REVIEW --------------------
+Paper overview:
+The paper presents measurements of the performance on EPOS. The
+architecture and characteristics of this system are only discussed
+briefly, but the concepts behind it sound very intriguing.
+
+Comments to authors:
+The exact solution to the dining philosophers used would be
+interesting. On the other hand, some more mainstream real-time
+benchmark, like Hartstone, or some generic benchmark would be more
+appropiate for comparison purposes.
+
+There are of typoes and grammar errors in the paper.

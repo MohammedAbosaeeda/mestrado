@@ -1,0 +1,25 @@
+% $Id: allbib.tex,v 1.2 2004/09/26 20:17:45 lohmann Exp $
+%
+% Purpose of this file is to easily test the integrity of the BibTEX
+% database.
+%
+\documentclass[11pt,dvips]{article}
+\usepackage{a4}
+\usepackage{url}
+\bibliographystyle{alpha}
+%\bibliographystyle{abbrv}
+
+\begin{document}
+
+\title{
+    Bibliographie Lehrstuhl Informatik 4
+}
+
+\author{Daniel Lohman}
+
+\maketitle
+
+\nocite{*}
+\bibliography{macros-short,all}
+
+\end{document}

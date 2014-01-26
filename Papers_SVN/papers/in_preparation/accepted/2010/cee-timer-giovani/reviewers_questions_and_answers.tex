@@ -1,0 +1,119 @@
+\documentclass[english,11pt]{letter}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{babel}
+\usepackage[top=.5in,bottom=.5in,left=1in,right=1in,noheadfoot]{geometry}
+\usepackage{graphicx}
+\usepackage{url}
+
+\address{\sffamily
+  \begin{tabular}{rr}
+    Prof.~Dr.~Ant\^{o}nio Augusto Fr\"{o}hlich & \raisebox{-0.9cm}[0pt][0pt]{\resizebox*{!}{1.2cm}{\includegraphics{lisha}}}\\
+    Federal University of Santa Catarina &\\
+    Software/Hardware Integration Laboratory &\\
+    \multicolumn{2}{r}{PO Box 476, 88040-900 Florian\'{o}polis, SC, Brazil}\\
+    \multicolumn{2}{r}{Phone: +55 48 3721-9516}\\
+    \multicolumn{2}{r}{E-Mail: guto@lisha.ufsc.br}\\
+    \multicolumn{2}{r}{WWW: http://lisha.ufsc.br/Guto}\\
+    \\
+    \multicolumn{2}{r}{\today}
+  \end{tabular}
+}
+
+\date{}
+
+\signature{
+  \begin{center}
+   %\raisebox{-.9cm}[0pt][0pt]{\includegraphics[scale=1]{/home/guto/personal/signature}}\\
+    \hrulefill\\
+    Ant\^{o}nio Augusto Fr\"{o}hlich
+  \end{center}
+}
+
+\begin{document}
+
+\begin{letter}{ELSEVIER Computers and Electrical Engineering Journal\\
+    Editor-in-Chief\\
+    Professor Dr. Manu Malek}
+\opening{Dear Prof. Malek,}
+\setlength{\parskip}{1.5ex}
+
+Thank you very much for the review of the manuscript \textbf{Periodic
+  Timers Revisited: the Real-time Embedded System Perspective}. A
+revised version that incorporates all your remarks and also the
+reviewers' suggestions is being submitted online. Graphical abstract and
+research highlights have been added. The addressing of reviewers'
+comments is discussed bellow:
+
+\begin{itemize}
+\item \textbf{Precise description of periodic and single-shot
+    mechanisms} 
+
+  We have extended the explanation about periodic and single-shot timers
+  in the introduction and we also included a figure to depict the
+  described example.
+	
+\item \textbf{Paper's motivation and results}
+	
+  We made both motivation and results clearer in the introduction. Our
+  main purpose is to weave some of the prejudice against periodic
+  timers, which actually owe much of their bad reputation to poor
+  implementations. Besides, we present concrete information about the
+  limitations of single-shot timers that might be specially useful for
+  those endeavoring new real-time support systems.
+	
+\item \textbf{Improving related work section}
+	
+  We have fully rewritten the related work section, including additional
+  timing solutions from other groups and describing each one in more
+  detail. Well-known Real-Time Operating Systems (e.g. VxWorks, QNX, RTAI,
+  RTLinux) are now featured.
+	
+\item \textbf{Motivation for EPOS}
+	
+  As we stated in the final remarks of Section 4, a smart implementation
+  of a time management mechanism does not depend on the real-time
+  operating system. We used EPOS in our experiments because it features
+  an elegant and clean implementation that makes additions and
+  extensions rather easier than for traditional, non component-based
+  systems. An open-source version of EPOS is available online at
+  \url{http://epos.lisha.ufsc.br}.
+	
+\item \textbf{Conclusions}
+	
+  We clearly cited the case where a periodic timer outperforms an
+  equivalent single-shot timer (when requested periods exceed the
+  maximum hardware period) and also explained why this happens (overhead
+  of reprogramming the hardware timer and software tick counting).
+  Indeed, we added the result of the multi-threaded environment
+  experiment, in which the periodic interrupt handler presented better
+  execution timer up to 5 threads in comparison to the single-shot
+  interrupt handler.
+	
+\item \textbf{Figures placement}
+	
+  We made a complete review in the figures placement. We also changed
+  the footnote on page 2 by a Figure as recommended by the reviewer \#2.
+	
+\item \textbf{Tables 1 and 2}
+	
+  We changed the word targeted by expected in Tables 1 and 2 in order to
+  improve the comprehension.
+	
+\item \textbf{Abbreviations}
+	
+  We have added a reference when AVR is used by the first time. AVR is
+  not an abbreviation, but the name that Atmel gave for its
+  architecture. We also made a review to spell out each acronym in the
+  first time it is used.
+	
+\end{itemize}
+
+	
+Looking forward to have the manuscript published,
+
+\closing{~}
+
+\end{letter}
+
+\end{document}

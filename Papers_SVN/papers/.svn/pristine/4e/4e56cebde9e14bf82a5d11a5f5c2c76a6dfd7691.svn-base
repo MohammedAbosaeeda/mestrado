@@ -1,0 +1,446 @@
+@INPROCEEDINGS{SunNingning:TSS:2009,
+    author={Sun Ning-ning and Fan Chao and Xia Xu},
+    journal={IT in Medicine Education, 2009. ITIME '09. IEEE International Symposium on}, title={An effective three-step search algorithm for motion estimation},
+    year={2009},
+    month={aug.},
+    volume={1},
+    number={},
+    pages={400 -403},
+    keywords={block matching algorithm;center-biased characteristic;computational complexity;diamond search algorithm;full search algorithm;image sequence reliability;motion vector estimation algorithm;multistep search strategy;parallel processing algorithm;predictive diamond search algorithm;small diamond template;small square template;super-resolution reconstruction;three-step search algorithm;computational complexity;image matching;image reconstruction;image resolution;image sequences;motion estimation;parallel algorithms;search problems;},
+    doi={10.1109/ITIME.2009.5236389},
+    ISSN={}
+}
+
+@ARTICLE{LaiManPo:4SS:1996,
+    author={Lai-Man Po and Wing-Chung Ma},
+    journal={Circuits and Systems for Video Technology, IEEE Transactions on}, 
+    title={A novel four-step search algorithm for fast block motion estimation },
+    year={1996},
+    month={jun.},
+    volume={6},
+    number={3},
+    pages={313 -317},
+    keywords={average computational requirement;center-biased checking point pattern;center-biased motion vector distribution;fast block motion estimation;four-step search algorithm;halfway-stop technique;image sequences;motion compensation errors;performance;simulation;three-step search;worst-case computational requirement;computational complexity;image sequences;motion compensation;motion estimation;},
+    doi={10.1109/76.499840},
+    ISSN={1051-8215}
+}
+
+@INPROCEEDINGS{ShipingZhu:DS:2009,
+    author={Shiping Zhu and Jun Tian and Xiaodong Shen and Belloulata, K.},
+    journal={Image Processing (ICIP), 2009 16th IEEE International Conference on}, 
+    title={A new cross-diamond search algorithm for fast block motion estimation},
+    year={2009},
+    month={nov.},
+    volume={},
+    number={},
+    pages={1581 -1584},
+    keywords={cross-diamond search algorithm;fast block motion estimation;fast block-matching algorithms;modified partial distortion criterion;motion vector distribution characteristics;real world video sequences;image matching;image sequences;motion estimation;search problems;},
+    doi={10.1109/ICIP.2009.5413397},
+    ISSN={1522-4880}
+}
+
+@ARTICLE{HaibingYin:HW:2010,
+    author={Haibing Yin and Huizhu Jia and Honggang Qi and Xianghu Ji and Xiaodong Xie and Wen Gao},
+    journal={Circuits and Systems for Video Technology, IEEE Transactions on}, 
+    title={A Hardware-Efficient Multi-Resolution Block Matching Algorithm and its VLSI Architecture for High Definition MPEG-Like Video Encoders},
+    year={2010},
+    month={sep.},
+    volume={20},
+    number={9},
+    pages={1242 -1254},
+    keywords={VLSI architecture;fractional motion estimation;high definition MPEG;integer multiresolution motion estimation;logic circuit;memory bandwidth reduction;multiresolution block matching algorithm;on-chip SRAM consumption;on-chip reference pixel buffer sharing mechanism;parallel processing element array structure;video encoder;VLSI;image resolution;logic circuits;motion estimation;video coding;},
+    doi={10.1109/TCSVT.2010.2058476},
+    ISSN={1051-8215}
+}
+
+@INPROCEEDINGS{HoyoungChang:HW:2009,
+    author={Hoyoung Chang and Soojin Kim and Seonyoung Lee and Kyeongsoon Cho},
+    journal={SOC Conference, 2009. SOCC 2009. IEEE International}, 
+    title={High-performance architecture of H.264 integer-pixel motion estimation IP for real-time 1080HD video CODEC},
+    year={2009},
+    month={sep.},
+    volume={},
+    number={},
+    pages={419 -422},
+    keywords={H.264 integer-pixel motion estimation IP;circuit architecture;frequency 45.5 MHz;high-performance architecture;motion vectors;processing speed;real-time 1080HD video codec;variable block sizes;data compression;logic design;motion estimation;video codecs;video coding;},
+    doi={10.1109/SOCCON.2009.5398003},
+    ISSN={}
+}
+
+@INPROCEEDINGS{XiangLi:MF:2004,
+    author={Xiang Li and Li, E.Q. and Yen-Kuang Chen},
+    journal={Acoustics, Speech, and Signal Processing, 2004. Proceedings. (ICASSP '04). IEEE International Conference on},
+    title={Fast multi-frame motion estimation algorithm with adaptive search strategies in H.264},
+    year={2004},
+    month={may.},
+    volume={3},
+    number={},
+    pages={ iii - 369-72 vol.3},
+    keywords={ H.264/AVC video coding standard; MPEG-4; PSNR; adaptive search strategies; full search algorithm; matching point minimization; multi-frame motion estimation; speed-up performance; image sequences; minimisation; motion estimation; search problems; video coding;},
+    doi={10.1109/ICASSP.2004.1326558},
+    ISSN={1520-6149}
+}
+
+@inproceedings{Ma:MF:2009,
+    author = {Ma, Weipeng and Yang, Shuyuan and Pei, Chaoke and Gao, Li and Lin, Yimang},
+    title = {Fast algorithm for multi-reference and variable block size motion estimation in H.264/AVC},
+    booktitle = {ICIMCS '09: Proceedings of the First International Conference on Internet Multimedia Computing and Service},
+    year = {2009},
+    isbn = {978-1-60558-840-7},
+    pages = {151--154},
+    location = {Kunming, Yunnan, China},
+    doi = {http://doi.acm.org/10.1145/1734605.1734641},
+    publisher = {ACM},
+    address = {New York, NY, USA},
+}
+
+@ARTICLE{YepingSu:MF:2006,
+    author={Yeping Su and Ming-Ting Sun},
+    journal={Circuits and Systems for Video Technology, IEEE Transactions on}, 
+    title={Fast multiple reference frame motion estimation for H.264/AVC},
+    year={2006},
+    month={mar.},
+    volume={16},
+    number={3},
+    pages={447 -452},
+    keywords={H.264-AVC;multiple reference frame motion estimation;video coding;data compression;motion compensation;motion estimation;video coding;},
+    doi={10.1109/TCSVT.2006.869970},
+    ISSN={1051-8215}
+}
+
+@ARTICLE{YuWenHuang:Complex:2006,
+    author={Yu-Wen Huang and Bing-Yu Hsieh and Shao-Yi Chien and Shyh-Yih Ma and Liang-Gee Chen},
+    journal={Circuits and Systems for Video Technology, IEEE Transactions on}, 
+    title={Analysis and complexity reduction of multiple reference frames motion estimation in H.264/AVC},
+    year={2006},
+    month={apr.},
+    volume={16},
+    number={4},
+    pages={ 507 - 522},
+    keywords={ H.264-AVC; complexity reduction; context-based adaptive criteria; interprediction residue; intraprediction residue; multiple reference frames motion estimation; statistical analysis; text-based adaptive method; video coding standard; video sequences; adaptive signal processing; computational complexity; data compression; image sequences; motion estimation; statistical analysis; video coding;},
+    doi={10.1109/TCSVT.2006.872783},
+    ISSN={1051-8215},
+}
+
+@INPROCEEDINGS{ChiaChunLin:FastAlgPlusArch:2006,
+    author={Chia-Chun Lin and Yu-Kun Lin and Tian-Sheuan Chang},
+    journal={Circuits and Systems, 2006. APCCAS 2006. IEEE Asia Pacific Conference on}, 
+    title={A Fast Algorithm and Its Architecture for Motion Estimation in MPEG-4 AVC/H.264 Video Coding},
+    year={2006},
+    month={dec.},
+    volume={},
+    number={},
+    pages={1248 -1251},
+    keywords={MPEG-4 AVC/H.264 video coding;fast algorithm;fractional ME;mode filtering;motion estimation;parallel architecture;motion estimation;video coding;},
+    doi={10.1109/APCCAS.2006.342389},
+    ISSN={}
+}
+
+@INPROCEEDINGS{ChiaChunLin:PMRME:2007,
+    author={Chia-Chun Lin and Yu-Kun Lin and Tian-Sheuan Chang},
+    journal={Acoustics, Speech and Signal Processing, 2007. ICASSP 2007. IEEE International Conference on}, 
+    title={PMRME: A Parallel Multi-Resolution Motion Estimation Algorithm and Architecture for HDTV Sized H.264 Video Coding},
+    year={2007},
+    month={apr.},
+    volume={2},
+    number={},
+    pages={II-385 -II-388},
+    keywords={HDTV sized H.264 video coding;PMRME;PSNR degradation;bit truncation;hardware-efficient fast algorithm;large search range motion estimation;mode filtering;parallel multi-resolution motion estimation algorithm;filtering theory;high definition television;motion estimation;video coding;},
+    doi={10.1109/ICASSP.2007.366253},
+    ISSN={1520-6149},
+}
+
+@INPROCEEDINGS{XiangLi:2004,
+    author={Xiang Li and Li, E.Q. and Yen-Kuang Chen},
+    journal={Acoustics, Speech, and Signal Processing, 2004. Proceedings. (ICASSP '04). IEEE International Conference on},
+    title={Fast multi-frame motion estimation algorithm with adaptive search strategies in H.264},
+    year={2004},
+    month={may.},
+    volume={3},
+    number={},
+    pages={ iii - 369-72 vol.3},
+    keywords={ H.264/AVC video coding standard; MPEG-4; PSNR; adaptive search strategies; full search algorithm; matching point minimization; multi-frame motion estimation; speed-up performance; image sequences; minimisation; motion estimation; search problems; video coding;},
+    doi={10.1109/ICASSP.2004.1326558},
+    ISSN={1520-6149}
+}
+
+@INPROCEEDINGS{Yang:2005,
+    author = {Libo Yang and Keman Yu and Jiang Li and Shipeng Li},
+    title = {Prediction-based directional fractional pixel motion estimation for H.264 video coding},
+    booktitle = {IEEE International Conference on Acoustics Speech Signal Processing},
+    year = {2005},
+    pages = {901--904}
+}
+
+@inproceedings{Husemann:2007,
+	address = {Rio de Janeiro},
+	title = {A new approach for high performance motion estimation algorithm implemented in hardware},
+	booktitle = {Proceedings of the 22nd Symposium on Microelectronics Technologies and Devices},
+	author = {Ronaldo Husemann and Valter Roesler},
+	year = {2007},
+}
+
+@inproceedings{Husemann:2006,
+    AUTHOR = {Ronaldo Husemann and Adão de Souza Jr and Takashi Tome and Valter Roesler},
+    TITLE = {Análise da implementação de algoritmos de codificação e decodificação de vídeo MPEG-2 HD escalável em hardware},
+    BOOKTITLE = {SEMISH 2006},
+    YEAR = {2006},
+    PAGES = {1-10}
+}
+
+# Nousias, I. "Optimized Hardware/Software MPEG Video Player". Institute for System Level Integration - The Alba Campus. 2002. Livingston - Scotland.
+@article{Nousias:2002,
+        AUTHOR = "Nousias, I.",
+        TITLE = "Optimized Hardware/Software MPEG Video Player",
+        YEAR = "2002"
+}
+
+@INPROCEEDINGS{Tourapis:PMVFAST:2001,
+    author = {Alexis Tourapis Oscar and Oscar C. Au and Ming L. Liou},
+    title = {Predictive Motion Vector Field Adaptive Search Technique (PMVFAST) - Enhancing Block Based Motion Estimation},
+    booktitle = {in the Optimization Model 1.0,” in ISO/IEC JTC1/SC29/WG11 MPEG2000/M6194},
+    year = {2001},
+    pages = {883--892}
+}
+
+@INPROCEEDINGS{HoiMingWong:EPMVFAST:2005,
+    author={Hoi-Ming Wong and Au, O.C. and Chi-Wang Ho and Shu-Kei Yip},
+    journal={Multimedia and Expo, 2005. ICME 2005. IEEE International Conference on}, 
+    title={Enhanced predictive motion vector field adaptive search technique (E-PMVFAST)-based on future MV prediction},
+    year={2005},
+    month={jul.},
+    volume={},
+    number={},
+    pages={ 4 pp.},
+    keywords={ E-PMVFAST; adaptive search technique; enhanced predictive motion vector field; modern video coding standard; motion estimation; motion estimation; prediction theory; search problems; video coding;},
+    doi={10.1109/ICME.2005.1521524},
+    ISSN={}
+}
+
+@ARTICLE{LiangGeeChen:TDL:1991,
+    author={Liang-Gee Chen and Wai-Ting Chen and Yeu-Shen Jehng and Tzi-Dar Chiuch},
+    journal={Circuits and Systems for Video Technology, IEEE Transactions on}, title={An efficient parallel motion estimation algorithm for digital image processing},
+    year={1991},
+    month={dec.},
+    volume={1},
+    number={4},
+    pages={378 -385},
+    keywords={VLSI motion estimator;block-matching algorithm;digital image processing;measurements;motion vector;parallel hierarchical one-dimensional search;parallel motion estimation algorithm;search algorithms;search speed;VLSI;computerised picture processing;digital signal processing chips;parallel algorithms;},
+    doi={10.1109/76.120779},
+    ISSN={1051-8215}
+}
+
+# T. Koga et al. Motion-compensated interframe coding for video conferencing. In: proceedings Nat. Telecom. Conf., dez 81.
+@article{Koga:1981,
+        AUTHOR = "T. Koga et al",
+        TITLE = "Motion-compensated interframe coding for video conferencing",
+        YEAR = "1981"
+}
+
+# L. M. Po and W. C. Ma, “A novel four-step search algorithm for fast block motion estimation,” IEEE Trans. Circuits System Video Technol., vol. 6, pp. 313–317, June 1996.
+@article{bb17234,
+        AUTHOR = "Po, L.M. and Ma, W.C.",
+        TITLE = "A Novel Four-Step Search Algorithm for Fast Block Motion Estimation",
+        JOURNAL = CirSysVideo,
+        VOLUME = "6",
+        YEAR = "1996",
+        NUMBER = "3",
+        MONTH = "June",
+        PAGES = "313-317",
+        BIBSOURCE = "http://www.visionbib.com/bibliography/image-proc204.html#TT16527"}
+
+# Shan Zhu and Kai-Kuang Ma. A New Diamond Search Algorithm for Fast Block-Matching Motion Estimation. IEEE TRANSACTIONS ON IMAGE PROCESSING, VOL. 9, NO. 2, FEBRUARY 2000.
+@ARTICLE{821744,
+title={A new diamond search algorithm for fast block-matching motion estimation},
+author={Shan Zhu and Kai-Kuang Ma},
+journal={Image Processing, IEEE Transactions on},
+year={2000},
+month={Feb},
+volume={9},
+number={2},
+pages={287-290},
+keywords={image matching, image sequences, mean square error methods, motion estimation, search problems, video codingBMME, DS algorithm, computation, diamond search algorithm, fast block-matching motion estimation, image sequences, mean-square error performance, motion vector distribution, performance},
+doi={10.1109/83.821744},
+ISSN={1057-7149}, }
+
+# Sung-Eun Kim; Jong-Ki Han; Jae-Gon Kim. "Efficient motion estimation algorithm for MPEG-4 to H.264 transcoder". ICIP 2005. IEEE International Conference on Image Processing. Sept. 2005. V3, page(s): III- 656-659.
+@inproceedings{bb18476,
+        AUTHOR = "Kim, S.E. and Han, J.K. and Kim, J.G.",
+        TITLE = "Efficient Motion Estimation Algorithm for MPEG-4 to H.264 Transcoder",
+        BOOKTITLE = ICIP05,
+        YEAR = "2005",
+        PAGES = "III: 656-659",
+        BIBSOURCE = "http://www.visionbib.com/bibliography/image-proc215.html#TT17751"}
+
+# Y.-Q. Zhang and S. Zafar, “Motion-compensated wavelet transform coding for color video compression,” IEEE Trans. Circuits Syst. Video Technol., vol. 2, pp. 285–296, Sept. 1992.
+@article{bb6698,
+        AUTHOR = "Zhang, Y.Q. and Zafar, S.",
+        TITLE = "Motion-compensated wavelet transform coding for color video compression",
+        JOURNAL = CirSysVideo,
+        VOLUME = "2",
+        YEAR = "1992",
+        NUMBER = "3",
+        MONTH = "September",
+        PAGES = "285-296",
+        BIBSOURCE = "http://www.visionbib.com/bibliography/compute92.html#TT6193"}
+
+# S. Kim, S. Rhee, J. G. Jeon, and K. T. Park, “Interframe coding using two-stage variable block-size multiresolution motion estimation and wavelet decomposition,” IEEE Trans. Circuits Syst. Video Technol., vol. 8, pp. 399–409, Aug. 1998.
+@article{Kim:1998,
+        AUTHOR = "S. Kim et al.",
+        TITLE = "Interframe coding using two-stage variable block-size multiresolution motion estimation and wavelet decomposition",
+        YEAR = "1998"
+}
+
+# K. M. Nam, J.-S. Kim, R.-H. Park, and Y. S. Shim, “A fast hierarchical motion vector estimation algorithm using mean pyramid,” IEEE Trans. Circuits Syst. Video Technol., vol. 5, pp. 344–351, Aug. 1999.                       
+@article{bb17203,
+        AUTHOR = "Nam, K.M. and Kim, J.S. and Park, R.H. and Shim, Y.S.",
+        TITLE = "A fast hierarchical motion vector estimation algorithm using mean
+pyramid",
+        JOURNAL = CirSysVideo,
+        VOLUME = "5",
+        YEAR = "1995",
+        NUMBER = "4",
+        MONTH = "August",
+        PAGES = "344-351",
+        BIBSOURCE = "http://www.visionbib.com/bibliography/image-proc203.html#TT16496"}
+                      
+# Zan, J. Ahmad, M.O. Swamy. Pyramidal motion estimation techniques exploiting intra-level motion correlation. In: IEEE Transactions on Circuits and Systems II: Analog and Digital Signal Processing. V 50, N. 2; pp 83- 93. Feb 2003.
+@article{Zan:2003,
+        AUTHOR = "Zan, J. Ahmad, M.O. Swamy.",
+        TITLE = "Pyramidal motion estimation techniques exploiting intra-level motion correlation",
+        YEAR = "2003"
+}
+
+# Lee S. et al. “New Motion Estimation Algorithm Using Adaptively Quantized Low Bit-Resolution Image and Its VLSI Architecture for MPEG2 Video Encoding”, In IEEE Transactions on Circuits and Systems for Video Technology, vol. 8, n. 6, October 1998, p. 734-744
+@article{bb15910,
+        AUTHOR = "Lee, S.S. and Kim, J.M. and Chae, S.I.",
+        TITLE = "New Motion Estimation Algorithm Using Adaptively Quantized Low
+Bit-Resolution Image and Its VLSI Architecture for MPEG2 Video Encoding",
+        JOURNAL = CirSysVideo,
+        VOLUME = "8",
+        YEAR = "1998",
+        NUMBER = "6",
+        MONTH = "October",
+        PAGES = "734",
+        BIBSOURCE = "http://www.visionbib.com/bibliography/image-proc190.html#TT15220"}
+
+# M. Brünig and W. Niehsen, “Fast full-search block matching,” IEEE Trans. Circuits Syst. Video Technol., vol. 11, pp. 241–247, Feb. 2001.
+@article{Brunig:2001,
+        AUTHOR = "M. Brünig and W. Niehsen",
+        TITLE = "Fast full-search block matching",
+        YEAR = "2001"
+}
+
+# Yu-Wen Huang et al. “Global elimination algorithm and architecture design for fast block matching motion estimation”. In: IEEE Transactions on Circuits and Systems for Video Technology, V. 14, N. 6, June 2004. pp 898 – 907.
+@article{bb17548,
+        AUTHOR = "Huang, Y.W. and Chien, S.Y. and Hsieh, B.Y. and Chen, L.G.",
+        TITLE = "Global Elimination Algorithm and Architecture Design for Fast Block
+Matching Motion Estimation",
+        JOURNAL = CirSysVideo,
+        VOLUME = "14",
+        YEAR = "2004",
+        NUMBER = "6",
+        MONTH = "June",
+        PAGES = "898-907",
+        BIBSOURCE = "http://www.visionbib.com/bibliography/image-proc206.html#TT16827"}
+
+# ISO/IEC TR 14496 - Part 7, 'Optimized Reference Software for Coding of Audio-visual Objects', first edition, 2002.
+@manual{ISO/IEC_TR_14496-7,
+  author = {ISO/IEC},
+  title = {Optimized Reference Software for Coding of Audio-visual Objects},
+  year = {2002}
+}
+
+# Liu, B.; Zaccarin, A. “New fast algorithms for the estimation of block motion vectors”. In: IEEE Transactions on Circuits and Systems for Video Technology, V. 3, N. 2, April 1993, pp 148-157
+@ARTICLE{liu:sub:1993,
+author={Liu, B. and Zaccarin, A.},
+journal={Circuits and Systems for Video Technology, IEEE Transactions on}, title={New fast algorithms for the estimation of block motion vectors},
+year={1993},
+month={apr.},
+volume={3},
+number={2},
+pages={148 -157},
+keywords={MPEG-I;block motion estimation;block motion vectors;fast algorithms;pixel subsampling;subsampled motion field;image processing;motion estimation;},
+doi={10.1109/76.212720},
+ISSN={1051-8215},}
+
+# Zhong-Li He et al. “Low-power VLSI design for motion estimation using adaptive pixel truncation”. In: IEEE Transactions on Circuits and Systems for Video Technology, V. 10, N. 5, Aug. 2000, pp 669–678.
+@article{DBLP:journals/tcsv/HeTCL00,
+  author    = {Zhong-Li He and
+               Chi-Ying Tsui and
+               Kai-Keung Chan and
+               Ming L. Liou},
+  title     = {Low-power VLSI design for motion estimation using adaptive
+               pixel truncation},
+  journal   = {IEEE Trans. Circuits Syst. Video Techn.},
+  volume    = {10},
+  number    = {5},
+  year      = {2000},
+  pages     = {669-678},
+  bibsource = {DBLP, http://dblp.uni-trier.de}
+}
+
+# MPEG-2: ISO/IEC JTC1/SC29/WG11 e ITU-T, “ISO/IEC 13818-5: Information Technology-Generic Coding of Moving Pictures and Associated Audio Information: Software Simulation”. ISO/IEC and ITU-T, 1997.
+@manual{ISO/IEC_13818-5,
+  author = {ISO/IEC},
+  title = {International Standard ISO/IEC 13818-5 (Software Simulation)},
+  year = {1997}
+}
+
+# JM
+@misc{site:jm,
+ year = {2009},
+ title = {H.264/AVC JM reference software},
+ url = {http://iphome.hhi.de/suehring/tml/},
+ urlaccessdate = {18 nov. 2009}
+}
+
+@article{citeulike:1269699,
+    abstract = {H.264/AVC is newest video coding standard of the ITU-T Video Coding Experts Group and the ISO/IEC Moving Picture Experts Group. The main goals of the H.264/AVC standardization effort have been enhanced compression performance and provision of a "network-friendly" video representation addressing "conversational" (video telephony) and "nonconversational" (storage, broadcast, or streaming) applications. H.264/AVC has achieved a significant improvement in rate-distortion efficiency relative to existing standards. This article provides an overview of the technical features of H.264/AVC, describes profiles and applications for the standard, and outlines the history of the standardization process.},
+    author = {Wiegand, T. and Sullivan, G. J. and Bjontegaard, G. and Luthra, A.},
+    booktitle = {Circuits and Systems for Video Technology, IEEE Transactions on},
+    citeulike-article-id = {1269699},
+    citeulike-linkout-0 = {http://dx.doi.org/10.1109/TCSVT.2003.815165},
+    citeulike-linkout-1 = {http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=1218189},
+    day = {04},
+    doi = {10.1109/TCSVT.2003.815165},
+    journal = {Circuits and Systems for Video Technology, IEEE Transactions on},
+    keywords = {h264avc, video},
+    month = {August},
+    number = {7},
+    pages = {560--576},
+    posted-at = {2008-03-03 06:35:31},
+    priority = {0},
+    title = {Overview of the H.264/AVC video coding standard},
+    url = {http://dx.doi.org/10.1109/TCSVT.2003.815165},
+    volume = {13},
+    year = {2003}
+}
+
+@inproceedings{1101854,
+ author = {Du, Tran Duc Hai},
+ title = {Macroblock mode decision for H.264},
+ booktitle = {MIR '05: Proceedings of the 7th ACM SIGMM international workshop on Multimedia information retrieval},
+ year = {2005},
+ isbn = {1-59593-244-5},
+ pages = {167--172},
+ location = {Hilton, Singapore},
+ doi = {http://doi.acm.org/10.1145/1101826.1101854},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+}
+
+@INPROCEEDINGS{612909,
+title={Reducing hardware complexity of motion estimation algorithms using truncated pixels},
+author={Zhongli He and Liou, M.L.},
+booktitle={Circuits and Systems, 1997. ISCAS '97., Proceedings of 1997 IEEE International Symposium on},
+year={1997},
+month={Jun},
+volume={4},
+number={},
+pages={2809-2812 vol.4},
+keywords={VLSI, decoding, image matching, image sequences, motion estimation, video signal processingPSNR, VLSI architectures, block-matching motion estimation, decoded video sequences, equivalent gate count, full-search algorithm, hardware complexity, matching error, truncated pixels},
+doi={10.1109/ISCAS.1997.612909},
+ISSN={}, 
+}
+

@@ -1,0 +1,178 @@
+\note{Abertura do capítulo.}
+
+This section will present the power manager's implementation. This
+includes the message propagation mechanism and the definition of a
+descriptive language to represent the operating modes nets. This
+language will be used to enable automatic generation of the operating
+mode switching methods. Therefore, the experimental environment, which
+is the \textsc{Epos}~\cite{Marcondes:ETFA:2006} operating system, is
+briefly described.
+
+
+\subsection{Static resolution of the Operating Modes Nets}
+
+\note{As redes são legais mas não precisam ser interpretadas
+  on-the-fly.}
+
+The Operating Mode Nets presented at section~\ref{sc:migration_nets}
+offer to this proposal a way to specify the operating mode switching
+procedures. Although there is a lot of mathematical analysis models to
+interpret these nets at execution time, these models demand for
+processing and memory capabilities well beyond of embedded devices'
+capacities. However, once in this proposal the nets and the
+application are known at system generation time, online interpretation
+of these nets is not needed, and can be eliminated. The elimination is
+done by analyzing the nets at compilation time, thus generating the
+operating mode switching methods accordingly to the system
+configuration.
+
+\note{Então definimos uma linguagem descritiva das redes que,
+  interpretada, gera os métodos 'power'.}
+
+An open-source graphical Petri Net editor called
+Pipe2~\cite{Akharware:2005} was used to generate the operation mode
+nets. This tool was then modified to export the operation mode nets as
+a \textsc{Xml} based language which feeds an analysis tool with
+information about the operating mode transition procedures. At system
+generation time, this tool uses system information about which
+components are in use (\textsc{Epos} provides this information after
+an application analisys~\cite{Tondello:2005}) to generate the
+operating mode switching procedures which will be needed. These
+procedures are aggregated by an aspect, which is applied to the
+components which power consumption must be handled. This aspect
+aggregate some data to control the power consumption of the components
+it is applied to and, also, adds code to garantee that components will
+be in an operating mode in which the requested operation can be
+executed. Information about in which operating mode each system
+interface method works was included in \textsc{Epos}' information
+database.
+
+\input{prg/power_manager.tex}
+
+The aspect was implemented as a \emph{scenario adapter}, i.e., a
+static meta-programmed construct (C++ template class) which extends
+the components (C++ classes) over which it will be applied,
+aggregating data by declaring its variables, and modifying code by
+using polymorfism. As template dependencies are solved at compilation
+time in C++, the polymorphism haven't aggregated aditional overhead to
+the system. This happens because, once power management is switched on
+for a certain component, the system configuration prevents the
+application from calling the original version of the component,
+incurring in the existence of only one used method.
+
+Figure~\ref{prg:power_manager}(a) shows a source code fragment of the
+Power\_Manager aspect. There are two configurable features for this
+manager: \emph{shared} and \emph{instances}. \emph{shared} is used to
+inform that there is the possibility of the managed component be
+shared. When this happens, the power manager tracks the component's
+users, preventing itself from switching off in use components.
+\emph{instances} enables a funcionality which keeps track of
+components instances. It is used to allow message propagation from
+higher level components. These features are configured by the system
+or by the application programmer, and the aspect is specialized to
+operate accordingly to this configuration.
+Figures~\ref{prg:power_manager}(a), \ref{prg:power_manager}(b), and
+\ref{prg:power_manager}(c), shows the methods which were automatically
+generated for a UART components, i.e., the operating mode switching
+procedure (\emph{power}) and the wrapping methods for the UART's
+interface methods \emph{get} and \emph{put}.
+
+
+\subsection{Ambiente Experimental}
+
+\note{Protótipo da proposta com EPOS para ATMegaS e XScale(?). Suporte
+  para periféricos.}
+To test this proposal, this power manager was adapted to operate over
+the \textsc{Epos} operating system~\cite{Froehlich:2001}.
+Implementations of this system for \textsc{AVR} microcontrolers were
+used. Also, support for other devices featured by some used platforms
+featured was developed in cooperation with a parallel work which
+explored operating system support for wireless sensor
+networks~\cite{Wanner:ETFA:2006}. Among these devices are
+communication devices (\textsc{Uart} and radio \textsc{MACs}) and
+sensing devices (thermistores, photo-diodes, accelerometers,
+anolog-digital conversors and high-level abstractions for sensing).
+
+
+\subsubsection{EPOS - Embedded Parallel Operating System}
+
+\note{Começou com a tese do Guto. Extensões para projeto de hardware e
+  particionamento automático.}
+
+The \textsc{Epos} operating system was proposed by Fröhlich in his PhD
+thesis as a prototype to prove the concepts behind his
+Application-Oriented System Design methodology
+(\textsc{Aosd})~\cite{Froehlich:2001}. This methodology uses several
+advanced software engineering and programming techniques that,
+combined, enable the generation of optimized operating systems for
+dedicated applications. Since its creation, \textsc{Epos} have been
+used as platform to validate and extend \textsc{Aosd}'s concepts and,
+recently, has also been successfully used as a hardware design
+methodology~\cite{Polpeta:ETFA:2005}. This methology has evoluted and
+\textsc{Epos} is becoming a complete solution for software/hardware
+co-design of embedded systems~\cite{Cancian:2006}.
+
+\note{EPOS permite o desenvolvimento de aplicações portáveis. Sistema
+  otimizado para aplicação dedicada. Para isso usa AOSD (Interfaces,
+  Mediadores, Abstrações).}
+The main goals of the \texttt{EPOS} system are to allow application
+programmers to write architecture-independent applications, and,
+through the application analysis, to deliver a run-time software
+support for such applications which complies all resources that a
+specific application needs, and nothing else. In order to achieve
+these goals, \texttt{EPOS} relies on AOSD's concepts of \emph{Inflated
+  Interfaces}, \emph{Hardware Mediators} and \emph{System
+  Abstractions}.
+
+
+\note{Pra que servem Mediadores, Abstrações e Interfaces?}
+\emph{Hardware mediators} are software constructs that mediate the
+interaction between operating system components, called \emph{System
+  Abstractions}, and hardware components. This mediation is done
+through the definition of a rigid interface for each group (family) of
+hardware components. This interface is called \emph{Inflated
+  Interface}, and it is responsible for defining the main difference
+between hardware mediators and \textsc{HAL}s. Instead of building a
+monolithic layer encapsulating the resources available in the hardware
+platform, each hardware mediator abstracts the correspondent hardware
+component functionalities and deliver these functionalities to the
+operating system through the inflated interface. As hardware mediators
+are intended to be mostly meta-programmed, their code is dissolved in
+the abstractions as the ``interface contract'' is met, generating
+virtually no overhead to the system~\cite{Polpeta:2004}.
+
+\note{Componentes organizados em famílias. Regras de composição
+  garantem coerência dos designs.}
+
+Each system abstraction or hardware mediator is composed by a set of
+similar operating system components. These components are organized
+according to the \emph{Family-Based Design} paradigm, and have their
+\emph{commonalities} and \emph{variabilities} explored through
+different class hierarchies. For instance, the \texttt{Thread} family
+of system abstractions is comprised by several different thread
+implementations (e.g., \texttt{Exclusive\_Thread},
+\texttt{RT\_Thread}), and the \texttt{Scheduler} family is comprised
+by several schedulers (e.g., \texttt{FCFS\_Scheduler},
+\texttt{EDF\_Scheduler}, \texttt{RM\_Scheduler}). Composition rules
+help a graphical tool to suggest for the application programmer a
+running environment for each application. An example of composition
+rule would be the mandatory use of the \texttt{RT\_Thread} member when
+a real-time scheduler (e.g., Erliest Deadline First (EDF) and Rate
+Monotonic (RM)) is chosen.
+
+
+\note{Engenharia de domínio. Scenario Adapters e Configurable
+  Features.}
+
+System Abstractions and Hardware Mediators are intended to be
+collected from an \emph{Application-Oriented Domain Analysis and
+  Decomposition} process. This analysis process is quite similar to
+\emph{object-oriented decomposition}. The main difference is that the
+Application-Oriented System Design is a multi-paradigm design
+methodology, so other entities, such as \emph{aspects} and
+\emph{configurable features}, must come out from this analysis. The
+use of \emph{configurable features} and \emph{scenario aspects},
+allied to advanced programming techniques, such as \emph{Static
+  Meta-programming} and \emph{Aspect-Oriented Programming}, deliver to
+the application programmer a widely configurable and adaptive system.
+

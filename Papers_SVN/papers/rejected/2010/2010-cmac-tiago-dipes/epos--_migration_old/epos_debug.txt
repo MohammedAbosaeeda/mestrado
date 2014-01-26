@@ -1,0 +1,19 @@
+Debugging on Eclipse
+	
+1- Configure the eclipse debugger
+
+	2.1 - Create a new GDB Hardware Debugging configuration
+		2.1.1 - Select the project and the application(.elf ?????????)
+		2.1.2 - Set the following options in the Debug tab:
+				GDB command: avr-gdb
+				JTAG device: Generic
+				Host: localhost
+				Port: 4242
+		2.1.3 - In the Startup tab unmark everything except the Resume option in the Resume Options frame.
+		
+2 - Start the gdb server over the jtagice:
+	
+	sudo avarice --mkII --ignore-intr --jtag usb :4242
+	
+
+3- Run the debug configuration you created

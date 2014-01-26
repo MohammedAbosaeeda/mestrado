@@ -1,0 +1,443 @@
+\documentclass{acm_proc_article-sp}
+\usepackage{graphicx,url}
+%\usepackage[brazil]{babel} %se usar este pacote (babel), ocorre o seguinte erro:
+% ! Use of \@citex doesn't match its definition.
+\usepackage[latin1]{inputenc}
+
+%-----------------------------------
+% Para usar o código como se fosse uma figura
+\usepackage{listings}
+\lstset{keywordstyle=\bfseries, flexiblecolumns=true}
+\lstloadlanguages{[ANSI]C++,HTML}
+\lstdefinestyle{prg} {basicstyle=\small\sffamily, lineskip=-0.2ex, showspaces=false}
+
+\newcommand{\prg}[3][tbp]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=C++,style=prg]{fig/#2.cc}
+   \caption{#3\label{prg:#2}}
+ \end{figure}
+}
+%-----------------------------------
+
+
+%-----------------------------------
+\newcommand{\epos}{\textsc{EPOS}}
+\newcommand{\aosd}{\textsc{AOSD}}
+%-----------------------------------
+
+\begin{document}
+
+\title{Adaptação de um Decodificador MPEG-2 \\a uma API DSP Multiplataforma
+\titlenote{(Does NOT produce the permission block, copyright information nor page numbering). For use with ACM\_PROC\_ARTICLE-SP.CLS. Supported by ACM.}}
+
+\numberofauthors{3}
+
+\author{
+Mateus Krepsky Ludwich, Danillo Moura Santos, Antônio Augusto Fröhlich\\
+\affaddr{Laboratório de Integração de Software e Hardware -- LISHA}\\
+\affaddr{Departamento de Informática e Estatística -- INE}\\
+\affaddr{Universidade Federal de Santa Catarina -- UFSC}\\
+\affaddr{Caixa Postal 476 -- CEP 88.040-900 -- Florianópolis -- SC -- Brasil}\\
+\email{\{mateus,danillo,guto\}@lisha.ufsc.br}
+}
+
+\date{15 August 2008}
+
+\maketitle
+
+
+% abstract
+\begin{abstract}
+	Processes of video encoding and decoding deal with signal processing, after all,
+video is a kind of signal. Are called codecs the components that implements
+these processes. It is desirable that codecs implemented in software be 
+portable with satisfactory performance for various hardware platforms. In video
+codecs the stages of digital signal processing are the more complex in the 
+computational sense. Because of this is often the search for optimizing
+this stage, witch is commonly achieved writing them fully or partially in 
+assembly language of specific architectures. The bad side of these approach, is
+that the codecs portability is damaged. To solve this problem, was used a API
+that provides features of digital signal processing (DSP) and primitives of 
+digital signal processors (DSP-HW). This API was applied in the libmpeg2 library
+\cite{libmpeg2site}, that implements a MPEG-2 decoder.
+
+	The stage of Inverse Discrete Cosine Transform (IDCT) was modified to use the 
+API. The MPEG-2 part 4 conformance test for IDCT was applied on this 
+modification. The modified decoder passed in this test. A performance analysis
+also was made, where the modified decoder was compared with the original one.
+The performance of modified decoder was satisfactory. Another stage of MPEG-2
+that was worked was the motion compensation (MC). Then was generated notes where
+the utilization of the API is possible in this stage.
+\end{abstract}
+
+
+% I. Computing Methodologies I.4 IMAGE PROCESSING AND COMPUTER VISION
+% I.4.2 Compression (Coding) (E.4)
+%
+% ou
+% E. Data E.4 CODING AND INFORMATION THEORY Data compaction and compression
+%
+% ou 
+% D.2.7 [Software Engineering] Distribution, Maintenance, and Enhancement - portability
+%
+\category{I.4}{Image Processing And Computer Vision}{Compression (Coding)} %[MPEG-2]
+
+\terms{Algorithms}
+
+\keywords{Video decoding, MPEG, DSP, API} % NOT required for Proceedings
+
+\section{Introdução}
+	Em codecs de vídeo os estágios de processamento digital de sinais são
+os mais complexos do ponto de vista computacional. Em virtude disto é freqüente
+a busca de uma otimização de tais estágios, o que é em geral obtido implementando-os
+total ou parcialmente em linguagem assembly de arquiteturas específicas. O lado
+ruim de tal abordagem é que a portabilidade dos codecs é prejudicada. Para
+solucionar este problema, utilizou-se uma API que concentra em si funcionalidades
+de processamento digital de sinal (DSP) e primitivas de processadores digitais de sinal
+(DSP-HW). Esta API tem como objetivo prover suporte para o desenvolvimento de aplicações portáveis, 
+mantendo um desempenho satisfatório em diferentes arquiteturas computacionais.
+Como estudo de caso, aplicou-se esta API na biblioteca libmpeg2 \cite{libmpeg2site} 
+que implementa um decodificador MPEG-2.
+
+	A libmpeg2 possui um esquema nativo para prover portabilidade. Neste esquema
+os estágios que mais realizam processamento (i.e. IDCT e MC) fazem uso de
+diversos ponteiros de função. Estes ponteiros podem ser associados a funções genéricas,
+escritas em linguagem C, ou a funções otimizadas, escritas em assembly de
+arquiteturas específicas.
+
+	A API DSP provê assinaturas de métodos/funções C++, entretanto a implementação de
+cada método pode ser realizada em C ou C++, em assembly otimizado para arquiteturas
+específicas, ou ainda em hardware (através do uso de lógica programável por exemplo).
+Como a aplicação apenas "enxergará" métodos C++, é provida uma portabilidade
+de forma transparente.
+
+	Modificou-se a libmpeg2 para utilizar a IDCT provida pela API.
+Confirmou-se a corretude das alterações efetuadas, e também realizou-se uma análise
+de desempenho comparando o decodificador original com o modificado. A aplicabilidade
+da API também é mostrada para a MC, sendo apresentados os pontos deste estágio
+que podem fazer uso da API.
+
+\section{API DSP}
+%<Por que a API existe?>
+	O contínuo avanço da tecnologia de fabricação de circuitos integrados VLSI,
+como a maioria dos ASICs, proporciona o emprego de processamento digital de sinais
+em diversas áreas. Atualmente diversos sistemas embarcados fazem
+uso de algoritmos DSP para comunicação sem fio, porém estes sistemas sofrem
+com a escassez de recursos, o que leva os projetistas ao \textit{trade-off}
+entre poder de processamento e recursos computacionais existentes. O baixo
+consumo de energia é importante em sistemas alimentados por bateria,
+portanto, aliado ao fato das restrições de recursos, as implementações de
+algoritmos DSP devem ser adaptadas para sistemas embarcados, levando em
+consideração os requisitos da aplicação e também a eficiência no consumo de
+energia e os poucos recursos disponíveis. Esta adaptação na implementação
+dos algoritmos DSP para sistemas embarcados pode ser facilitada com o uso de
+uma metodologia de projeto que guie o desenvolvedor durante a implementação
+do sistema.
+
+	Diversas características arquiteturais dos DSP-HWs, como instruções dedicadas e
+modelos de memória específicos, impedem que o desenvolvimento de aplicações em
+linguagem de alto nível gere código eficiente para estas arquiteturas. Por isso,
+ainda hoje, muitas aplicações são desenvolvidas em linguagem Assembly, o que 
+dificulta que estas sejam portadas para outras arquiteturas. Este é o ponto 
+crucial deste trabalho, permitir o desenvolvimento de aplicações DSP em 
+linguagem de alto nível de forma que através do uso de uma API o código 
+gerado seja satisfatório (eficiente) e possa ser portado para várias arquiteturas.
+Dentre estas arquiteturas pode-se citar processadores digitais de sinais com instruções dedicadas,
+processadores de propósito geral e sistemas dedicados desenvolvidos em FPGA. 
+
+	A proposta da API é tornar aplicações de DSP portáveis para
+diferentes arquiteturas. A portabilidade é interessante para desenvolvedoras de
+produtos, pois estes podem implementar o seu conhecimento (software da
+aplicação) em diferentes processadores, analisando o melhor custo benefício.
+Além da redução de custo através da exploração de diferentes soluções, o uso
+de uma API homogênea para diferentes arquiteturas permite a criação de
+famílias de produtos com características diferentes, sem que seja necessário
+uma re-engenharia de todo produto a cada nova versão (decorrente da troca de
+arquitetura). Um dos requisitos fundamentais deste tipo de aplicação é o 
+cumprimento de requisitos de Tempo Real, os quais podem ser também suportados
+pela API, auxiliando o desenvolvedor da aplicação durante o projeto.
+
+	No desenvolvimento da API estão sendo empregados os conceitos da metodologia
+de desenvolvimento de sistemas orientados a aplicação, do inglês 
+\textit{Application-Oriented System Design} (AOSD). O \epos, sistema operacional
+com o qual a API estará integrada, foi desenvolvido seguindo este metodologia. A
+\aosd \cite{Guto:2001}
+faz uso de algumas técnicas de engenharia de software para permitir o 
+desenvolvimento de sistemas embarcados eficientes,
+algumas destas técnicas são: Orientação a Aspectos, Desenvolvimento baseado
+em famílias e metaprogramação estática. %A orientação a aspectos permite a
+%aplicação de características ortogonais ao sistema, ou seja, que impactam a
+%implementação de todos os componentes de forma contida e simples. 
+%No \epos, sistema operacional alvo da API, aspectos são aplicados no sistema 
+%utilizando-se Adaptadores de
+%Cenários\cite{Frohlich:2000}, mecanismo parte da AOSD que realiza a
+%aplicação de aspectos em códigos C++ metraprogramados. O desenvolvimento
+%baseado em famílias \cite{Parnas:1976} permite a organização de componentes
+%com características comuns em grupos, chamados de famílias. Estes grupos
+%fazem uso de uma mesma interface, a ser exportada para o resto do sistema.
+%Desta forma, componentes de uma mesma família são intercambiáveis, sem
+%causar impacto no código da aplicação. A metaprogramação estática permite a
+%resolução de expressões em tempo de compilação (\textit{templates} em C++)
+%\cite{Kreutz:2006} podendo ser utilizada para permitir a compilação somente
+%de tipos utilizados em uma aplicação.
+
+	%<Quais os métodos da API>
+	As funcionalidades da API são providas através de métodos C++. Dentre os
+métodos que a API pode prover estão transformadas conhecidas no domínio do DSP,
+como DCT, IDCT, DFT (FFT), filtros, e primitivas de DSP-HW, como multiplicadores
+acumuladores (MAC), deslocadores em barra (barrel shifter) e operações aritméticas
+diversas em ponto fixo.
+
+	%<Como se usa a API>
+	A seguir, no estudo de caso realizado, é mostrado a função para realização 
+de IDCT, provida pela API, assim como trechos de programa ilustrando a utilização
+da mesma.
+
+\section{Estudo de caso}
+
+%<Apresentar libmpeg2>
+	O decodificador MPEG-2 que foi adaptado para trabalhar com a API foi o 
+decodificador implementado pela biblioteca libmpeg2. A libmpeg2 trata-se de um
+software livre e é uma biblioteca amplamente utilizada e depurada. 
+Em \cite{libmpeg2site} existe uma lista de projetos que usam a libmpeg2, dentre 
+eles podemos citar os seguintes players multimídia: VLC (VideoLAN), MPlayer e Xine.
+	
+	A libmpeg2 é escrita na linguagem C. Entretanto, alguns trechos
+da biblioteca possuem versões em assembly (além da versão em C), trechos estes
+associados a estágios do processo de decodificação que podem aproveitar-se de 
+otimizações específicas de determinadas plataformas de hardware. Os estágios da libmpeg2 que possuem 
+otimizações em assembly são a 
+Transformada Inversa Discreta do Cosseno (Inverse Discrete Cosine Transform - IDCT) e a 
+compensação de movimento (Motion Compensation - MC).
+As plataformas para as quais atualmente existem otimizações em assembly são
+x86 (instruções MMX) e Power PC - ppc (instruções AltiVec).
+%<Comentar as modificações feitas na IDCT>
+%\subsubsection{Função da API utilizada}
+
+	Na modificação do decodificador no estágio de IDCT, onde a implementação de
+IDCT original da libmpeg2 foi trocada pela implementação fornecida pela API DSP,
+utilizou-se a seguinte função da API:
+
+\textit{void idct2D(DCTELEM *dctWeights);}
+
+onde \textit{DCTELEM} é um \textit{short} (inteiro de
+16 bits sinalizados) e \textit{dctWeights} é o bloco de entrada (e saída) da IDCT.
+Esta função, opera uma IDCT bidimensional sobre um bloco de 8x8 elementos.
+
+%\subsubsection{Alterações realizadas}
+	Na libmpeg2, existem dois ponteiros de função que são associados a
+funções relacionadas com a IDCT. São eles: \\
+mpeg2\_idct\_copy e mpeg2\_idct\_add,
+utilizados, respectivamente, na decodificação intra e inter de imagens
+MPEG-2. Estes ponteiros podem ser associados a funções genéricas,
+escritas em linguagem C, ou a funções otimizadas, escritas em assembly.
+
+	No presente trabalho as funções mpeg2\_idct\_copy\_c e \\
+mpeg2\_idct\_add\_c
+foram modificadas para utilizarem a função de IDCT provida pela API. Não houve
+preocupação em alterar as funções com implementação em assembly, pois as 
+implementações da IDCT da própria API é que proverão versões em assembly,
+otimizadas para plataformas espefíficas. Aqui, é mostrado como a função
+mpeg2\_idct\_copy\_c foi alterada. Não há necessidade de se apresentar a
+alteração da função mpeg2\_idct\_add\_c, pois ela aconteceu de forma muito semelhante a 
+modificação de mpeg2\_idct\_copy\_c.
+	
+	A função mpeg2\_idct\_copy\_c possui a seguinte assinatura:
+
+\textit{void mpeg2\_idct\_copy\_c (int16\_t * block, uint8\_t * dest, const int stride);} 
+
+onde: \textit{block} é o bloco de entrada da IDCT, \textit{dest} é o bloco de
+saída \textit{stride} indica o quanto se avança no bloco de saída, a medida em
+que ele está sendo construído. A implementação original é basicamente a seguinte:
+%
+%\prg[t]{time_app}{Using Time Services in \epos}
+%ou seja, \prg[posicao]{arquivo}{Legenda}
+\prg[h]{mpeg2_idct_copy_c_original}{mpeg2\_idct\_copy\_c - Original}
+%
+
+Onde é aplicado uma IDCT unidimensional nas linhas do bloco e, em seguida,
+outra IDCT também unidimensional em cada coluna do bloco alterado. Esta função pode ser
+observada na íntegra nos fontes da libmpeg2 (versão mpeg2dec-0.4.1), que podem 
+ser obtidos em \cite{libmpeg2site}.
+	
+	A versão alterada de mpeg2\_idct\_copy\_c, utilizando-se a API, fica da seguinte
+forma:
+\prg[h]{mpeg2_idct_copy_c_adaptada}{mpeg2\_idct\_copy\_c - Adaptada}
+
+Como a função \textit{idct2D}, provida pela API é escrita em C++, e a libmpeg2
+em C, é necessário a utilização da função wrapper \textit{c\_idct2D}.
+
+	Verificou-se que a IDCT da libmpeg2 exige que sua entrada esteja em um 
+formato específico para operar corretamente e gerar uma saída igual a de uma 
+IDCT convencional. Como a função de IDCT provida pela API necessita de uma
+entrada convencional utilizou-se a função \textit{libmpeg2ToNormal} para
+desfazer a formatação de entrada realizada pela libmpeg2.
+	
+	Como mencionado, a API DSP é quem proverá implementações em assembly, 
+otimizadas para plataformas específicas para a função \textit{idct2D}.
+Devido a isto as otimizações de cada método/função e a portabilidade dos mesmos, passam a 
+residir não mais nas várias versões das funções
+associadas a mpeg2\_idct\_copy e mpeg2\_idct\_add e sim na função provida pela API.
+Desta forma a granularidade das otimizações para plataformas se torna mais fina
+e focada na API, assim o desenvolvedor do decodificador passa a se preocupar
+apenas na interface das funções DSP que utilizará e não nas implementações das mesmas.
+
+\subsection{Teste de conformidade}
+	O padrão MPEG-2 parte 4 (testes de conformidade)\cite{ISO/IEC_13818-4} 
+descreve como testar uma IDCT e verificar se ela pode ser considerada de acordo com
+o mesmo. Tal teste de conformidade foi implementado no decorrer deste trabalho.
+Ele consiste basicamente na geração de 6 milhões de blocos de 
+entrada de IDCT, aplicação destes em uma IDCT de referência e na IDCT a ser 
+validada e comparação dos resultados. A construção desta IDCT de referência
+também é especificada pelo padrão.
+
+	Aplicou-se este teste na IDCT original da libmpeg2 para confirmar se 
+esta era realmente compatível com o padrão e como uma forma de validar
+o teste desenvolvido. 
+Como era de se esperar a IDCT original da libmpeg2 passou no teste. Testou-se
+então a implementação padrão da IDCT provida pela API, e esta também 
+demonstrou-se de acordo com os requisitos do padrão. 
+
+	Como teste de integração da IDCT na libmpeg2 executou-se a
+libmpeg2 adaptada e a original, sobre os mesmos vídeos, imprimindo as saídas
+das IDCTs e comparando os resultados. Neste caso considerou-se a saída da
+libmpeg2 original como a referência. Também neste caso, como era de se esperar,
+as diferenças entre os resultados se encaixam nos requisitos do padrão MPEG-2.
+Para executar a libmpeg2, utilizou-se de um programa exemplo que vem com a mesma. Este
+programa tem como entrada um arquivo de vídeo em MPEG-2, e sua saída são os 
+arquivos de imagem não compactada, que formam os vários quadros do vídeo 
+decodificado. 
+
+\subsection{Análise de desempenho}
+	A implementação de IDCT provida pela API foi comparada com a IDCT original
+da libmpeg2 com relação a tempo médio de computação de um determinado número
+de blocos. Estes blocos foram gerados pelo mesmo mecanismo empregado no teste
+de conformidade da IDCT (descrito acima).
+
+	Em uma execução com 60000 (sessenta mil) blocos distintos, o tempo
+médio de execução das IDCTs foi o seguinte:
+\begin{itemize}
+\item IDCT libmpeg2: 869 nanosegundos (ns)
+\item IDCT API: 1326 nanosegundos (ns)
+\end{itemize}
+A diferença entre os tempos de execução é de 457 nanosegundos. A relação
+tempo médio execução IDCT API / tempo médio execução IDCT libmpeg2, ou seja,
+1326 ns / 869 ns, é  de aproximadamente 1.5. Isto significa que a IDCT da libmpeg2
+se apresentou cerca de 1.5 vezes mais rápida do que a implementação de IDCT
+provida pela API. 
+No procedimento descrito acima, desejou-se verificar o desempenho das IDCTs 
+(libmpeg2 e API) de forma isolada. Portanto o tempo de mapeamento de blocos de
+entrada de IDCT formato libmpeg2 para blocos IDCT convencionais não foi 
+considerado. Repetindo-se este procedimento, considerando
+o tempo de mapeamento, a diferença entre os tempos de execução sobe para cerca de
+2.5 vezes.
+
+	Atualmente nem o decodificador original nem o modificado se encontram
+integrados a um player de vídeo. Esta integração seria interessante para se
+avaliar de forma visual qual a representatividade desta diferença de 2.5 vezes
+entre o tempo de computação das duas IDCTs. Entretanto realizou-se um pequeno
+experimento que forneceu uma indicação aproximada da representatividade desta 
+diferença. O experimento foi o seguinte: executou-se alguns	vídeos MPEG-2 
+no player VLC \cite{vlc_site} o qual utiliza a libmpeg2. Mediu-se a carga 
+da CPU durante a execução do VLC utilizando-se o programa TOP. %\cite{top_wikipedia}.
+Em média a carga da CPU fica abaixo de 5\%, o que representa de forma aproximada
+a carga utilizando-se o decodificador original. Considerando uma relação
+diretamente proporcional e linear entre o tempo de execução da IDCT e a carga
+média da CPU, a utilização do decodificador modificado no VLC resultaria em uma carga
+de 12.5\%  (2.5 x 5\%). Como 12.5\% é uma carga relativamente baixa de utilização
+de CPU, pode-se inferir que a diferença de 2.5 vezes entre os tempos médios
+de execução das IDCTs é aceitável.
+
+\subsection{Aplicabilidade da API}
+	A compensação de movimento (Motion Compensation - MC), é um importante 
+estágio do processo de decodificação MPEG-2, pois é neste momento em que a 
+redundância temporal é tratada.	Uma etapa fundamental na MC, consiste na formação de 
+predições e preditores, que posteriormente serão adicionados à imagens chaves,
+reconstruindo imagens que foram codificadas em função de outras.
+
+	As funções da libmpeg2 que lidam com a formação das predições fazem uso de laços e operações de
+deslocamento em sua implementações. As primitivas da API que podem ser
+utilizadas, neste caso, são os deslocadores em barra e os laços em hardware.
+Os deslocadores em barra permitem a realização das operações de deslocamento em
+um único ciclo de relógio. E laços em hardware, poderiam substituir os laços
+em software presentes nestas funções.
+
+	No presente momento deslocadores em barra e os laços em hardware
+ainda não são providos pela API. Porém, quando eles estiverem disponíveis, a estratégia 
+para utiliza-los a partir da libmpeg2 será a mesma que foi usada para substituir
+a IDCT, isto é, a alteração da versão em C das devidas funções. 
+Assim como no caso da IDCT não haverá necessidade de alterar as versões 
+assembly das funções, uma vez que as otimizações ficarão a cargo das implementações
+providas pela API.
+
+\section{Trabalhos relacionados}
+\begin{itemize}
+\item{VSIPL}
+    Trata-se de uma especificação de domínio público para processamento de 
+imagens e sinais \cite{Janka:2001}. Define uma API em C que é razoavelmente difundida, e 
+possui implementações de diferentes \textit{Vendors} para diferentes arquiteturas.
+Existe também uma versão deste padrão baseada na linguagem C++, cujo intuito é
+prover um maior nível de abstração na modelagem de aplicações DSP, chamado VSIPL++. %\cite{Campbell:2006}.
+A API usada no presente trabalho suportará uma versão da VSIPL++ criada para 
+sistemas embarcados chamada VSIPL++ Core Lite.
+
+\item{MMM}
+    Multimedia Macros (MMM) \cite{957074}, é uma biblioteca de macros do pré-processador
+da linguagem C voltada para a construção de aplicações DSP e multimídia. Uma
+aplicação escrita utilizando a MMM utiliza suas macros, que são expandidas para
+instruções em linguagem assembly de diversas arquiteturas. Possui implementações para
+diversos DSP-HW e para processadores de uso geral (General Purpose Processor - GPP)
+com extensões multimídia (e.g. Pentium/SSE, PowerPC/AltiVec).
+
+\item{Open Max}
+    OpenMax é uma especificação que define é um conjunto de PIs (Programming Interfaces) \cite{SiteOpenMax}
+Ela é dividida em três camadas: Application, Integration e Development. 
+Esta terceira camada, Development, estabelece primitivas como IDCT, VLC, 
+Zig-Zag, FIR, entre outras relacionadas com DSP e processamento de áudio
+e vídeo. 
+
+\end{itemize}
+
+\section{Conclusões}
+\label{sec_conclusao}
+
+\indent Através deste trabalho foi demonstrada a utilização de uma API DSP como meio
+de solucionar o problema de portabilidade enfrentado pelos codecs de vídeo, 
+sem maiores perdas de desempenho. Esta demonstração foi realizada adaptando-se
+a biblioteca libmpeg2, que implementa um decodificador MPEG-2, para trabalhar com a API. 
+Os estágios do decodificador trabalhados foram a transformada inversa
+discreta de coseno (IDCT) e a compensação de movimento (MC). \\
+\indent Modificou-se a libmpeg2 para utilizar a IDCT provida pela API.
+A corretude das alterações efetuadas foi confirmada  com a aplicação do teste
+de conformidade descrito no padrão MPEG-2 parte 4 \cite{ISO/IEC_13818-4}.
+Fez-se também uma análise de desempenho comparando a IDCT original com a 
+provida pela API. Também neste quesito os resultados foram satisfatórios. \\
+\indent Foram identificados os pontos da libmpeg2 relativos a compensação de 
+movimento que podem usar a API DSP. Atualmente as primitivas da API a serem
+utilizadas pela MC ainda não estão disponíveis já que a mesma se encontra em
+desenvolvimento. Porém, quando elas estiverem disponíveis, a estratégia 
+para utiliza-los a partir da libmpeg2 será a mesma que foi usada para substituir
+a IDCT.
+
+% Observações:
+% É recomendado pela ACM SIG latex option 01 que seja submetido um único arquivo
+% .tex Portanto, na versão final do artigo é necessário, copiar o conteúdo do
+% arquivo .bbl (gerado com a bibitex a partir do .bib) para este arquivo.
+%
+% No caso de se submeter apenas um .dvi ou .pdf, este requisito pode ser ignorado.
+
+% <referencias>, o nome do arquivo .bib que contém as referências bibliográficas,
+% deve ser o mesmo do .tex principal.
+
+\bibliographystyle{abbrv}
+%\nocite{*}
+\bibliography{decoder_webmedia} % esta é comentada, quando for inserido o conteúdo do .bbl
+% não sei porque, mas precisa ter um <referencias>.aux (mesmo que vazio) para que o
+% bibtex funcione.
+
+%\begin{thebibliography}{1} % fica comentada até a versão "final"
+% aqui vai o conteudo do .bbl
+%\end{thebibliography} % fica comentada até a versão "final"
+
+\end{document}
+

@@ -1,0 +1,18 @@
+\section{Introdução}
+% Reprogramação, estrutura + protocolo
+% O que é um protocolo de disseminação
+% Importância de um prot. de diss.
+% Importância de uma boa estrutura
+% Ex. de uso: reprogramação RSSF
+% Contribuição: infra-estrutura p/ disseminação e reprogramação
+% Organização do artigo
+
+Reprogramar o software de um programa em execução é uma tarefa presente na grande maioria dos ambientes computacionais. A gama de aplicações que utiliza algum meio de reprogramação varia desde browsers para internet à sistemas dedicados, como controladores em um veículo, por exemplo. Devido às características especiais destes sistemas dedicados (e.g. limitação de recursos), a estrutura de reprogramação de software é diferente daquela presente nos ambientes computacionais convencionais. Além disso, alguns desses sistemas dedicados, como Redes de Sensores Sem Fio (RSSF), são formados por uma grande quantidade de nodos, onde coletar todos para reprogramá-los é impraticável.
+
+A estrutura de reprogramação de software em um sistema embarcado deve ser composta por um protocolo de disseminação de dados e uma estrutura que organize os dados de forma consistente na memória do sistema. Uma maneira de oferecer isso às aplicações embarcadas é ocultar tal estrutura em um sistema operacional. Geralmente, a estrutura de reprogramação utilizada em um SO embarcado é composta por módulos atualizáveis em tempo de execução. Esses módulos são independentes de posição de memória para as aplicações e podem ser substituídos em tempo de execução~\cite{sos, dunkels04contiki}. 
+
+Não obstante, é essencial que a totalidade dos novos dados de um ou mais módulos cheguem corretamente a todos os nodos envolvidos na reprogramação. Por este motivo, um protocolo de disseminação deve ser usado juntamente com a estrutura do SO. De forma simplificada, um protocolo funciona da seguinte maneira: a disseminação começa através de uma estação base responsável por transmitir os dados aos seus nodos vizinhos. Uma vez que um nodo recebe os dados ele passa a ser capaz de retransmiti-los aos seus próprios vizinhos. Assim, se um nodo A tem B como vizinho, e o nodo B tem A e C como vizinhos, ao receber os dados de A o nodo B vai retransmiti-los para C. O processo se repete para todos os nodos, de forma que a rede inteira receba os dados~\cite{moap, deluge}.
+
+Este artigo apresenta o projeto e implementação de uma estrutura de reprogramação de software eficiente para sistemas embarcados transparente para aplicações. A estrutura é implementada no \EPOS{} (\epos{})~\cite{frohlich:2001} e é composta por um sistema que isola os componentes do sistema em unidades físicas da memória e um protocolo de disseminação de dados que garante a entrega dos novos dados para os nodos envolvidos na reprogramação. A estrutura foi avaliada em termos de consumo de memória, tempo disseminação e de reprogramação, apresentando bons resultados.
+
+O restante deste artigo está organizado da seguinte maneira. A seção 2 apresenta os principais trabalhos relacionados a protocolos de disseminação e sistemas operacionais que suportam reprogramação. A seção 3 mostra o projeto do protocolo de disseminação usado neste trabalho e compara suas características com os protocolos relacionados. A seção 4 apresenta a integração do protocolo de disseminação com a estrutura do SO. A avaliação da estrutura de reprogramação completa é realizada na seção 5 e finalmente, a seção 6 conclui o artigo.

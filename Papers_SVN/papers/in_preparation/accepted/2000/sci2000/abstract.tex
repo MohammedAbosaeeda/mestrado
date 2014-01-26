@@ -1,0 +1,57 @@
+\documentclass[10pt,english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{geometry}
+\usepackage{babel}
+
+\geometry{a4paper,tmargin=3cm,bmargin=3cm,lmargin=3cm,rmargin=3cm}
+
+\begin{document}
+
+\title{Scenario Adapters: Efficiently Adapting Components\\[0.2cm]
+	\normalsize{(extended abstract)}}
+\author{Antônio Augusto Fröhlich\\[0.2cm]
+	\small{GMD FIRST}\\[-0.5ex]
+	\small{Kekuléstraße 7}\\[-0.5ex]
+	\small{12489 Berlin, Germany}\\[-0.5ex]
+        \small\tt{guto@first.gmd.de}}
+\date{}
+\maketitle
+ 
+\sloppy
+
+\section{Introduction}
+
+Object-orientation together with component-based software engineering is enabling the long dreamed production of software as an assemblage of ordinary components. Similarly to other industries, software developers can now reuse components, reducing costs and accelerating production. Moreover, in comparison to other assembly lines, for instance to the largely acclaimed automotive industry, component-based software engineering shows an expressive advantage: software components, besides being reused, can easily be adapted to match particular requirements. This, for the car industry, would mean having a single engine that could be adapted either to propel a limousine or a small city car.
+
+Conceiving a software system as an assemblage of adaptable components, however, brings about new challenges. What granularity components will have, how they will be configured and adapted, how they will be put together, how to grant that an assemblage of components yields to a system that matches the requisites of a given set of applications, are just some of the important questions that have to be answered in order to make this strategy really effective.
+
+This extended abstract focuses on the question about component adaptation. It first presents the motivation for component adaptation and then describes the scenario adapter mechanism. Scenario adapters can be used to efficiently adapt an existing component to join a specific execution scenario. The full paper, besides more detailed discussion about the theme, describes the implementation of scenario adapters as C++ templates and features a case study about \textsc{Epos}, a highly configurable operating system that employs the scenario adapter mechanism described here.
+
+\section{Adaptable Components}
+
+Component-based systems are usually born with a big question about component granularity. The question is so crucial because it directly impacts performance, configurability and maintainability. On the one hand, a system made up of a large amount of fine components will certainly achieve better performance than one made up of a couple of coarse components, because each coarse component brings along functionality that will not always be used. The component functionality that is not used turns into overhead for the applications. On the other hand, a set of fine grain components is harder to configure and to maintain.
+
+If supporting high performance applications is a goal for the component-based system, the configuration and maintenance difficulties is a price that has to be paid. Nevertheless, the number of components and the complexity of each component may be reduced if components are designed to be independent of some execution aspects and if there is a way to adapt them to execute in a given scenario. In this way, instead of implementing several versions of a component to run in different scenarios, one may implement a single scenario-independent component and later adapt it to the respective execution scenario. This does not only bring benefits due to concern separation, but also because the strategy used to adapt a component will likely be reused to adapt other components to the same execution scenario, thus reducing the total amount of code. Aspects such as synchronization, remote invocation, protection and architectural characteristics, can usually be avoided from a component's realization~\cite{Froehlich:ehpc:1999}.
+
+A process abstraction is a good example for an adaptable component. Instead of implementing versions of it to run on a several architectures, to run locally or remotely, to support single or multithreading, to run in single or multiprocessors, to run in safe or unsafe environments,  it is possible to work out a single implementation that regards only aspects that are intrinsic to the process abstraction. This single implementation can later be adapted to a specific execution environment. 
+
+The approach of writing pieces of software that are independent of certain aspects and later adapting them to a given scenario is often referred as \textit{Aspect Oriented Programming} (AOP)~\cite{Kiczales:ecoop:1997}. However, AOP usually implies in describing aspects in aspect-oriented languages and also demands for tools (\textit{weavers}) to combine aspects and aspect-independent components. Weaving a component to adapt it to an execution scenario may be an efficient alternative, but it raises the problem of granting that the wove component preserves its original semantics. Therefore, we propose another approach, based on statically metaprogrammed  scenario adapters.
+
+\section{Scenario Adapters}
+
+Scenario adapters are mechanism to efficiently adapt existing aspect-independent components to specific execution scenarios. In order to achieve the efficiency demanded by high performance systems, scenario adapters are statically metaprogrammed~\cite{Veldhuizen:1995}, so that component adaptations occur at compile time, before system execution.
+
+Contrary to what it may look, adapting components at compile time, at least in regard to high performance execution scenarios, usually does not imply in flexibility loss. Once adapted to a scenario, a component is not expected to move to another scenario, although the abstractions it represents may freely move. Recurring to the process example again, it is the process itself that can migrate and not the respective system component implementation. The process component may be adapted and assembled into several systems. The system that will run on a single processor node will have the respectively adapted component, just as the multiprocessor node system. When a process migrates from a single processor node to a multiprocessor one, the component itself is not migrated, but its state and behavior.
+ 
+Another advantage of an statically metaprogrammed scenario adapter is that it can easily be optimized by the compiler. Segments of the metaprogram that are not referred are normally not included in the compilation output. Therefore, a component adapted to support remote invocation, but that is not actually remotely invoked, will not include the respective code. Besides, when a component that completely fulfills the execution scenario requirements exists, the metaprogram does not generate any code.
+
+We implemented scenario adapters in the realm of the \textsc{Epos} project~\cite{Froehlich:ooosw:1999}, which aims to deliver, whenever possible automatically, a highly performance operating system to each application. Aimed are parallel and embedded applications. \textsc{Epos} scenario adapters are C++ templates that jointly define a framework in which application-ready, aspect-independent components can be composed and adapted. Current adaptations include multithreading synchronization, remote invocation and access control.
+
+Several application-oriented systems have already been generated and evaluated. These systems showed no overhead due to the use of scenario adapters, what demonstrate the efficiency of scenario adapters. We are now extending the set of \textsc{Epos} scenario adapters and also the set of system components in order to better validate and evaluate the project.
+
+\nocite{Cordsen:iwooos:1991}
+\bibliographystyle{plain}
+\bibliography{cluster_computing,operating_systems,communication,processors,parallel_machines,software_engineering,guto}
+
+\end{document}

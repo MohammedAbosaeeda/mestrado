@@ -1,0 +1,107 @@
+% Bibliography on Cluster Computing
+% References selected by Guto (May 2000)
+%BUYYA, R., High Performance Cluster Computing: Architectures and Systems, Prentice Hall, Austrﬂlia, 1999
+
+@article{Anderson:1995,
+  author =	 "Thomas E. Anderson and David E. Culler and David
+                  A. Patterson and others",
+  title =	 "{A Case for Networks of Workstations: NOW}",
+  journal =	 "IEEE Micro",
+  month =	 feb,
+  year =	 1995,
+  url =		 "http://now.cs.berkeley.edu/Case/case.ps",
+}
+
+@Misc{Avalon,
+  author = 	 "Los Alamos National Laboratory",
+  title = 	 "{Avalon Frequently Asked Questions}",
+  howpublished = "Online",
+  month =	 dec,
+  year =	 1998,
+  note =         "[http://cnls.lanl.gov/avalon/FAQ.html] (May 30, 2000)",
+}
+
+@Book{Buyya:1999,
+  editor =	 "Rajkumar Buyya",
+  title =	 "High Performance Cluster Computing: Architectures and
+                  Systems",
+  publisher =	 " Prentice Hall",
+  volume =	 1,
+  year =	 1999,
+  isbn =	 "0-13-013784-7"
+}
+
+@inproceedings{Culler:1997,
+  author =	 "David E. Culler and Andrea Arpaci-Dusseau and Remzi
+                  Arpaci-Dusseau and Brent Chun and Steven Lumetta and
+                  Alan Mainwaring and Richard Martin and Chad Yoshikawa
+                  and Frederick Wong",
+  title =	 "{Parallel Computing on the Berkeley NOW}",
+  booktitle =	 "Proceedings of the 9th Joint Symposium on Parallel
+                  Processing",
+  address =	 "Kobe, Japan",
+  month =	 "",
+  year =	 1997,
+  url =		 "http://now.cs.berkeley.edu/Papers2/Postscript/jpps.ps",
+}
+
+@inproceedings{Dusseau:1997,
+  author =	 "Andrea C. Arpaci-Dusseau and David E. Culler",
+  title =	 "{Extending Proportional-Share Scheduling to a Network
+                  of Workstations}",
+  booktitle =	 "Proceedings of International Conference on Parallel
+                  and Distributed Processing Techniques and Applications
+                  97",
+  address =	 "Las Vegas, USA",
+  month =	 jun,
+  year =	 1997,
+  url =          "http://now.cs.berkeley.edu/Papers2/Postscript/pdpta.ps",
+}
+
+@inproceedings{Griebel:1997,
+  author =	 "Michael Griebel and Gerhard Zumbusch",
+  title =	 "{PARNASS: Porting Gigabit-LAN Components to a
+                  Workstation Cluster}",
+  booktitle =	 "Proceedings of the First German Workshop on Cluster
+                  Computing",
+  address =	 "Chemnitz, Germany",
+  month =	 nov,
+  year =	 1997,
+  url =          "http://wwwwissrech.iam.uni-bonn.de/research/pub/zumbusch/cluster97.ps.gz"
+}
+
+@inproceedings{Hori:1997,
+  author =	 "Atsushi Hori and Hiroshi Tezuka and Yutaka Ishikawa",
+  title =	 "{User-level Parallel Operating System for Clustered
+                  Commodity Computers}",
+  booktitle =	 "Proceedings of Proceedings of Cluster Computing
+                  Conference '97",
+  month =	 mar,
+  year =	 1997,
+  url =          "http://www.rwcp.or.jp/lab/pdslab/papers/hori-ccc97.ps.gz"
+}
+
+@inproceedings{Tanaka:1998,
+  author =	 "Yoshio Tanaka and Motohiko Matsuda and Makoto Ando and
+                  Kazuto Kubota and Mistsuhisa Sato",
+  title =	 "{COMPaS: A Pentium Pro PC-based SMP Cluster and its
+                  Experience}",
+  booktitle =	 "IPPS Workshop on Personal Computer Based Networks of
+                  Workstations'98",
+  year =	 1998,
+  pages =	 "486--497",
+  url =          "http://pdplab.trc.rwcp.or.jp/pdperf/papers/pc-now98.ps.gz"
+}
+
+@Manual{ccwp,
+  key =		 "TFCC",
+  title =	 "Cluster Computing White Paper",
+  organization = "IEEE Task Force on Cluster Computing",
+  editor =	 "Mark Baker",
+  edition =	 "{M}ark {B}aker, editor, Online",
+  note =	 "[http://www.dcs.port.ac.uk/\~{}mab/tfcc/WhitePaper]",
+  month =	 dec,
+  year =	 2000,
+  url =		 "http://www.dcs.port.ac.uk/~mab/tfcc/WhitePaper/"
+}
+

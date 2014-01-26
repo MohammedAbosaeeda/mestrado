@@ -1,0 +1,51 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Geovani Ricardo Wiedenhoft
+% Email: grw at lisha.ufsc.br
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+
+@InProceedings{Wiedenhoft:ETFA:2007,
+  author =	{Geovani Ricardo Wiedenhoft and Arliones Stevert Hoeller Junior and Ant\^{o}nio Augusto Fr\"{o}hlich},
+  title =	"{A Power Manager for Deeply Embedded Systems}",
+  booktitle =	"12th IEEE International Conference on Emerging Technologies and Factory Automation",
+  pages =	"748-751",
+  year =	2007,
+  address =	"Patras, Greece",
+  month =	Sep,
+  url =		"http://www.lisha.ufsc.br/~guto/publications/etfa2007-wiedenhoft.pdf"
+}
+
+@InProceedings{Wiedenhoft:WSO:2007,
+  author =	{Geovani Ricardo Wiedenhoft and Arliones Stevert Hoeller Junior and Ant\^{o}nio Augusto Fr\"{o}hlich},
+  title =	"{Um Gerente de Energia para Sistemas Profundamente Embarcados}",
+  booktitle =	"IV Workshop de Sistemas Operacionais",
+  pages =	"796-804",
+  year =	2007,
+  address =	"Rio de Janeiro, RJ, Brazil",
+  month =	Jul,
+  url =		"http://www.lisha.ufsc.br/~guto/publications/wso2007-wiedenhoft.pdf"
+}
+
+@InProceedings{Wiedenhoft:WTR:2007,
+  author =	{Geovani Ricardo Wiedenhoft and Arliones Stevert Hoeller Junior and Ant\^{o}nio Augusto Fr\"{o}hlich},
+  title =	"{Quality-Of-Service: the Role of Energy}",
+  booktitle =	"9th Workshop on Real-Time Systems",
+  pages =	"107-110",
+  year =	2007,
+  address =	"Belem, Brazil",
+  month =	May,
+  url =		"http://www.lisha.ufsc.br/~guto/publications/wtr2007-wiedenhoft.pdf"
+}
+
+@InProceedings{Wiedenhoft:CLEI:2007,
+  author =	{Geovani Ricardo Wiedenhoft and Arliones Stevert Hoeller Junior and Ant\^{o}nio Augusto Fr\"{o}hlich},
+  title =	"{Energia como um Parâmetro para Qualidade de Serviço em Sistemas Embarcados}",
+  booktitle =	"XXXIII Latin American Conference on Informatics",
+  pages =	"7",
+  year =	2007,
+  address =	"San José, Costa Rica",
+  month =	October,
+  note =	"to appear",
+  url =		"http://www.lisha.ufsc.br/~guto/publications/clei2007-wiedenhoft.pdf"
+}
+

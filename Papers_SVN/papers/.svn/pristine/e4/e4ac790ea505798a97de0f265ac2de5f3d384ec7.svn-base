@@ -1,0 +1,101 @@
+\section{Implementation for the EPOS Project}
+\label{sec:impl_epos}
+
+The \epos~Project (Embedded Parallel Operating System) aims at automating the
+development of embedded systems so that developers can concentrate on the
+applications. \epos~relies on the Application-Driven Embedded System Design
+(\adesd)~\cite{Frohlich:2001} method to guide the development of both software
+and hardware components that can be automatically adapted to fulfill the
+requirements of particular applications. \epos~features a set of tools to
+support developers in selecting, configuring, and plugging components into its
+application-specific framework. The combination of methodology, components,
+frameworks, and tools enable the automatic generation of application-specific
+embedded system instances~\cite{Project:EPOS:2010}.
+
+\subsection{The EPOSMote}
+
+Besides run time support system and tools, the \epos~Pro\-ject has driven the
+development of hardware platforms, being the \emote~among them. \emote~is a
+modular platform for wireless sensor network applications. It has three
+different modules as shown in Figure~\ref{fig:emote2-mc13224v-block_diagram}.
+The \emph{Processing Module} incorporates the core processing and communication
+components of the system. There are two different versions of this module: one
+based on Atmel's ZigBit package and another, used in this work, based on
+Freescales' System-on-Chip MC13224V. Both present RF transceivers compatible
+with IEEE 802.15.4 standard. Power supply and I/O interfaces were factored out
+on \emote's design to allow adaptation to specific applications. The power
+interface has separated signals for the power source ($V_{cc}$, $V_{dd}$ and
+$Gnd$) and an $I^2C$ interface for communication with the processing module. The
+I/O interface make 32 pins available for custom designs including a bypass of
+the power source, all $ADC$ channels, $SPI$, $UART$ and several $GPIO$ pins. The
+\emote~Project developed a \emph{Start-Up} board to be connected to the I/O
+interface featuring $USB$ converter, a thermistor, a 3-axis accelerometer, LEDs,
+and buttons that was also used in this work.
+
+\fig{emote2-mc13224v-block_diagram}{EPOSMote's block diagram.}{scale=.54}
+
+To be able to account for energy consumption on the \emote~we first need to
+analyze its power characteristics and build its energy model. These information
+were collected from the devices' datasheets, when available, or measured using
+an oscilloscope in current mode. Table~\ref{tab:emote-energy_currents} shows
+values of current drains of system devices in different operating modes to be
+used by time-based accounters, while Table~\ref{tab:emote-energy_consumptions}
+show drained battery charge for monitored events to be used by event-based
+accounters.
+
+\tab{emote-energy_currents}{Current drawn by EPOSMote's components in different
+operating modes for time-based accounting.}
+
+\tab{emote-energy_consumptions}{Battery charge used by EPOSMote's components in
+monitored events for event-based accounting.}
+
+
+\subsection{The EPOS Power Manager}
+
+Once power management is a non-functional property of computing
+systems~\cite{Lohmann:2005} the \epos' power manager was modeled as an software
+aspect~\cite{Mens:1997}, thus being its implementation orthogonal to the
+implementation of other components in \epos' framework. In \epos, aspects are
+implemented as constructs called \emph{Scenario
+Adapters}~\cite{Frohlich:SCI:2000}, which relies on C++'s static metaprogramming
+capability (templates) and doesn't imply in the use of extra tools such as
+aspect weavers.
+
+\wfig{pm-uml-classes}{UML class diagram of EPOS' power manager.}{scale=.99}
+
+Figure~\ref{fig:pm-uml-classes} shows a class diagram for the \epos' power
+manager modeled as a scenario adapter.
+
+The base \texttt{Power\_Manager} wraps the target class (to which the aspect may
+be applied) by inheritance and function overriding (the \emph{Adapter Design
+Pattern}). Additional methods may them be easily included, as is the case of the
+\texttt{power} methods in the base \texttt{Power\_Manager} class.
+\texttt{Power\_Manager} is, in turn, a facade (the \emph{Facade Design Pattern})
+to other functionalities related to power management being implemented by other
+components. For instance, \texttt{Power\_Manager\_Shared} and
+\texttt{Power\_Manager\_Instances} are responsible for, respectively,
+controlling of operating modes for shared components, and keeping of object
+references for system-wide power management actions~\cite{Hoeller:DIPES:2006}.
+
+In this work, \epos' power manager was extended to include the energy
+consumption accounting functionality. This was done by aggregating the
+\texttt{Power\_Manager\_Accounter} class which, in turn, implements the energy
+consumption profiles described at Section~\ref{sec:profiles} with the algorithms
+listed in Figure~\ref{prg:batt_updates}. Accounting of events on the event-based
+profile are performed through the \texttt{account(e:Event)} method, which may be
+called in a \texttt{wrapped\_method()} if the event generated by such a method
+is a monitored one. As concerning overhead issues, it is important to note that
+the \texttt{account(e:Event)} method, which increments an event counter, is an
+inline function, thus incurring in no overheads related to function calls at
+runtime. Also, the branches that implement the facade at the \texttt{power(m:OP\_Mode)}
+method of \texttt{Power\_Manager} use constant boolean values which, in \epos,
+are defined at configuration time, before compilation. As such, these are
+subject to compiler optimizations which are able to remove these branches in the
+final system binary. Table~\ref{tab:pm-overhead} presents the impact of the
+proposed accounter on \epos~in terms of code and data memory usage, showing that
+the accounting mechanism aggregates 2,768 bytes of code (ROM) and 70 bytes of
+data (RAM) over the original fully functional \texttt{Power\_Manager}.
+
+\tab{pm-overhead}{Memory footprint overhead of the EPOS power manager.(?COMO
+TIRA A HLINE DE BAIXO DO SETUP?)}
+

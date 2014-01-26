@@ -1,0 +1,20 @@
+
+\begin{tabular}{|l|ccc|rrr|}
+\cline{2-7}
+\multicolumn{1}{c}{}  &   \multicolumn{3}{|c|}{Memory footprint (code/data) in bytes}    & \multicolumn{3}{|c|}{Avg. operation exec. time in $\mu$s} \\
+\multicolumn{1}{c|}{} &   SW-only    &   Unified     &       Diff. (\%)                  & SW-only   &  Unified  &     Diff. (\%) \\
+\cline{1-1}
+Scheduler             &  8980 / ~432 &   9184 / ~432 &  02.27 / ~00.00                    & 4.26      &   4.52    & 06.10\\
+ADPCM                 &  1992 / ~~72 &   2220 / ~~56 &  11.44 / -22.22                   & 3.90      &   3.90    & 00.00\\
+DTMF                  &  1076 / 3152 &   1536 / 2884 &  42.75 / -08.50                   & 6844.90   &   7484.00 & 09.35\\
+\hline
+
+\end{tabular}
+
+%SW AVGs
+%Memory footprint = 4.19 %
+%Exec. time = 5.15 %
+
+
+
+

@@ -1,0 +1,351 @@
+@book{Frohlich:2001,
+ title   ={Application-Oriented Operating Systems},
+ author  ={Ant\^onio Augusto Medeiros Froehlich},
+ edition ={1},
+ publisher={GMD - Forschungszentrum Informationstechnik},
+ year    =2001}
+
+@inproceedings{fauze:2005,
+	author= {Fauze Valerio Polpeta and Ant\^onio Augusto Fröhlich},
+	title = { On the Automatic Generation of SoC-based Embedded Systems}, 
+	booktitle = { In: Proceedings of the 10th IEEE International Conference on Emerging
+	Technologies and Factory Automation}, 
+	year = {2005},
+}
+ 
+ @inproceedings{Driesen:1996:Direct,
+ author = {Karel Driesen and Urs H\"olzle},
+ title = {The direct cost of virtual function calls in C++},
+ booktitle = {OOPSLA '96: Proceedings of the 11th ACM SIGPLAN conference on Object-oriented programming, systems, languages, and applications},
+ year = {1996},
+ isbn = {0-89791-788-X},
+ pages = {306--323},
+ location = {San Jose, California, United States},
+ doi = {http://doi.acm.org/10.1145/236337.236369},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+}
+
+@inproceedings{tourwe04codemining,
+ author = {Tom Tourwe and Kim Mens},
+ title = {Mining Aspectual Views using Formal Concept Analysis},
+ booktitle = {SCAM '04: Proceedings of the Source Code Analysis and Manipulation, Fourth IEEE International Workshop on (SCAM'04)},
+ year = {2004},
+ isbn = {0-7695-2144-4},
+ pages = {97--106},
+ doi = {http://dx.doi.org/10.1109/SCAM.2004.14},
+ publisher = {IEEE Computer Society},
+ address = {Washington, DC, USA},
+}
+
+@inproceedings{ tilley03survey,
+  author = 	 "T. Tilley and R. Cole and P. Becker and P. Eklund",
+  title = 	 "A Survey of Formal Concept Analysis Support for Software Engineering Activities",
+  booktitle =  "Proceedings of the First International Conference on Formal Concept Analysis - ICFCA'03",
+  year =	 "2003",
+  editor =	 "Gerd Stumme",
+  month =	 "February",
+  publisher =	 "Springer-Verlag",
+  note = 	 "to appear",
+  url = "citeseer.ist.psu.edu/tilley03survey.html" 
+}
+
+@misc{ hanenberg03refactoring,
+author = "S. Hanenberg and C. Oberschulte and R. Unland",
+title= "Refactoring of aspect-oriented software",
+booktitle ="In Net. ObjectDays 2003",
+address = "Erfurt, Germany",
+year ="2003"
+}
+
+@inproceedings{ janzem03navigating,
+ author = "Doug Janzen and Kris De Volder",
+ title = "Navigating and querying code without getting lost",
+ booktitle = "AOSD '03: Proceedings of the 2nd international conference on Aspect-oriented software development",
+ year = "2003",
+ isbn = "1-58113-660-9",
+ pages = "178--187",
+ location = "Boston, Massachusetts",
+ doi = "http://doi.acm.org/10.1145/643603.643622",
+ publisher = "ACM Press",
+ address = "New York, NY, USA"
+ }
+ 
+@techreport{ griswold00aspectbrowser,
+    author = "W. G. Griswold and Y. Kato and J. J. Yuan",
+    title = "AspectBrowser: Tool Support for Managing Dispersed Aspects",
+    number = "CS1999-0640",
+    month = "3,",
+    pages = "6",
+    year = "2000",
+    url = "citeseer.ist.psu.edu/griswold99aspect.html"
+   }
+    
+  @article{wille81restructuring,
+   author = "Rudolf Wille",
+   title = "Restructuring Lattice Theory: An Approach Based on Hierarchies of Concepts",
+   journal = "Ordered Sets, Ivan Rival Ed., NATO Advanced Study Institute",
+   volume = "83",
+   pages = "445-470",
+   month = sep,
+   year = "1981"
+}
+
+@inproceedings{965676,
+ author = {Jan Hannemann and Thomas Fritz and Gail C. Murphy},
+ title = {Refactoring to aspects: an interactive approach},
+ booktitle = {eclipse '03: Proceedings of the 2003 OOPSLA workshop on eclipse technology eXchange},
+ year = {2003},
+ pages = {74--78},
+ location = {Anaheim, California},
+ doi = {http://doi.acm.org/10.1145/965660.965676},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+ }
+
+@inproceedings{1052909,
+ author = {Leonardo Cole and Paulo Borba},
+ title = {Deriving refactorings for AspectJ},
+ booktitle = {AOSD '05: Proceedings of the 4th international conference on Aspect-oriented software development},
+ year = {2005},
+ isbn = {1-59593-042-6},
+ pages = {123--134},
+ location = {Chicago, Illinois},
+ doi = {http://doi.acm.org/10.1145/1052898.1052909},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+ }
+
+@inproceedings{1052910,
+ author = {Jan Hannemann and Gail C. Murphy and Gregor Kiczales},
+ title = {Role-based refactoring of crosscutting concerns},
+ booktitle = {AOSD '05: Proceedings of the 4th international conference on Aspect-oriented software development},
+ year = {2005},
+ isbn = {1-59593-042-6},
+ pages = {135--146},
+ location = {Chicago, Illinois},
+ doi = {http://doi.acm.org/10.1145/1052898.1052910},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+ }
+
+@inproceedings{1094901,
+ author = {Uir\&\#225; Kulesza and Cl\&\#225;udio SantÁnna and Carlos Lucena},
+ title = {Refactoring the JUnit framework using aspect-oriented programming},
+ booktitle = {OOPSLA '05: Companion to the 20th annual ACM SIGPLAN conference on Object-oriented programming, systems, languages, and applications},
+ year = {2005},
+ isbn = {1-59593-193-7},
+ pages = {136--137},
+ location = {San Diego, CA, USA},
+ doi = {http://doi.acm.org/10.1145/1094855.1094901},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+ }
+
+
+@inproceedings{1052908,
+ author = {Miguel P. Monteiro and Jo\&\#227;o M. Fernandes},
+ title = {Towards a catalog of aspect-oriented refactorings},
+ booktitle = {AOSD '05: Proceedings of the 4th international conference on Aspect-oriented software development},
+ year = {2005},
+ isbn = {1-59593-042-6},
+ pages = {111--122},
+ location = {Chicago, Illinois},
+ doi = {http://doi.acm.org/10.1145/1052898.1052908},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+ }
+
+@inproceedings{331419,
+ author = {Bradley M. Kuhn and David W. Binkley},
+ title = {An enabling optimization for C++ virtual functions},
+ booktitle = {SAC '96: Proceedings of the 1996 ACM symposium on Applied Computing},
+ year = {1996},
+ isbn = {0-89791-820-7},
+ pages = {420--428},
+ location = {Philadelphia, Pennsylvania, United States},
+ doi = {http://doi.acm.org/10.1145/331119.331419},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+ }
+
+@inproceedings{263728,
+ author = {Olivier Zendra and Dominique Colnet and Suzanne Collin},
+ title = {Efficient dynamic dispatch without virtual function tables: the SmallEiffel compiler},
+ booktitle = {OOPSLA '97: Proceedings of the 12th ACM SIGPLAN conference on Object-oriented programming, systems, languages, and applications},
+ year = {1997},
+ isbn = {0-89791-908-4},
+ pages = {125--141},
+ location = {Atlanta, Georgia, United States},
+ doi = {http://doi.acm.org/10.1145/263698.263728},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+ }
+
+@inproceedings{Bacon:1996:Fast,
+ author = {David F. Bacon and Peter F. Sweeney},
+ title = {Fast static analysis of C++ virtual function calls},
+ booktitle = {OOPSLA '96: Proceedings of the 11th ACM SIGPLAN conference on Object-oriented programming, systems, languages, and applications},
+ year = {1996},
+ isbn = {0-89791-788-X},
+ pages = {324--341},
+ location = {San Jose, California, United States},
+ doi = {http://doi.acm.org/10.1145/236337.236371},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+ }
+
+@inproceedings{Driesen:1996:The,
+ author = {Karel Driesen and Urs Hölzle},
+ title = {The direct cost of virtual function calls in C++},
+ booktitle = {OOPSLA '96: Proceedings of the 11th ACM SIGPLAN conference on Object-oriented programming, systems, languages, and applications},
+ year = {1996},
+ isbn = {0-89791-788-X},
+ pages = {306--323},
+ location = {San Jose, California, United States},
+ doi = {http://doi.acm.org/10.1145/236337.236369},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+ }
+
+@inproceedings{508396,
+ author = {Jason Baker and Wilson Hsieh},
+ title = {Runtime aspect weaving through metaprogramming},
+ booktitle = {AOSD '02: Proceedings of the 1st international conference on Aspect-oriented software development},
+ year = {2002},
+ isbn = {1-58113-469-X},
+ pages = {86--95},
+ location = {Enschede, The Netherlands},
+ doi = {http://doi.acm.org/10.1145/508386.508396},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+ }
+
+@inproceedings{944730,
+ author = {Chiyan Chen and Hongwei Xi},
+ title = {Meta-programming through typeful code representation},
+ booktitle = {ICFP '03: Proceedings of the eighth ACM SIGPLAN international conference on Functional programming},
+ year = {2003},
+ isbn = {1-58113-756-7},
+ pages = {275--286},
+ location = {Uppsala, Sweden},
+ doi = {http://doi.acm.org/10.1145/944705.944730},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+ }
+
+@techreport{Gurtovoy:2005:Boost,
+    title = {{The Boost C++ Metaprogramming Library}},
+    author = {Aleksey Gurtovoy and David Abrahams},
+    year = {2005},
+}
+
+@misc{Abrahams:2004:Deeper,
+    title = {{A Deeper Look at Metafunctions}},
+    author = {David Abrahams and Aleksey Curtovoy},
+    year = {2004},
+    month = {Aug},
+    note = {\url{http://www.artima.com/cppsource/metafunctions.html}},
+    publisher = {Aritma Developer},
+}
+
+@Misc{Deursen:2003:Aspect,
+  title =   "Aspect Mining and Refactoring",
+  author =  "Arie Van Deursen and Leon Moonen and Marius Marin",
+  year =    "2003",
+  month =   nov # "~05",
+  abstract =    "In this paper we argue for the need for research in
+         the area of aspect mining, covering concepts,
+         principles, methods and tools supporting the
+         identification of aspects in objectoriented software
+         systems as well as the subsequent refactoring of such
+         systems in aspect-oriented systems.",
+  citeseer-references = "oai:CiteSeerPSU:638243; oai:CiteSeerPSU:404182;
+         oai:CiteSeerPSU:287583; oai:CiteSeerPSU:63210;
+         oai:CiteSeerPSU:552786; oai:CiteSeerPSU:529773",
+  annote =  "Arie Van Deursen (CWI Delft University. of Technology;
+         The Netherlands); Leon Moonen (Delft University. of
+         Technology CWI; The Netherlands); Marius Marin (Delft
+         University of Technology; The Netherlands);",
+  bibsource =  "OAI-PMH server at cs1.ist.psu.edu",
+  language =    "en",
+  oai =     "oai:CiteSeerPSU:709190",
+  rights =  "unrestricted",
+  URL =     "http://citeseer.ist.psu.edu/709190.html;
+         http://www.swen.uwaterloo.ca/~reface03/Papers/LeonMoonen.pdf",
+}
+
+InProceedings{Breu:2004:Aspect,
+  title =	"Aspect Mining Using Event Traces",
+  author =	"Silvia Breu and Jens Krinke",
+  year = 	"2004",
+  bibdate =	"2004-10-08",
+  bibsource =	"DBLP,
+		 http://dblp.uni-trier.de/db/conf/kbse/ase2004.html#BreuK04",
+  booktitle =	"ASE",
+  crossref =	"conf/kbse/2004",
+  pages =	"310--315",
+  URL =  	"http://csdl.computer.org/comp/proceedings/ase/2004/2131/00/21310310abs.htm",
+}
+
+@Misc{Deursen:2005:A,
+  title =	"A Systematic Aspect-Oriented Refactoring and Testing
+		 Strategy, and its Application to {JH}otDraw",
+  note = 	"Comment: 25 pages",
+  author =	"Arie van Deursen and Marius Marin and Leon Moonen",
+  year = 	"2005",
+  month =	mar # "~05",
+  abstract =	"Aspect oriented programming aims at achieving better
+		 modularization for a system's crosscutting concerns in
+		 order to improve its key quality attributes, such as
+		 evolvability and reusability. Consequently, the
+		 adoption of aspect-oriented techniques in existing
+		 (legacy) software systems is of interest to remediate
+		 software aging. The refactoring of existing systems to
+		 employ aspect-orientation will be considerably eased by
+		 a systematic approach that will ensure a safe and
+		 consistent migration. In this paper, we propose a
+		 refactoring and testing strategy that supports such an
+		 approach and consider issues of behavior conservation
+		 and (incremental) integration of the aspect-oriented
+		 solution with the original system. The strategy is
+		 applied to the JHotDraw open source project and
+		 illustrated on a group of selected concerns. Finally,
+		 we abstract from the case study and present a number of
+		 generic refactorings which contribute to an incremental
+		 aspect-oriented refactoring process and associate
+		 particular types of crosscutting concerns to the model
+		 and features of the employed aspect language. The
+		 contributions of this paper are both in the area of
+		 supporting migration towards aspect-oriented solutions
+		 and supporting the development of aspect languages that
+		 are better suited for such migrations.",
+  bibsource =	"OAI-PMH server at arXiv.org",
+  oai =  	"oai:arXiv.org:cs/0503015",
+  subject =	"Software Engineering; Programming Languages; D.2.7;
+		 D.2.5; D.1.5",
+  URL =  	"http://arxiv.org/abs/cs/0503015",
+}
+
+@InProceedings{Hannemann:2005:aosd05,
+  booktitle =	"Proc. 4rd Int' Conf. on Aspect-Oriented Software
+		 Development {({AOSD}-2005)}",
+  editor =	"Peri Tarr",
+  publisher =	"ACM Press",
+  year = 	"2005",
+  month =	mar,
+  title =	"Role-Based Refactoring of Crosscutting Concerns",
+  author =	"Jan Hannemann and Gail Murphy and Gregor Kiczales",
+  pages =	"135--146",
+}
+
+
+@Book{robson:99:stl,
+	title =		"Using the Stl - The C++ Standard Template Library",
+	author =	"Robert Robson",
+	publisher = 	"Springer-Verlag",
+	year =		"1999",
+	pages =		"600",
+	isbn =		"0-387-98857-2",
+	edition =	"2",
+}

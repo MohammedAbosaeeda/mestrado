@@ -1,0 +1,24 @@
+\section{Conclusion}
+\label{sc:conclusao}
+
+%- Retomar os objetivos deste trabalho. Retomar as implicações e características. Atender o tempo de duração da bateria e os \deadlines{} das partes obrigatórias.
+
+%Este trabalho propôs uma abordagem que explora a energia como um parâmetro de \qos{} em sistemas embarcados móveis, para atender o tempo de duração do sistema com a execução e garantia dos \deadlines{} de, no mínimo, tarefas essenciais, definidas previamente pelo programador da aplicação. Essa abordagem foi inspirada pelos conceitos de tarefas imprecisas, que são tarefas que podem ser divididas em parte obrigatória e parte opcional. Neste artigo, equações em tempo de projeto foram apresentadas com o objetivo do programador da aplicação verificar se o conjunto de tarefas utilizado será escalonável no nosso algoritmo com relação aos dois parâmetros desejados (tempo e energia). Em tempo de execução, nosso escalonador baseado no algoritmo \textsc{EDF} garante os \deadlines{} das partes obrigatórias e com a realimentação da equação de energia verifica se o tempo de duração do sistema exigido será alcançado. Caso algum dos parâmetros desejados seja comprometido, as partes opcionais serão descartadas, diminuindo os níveis da \QoS{}.  Um protótipo foi implementado no \epos{}, que permitiu que um gerente de energia fosse executado nos períodos ociosos em que as partes opcionais foram impedidas de executar, consumindo menos energia e aumentando o tempo de duração da bateria.
+
+This work proposed an approach to exploit energy as a \qos{} parameter in order
+to guarantee that battery lifetime can last time desired by mobile embedded
+system and yet preserve the deadlines of hard real-time tasks.
+Our approach was inspired by imprecise tasks concepts, according to tasks
+can be divided into mandatory and optional parts. In this article, equations at
+project-time were presented with objective the of application programmer to
+check if a set of tasks will be schedulable in our algorithm in relation to two
+parameters desired, i.e., time and energy. At execution-time, our scheduler
+based on \textsc{EDF} algorithm ensures the mandatory subtasks deadlines and
+recalculates the equation of energy in order to check if the required battery 
+lifetime will be met. The optional subtasks are prevented from executing, i.e,
+decreasing \qos{} levels if any required parameter will not be met. A prototype
+was developed in \epos{}, which allowed the execution of a power manager in idle
+periods created by non-execution of the optional subtasks, thus reducing 
+energy consumption by stopping or slowing down system components during these
+idle periods.
+

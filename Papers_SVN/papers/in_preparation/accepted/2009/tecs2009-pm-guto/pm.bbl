@@ -1,0 +1,224 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citeauthoryear{Aboughazaleh, Mossé, Childers, and
+  Melhem}{Aboughazaleh et~al\mbox{.}}{2006}]{Melhem:2006}
+{\sc Aboughazaleh, N.}, {\sc Mossé, D.}, {\sc Childers, B.~R.}, {\sc and} {\sc
+  Melhem, R.} 2006.
+\newblock Collaborative operating system and compiler power management for
+  real-time applications.
+\newblock {\em ACM Transactions on Embedded Computing Systems\/}~{\em 5,\/}~1
+  (feb), 82--115.
+
+\bibitem[\protect\citeauthoryear{Bacon, Cheng, and Rajan}{Bacon
+  et~al\mbox{.}}{2003}]{Bacon:2003}
+{\sc Bacon, D.~F.}, {\sc Cheng, P.}, {\sc and} {\sc Rajan, V.~T.} 2003.
+\newblock A real-time garbage collector with low overhead and consistent
+  utilization.
+\newblock {\em ACM SIGPLAN Notices\/}~{\em 38,\/}~1, 285--298.
+
+\bibitem[\protect\citeauthoryear{Bang, Bang, Yoon, and Chung}{Bang
+  et~al\mbox{.}}{2009}]{Bang:2009}
+{\sc Bang, S.-Y.}, {\sc Bang, K.}, {\sc Yoon, S.}, {\sc and} {\sc Chung, E.-Y.}
+  2009.
+\newblock Run-time adaptive workload estimation for dynamic voltage scaling.
+\newblock {\em IEEE Transactions on Computer-Aided Design of Integrated
+  Circuits and Systems\/}~{\em 28,\/}~9 (sep), 1334--1347.
+
+\bibitem[\protect\citeauthoryear{Benini, Bogliolo, and Micheli}{Benini
+  et~al\mbox{.}}{1998}]{Benini:1998}
+{\sc Benini, L.}, {\sc Bogliolo, A.}, {\sc and} {\sc Micheli, G.~D.} 1998.
+\newblock Dynamic power management of electronic systems.
+\newblock In {\em ICCAD '98: Proceedings of the 1998 IEEE/ACM international
+  conference on Computer-aided design}. ACM Press, New York, USA, 696--702.
+
+\bibitem[\protect\citeauthoryear{Bhatti, Carlson, Dai, Deng, Rose, Sheth,
+  Shucker, Gruenwald, Torgerson, and Han}{Bhatti
+  et~al\mbox{.}}{2005}]{Bhatti:2005}
+{\sc Bhatti, S.}, {\sc Carlson, J.}, {\sc Dai, H.}, {\sc Deng, J.}, {\sc Rose,
+  J.}, {\sc Sheth, A.}, {\sc Shucker, B.}, {\sc Gruenwald, C.}, {\sc Torgerson,
+  A.}, {\sc and} {\sc Han, R.} 2005.
+\newblock Mantis os: an embedded multithreaded operating system for wireless
+  micro sensor platforms.
+\newblock {\em Mob. Netw. Appl.\/}~{\em 10,\/}~4, 563--579.
+
+\bibitem[\protect\citeauthoryear{Chou, Liu, Li, and Bagherzadeh}{Chou
+  et~al\mbox{.}}{2002}]{Chou:2002}
+{\sc Chou, P.~H.}, {\sc Liu, J.}, {\sc Li, D.}, {\sc and} {\sc Bagherzadeh, N.}
+  2002.
+\newblock Impacct: Methodology and tools for power-aware embedded systems.
+\newblock {\em DESIGN AUTOMATION FOR EMBEDDED SYSTEMS, Special Issue on Design
+  Methodologies and Tools for Real-Time Embedded Systems\/}~{\em 7,\/}~3 (Oct),
+  205--232.
+
+\bibitem[\protect\citeauthoryear{Devadas and Aydin}{Devadas and
+  Aydin}{2008}]{Aydin:2008}
+{\sc Devadas, V.} {\sc and} {\sc Aydin, H.} 2008.
+\newblock On the interplay of dynamic voltage scaling and dynamic power
+  management in real-time embedded applications.
+\newblock In {\em Proceedings of EMSOFT~08}. Atlanta, USA, 99--108.
+
+\bibitem[\protect\citeauthoryear{Dhiman and Rosing}{Dhiman and
+  Rosing}{2009}]{Dhiman:2009}
+{\sc Dhiman, G.} {\sc and} {\sc Rosing, T.} 2009.
+\newblock System-level power management using online learning.
+\newblock {\em IEEE Transactions on Computer-Aided Design of Integrated
+  Circuits and Systems\/}~{\em 28,\/}~5 , 676--689.
+
+\bibitem[\protect\citeauthoryear{Flinn and Satyanarayanan}{Flinn and
+  Satyanarayanan}{2004}]{Flinn:2004}
+{\sc Flinn, J.} {\sc and} {\sc Satyanarayanan, M.} 2004.
+\newblock Managing battery lifetime with energy-aware adaptation.
+\newblock {\em ACM Trans. Comput. Syst.\/}~{\em 22,\/}~2, 137--179.
+
+\bibitem[\protect\citeauthoryear{Fröhlich}{Fröhlich}{2001}]{Frohlich:2001}
+{\sc Fröhlich, A.~A.} 2001.
+\newblock {\em {Application-Oriented Operating Systems}}.
+\newblock GMD - Forschungszentrum Informationstechnik, Sankt Augustin.
+
+\bibitem[\protect\citeauthoryear{Fröhlich and Wanner}{Fröhlich and
+  Wanner}{2008}]{Frohlich:JCS:2008}
+{\sc Fröhlich, A.~A.} {\sc and} {\sc Wanner, L.} 2008.
+\newblock Operating system support for wireless sensor networks.
+\newblock {\em Journal of Computer Science\/}~{\em 4,\/}~4, 272--281.
+
+\bibitem[\protect\citeauthoryear{Harada, Ushio, and Nakamoto}{Harada
+  et~al\mbox{.}}{2006}]{Harada:2006}
+{\sc Harada, F.}, {\sc Ushio, T.}, {\sc and} {\sc Nakamoto, Y.} 2006.
+\newblock Power-aware resource allocation with fair qos guarantee.
+\newblock In {\em Proceedings of the 12th IEEE International Conference on
+  Embedded and Real-Time Computing Systems and Applications}. IEEE Computer
+  Society, Washington, USA, 287--293.
+
+\bibitem[\protect\citeauthoryear{Hill, Horton, Kling, and Krishnamurthy}{Hill
+  et~al\mbox{.}}{2004}]{Hill:2004}
+{\sc Hill, J.}, {\sc Horton, M.}, {\sc Kling, R.}, {\sc and} {\sc
+  Krishnamurthy, L.} 2004.
+\newblock The platforms enabling wireless sensor networks.
+\newblock {\em Communications of the ACM\/}~{\em 47,\/}~6, 41--46.
+
+\bibitem[\protect\citeauthoryear{Hill, Szewczyk, Woo, Hollar, Culler, and
+  Pister}{Hill et~al\mbox{.}}{2000}]{Hill:2000}
+{\sc Hill, J.}, {\sc Szewczyk, R.}, {\sc Woo, A.}, {\sc Hollar, S.}, {\sc
+  Culler, D.}, {\sc and} {\sc Pister, K.} 2000.
+\newblock System architecture directions for networked sensors.
+\newblock In {\em Proceedings of the 9th International Conference on
+  Architectural Support for Programming Languages and Operating Systems}.
+  Cambridge, USA, 93--104.
+
+\bibitem[\protect\citeauthoryear{Kellner and Bellosa}{Kellner and
+  Bellosa}{2007}]{Bellosa:2007}
+{\sc Kellner, S.} {\sc and} {\sc Bellosa, F.} 2007.
+\newblock Energy accounting support in tinyos.
+\newblock In {\em GI/ITG KuVS Fachgespräch Systemsoftware und Energiebewusste
+  Systeme}. Number 2007-20. Fakult\"at f\"ur Informatik, Universit\"at
+  Karlsruhe (TH), Karlsruhe, Germany, 17--20.
+\newblock Interner Bericht.
+
+\bibitem[\protect\citeauthoryear{Kiczales, Lamping, Mendhekar, Maeda, Lopes,
+  Loingtier, and Irwin}{Kiczales et~al\mbox{.}}{1997}]{Kiczales:1997}
+{\sc Kiczales, G.}, {\sc Lamping, J.}, {\sc Mendhekar, A.}, {\sc Maeda, C.},
+  {\sc Lopes, C.~V.}, {\sc Loingtier, J.-M.}, {\sc and} {\sc Irwin, J.} 1997.
+\newblock {Aspect-Oriented Programming}.
+\newblock In {\em Proceedings of the European Conference on Object-oriented
+  Programming'97}. Lecture Notes in Computer Science, vol. 1241. Springer,
+  Jyväskylä, Finland, 220--242.
+
+\bibitem[\protect\citeauthoryear{Liu and Layland}{Liu and
+  Layland}{1973}]{Liu:1973}
+{\sc Liu, C.~L.} {\sc and} {\sc Layland, J.} 1973.
+\newblock Scheduling algorithms for multiprogramming in a hard real-time
+  environment.
+\newblock {\em Journal of the ACM\/}~{\em 20,\/}~1, 46--61.
+
+\bibitem[\protect\citeauthoryear{Liu, Shih, Lin, Bettati, and Chung}{Liu
+  et~al\mbox{.}}{1994}]{Liu:1994}
+{\sc Liu, J.~W.}, {\sc Shih, W.-K.}, {\sc Lin, K.-J.}, {\sc Bettati, R.}, {\sc
+  and} {\sc Chung, J.-Y.} 1994.
+\newblock Imprecise computations.
+\newblock {\em Proceedings of the IEEE\/}~{\em 82,\/}~1 (Jan), 83--94.
+
+\bibitem[\protect\citeauthoryear{Mandal, Mahapatra, Bhojwani, and
+  Mohanty}{Mandal et~al\mbox{.}}{2010}]{Mohanty:2010}
+{\sc Mandal, S.}, {\sc Mahapatra, R.}, {\sc Bhojwani, P.}, {\sc and} {\sc
+  Mohanty, S.} 2010.
+\newblock Intellbatt: Toward a smarter battery.
+\newblock {\em Computer\/}~{\em 43,\/}~3 (mar), 67--71.
+
+\bibitem[\protect\citeauthoryear{Monteiro, Devadas, Ashar, and
+  Mauskar}{Monteiro et~al\mbox{.}}{1996}]{Monteiro:1996}
+{\sc Monteiro, J.}, {\sc Devadas, S.}, {\sc Ashar, P.}, {\sc and} {\sc Mauskar,
+  A.} 1996.
+\newblock Scheduling techniques to enable power management.
+\newblock In {\em Proceedings of the 33rd Annual Design Automation Conference}.
+  Las Vegas, USA, 349--352.
+
+\bibitem[\protect\citeauthoryear{Niu and Quan}{Niu and Quan}{2005}]{Niu:2005}
+{\sc Niu, L.} {\sc and} {\sc Quan, G.} 2005.
+\newblock A hybrid static/dynamic dvs scheduling for real-time systems with (m,
+  k)-guarantee.
+\newblock {\em rtss\/}~{\em 0}, 356--365.
+
+\bibitem[\protect\citeauthoryear{Panasonic}{Panasonic}{2004}]{Panasonic:ERTJ:2%
+004}
+{\sc Panasonic}. 2004.
+\newblock {\em ERTJ Multilayer Chip NTC Thermistors Datasheet}.
+\newblock Panasonic.
+
+\bibitem[\protect\citeauthoryear{Peterson}{Peterson}{1977}]{Peterson:1977}
+{\sc Peterson, J.~L.} 1977.
+\newblock Petri nets.
+\newblock {\em ACM Comput. Surv.\/}~{\em 9,\/}~3, 223--252.
+
+\bibitem[\protect\citeauthoryear{Pettis and Lu}{Pettis and
+  Lu}{2009}]{Pettis:2009}
+{\sc Pettis, N.} {\sc and} {\sc Lu, Y.-H.} 2009.
+\newblock A homogeneous architecture for power policy integration in operating
+  systems.
+\newblock {\em IEEE Transactions on Computers\/}~{\em 58,\/}~7 (jul), 945--955.
+
+\bibitem[\protect\citeauthoryear{Ren, Krogh, and Marculescu}{Ren
+  et~al\mbox{.}}{2005}]{Ren:2005}
+{\sc Ren, Z.}, {\sc Krogh, B.}, {\sc and} {\sc Marculescu, R.} 2005.
+\newblock Hierarchical adaptive dynamic power management.
+\newblock {\em IEEE Transactions on Computers\/}~{\em 54,\/}~4, 409--420.
+
+\bibitem[\protect\citeauthoryear{Scordino and Lipari}{Scordino and
+  Lipari}{2004}]{Scordino:2004}
+{\sc Scordino, C.} {\sc and} {\sc Lipari, G.} 2004.
+\newblock Using resource reservation techniques for power-aware scheduling.
+\newblock In {\em EMSOFT '04: Proceedings of the 4th ACM international
+  conference on Embedded software}. ACM Press, New York, USA, 16--25.
+
+\bibitem[\protect\citeauthoryear{Tennenhouse}{Tennenhouse}{2000}]{Tennenhouse:%
+2000}
+{\sc Tennenhouse, D.} 2000.
+\newblock {Proactive Computing}.
+\newblock {\em Communications of the ACM\/}~{\em 43,\/}~5 (May), 43--50.
+
+\bibitem[\protect\citeauthoryear{Vaddagiri, Santhanam, Sukthankar, and
+  Iyer}{Vaddagiri et~al\mbox{.}}{2004}]{Vaddagiri:2004}
+{\sc Vaddagiri, S.}, {\sc Santhanam, A.~K.}, {\sc Sukthankar, V.}, {\sc and}
+  {\sc Iyer, M.} 2004.
+\newblock Power management in linux-based systems.
+\newblock {\em Linux Journal\/}.
+
+\bibitem[\protect\citeauthoryear{Wiedenhoft, Junior, and Fröhlich}{Wiedenhoft
+  et~al\mbox{.}}{2007}]{Wiedenhoft:ETFA:2007}
+{\sc Wiedenhoft, G.~R.}, {\sc Junior, A. S.~H.}, {\sc and} {\sc Fröhlich,
+  A.~A.} 2007.
+\newblock {A Power Manager for Deeply Embedded Systems}.
+\newblock In {\em 12th IEEE International Conference on Emerging Technologies
+  and Factory Automation}. Patras, Greece, 748--751.
+
+\bibitem[\protect\citeauthoryear{Yuan}{Yuan}{2004}]{Yuan:2004}
+{\sc Yuan, W.} 2004.
+\newblock Grace-os: An energy-efficient mobile multimedia operating system.
+\newblock Ph.D. thesis, University of Illinois at Urbana-Champaign.
+
+\bibitem[\protect\citeauthoryear{Zeng, Ellis, and Lebeck}{Zeng
+  et~al\mbox{.}}{2005}]{Zeng:2005}
+{\sc Zeng, H.}, {\sc Ellis, C.~S.}, {\sc and} {\sc Lebeck, A.~R.} 2005.
+\newblock Experiences in managing energy with ecosystem.
+\newblock {\em IEEE Pervasive Computing\/}~{\em 4,\/}~1, 62--68.
+
+\end{thebibliography}

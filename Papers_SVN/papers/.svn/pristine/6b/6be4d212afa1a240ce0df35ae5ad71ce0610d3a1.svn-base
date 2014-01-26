@@ -1,0 +1,126 @@
+@article{Liu:1973,
+ author = {Liu, C.~L. and Layland, J.~W.},
+ title = {Scheduling Algorithms for Multiprogramming in a Hard-Real-Time Environment},
+ journal = {J. ACM},
+ issue_date = {Jan. 1973},
+ volume = {20},
+ number = {1},
+ month = jan,
+ year = {1973},
+ issn = {0004-5411},
+ pages = {46--61},
+ numpages = {16},
+ acmid = {321743},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+}
+
+@inproceedings{Calandrino:2006,
+ author = {Calandrino, J.~M. and Leontyev, H. and Block, A. and Devi, UmaMaheswari C. and Anderson, J.~H.},
+ title = {LITMUSRT: A Testbed for Empirically Comparing Real-Time Multiprocessor Schedulers},
+ booktitle = {Proceedings of the 27th IEEE International Real-Time Systems Symposium},
+ series = {RTSS '06},
+ year = {2006},
+ isbn = {0-7695-2761-2},
+ pages = {111--126},
+ numpages = {16},
+ acmid = {1194409},
+ publisher = {IEEE Computer Society},
+ address = {Washington, DC, USA},
+}
+
+@inproceedings{Bastoni:2010,
+ author = {Bastoni, A. and Brandenburg, B.~B. and Anderson, J.~H.},
+ title = {An Empirical Comparison of Global, Partitioned, and Clustered Multiprocessor EDF Schedulers},
+ booktitle = {Proceedings of the 2010 31st IEEE Real-Time Systems Symposium},
+ series = {RTSS '10},
+ year = {2010},
+ isbn = {978-0-7695-4298-0},
+ pages = {14--24},
+ numpages = {11},
+ acmid = {1936217},
+ publisher = {IEEE Computer Society},
+ address = {Washington, DC, USA},
+ keywords = {Real-Time Operating Systems, Multiprocessor Real-Time Scheduling, Multiprocessor Schedulers Comparison},
+}
+
+@inproceedings{Bastoni:2011,
+ author = {Bastoni, A. and Brandenburg, B.~B. and Anderson, J.~H.},
+ title = {Is Semi-Partitioned Scheduling Practical?},
+ booktitle = {Proceedings of the 2011 23rd Euromicro Conference on Real-Time Systems},
+ series = {ECRTS '11},
+ year = {2011},
+ isbn = {978-0-7695-4442-7},
+ pages = {125--135},
+ numpages = {11},
+ acmid = {2056725},
+ publisher = {IEEE Computer Society},
+ address = {Washington, DC, USA},
+ keywords = {real-time systems, multiprocessor real-time scheduling, semi-partitioned scheduling, implementation study, schedulability},
+} 
+
+@article{Gracioli:2013,
+ author = {Gracioli, G. and Fr\"{o}hlich, A.~A. and Pellizzoni, R. and Fischmeinster, S.},
+ title = {Implementation and Evaluation of Global and Partitioned Scheduling in a Real-Time OS},
+ journal = {Real-Time Systems Journal (em revisão)},
+ year = {2013},
+ numpages = {50},
+} 
+
+@BOOK{Farines,
+  AUTHOR = {Jean Marie Farines and Joni da Silva Fraga and Rômulo Silva de Oliveira},
+  TITLE = {Sistemas de Tempo Real},
+  PUBLISHER = {12ª Escola de Computação, IME-USP},
+  YEAR = 2000,
+  ADDRESS = {São Paulo-SP},
+  MONTH = JUL
+}
+
+@INPROCEEDINGS{Brandenburg:2007,
+    author = {Brandenburg, B.~B and Anderson, J.~H.},
+    title = {Feather-trace: A light-weight event tracing toolkit},
+    booktitle = {In Proceedings of the Third International Workshop on Operating Systems Platforms for Embedded Real-Time Applications (OSPERT'07},
+    year = {2007},
+    pages = {61--70}
+}
+
+@BOOK{Froehlich:2001,
+  AUTHOR = {Ant{\^{o}}nio Augusto Fr{\"{o}}hlich},
+  TITLE = {Application-Oriented Operating Systems},
+  PUBLISHER = {GMD - Forschungszentrum Informationstechnik},
+  YEAR = 2001,
+  NUMBER = 17,
+  SERIES = {GMD Research Series},
+  ADDRESS = {Sankt Augustin},
+  MONTH = AUG
+}
+
+@ONLINE{epos,
+author = {EPOS},
+title = {EPOS website},
+month = Jul,
+year = {2012},
+url = {http://epos.lisha.ufsc.br}
+}
+
+@Article{Wanner:JCS:2008,
+  author =	"Lucas Francisco Wanner and Ant{\^o}nio Augusto Fr{\"o}hlich",
+  title =	"{Operating System Support for Wireless Sensor Networks}",
+  journal =	"Journal of Computer Science",
+  year =	2008,
+  volume =	"4",
+  number =	"4",
+  pages =	"272-281",
+  issn =	"1549-3636"
+}
+
+@InProceedings{Ludwich:IADIS_AC:2011,
+  author =	"Mateus Krepsky Ludwich and Ant{\^o}nio Augusto Fr{\"o}hlich",
+  title =	"{Abstracting hardware devices to embedded Java applications}",
+  booktitle =	"IADIS Applied Computing 2011",
+  pages =	"371-378",
+  year =	2011,
+  address =	"Rio de Janeiro, Brazil",
+  month =	Nov,
+  isbn =	"978-989-8533-06-7",
+}

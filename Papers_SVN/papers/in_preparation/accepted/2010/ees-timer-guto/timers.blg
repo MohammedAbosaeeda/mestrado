@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99c (Web2C 7.5.6)
+The top-level auxiliary file: timers.aux
+The style file: IEEEtran.bst
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Database file #1: timing.bib
+-- IEEEtran.bst version 1.12 (2007/01/11) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+
+Done.
+You've used 10 entries,
+            4024 wiz_defined-function locations,
+            884 strings with 9337 characters,
+and the built_in function-call counts, 7146 in all, are:
+= -- 535
+> -- 177
+< -- 46
++ -- 94
+- -- 33
+* -- 351
+:= -- 1062
+add.period$ -- 23
+call.type$ -- 10
+change.case$ -- 9
+chr.to.int$ -- 108
+cite$ -- 10
+duplicate$ -- 534
+empty$ -- 651
+format.name$ -- 42
+if$ -- 1647
+int.to.chr$ -- 0
+int.to.str$ -- 10
+missing$ -- 103
+newline$ -- 53
+num.names$ -- 10
+pop$ -- 256
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 539
+stack$ -- 0
+substring$ -- 261
+swap$ -- 401
+text.length$ -- 10
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 10
+warning$ -- 0
+while$ -- 28
+width$ -- 12
+write$ -- 113

@@ -1,0 +1,198 @@
+\documentclass{acm_proc_article-sp}
+
+\usepackage[utf8]{inputenc}	% for Latin languages
+\usepackage[T1]{fontenc}	% for ISO and UTF characters
+\usepackage[english]{babel}	% for multilingual support
+
+\newcommand{\fig}[4][thb]{
+  \begin{figure}[#1] {\centering{\includegraphics[#4]{fig/#2}}\par}
+    \caption{#3\label{fig:#2}}
+  \end{figure}
+}
+
+\begin{document}
+
+\title{Using QEMU and GDB for cross debugging through automatic exchange of configuration parameters.}
+
+\numberofauthors{2}
+\author{
+\alignauthor
+Rita de Cássia Cazu Soldi\\
+       \affaddr{Federal University of Santa Catarina(UFSC)}\\
+       \affaddr{Laboratory for Software and Hardware Integration(LISHA)}\\
+       \affaddr{P.O. Box 476}\\
+       \affaddr{88049-900 - Florianópolis, SC, Brazil}\\
+       \email{rita@lisha.ufsc.br}
+% 2nd. author
+\alignauthor
+Antônio Augusto Medeiros Fröhlich\\
+       \affaddr{Federal University of Santa Catarina(UFSC)}\\
+       \affaddr{Laboratory for Software and Hardware Integration(LISHA)}\\
+       \affaddr{P.O. Box 476}\\
+       \affaddr{88049-900 - Florianópolis, SC, Brazil}\\
+       \email{guto@lisha.ufsc.br}
+}
+
+\maketitle
+\begin{abstract}
+Debugging is one of the most time-consuming process in software development. For embedded systems it becomes even more challenging, since the developer performs the process repeatedly on different platforms, which vary according to the architecture, languages and vendor.
+
+This paper presents the Automatic Exchange of configuration Parameters (AEP) as the first step to achieve a fully automated tool for running tests in embedded systems. We evaluate the AEP with a real-world application in terms of valid information in the log and memory consumption to process this information. The obtained results indicate that even a small part of the fully automated debug produce helpful answers for developers to find and fix bugs.
+\end{abstract}
+
+\keywords{Test automation, cross debug, embedded systems}
+
+\section{Introduction}
+When a software deviates from the expected/specified behaviour, its developers must start the debugging process to find the cause of the abnormal behaviour before fixing it. However, the debugging task consumes considerable amount of time and brings many challenges, since it requires a thorough inspection of the source code making it a non-trivial process  \cite{parnin2011automated}.
+
+The debugging task is even more difficult when it comes to embedded systems because, unlike general-purpose systems that are designed to be flexible, embedded systems have to cope with limited resources and perform specific tasks. Even coding and testing is more defiant in this kind of systems since the developers need to find out how to optimize the use of the scarce resources and the platform depends on operating systems, architecture, vendors, debugging tool, etc, \cite{schneider2004ten}. This makes embedded systems more susceptible to errors and specification failures.
+
+There are several approaches for debugging applications and each one has a different degree of automation, nevertheless, the more automated is the process more information about the application it needs. Thereby, a fully debug automation requires a previous knowledge of all possible scenarios that could result in error.
+
+Most of debug tools are partially automated and demand some interaction with the developer to make decisions during testing \cite{campos2012gzoltar,tracingDiagnose}. This type of tool saves some development time, but not as much when compared to total automation tools. The automation of the entire testing process without any human intervention is still a challenge to researchers, although there are some studies that can automate part of the process with data taken directly from the application \cite{Larson:2013:MDAT,JSWjsw0803603616}.
+
+In this paper, we propose an automation of one part of the debugging process for embedded systems' application, the automatic exchange of configuration parameters. In our proposal, is presented an introduction to the problem of setting up a stable environment for testing embedded systems. Part of this work is the creation of a script responsible for exchanging configuration parameters. In summary, we make the following contributions:
+
+\begin{itemize}
+
+\item \textbf{Automate the operation of debugging executed with a real world embedded system application.} In this case study developers can run a script to automatic find errors and use a report to fix the code or find better parameter values.
+
+\item \textbf{Specification of an environment for debugging embedded applications, fully configurable according to specific hardware/software requirements.} We show how it is possible to create an environment for development and testing embedded applications using GDB to cross debug the code and QEMU to simulate its execution.
+\end{itemize}
+
+%The rest of this paper is organized as follows. Section \ref{sec:relatedWork} presents the related work. Section \ref{sec:simulationEnv} contain the details of the integrated GDB and QEMU environment for debugging embedded applications. Section \ref{sec:automatic} presents the anatomic solution of exchange parameter's configuration applied in a study case, Section \ref{sec:evaluation} shows the results and finally Section \ref{sec:Conclusion} concludes the paper.
+
+\section{Related Work}
+\label{sec:relatedWork}
+The automated testing area has a vast literature that inspired our proposal. There are several approaches for debugging general purposing systems, and based on this works we created the parameters exchange script and the test environment for debugging embedded systems applications as a first step to achieve a fully automated tool.
+
+The work presented by Seo et al. \cite{seo} proposes an interface technique that identify and classify interfaces between embedded system layers. They created a model based tool that generates and executes test cases to analyse these interface layers and yet proposed the emulation test technique, that integrates monitoring and debugging embedded systems. Despite the similarity, since we also emulate the target board environment and monitor the behaviour of environment variables, Seo et al. focus on testing interfaces and layers, while our proposal addresses the testing of components and their integration.
+
+ATEMES \cite{atemes} is a tool for automatic random tests, that includes coverage testing, unit testing, performance testing and race condition
+testing. ATEMES supports instrumentation of source code, generation of tests cases and generation of primitive input data for multi-core embedded software. This system is similar to ours since we also automatically run random tests under cross-testing environment to support embedded software testing. However, the idea of our work is to integrate the exchange parameters directly in the operating system, so its possible not only test the application as well as optimize the choice of the configuration parameters.
+
+Statistical Debugging techniques \cite{zheng2006statistical,zhang2009capturing,parsa2011statistical} are capable of isolating a bug by automatic running an application several times and using generated statistical data to analyse these executions information. As a result of this analysis it is possible to pinpointing a suspiciousness ranking, that reduces the bugs' search area. Due to the need of a large data set to accomplish this statistic and the necessity to have a big data storage to keep information of all executions, this technique could not be incorporated into an embedded system, except by using cross-debug. However, a ranking pointing out possible errors is a breakthrough in the developer's work, therefore we designed the debugging environment to be build on a machine with more storage and processing, than the embedded system.
+
+In program slicing \cite{sasirekha2011program, Xu:2005:BSP:1050849.1050865,artho2011iterative} the main idea is to divide the code into different parts, testing and removing paths that do not lead to errors. This technique has two approaches for reducing the path that lead to error: static slicing and dynamic slicing. Static slicing has faster reduction of application path, however, it does not  consider the initial entry of the program, then the final set of paths leading to the error are an approximation of the real set. In dynamic slicing  the initial entry has a great influence on how the slices are performed, allowing a greater precision for final errors path. This technique is interesting because it needs only one error path to simplify the set of inputs to be examined. In our proposal we intend to support both types of slicing through configuration files (traits) that can address the whole system or just a specific part of the application.
+
+In capture and replay \cite{burger2008replaying,qi2011locating,orso2005selective} the program is executed until it reaches the end and all operations performed are stored in a log. Burger and Zeller developed a JINSI tool that can capture and replay interactions between inter/intra-components. So all relevant operations are observed and run step by step, considering all communications between two components, until find the bug. Besides being the most widely used, this kind of technique need to perform all possible paths from one object to another, making this technique time consuming. From this technique our work absorbs the idea of debug focusing on the components that compose the application. We use a highly configurable operating system, on which you can plug a single component with different implementations, so developer can verify the difference between them.
+
+\section{Embedded Systems Debugging Environment}
+\label{sec:simulationEnv}
+This section presents details of the debugging process, simulation and how to integrate both in order to create a better environment for developing and testing embedded applications.
+
+Regardless of the technique to be used, debugging can be accomplished in two ways, either locally or remotely. Local debugging is when the application runs on the same machine as the debugger. As a result, application and debugger have a lower communication latency, however, the application interferes in the debug process, e.g., if the application under test crashes, the debugger will need to halt or restart to seek the cause.
+
+This influence does not happen in remote debug, since application and debugger run in separate machines. The tests are performed into an isolated box over a network connection. Despite of having some latency issues, from the debugging point of view, the rest of the process can be viewed as a local debug with two screens connected in only one system.
+
+In order to provide the most number of possibilities for the developer, the emulator used to debug applications must provide both ways to perform this activity. Also, for a useful debug, developers must consider others concepts involved in debugging, such as, how to configure the code execution mode, to observe the application outputs, watch some environment's variables, log the tasks performed and others configurations. This requires a good ally to become possible follow program steps and analyse executing state a moment before a crash or even to specify anything that might affect its behaviour.
+
+\subsection{Debugging with QEMU and GDB}
+QEMU is a generic and open source machine emulator and virtualizer. When used as a machine emulator its possible to run applications made for one machine to another via dynamic translation. The decision to use QEMU emulator was based on active community, support of Linux as host machine, a native set of target machines and the possibility to integrate a new machine.
+
+Thus, besides having QEMU to emulate applications, we still need to examine the state and variables of the application. Using GDB - \textit{the GNU Project Debugger} it is possible to see inside the application while it executes \cite{gdb}. One important characteristic of GDB is to enable remote debug. Therefore, it is possible to run the program on a given embedded platform while we debug it with GDB running in separated machine. In remote debugging, GDB connects to a remote system over a network and then control the execution of the program and retrieve information about its state.
+
+The integration of both is particular for each host/target machine, thus, some steps presented here must be tailored depending on your target architecture. Figure~\ref{fig:qemu_gdb_gray} presents the activities required to perform remote debugging using IA-32 architecture. These steps and additional explanation of which techniques and tools are used in this process are listed bellow:
+
+\fig{qemu_gdb_gray}{Steps to integrate QEMU and GDB}{scale=.25}
+
+\begin{enumerate}
+\item \textbf{Compile with debug information} is the first and the most important step. The source code is the input and the output is the compiled application that has debug information. Using GCC (\textit{GNU project C and C++ compiler}) it can be performed by using \texttt{-g} option to compile.
+
+\item \textbf{Emulate with QEMU} is a necessary step to execute the application in the correct target architecture. To perform this step, the developer must initiate QEMU with \textit{-s -S} options. The first option enables the GDB stub, in order to open communication between QEMU and GDB. The \textit{-S} option is used to force QEMU to wait GDB to connect after the system restart, e.g., if we compile an application with debug information (\textit{app.img}), that prints information in the screen (\textit{stdio}), QEMU call should look like \\
+ \texttt{qemu -fda app.img -serial stdio -s -S}
+
+\item \textbf{Connect with GDB} starts with a GDB session, that must be initialized in an separate window. Then, to connect GDB in QEMU the developer must explicitly specify that the target to be examined is remote and inform the host address and port of the target (in this case, QEMU). When host is in the same machine as GDB, its possible inform only the port, but the complete line must be similar to:\\ \texttt{target remote [host]:[port]}
+
+
+\item \textbf{Recovery debug information} is an important step to help developers to find errors, once its possible to use autocomplete to recovery the all name contained in the symbols table. The file used to keep debug information (as the path) must be informed to GDB using the command: \\
+\texttt{file [path\_to\_the\_file]}\\
+
+\item \textbf{Finding errors} is an activity that depends on the program to be debugged. From this step, the developer can set breakpoints, watchpoints, control the execution of the program and even enable logs. More information about command set can be found in GDB's page \footnote{http://www.gnu.org/s/gdb/}.
+\end{enumerate}
+
+\section{Automatic Exchange of Configuration Parameters}
+\label{sec:automatic}
+The automatic exchange of configuration parameters (AEP) is part of an effort to integrate a new debugging tool into operating system methods in order to reduce software development efforts.
+
+Our work is based on the Embedded Parallel Operating System (EPOS) \cite{Froehlich:2001} since it adds a great deal of configurability of the system, which is very suitable for evaluating a exchange configuration script. Also, EPOS is a component-based framework that provides all traditional abstractions of operating systems and services like memory management, communication and time management. Furthermore, it has been used in several \footnote{http://www.lisha.ufsc.br/pub/index.php?key=EPOS} academic and industrial projects.
+
+Once EPOS uses generic programming techniques, each abstraction can be configured as desired using traits template parameter \cite{Stroustrup:c++}. Traits are parametrized classes that describe the properties of a given object/algorithm.
+
+\fig{traits}{Set of definitions from a traits class in EPOS}{scale=.5}
+
+Figure~\ref{fig:traits} shows a piece of traits classes used in EPOS to configure the main thread as a set of static members that describes some definitions used by this abstraction.
+
+This operating system is instantiated only with the basic support for its dedicated application. It is important to highlight that an individual member of a trait is a characteristic of the system and all features of a component must be set appropriately for a better performance of the system. In this context, the automated exchange of these parameters can be used both to discovery a failure in the program by wrong characterization of components, or to improve the performance for the application by selecting a better configuration.
+
+Figure~\ref{fig:script_gray} is an overview of how the exchange of configurations parameters occurs. Basically a traits information is selected, its definition is changed according to the specification and the application is recompiled. Traces generated by each version of application are compared and reported to the developer. Before a new cycle is complete, the integrated test environment is used to verify the application execution. The performance is analysed and compared with other versions of the application, which also generates an execution report.
+
+\fig{script_gray}{Overview of automatic exchange of configuration parameters}{scale=.26}
+
+In the current version of the AEP shell script, a configuration is selected and its parameter is modified randomly, but can also be supplemented with an artificial intelligence tool or some application-oriented system design tool to provide all information for the script.
+
+\subsection{Real-World Application}
+The automatic exchange parameters script was used to test the Distributed Motion Estimation Component (DMEC). This component performs a motion estimation that exploits the similarity between adjacent images in a video sequence, which allows images to be coded differentially, increasing the compression ratio of the generated bitstream. Motion Estimation is an significant stage for H.264 encoding, since it consumes around 90\% of the total time of the encoding process \cite{dmec}.
+
+DMEC's test check the performance of motion estimation using a data partitioning strategy. This estimate is made by \texttt{Workers} threads and the result is processed by the \texttt{Coordinator} thread  \cite{dmec}.
+
+\fig{dmec}{Interaction between \texttt{Coordinator} and \texttt{Workers} threads \cite{dmec}}{scale=.3}
+
+Figure~\ref{fig:dmec} presents the interaction between the threads. The \texttt{Coordinator} is responsible for defining the partitioning of picture, provide the image to be processed and return results generated to encoder, while \texttt{Workers} must calculate motion cost and motion vectors.
+
+The Distributed Motion Estimation Component was tested using the integrated environment demonstrated in the section \ref{sec:simulationEnv}. Despite the first part of the script generates multiple configurations, only compile the code does not guarantee that the application is bug free. Figures \ref{fig:qemu_dmec_6_workers} and \ref{fig:qemu_dmec_60_workers} show the DMEC execution using values 6 and 60 for \texttt{NUM\_WORKERS} configuration.
+
+\fig{qemu_dmec_6_workers}{DMEC emulated execution with \texttt{NUM\_WORKERS} = 6}{scale=.42}
+\fig{qemu_dmec_60_workers}{DMEC emulated execution with \texttt{NUM\_WORKERS} = 60}{scale=.42}
+
+The difference between the two scenarios is that after retrieving the information from the application, QEMU has a response only for the six \texttt{workers} configuration.
+
+Part of the configurations changed by the script do not even compile. The AEP script uses GDB for debugging all configurations that could be compiled. This process was crucial to determine the error in DMEC's case. In this sense, some breakpoints were added to all functions, specially the main function, see Figure \ref{fig:gdb_dmec_60_workers}. Its possible to check that "continuing" is the last line that appears in the execution. The execution failed because a "too high" value was defined for the number of threads.
+
+\fig{gdb_dmec_60_workers}{DMEC debug with GDB execution with \texttt{NUM\_WORKERS} = 60}{scale=.43}
+
+Through the second part of the script, i.e., the debugging process, it was possible to verify that the program not even reach the main function, which means that now the script must change configurations before calling the main function again.
+
+\section{Evaluation}
+\label{sec:evaluation}
+
+Tests were performed with the chosen application running under EPOS 1.1 and compiled with GNU 4.5.2 for IA32 architecture. The integrated environment is composed by GDB 7.2 and QEMU 0.14.0. For evaluation were collected data from totally random and partially random tests of DMEC application. 
+
+Totally random test is the one that has no prior information on the application. That is, any configuration within \texttt{traits} can change, including parameters that not influence the application. Figure~\ref{fig:comp_report_total} presents a piece of report with some generated configuration, e.g., the size of application stack, if a thread should be busy waiting, the value of a quantum, how much cycles clock should consider, etc.
+
+\fig{comp_report_total}{Totally random generated configurations}{scale=.36}
+
+In total random execution case, test performed hundred tries, generating 85 different configurations in which only 23\% of them could be correctly compiled, but less than 5\% of configurations were relevant to DMEC. Figure~\ref{fig:total_random} presents the ratio of the different configurations generated, those that have been compiled and those that were actually relevant.
+
+\fig{total_random}{Totally random configurations versus their relevance}{scale=.6}
+%100 testes, 78 negativas, 22 positivas - 66 dif neg, 19 dif pos - 5 pos dmec e 21 neg dmec
+
+The execution of this versions showed that application did not change significantly, since most part of exchanged parameters not influence the application.
+
+On the other hand, a partially random test has some tips about application, such as relevant settings and valid configurations. In other words, the script changes only parameters that directly influences the application. This second test was concentrated in only one configuration, the number of \texttt{Workers}. Thus it was possible to focus on just one parameter to try to find the best option for the application. Figure~\ref{fig:comp_report_partial} presents a report with all tries.
+
+\fig{comp_report_partial}{Partially random generated configurations}{scale=.43}
+
+The test got 69 different configurations (same number of tries) and all of them could be correctly compiled and only 8 could be executed, in other words, less than 10\% of tries could be used as configuration. Figure~\ref{fig:partial_random} presents the ratio of the different configurations versus its relevance.
+
+\fig{partial_random}{Partially random configurations versus their relevance}{scale=.6}
+
+Also, to use the integrated debug environment it was necessary to build the code with a special set-up, in which it is possible to generate information about the application to be tested. 
+
+Without this information the original DMEC image consumes more than 50kB, but with the generation of debug symbols the new image consumes about 70 kB and increases in 80\% the cost in terms of memory to debug DMEC application.
+
+\section{Conclusion}
+\label{sec:Conclusion}
+In this paper, we have shown how to set up a development environment for embedded applications based on specific hardware/software requirements and introduce the automatic exchange of configuration parameters as one anatomic part of fully automated debug.
+
+The integrated development environment provides independence of the physical target platform for development and test. Its an important step, since some embedded systems may not be able to store the extra data needed to support debug. The impact of enable debug information in code size and in the execution time of the real-world application was more than 80\%. Also, developers no longer need to spend time understanding a new development platform whenever some characteristic of the embedded system changes.
+
+The automatic exchange was evaluated using two kinds of test. The fully automated test works with no prior information of the application, but it was possible to generate valid configurations, that could be tested as alternative solutions. In partial automated test all generated configurations were valid and the report was useful to discovery that some parameter values were better then others.
+
+In this sense, was possible to realize that even a small part of the complete automated solution produce answers to help developers finding and fixing bugs. With only a hundred tries was possible to find error/restriction in the code.
+
+\bibliographystyle{abbrv}
+\bibliography{references}
+
+\balancecolumns
+\end{document}

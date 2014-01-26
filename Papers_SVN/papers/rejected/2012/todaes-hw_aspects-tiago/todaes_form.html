@@ -1,0 +1,1640 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html>
+
+<head>
+<title>ScholarOne Manuscripts</title>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=UTF-8">
+
+<LINK REL=STYLESHEET TYPE='text/css' HREF='/css/en_US/scholarone.css'>
+
+<script language='JavaScript' type='text/javascript'>
+var ALERT_WAIT_FOR_SUBMIT = 'The form has been submitted, please wait until it has completed before pressing any more buttons.';
+var ALERT_TEXT_LIMIT = 'The text limit for this field has been reached. No more text may be added.';
+var ALERT_NO_SEARCH = 'Starting over will mean that the system will not perform this search. Are you sure?';
+var ALERT_TEXT_OVERFLOW = 'Text overflow';
+var PREFER_24HOUR = '0';
+var GMT_STR = 'GMT';
+var AM_STR = 'AM';
+var PM_STR = 'PM';
+</script>
+<script language='JavaScript' type='text/javascript'>
+var ALERT_WAIT_FOR_SUBMIT = 'The form has been submitted, please wait until it has completed before pressing any more buttons.';
+var ALERT_TEXT_LIMIT = 'The text limit for this field has been reached. No more text may be added.';
+var ALERT_NO_SEARCH = 'Starting over will mean that the system will not perform this search. Are you sure?';
+var ALERT_TEXT_OVERFLOW = 'Text overflow';
+var PREFER_24HOUR = '0';
+var GMT_STR = 'GMT';
+var AM_STR = 'AM';
+var PM_STR = 'PM';
+</script>
+<SCRIPT LANGUAGE='JavaScript' src='/common/scholarone.js'></SCRIPT>
+<link type='text/css' rel='StyleSheet' href='/css/en_US/helptip.css'/>
+<script language='JavaScript' src='/common/helptip.js'></script>
+<script language='JavaScript' type='text/javascript'>
+function getSiteURL()
+{
+   return 'todaes';
+}
+function getLongRequestSiteURL()
+{
+   return '/LongRequest/todaes';
+}
+var gSessionWarningTimer = window.setInterval('SessionWarningTimer()', 60000);
+var gTimerCount = 0;var canTimeout = false;var isSubmissionPage = true;
+function getCurrentPage(){return 'AUTHOR_SUBMIT';}
+function stopTimeout()
+{
+	canTimeout = false;
+}
+function restartTimer()
+{
+   window.clearInterval(gSessionWarningTimer);
+   gSessionWarningTimer = window.setInterval('SessionWarningTimer()', 60000);
+}
+function SessionWarningTimer()
+{
+   gTimerCount++;
+   if ( gTimerCount == 168)
+      if (canTimeout)
+{ 
+	showSessionWarning(true); 
+}
+}
+var gSessionSaveTimer = window.setTimeout('SessionSave()', 10680000);
+function SessionSave()
+{
+ if(canTimeout) { 
+   if(false) { 
+      var errorUrl = '';       if(window.parent != null && window.parent.frames != null && window.parent.frames.length > 0) {          window.parent.top.location = errorUrl;      } else {          window.location = errorUrl;      }    } else { 
+      if(window.parent != null && window.parent.frames != null && window.parent.frames.length > 0) {         window.parent.top.setDataAndNextPage('NATURAL_TIMEOUT', 'true', 'LOGIN');
+      } else {         setDataAndNextPage('NATURAL_TIMEOUT', 'true', 'LOGIN');
+      }     } 
+  }}
+function getPostParams(){}
+
+function popWindow(url,winname,width,height)
+{
+  winX=Math.round(screen.width/2)-(width/2);
+  winY=Math.round(screen.height/2)-(height/2);
+  winStats='toolbar=no,location=no,directories=no,menubar=no,resizable=yes,'
+  winStats+='scrollbars=yes,width='+width+',height='+height
+  if (navigator.appName.indexOf('Microsoft')>=0) {
+    winStats+=',left='+winX+',top='+winY+''
+  }else{ 
+    winStats+=',screenX='+winX+',screenY='+winY+''
+  }
+  restartTimer();
+  handle = window.open(encodeURI(url),winname,winStats) 
+  if(handle != null)
+  {
+   if (winname != 'add_person_to_pick_pop' && winname != 'mssearch_issue_popup' && winname != 'progress_pop_report' && winname != 'progress_pop_large' && winname != 'transfer_pop' && winname != 'email_popup_stay' && winname != 'forms_instructions_popup') 
+   {
+     addHandleToArray(handle);  
+   }
+   handle.focus();  
+  }
+  if (winname == 'progress_pop_delayed' || winname == 'author_affil_details' || winname == 'sp_char_palette') 
+    return handle;  
+}
+function popWindowSecure(url,winname,width,height)
+{
+  winX=Math.round(screen.width/2)-(width/2);
+  winY=Math.round(screen.height/2)-(height/2);
+  winStats='toolbar=no,location=no,directories=no,menubar=no,status=yes,resizable=yes,'
+  winStats+='scrollbars=yes,width='+width+',height='+height
+  if (navigator.appName.indexOf('Microsoft')>=0) {
+    winStats+=',left='+winX+',top='+winY+''
+  }else{ 
+    winStats+=',screenX='+winX+',screenY='+winY+''
+  }
+  restartTimer();
+  handle = window.open(url,winname,winStats) 
+  if (winname != 'add_person_to_pick_pop' && winname != 'mssearch_issue_popup' && winname != 'progress_pop_report' && winname != 'progress_pop_large' && winname != 'transfer_pop' && winname != 'email_popup_stay') 
+    addHandleToArray(handle);  
+  handle.focus();  
+}
+function popWindowSecureForPortal(url,winname,width,height)
+{
+  winX=Math.round(screen.width/2)-(width/2);
+  winY=Math.round(screen.height/2)-(height/2);
+  winStats='toolbar=yes,location=yes,directories=yes,menubar=yes,status=yes,resizable=yes,'
+  winStats+='scrollbars=yes,width='+width+',height='+height
+  if (navigator.appName.indexOf('Microsoft')>=0) {
+    winStats+=',left='+winX+',top='+winY+''
+  }else{ 
+    winStats+=',screenX='+winX+',screenY='+winY+''
+  }
+  restartTimer();
+  handle = window.open(url,winname,winStats) 
+  if (winname != 'add_person_to_pick_pop' && winname != 'mssearch_issue_popup' && winname != 'progress_pop_report' && winname != 'progress_pop_large' && winname != 'transfer_pop' && winname != 'email_popup_stay') 
+    addHandleToArray(handle);  
+  handle.focus();  
+}
+function showProgressWindow() { 
+  javascript: popWindow('todaes?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&SHOW_UPLOADING_FL=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=8798&CURRENT_USER_ID=27426113&DOCUMENT_HASHCODE=2034570456&SANITY_CHECK_DOCUMENT_ID=12177342&CONFIG_ID=1605&PAGE_NAME=AUTHOR_SUBMIT','progress_pop', 400, 300); 
+}function showProgressWindowLarge(vPageName) { 
+  javascript: popWindow('todaes?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&SHOW_UPLOADING_FL=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=8798&CURRENT_USER_ID=27426113&DOCUMENT_HASHCODE=2034570456&SANITY_CHECK_DOCUMENT_ID=12177342&CONFIG_ID=1605&PAGE_NAME=AUTHOR_SUBMIT&PAGE_NAME=' + vPageName + '','progress_pop_large', 800, 600); 
+}function showProgressWindowForReport() {  javascript: popWindow('todaes?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&SHOW_CREATING_REPORT_FL=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=8798&CURRENT_USER_ID=27426113&DOCUMENT_HASHCODE=2034570456&SANITY_CHECK_DOCUMENT_ID=12177342&CONFIG_ID=1605&PAGE_NAME=AUTHOR_SUBMIT','progress_pop_report', 600, 500); 
+} 
+function showProgressWindowForReportSwitchConfig(configId) {  javascript: popWindow('todaes?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&SHOW_CREATING_REPORT_FL=Y&FIRST_TIME_FL=Y&SWITCH_CONFIG_ID_UNDER_POPUP=\'+configId+\'&CURRENT_ROLE_ID=8798&CURRENT_USER_ID=27426113&DOCUMENT_HASHCODE=2034570456&SANITY_CHECK_DOCUMENT_ID=12177342&CONFIG_ID=1605&PAGE_NAME=AUTHOR_SUBMIT','progress_pop_report', 600, 500); 
+} 
+function showProgressWindowRoleChange() {  javascript: popWindow('/LongRequest/todaes?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&PAGE_NAME=AUTHOR_SUBMIT&SHOW_ROLE_CHANGE_TASK=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=8798&CURRENT_USER_ID=27426113&DOCUMENT_HASHCODE=2034570456&SANITY_CHECK_DOCUMENT_ID=12177342&CONFIG_ID=1605&PAGE_NAME=AUTHOR_SUBMIT','progress_pop_report', 800, 600); 
+} 
+function showProgressWindowMSListExport() {  javascript: popWindow('/LongRequest/todaes?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&SPAWN_EXPORT_MS_LIST_THREAD=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=8798&CURRENT_USER_ID=27426113&DOCUMENT_HASHCODE=2034570456&SANITY_CHECK_DOCUMENT_ID=12177342&CONFIG_ID=1605&PAGE_NAME=AUTHOR_SUBMIT','progress_pop_report', 400, 300); 
+} 
+function showProgressWindowStubsListExport() {  javascript: popWindow('/LongRequest/todaes?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&PAGE_NAME=AUTHOR_SUBMIT&SPAWN_EXPORT_STUBS_LIST_THREAD=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=8798&CURRENT_USER_ID=27426113&DOCUMENT_HASHCODE=2034570456&SANITY_CHECK_DOCUMENT_ID=12177342&CONFIG_ID=1605&PAGE_NAME=AUTHOR_SUBMIT','progress_pop_report', 400, 300); 
+} 
+function showProgressWindowMSListExportHistoryExport() {  javascript: popWindow('/LongRequest/todaes?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&PAGE_NAME=AUTHOR_SUBMIT&SPAWN_EXPORT_MS_LIST_THREAD=Y&FIRST_TIME_FL=Y&CSV_FOR_EXPORT_HISTORY=Y&CURRENT_ROLE_ID=8798&CURRENT_USER_ID=27426113&DOCUMENT_HASHCODE=2034570456&SANITY_CHECK_DOCUMENT_ID=12177342&CONFIG_ID=1605&PAGE_NAME=AUTHOR_SUBMIT','progress_pop_report', 400, 300); 
+} 
+function showProgressWindowSimpleExportHistory() {  javascript: popWindow('/LongRequest/todaes?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&SPAWN_EXPORT_SIMPLE_EXPORT_HISTORY_THREAD=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=8798&CURRENT_USER_ID=27426113&DOCUMENT_HASHCODE=2034570456&SANITY_CHECK_DOCUMENT_ID=12177342&CONFIG_ID=1605&PAGE_NAME=AUTHOR_SUBMIT','progress_pop_report', 400, 300); 
+} 
+function showProgressAsyncSearchResultsExport() {  javascript: popWindow('/LongRequest/todaes?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&PAGE_NAME=AUTHOR_SUBMIT&SPAWN_DOWNLOAD_ASYNC_SEARCH_RESULTS_THREAD=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=8798&CURRENT_USER_ID=27426113&DOCUMENT_HASHCODE=2034570456&SANITY_CHECK_DOCUMENT_ID=12177342&CONFIG_ID=1605&PAGE_NAME=AUTHOR_SUBMIT','progress_pop_report', 600, 500); 
+} 
+function showProgressWindowMSAddTasks() {  javascript: popWindow('/LongRequest/todaes?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&SPAWN_MS_ADD_TASK=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=8798&CURRENT_USER_ID=27426113&DOCUMENT_HASHCODE=2034570456&SANITY_CHECK_DOCUMENT_ID=12177342&CONFIG_ID=1605&PAGE_NAME=AUTHOR_SUBMIT','progress_pop_report', 400, 300); 
+} 
+function showProgressWindowForIssueLineup(vRadioGroupName, vIssueId) {selVal = GetRadioValue(vRadioGroupName);if(selVal == '3') {javascript:setField('TAG_ACTION', 'EXPORT_ISSUE');  javascript: popWindow('todaes?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&EDIT_ISSUE_ID=\'+vIssueId+\'&EXPORT_ISSUE_LINEUP_SELECTED=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=8798&CURRENT_USER_ID=27426113&DOCUMENT_HASHCODE=2034570456&SANITY_CHECK_DOCUMENT_ID=12177342&CONFIG_ID=1605&PAGE_NAME=AUTHOR_SUBMIT','progress_pop_report', 400, 300); 
+} else {  javascript: showProgressWindowForReport();}} 
+function showProgressWindowGeneric(vProgressTypeId) {  javascript: popWindow('todaes?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&PROGRESS_TYPE_ID=\'+vProgressTypeId+\'&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=8798&CURRENT_USER_ID=27426113&DOCUMENT_HASHCODE=2034570456&SANITY_CHECK_DOCUMENT_ID=12177342&CONFIG_ID=1605&PAGE_NAME=AUTHOR_SUBMIT','progress_pop_report', 400, 300); 
+} 
+function showProgressWindowForTransfer() {  javascript: popWindow('todaes?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&SHOW_TRANSFERING_TEXT=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=8798&CURRENT_USER_ID=27426113&DOCUMENT_HASHCODE=2034570456&SANITY_CHECK_DOCUMENT_ID=12177342&CONFIG_ID=1605&PAGE_NAME=AUTHOR_SUBMIT','transfer_pop', 400, 300); 
+} 
+function showProgressWindowForIssueTransfer() {  javascript: popWindow('todaes?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&POPUP_RELOAD_PARENT_PAGE=PRODUCTION_ISSUE_MANAGEMENT&CURRENT_PAGE_NO=null&SHOW_ISSUE_TRANSFERING_TEXT=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=8798&CURRENT_USER_ID=27426113&DOCUMENT_HASHCODE=2034570456&SANITY_CHECK_DOCUMENT_ID=12177342&CONFIG_ID=1605&PAGE_NAME=AUTHOR_SUBMIT','transfer_pop', 400, 300); 
+} 
+function showProgressWindowForImport() {  javascript: popWindow('todaes?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&SHOW_CREATING_IMPORT_FL=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=8798&CURRENT_USER_ID=27426113&DOCUMENT_HASHCODE=2034570456&SANITY_CHECK_DOCUMENT_ID=12177342&CONFIG_ID=1605&PAGE_NAME=AUTHOR_SUBMIT','progress_pop_report', 400, 300); 
+} 
+function checkForSomethingToUpload()
+{ 
+  var i=0; 
+  var existsFl = 0; 
+  for (i=0;i<20;i++) { 
+    var metaArray = document.getElementsByName('FILE_TO_UPLOAD'+i); 
+    if (metaArray.length == 1) { 
+     var filename = document.forms[0]['FILE_TO_UPLOAD'+i].value; 
+     if (filename.length > 0) 
+       existsFl = 1; 
+   } 
+  } 
+  if (existsFl == 1) { return true; }  
+  return false; 
+}
+function checkForDuplicateFiles()
+{ 
+  var i=0; 
+  var j=0; 
+  var existsFileFl = 0; 
+  var filename1 = '';
+  var filename2 = '';
+  var noOfFiles = 0;
+  noOfFiles =  document.getElementById('HIDDEN_VALUE_FOR_FILENO').value; 
+  for (i=0;i<noOfFiles && existsFileFl != 1;i++){
+     filename1 = document.forms[0]['FILE_TO_UPLOAD'+i].value; 
+     filename1 = trimAll(filename1.substring(filename1.lastIndexOf('\\')+1));     for(j=i+1; j<noOfFiles && existsFileFl != 1;j++){ 
+       filename2 = document.forms[0]['FILE_TO_UPLOAD'+j].value; 
+       filename2 = trimAll(filename2.substring(filename2.lastIndexOf('\\')+1));       if(filename1!='' && filename1==filename2) existsFileFl = 1; } } 
+  if (existsFileFl == 1) { alert ('A file named ' + filename1 + ' is already present for uploading for this manuscript. If you want to upload this file (e.g. this is a replacement for an existing file) you must rename the new file and then upload it.'); resetIsOk(); return false; }  
+  return true; 
+}
+function checkUploadFields()
+{ 
+   if(window.parent != null && window.parent.frames != null && window.parent.frames.length > 0) { 
+		return checkUploadFieldsLocal(); 
+   }   
+  return true; 
+}
+function checkUploadFieldsLocal()
+{ 
+  return true; 
+}
+function showProgressWindowUserListExport() {  javascript: popWindow('/LongRequest/todaes?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&SPAWN_EXPORT_USER_LIST_THREAD=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=8798&CURRENT_USER_ID=27426113&DOCUMENT_HASHCODE=2034570456&SANITY_CHECK_DOCUMENT_ID=12177342&CONFIG_ID=1605&PAGE_NAME=AUTHOR_SUBMIT','progress_pop_report', 400, 300); 
+} 
+function showProgressWindowUPlagiarismDocExport() {  javascript: popWindow('/LongRequest/todaes?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&SPAWN_EXPORT_PLAG_DOC_LIST_THREAD=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=8798&CURRENT_USER_ID=27426113&DOCUMENT_HASHCODE=2034570456&SANITY_CHECK_DOCUMENT_ID=12177342&CONFIG_ID=1605&PAGE_NAME=AUTHOR_SUBMIT','progress_pop_report', 400, 300); 
+} 
+function showProgressWindowRevExport() {  var assigneeRoleId = document.forms[0].ASSIGNEE_ROLE_ID.value;  var docTaskId = document.forms[0].DOCUMENT_TASK_ID.value;  popWindow("/LongRequest/todaes?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&PAGE_NAME=AUTHOR_SUBMIT&SPAWN_EXPORT_REV_THREAD=Y&FIRST_TIME_FL=Y&ASSIGNEE_ROLE_ID=" + assigneeRoleId + "&DOCUMENT_TASK_ID=" + docTaskId + "&CURRENT_ROLE_ID=8798&CURRENT_USER_ID=27426113&DOCUMENT_HASHCODE=2034570456&SANITY_CHECK_DOCUMENT_ID=12177342&CONFIG_ID=1605&PAGE_NAME=AUTHOR_SUBMIT","progress_pop_report", 480, 400); 
+} 
+function showProgressWindowEmailTagsListExport() {  javascript: popWindow('/LongRequest/todaes?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&PAGE_NAME=AUTHOR_SUBMIT&SPAWN_EXPORT_EMAIL_TAG_LIST_THREAD=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=8798&CURRENT_USER_ID=27426113&DOCUMENT_HASHCODE=2034570456&SANITY_CHECK_DOCUMENT_ID=12177342&CONFIG_ID=1605&PAGE_NAME=AUTHOR_SUBMIT','progress_pop_report', 400, 300); 
+} 
+
+var emailWindows = new Array();
+var emailWindowNames = new Array();
+var checkEmailWindowsCalled = false;
+function registerEmailWindow(emailWindow)
+{ 
+   emailWindows[emailWindows.length] = emailWindow;
+   if(emailWindowNames.toString().indexOf(emailWindow.name)==-1)
+   { 
+       emailWindowNames[emailWindowNames.length] = emailWindow.name;
+   }
+   if(document.forms[0].OPEN_EMAIL_WINDOWS!=null)
+   { 
+       document.forms[0].OPEN_EMAIL_WINDOWS.value = emailWindowNames.toString();
+   }
+} 
+
+function checkEmailWindows()
+{
+if(!checkEmailWindowsCalled)
+{
+   var blPopupsOpen=false;
+   if(false)
+   { 
+     if(document.forms[0].NEXT_PAGE.value.indexOf("MANUSCRIPT_DETAILS")==-1 || (document.forms[0].NEXT_PAGE.value.indexOf("MANUSCRIPT_DETAILS")!=-1 && document.forms[0].NEXT_PREV_DOCUMENT_ID!=null && document.forms[0].NEXT_PREV_DOCUMENT_ID.value!="" && document.forms[0].DOCUMENT_ID.value != document.forms[0].NEXT_PREV_DOCUMENT_ID.value) || (document.forms[0].NEXT_PAGE.value.indexOf("MANUSCRIPT_DETAILS")!=-1 && document.forms[0].PRE_ACTION != null && document.forms[0].PRE_ACTION.value=="PERFORM_HEADER_QUICK_SEARCH" )|| (document.forms[0].NEXT_PAGE.value.indexOf("MANUSCRIPT_DETAILS")!=-1 && document.forms[0].PROXY_TO_ROLE_ID != null && document.forms[0].PROXY_TO_ROLE_ID.value != '' ))
+     { 
+       emailWindows.length=0;
+       for(var i = 0; i<emailWindowNames.length; i++)
+       {
+           emailWindowName = emailWindowNames[i];
+           if (typeof emailWindowName != 'undefined' && emailWindowName != '')
+           { 
+               var winHandle=window.open('',emailWindowName);
+               if(typeof winHandle.frames['mainemailwindow'] != 'undefined' && winHandle.frames['mainemailwindow'] != null)
+               {
+                   registerEmailWindow(winHandle);
+               }
+               else
+               {
+                   winHandle.close();
+               }
+           }
+       }
+       if(emailWindows.length > 0)
+       { 
+           for(var i = 0; i<emailWindows.length; i++)
+           {
+               if(!emailWindows[i].closed)
+               {
+                   blPopupsOpen=true;
+                   break;
+               }
+           }
+           if(!blPopupsOpen)
+           { 
+               checkEmailWindowsCalled=true;
+               return true;
+           }
+           if(confirm ('We have detected that there is at least one e-mail window open - these windows will be closed when you move from the details of one manuscript to another. If you would like to retain this text for use later,  please either save the e-mails as drafts or copy them to your hard drive for future reference.\nContinue?'))
+           { 
+               for(var i = 0; i<emailWindows.length; i++)
+               {
+                   if(!emailWindows[i].closed)
+                   {
+                       unRegisterWindow(emailWindows[i].name);
+                       emailWindows[i].close();
+                   }
+               }
+               checkEmailWindowsCalled=true;
+               return true;
+           }
+           else
+           { 
+               if(document.forms[0].NEXT_PREV_DOCUMENT_ID!=null){document.forms[0].NEXT_PREV_DOCUMENT_ID.value='';}
+               if(document.forms[0].PRE_ACTION!=null){document.forms[0].PRE_ACTION.value='';}
+               if(document.forms[0].PROXY_TO_ROLE_ID!=null){document.forms[0].PROXY_TO_ROLE_ID.value='';}
+               if(document.forms[0].CLEAR_SEARCH!=null){document.forms[0].CLEAR_SEARCH.value='';}
+               return false;
+           }
+       }
+       else
+       { 
+           checkEmailWindowsCalled=true;
+           return true;
+       }
+     }
+     else
+     { 
+       checkEmailWindowsCalled=true;
+       return true;
+     }
+   }
+   else
+   {
+       checkEmailWindowsCalled=true;
+       return true;
+   }
+}
+else
+{ 
+   checkEmailWindowsCalled=true;
+   return true;
+}
+}
+
+function getOpenEmailWindows()
+{ 
+   if(document.forms[0].OPEN_EMAIL_WINDOWS!=null)
+   { 
+       return document.forms[0].OPEN_EMAIL_WINDOWS.value;
+   }
+   else
+   { 
+       return '';
+   }
+} 
+
+function registerEmailWindowByName(emailWindowName)
+{ 
+ if (typeof emailWindowName != 'undefined')
+ { 
+   if(emailWindowNames.toString().indexOf(emailWindowName)==-1)
+   { 
+       emailWindowNames[emailWindowNames.length] = emailWindowName;
+   }
+   if(document.forms[0].OPEN_EMAIL_WINDOWS!=null)
+   { 
+       document.forms[0].OPEN_EMAIL_WINDOWS.value = emailWindowNames.toString(); 
+   }
+ } 
+} 
+
+function unRegisterWindow(emailWindowName)
+{ 
+  var newEmailWinNames = new Array(); 
+  for(var i = 0, j=0; i<emailWindowNames.length; i++)
+  {
+   if(emailWindowNames[i]!=emailWindowName)
+   { 
+      if(typeof emailWindowNames[i] != 'undefined' && emailWindowNames[i]!='')
+      { 
+         newEmailWinNames[j] = emailWindowNames[i];
+         j++;
+      }
+   }
+  }
+  emailWindowNames.length=0;
+  emailWindowNames=newEmailWinNames;
+  if(document.forms[0].OPEN_EMAIL_WINDOWS!=null)
+  { 
+      document.forms[0].OPEN_EMAIL_WINDOWS.value = emailWindowNames.toString();
+  }
+} 
+
+function showProgressWindowPermissionAuditTrailExport() {  javascript: popWindow('/LongRequest/todaes?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&PAGE_NAME=AUTHOR_SUBMIT&SPAWN_EXPORT_PERMISSION_AUDIT_TRAIL_THREAD=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=8798&CURRENT_USER_ID=27426113&DOCUMENT_HASHCODE=2034570456&SANITY_CHECK_DOCUMENT_ID=12177342&CONFIG_ID=1605&PAGE_NAME=AUTHOR_SUBMIT','progress_pop_report', 400, 300); 
+} 
+function showProgressWindowSubmissionStatisticsExportCSV() {  javascript: popWindow('/LongRequest/todaes?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&SPAWN_EXPORT_SUBMISSION_STATISTICS_THREAD=Y&CURRENT_ROLE_ID=8798&CURRENT_USER_ID=27426113&DOCUMENT_HASHCODE=2034570456&SANITY_CHECK_DOCUMENT_ID=12177342&CONFIG_ID=1605&PAGE_NAME=AUTHOR_SUBMIT','progress_pop_report', 400, 300); 
+} 
+</script>
+
+</head>
+<body bgcolor="#FFFFFF" style="margin: 0px;" onUnLoad='document.body.style.cursor = "default"; closeAllWindows();'>
+<a name='reftop'></a>
+<form style='margin:0px;' id='default_form' name='default_form' method='post' TARGET=''  action='http://mc.manuscriptcentral.com:80/todaes'>
+<input type = 'hidden' name ='PORTAL' value = 'null'>
+<input type = 'hidden' name ='NEXT_PAGE' value = ''>
+<input type = 'hidden' name ='NEXT_PAGE_FOR_REDIRECT' value = ''>
+<input type = 'hidden' name ='CURRENT_PAGE' value='AUTHOR_SUBMIT'>
+<input type = 'hidden' name ='PRE_ACTION' value=''>
+<input type = 'hidden' name ='POST_ACTION' value=''>
+<input type = 'hidden' name ='CURRENT_ROLE_ID' value='8798'>
+<input type = 'hidden' name ='SWITCH_CONFIG_ID' value=''>
+<input type = 'hidden' name ='CHANGE_PORTAL_CONFIG_ID_FOR_LOGIN_PAGE' value=''>
+<input type = 'hidden' name ='SWITCH_CONFIG_ID_PREV' value=''>
+<input type = 'hidden' name ='NEW_USER_CONFIG_ID' value=''>
+<input type = 'hidden' name ='PROXY_TO_PAGE_NAME' value=''>
+<input type = 'hidden' name ='PROXY_TO_ROLE_ID' value=''>
+<input type = 'hidden' name ='PROXY_TO_DOCUMENT_ID' value=''>
+<input type = 'hidden' name ='PROXY_TO_DOCUMENT_TASK_ID' value=''>
+<input type = 'hidden' name ='PAGE_DIRTY_FL' value=''>
+<input type = 'hidden' name ='PAGE_LOADED_FLAG' value=''>
+<input type = 'hidden' name ='DISPLAY' value=''>
+<input type = 'hidden' name ='SANITY_CHECK_DOCUMENT_ID' value='12177342'>
+<input type = 'hidden' name ='DOCUMENT_HASHCODE' value='2034570456'>
+<input type = 'hidden' name ='CONFIG_ID' value='1605'>
+<input type='hidden' name='SAVE_MS_DETAILS_FL' value=''><input type='hidden' name='SAVE_MS_DETAILS_VALIDATE_FL' value=''><input type = 'hidden' name='CURRENT_USER_ID' value='27426113'>
+<input type = 'hidden' name ='NATURAL_TIMEOUT' value='false'>
+<input type = 'hidden' name='CURRENT_USER_ID' value='27426113'>
+<input type = 'hidden' name='LOGIN_SITE_SHORT_NAME' value='null'>
+<input type = 'hidden' name='EXTERNAL_HTTP_REFERRER' value='http://mc.manuscriptcentral.com/todaes'>
+
+<table border=0 cellpadding=0 cellspacing=0 align=left width=100%>
+	<tr>
+		<td class="societylogobg" align=left width=100%>
+			
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+<SCRIPT LANGUAGE='JavaScript1.2' src='/common/mouseposition.js'></SCRIPT>
+
+			 
+			<table border=0 cellpadding=0 cellspacing=0 width=100%>
+				<tr>
+						
+	<td><img src='/societyimages/todaes/todaes.gif' border=0></td>
+					
+       
+    <td align=right>
+            <table border=0 cellpadding=0 cellspacing=0 width=1%>
+              <tr>
+                    
+      <td colspan=2 align=right>
+        <table border=0 cellpadding=0 cellspacing=0>
+          <tr>
+            
+                
+                     <td><a HREF="javascript:setDataAndNextPage('PRE_ACTION','PERSON_EDIT_ACCOUNT','EDIT_ACCOUNT_1')"><img src="/images/en_US/topmenu/topright_edit.gif" border=0></a></td>
+            
+
+              
+                 <td><a HREF="javascript:popWindow('todaes?NEXT_PAGE=FORMS_AND_INSTRUCTIONS&CURRENT_ROLE_ID=8798&CURRENT_USER_ID=27426113&DOCUMENT_HASHCODE=2034570456&SANITY_CHECK_DOCUMENT_ID=12177342&CONFIG_ID=1605&PAGE_NAME=AUTHOR_SUBMIT','forms_instructions_popup', 700, 400)"><img src="/images/en_US/topmenu/topright_instructions.gif" border=0></a></td>
+              
+                      
+                    
+          
+          
+            <td><a HREF="javascript:
+            
+            setField('PRE_ACTION', 'LOGOUT');  
+            setNextPage('LOGIN')"><img src='/images/en_US/topmenu/topright_logout.gif' border=0></a></td>
+
+
+                        
+                         <td><a HREF="javascript:popWindow('http://mchelp.manuscriptcentral.com/gethelpnow/','SUPPORT_URL', 700, 400)"><img src='/images/en_US/topmenu/topright_get_help_now.gif' border=0></a></td> 
+
+
+                      
+                      
+                      
+                    </tr>
+                  </table>
+                </td>
+
+				</tr>
+				<tr>							
+							 	
+ 	<td align=right> <img src="/images/en_US/layout/scholarone_manuscripts_logo.gif" border=0></td>
+
+					
+
+
+
+
+				</tr>
+			</table>
+		</td>
+		</tr>
+			</table>
+
+		</td>
+	</tr>
+	<tr>
+		<td class="headerbreadcrumbsbg" colspan=2>
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<input type="hidden" name="SEARCH_RESULT_PAGE" value="">
+<table border=0 cellpadding=0 cellspacing=0>
+	<tr>
+		<td><img src='/images/common/breadcrumbs/breadcrumbs_bg.gif' border=0></td>
+  	
+     	<td><p class='pagecontents'>
+     	
+     	
+     		<A class="breadcrumblink" HREF="javascript:setDataAndNextPage('CURRENT_ROLE_ID', 2, 'WELCOME')">
+     		Main Menu</A>
+     		<td><img src='/images/common/breadcrumbs/arrow.gif' border=0></td>
+     	
+     	</p></td>
+
+    	
+      
+	        
+	        <td><p class='pagecontents'><A class="breadcrumblink" HREF="javascript:setField('POST_ACTION','AUTH_VIEW_MANU');setDataAndNextPage('CURRENT_ROLE_ID',8798,'AUTHOR_VIEW_MANUSCRIPTS')">Author Dashboard</A></p></td>
+	          
+      <td><img src='/images/common/breadcrumbs/arrow.gif' border=0></td>          
+    
+		<td><p class='pagecontents'>Manuscript Submission</p></td>  
+		
+	</tr>
+</table>
+
+		
+		</td>
+	</tr>
+	<tr>
+  <td>
+    <table border=0 cellpadding=0 cellspacing=0 width=100%>
+    <tr>
+      
+
+
+
+
+
+        
+      <td align=right>
+      	
+        	
+
+
+
+
+
+
+
+		<p class='pagecontents'>You are logged in as&nbsp;Tiago Mück&nbsp;</p>
+	
+
+
+        
+      </td>
+    </tr>
+    </table>
+  </td>
+	</tr>		
+	<tr>
+		<td align=center>
+			
+<DIV ID='warning' NAME='warning' STYLE='position:absolute;visibility:hidden' WIDTH='20%'>    
+
+<table border=0 cellpadding=0 cellspacing=0 width=350>
+   <tr>
+       <td><p class='footer'>&nbsp;</p></td>
+   </tr>
+   <tr>    
+       <td class='secondarymenubg'>
+           <table cellpadding=5 cellspacing=10 border=0 width=100%>
+               <tr>
+                   <td class='dataentry'>
+                       <table border=0 cellpadding=0 cellspacing=0>
+                           <tr>
+                               <td><p class='pagecontents'><br>For security reasons, your session will time out in 10 minutes (at <span id="tP"><script language='javascript'>showTime()</script></span>).  Please save your work to avoid potential loss.  To refresh your session, close this message and save your work or return to your main menu.  You may then continue working as normal.<br>&nbsp;</p></td>
+                           </tr>
+                           <tr>
+                               <td align=center><a href='#' onClick='showSessionWarning(false)'><img src='/images/en_US/buttons/close_message.gif' border=0></a></td>
+                           </tr>
+                       </table>
+                   </td>
+               </tr>
+           </table>
+       </td>
+   </tr>
+</table>   
+</DIV>
+
+		</td>
+	</tr>
+</table>
+<BR CLEAR=ALL>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 ALIGN=CENTER WIDTH=760>
+	<TR>
+		<TD VALIGN=TOP>
+			<TABLE BORDER=0 CELLPADDING=5 CELLSPACING=0 WIDTH=100%>
+				<tr>
+					<td id='errors.jspf' colspan=2>
+						
+
+
+
+
+
+
+
+
+		
+					</td>
+				</tr>			
+				<TR>
+					<TD COLSPAN=2>
+						<TABLE BORDER=0 CELLPADDING=5 CELLSPACING=0 WIDTH=100%>
+							<TR>
+								
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  		<td valign=top width=8%><img src="/images/en_US/layout/submit_a_manuscript_header.gif"   border=0></td>
+  
+  					<td width=75% valign=top>					
+    			
+    					<span class="pagecontents">Review the information below for correctness and make changes as needed. <b>After reviewing the manuscript proofs at the foot of this page, you MUST CLICK 'SUBMIT' to complete your submission.</b>
+  
+    	</span>	
+   
+  	</td>
+   						
+  				
+        
+          
+
+
+          
+          
+          
+          
+          
+											
+							</TR>
+						</TABLE>
+					</TD>
+				</TR>				
+				<TR>				
+					<TD VALIGN=TOP Width=15%>
+
+						
+
+
+
+
+
+
+
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 ALIGN=LEFT>
+  <TR>
+    <TD>
+
+      <TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 WIDTH=100%>
+
+        <TR>
+          <TD>
+            <TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+            <TR>
+              <TD VALIGN=TOP><A HREF="javascript:setNextPage('AUTHOR_TYPE')" 
+                  
+                   onClick="return checkUploadFields();" 
+                  ><IMG SRC='/images/en_US/layout/steps/1_data_done_off.gif' BORDER=0></A></TD>
+              <TD VALIGN=TOP><P CLASS='steps nowrap'><A HREF="javascript:setNextPage('AUTHOR_TYPE')"
+                  
+                   onClick="return checkUploadFields();" 
+                  >Type, Title, & Abstract</A></P></TD>
+              </TR>
+            </TABLE>
+          </TD>
+        </TR>
+
+        <TR>
+          <TD CLASS='completestep' VALIGN=TOP ALIGN=LEFT>
+            <IMG SRC='/images/en_US/layout/steps/spacer.gif' BORDER=0>
+          </TD>
+        </TR>
+
+        <TR>
+          <TD>
+            <TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+            <TR>
+              <TD VALIGN=TOP><A HREF="javascript:setNextPage('AUTHOR_ATTRIBUTES')" 
+                  
+                   onClick="return checkUploadFields();" 
+                  ><IMG SRC='/images/en_US/layout/steps/2_data_done_off.gif' BORDER=0></A></TD>
+              <TD VALIGN=TOP><P CLASS='steps nowrap'><A HREF="javascript:setNextPage('AUTHOR_ATTRIBUTES')"
+                  
+                   onClick="return checkUploadFields();" 
+                  >Attributes</A></P></TD>
+              </TR>
+            </TABLE>
+          </TD>
+        </TR>
+
+        <TR>
+          <TD CLASS='completestep' VALIGN=TOP ALIGN=LEFT>
+            <IMG SRC='/images/en_US/layout/steps/spacer.gif' BORDER=0>
+          </TD>
+        </TR>
+
+        <TR>
+          <TD>
+            <TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+            <TR>
+              <TD VALIGN=TOP><A HREF="javascript:setNextPage('AUTHOR_AUTHORS')" 
+                  
+                   onClick="return checkUploadFields();" 
+                  ><IMG SRC='/images/en_US/layout/steps/3_data_done_off.gif' BORDER=0></A></TD>
+              <TD VALIGN=TOP><P CLASS='steps nowrap'><A HREF="javascript:setNextPage('AUTHOR_AUTHORS')"
+                  
+                   onClick="return checkUploadFields();" 
+                  >Authors & Institutions</A></P></TD>
+              </TR>
+            </TABLE>
+          </TD>
+        </TR>
+
+        <TR>
+          <TD CLASS='completestep' VALIGN=TOP ALIGN=LEFT>
+            <IMG SRC='/images/en_US/layout/steps/spacer.gif' BORDER=0>
+          </TD>
+        </TR>
+
+        <TR>
+          <TD>
+            <TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+            <TR>
+              <TD VALIGN=TOP><A HREF="javascript:setNextPage('AUTHOR_REVIEWERS')" 
+                  
+                   onClick="return checkUploadFields();" 
+                  ><IMG SRC='/images/en_US/layout/steps/4_data_done_off.gif' BORDER=0></A></TD>
+              <TD VALIGN=TOP><P CLASS='steps nowrap'><A HREF="javascript:setNextPage('AUTHOR_REVIEWERS')"
+                  
+                   onClick="return checkUploadFields();" 
+                  >Referees</A></P></TD>
+              </TR>
+            </TABLE>
+          </TD>
+        </TR>
+
+        <TR>
+          <TD CLASS='completestep' VALIGN=TOP ALIGN=LEFT>
+            <IMG SRC='/images/en_US/layout/steps/spacer.gif' BORDER=0>
+          </TD>
+        </TR>
+
+        <TR>
+          <TD>
+            <TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+            <TR>
+              <TD VALIGN=TOP><A HREF="javascript:setNextPage('AUTHOR_DETAILS')" 
+                  
+                   onClick="return checkUploadFields();" 
+                  ><IMG SRC='/images/en_US/layout/steps/5_data_done_off.gif' BORDER=0></A></TD>
+              <TD VALIGN=TOP><P CLASS='steps nowrap'><A HREF="javascript:setNextPage('AUTHOR_DETAILS')"
+                  
+                   onClick="return checkUploadFields();" 
+                  >Details & Comments</A></P></TD>
+              </TR>
+            </TABLE>
+          </TD>
+        </TR>
+
+        <TR>
+          <TD CLASS='completestep' VALIGN=TOP ALIGN=LEFT>
+            <IMG SRC='/images/en_US/layout/steps/spacer.gif' BORDER=0>
+          </TD>
+        </TR>
+
+        <TR>
+          <TD>
+            <TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+            <TR>
+              <TD VALIGN=TOP><A HREF="javascript:setNextPage('AUTHOR_FILE_UPLOAD')" 
+                  
+                   onClick="return checkUploadFields();" 
+                  ><IMG SRC='/images/en_US/layout/steps/6_data_done_off.gif' BORDER=0></A></TD>
+              <TD VALIGN=TOP><P CLASS='steps nowrap'><A HREF="javascript:setNextPage('AUTHOR_FILE_UPLOAD')"
+                  
+                   onClick="return checkUploadFields();" 
+                  >File Upload</A></P></TD>
+              </TR>
+            </TABLE>
+          </TD>
+        </TR>
+
+        <TR>
+          <TD CLASS='completestep' VALIGN=TOP ALIGN=LEFT>
+            <IMG SRC='/images/en_US/layout/steps/spacer.gif' BORDER=0>
+          </TD>
+        </TR>
+
+        <TR>
+          <TD>
+            <TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+            <TR>
+              <TD VALIGN=TOP><A HREF="javascript:setNextPage('AUTHOR_SUBMIT')" 
+                  
+                   onClick="return checkUploadFields();" 
+                  ><IMG SRC='/images/en_US/layout/steps/7_data_done_on.gif' BORDER=0></A></TD>
+              <TD VALIGN=TOP><P CLASS='steps nowrap'><A HREF="javascript:setNextPage('AUTHOR_SUBMIT')"
+                  
+                   onClick="return checkUploadFields();" 
+                  >Review &amp; Submit</A></P></TD>
+              </TR>
+            </TABLE>
+          </TD>
+        </TR>
+
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+
+
+					</TD>
+					<TD VALIGN=TOP width=85%>
+						<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 WIDTH=100%>
+							<TR>
+								<TD>
+									<TABLE ALIGN=LEFT CELLPADDING=0 CELLSPACING=5 BORDER=0 WIDTH=100%>
+<TR>
+<TD CLASS='tablelines' COLSPAN=2>
+<TABLE CELLPADDING=5 CELLSPACING=1 BORDER=0 WIDTH=100%>
+<TR>
+<TD CLASS='tablelightcolor'>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=2 ALIGN=RIGHT>
+<TR>
+<input type='hidden' name='PERFORMED_SEARCH_FL' value='Y'> 
+<TD ALIGN=RIGHT><A HREF="javascript:setNextPage('AUTHOR_FILE_UPLOAD')" onClick="if (isok(self.form)==0) {return false}else{return checkUploadFields()};"><IMG SRC='/images/en_US/buttons/save_back.gif' BORDER=0 NAME='previous_button'></A></TD>
+<TD id='SUBMIT_BUTTON' ALIGN=RIGHT><A HREF="javascript: setDataAndNextPage('TAG_ACTION', 'AUTHOR_CONFIRM_SUBMIT', 'AUTHOR_SUBMIT_CONFIRM');" onClick="javascript:  if (currentlySubmitting == 0) { if (!confirm('This will submit the manuscript. Are you sure?')) { return false; } else { currentlySubmitting = 1; return true; }} else { alert('Processing submission please wait.'); return false; } " ><IMG SRC='/images/en_US/buttons/submit.gif' BORDER=0 NAME='next_button'></A></TD>
+</TR>
+</TABLE>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TR>
+</TABLE>
+
+								</TD>
+							</TR>											
+							<TR>
+								<TD>
+						  
+						  <!-- JSPF: /include/content/author/author_ms_submit.jsp -->
+						  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+     <input type="hidden" name="TAG_ACTION" value="DOCUMENT_SAVE">
+     <input type="hidden" name="DOCUMENT_ID" value="12177342 ">
+     <input type="hidden" name="JUST_VIEWED_PROOF_TYPE" value="">
+     <input type="hidden" name="PERSON_ID " value="">
+     <input type="hidden" name="RESESSION_USER_FL " value="">
+     <input type="hidden" name="DOCUMENT_ID_SUB_ECOMMERCE" value="">
+
+     
+      
+     <script language="JavaScript" type="text/javascript">
+     function reloadForEcommerce(docId)
+     {
+       setField(IParameterName.DOCUMENT_ID_SUB_ECOMMERCE,docId);setDataAndNextPage(IParameterName.TAG_ACTION ,IActionName.AUTHOR_CONFIRM_SUBMIT ,IPageName.AUTHOR_SUBMIT_CONFIRM ); 
+     } 
+     </script>
+     <TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 ALIGN=LEFT WIDTH=100%>
+      <TR>
+        <TD>
+          <TABLE ALIGN=LEFT CELLPADDING=0 CELLSPACING=10 BORDER=0 WIDTH=100%>
+          <TR>
+            <TD CLASS="tablelines" COLSPAN=2>
+             <TABLE CELLPADDING=5 CELLSPACING=1 BORDER=0 WIDTH=100%>
+              <TR>	
+                <TD CLASS="headercells" nowrap>
+                  <P CLASS="pagecontents"><B>My Manuscript Information</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
+                </TD>
+               </TR>
+              </TABLE>
+            </TD>
+         </TR>
+
+      <TR>
+
+ 
+      <TD VALIGN="top"><IMG SRC=/images/en_US/icons/check_mark.gif BORDER=0></TD>
+      <TD CLASS="tablelines">
+      <TABLE CELLPADDING=5 CELLSPACING=1 BORDER=0 WIDTH=100%>
+      <TR>
+      <TD CLASS="secondaryheader" >
+      <TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=100%>
+      <TR><TD>
+      <P CLASS="pagecontents"><B>
+      
+      
+      Step 1:
+      Type, Title, & Abstract</B></P>  
+      </TD>
+      <TD WIDTH=1% ALIGN=CENTER>	
+      <a href="javascript:setNextPage('AUTHOR_TYPE');">	
+      <IMG SRC="/images/en_US/buttons/edit.gif" BORDER=0>
+       </a></TD>
+      </TR>
+      </TABLE></TD>
+      </TR>
+      <TR>	
+      <TD CLASS="tablelightcolor" COLSPAN=2>
+      <TABLE BORDER=0 CELLPADDING=5 CELLSPACING=0>
+      
+      
+
+          <TR>
+          <TD VALIGN=TOP align=left>
+          <P CLASS="pagecontents"><B>Manuscript Type:</B></P>
+          </TD>
+          <TD>
+          <P CLASS="pagecontents">Paper</P>
+          </TD>
+          </TR>
+ 
+      <TR>
+      <TD VALIGN=TOP align=left>
+      <P CLASS="pagecontents"><B>Title:</B></P>
+      </TD>
+      <TD>
+    
+      <P CLASS="pagecontents">AOP-based RTL HW design using SystemC</P>
+      </TD>
+      </TR>
+  
+        
+        <TR>
+        <TD VALIGN=TOP align=left>
+        <P CLASS="pagecontents"><B>Abstract:</B></P>
+        </TD>
+    
+         
+          <TD>
+  
+          <P CLASS="pagecontents">With the increasing complexity of digital hardware designs, hardware description languages are<br>being pushed to higher levels of abstraction, thus allowing for the use of design artifacts which<br>were previously exclusive to the software domain. In this paper we aim to contribute to this scenario by proposing artifacts and guidelines for digital hardware design using object-oriented and<br>aspect-oriented programming concepts. Our methodology is based on features provided by SystemC, a C++-based hardware description language, and leverages on its synthesizable subset in order to produce designs suitable for circuit synthesis. Our experimental results show that our design artifacts provide an increased level of flexibility and reusability while increasing the final circuit size by only 2%.</P>
+          </TD>          
+       
+        </TR>
+          
+   <TR><TD VALIGN=TOP align=right colspan=2></TD></TR>      
+      </TABLE>
+      </TD>	
+      
+      </TR>
+      </TABLE>
+      </TD>
+      </TR>
+   
+      <TR>
+
+     
+      <TD VALIGN="top"><IMG SRC=/images/en_US/icons/check_mark.gif BORDER=0></TD>
+      <TD CLASS="tablelines">
+      <TABLE CELLPADDING=5 CELLSPACING=1 BORDER=0 WIDTH=100%>
+      <TR>
+      <TD CLASS="secondaryheader" >
+      <TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=100%>
+      <TR><TD>
+      <P CLASS="pagecontents"><B>
+                         		
+                         		
+                         		Step 2: Attributes</B></P>
+      </TD>
+      <TD WIDTH=1% ALIGN=CENTER>	
+      <a href="javascript:setNextPage('AUTHOR_ATTRIBUTES');">	
+      <IMG SRC="/images/en_US/buttons/edit.gif" BORDER=0>
+       </a></TD>
+      </TR>
+      </TABLE></TD>
+      </TR>
+      <TR>	
+      <TD CLASS="tablelightcolor" COLSPAN=2>
+      <TABLE BORDER=0 CELLPADDING=5 CELLSPACING=0>
+      
+      
+
+            <TR>	
+            <TD VALIGN=TOP align=right width=25%>
+            <P CLASS="pagecontents"><B>Computing Classification Systems :</B></P>
+            </TD>
+            <TD>
+         <P CLASS="pagecontents">B.6.3 LOGIC DESIGN<img src="/images/en_US/icons/needs-review.gif" border=0> , Hardware description languages<img src="/images/en_US/icons/needs-review.gif" border=0> </P>
+            </TD>
+            </TR>	
+  
+     <TR><TD VALIGN=TOP align=right colspan=2></TD></TR>
+
+        </TABLE>
+      </TD>	
+
+      </TR>
+      </TABLE>
+      </TD>
+      </TR>
+    
+      <TR>
+
+     
+      <TD VALIGN="top"><IMG SRC=/images/en_US/icons/check_mark.gif BORDER=0></TD>
+      <TD CLASS="tablelines">
+      <TABLE CELLPADDING=5 CELLSPACING=1 BORDER=0 WIDTH=100%>
+      <TR>
+      <TD CLASS="secondaryheader" >
+      <TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=100%>
+      <TR><TD>
+      <P CLASS="pagecontents"><B>
+      
+      
+      Step 3:
+      Authors & Institutions</B></P> 
+      </TD>
+      <TD CLASS="secondaryheader" WIDTH=1% ALIGN=CENTER>	
+      <a href="javascript:setNextPage('AUTHOR_AUTHORS');">	
+      <IMG SRC="/images/en_US/buttons/edit.gif" BORDER=0>
+       </a></TD>
+      </TR>
+      </TABLE></TD>
+      </TR>
+      <TR>	
+      <TD CLASS="tablelightcolor" COLSPAN=2>
+      <TABLE BORDER=0 CELLPADDING=5 CELLSPACING=0>
+      
+      
+    <TR>
+          <TD Colspan=2>
+          <P CLASS="pagecontents">1.&nbsp;
+          Mück, Tiago; Federal University of Santa Catarina, Computer Science Department</P>
+          </TD>
+          </TR>
+       <TR>
+          <TD Colspan=2>
+          <P CLASS="pagecontents">2.&nbsp;
+          Fröhlich, Antônio; Federal University of Santa Catarina, Computer Science Department</P>
+          </TD>
+          </TR>
+   
+      <TR><TD VALIGN=TOP align=right colspan=2></TD></TR>
+      </TABLE>
+      </TD>	
+      </TR>
+      </TABLE>
+      </TD>
+      </TR>
+   
+      <TR>
+
+      
+      <TD VALIGN="top"><IMG SRC=/images/en_US/icons/check_mark.gif BORDER=0></TD>
+      <TD CLASS="tablelines">
+      <TABLE CELLPADDING=5 CELLSPACING=1 BORDER=0 WIDTH=100%>
+      <TR>	
+      <TD CLASS="secondaryheader" >
+      <TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=100%>
+      <TR><TD>
+      <P CLASS="pagecontents"><B>
+      
+      
+      Step 4:
+      Referees</B></P> 
+       </TD>
+       <TD WIDTH=1% ALIGN=CENTER>	
+      <a href="javascript:setNextPage('AUTHOR_REVIEWERS');"><IMG SRC='/images/en_US/buttons/edit.gif' border=0></a></TD>
+       </TR>
+       </TABLE></TD>       
+      </TR>
+      <TR>	
+      <TD CLASS="tablelightcolor" COLSPAN=2>
+      <TABLE BORDER=0 CELLPADDING=5 CELLSPACING=0>
+      
+      
+
+          <TR>
+          <TD align=right>
+          <P CLASS="pagecontents"><b>My Reviewers:</b></P>
+          </TD>
+          <TD>
+          <P CLASS="pagecontents">Andreas Gerstlauer University of Texas at Austin, , gerstl@ece.utexas.edu (Preferred)<br>Flávio Wagner Universidade Federal do Rio Grande do Sul, , flavio@inf.ufrgs.br (Preferred)<br>Olaf Spinczyk Technische Universität Dortmund, , olaf.spinczyk@tu-dortmund.de (Preferred)<br></P>
+          </TD>
+          </TR>
+    
+          <TR>
+          <TD align=right>
+          <P CLASS="pagecontents"><b>My Editors:</b></P>
+          </TD>
+          <TD>
+          <P CLASS="pagecontents">Alex Jones University of Pittsburgh, Electrical and Computer Engineering, akjones@ece.pitt.edu (Preferred)<br></P>
+          </TD>
+          </TR>
+    
+     
+     <TR><TD VALIGN=TOP align=right colspan=2></TD></TR>
+      </TABLE>
+      </TD>	
+     
+      </TR>
+      </TABLE>
+      </TD>
+      </TR>
+  
+      <TR>
+
+     
+      <TD VALIGN="top"><IMG SRC=/images/en_US/icons/check_mark.gif BORDER=0></TD>
+      <TD CLASS="tablelines">
+      <TABLE CELLPADDING=5 CELLSPACING=1 BORDER=0 WIDTH=100%>
+      <TR>	
+      <TD CLASS="secondaryheader">
+      <TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=100%>
+      <TR><TD>
+      <P CLASS="pagecontents"><B>
+      
+      
+      Step 5:
+      Details & Comments</B></P>
+      </TD>	
+      <TD BORDER=0 WIDTH=1% ALIGN=CENTER>	
+      <a href="javascript:setNextPage('AUTHOR_DETAILS');">
+      <IMG SRC="/images/en_US/buttons/edit.gif" BORDER=0></a></TD>
+      </TR>
+      </TABLE></TD>
+      </TR>
+      <TR>
+      <TD CLASS="tablelightcolor" COLSPAN=2>
+
+      <TABLE BORDER=0 CELLPADDING=5 CELLSPACING=0>
+      
+      
+     
+        <TR>
+        <TD VALIGN=TOP>
+        
+        <TABLE BORDER=0 CELLPADDING=5 CELLSPACING=0><tr><td>
+        
+        <P CLASS="pagecontents"><B>Cover Letter:</B></P>
+        </TD>
+        <TD>
+
+        <P CLASS="pagecontents"></P>
+        </TD>
+        </TR>
+        
+        </TABLE></td></tr>
+  
+        <TR>
+        <TD CLASS="tablelightcolor" colspan=2>
+        <TABLE BORDER=0 CELLPADDING=5 CELLSPACING=0>
+
+            <TR>
+            <TD>
+            <P CLASS="pagecontents">1.</P>
+            </TD>
+            <TD>
+          <P CLASS="pagecontents">cover.pdf</P>
+            </TD>
+            </TR>
+      </TABLE>
+        </TD>	
+        </TR>
+     <TR>
+      <TD VALIGN=TOP align=right colspan=2>
+  
+        &nbsp;
+   
+        <TABLE cellSpacing=5 cellPadding=0 width=100% align=left border=0>
+<TR>
+<TD class='tablelines'>
+<TABLE cellSpacing=1 cellPadding=5 width=100%  border=0>
+<tr><td class="headercells" align="Left" width="100%"  colspan='2'  ><span class="pagecontents"><B>Is this manuscript a candidate for a special issue?</B> </span> </td>
+</tr><tr><td class="dataentry" align="Center" width="1%"  ><span class="pagecontents"><a name='ANCHOR_CUSTOM_FIELD7991'/>&nbsp; </span> </td>
+<td class="dataentry" align="Left" width="100%"  ><span class="pagecontents"><a name='ANCHOR_CUSTOM_FIELD7991'/>Yes </span> </td>
+</tr><tr><td class="dataentry" align="Center" width="1%"  ><span class="pagecontents"><a name='ANCHOR_CUSTOM_FIELD7991'/><nobr><img src='/images/en_US/icons/check_mark_scoresheet.gif' border=0></nobr> </span> </td>
+<td class="dataentry" align="Left" width="100%"  ><span class="pagecontents"><a name='ANCHOR_CUSTOM_FIELD7991'/>No </span> </td>
+</tr></table>
+</td>
+</tr>
+</table>
+<BR CLEAR=ALL>&nbsp;
+   
+        &nbsp;
+   
+        &nbsp;
+   
+        &nbsp;
+   
+        &nbsp;
+   
+        &nbsp;
+   
+        &nbsp;
+     </TD>	
+      </TR>
+      <TR><TD VALIGN=TOP align=right colspan=2><TABLE cellSpacing=5 cellPadding=0 width=100% align=left border=0>
+<TR>
+<TD class='tablelines'>
+<TABLE cellSpacing=1 cellPadding=5 width=100%  border=0>
+<tr><td class="headercells" align="Left" width="100%"  ><span class="pagecontents"><B>Custom Questions for Submission</B> </span> </td>
+</tr><tr><td class="dataentry" align="Left" width="100%"  ><span class="pagecontents">Do you have electronic supplementary materials? </span> </td>
+</tr><tr><td class="dataentry" align="Left" width="100%"  ><span class="pagecontents"><a name='ANCHOR_CUSTOM_FIELD35945'/> </span> </td>
+</tr><tr><td class="dataentry" align="Left" width="100%"  ><span class="pagecontents"><a name='ANCHOR_CUSTOM_FIELD35945'/>No </span> </td>
+</tr><tr><td class="dataentry" align="Left" width="100%"  ><span class="pagecontents">Please read the <a href='http://www.acm.org/pubs/copyright_form.html' target='new'><b>Copyright Transfer Agreement</b></a>.
+<br>
+Have you submitted the Copyright Transfer Agreement? </span> </td>
+</tr><tr><td class="dataentry" align="Left" width="100%"  ><span class="pagecontents"><a name='ANCHOR_CUSTOM_FIELD35946'/> </span> </td>
+</tr><tr><td class="dataentry" align="Left" width="100%"  ><span class="pagecontents"><a name='ANCHOR_CUSTOM_FIELD35946'/>No </span> </td>
+</tr></table>
+</td>
+</tr>
+</table>
+<BR CLEAR=ALL>&nbsp;<TABLE cellSpacing=5 cellPadding=0 width=100% align=left border=0>
+<TR>
+<TD class='tablelines'>
+<TABLE cellSpacing=1 cellPadding=5 width=100%  border=0>
+<tr><td class="headercells" align="Left" width="100%"  colspan='2'  ><span class="pagecontents"><B><img src = '/images/en_US/icons/required.gif'><input name='REQUIRED_CUSTOM_FIELD' value='CUSTOM_FIELD_RESPONSE_ID139911' type='hidden'  pageName='AUTHOR_DETAILS'/>&nbsp;Is this submission based on a previously-published archival conference or workshop paper?" </B> </span> </td>
+</tr><tr><td class="dataentry" align="Left" width="1%"  ><span class="pagecontents"><a name='ANCHOR_CUSTOM_FIELD139911'/>&nbsp; </span> </td>
+<td class="dataentry" align="Left" width="100%"  ><span class="pagecontents"><a name='ANCHOR_CUSTOM_FIELD139911'/>Yes </span> </td>
+</tr><tr><td class="dataentry" align="Left" width="1%"  ><span class="pagecontents"><a name='ANCHOR_CUSTOM_FIELD139911'/><nobr><img src='/images/en_US/icons/check_mark_scoresheet.gif' border=0></nobr> </span> </td>
+<td class="dataentry" align="Left" width="100%"  ><span class="pagecontents"><a name='ANCHOR_CUSTOM_FIELD139911'/>No </span> </td>
+</tr></table>
+</td>
+</tr>
+</table>
+<BR CLEAR=ALL>&nbsp;<TABLE cellSpacing=5 cellPadding=0 width=100% align=left border=0>
+<TR>
+<TD class='tablelines'>
+<TABLE cellSpacing=1 cellPadding=5 width=100%  border=0>
+<tr><td class="headercells" align="Left" width="100%"  colspan='2'  ><span class="pagecontents"><B><img src = '/images/en_US/icons/required.gif'><input name='REQUIRED_CUSTOM_FIELD' value='CUSTOM_FIELD_RESPONSE_ID139912' type='hidden'  pageName='AUTHOR_DETAILS'/>&nbsp;I have read the following:</B> </span> </td>
+</tr><tr><td class="dataentry" align="Left" width="1%"  ><span class="pagecontents"><a name='ANCHOR_CUSTOM_FIELD139912'/><nobr><img src='/images/en_US/icons/check_mark_scoresheet.gif' border=0></nobr> </span> </td>
+<td class="dataentry" align="Left" width="100%"  ><span class="pagecontents">The technical contributions appearing in ACM journals are normally original papers which have not been published elsewhere.
+<br><br>
+Simultaneous submissions to conferences and journals, and submissions that have already appeared in journals will be rejected by default.
+<br><br>
+Publication of a previously-published conference or workshop article that is available in a formal proceedings (with digital archival) is allowed only if the editor judges that:
+<br><br>
+(a) the revision contains significant amplification or clarification of the original material (30% or more new material), or
+<br><br>
+(b) there is a significant additional benefit to be gained from journal publication e.g., one article that connects multiple previously-published articles in a coherent manner where the integration of these articles provides additional insight on the approach or overall system.
+<br><br>
+In either case, any prior appearance should be noted on the title page of the paper.
+Furthermore, authors should submit as attachments:
+<br><br>
+1) a brief note clearly indicating what constitutes the (30% or more) new material, <br>and <br>
+2) the previously published article(s). </span> </td>
+</tr></table>
+</td>
+</tr>
+</table>
+<BR CLEAR=ALL>&nbsp;<TABLE cellSpacing=5 cellPadding=0 width=100% align=left border=0>
+<TR>
+<TD class='tablelines'>
+<TABLE cellSpacing=1 cellPadding=5 width=100%  border=0>
+<tr><td class="dataentry" align="Left" width="1%"  ><span class="pagecontents"><a name='ANCHOR_CUSTOM_FIELD141426'/><nobr><img src='/images/en_US/icons/check_mark_scoresheet.gif' border=0></nobr> </span> </td>
+<td class="dataentry" align="Left" width="100%"  ><span class="pagecontents"><img src = '/images/en_US/icons/required.gif'><input name='REQUIRED_CUSTOM_FIELD' value='CUSTOM_FIELD_RESPONSE_ID141426' type='hidden'  pageName='AUTHOR_DETAILS'/>&nbsp;I confirm that this submission is an original work, or, in my opinion, this submission contains 30% or more new material with respect to previous conference publication(s). </span> </td>
+</tr></table>
+</td>
+</tr>
+</table>
+<BR CLEAR=ALL>&nbsp;<TABLE cellSpacing=5 cellPadding=0 width=100% align=left border=0>
+<TR>
+<TD class='tablelines'>
+<TABLE cellSpacing=1 cellPadding=5 width=100%  border=0>
+<tr><td class="headercells" align="Left" width="100%"  colspan='2'  ><span class="pagecontents"><B><img src = '/images/en_US/icons/required.gif'><input name='REQUIRED_CUSTOM_FIELD' value='CUSTOM_FIELD_RESPONSE_ID139914' type='hidden'  pageName='AUTHOR_DETAILS'/>&nbsp;ACM Policy on Plagiarism</B> </span> </td>
+</tr><tr><td class="dataentry" align="Left" width="1%"  ><span class="pagecontents"><a name='ANCHOR_CUSTOM_FIELD139914'/><nobr><img src='/images/en_US/icons/check_mark_scoresheet.gif' border=0></nobr> </span> </td>
+<td class="dataentry" align="Left" width="100%"  ><span class="pagecontents"><img src = '/images/en_US/icons/required.gif'><input name='REQUIRED_CUSTOM_FIELD' value='CUSTOM_FIELD_RESPONSE_ID139914' type='hidden'  pageName='AUTHOR_DETAILS'/>&nbsp;Confirm that you are familiar with the ACM's Policy on Plagiarism, including self-plagiarism:
+<br><br>
+<a href=http://www.acm.org/publications/policies/plagiarism_policy target=_blank>ACM's Policy on Plagiarism, including self plagiarism</a> </span> </td>
+</tr></table>
+</td>
+</tr>
+</table>
+<BR CLEAR=ALL>&nbsp;<TABLE cellSpacing=5 cellPadding=0 width=100% align=left border=0>
+<TR>
+<TD class='tablelines'>
+<TABLE cellSpacing=1 cellPadding=5 width=100%  border=0>
+<tr><td class="headercells" align="Left" width="100%"  colspan='2'  ><span class="pagecontents"><B><img src = '/images/en_US/icons/required.gif'><input name='REQUIRED_CUSTOM_FIELD' value='CUSTOM_FIELD_RESPONSE_ID139915' type='hidden'  pageName='AUTHOR_DETAILS'/>&nbsp;ACM Policy on Prior Publication and Simultaneous Submissions</B> </span> </td>
+</tr><tr><td class="dataentry" align="Left" width="1%"  ><span class="pagecontents"><a name='ANCHOR_CUSTOM_FIELD139915'/><nobr><img src='/images/en_US/icons/check_mark_scoresheet.gif' border=0></nobr> </span> </td>
+<td class="dataentry" align="Left" width="100%"  ><span class="pagecontents"><img src = '/images/en_US/icons/required.gif'><input name='REQUIRED_CUSTOM_FIELD' value='CUSTOM_FIELD_RESPONSE_ID139915' type='hidden'  pageName='AUTHOR_DETAILS'/>&nbsp;Confirm that you are familiar with the ACM's Policy on Prior Publication and Simultaneous Submissions
+<br><br>
+<a href=http://www.acm.org/publications/policies/sim_submissions target=_blank>ACM's Policy on Prior Publication and Simultaneous Submissions</a> </span> </td>
+</tr></table>
+</td>
+</tr>
+</table>
+<BR CLEAR=ALL>&nbsp;</TD></TR>
+      </TABLE>
+
+      </TD>	
+      </TR>
+      </TABLE>
+      </TD>
+      </TR>
+
+      <TR>
+
+      
+     <TD VALIGN="top"><IMG SRC=/images/en_US/icons/check_mark.gif BORDER=0></TD>
+      <TD CLASS="tablelines">
+      <TABLE CELLPADDING=5 CELLSPACING=1 BORDER=0 WIDTH=100%>
+      <TR>	
+      <TD CLASS="secondaryheader" >
+      <TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=100%>
+      <TR><TD>
+      <P CLASS="pagecontents"><B>
+      
+      
+      Step 6:
+      File Upload</B></P>
+      </TD>	
+      <TD WIDTH=1% ALIGN=CENTER>	
+      <a href="javascript:setNextPage('AUTHOR_FILE_UPLOAD');">
+      <IMG SRC="/images/en_US/buttons/edit.gif"BORDER=0>
+       </a></TD>
+       </TR>
+       </TABLE></TD>
+      </TR>
+    
+      
+      <TR>
+      <TD CLASS="tablelightcolor" COLSPAN=2>
+      <TABLE BORDER=0 CELLPADDING=5 CELLSPACING=0>
+      
+       
+
+          <TR>
+          <TD>
+          <P CLASS="pagecontents">1.</P>
+          </TD>
+          <TD>
+          <P CLASS="pagecontents">paper_submited.pdf
+          
+          </P>
+          </TD>
+          </TR>
+    
+<TR><TD VALIGN=TOP align=right colspan=2></TD></TR>
+       </TABLE>
+      </TD>	      
+      </TR>
+      </TABLE>
+      </TD>
+      </TR>
+  
+      <TR>
+
+     
+      <TD VALIGN="top"><IMG SRC="/images/en_US/icons/check_mark.gif"
+           BORDER=0></TD>
+
+      <TD CLASS="tablelines">
+      <TABLE CELLPADDING=5 CELLSPACING=1 BORDER=0 WIDTH=100%>
+      <TR>	
+      <TD CLASS="secondaryheader">
+      <TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=100%>
+      <TR><TD>
+      <P CLASS="pagecontents"><B>
+      
+      
+      Step 7:
+      Review &amp; Submit</B></P>   
+      </TD>	
+      
+      </TR>
+      </TABLE></TD>
+      </TR>
+      
+      <TR>
+      <TD CLASS="tablelightcolor" COLSPAN=2>
+         <a href="javascript:setActionPageData('UPDATE_PROOFS_VIEWED','AUTHOR_SUBMIT','JUST_VIEWED_PROOF_TYPE',
+                'HTML');" onClick="javascript:window.open('/LongRequest/todaes?TAG_ACTION=DOWNLOAD_PROOF_FILE&DOCUMENT_ID=12177342&FILE_KEY=-1496592426&DOWNLOAD=TRUE&FILE_TYPE=DOCUMENT&PROOF_FILE_TYPE=HTML&DOCUMENT_HASHCODE=2034570456&SANITY_CHECK_DOCUMENT_ID=12177342&RANDOM=2045','html_proof_window','toolbar=yes,location=no,directories=no,menubar=yes,resizable=yes,scrollbars=yes'); return true;"> 
+                     
+                                          <IMG NAME="HTML_IMG" SRC="/images/en_US/buttons/view_html_proof_viewed.gif" BORDER=0></a>
+              &nbsp;&nbsp; 
+                <a href="javascript:setActionPageData('UPDATE_PROOFS_VIEWED','AUTHOR_SUBMIT','JUST_VIEWED_PROOF_TYPE','PDF_HI');"
+                 onClick="javascript:window.open('http://mc.manuscriptcentral.com/downloads/linkpool/prod1/todaes/2012/5/s1-ln1217734295844769-1939656818Hwf-218919736IdV147310274012177342PDF_HI0001.pdf','pdf_proof_window','toolbar=yes,location=no,directories=no,menubar=yes,resizable=yes,scrollbars=yes');  return true; "> 
+        
+               <IMG NAME="PDF_HI_IMG" SRC="/images/en_US/buttons/view_pdf_proof_viewed.gif" BORDER=0></a>
+   
+    
+      </TD>
+      </TR>
+  
+     </TABLE>
+     </TD>
+     </TR>
+     </TABLE>
+        
+	                      
+						  
+								</TD>
+							</TR>
+							<TR>
+								<TD>
+									<TABLE ALIGN=LEFT CELLPADDING=0 CELLSPACING=5 BORDER=0 WIDTH=100%>
+<TR>
+<TD CLASS='tablelines' COLSPAN=2>
+<TABLE CELLPADDING=5 CELLSPACING=1 BORDER=0 WIDTH=100%>
+<TR>
+<TD CLASS='tablelightcolor'>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=2 ALIGN=RIGHT>
+<TR>
+<input type='hidden' name='PERFORMED_SEARCH_FL' value='Y'> 
+<TD ALIGN=RIGHT><A HREF="javascript:setNextPage('AUTHOR_FILE_UPLOAD')" onClick="if (isok(self.form)==0) {return false}else{return checkUploadFields()};"><IMG SRC='/images/en_US/buttons/save_back.gif' BORDER=0 NAME='previous_button'></A></TD>
+<TD id='SUBMIT_BUTTON' ALIGN=RIGHT><A HREF="javascript: setDataAndNextPage('TAG_ACTION', 'AUTHOR_CONFIRM_SUBMIT', 'AUTHOR_SUBMIT_CONFIRM');" onClick="javascript:  if (currentlySubmitting == 0) { if (!confirm('This will submit the manuscript. Are you sure?')) { return false; } else { currentlySubmitting = 1; return true; }} else { alert('Processing submission please wait.'); return false; } " ><IMG SRC='/images/en_US/buttons/submit.gif' BORDER=0 NAME='next_button'></A></TD>
+</TR>
+</TABLE>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TR>
+</TABLE>
+
+								</TD>
+							</TR>
+						</TABLE>
+					</TD>
+				</TR>
+			</TABLE>
+		</TD>
+	</TR>
+</TABLE>
+<BR CLEAR=ALL>
+
+
+
+
+
+<table border=0 cellpadding=10 cellspacing=0 align=center width=100%>
+	<tr>
+		<td align=center>
+		<p class="footer">ScholarOne Manuscripts<sup>TM</sup> v4.8.1 (patent #7,257,767 and #7,263,655). © ScholarOne, Inc., 2012. All Rights Reserved.<BR>ScholarOne Manuscripts is a trademark of ScholarOne, Inc. ScholarOne is a registered trademark of ScholarOne, Inc.<br><br><a href="http://www.twitter.com/ScholarOneNews"><img src="/images/en_US/icons/t_mini-a.png" alt="Follow ScholarOneNews on Twitter"/ border=0></a> Follow ScholarOne on Twitter<br><br>
+		<a href="http://mc.manuscriptcentral.com/downloads/terms.htm"
+			target="_new">Terms and Conditions of Use</a> - <a
+			href="http://mc.manuscriptcentral.com/downloads/privacy.htm"
+			target="_new">ScholarOne Privacy Policy</a> - <a
+            href="javascript:popWindow('http://mchelp.manuscriptcentral.com/gethelpnow/','SUPPORT_URL', 700, 400)" >
+             <font color="orange"><b>Get Help Now</b></font></a>
+       </p>			
+		</td>
+	</tr>
+	<tr>
+		<td align=center>
+		<p class="footer">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		&nbsp; &nbsp;
+
+</p>
+		</td>
+	</tr>
+</table>
+
+      
+<script type='text/javascript'>
+if (document.attachEvent) {
+  var links = document.getElementsByTagName('a');
+
+  for( var i = 0, n = links.length; i < n; ++i ) {
+    link = links[i]; 
+    if(link.name == null || link.name == '')
+    {
+      link.attachEvent('onclick', checkSubmitted);
+    }
+  }
+}
+</script>
+
+
+  <!-- Running on server: 0096    -->
+
+	
+<script language='JavaScript' type='text/javascript'>  setField('SANITY_CHECK_DOCUMENT_ID','12177342');   setField('DOCUMENT_HASHCODE','2034570456');   setField('CONFIG_ID','1605');   setField('PAGE_LOADED_FLAG','Y'); </script></form><script language='JavaScript' type='text/javascript'></script>	
+</body>
+</html>

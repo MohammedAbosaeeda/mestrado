@@ -1,0 +1,448 @@
+\section{Sistemas Operacionais para \Rssf}
+\label{sec:so}
+
+%introdução
+Esta seção apresenta uma revisão de características necessárias aos sistemas
+operacionais de \rssf. Ao final será apresentado o \epos, um sistema operacional
+desenvolvido no \lisha para plataformas embarcadas que implementa muitas das
+funcionalidades utilizadas em \rssf.
+
+Em uma \rssf, requisitos específicos das aplicações em desenvolvimento guiam
+todo o projeto de hardware, incluindo a capacidade de processamento, largura de
+banda e taxas de transmissão do rádio, e módulos de sensores, requerendo que o
+projeto seja modular. Estes requisitos, contudo, leva a uma grande variedade de
+componentes de hardware, tornando os dispositivos de \rssf não apenas modulares,
+mas heterogêneos. Neste cenário, uma aplicação de sensoriamento desenvolvida
+para uma dada plataforma dificilmente será portável a uma plataforma diferente,
+a não ser que o sistema de suporte de tempo de execução nestas plataformas
+provejam mecanismos que abstraiam e encapsulem a plataforma de sensoriamento de
+modo adequado. Ao mesmo tempo, os recursos limitados tipicamente encontrados no
+hardware para \rssf forçam qualquer sistema para estes dispositivos a serem
+eficientes e não usar recursos em excesso.
+
+A necessidade por conectividade, abstração de hardware e gerenciamento de
+recursos limitados torna imperativo o suporte de um sistema operacional para
+aplicações de redes de sensores. Considerando a pesquisa, tecnologia e
+aplicações atuais é enumera-se uma série de requisitos para sistemas
+operacionais de \rssf~\cite{Wanner:JCC:2008}:
+\begin{enumerate}
+
+  \item \textbf{Prover funcionalidade básica de sistema operacional:} Para não
+  restringir funcionalidade e portabilidade das aplicações, um sistema
+  operacional para \rssf deve prover serviços tradicionais de sistema
+  operacional como: abstração de hardware, gerenciamento de processos
+  (geralmente seguindo o prisma ``monotarefa, multi-thread''), serviços de
+  temporização e gerenciamento de memória.
+
+  \item \textbf{Prover mecanismos eficientes para gerenciar consumo de energia:}
+  Gerência de energia dos nodos de sensoriamento é um fator determinante da vida
+  útil de uma \rssf. O sistema de suporte em tempo de execução para aplicações
+  de redes de sensores deve prover mecanismos de gerência de energia para as
+  aplicações, assim como usar o mínimo de energia possível para prover seus
+  serviços.
+
+  \item \textbf{Prover mecanismos de reprogramação em campo:} Dado que os nodos
+  de \rssf podem estar localizados em regiões inóspitas e que requisitos e
+  parâmetros das aplicações podem mudar com o tempo, reprogramação em campo
+  através da rede de comunicação é um serviço importante neste tipo de sistema.
+  Um sistema operacional para \rssf deve idealmente prover, para aplicações já
+  implantadas, mecanismos de reprogramação total ou parcial em campo.
+
+  \item \textbf{Abstrair hardware de sensores heterogêneos de modo uniforme:}
+  Como já dito acima, os requisitos específicos de uma aplicação de \rssf faz
+  do seu hardware não apenas modular, mas também heterogêneo, fazendo com que
+  seja difícil portar uma aplicação de sensoriamento de uma plataforma para
+  outra distinta. Além das diferenças arquiteturais, os próprios sensores
+  (e.g., temperatura, luz, sensores de movimento) apresentam uma variabilidade
+  ainda maior. Módulos de sensores apresentando a mesma funcionalidade
+  frequentemente variam sua interface de acesso, características operacionais e
+  parâmetros. Um sistema de suporte de tempo de execução apropriadamente
+  projetado pode liberar os programadores das aplicações destas dependências
+  arquiteturais e promover a portabilidade das aplicações a diferentes
+  plataformas de sensoriamento.
+
+  \item \textbf{Prover uma pilha de protocolos de comunicação configurável:}
+  Dados os requisitos específicos de comunicação que diferentes aplicações
+  apresentam, o hardware de comunicação para \rssf deve apresentar um certo
+  nível de configurabilidade. O sistema operacional deve prover meios para
+  configurar a pilha de protocolos de comunicação, a partir dos protocolos de
+  controle de acesso ao meio (MAC), garantindo assim que aplicações possam
+  explorar as características do dispositivo de comunicação empregado do modo
+  que melhor lhe convir.
+
+  \item \textbf{Operar com recursos limitados:} Como nodos de \rssf precisam
+  consumir pouca energia, o projeto do hardware destes nodos deve trocar, sempre
+  que possível, sua capacidade de computação por mais baixa potência. Assim, os
+  nodos terão recursos de processamento e memória limitados. Um sistema
+  operacional para \rssf deve entregar os serviços requisitados pela aplicação
+  sem utilizar uma quantidade elevada dos recursos computacionais disponíveis.
+
+\end{enumerate}
+
+%outros sistemas . . .
+
+Sistemas operacionais típicos para sistemas embarcados, como VxWorks, QNX, OS-9,
+WinCE e $\mu$Clinux, provêm um ambiente de programação similar àqueles
+existentes em computadores tradicionais, normalmente através de serviços
+compatíveis com POSIX. Muitos destes sistemas operacionais provêm e requerem
+suporte em hardware para proteção de memória. Embora estes sistemas sejam
+adequados para outros aplicações embarcadas complexas como telefones celulares,
+set-top-boxes, seus requisitos em termos de capacidade de memória e de
+processamento torna impossível seu uso em \rssf. Vários sistemas foram
+projetados especialmente para estas redes, incluindo MagnetOS~\cite{Barr:2002},
+Contiki~\cite{Dunkels:2004} e AmbientRT~\cite{Hofmeijer:2004}. Os mais
+proeminentes são, contudo, os sistemas TinyOS~\cite{Hill:2000}, MANTIS
+OS~\cite{Abrach:2003} e SOS~\cite{Han:2005}.
+
+O TinyOS é um sistema operacional baseado em eventos. O sistema é organizado em
+uma coleção de componentes. Cada configuração do TinyOS é composta por uma
+aplicação e os serviços de sistema operacional por ela requiridos, consistindo
+de um escalonador e um grafo de componentes. Cada componente é composto por
+comandos, tratadores de eventos, tarefas e quadro de execução. Cada componente
+ainda declara os comandos aos quais responde e os eventos que ele sinaliza.
+Comandos são chamadas de métodos não bloqueantes e são tipicamente usados para
+iniciar requisições de software e hardware e, condicionalmente, iniciar tarefas.
+tratadores de eventos são usados para tratar interrupções de hardware e podem
+chamar comandos ou disparar tarefas.
+
+O sistema possui um modelo de concorrência simplificado, baseado num modelo em
+que tarefas executam até completar, sendo apenas preemptadas apenas por
+interrupções. Este modelo traz consequências tanto positivas quanto negativas.
+em um modelo tradicional baseado em threads, onde cada thread tem sua própria
+pilha, cada thread precisa reservar espaço na memória, já limitada, do nodo para
+seu contexto de execução. Dependendo da arquitetura, troca de contexto pode ser
+uma operação extensa. Restringindo este modelo, o TinyOS reduz grande parte
+deste sobrecusto, mas também perde a maior parte das características de um
+modelo multi-thread. Esta restrição de concorrência pode ainda inibir a
+capacidade do sistema em tratar restrições de tempo-real. O TinyOS não provê
+mecanismos de alocação dinâmica de memória. Serviços de temporização são
+providos por uma interface de Timer. O modelo de componentes do TinyOS, junto de
+seu sistema simplificado de concorrência, permite ao sistema operar em
+plataformas com menos de 1 kilobyte de memória RAM.
+
+Gerenciamento de energia no TinyOS é implementado pelo escalonador de tarefas,
+que faz uso da interface \texttt{StdControl} para iniciar e para componentes.
+Quando a fila do escalonador está vazia, o processador principal é colocado em
+um modo \textit{sleep}, de baixa potência. Deste modo, novas tarefas somente
+serão disparadas na execução de um tratador de interrupção, que ``acorda'' o
+processador. Este método permite bons resultados para o microcontrolador
+principal, mas deixa métodos mais agressivos de gerência de energia a cargo da
+aplicação.
+
+O TinyOS apresenta uma arquitetura de abstração de hardware composta de três
+camadas: \textit{Hardware Presentation Layer} (HPL), \textit{Hardware Adaptation
+Layer} (HAL) e \textit{Hardware Interface Layer} (HIL)~\cite{Handziski:2004}. A
+HPL agrupa componentes de dispositivos específicos em modelos específicos de
+cada domínio, como \textit{Alarm} ou \textit{ADC Channel}. A HAL provê a melhor
+abstração possível em termos de uso efetivo de recursos, mas ainda tenta não
+inibir a portabilidade da aplicação. A HIL usa componentes adaptados para
+implementar abstrações independentes de plataforma. O desenvolvedor de
+aplicações para o TinyOS pode escolher usar qualquer um dos níveis de abstração
+disponíveis, trocando portabilidade da aplicação por uso eficiente dos recursos.
+
+A pilha de comunicação do TinyOS é baseada no protocolo controle de acesso ao
+meio B-MAC~\cite{Polastre:2004}. O protocolo é implementa em duas camadas: controle de
+hardware (LLHC - \textit{low-level hardware control}) e lógica do protocolo (PL
+- \textit{protocol logic}). A camada de controle de hardware permite
+configuração estática e dinâmica dos parâmetros básicos de comunicação (e.g.,
+frequência, potência de transmissão). O sistema também permite algum nível de
+configuração da camada da lógica do protocolo (e.g., \textit{duty cycle},
+algoritmo de detecção de canal livre, uso de reconhecimento).
+
+O MANTIS OS (Multimodal networks of in situ sensors)~\cite{Abrach:2003} é um sistema
+operacional multi-thread que utiliza uma API (\textit{Application Programming
+Interface}) inspirada em POSIX e adaptada às necessidades e restrições das
+\rssf. A API é preservada entre diferentes plataformas e o kernel do sistema é
+composto de um escalonador e drivers de dispositivos. Uma pilha de comunicação e
+um servidor de comandos são disponibilizados a serviços de nível de usuário.
+
+O escalonador do MANTIS OS provê um subconjunto do pacote POSIX threads, com
+escalonamento round-robin baseado em prioridades. O sistema suporta alocação de
+memória na estática e dinâmica para as threads. O escalonador é acionado
+periodicamente por um timer, através de operações em semáforos. Uma thread
+\textit{idle} de baixa prioridade é utilizada como ponto de entrada para as
+políticas de gerência de energia do sistema, que põem o processador em modo
+\textit{sleep} sempre que não há threads aptas para execução. Serviços de
+temporização e de sincronização são providos através de interfaces similares às
+definidas pelo padrão POSIX. O mecanismo de escalonamento complexo utilizado no
+MANTIS OS acarreta um sobrecusto maior que o acarretado por modelos mais
+simples, baseados em eventos. Logo, o sistema necessita de mais memória, tanto
+RAM quanto de código, que, por exemplo, o TinyOS. O sistema ainda é, contudo,
+adequado para uso em protótipos atuais de \rssf.
+
+O MANTIS usa uma camada de abstração de hardware (HAL - \textit{Hardware
+Abstraction Layer}), com as funções \texttt{dev\_read()}, \texttt{dev\_write()},
+\texttt{dev\_mode()} e \texttt{dev\_ioctl()}. Cada função toma um dispositivo
+como parâmetro e uma tabela de funções redireciona chamadas gerais aos drivers
+dos dispositivos. A lista de parâmetros para as funções \texttt{dev\_mode()} e
+\texttt{dev\_ioctl()} são específicas para cada dispositivo e não há uma
+abstração unificada para os sensores (cada driver de dispositivo apresenta
+semânticas específicas).
+
+O sistema provê uma interface de comunicação unificada através de threads em
+nível de usuário. Há um formato unificado de pacote para diferentes interfaces
+de comunicação (e.g., RS-232, USB, rádio). Esta camada de comunicação gerencia a
+sincronização de pacotes e \textit{buferização}. Sob a API de comunicação, o
+MANTIS OS usa drivers de dispositivos tradicionais. As aparentes vantagens de um
+ponto de entrada único para comunicação é diminuída devido à semântica e
+parâmetros específicos dos métodos de comunicação para cada interface.
+
+O SOS~\cite{Han:2005} é um sistema operacional dinamicamente reconfigurável para
+\rssf. O kernel do sistema inclui serviços de passagem de mensagens, alocação dinâmica
+de memória e carga dinâmica de módulos. O SOS é organizado em uma série de
+módulos binários que implementam tarefas específicas. Estes componentes são
+comparáveis em funcionalidade aos componentes do TinyOS. Uma aplicação é
+composta por uma série de módulos que interagem entre si, apresentando tanto
+interface por chamada de métodos quanto por passagem de mensagens. Passagem de
+mensagens é assíncrona e coordenada por um escalonador que usa uma fila ordenada
+por prioridades. Chamadas diretas a funções são utilizadas para operações
+síncronas entre os módulos. O sistema integra alocação dinâmica de memória e
+\textit{garbage collection}. Como no TinyOS e no MANTIS OS, SOS coloca o
+processador em modo \textit{sleep} sempre que não há mensagens para escalonar. O
+modelo de reconfiguração dinâmica do SOS implica em sobrecustos
+consideravelmente maiores quando comparado com outros sistemas. Contudo, este
+sobrecusto ainda é aceitável aplicações de \rssf]~\cite{Han:2005}.
+
+SOS provê serviços para, dinamicamente, incluir, atualizar e remover módulos em
+programas previamente implantados. O sistema divide a memória de programa em
+páginas, e mantém estruturas de estado e contexto na memória RAM para cada
+módulo.
+
+O sistema usa os mecanismos de módulos de kernel carregáveis nas abstrações de
+hardware de sensoriamento. Através desta arquitetura, drivers de dispositivos
+podem registrar seus serviços e associá-los a um nome, permitindo às aplicações
+acessar componentes através destes nomes. Por exemplo, um driver de um sensor
+analógico pode se associar a um canal do ADC (Analog-to-Digital Converter) e
+registrar um sensor de um tipo específico (e.g., PHOTO - luminosidade, TEMP -
+temperatura, etc). Quando a aplicação requer dados de, por exemplo, PHOTO, o
+kernel usa o driver registrado para obter a leitura apropriada. Esta abstração
+semântica das leituras de sensores promove portabilidade das aplicações.
+Contudo, como o sistema operacional precisa manter uma tabela de ponteiros para
+funções indexada por nomes, o registro de drivers implica em algum sobrecusto de
+memória.
+
+
+\subsection{\epos - Embedded Parallel Operating System}
+\label{sec:epos}
+
+Requisitos de sistema para \rssf incluem funcionalidades básicas de sistema
+operacional (e.g., gerência de memória, escalonamento), gerência de energia,
+mecanismos de reprogramação dinâmica, abstração dos dispositivos de
+sensoriamento (sensores) e uma pilha de comunicação configurável. A capacidade
+limitada do hardware de \rssf requer que estes sistemas operem com recursos
+limitados, o que faz do uso e adaptação de sistemas operacionais tradicionais
+impossível. Vários projetos de
+pesquisa~\cite{Abrach:2003, Barr:2002, Dunkels:2004, Han:2005, Hill:2000,
+Hofmeijer:2004} focaram na solução do problema de suporte de sistema para redes
+de sensores. A maioria deles, contudo, falhou no tratamento de dois requisitos:
+configuração transparente do canal de comunicação e abstração eficiente e
+unificada da camada de abstração de sensores.
+
+O \epos (Embedded Parallel Operating
+System)~\cite{Froehlich:2001,Marcondes:ETFA:2006} é um arcabouço baseado em
+componentes para a geração de ambientes dedicados de suporte de tempo de
+execução. O arcabouço do \epos permite que programadores desenvolvam aplicações
+independentes de plataforma, e ferramentas de análise permitem que componentes
+sejam adaptados automaticamente para atender a requisitos destas aplicações
+particulares. Por definição, uma instância do sistema agrega todo suporte
+necessário para a sua aplicação dedicada, e nada mais.
+
+O projeto modular do \epos foi guiado pela metodologia Projeto de Sistemas
+Embarcados Guiado pela Aplicação (ADESD - \textit{Application-Driven Embedded
+System Design}). A ADESD baseia-se nas conhecidas estratégias de decomposição de
+domínio por trás do Projeto Baseado em Famílias (FBD - \textit{Family-Based
+Design}) e Orientação a Objetos (OO) como, por exemplo, análise de atributos
+comuns e variabilidade, para adicionar o conceito de identificação e separação
+de aspectos ainda nos estágios iniciais do projeto~\cite{Froehlich:2001}. Deste
+modo, a ADESD guia a engenharia de domínio para famílias de componentes, das
+quais dependências de cenários de execução são fatoradas na forma de aspectos e
+relacionamentos externos são capturados em um arcabouço de componentes. Esta
+estratégia de engenharia de domínio trata consistentemente algumas das questões
+mais relevantes do desenvolvimento de software baseado em componentes:
+reuso, gerenciamento da complexidade e composição.
+
+\fig{aosd}{Processo de decomposição de domínio da ADESD.}{width=.9\columnwidth}
+
+A Figura~\ref{fig:aosd} mostra o processo de decomposição de domínio no projeto
+de sistemas embarcados guiado pela aplicação. Abstrações são identificadas a
+partir do domínio do problema e organizadas em famílias, de acordo com suas
+características comuns. Dependências de cenário são modeladas como aspectos que
+podem ser aplicados através de adaptadores de cenário. Famílias de abstrações
+são visíveis para aplicações através de interfaces infladas, que exportam seus
+membros como um único ``super-componente''. As arquiteturas de sistema são
+capturadas em arcabouços de componentes, que são definidos em termos de aspectos
+de cenário.
+
+Famílias de abstrações no \epos representam abstrações tradicionais de sistemas
+operacionais e implementam serviços como gerenciamento de memória e de
+processos, sincronização de processos, gerenciamento de tempo e comunicação.
+Abstrações são projetadas e implementadas de modo independente de seus cenários
+de execução e arquiteturas. Todas unidades de hardware dependentes de
+arquitetura são abstraídas como mediadores de hardware, que exportam, através de
+interfaces independentes de plataforma, a funcionalidade necessária às
+abstrações. Devido ao uso de metaprogramação estática e \textit{function
+inlining}, mediadores de hardware implementam suas funcionalidades sem formar
+uma camada de abstração de hardware (HAL - \textit{Hardware Abstraction Layer})
+tradicional. Através do uso de mediadores de hardware, as abstrações do \epos
+atingiram um nível de reuso que permite, por exemplo, a mesma família de
+abstrações de threads ser utilizada em ambientes tanto monotarefa quanto
+multitarefa, como parte de um $\mu$kernel ou meramente ligada à aplicação,
+tanto em microcontroladores de 8-bits quanto em um processador de 64-bits.
+
+No \epos, processos são gerenciados pelas abstrações \texttt{Thread} e
+\texttt{Task}. Cada thread armazena seu contexto em sua própria pilha. A
+abstração de contexto defini o conjunto de dados que precisa ser armazenado para
+um fluxo de execução e, deste modo, cada arquitetura define seu próprio
+contexto.
+
+Tempo é tratado pela família de abstrações \texttt{Timepiece}. Estas abstrações
+são suportadas através dos mediadores \texttt{Timer}, Timestamp Counter
+(\texttt{TSC}) e Real-Time Clock (\texttt{RTC}). A abstração \texttt{Clock} é
+responsável por um controle estrito de tempo e está disponíveis em sistemas que
+possuam um dispositivo de relógio de tempo real (RTC). A abstração
+\texttt{Alarm} pode ser utilizada para gerar eventos que acordem uma thread ou
+chamem uma função. Alarmes têm ainda um evento mestre de altíssima prioridade
+que está associado com um período de tempo pré-definido. Este evento mestre é
+utilizado para acionar o algoritmo de escalonamento do sistema quando o
+\textit{quantum} de escalonamento é atingido, nos casos em que uma configuração
+com um escalonador ativo é utilizada. Finalmente, a abstração
+\texttt{Chronometer} é utilizada para realizar operações de medição de tempo.
+
+A família de abstrações \texttt{Synchronizer} provê mecanismos que garantem a
+consistência de dados em ambientes com processos concorrentes. O membro
+\texttt{Mutex} implementa um mecanismo de exclusão mútua que entrega duas
+operações atômicas: \texttt{lock} e \texttt{unlock}. O membro \texttt{Semaphore}
+implementa, como o próprio nome diz, um semáforo, que é uma variável inteira
+cujo valor apenas pode ser manipulado indiretamente através das operações
+atômicas \texttt{p} e \texttt{v}. O membro \texttt{Condition} realiza uma
+abstração de sistema inspirada no conceito de variável de condição, que permite
+a uma thread esperar que um predicado se torne válido.
+
+No \epos, detalhes referentes a proteção e tradução de espaços de endereçamento,
+assim como alocação de memória, são abstraídas através da família de mediadores
+de hardware \texttt{MMU} (\textit{Memory Management Unit}). A abstração
+\texttt{Address Space} é um contêiner para ``fatias'' de memória física chamados
+de \texttt{Segments}. Ele não implementa tarefas de proteção, tradução ou
+alocação de endereços de memória, deixando este papel para o mediador da MMU. O
+membro \texttt{Flat Address Space} define um modelo de memória no qual endereços
+lógicos e físicos coincidem, eliminando a necessidade de hardware para MMU. Em
+plataformas que não dispõem de MMU, um mediador para MMU simplesmente mantém o
+contrato de interface com o \texttt{Flat Address Space}, realizando
+implementações vazias de métodos quando necessário. Métodos relativos a alocação
+de memória operam sobre bytes de modo similar ao que é feito pela função de
+alocação de memória da libc.
+
+Controle de entrada e saída (I/O) de dispositivos periféricos é disponibilizado
+no \epos pelo mediador de hardware correspondente. O mediador \texttt{Machine}
+armazena as regiões de I/O e trata o registro dinâmico de interrupções. O
+mediador \texttt{IC} (\textit{Interrupt Controller}) trata a ativação ou
+desativação de interrupções individuais. Para lidar com as diferentes
+interrupções existentes em diferentes plataformas e contextos, \epos atribui um
+nome e uma sintaxe independente de plataforma a interrupções pertinentes ao
+sistema (e.g., interrupção de timer, interrupção de conversão completa no ADC).
+
+
+\subsection{O \epos para \rssf}
+
+Aplicações de \rssf apresentam requisitos específicos que vão além dos atendidos
+pelos serviços tradicionais de sistemas operacionais. Estes incluem
+gerenciamento de energia eficiente, reprogramação em campo, abstração uniforme
+de sensores e serviços de comunicação configuráveis. O \epos foi estendido de
+modo a atender estes requisitos extras~\cite{Wanner:JCC:2008}.
+
+O \epos provê serviços de gerência de energia dirigida pela aplicação que
+permite um consumo consciente de energia em sistemas profundamente embarcados
+sem comprometer a portabilidade da aplicação e sem gerar sobrecustos excessivos.
+O objetivo do subsistema de gerenciamento de energia do \epos é permitir que
+aplicações expressem quando determinados componentes de software não estão sendo
+utilizados, permitindo que o sistema migre dispositivos (hardware) associados a
+estes componentes de software para modos de operação que consumam menos energia.
+Disto emergiram várias questões que dizem respeito a diferenças arquiteturais
+entre dispositivos distintos e ao acesso concorrente aos recursos de hardware
+por diferentes componentes de software. Para tratar destas questões, foram
+concebidas (1) uma interface genérica para gerenciamento de energia, (2) um
+mecanismo de propagação de mensagens e (3) um modelo de formalização das trocas
+entre modos de operação~\cite{Hoeller:DIPES:2006}.
+
+Nesta estratégia de gerenciamento de energia, espera-se que o programador da
+aplicação especifique, em seu código-fonte, quando certos componentes não serão
+utilizados. Assim, uma API uniforme que permite gerenciamento de energia foi
+definida. Esta interface permite a interação entre aplicação e sistema, entre
+componentes do sistema e dispositivos de hardware, além de permitir que a
+aplicação acesse diretamente o hardware se assim desejar o programador. Para que
+o programador da aplicação não necessite ``acordar'' explicitamente os
+componentes do sistema sempre que eles forem utilizados, o mecanismo de
+gerenciamento de energia intercepta acessos aos componentes de hardware
+desativados, retornando estes componentes a seu estado operacional anterior
+sempre que estes são utilizados.
+
+\fig{api-hierarchy}{Hierarquia da API de gerenciamento de energia do
+\epos.}{width=.9\columnwidth}
+
+A aplicação pode, como demostrado na Figura~\ref{fig:api-hierarchy}, acessar um
+componente global (\texttt{System}) que possui referências para todos os outros
+componentes no sistema, disparando ações globais de troca de modo de operação no
+sistema. A aplicação ainda pode utilizar a interface de gerenciamento de
+energia através de subsistemas (e.g., comunicação, processamento,
+sensoriamento). Deste modo, mensagens são propagadas apenas para componentes
+usados na implementação de cada subsistema. A aplicação pode ainda acessar o
+hardware diretamente, utilizando a API disponível nos drivers de dispositivos
+(e.g., \textit{Network Interface Card} (NIC), CPU, Thermistor). A mesma API
+também é utilizada para troca de mensagens de gerenciamento de energia entre
+componentes do sistema.
+
+Para garantir a portabilidade da aplicação e para facilitar o desenvolvimento da
+aplicação API de gerenciamento de energia foi definida com um conjunto mínimo de
+métodos e um conjunto de modos de operação universais, que possuem uma semântica
+unificada para todo o sistema. Portabilidade é alcançada pelo fato de a
+aplicação não necessitar implementar procedimentos específicos para cada
+dispositivo de modo a trocar seu modo de operação. Estes procedimentos são
+abstraídos pela API. A facilidade de uso vem do fato de que o programador da
+aplicação não necessita analisar documentação específica do hardware para
+identificar os modos de operação disponíveis, os procedimentos para utilizar
+estes modos e as consequências destas mudanças.
+
+Estudos de caso~\cite{Hoeller:DIPES:2006} demonstram que é possível alcançar uma
+economia significante de energia com mínima intervenção pela aplicação. Esta
+estrutura de gerenciamento de energia do \epos é também utilizado por um
+gerenciador de energia ativo, que executa periodicamente ou quando não á threads
+a serem escalonadas e, oportunisticamente, altera o modo de operação de
+componentes e dispositivos para diminuir o consumo de energia do sistema. Este
+gerenciador de energia verifica o período de inatividade de cada componente e
+emprega heurísticas configuráveis que decidem os momentos apropriados para
+trocar seus modo de operação. Em sua versão mais simples, o gerenciador de
+energia põe todos os componentes ociosos por um determinado tempo em um modo de
+baixo consumo.
+
+\fig{update}{\textsc{Elus} - o mecanismo de reprogramação em campo do
+\epos.}{width=.9\columnwidth}
+
+Reprogramação em campo é realizada no \epos através de um mecanismo de indireção
+similar ao RPC (\textit{Remote Procedure Calls}), chamado
+\textsc{Elus} (\epos Live Update System)~\cite{Gracioli:HotSWUp:2008}. Nesta
+infraestrutura, apresentada na Figura~\ref{fig:update}, a invocação de um método
+de um componente por uma aplicação cliente passa por um \texttt{Proxy}, que
+envia uma mensagem a um \texttt{Agent}. Após a execução do método, uma mensagem
+com o valor de retorno é devolvido à aplicação. Nesta estrutura, um nível de
+indireção é criado entre as chamadas de métodos pela aplicação e o sistema,
+fazendo com que o componente \texttt{Agent} seja o único ciente da posição do
+componente do sistema na memória. O \texttt{Agent} controla o acesso aos métodos
+dos componentes através de um sincronizador (\texttt{Semaphore}), não permitindo
+chamadas a um componente que esteja passando por uma atualização. Uma thread do
+sistema é responsável por receber requisições de atualização e o novo código
+para os componentes. Estas requisições é enviada ao agente, que sobrescreve o
+código antigo para incluir o novo. A infraestrutura de reprogramação é
+transparente à aplicação é pode ser ``desligada'', eliminando as indireções e o
+ocasional sobrecusto que surge tanto em volume de código e dados (memória) e
+atrasos de processamento.
+
+O \epos ainda provê suporte específico para aplicações de sensoriamento,
+definido interfaces software/hardware capazes de abstrair famílias de
+dispositivos sensores de modo uniforme~\cite{Wanner:ETFA:2006}. O subsistema de
+sensoriamento do \epos já foi discutido na Seção~\ref{sec:epos_sensing} deste
+texto.
+
+A infraestrutura de comunicação do \epos para \rssf é implementada pelo
+protocolo C-MAC, \textit{Configurable MAC}, que provê suporte a comunicação de
+baixo nível (MAC - \textit{Medium Access Control})~\cite{Wanner:IESS:2007}. O
+C-MAC já foi discutido na Seção~\ref{sec:cmac} deste texto.

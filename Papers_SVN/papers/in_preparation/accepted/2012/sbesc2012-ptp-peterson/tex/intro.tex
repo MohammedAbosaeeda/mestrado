@@ -1,0 +1,33 @@
+% ------------------------------------------------------------------------------
+\section{Introdução} \label{intro}
+
+\IEEEPARstart{S}{incronização} de Tempo para dispositivos distribuídos é um campo de estudos desafiante. Levando-se em conta a topologia de como os dispositivos estão distribuídos, para algumas aplicações específicas é necessário que todos os nodos da rede estejam sincronizados  para se obter precisão nas medições realizadas. Esta necessidade de manter os relógios sincronizados, com uma certa tolerância, nos leva ao objetivo principal de estudo deste trabalho, permitindo assim a disponibilização de uma gama maior de aplicações. 
+		
+		Dado a necessidade de manter-se um tempo de relógio constante, com um nível de tolerância determinado, durante o tempo de vida da rede. Alguns fatores que podem influenciar na sincronização devem ser levados em consideração: temperatura, ruído de fase, ruído de frequência, atraso assimétrico e falhas no relógio \cite{Raton}. Considerando esses fatores na elaboração de uma estratégia de sincronização, podemos chegar a três classes de técnicas de sincronização \cite{Raton}. A primeira técnica se baseia em servidores de tempo fixo para sincronizar a rede, nela os dispositivos são sincronizados à servidores de tempo robustos e extremamente precisos. Na segunda técnica, o tempo é traduzido {\it hop-by-hop}, sendo essencialmente um serviço de tradução do tempo pela rede. E por fim a terceira técnica auto-organiza a rede para realizar a sincronização não dependendo de servidores de tempo especializados. Ele automaticamente organiza e determina os nodos mestre como sendo os servidores temporários de tempo.
+        
+        De acordo com estes três tipos, alguns protocolos foram propostos, para diferentes tipo de ambientes. O mais conhecido e utilizado destes é o {\it Network Time Protocol} (NTP). Entre as técnicas elencadas, o NTP se enquadra no primeiro tipo. Considerando os protocolos disponíveis, foi escolhido para ser estudado com um maior grau de profundidade o {\it Precision Time Protocol} (PTP), por ser um padrão adotado pela IEEE, pela alta precisão que podemos alcançar e pela sua flexibilidade de configuração e adequação à diferentes topologias de rede.
+		
+		Temos uma implementação conhecida deste protocolo para o Sistema Operacional Linux, o PTPd. No nosso caso utilizaremos o EPOS, que é um sistema operacional orientado à aplicações para sistemas embarcados \cite{Guto}. Com o uso de sistema operacionais voltados para dispositivos embarcados, entre eles sensores, o sincronismo de dados dos sensores torna-se fundamental para diversas aplicações de sensoriamento no processo de aquisição de dados ou controle. Aplicações em redes de sensores sem fio, similarmente à outros sistemas distribuídos, requerem um serviço de sincronização de tempo escalável. Um exemplo pode ser tomado a partir de aplicações de voz e de vídeo, onde os dados entre nodos sensores podem ser fundidos e exibidos de uma forma significativa na borda da rede. Além disso, alguns protocolos de localização podem tirar vantagem do tempo sincronizado dos sensores.
+		
+		O objetivo do estudo do protocolo PTP se dá na obtenção de sincronismo com precisão na faixa de sub-micro segundo para sistemas embarcados. Neste artigo iremos implementar o protocolo PTP para o Sistema Operacional EPOS com o intuito de estudar os aspectos e limitações do protocolo. Após esse trabalho inicial, temos a possibilidade de iniciar a integração do protocolo ao EPOSMote \cite{Mote}, uma plataforma aberta para redes de sensores sem fio, a fim de obter experimentos de sincronismo utilizando nodos sensores reais. Além de nos possibilitar a homologação com outras implementações do mesmo protocolo. 
+		
+		O trabalho foi estruturado em cinco seções, sendo I a Introdução, seguida pelos trabalhos relacionados na seção II. A seção III conta com o desenvolvimento do protocolo, assim como uma fundamentação sobre o protocolo PTP. O trabalho se encerra com as seções IV e V sendo dedicadas ao experimento e resultados e à conclusão, respectivamente.
+	 
+%thus enabling them to be
+%differentially encoded.
+
+% + Remember why it is important (consumes around 90% of the total encoding time).
+% Therefore is necessary to optimize ME, and there are many strategies for that:
+% algorithmic optimizations, parallelization of algorithms, and hardware
+% implementations of algorithms.
+
+
+
+% Present our work as a solution for keeping interfaces
+% Present our work as an ME optimization strategy based on picture partitioning
+%  (parallel algorithms).
+%  ...
+
+% + paper structure(chapters' description)
+
+% ------------------------------------------------------------------------------

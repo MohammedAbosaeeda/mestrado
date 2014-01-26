@@ -1,0 +1,98 @@
+\section{Avaliação}
+% Memória
+% Latência
+% Tempo de reconfiguração
+
+A estrutura de reprogramação formada pelo \ELUS{} e o protocolo de disseminação foi avaliada pelo consumo de memória, latência de envio de dados para toda a rede e tempo de reconfiguração, este considerando o tempo de recebimento dos dados pela rede e o tempo de escrita na memória de programa. Estes testes foram realizados utilizando-se nodos sensores Mica2~\cite{mica2}, que possuem um microcontrolador ATMega128, 4kB de memória ram, 128kB de memória flash, 4kB de EEPROM e comunicação via rádio. O sistema foi gerado com o compilador GNU g++ 4.0.2 e o consumo de memória medido utilizando-se a ferramenta GNU \textit{objdump} 2.16.1. A latência e tempo de reconfiguração foram medidos através do temporizador do microcontrolador.
+
+\subsection{Memória}
+
+A Tabela~3 apresenta o consumo de memória de todos os elementos da estrutura. Para este teste, o suporte a reconfiguração foi habilitado para um componente que possui 4 métodos. O protocolo de disseminação ocupa 2534 bytes na área de código e 21 bytes na área de dados não inicializados. Vale-se ressaltar que um buffer é criado dinamicamente na recepção do novo código pelo protocolo, sendo assim dependente do tamanho do código a ser enviado. A estrutura do framework do \ELUS{} consome 2076 bytes de código, 94 bytes de dados e 99 bytes de não inicializados devido às tabelas e variáveis necessárias para armazenar os objetos e métodos.
+
+\begin{table}
+\label{tab:mem}
+  \centering
+\small{
+\caption{Consumo de memória da estrutura: \ELUS{} e protocolo de disseminação.}
+\begin{tabular}{|c|c|c|c|c|}\hline
+\textbf{Elementos} & \multicolumn{4}{c|}{\textbf{Tamanho da Seção (bytes)}} \cr
+\cline{2-5}
+\textbf{da Estrutura} & \textbf{.text} & \textbf{.data} & \textbf{.bss} & \textbf{.bootloader} \cr
+\hline
+\textbf{Protocolo de Disseminação} & 2536 & 0 & 21 & 0  \cr\hline
+\textbf{\textsc{Reconfigurator}} 	& 166 & 0 & 4 & 0  \cr\hline
+\textbf{AVR Code Manager} 	& 36 & 0 & 0 & 416  \cr\hline
+\textbf{\ELUS{}} 		& 2076 & 94 & 74 & 0  \cr\hline
+\hline
+\textbf{Total} 			& 4814 & 94 & 99 & 416 \cr
+\hline
+\end{tabular}
+}
+\end{table}
+
+
+Além disso, quando um novo componente tem o suporte à reprogramação habilitado, este deve ter seus métodos incluídos no framework do \ELUS{}. A Tabela~4 mostra o consumo de memória necessário pelo \ELUS{} quando um novo componente é adicionado no sistema. Os métodos \componente{Create}, \componente{Destroy} e \componente{Update} representam o construtor, destrutor do objeto do componente e o método de atualização e devem, portanto, sempre estar presentes. Para cada componente também é necessário um semáforo para controlar o acesso exclusivo ao componente e impedir que uma atualização ocorra ao mesmo tempo que seu código esteja executando. O total de consumo mínimo para um novo componente adicionado, composto pelo construtor, destrutor, método \componente{Update} e um método que não receba parâmetros e não tenha nenhum valor de retorno é de 1662 bytes de código e 26 bytes de dados.
+
+\begin{table}
+  \centering
+\small{
+\caption{Consumo de memória do \ELUS{} ao habilitar o suporte à reconfiguração em um componente.}
+\begin{tabular}{|c|c|c|}\hline
+\textbf{Método} & \multicolumn{2}{c|}{\textbf{Tamanho da Seção (bytes)}} \cr
+\cline{2-3}
+\textbf{do Framework} & \textbf{.text} & \textbf{.data} \cr
+\hline
+Create				& 180  & 0  \cr\hline
+Destory 			& 138  & 0  \cr\hline
+Método sem parâmetro  		& 94 & 0  \cr
+e valor de retorno 		& & 	\cr\hline
+Método com um parâmetro   	& 98 & 0  \cr
+e sem valor de retorno 		& &  \cr\hline
+Método sem parâmetro 		& 112  & 0  \cr
+e com valor de retorno 		& &  \cr\hline
+Método com um parâmetro  	& 126 & 0  \cr
+e valor de retorno 		& &  \cr\hline
+Update	 			& 1250  & 0   \cr\hline
+Dispatcher 			& 0  & 2 X (n. de métodos)  \cr\hline
+Semáforo 			& 0  & 18   \cr\hline
+\hline
+\textbf{Tamanho mínimo}  & 1662 & 26 \cr
+\hline
+\end{tabular}
+}
+\label{tab:elusMem}
+\end{table}
+
+A Equação~\ref{for:size} sumariza o sobrecusto de memória. O tamanho de um componente ``C'' é o somatório dos tamanhos de todos os métodos conforme a Tabela~4 somados com o tamanho da implementação dos métodos pelo próprio componente. Ainda, somam-se a este valor, o tamanho dos métodos \componente{Create}, \componente{Destroy} e \componente{Update}. Já o tamanho dos dados é a soma dos dados do componente com os valores do \componente{Dispatcher} e \componente{Semáforo} que são utilizados pelo \ELUS{}.
+
+\label{for:size}
+\begin{align}
+Tamanho_{c} = \sum_{i=1}^n (M \mathaccent 19 e todo_{i}) + Create + Destroy + Update
+\end{align}
+
+\subsection{Latência}
+Foram utilizadas duas topologias para medir a latência do protocolo de disseminação, ilustradas na Figura \ref{fig:topology}: (a) a estação base possui comunicação com todos os nodos, (b) a estação base não possui comunicação com um nodo, que está ao alcance dos outros. Em ambas topologias repetiu-se o processo de disseminação vinte vezes, de forma a atualizar um método de um componente do sistema, propagando 10 bytes de dados (utilizados na atualização do método) e 6 bytes de informações de controle (utilizadas pelo protocolo).
+
+\begin{figure}
+\centering
+\begin{tabular}{cc}
+\includegraphics[scale=0.4]{fig/topology1} & 
+\includegraphics[scale=0.4]{fig/topology2} \\
+(a) & (b)
+\end{tabular}
+\caption{Topologias utilizadas para medição de latência. (a) Estação base possui comunicação com todos os nodos (b) Estação base não possui comunicação com todos os nodos.}
+\label{fig:topology}
+\end{figure}
+
+A Figura~\ref{fig:latency1} apresenta a média do tempo que a estação base leva para propagar os dados aos nodos a sua volta. Foi observado um desvio padrão de 0,0233 segundos. Este tempo não mudou alterando o número de receptores entre um e três, isto porque pacotes perdidos estão altamente correlacionados, ou seja, vários receptores perdem o mesmo conjunto de pacotes \cite{mnp}.
+
+\fig{latency1}{Tempo de disseminação e reconfiguração.}{scale=.6}
+
+A Figura~\ref{fig:latency2} mostra a média de tempo que os dados levam para serem propagados da estação base para nodos intermediários, e destes para o nodo fora de alcance da estação base (segunda topologia). É possível perceber que o tempo necessário para propagar dados entre nodos normais da rede é aproximadamente quatro vezes maior que o tempo gasto pela estação base, isto se deve ao fato que a estação base não executa a etapa de seleção de emissor, ou seja, não perde tempo divulgando sua versão e recebendo requisições para enfim se tornar um emissor e começar a disseminar os dados. O tempo de disseminação dos nodos intermediários apresentou um desvio padrão de 1,1288 segundos.
+ 
+\fig{latency2}{Tempo de disseminação.}{scale=.6}
+
+\subsection{Tempo de Reconfiguração}
+Foi considerado como tempo de reconfiguração, o tempo que o nodo leva para atualizar sua memória de programa após ter recebido todos os dados necessários, via o protocolo de disseminação. Na estrutura proposta este tempo engloba: a chamada do \textsc{Reconfigurator}, os métodos \componente{p} e \componente{v} do semáforo, a chamada para o método \componente{Update}, a recuperação dos argumentos passados na mensagem ETP, a recuperação do objeto a ser atualizado em uma tabela hash, descobrir o endereço da \componente{vtable} e a escrita dos dados na flash. A Figura \ref{fig:latency1} mostra a média do tempo de reconfiguração obtido, sendo que o mesmo apresentou um desvio padrão de 0,0103 segundos.
+
+Uma característica da arquitetura utilizada é que não é possível mudar apenas um byte por vez em sua memória flash. Esta memória só permite a escrita em páginas, cujo tamanho é de 256 bytes, e antes de reescrever uma página é necessário apagar seu conteúdo. Desta forma para atualizarmos uma parte da memória é necessário ler o conteúdo da página e armazená-lo em um buffer temporário, modificar apenas a parte desejada para enfim escrever na flash.

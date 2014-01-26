@@ -1,0 +1,162 @@
+\section{Módulos de sensoriamento}
+\label{sec:modulos}
+
+%introdução
+Este capítulo aborda a arquitetura dos módulos de sensoriamento. Será discutida
+a arquitetura básica, comumente composta de um conjunto de sensores, um
+processador e um transceptor de rádio~\cite{Barr:2002,Pottie:2000}. Serão
+apresentadas abordagens comerciais recentes de integração destes componentes
+em \emph{single-package} ou em \emph{single-die}. Também serão discutidos os
+requisitos buscados em um módulo de sensoriamento em termos de dimensões,
+consumo de energia, modularidade e adaptabilidade do canal de comunicação.
+
+%arquitetura dos módulos de sensoriamento (sensores + processador + transceptor)
+\subsection{Arquitetura de módulos de sensoriamento}
+
+Em\rssf, diversos nodos sensores, compostos por um conjunto de sensores
+analógicos e digitais, um microcontrolador, um transceptor sem-fios e bateria,
+coordenam-se e trocam informações de maneira a prover uma visão global de um
+dado objeto de estudo. Cada nodo individual possui capacidade limitada, mas a
+comunicação e processamento cooperativo na rede permitem a obtenção de dados
+mais precisos. Com base na pesquisa e aplicações atuais, e possível definir que
+a arquitetura básica de um nodo de sensor, composta por um microcontrolador e a
+um transceptor sem-fios deve~\cite{Wanner:MSC:2006}:
+\begin{itemize}
+    \item Ter dimensões físicas reduzidas.\\
+    Para poderem ser instalados de maneira não intrusiva, os nodos sensores
+    devem ter dimensões reduzidas. Dado o constante avanço das técnicas de
+    miniaturização de hardware, o tamanho dos componentes eletrônicos utilizados
+    nos nodos tende a diminuir constantemente. Entretanto, a miniaturização dos
+    nodos sensores pode estar limitada ao tamanho da fonte de energia (seja na
+    forma de baterias ou dispositivos para captura de energia ambiente).
+
+    \item Ser capaz de operar por um longo tempo com quantidade limitada de
+    energia.\\
+    A necessidade de operação autônoma de um nodo sensor, e a capacidade
+    limitada de energia disponível ao mesmo, fazem com que o baixo consumo de
+    energia seja um fator determinante no projeto de hardware. Sendo assim, o
+    projeto de um nodo sensor priorizará componentes de baixa potência e com
+    suporte a gerencia do consumo de energia (e.g., microcontroladores,
+    transceptores de baixa potência) em detrimento de componentes direcionados a
+    alta capacidade de processamento, desempenho ou potência.
+
+    \item Ter um projeto modular, permitindo a conexão com sensores específicos
+    para diferentes aplicações.\\
+    Os serviços de uma rede de sensores tendem a ser específicos, e utilizar
+    somente o hardware necessário aos requisitos de cada aplicação. Desta forma,
+    é importante que o projeto seja modular, e permita a remoção e inclusão de
+    sensores conforme as necessidades da aplicação.
+
+    \item Permitir a mais ampla configuração possível do canal de transmissão de
+    dados.\\
+    O transceptor de dados sem-fios é, em geral, o componente com maior consumo
+    de energia em um nodo sensor. Desta forma, é importante que este transceptor
+    passe a maior parte do tempo desligado. Por outro lado, aplicações
+    específicas terão padrões de comunicação específicos, e poderão se beneficiar
+    de diferentes técnicas de modulação de dados e controle de acesso ao meio,
+    que permitam o controle do consumo de energia sem comprometer a comunicação
+    de dados. Desta forma, o transceptor deve permitir a maior configuração do
+    canal de dados possível.
+
+\end{itemize}
+
+%abordagens de integração
+Para atender a esta série de requisitos, módulos de sensoriamento focaram no uso
+de componentes de baixa potência de pequeno tamanho. É o caso, por exemplo, da
+família módulos de sensoriamento Mica da Crossbow, Inc.~\cite{Crossbow:MTS:2005}.
+Estes \emph{motes} (como o da Figura~\ref{fig:mica_mote}) são baseados em
+processadores \textsc{Avr}, da Atmel, Inc., que são processadores RISC de baixa
+potência. Além dos processadores \textsc{Avr}, estes dispositivos apresentam
+variados modelos de transceptores de rádio, como o caso do CC1000 no Mica2 e do
+CC2400 no MicaZ, ambos transceptores do fabricante Chipcom, Inc. O CC1000 é um
+dispositivo de rádio que opera com modulação FM (\textit{Frequency Modulation})
+nas faixas de frequência 315, 433, 868 e 915 MHz. Este dispositivo implementa
+apenas a camada física de um transceptor FM, sendo que a camada de enlace (MAC e
+LLC) são implementadas em software. A popularização do uso deste tipo de
+transceptor deu origem a uma série de protocolos de MAC criados para dar melhor
+suporte a certas categorias de aplicação. Já o CC2400 implementa as camadas
+física e de enlace (MAC) do padrão IEEE 802.15.4. Este padrão, embora diminua a
+flexibilidade no uso da camada física, permitiu o desenvolvimento de abstrações
+de mais alto nível estáveis, já que os desenvolvedores passaram a trabalhar
+sobre versões estáveis das camadas 1 (física) e 2 (enlace) da pilha de
+comunicação. É exemplo destes desenvolvimentos o consórcio $ZigBee^{TM}$, que
+implementa uma série de protocolos das camadas de 3 (rede) e 4 (transporte) para
+uso em dispositivos das chamadas PAN (\textit{Personal Area Network}). Embora
+descrever a tecnologia $ZigBee^{TM}$ não seja objetivo deste minicurso, os
+diferentes MACs utilizados em \rssf, incluindo o IEEE 802.15.4, são melhores
+descritos na seção~\ref{sec:MAC}.
+
+\fig{mica_mote}{Mica2 mote da Crossbow Inc.}{scale=.7}
+
+\tab{micaz_x_zigbit_x_mc13224v}{Comparação de características do MicaZ, ZigBit e
+MC13224V. Todos os três apresentam um rádio compatível com IEEE 802.15.4.}
+
+Para atender as demandas por maior poder de processamento e maior potência de
+rádio em plataformas com menores dimensões e menor consumo de energia, os
+projetos modulares caminharam para a integração de microcontrolador, transceptor
+e outros componentes como antena e reguladores de tensão em uma abordagem
+\emph{single-package}. Como exemplo pode ser citado o projeto $ZigBit^{TM}$ da
+MeshNetics~\cite{Meshnetics:ZigBit:2007}. Buscando um desempenho ainda maior,
+abordagens \emph{single-die} permitem a integração de microcontrolador, rádio, e
+diversos outros dispositivos em um único circuito integrado, como, por exemplo,
+os dispositivos da família MC1322X da Freescale, ou os dispositivos STM32W da
+STMicroelectronics. A Tabela~\ref{tab:micaz_x_zigbit_x_mc13224v} mostra como
+dispositivos que representam cada uma das abordagens apresentam melhor
+desempenho junto com melhores características de tamanho e consumo de energia.
+
+%requisitos buscados em um módulo de sensoriamento
+\subsection{A arquitetura do \emote}
+\label{sec:emote_arch}
+
+O projeto \emote tem por objetivo desenvolver uma família de módulos de
+sensoriamento que permita ampla configurabilidade tanto da plataforma quanto do
+ambiente de software (sistema operacional). O \emote, apresentado na
+Figura~\ref{fig:emote-modulos}, foi concebido com um projeto modular, sendo
+previstos três módulos, entre os quais foram estabelecidas interfaces padrão,
+permitindo o uso intercambiável de diferentes versões dos módulos. A
+Figura~\ref{fig:emote2-block_diagram} apresenta os três tipos de módulos, que
+são os seguintes:
+\fig{emote-modulos}{O \emote ao lado de uma moeda de uma libra.}{scale=.15}
+\begin{itemize}
+    \item \textbf{Módulo de Base:} o módulo base incorpora as funcionalidades de
+    processamento e de comunicação. O projeto \emote desenvolveu duas versões
+    deste módulo, uma utilizando o \emph{single-package} $ZigBit^{TM}$ e outra
+    utilizando o \textsc{SoC} (\emph{single-die}) MC13224V, da Freescale.
+    Características específicas de cada versão do módulo base são apresentadas
+    abaixo. Este módulo deve implementar detalhes de do suporte a estes
+    dispositivos, como a regulação de tensão e o dimensionamento da antena, além
+    rotear os pinos dos dispositivos de modo a manter o padrão das interfaces de
+    alimentação e de entrada e saída.
+    \item \textbf{Módulo de Entrada e Saída:} no módulo de entrada e saída devem
+    ser implementadas as interfaces necessárias de entrada e saída, podendo um
+    novo módulo destes ser desenvolvido para cada aplicação que se pretende
+    desenvolver, permitindo o emprego dos sensores ou atuadores desejados para
+    uma aplicação específica. O projeto \emote desenvolveu um módulo de entrada
+    e saída ao qual deu o nome de \textit{start-up board}. Esta placa incorpora
+    uma interface USB, sensor de temperatura, acelerômetro de 3 eixos, alguns
+    LEDs e botões~\cite{Project:Emote:2010}.
+    \item \textbf{Módulo de Alimentação:} de modo a permitir o emprego de
+    diferentes fontes de alimentação, uma interface de alimentação foi
+    implementada. Módulos que se conectam a esta interface podem ser tão simples
+    como uma bateria alcalina AA, ou tão complexas quanto um sistema com bateria
+    de lítio recarregável ou com painéis solares. A interface de alimentação
+    ainda disponibiliza uma interface I2C, permitindo que o módulo de
+    alimentação se comunique com o de processamento. O projeto \emote ainda não
+    desenvolveu nenhum módulo de alimentação específico, mas trabalhos em
+    andamento estão explorando tecnologias de captação de energia utilizando
+    esta interface.
+\end{itemize}
+
+\fig{emote2-block_diagram}{Arquitetura básica do \emote}{scale=.45}
+
+As interfaces padrão definidas pelo projeto \emote para interconexão dos
+módulos desenvolvidos são as seguintes:
+\begin{itemize}
+    \item \textbf{Interface de Entrada e Saída:} 32 pinos, sendo 2 para
+    alimentação e outros 30 que podem ser utilizados ou como GPIO, ou com
+    funções específicas que inclui ADC, UART e SPI.
+    \item \textbf{Interface de Alimentação:} disponibiliza pinos aos quais devem
+    ser conectados o terra e alimentação do módulo de alimentação. O módulo de
+    processamento devolve ao módulo de alimentação o sinal com tensão regulada.
+    Também existem os 2 pinos empregados na comunicação I2C.
+\end{itemize}

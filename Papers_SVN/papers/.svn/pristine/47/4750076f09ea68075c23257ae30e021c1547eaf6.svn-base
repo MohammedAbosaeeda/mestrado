@@ -1,0 +1,17 @@
+
+\begin{tabular}{|l|rrr|rrr|rrr|}
+\cline{2-10}
+\multicolumn{1}{c}{} & \multicolumn{3}{|c|}{FPGA slices}    & \multicolumn{3}{|c|}{Max. nº of clock cycles p/op.}    &   \multicolumn{3}{|c|}{Maximum frequency (MHz)}\\
+\multicolumn{1}{c|}{}&   HW-only &   Unified &   Diff. (\%) &   HW-only  &   Unified &     Diff. (\%)                &   HW-only       &    Unified     &      Diff. (\%)  \\
+\cline{1-1}
+Scheduler            &   904     &  807      &  -12.01      &  ~~34      &   ~~36    &  ~~5.55                       &    262          &   196          &      -25.19  \\
+ADPCM                &   157     &  134      &  -17.16      &  ~~~2      &   ~~~7    &  ~71.42                       &    135          &   174          &      ~22.41\\
+DTMF                 &   161     &  179      &  11.18       &  5643      &   5635    &  -0.14                        &    105          &   93           &      -11.42\\
+\hline
+\end{tabular}
+
+%HW AVGs (Normal / sem pts discrepantes)
+%FPGA res = 43%
+%Clock cycles = -8.93 %
+%Freq = -10.48 % / -10.48 %
+

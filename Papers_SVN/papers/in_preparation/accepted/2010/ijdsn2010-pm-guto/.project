@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>ijdsn2010-pm-guto</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>net.sourceforge.texlipse.builder.TexlipseBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>net.sourceforge.texlipse.builder.TexlipseNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>lisha.bib</name>
+			<type>1</type>
+			<location>/home/guto/papers/bib/lisha.bib</location>
+		</link>
+		<link>
+			<name>net.bib</name>
+			<type>1</type>
+			<location>/home/guto/papers/bib/net.bib</location>
+		</link>
+		<link>
+			<name>pm.bib</name>
+			<type>1</type>
+			<location>/home/guto/papers/bib/pm.bib</location>
+		</link>
+	</linkedResources>
+</projectDescription>

@@ -1,0 +1,1005 @@
+The coordinator just receives a certain amount of data and then print the statistics.
+The sensor nodes periodically send bursts of 64 bytes to the coordintor and then write the
+statistics on the EEPROM
+Results are in ms, bytes, bits/s, volts, ampere and joules
+The ATMega1281 is clocked at 1 MHz
+
+
+===============================================================================================
+BEACON DISABLE - CSMA-CA ON - ACK ON
+===============================================================================================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+N. of sensors = 1
+COORDINATOR
+Received 3072 bytes
+Statistics:
+{rxp=48,rxb=3072,rxt=31540,txp=0,txb=0,txt=0,drop=0,ttxp=0}
+Bytes received per sensor node: 
+187: 3072
+204: 0
+221: 0
+238: 0
+
+SENSOR 1
+Address = 187
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 2112
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+throughput =  11636.363636364 bps
+loss rate = 0 %
+energy = 
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+N. of sensors = 2
+
+COORDINATOR
+Received 6208 bytes
+Statistics:
+{rxp=97,rxb=6208,rxt=32378,txp=0,txb=0,txt=0,drop=0,ttxp=0}
+Bytes received per sensor node: 
+187: 3136
+204: 3072
+221: 0
+238: 0
+
+SENSOR 1
+Address = 187
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 2260
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 50
+
+
+SENSOR 2
+Address = 204
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 2176
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 49
+
+throughput = 11195.671776375 bps
+loss rate = 0.02020202 (2%)
+energy = 
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+N. of sensors = 3
+
+COORDINATOR
+Received 9344 bytes
+Statistics:
+{rxp=146,rxb=9344,rxt=45234,txp=0,txb=0,txt=0,drop=1,ttxp=0}
+Bytes received per sensor node: 
+187: 3072
+204: 3200
+221: 3072
+238: 0
+
+SENSOR 1
+Address = 187
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 2112
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+SENSOR 2
+Address = 204
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 2272
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 51
+
+SENSOR 3
+Address = 221
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 2326
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 51
+
+
+throughput = 11140.387481371 bps
+loss rate = 0.026666667 (3%)
+energy = 
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+N. of sensors = 4
+
+COORDINATOR
+Received 13952 bytes
+Statistics:
+{rxp=218,rxb=13952,rxt=63842,txp=0,txb=0,txt=0,drop=2,ttxp=0}
+Bytes received per sensor node: 
+187: 3264
+204: 3072
+221: 3136
+238: 4480
+
+SENSOR 1
+Address = 187
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 2562
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 57
+
+SENSOR 2
+Address = 204
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 2216
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 50
+
+SENSOR 3
+Address = 221
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 2480
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 54
+
+SENSOR 4
+Address = 238
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 3236
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 70
+
+throughput = 10636.173051267 bps
+loss rate = 0.056277056 (5%)
+energy = 
+
+===============================================================================================
+BEACON DISABLE - CSMA-CA OFF - ACK ON
+===============================================================================================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+N. of sensors = 1
+
+COORDINATOR
+Received 3072 bytes
+Statistics:
+{rxp=48,rxb=3072,rxt=39318,txp=0,txb=0,txt=0,drop=0,ttxp=0}
+Bytes received per sensor node: 
+187: 3072
+204: 0
+221: 0
+238: 0
+
+E_m = 10.7040
+I_med = 0.7577
+I_teste = 0.0261
+V_med = 92.6312
+V_teste = 3.1942
+
+SENSOR 1
+Address = 187
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 1904
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+
+throughput = 12907.56302521 bps
+loss rate = 0 %
+energy = 0.003484375 joules/byte
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+N. of sensors = 2
+
+COORDINATOR
+Received 6144 bytes
+Statistics:
+{rxp=96,rxb=6144,rxt=32606,txp=0,txb=0,txt=0,drop=0,ttxp=0}
+Bytes received per sensor node: 
+187: 3072
+204: 3072
+221: 0
+238: 0
+
+
+SENSOR 1
+Address = 187
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 1956
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 49
+
+SENSOR 2
+Address = 204
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 1920
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+throughput = 12681.114551084 bps
+loss rate = 0.010309278 (1%)
+energy = 
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+N. of sensors = 3
+
+COORDINATOR
+Received 9216 bytes
+Statistics:
+{rxp=144,rxb=9216,rxt=37100,txp=0,txb=0,txt=0,drop=0,ttxp=0}
+Bytes received per sensor node: 
+187: 3072
+204: 3072
+221: 3072
+238: 0
+
+SENSOR 1
+Address = 187
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 2100
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 52
+
+SENSOR 2
+Address = 204
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 1918
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+SENSOR 3
+Address = 221
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 1840
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+
+
+throughput = 12585.8654831bps
+loss rate = 0.027027027 (2%)
+energy = 
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+N. of sensors = 4
+
+COORDINATOR
+Received 13184 bytes
+Statistics:
+{rxp=206,rxb=13184,rxt=51234,txp=0,txb=0,txt=0,drop=19,ttxp=0}
+Bytes received per sensor node: 
+187: 3328
+204: 3392
+221: 3200
+238: 3264
+
+SENSOR 1
+Address = 187
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 3602
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 78
+
+SENSOR 2
+Address = 204
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 3826
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 83
+
+
+SENSOR 3
+Address = 221
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 2402
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 58
+
+SENSOR 4
+Address = 238
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 2764
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 64
+
+throughput = 8374.781642052 bps
+loss rate = 0.272084806 (27%)
+energy = 
+
+===============================================================================================
+BEACON DISABLE - CSMA-CA ON - ACK OFF
+===============================================================================================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+N. of sensors = 1
+
+COORDINATOR
+Received 3072 bytes
+Statistics:
+{rxp=48,rxb=3072,rxt=34562,txp=0,txb=0,txt=0,drop=0,ttxp=0}
+Bytes received per sensor node: 
+187: 3072
+204: 0
+221: 0
+238: 0
+
+E_m = 26.7801
+I_med =  2.3369
+I_teste = 0.0730
+V_med = 99.9765
+V_teste = 3.1243
+
+SENSOR 1
+Address = 187
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 1054
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+
+throughput = 23316.888045541 bps
+loss rate = 0 %
+energy = 0.00871748 joules/byte
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+N. of sensors = 2
+
+COORDINATOR
+Received 5888 bytes
+Statistics:
+{rxp=92,rxb=5888,rxt=40418,txp=0,txb=0,txt=0,drop=0,ttxp=0}
+Bytes received per sensor node: 
+187: 2880
+204: 3008
+221: 0
+238: 0
+
+E_m = 30.8218
+I_med = 2.6135
+I_teste = 0.0747
+V_med = 109.1903
+V_teste = 3.1197
+
+SENSOR 1
+Address = 187
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 1056
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+SENSOR 2
+Address = 204
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 1052
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+
+throughput = 22345.351043643 bps
+loss rate = 0.041666667 (4 %)
+energy = 0.005234681 joules/byte
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+N. of sensors = 3
+
+COORDINATOR
+Received 9024 bytes
+Statistics:
+{rxp=141,rxb=9024,rxt=45614,txp=0,txb=0,txt=0,drop=0,ttxp=0}
+Bytes received per sensor node: 
+187: 2944
+204: 3072
+221: 3008
+238: 0
+
+E_m = 56.5659
+I_med = 2.5953
+I_teste = 0.0763
+V_med = 105.9712
+V_teste = 3.1168
+
+SENSOR 1
+Address = 187
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 1056
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+SENSOR 2
+Address = 204
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 1056
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+SENSOR 3
+Address = 221
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 1038
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+
+
+throughput = 22918.095238095 bps
+loss rate = 0.020833333 (2 %)
+energy = 0.005234681 joules/byte
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+N. of sensors = 4
+
+COORDINATOR
+Received 12096 bytes
+Statistics:
+{rxp=189,rxb=12096,rxt=27210,txp=0,txb=0,txt=0,drop=0,ttxp=0}
+Bytes received per sensor node: 
+187: 2944
+204: 3072
+221: 3008
+238: 3072
+
+E_m = 51.2392
+I_med = 2.5936
+I_teste = 0.0393
+V_med = 200.7999
+V_teste = 3.0424
+
+SENSOR 1
+Address = 187
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 1056
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+SENSOR 2
+Address = 204
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 1054
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+SENSOR 3
+Address = 221
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 1052
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+SENSOR 4
+Address = 238
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 1054
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+throughput = 22952.561669829 bps
+loss rate = 0.015625 (1 %)
+energy = 0.00423536 joules/byte ???
+
+
+
+===============================================================================================
+BEACON DISABLE - CSMA-CA OFF - ACK OFF
+===============================================================================================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+N. of sensors = 1
+
+COORDINATOR
+Statistics:
+{rxp=48,rxb=3072,rxt=38672,txp=0,txb=0,txt=0,drop=0,ttxp=0}
+Bytes received per sensor node: 
+187: 3072
+204: 0
+221: 0
+238: 0
+
+t_teste = 132.7524
+E_m = 27.8932
+I_med = 2.2004
+I_teste = 0.0667
+V_med = 103.9870
+V_teste = 3.1511
+
+SENSOR 1
+Address = 187
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 772
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+throughput = 31834 bps
+loss rate = 0 %
+energy = 0.009079 joules/byte
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+N. of sensors = 2
+
+COORDINATOR
+Received 5760 bytes
+Statistics:
+{rxp=90,rxb=5760,rxt=39240,txp=0,txb=0,txt=0,drop=0,ttxp=0}
+Bytes received per sensor node: 
+187: 2944
+204: 2816
+221: 0
+238: 0
+
+E_m = 29.7441
+I_med = 2.3590
+I_teste = 0.0715
+V_med = 103.3656
+V_teste = 3.1323
+
+SENSOR 1
+Address = 187
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 776
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+SENSOR 2
+Address = 204
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 796
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+throughput = 29312 bps
+loss rate = 0.0625 (6 %)
+energy = 0.005163906 joules/byte
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+N. of sensors = 3
+
+COORDINATOR
+Received 8896 bytes
+Statistics:
+{rxp=139,rxb=8896,rxt=45346,txp=0,txb=0,txt=0,drop=0,ttxp=0}
+Bytes received per sensor node: 
+187: 3008
+204: 2944
+221: 2944
+238: 0
+
+E_m = 30.0116
+I_med = 2.5304
+I_teste = 0.0744
+V_med = 106.3369
+V_teste = 3.1276
+
+SENSOR 1
+Address = 187
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 776
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+SENSOR 2
+Address = 204
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 804
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+SENSOR 3
+Address = 221
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 770
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+throughput = 30284.2553 bps
+loss rate = 0.034722222 (3 %)
+energy = 0.003373606 joules/byte
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+N. of sensors = 4
+
+COORDINATOR
+Received 12032 bytes
+Statistics:
+{rxp=188,rxb=12032,rxt=51446,txp=0,txb=0,txt=0,drop=0,ttxp=0}
+Bytes received per sensor node: 
+187: 3072
+204: 3072
+221: 3008
+238: 2880
+
+E_m = 36.0361
+I_med = 2.7754
+I_teste = 0.0750
+V_med = 115.5430
+V_teste = 3.1228
+
+SENSOR 1
+Address = 187
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 774
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+SENSOR 2
+Address = 204
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 824
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+SENSOR 3
+Address = 221
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 770
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+SENSOR 4
+Address = 238
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 768
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+
+throughput = 30693.87755102 bps
+loss rate = 0.020833333 (2 %)
+energy = 0.002995022 joules/byte
+
+
+#####################################
+
+
+===============================================================================================
+BEACON ENABLE - CSMA-CA ON - ACK ON
+===============================================================================================
+Obs.: The sensor nodes die if the pkt size = 64. Using pkt size = 32 and multiplying the tx/rx bytes
+statistics by two.
+Obs.: Due to timing problems, the coordinator always lose 50% of the packets. Dividing the total_tx_packets
+statistic by 2 to obtain decent pkt loss ratio.
+Obs.: The tx_time is ridiculous, should be divided by 2 also ? YES
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+N. of sensors = 1
+
+COORDINATOR
+Received 3072 bytes
+Statistics:
+{rxp=48,rxb=3072,rxt=8700,txp=0,txb=0,txt=0,drop=0,ttxp=0}
+Bytes received per sensor node: 
+187: 3072
+204: 0
+221: 0
+238: 0
+
+SENSOR 1
+Address = 187
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 47885
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 48
+
+
+throughput =   512 bps
+loss rate = 0 %
+energy = 
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+N. of sensors = 2
+COORDINATOR
+Received 6144 bytes
+Statistics:
+{rxp=96,rxb=6144,rxt=13840,txp=0,txb=0,txt=0,drop=0,ttxp=0}
+Bytes received per sensor node: 
+187: 3072
+204: 3072
+221: 0
+238: 0
+
+
+SENSOR 1
+Address = 187
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 56058
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 50
+
+SENSOR 2
+Address = 204
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 48329
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 49
+
+
+
+throughput =   470.863230096 bps
+loss rate = 0.03030303 (3 %)
+energy = 
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+N. of sensors = 3
+
+COORDINATOR
+Received 9216 bytes
+Statistics:
+{rxp=144,rxb=9216,rxt=964,txp=0,txb=0,txt=0,drop=6,ttxp=0}
+Bytes received per sensor node: 
+187: 3008
+204: 3520
+221: 2688
+238: 0
+
+SENSOR 1
+Address = 187
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 55624
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 52
+
+SENSOR 2
+Address = 204
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 63243
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 58
+
+SENSOR 3
+Address = 221
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 70916
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 64
+
+
+throughput =   388.485796936 bps
+loss rate = 0.172413793 (17 %)
+energy = 
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+N. of sensors = 4
+
+COORDINATOR
+
+Received 12160 bytes
+Statistics:
+{rxp=190,rxb=12160,rxt=62084,txp=0,txb=0,txt=0,drop=12,ttxp=0}
+Bytes received per sensor node: 
+187: 3008
+204: 3072
+221: 3072
+238: 3008
+
+
+SENSOR 1
+Address = 187
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 144269
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 89
+
+SENSOR 2
+Address = 204
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 108022
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 81
+
+SENSOR 3
+Address = 221
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 53826
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 51
+
+SENSOR 4
+Address = 238
+rx_packets = 0
+tx_packets = 48
+rx_bytes = 0
+tx_bytes = 3072
+tx_time = 85432
+rx_time = 0
+dropped_packets = 0
+total_tx_packets = 71
+
+throughput =   248.448791276 bps
+loss rate = 0.349315068 (35 %)
+energy = 
+
+===============================================================================================
+===============================================================================================
+===============================================================================================
+We don't really need this ones
+BEACON ENABLE - CSMA-CA OFF - ACK ON
+BEACON ENABLE - CSMA-CA ON - ACK OFF
+BEACON ENABLE - CSMA-CA OFF - ACK OFF
+
+

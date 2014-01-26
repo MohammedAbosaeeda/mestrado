@@ -1,0 +1,177 @@
+\newcommand{\generictablefontsize}{\footnotesize}
+
+\newcommand{\figSC}[4][htbp]{
+  \begin{figure}[#1] 
+    \centering
+    \scalebox{#2}{\includegraphics{Figures/#3}}
+    \caption{#4}
+    \label{#3}
+  \end{figure}
+}
+
+\newcommand{\multfigtwoh}[6][htbp]{
+\begin{figure*}[#1]
+  \centering
+  \subfloat[]{\label{#3}\scalebox{#2}{\includegraphics{Figures/#3}}}
+  \subfloat[]{\label{#4}\scalebox{#2}{\includegraphics{Figures/#4}}}
+  \caption{#6}
+  \label{#5}
+\end{figure*}
+}
+
+\newcommand{\multfigtwov}[6][htbp]{
+\begin{figure}[#1]
+  \centering
+  \subfloat[]{\label{#3}\scalebox{#2}{\includegraphics{Figures/#3}}}\\
+  \subfloat[]{\label{#4}\scalebox{#2}{\includegraphics{Figures/#4}}}
+  \caption{#6}
+  \label{#5}
+\end{figure}
+}
+
+\newcommand{\figR}[5][htbp]{
+  \begin{figure}[#1]
+    \centering
+    \scalebox{#2}{\includegraphics[angle=#5]{Figures/#3}}
+    \caption{#4}
+    \label{#3}
+  \end{figure}
+}
+
+\newcommand{\figTC}[4][htbp]{
+  \begin{figure*}[#1] 
+    \centering
+    \scalebox{#2}{\includegraphics{Figures/#3}}
+    \caption{#4}
+    \label{#3}
+  \end{figure*}
+}
+
+\newcommand{\figEMPTY}[5][htbp]{
+  \begin{figure}[#1]
+    \fbox{\begin{minipage}{#2}\hfill\vspace{#3}\end{minipage}}
+    \centering
+    \label{#4}
+    \caption{#5}
+  \end{figure}
+}
+
+\newcommand{\figEMPTYTC}[5][htbp]{
+  \begin{figure*}[#1]
+    \fbox{\begin{minipage}{#2}\hfill\vspace{#3}\end{minipage}}
+    \centering
+     \label{#4}
+    \caption{#5}
+  \end{figure*}
+}
+
+\newcommand{\tabSC}[3][htbp]{
+  \begin{table}[#1]
+    \generictablefontsize
+    \caption{#3}
+    \label{#2}
+    \centering
+    \input{Tables/#2}
+  \end{table}
+}
+
+\newcommand{\tabTC}[3][htbp]{
+  \begin{table*}[#1]
+    \generictablefontsize
+    \caption{#3}
+    \label{#2}    
+    \centering
+    \input{Tables/#2}
+  \end{table*}
+}
+
+%Only for ACM templates
+\newcommand{\tabTBL}[3][htbp]{
+  \begin{table}[#1]
+    \tbl{#3\label{#2}}{%
+      \input{Tables/#2}
+    }  
+  \end{table}
+}
+
+%Only for ACM templates
+\newcommand{\tabACMtable}[4][htbp]{
+  \begin{acmtable}{#3}[#1]
+    \generictablefontsize
+    \centering
+    \input{Tables/#2}
+    \caption{#4}
+    \label{#2}
+  \end{acmtable}
+}
+
+\newcommand{\tabTBLxXxXfig}[6][htbp]{
+\begin{figure}[#1]
+  \centering
+  \begin{minipage}[c]{0.4\textwidth}
+    \centering
+    %\tbl{#3\label{#2}}{
+    \tblnocaption{*}{
+      \input{Tables/#2}
+    }
+  \end{minipage}
+  \hspace{0.5cm}
+  \begin{minipage}[c]{0.4\textwidth}
+    \centering\scalebox{#4}{\includegraphics{Figures/#3}}
+    %\captionof{figure}{#6\label{#5}}
+  \end{minipage}
+  \captionof{figure}{#5\label{#3}}
+\end{figure}
+}
+
+\newcommand{\tabTBLxXxXfigV}[6][htbp]{
+\begin{figure}[#1]
+  \centering
+  \begin{minipage}[c]{0.4\textwidth}
+    \centering
+    %\tbl{#3\label{#2}}{
+    \tblnocaption{*}{
+      \input{Tables/#2}
+    }
+  \end{minipage}
+  \\
+  \begin{minipage}[c]{0.4\textwidth}
+    \centering\scalebox{#4}{\includegraphics{Figures/#3}}
+    %\captionof{figure}{#6\label{#5}}
+  \end{minipage}
+  \captionof{figure}{#5\label{#3}}
+\end{figure}
+}
+
+\newcommand{\tabSCxXxXfig}[6][htbp]{
+\begin{figure*}[#1]
+  \centering
+  \begin{minipage}[c]{0.4\textwidth}
+    \generictablefontsize
+    \centering
+    \input{Tables/#2}
+  \end{minipage}
+  \hspace{0.5cm}
+  \begin{minipage}[c]{0.4\textwidth}
+    \centering\scalebox{#4}{\includegraphics{Figures/#3}}
+  \end{minipage}
+  \caption{#5\label{#3}}
+\end{figure*}
+}
+
+\newcommand{\tabSCxXxXfigV}[6][htbp]{
+\begin{figure}[#1]
+  \centering
+  \begin{minipage}[c]{0.5\textwidth}
+    \generictablefontsize
+    \centering
+    \input{Tables/#2}
+  \end{minipage}
+  \\
+  \begin{minipage}[c]{0.5\textwidth}
+    \centering\scalebox{#4}{\includegraphics{Figures/#3}}
+  \end{minipage}
+  \caption{#5}
+  \label{#3}
+\end{figure}
+}

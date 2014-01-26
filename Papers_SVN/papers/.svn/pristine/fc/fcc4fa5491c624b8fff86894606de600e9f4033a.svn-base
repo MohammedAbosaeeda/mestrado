@@ -1,0 +1,66 @@
+%-------------------------------------------------------------------------------
+% UM NÚCLEO PARA O SISTEMA
+%-------------------------------------------------------------------------------
+\section{Um Núcleo para o Sistema}
+
+O sistema de arquivos é apenas um dos componentes de um sistema operacional, sendo influenciado e influenciando a estrutura global do sistema. Nesta seção analisamos algumas das características do sistema operacional indispensáveis para a implementação do sistema de arquivos proposto.
+
+A idéia básica é subdividir o sistema operacional em vários servidores mais um núcleo. Esse núcleo deveria ser o mais simples possível, implementando somente o indispensável para que se pudesse executar os servidores. Esses, por sua vez, supririam o sistema com a funcionalidade desejada.
+
+O núcleo seria carregado como primeiro passo para a inicialização do sistema, teria segmentos de dados e código protegidos e executaria em modo supervisor de processador. Ele seria invocado através de interrupções de {\em software} sempre que algum de seus serviços fosse solicitado ou quando da ocorrência de alguma interrupção de {\em hardware}.
+
+Nesse modelo, cada controlador de dispositivo seria implementado como um servidor. Assim sendo, devemos converter as interrupções de {\em hardware} relativas aos dispositivos em mensagens para os respectivos servidores.
+
+No que diz respeito a manutenção do estado do sistema, o núcleo deveria manter informações somente sobre os recursos controlados por ele, tais como: segmentos de memória associados às tarefas, contexto dos fluxos de execução das tarefas, etc. Informações sobre recursos provenientes dos servidores seriam mantidas pelos próprios servidores. Ou seja, o estado do sistema não é centralizado no núcleo: ele está dividido pelos servidores do sistema.
+
+Resumidamente, podemos definir quatro classes de serviços que são de responsabilidade do núcleo do sistema:
+
+\begin {itemize}
+
+\item Criação e destruição de tarefas;
+
+\item Criação e destruição de fluxos de execução de tarefas;
+
+\item Comunicação entre tarefas;
+
+\item Sincronização de fluxos de execução de tarefas.
+
+\end {itemize}
+
+
+\subsection {Tarefas}
+
+O processo de compilação de um programa fonte produz um arquivo binário ou executável que contém o código e os dados referentes ao programa. Quando executamos um programa, tanto o código como os dados são trazidos para segmentos específicos de memória. Esses segmentos, mais algumas informações de controle, formam o que chamamos de tarefa. O núcleo do sistema deve ser capaz de criar uma tarefa a partir de um arquivo executável e de destruí-la quando solicitado.
+
+\subsection {Fluxos de Execução de Tarefas}
+
+Para executarmos um programa não nos basta carregá-lo na memória do computador, precisamos também definir um contexto de execução e fazer com que o processador comece a executar suas instruções. Em outras palavras, precisamos criar um fluxo de execução para a tarefa correspondente ao programa, o que envolve a definição de uma estrutura descritora do seu contexto, incluindo o estado do fluxo, o estado do processador, informações sobre os recursos alocados ao fluxo, informações de controle e uma pilha de execução. O núcleo do sistema operacional deve fornecer serviços que permitam a criação e destruição de fluxos de execução de uma dada tarefa.
+
+Uma tarefa com um único fluxo de execução é equivalente ao conceito tradicional de processo. Uma tarefa com {\em n} fluxos de execução é algo mais simples e barato do que {\em n} processos, pois quando criamos um novo fluxo de execução para uma tarefa não precisamos carregar novos segmentos de memória com código e dados. O custo de criação de um fluxo de execução se reduz ao da criação de uma estrutura descritora e da alocação de uma nova pilha.
+
+O uso de múltiplos fluxos de execução para a tarefa de um dado servidor pode aumetar bastante o desempenho do sistema, pois, por exemplo, enquanto um fluxo estiver bloqueado esperando por um dispositivo, um outro poderá estar executando um serviço sobre um outro dispositivo.
+
+Porém, como tudo no universo obedece a lei das compensações, o uso de múltiplos fluxos de execução exige um cuidado especial com sincronismo. Não é difícil imaginarmos uma condição de corrida sobre uma tabela global de um servidor. Os resultados trágicos de tais situações são bem conhecidos, para evitá-los, cada servidor sincronizará suas seções críticas com ajuda do núcleo do sistema operacional.
+
+O conceito de múltiplos fluxos de execução de tarefas abordado nessa seção é derivado do conceito de processo leve descrito em \cite {sil90}. Modelos similares têm sido usados em sistemas operacionais como o Amoeba \cite {mul90} e o Mach \cite {acc86} e parecem se consolidar a medida que os processadores adquirem facilidades para escalonar rapidamente os processos.
+
+
+\subsection {Comunicação}
+
+A comunicação entre clientes e servidores talvez seja o ponto mais crítico para o desempenho do sistema, uma vez que todos os serviços são solicitados e respondidos através de mensagens.
+
+Uma vez que os vários fluxos de execução de uma tarefa compartilham o mesmo segmento de dados, não prevemos a possibilidade de envio de mensagens entre fluxos de uma mesma tarefa. Mensagens são trocadas entre fluxos de tarefas distintas.
+
+Uma característica importande do mecanismo de comunicação é a possibilidade de envio de mensagens com tamanho variável, uma vez que o tamanho das mensagens envolvidas na comunicação entre clientes e servidores não pode ser determinado a priori. Considere, por exemplo, a mensagem correspondente à chamada de sistema "open ([filename])"; não podemos determinar quantos caracteres compõem o nome do arquivo antes da efetivação da chamada de sistema.
+
+A questão da localização das entidades comunicantes também é importante. Não se espera que um cliente conheça a localização de um dado servidor. Espera-se entretanto que o sistema implemente algum mecanismo que torne esses fatores transparentes. Uma idéia seria a implementação de um sistema de comunicações que fizesse uso de caixas postais. Com a implementação desse conceito, os processos clientes passariam a enviar mensagem para uma dada caixa postal que, por sua vez, estaria associada a um ou mais servidores. Clientes e servidores podem inclusive não estar executando no mesmo processador.
+
+
+\subsection {Sincronização}
+
+Como o sistema prevê a possibilidade de múltiplos fluxos de execução para uma mesma tarefa, devemos fornecer, através do núcleo, um mecanismo que possibilite a sincronização da execução de seções críticas. Uma seção crítica existe sempre que tivermos mais de um fluxo de execução manipulando dados comuns. Entretanto, como cada fluxo de execução possui sua própria pilha de execução, onde são criadas variáveis locais, uma seção crítica somente ocorrerá quando os fluxos manipularem os dados globais da tarefa.
+
+Um mecanismo simples e eficiente para a sincronização de fluxos de execução é o semáforo, pois ele garante as três condições para a execução de seções críticas \cite {sil90}: exclusividade de execução, progresso de execução e espera limitada para execução. Um semáforo permite que apenas um fluxo esteja executando uma seção crítica num dado instante, bloqueando os demais fluxos que tentem executar a mesma seção crítica até que o primeiro fluxo saia da mesma.
+
+A idéia é associar um semáforo a cada estrutura de dados global, assim, quando um fluxo desejar alterar uma estrutura global, ele antes chama o núcleo para validar o semáforo associado.
+ 

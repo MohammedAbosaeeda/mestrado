@@ -1,0 +1,14 @@
+
+\begin{tabular}{lrrrr}
+\toprule
+\multirow{2}{*}{Partitioning} & \multicolumn{2}{c}{Memory (code+data)} & \multicolumn{2}{c}{FPGA Avg. rsc. util.} \\
+\cmidrule(l){2-3}
+\cmidrule(l){4-5}
+                       & Total & System                         & Total & System \\
+\midrule
+All SW                 & 19553 b & 12201 b                      &   3.70\% & 3.70\%  \\
+All HW                 & 16479 b & 16479 b                      &   5.05\% & 3.75\% \\
+Hybrid                 & 19093 b & 16605 b                      &   4.24\% & 3.74\%\\
+\bottomrule
+\end{tabular}
+

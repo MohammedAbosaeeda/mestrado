@@ -1,0 +1,51 @@
+set terminal latex
+set format xy "%g"
+set size 6/5., 4/3.
+unset x2tics
+unset y2tics
+set logscale x 2
+
+set output "PIOxDMA_graph.tex"
+set title "Host/NIC data transfer methods comparisson"
+set xlabel "Frame size (bytes)"
+set ylabel "Delay"
+set xrange [1:1024]
+set yrange [1:30]
+set key left box 2 width 5 height 1
+
+plot  'pio_dma.dat' using 1:4 title "Host-NIC DMA" with lines,\
+      'pio_dma.dat' using 1:3 title "Write PIO" with linespoints 2
+
+pause -1 "Hit return to continue"
+
+set output "GMxBaseline_graph.tex"
+#set title "Host/NIC data transfer methods comparisson"
+set xlabel "Frame size"
+set xlabel -1
+set ylabel "$\\frac{RTT}{2}$"
+#set ylabel "Latency"
+set ylabel -1
+set xrange [1:4096]
+set yrange [1:100]
+set key left box 1 width 2 height 1
+
+plot  'gm_perf.dat' using 1:2 title "GM" with linespoints 2,\
+      'baseline_perf.dat' using 1:2 title "Baseline" with lines 1
+
+pause -1 "Hit return to continue"
+
+
+#set grid x y
+#set style fill solid 1.0
+#set style fill solid border -1
+#set style fill solid 0.25 border
+#set boxwidth 0.5 
+
+#plot  [512:]'pio_dma.dat' using 1:3 title "Host-NIC DMA" with lines,\
+#      'pio_dma.dat' using 1:2 title "Write PIO" with lines
+
+#plot [0:64] 'times' using 1:3 title "Host-NIC DMA" with boxes,\
+#      'times' using 1:2 title "Write PIO" with boxes
+
+#plot 'times' using 1:2 title "Write PIO" with impulses,\
+#     'times' using 1:3 title "Host-NIC DMA" with points

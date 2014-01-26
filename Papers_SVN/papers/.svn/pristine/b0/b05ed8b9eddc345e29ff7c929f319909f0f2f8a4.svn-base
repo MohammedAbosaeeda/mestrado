@@ -1,0 +1,16 @@
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{cccccc}
+&\multicolumn{2}{c}{\textbf{Setup}} & \textbf{1-Hour} & \textbf{365-Day Con-} & \textbf{Lifetime} \\
+&\textbf{Calibrator}	& \textbf{Display}	& \textbf{Energy (J)} & \textbf{sumption (mAh)} & \textbf{(days)} \\
+\hline
+(a) & -	& -	& \makebox[5ex][r]{5.07}	& \makebox[3ex][r]{4112}	& \makebox[4ex][r]{479}	\\
+(b) & RT	& BE	& \makebox[5ex][r]{8.13}	& \makebox[3ex][r]{6597}	& \makebox[4ex][r]{299}	\\
+(c) & BE	& RT	& \makebox[5ex][r]{28.83}	& \makebox[3ex][r]{23384}	& \makebox[4ex][r]{84}	\\
+(d) & RT	& RT	& \makebox[5ex][r]{31.89}	& \makebox[3ex][r]{25869}	& \makebox[4ex][r]{76}	\\
+(e) & BE	& BE	& \makebox[5ex][r]{6.66}	& \makebox[3ex][r]{5402}	& \makebox[4ex][r]{365}	\\
+\end{tabular}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../pm"
+%%% End:

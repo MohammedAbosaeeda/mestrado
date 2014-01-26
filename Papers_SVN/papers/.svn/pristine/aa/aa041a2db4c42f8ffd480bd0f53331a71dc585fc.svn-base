@@ -1,0 +1,210 @@
+@ARTICLE{Wang:2009,
+  author = {Jianping Wang and Eseosa Osagie and Parimala Thulasiraman and Ruppa K. Thulasiram},
+  title = {HOPNET: A hybrid ant colony optimization routing algorithm for mobile ad hoc network},
+  journal = {Ad Hoc Networks},
+  year = {2009},
+  volume = {7},
+  pages = {690 - 705},
+  number = {4},
+  doi = {DOI: 10.1016/j.adhoc.2008.06.001},
+  issn = {1570-8705},
+}
+
+@INPROCEEDINGS{Haas:1997,
+  author = {Haas, Z.J.},
+  title = {A new routing protocol for the reconfigurable wireless networks},
+  year = {1997},
+  volume = {2},
+  pages = {562 -566 vol.2},
+  month = {oct.},
+  doi = {10.1109/ICUPC.1997.627227},
+  journal = {Universal Personal Communications Record, 1997. Conference Record., 1997 IEEE 6th International Conference on},
+}
+
+@ARTICLE{Dorigo:2006,
+  author = {Dorigo, M. and Birattari, M. and Stutzle, T.},
+  title = {Ant colony optimization},
+  journal = {Computational Intelligence Magazine, IEEE},
+  year = {2006},
+  volume = {1},
+  pages = {28 -39},
+  number = {4},
+  month = {nov.},
+  doi = {10.1109/MCI.2006.329691},
+  issn = {1556-603X},
+}
+
+@ARTICLE{Dorigo:2005,
+  author = {Marco Dorigo and Christian Blum},
+  title = {Ant colony optimization theory: A survey},
+  journal = {Theoretical Computer Science},
+  year = {2005},
+  volume = {344},
+  pages = {243 - 278},
+  number = {2-3},
+  doi = {DOI: 10.1016/j.tcs.2005.05.020},
+  issn = {0304-3975},
+}
+
+@BOOK{Frohlich:2001,
+    AUTHOR = {Ant\^onio Augusto Fr\"ohlich},
+    TITLE = "{Application-Oriented Operating Systems}",
+    PUBLISHER = {GMD - Forschungszentrum Informationstechnik},
+    YEAR = 2001,
+    NUMBER = 17,
+    SERIES = {GMD Research Series},
+    ADDRESS = {Sankt Augustin},
+    MONTH = AUG
+}
+
+@article{
+Pham:2007,
+         author = {Hai N. Pham and Dimosthenis Pediaditakis and Athanassios Boulis},
+         title = "{From Simulation to Real Deployments in WSN and Back}",
+         journal ={A World of Wireless, Mobile and Multimedia Networks, International Symposium on},
+         volume = {0},
+         year = {2007},
+         isbn = {978-1-4244-0992-1},
+         pages = {1-6},
+         publisher = {IEEE Computer Society},
+         address = {Los Alamitos, CA, USA},
+}
+
+@article{
+Zeng:2009,
+         author = {Zeng, Kai and Ren, Kui and Lou, Wenjing and Moran, Patrick J.},
+         title = {Energy aware efficient geographic routing in lossy wireless sensor networks with environmental energy supply},
+         journal = {Wirel. Netw.},
+         volume = {15},
+         number = {1},
+         year = {2009},
+         issn = {1022-0038},
+         pages = {39--51},
+         doi = {http://dx.doi.org/10.1007/s11276-007-0022-0},
+         publisher = {Kluwer Academic Publishers},
+         address = {Hingham, MA, USA},
+}
+
+@article{
+Kumar:2010,
+          author = {Kumar, Neeraj and Kumar, Manoj and Patel, R.B.},
+          title = "{Coverage and Connectivity Aware Neural Network Based Energy Efficient Routing in Wireless Sensor Networks}",
+          journal = {ArXiv e-prints},
+          archivePrefix = "arXiv",
+          eprint = {1003.3558},
+          primaryClass = "cs.NI",
+          year = {2010},
+          month = {Mar},
+          doi = {http://dx.doi.org/10.5121/jgraphhoc.2010.2105},
+          adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+
+@article{
+Powell:2007,
+           author = {Powell, Olivier and Leone, Pierre and Rolim, Jos\'{e}},
+           title = {Energy optimal data propagation in wireless sensor networks},
+           journal = {J. Parallel Distrib. Comput.},
+           volume = {67},
+           number = {3},
+           year = {2007},
+           issn = {0743-7315},
+           pages = {302--317},
+           doi = {http://dx.doi.org/10.1016/j.jpdc.2006.10.007},
+           publisher = {Academic Press, Inc.},
+           address = {Orlando, FL, USA},
+}
+
+@article{
+Shuang:2009,
+           author = {Shuang, Bing and Li, Zhenbo and Chen, Jiapin},
+           affiliation = {Shanghai Jiao Tong University National Key Laboratory of Nano/Micro Fabrication Technology, Key Laboratory for Thin Film and Microfabrication of Ministry of Education, Research Institute of Micro/Nano Science and Technology Shanghai 200030 People’s Republic of China},
+           title = {An Ant-Based On-Demand Energy Route Protocol for IEEE 802.15.4 Mesh Network},
+           journal = {International Journal of Wireless Information Networks},
+           publisher = {Springer Netherlands},
+           issn = {1068-9605},
+           pages = {225-236},
+           volume = {16},
+           issue = {4},
+           doi = {http://dx.doi.org/10.1007/s10776-009-0110-4},
+           note = {10.1007/s10776-009-0110-4},
+           year = {2009}
+}
+
+@article{
+Matrouk:2009,
+        author = "Khaled Matrouk and Bjorn Landfeldt",
+        title = "RETT-gen: A globally efficient routing protocol for wireless sensor networks by equalising sensor energy and avoiding energy holes",
+        journal = "Ad Hoc Networks",
+        volum344e = "7",
+        number = "3",
+        pages = "514 - 536",
+        year = "2009",
+        issn = "1570-8705",
+        doi = "DOI: 10.1016/j.adhoc.2008.07.002",
+}
+
+@article{
+Anastasi:2009,
+        title = "Energy conservation in wireless sensor networks: A survey",
+        journal = "Ad Hoc Networks",
+        volume = "7",
+        number = "3",
+        pages = "537 - 568",
+        year = "2009",
+        issn = "1570-8705",
+        doi = "DOI: 10.1016/j.adhoc.2008.06.003",
+        author = "Giuseppe Anastasi and Marco Conti and Mario Di Francesco and Andrea Passarella",
+}
+
+@INPROCEEDINGS{
+Hu:2009,
+        author={Gang Hu and Pan Zhang and Wei Zhang},
+        journal={Dependable, Autonomic and Secure Computing, 2009. DASC '09. Eighth IEEE International Conference on},
+        title={The Optimal Design of Tree Structure Based on Ant Colony of Wireless Sensor Networks Routing},
+        year={2009},
+        month={dec.},
+        pages={772 -776},
+        doi={10.1109/DASC.2009.23},
+}
+
+@article{
+Okazaki:2011,
+            author = {Okazaki, A.M. and Frohlich, A.A.},
+            booktitle = {18th International Conference on Telecommunications},
+            title = {AD-ZRP: Ant-based routing algorithm for dynamic wireless sensor networks},
+            year = {2011},
+            month = {may.},
+            pages = {15-20},
+            doi = {10.1109/CTS.2011.5898910},
+}
+
+@INPROCEEDINGS{ OkazakiB:2011,
+    author={Okazaki, A.M. and Frohlich, A.A.},
+    booktitle={GLOBECOM Workshops (GC Wkshps), 2011 IEEE},
+    title={Ant-based Dynamic Hop Optimization Protocol: A routing algorithm for Mobile Wireless Sensor Networks},
+    year={2011},
+    month={dec.},
+    pages={1139 -1143},
+}
+
+@INPROCEEDINGS{Vlajic:2009,
+  author = {Vlajic, N. and Stevanovic, D.},
+  title = {Performance Analysis of ZigBee-Based Wireless Sensor Networks with Path-Constrained Mobile Sink(s)},
+  year = {2009},
+  pages = {61 -68},
+  month = {jun.},
+  doi = {10.1109/SENSORCOMM.2009.114},
+  file = {:Performance Analysis of ZigBee-Based Wireless Sensor Networks with Path-Constrained Mobile Sink(s).pdf:PDF},
+  journal = {Sensor Technologies and Applications, 2009. SENSORCOMM '09. Third International Conference on},
+}
+
+@INPROCEEDINGS{
+Zen:2008,
+        author = {Zen, K. and Habibi, D. and Rassau, A. and Ahmad, I.},
+        booktitle = {5th IFIP International Conference on Wireless and Optical Communications Networks},
+        title = {Performance evaluation of IEEE 802.15.4 for mobile sensor networks},
+        year = {2008},
+        month = {may.},
+        pages = {1-5},
+        doi = {10.1109/WOCN.2008.4542536},
+}

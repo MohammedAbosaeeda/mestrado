@@ -1,0 +1,82 @@
+%------------------------------------------------------------------------------
+\section{Introdução}
+As chamadas linguagens de altíssimo nível 
+(VHLLs - \emph{Very High Level Languages})
+%\cite{Wilson:1999},
+,
+da qual o Java é um exemplo, facilitam o desenvolvimento de sistemas embarcados
+pois elas provêm funcionalidades como orientação a objetos, 
+gerenciamento automático de memória e proteção de memória \cite{1620409}. 
+Além dos requisitos de tempo e de consumo de memória impostos por sistemas 
+embarcados (SEs), outro importante requisito que deve ser atendido por
+implementações Java focadas em SEs é  
+prover aos desenvolvedores um meio de controlar dispositivos de hardware.
+Isto é necessário uma vez que as aplicações para sistemas embarcados executam próximas
+do hardware, no sentido de que elas utilizam dispositivos de hardware como sensores e
+atuadores para interagir com o ambiente, transmissores e receptores para comunicação e
+temporizadores para operações em tempo real.
+
+Interface de Função Estrangeira (FFI - \emph{Foreign Function Interface}) 
+é o mecanismo utilizado por plataformas Java para acessar dispositivos de 
+hardware e memória. 
+De fato, diversos pacotes Java como \emph{java.io}, \emph{java.net} e 
+\emph{java.awt} são implementados utilizando funcionalidades de 
+FFI \cite{Liang:1999}. 
+Entretanto as principais FFIs Java possuem limitações para lidar com
+sistemas embarcados. 
+Elas são demasiadamente onerosas ou possuem limitações de projeto.
+Além disso, as FFIs por si só não auxiliam na abstração de dispositivos de hardware para
+VHLLs, elas apenas provêm um meio de utilizar código escrito em outras linguagens,
+como C e C++, capazes de acessar diretamente dispositivos de hardware.
+
+Neste artigo apresentamos um método para realizar a interface entre 
+dispositivos de hardware e aplicações Java embarcadas.
+%
+Como forma de superar as limitações das principais FFIs Java para 
+% Para resolver o problema da não adequação das principais FFIs Java para 
+sistemas embarcados, utilizamos a FFI da máquina virtual Java 
+(JVM - \emph{Java Virtual Machine}) KESO \cite{Wawersich:2007}.
+A JVM KESO foca em sistemas 
+embarcados e traduz programas em bytecode Java para 
+C antes da execução do mesmos. A FFI da KESO também utiliza uma abordagem 
+estática, gerando o código C especificado para a implementação de métodos nativos.
+%
+Como forma de orientar e facilitar a realização de interface entre 
+dispositivos de hardware e Java
+utilizamos o conceito de \emph{mediadores de hardware}, propostos pela 
+metologia de Projeto de Sistemas Embarcados Orientada pela Aplicação 
+(ADESD - \emph{Application-Driven Embedded System Design})
+%\cite{Polpeta:2004}, 
+\cite{Froehlich:2001}.
+Os mediadores de hardware são semelhantes a \emph{drivers} UNIX, abstraindo
+dispositivos de hardware para serem utilizados pelas demais  
+abstrações de sistema (e.g. \emph{threads}). 
+O EPOS (\emph{Embedded Parallel Operating System}), é
+um caso de aplicação da ADESD no domínio de sistemas operacionais, e implementa
+o conceito de mediadores de hardware.
+
+A principal contribuição deste artigo é portanto, 
+um método para suportar o desenvolvimento
+de bibliotecas de classes cujos elementos são abstrações de dispositivos de 
+hardware. 
+Demonstramos o uso do método proposto no desenvolvimento de adaptadores de
+código nativo (\emph{bindings} FFI para interface com código nativo) de
+dispositivos simples para comunicação serial e de componentes mais complexos,
+como um componente que realiza estimativa de movimento em codificação de vídeo 
+H.264.
+
+As próximas seções deste artigo estão organizadas da seguinte maneira: 
+a seção \ref{sec:related_work} apresenta trabalhos relacionados envolvendo
+interface hardware/software para Java e abordagens de geração de adaptadores.
+Nós apresentamos nossa abordagem de interface entre dispositivos de hardware
+e aplicações Java na seção \ref{sec:proposal}. Conceitos do EPOS e da KESO são
+apresentados quando necessários para suportar o entendimento da nossa proposta.
+Na seção \ref{sec:eval} nós avaliamos nossa abordagem em termos de desempenho,
+consumo de memória e portabilidade.
+A seção \ref{sec:case_study} apresenta um componente de estimativa de movimento
+para codificação H.264 como um exemplo de utilização do nosso método para o 
+desenvolvimento de uma aplicação real. % Ver como colocar isso de "aplicação real".
+Nossas considerações finais são apresentadas na seção \ref{sec:discussion}.
+
+% ------------------------------------------------------------------------------
+

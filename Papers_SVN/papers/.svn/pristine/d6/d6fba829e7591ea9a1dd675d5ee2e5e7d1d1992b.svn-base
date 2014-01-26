@@ -1,0 +1,278 @@
+\section{Power Management Infrastructure}\label{sec:infra}
+
+% Traditional Infrastructure
+% - Hardware -> sophisticate
+% - Software -> low-level, primitive, misuse hardware
+% - Implementation -> hard-coded
+% - Energy efficient (otherwise, senseless)
+From the discussion about traditional power management APIs for embedded
+systems in the previous section, we can infer that the infrastructure
+behind those APIs are mostly based on features directly exported by
+hardware components and do not escape from the software/hardware
+interface.  As a matter of fact, the power management infrastructure
+available in modern hardware components is far more evolved than the
+software counterpart, which not rarely is restricted to mimic the
+underlying hardware. For example, \textsc{XScale} microprocessors
+support a wide range of operating frequencies that allow for fine grain
+DVS. They also feature a Power Management Unit that manages idle, sleep,
+and a set of quick wake-up modes, and a Performance Monitoring Unit that
+furnishes a set of event counters that may be configured to monitor
+occurrence and duration of events.
+
+Power management mechanisms can benefit from such hardware features to
+implement context-aware power management strategies. Device drivers for
+the operating systems discussed in the previous section, however, do not
+make use of most of these features. In order to take advantage of them,
+application programmers must often implement platform-specific
+primitives by themselves. This, besides being out-of-scope for many
+embedded application developers, will certainly hinder portability and
+reuse.  The same can be observed with peripherals such as wireless
+network cards, which often provide a large set of configurable
+characteristics that are not well explored.
+
+In order to support both application-directed and autonomous power
+management strategies, the infrastructure necessary to implement the
+proposed API must feature the following services:
+
+% Traditional Services
+% - Auto-resume
+% - Accounting
+%   - Event counters
+%   - Consumption estimates
+% - Auto-suspend
+
+\begin{description}
+\item[Battery monitoring:] monitoring battery charge at run-time is
+  important to support power management decisions, including generalized
+  operating mode transitions when certain thresholds are reached; some
+  systems are equipped with intelligent batteries that inherently
+  provide this service, others must tackle on techniques such as voltage
+  variation along discharge measured via an ADC to estimate the energy
+  still available to the system~\cite{Mohanty:2010}.
+
+\item[Accounting:] tracking the usage of components is fundamental to
+  any dynamic power management strategy; this can be accomplished by
+  \emph{event counters} implemented either in software or in hardware;
+  some hardware platforms feature event counters that are usually
+  accessible from software, thus allowing for more precise
+  tracking; in some systems, for which energy
+  consumption measurements have been carried out on a per-component
+  basis, it might even be possible to perform energy accounting based on
+  these counters~\cite{Bellosa:2007}.
+
+\item[Auto-resume:] a component that has been set to an energy-saving
+  mode must be brought back to activity before it can deliver any
+  service; in order to relieve programmers from this task, most
+  infrastructures usually implement some sort of ``auto-resume''
+  mechanism, either by inserting mode verification primitives in the
+  method invocation mechanism of components or by a trap mechanism
+  that automatically calls for operating system intervention whenever
+  a inactive component is accessed.
+
+\item[Auto-suspend:] with accounting capabilities in hand, a power
+  management infrastructure can deliver ``auto-suspend'' mechanisms that
+  automatically change the status of components that are not currently
+  being used to energy-saving modes such as \emph{stand-by} or
+  \emph{off}; however, suspending a component to short after resume it
+  will probably spend more energy than letting it to continue in the
+  original mode, therefore, the heuristics used to decide which and when
+  components should be suspended is one of the most important issues in
+  the field and is now subject to intense
+  research~\cite{Ren:2005,Melhem:2006,Bang:2009,Dhiman:2009,Pettis:2009}.
+\end{description}
+
+% Proposed Infrastructure
+% - Same traditional services
+% - Mode change propagation mechanisms for high-level components
+% - Realization that services are ``aspects''
+
+Our proposed power management API allows interaction between the
+application and the system, between system components and hardware
+devices, and directly between application and hardware. Thus, in order
+to realize this API, each software and hardware component in our system
+must be adapted to provide the above listed services.
+
+\subsection{Implementation through Aspect Programs}
+
+% AOP
+\emph{Aspect-Oriented Programming}~(AOP)~\cite{Kiczales:1997} allows
+non-functional properties (e.g. identification, synchronization, sharing
+control) to be modeled separately from the components they affect.
+Associated implementation techniques enable the subsequent
+implementation of such properties as aspect programs that are kept
+isolated from components, thus preventing a generalized proliferation of
+manual, error-prone modifications across the system. As a non-functional
+property, power management fits well into this paradigm.
+
+% AOP without weavers
+% Scenario adapters
+\textsc{Epos}~\cite{Frohlich:2001}, our testbed system, supports AOP
+through a C++ construct called \emph{Scenario Adapter}. Scenario
+adapters enable aspects to be implemented as ordinary C++ programs that
+are subsequently applied to component code during system compilation,
+thus eliminating the need for external tools such as aspect weavers.
+Figure~\ref{fig:scenario_adapter} shows the general structure of a
+scenario adapter. The aspect programs \texttt{Aspect} implement their
+duties as the \texttt{Scenario\_Adapter} intercepts every invocation of
+a component operation by its \texttt{Clients} and embraces it withing a
+\texttt{enter}/\texttt{leave} pair. The \texttt{Scenario} construct
+collects these aspect programs, each with its own definition for
+\texttt{enter} and \texttt{leave}, and adjusts their activation for each
+individual target component\footnote{Each component in the system is
+  characterized by a \texttt{Trait} construct that is used by
+  \texttt{Scenario} to decide which aspect programs must be applied to
+  the component and in which order.}. C++ operators \texttt{new} and
+\texttt{delete} can also be redefined to induce the invocation of static
+versions of \texttt{enter} and \texttt{leave} respectively for the
+instantiation and destruction of components.
+
+\fig{scenario_adapter}{scale=0.75}{\textsc{Epos} Scenario Adapter.}
+
+% Aspect programs for energy accounting and auto-resume
+Following AOP principles, \textbf{energy accounting} can be implemented
+as an aspect program that adds event counters to components and adapts
+the corresponding methods to manipulate them as illustrated in
+figure~\ref{fig:aspect_account}. When \texttt{power()} is invoked on a
+component, the aspect program checks for mode changes while
+\emph{entering} the corresponding \emph{scenario}, issuing the
+accounting directives accordingly.  \textbf{Auto-resuming} a component
+that has been put in an energy-saving mode can be accomplished by
+testing and conditionally restoring the component's power mode on each
+method invocation as illustrated by figure~\ref{fig:aspect_resume}.
+
+\fig{aspect_account}{scale=0.75}{Energy accounting aspect.}
+\fig{aspect_resume}{scale=0.75}{Auto-resume aspect.}
+
+% Skip from Auto-suspend in favor of an scheduler-based approach
+\textbf{Auto-suspend} mechanisms can also take advantage of AOP
+techniques. Turning off components that are no longer being used could
+be easily accomplished by an aspect program that maintains usage
+counters associated to components. An automated suspend policy could
+then be implemented in the corresponding \texttt{leave} method (that
+would probably rely on heuristics to decide whether suspension should
+really take place). Nonetheless, automating power management decisions
+without taking scheduling concerns into consideration might compromise
+the correctness of real-time embedded applications. A more consistent
+strategy would consist in deploying aspect programs of this kind to
+collect run-time information, while delegating actual power management
+to an agent integrated with the scheduler.
+
+% System-wide aspects
+% Generalized transitions
+One pitfall in using AOP techniques to implement a power management
+infrastructure arises from the fact that individual software components
+manipulate distinct hardware components in quite specific
+ways. Implementing the proposed API, so that power mode transitions can
+be issued at high-level abstractions such as files and processes, would
+require the envisioned aspect program to consider a complex set of
+rules. In this proposal, we tackle this problem by formalizing the
+interaction between components through a set of
+\emph{Hierarchical Petri Nets} that are automatically transformed in the component-specific rules that are used by our generic aspect programs.
+
+\subsection{Operation Mode Transition Networks}\label{sec:petri_nets}
+
+% Petri Nets, and why we need them
+Petri Nets are a convenient tool to model operating mode transitions of
+components, not only because of its hierarchical representation
+capability, but also due to the availability of verification tools that
+can automatically check the whole system for deadlocks and unreachable
+states~\cite{Peterson:1977}. Figure~\ref{fig:transition_net-overview}
+shows a simplified view of the operating mode transition networks used
+in this proposal (only the transition from OFF to FULL is shown). The
+complete network encompasses all valid transitions in a similar way,
+with \emph{places} being associated to operating modes (FULL and OFF in
+the figure), and \emph{resources} designating the component's current
+operating mode.
+
+\fig{transition_net-overview}{scale=0.5}{Generalized Operating Mode
+  Transition Network.}
+
+The \texttt{Atomic\_Execution} place is responsible for ensuring that
+multiple mode change operations do not take place simultaneously. For
+that, this place is always initialized with one resource. When a power
+management API method is invoked, the corresponding transition is
+triggered (in the figure, \texttt{power(FULL)}) and the resource in the
+\texttt{Atomic\_Execution} place is consumed.  Additionally, a new
+resource is inserted into the \texttt{Triggering\_FULL} place to enable
+the transactions that remove the resources that marks the component's
+current operating mode (\texttt{OFF}). Since the component in the
+example is in the OFF state, only the \texttt{OFF\_TO\_FULL} transition
+is enabled. When this transition is triggered, the resource that marked
+the \texttt{OFF} place is consumed, and three resources are inserted
+into the \texttt{FULL\_Enable} place. This enables the
+\texttt{Enter\_FULL} transition, that is responsible for executing the
+operations that actually change the component's power mode. After this
+transition is triggered, two resources are inserted into the
+\texttt{FULL} place, enabling the \texttt{FULL\_Entered} transition,
+which finalizes the process, consuming the final resource in the
+\texttt{FULL\_Enable} place, and inserting one resource back into the
+\texttt{Atomic\_Execution} place. The entire process results in a
+resource being removed from the \texttt{OFF} place and inserted into the
+\texttt{FULL} place. In order to avoid deadlock when a component is
+requested to switch to its current operating mode (i.e., a component in
+\texttt{FULL} mode is requested to go into \texttt{FULL} mode), another
+transition was added to the model: \texttt{Recurrence}.  This transition
+returns the resource removed from the \texttt{Atomic\_Execution} place
+in case of recurrence.
+
+% Propagation/Transition(?) networks
+The generalized network represents operating mode transitions from a
+high-level perspective, without modeling the specific actions that must
+be taken to put a component into a given power mode. Those actions are
+subsequently modeled by specializations of mode transitions (such as
+\texttt{Enter\_FULL} in figure~\ref{fig:transition_net-overview}) for each
+individual component. At this refinement level, Petry Net tools can be
+used to simulate the network, validating it while generating traces that
+can be directly mapped to rules used in the aspect programs described
+earlier.
+
+\fig{transition_net-cmac-enter_full}{scale=0.5}{Communicator transition network
+  to enter mode FULL.}
+
+For instance, the communicator in our example propagates a
+\texttt{power(FULL)} directive down to associated hardware components as
+specified by the transition network shown in
+figure~\ref{fig:transition_net-cmac-enter_full}. The simulation of this
+transition network produces a trace that is automatically converted to
+the following code:
+
+\begin{lstlisting}[language=C++,style=prg]
+void Communicator::power_full()
+{
+    _radio.power(Radio::FULL);
+    _spi.power(SPI::FULL);
+    _timer.power(Timer::FULL);
+}
+\end{lstlisting}
+
+Note that each distinct communicator has its own transition network,
+thus ensuring that an application issuing the power directive does not
+need to be patched if the radio on the hardware platform changes or even
+if it is replaced by a wired transceiver. Similar transition networks
+are used for all modes, including the apparently more complex
+\emph{stand-by} and \emph{light} modes. The role of transition networks
+is solely to propagate power management invocations from high-level
+abstraction down to hardware components in a consistent manner. The
+implementation of method \texttt{power()} for hardware mediators (i.e.
+device drivers) does not use the traces of Petry Net simulations. They
+are entirely written by hand, taking in consideration the operating
+peculiarities of each hardware device.
+
+Furthermore, invocations of \texttt{power()} at the level of hardware
+mediators cannot be simply propagated, since transitions initiated by
+invocations on different high-level components (possibly by distinct
+threads) might conflict as they reach the hardware. For instance, a
+thread could issue a \texttt{power(OFF)} on a file that is stored in a
+flash memory that also stores other files currently in use by other
+threads. Therefore, each hardware mediator defines its own
+\texttt{power()} method considering the operating modes available in
+hardware but also considering its peculiarities in respect to higher
+level access. Common duties, such as serialization and share control are
+available as generic aspect programs, but the deployment of such
+programs is carefully decided by the development team.
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "pm"
+%%% End:

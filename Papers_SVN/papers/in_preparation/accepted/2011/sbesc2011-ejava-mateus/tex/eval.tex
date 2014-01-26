@@ -1,0 +1,140 @@
+\section{Avaliação}
+\label{sec:eval}
+Nós avaliamos nossa proposta de interface entre dispositivos de hardware e Java,
+descrita na seção \ref{sec:proposal}, em termos de desempenho, consumo de 
+memória e portabilidade.
+Utilizamos em nossos experimentos o exemplo da UART apresentado na seção 
+\ref{sec:proposal} e um componente para estimativa de movimento em codificação 
+de vídeo H.264.
+Esta seção descreve os resultados obtidos para o mediador UART.
+A seção \ref{sec:case_study} descreve em detalhes o componente de estimativa 
+de movimento assim como os resultados obtidos na análise do mesmo.
+
+\subsection{Desempenho}
+Um adaptador que realize interface entre linguagens de altíssimo nível e 
+dispositivos de hardware deve interferir o mínimo possível no tempo de resposta
+original de tais dispositivos, caso contrário, sua utilização pode tornar-se
+impraticável.
+Como forma de avaliar a proposta da seção \ref{sec:proposal}, nós medimos o 
+tempo de resposta do dispositivo de hardware em análise acessando-o diretamente
+(e.g. por uma aplicação C++) e acessando-o por nossos adaptadores de código
+nativo.
+O sobrecusto de tempo gerado por uma FFI
+pode ser descrito pela equação \ref{eq:time_overhead}.
+Nós definimos \emph{TempoDispositivo} como o tempo de resposta original o qual
+é composto pelo tempo do mediador EPOS mais o tempo do dispositivo físico.
+O \emph{TempoTotal} adiciona ao \emph{TempoDispositivo} o tempo de resposta
+do método nativo, incluindo a chamada para o método e o retorno do método.
+
+% NOTA: Acho que tinha colocado TempoTotal / TempoDispositivo pois pensei
+% o overhead como o inverso do speedup.
+% Mas neste caso a formula completa teria de ser:
+% (|1 - TempoTotal / TempoDispositivo|) * 100
+% ou seja com o módulo
+% Colocando TempoDispositivo / TempoTotal a formula fica mais simples, sem o 
+% módulo, fornecendo os mesmos resultados.
+% Fica assim:
+% (|1 - TempoDispositivo / TempoTotal|) * 100
+\begin{equation}
+\label{eq:time_overhead}
+SobrecustoFFI (\%) = \left ( 1 - \frac{TempoDispositivo} {TempoTotal} \right ) \times 100
+\end{equation}
+
+Nós medimos o \emph{TempoTotal} e o \emph{TempoDispositivo} do método \emph{put}
+da UART.
+O método foi chamado 10 mil vezes em uma execução de aplicação e a aplicação foi
+executada 30 vezes. 
+Nós utilizamos o \emph{time stamp clock} do EPOS para computar o tempo. 
+O sobrecusto obtido, por meio da equação \ref{eq:time_overhead}, corresponde a
+menos que 0.04\% do tempo total de execução do método.
+
+Como forma de estimar a relevância do valor do sobrecusto, nós reproduzimos o
+experimento da UART utilizando a plataforma \emph{Java Standard Edition} a qual
+utiliza a \emph{Java Native Interface} como FFI.
+Nós utilizamos a biblioteca \emph{RXTX} \cite{site:RXTX} a qual implementa a 
+\emph{Java Communications API} \cite{site:JavaCommAPI}, utilizada para 
+comunicação com dispositivos seriais.
+A função \emph{gettimeoftheday} foi utilizada para computar o 
+\emph{TempoDispositivo} e o método Java \emph{System.nanoTime} foi utilizado 
+para computar o \emph{TempoTotal}.
+A tabela \ref{tab:time_overhead} mostra os valores obtidos, assim como os 
+valores obtidos utilizando-se a nossa proposta.
+
+A aplicação baseada em JNI apresenta um sobrecusto de 1.5\% o qual é 
+aproximadamente 38 vezes maior do que o sobrecusto obtido utilizando-se nossa
+abordagem.
+Considerando uma aplicação que precisa enviar um byte a cada 420$\mu s$ e 
+considerando que a UART leva 417$\mu s$ para enviar um byte (\emph{boud rate} de 19200),
+um sobrecusto de 1.5\% (6.25$\mu s$) comprometeria na transmissão dos dados, 
+ocasionando perda de \emph{deadlines} em uma aplicação de tempo real.
+
+\begin{table}[t]
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{} & \textbf{Total($\mu s$)} & \textbf{UART($\mu s$)} & \textbf{Sobrecusto FFI (\%)}\\
+\hline
+Proposta & 517.74 & 517.54 & 0.04 \\
+\hline
+JSE & 8364683.74 & 8238695.07 & 1.5 \\
+\hline
+\end{tabular}
+\caption{Sobrecusto de tempo gerado pela FFI}
+\label{tab:time_overhead}
+\end{center}
+\end{table}
+
+\subsection{Consumo de memória}
+O adaptador de código nativo que encapsula um dispositivo de hardware deve
+impactar o mínimo possível na quantidade de memória de código e de dados 
+necessária à execução da aplicação.
+Como forma de estimar o sobrecusto de memória gerado pela nossa abordagem, nós
+medimos o consumo de memória (\emph{footprint}) da imagem binária contendo o
+sistema como um todo (aplicação, JVM e ambiente de suporte a execução).
+% e o consumo de memória especifico da criação do adaptador de código nativo.
+
+A tabela \ref{tab:space_overhead} mostra os valores obtidos para o exemplo UART,
+o qual foi compilado para as arquiteturas \emph{IA32} e \emph{Power PC32}.
+O tamanho do sistema como um todo incluindo a aplicação, a JVM KESO e o EPOS
+possui menos de 33KB em ambas as arquiteturas, um valor adequado para diversas
+plataformas embarcadas.
+
+\begin{table}[t]
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{} & \textbf{IA32(byte)} & \textbf{PPC32(byte)} \\
+\hline
+text & 28645 & 30504 \\
+\hline
+data & 1180 & 1198 \\
+\hline
+bss & 1264 & 840 \\
+\hline
+total & 31089 & 32542 \\
+\hline
+\end{tabular}
+\caption{Consumo de memória total}
+\label{tab:space_overhead}
+\end{center}
+\end{table}
+
+\subsection{Portabilidade}
+Nossos adaptadores de código nativo suportam dois tipos de portabilidade:
+portabilidade de plataforma e portabilidade entre software e hardware.
+
+Uma vez que um adaptador de código nativo desenvolvido utilizando nossa 
+abordagem utiliza o conceito de mediadores de hardware EPOS e este provê uma
+interface independente de máquina, nossos adaptadores podem existir para todas 
+as arquiteturas e plataformas suportadas pelo EPOS.
+
+Por portabilidade entre software e hardware queremos dizer que um mesmo 
+adaptador de código nativo pode ser utilizado tanto em uma implementação de
+software quanto em uma implementação em hardware do componente sendo abstraído.
+Isto é possível graças ao conceito de \emph{componentes híbridos} realizados
+pelo EPOS, aonde um componente preserva a mesma interface tanto em sua 
+implementação em software quanto em sua implementação em 
+hardware \cite{Marcondes:IESS:2009}.
+
+% ------------------------------------------------------------------------------
+

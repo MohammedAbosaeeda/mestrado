@@ -1,0 +1,12 @@
+% ------------------------------------------------------------------------------
+\section{Introduction} \label{intro}
+
+\IEEEPARstart{E}{nergy} consumption is a topic of paramount importance in the context of \emph{wireless sensor network} (WSN). In general, the node's longevity is dictated by its power consumption and its energy storage unit capacity. However, the concept of node's longevity  was entirely changed with the advent of energy harvesting capabilities. The possibility of extracting energy from the environment has drastically changed the energy management in WSN, increasing nodes' longevity.
+
+Among a number of energy sources that have been studied so far, solar has proved to be one of the most effective~\cite{Roundy:2003}. The solar energy conversion through photovoltaic (PV) cells is better performed at an optimum operating voltage. Operating a solar panel on this voltage results in transferring to the system the maximum amount of power available. In this context, \emph{maximum power point tracker} (MPPT) circuits have been proposed. The drawback is that MPPT circuitry introduces losses to a solar harvesting system. Recently, as an attempt to solve this problem, the integrated circuits (IC) industry has released low power MPPT integrated circuits. However, most of them are not dedicated for the specific low power consumption range of less than $100~mW$, typical for motes based on low power wireless \emph{Platform-in-Packages} (PiPs). Concerning these low power applications, it may be more energy efficient to have a good matching between the solar panel and the energy storage unit~\cite{Raghunathan:2005}. This well matched system could be able to work close to the maximum power point with less power loss.
+
+Consequently, the purpose of this work is to experimentally compare the performances of a directly coupled system and a MPPT IC based system. This research  will orient the next steps on the development of a low power energy harvesting system based on low power wireless PiPs.
+
+The paper is organized as follows: Section~\ref{fund} presents the fundamentals of solar energy harvesting. Section~\ref{design} discusses the design of the two proposed harvesting circuits under the perspective of low power wireless platforms. Section~\ref{case} presents the evaluation of both harvesting circuits. Finally, section~\ref{concl} closes the paper.
+
+% ------------------------------------------------------------------------------

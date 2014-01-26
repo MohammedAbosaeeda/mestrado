@@ -1,0 +1,11 @@
+Roteiro
+
+make veryclean all
+qemu -fda img/pc_app.img -serial stdio -s -S
+> se quiser colocar o output em um arquivo, é só colocar -serial "arquivo.txt"
+
+em outra janela
+gdb
+target remote:1234
+file app/pc_app
+setar breakpoints, ligar o logging e dar continue.

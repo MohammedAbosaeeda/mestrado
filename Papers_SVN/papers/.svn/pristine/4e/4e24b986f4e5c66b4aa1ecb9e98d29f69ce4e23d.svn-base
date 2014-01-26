@@ -1,0 +1,83 @@
+%-------------------------------------------------------------------------------
+% SERVIDOR DE ARQUIVOS
+%-------------------------------------------------------------------------------
+\section {Servidor de Arquivos}
+
+Nesta seção apresentamos o servidor de arquivos, um dos componentes mais importantes de um sistema operacional, uma vez que seus usuários fazem uso intenso de arquivos. A abordagem de objetos utilizada neste trabalho é diretamente derivada desse servidor, pois é nele que definimos fisicamente os objetos de memória secundária. No servidor de arquivos um objeto deixa de ser visto como uma entidade com estado, comportamento e identidade \cite {boo91} e passa a ser visto como uma seqüência de bytes a ser operada pelas funções internas do sistema.
+ 
+\subsection {Blocos Lógicos de Dados}
+
+O bloco lógico de dados é a unidade utilizada pelo servidor de arquivos para acessar, de maneira homogênea, dados armazenados em disco. Como os blocos físicos variam de dispositivo para dispositivo, temos no bloco lógico de dados um conceito fundamental para manter o sistema de arquivos independente de dispositivo. Nesta implementação decidimos fixar o tamanho do bloco lógico de dados em 1024 bytes e o endereço de bloco em 32 bits, o que nos permitirá endereçar dispositivos com até 4 Tbytes.
+
+
+\subsection {Volumes de Discos}
+
+Entendemos por volume ou disco lógico um conjunto contíguo de blocos (partição) de um disco, ao qual se atribui um nome e que é reconhecido pelo sistema como uma entidade independente. Somente os servidores de dispositivos conhecem a diferença entre um disco físico e um volume. O resto do sistema só reconhece volumes.
+
+O mapeamento de volume em disco físico é atribuição dos servidores de dispositivos. Para tal tradução é mantido em um bloco especial do disco uma tabela que descreve todas as suas partições. Essa tabela é lida e interpretada pelo servidor do dispositivo quando da inicialização do disco. Após a inicialização do dispositivo, cada uma das suas partições passa a ser vista como um disco autônomo.
+
+Uma representação esquemática de um disco pode ser vista na figura \ref{disk}. Cada disco possui quatro elementos:
+
+\begin {itemize}
+
+\item Bloco de {\em boot}: sempre o primeiro bloco do disco, contém código para dar início a carga do sistema operacional;
+
+\item Bloco de descrição do disco: descreve as características de um disco;
+
+\item Lista de descritores de arquivos: tem tamanho variável, definido pelo número máximo de arquivos que se poderá ter no disco;
+
+\item Área de usuário: o conjunto de blocos disponíveis ou utilizados pelos usuários.
+
+\end {itemize}
+
+\putpict {../fig/disk.ps} {13} {1.5} {Organização de um disco} {disk}
+
+
+\subsubsection {Bloco descritor de disco}
+
+O bloco descritor de disco está presente em todos os discos do sistema, sempre localizado no endereço zero. Ele é responsável pela manutenção de uma série de informações sobre o disco, como o tamanho do disco, o número de blocos livres no disco, o tamanho da lista de descritores de arquivos, o número de descritores de arquivos disponíveis, datas de criação e alteração do disco entre outras.
+
+Quando ativamos um disco (discos devem ser ativados antes que possam ser utilizados) o respectivo bloco descritor de dispositivo é trazido para a memória e inserido numa lista encadeada de discos ativos.
+
+O bloco descritor de disco contém ainda um vetor de identificadores de descritores de arquivos para otimizar a criação de novos arquivos. Esse vetor é automaticamente recarregado quando fica vazio, até que não haja mais descritores de arquivos disponíveis no disco.
+
+Uma outra parte do bloco descritor de disco é dedicada ao armazenamento de uma parte da estrutura de controle de alocação do disco. Nesta implementação gerenciamos os blocos livres de um disco mantendo uma lista encadeada com todos os blocos livres do disco. Assim, quando precisamos alocar um bloco, simplesmente retiramos a cabeça da lista e, quando liberamos um bloco, inserimos o mesmo no início da lista, ou seja, temos uma pilha encadeada de blocos livres.
+
+Existe ainda no bloco descritor de disco um campo booleano que é marcado como verdadeiro, tanto na cópia em memória como no disco, quando da ativação do disco, e só é marcado falso na sua desativação. Assim, se houver falta de luz ou violação de integridade do disco, na sua próxima ativação o referido campo será verdadeiro, o que gera uma seqüência de recuperação do disco.
+
+
+\subsection{Arquivos}
+
+Arquivos são os elementos utilizados pelo sistema para representar fisicamente qualquer objeto de memória secundária. Os arquivos ordinários de dados utilizados pelos usuários constituem apenas uma das classes de objetos.
+
+Abaixo citamos algumas das principais características que nortearam a implementação do conceito de arquivo:
+
+\begin {itemize}
+
+\item Eficiência na manipulação de arquivos pequenos, pois estatísticas mostram que o tamanho médio dos arquivos em um sistema do tipo \unix é 1 Kbyte e 99 \% dos arquivos são menores que 64 Kbytes \cite {mul84a};
+
+\item Possibilidade de criação, sob algum custo, de arquivos grandes;
+
+\item Possibilidade de acesso seqüencial a arquivos;
+
+\item Possibilidade de acesso aleatório a arquivos;
+
+\item Possibilidade de expansão de arquivos já criados.
+
+\end {itemize}
+
+
+\subsubsection{Descritores de arquivos}
+
+Os objetos de memória secundária são descritos perante o sistema por uma estrutura chamada descritor de arquivo. Descritores de arquivos armazenam várias informações sobre os arquivos, como por exemplo, a classe à qual pertence o arquivo, o tamanho do arquivo, as datas de criação, alteração e acesso ao arquivo, a identificação do dono do aquivo, um contador de sinônimos do arquivo.
+
+Para controlar os blocos alocados a um arquivo, mantemos, dentro do seu descritor, uma tabela com os endereços dos vinte primeiros blocos do arquivo. Isso garantirá acesso aleatório eficiente a esses blocos, uma vez que o descritor de um arquivo fica em memória enquanto o mesmo está aberto. Além dessa tabela acrescentaremos ao descritor do arquivo três endereços indiretos, sendo o primeiro com um nível de indireção, o segundo com dois e o terceiro com três.
+
+Quando um arquivo é criado o servidor de arquivos associa um descritor ao mesmo. Caso não existam descritores livres no disco a solicitação de criação de arquivo é negada.  Um descritor de arquivo é identificado por um número de 16 bits sem sinal, o que nos permite ter no máximo 65536 descritores por disco. Como existe uma relação unívoca entre descritores e arquivos, esse é também o limite do número de arquivos que podemos ter por disco.
+
+
+\subsubsection{Controle de acesso}
+
+O controle de acesso a um arquivo é feito com o auxilio de uma estrutura mantida dentro do descritor do mesmo. Esta estrutura implementa de maneira simples e eficiente um esquema do tipo "quem pode fazer o que?". Existem três operações que podem ser autorizadas: leitura, escrita e execução. Uma autorização pode ser consedida a quatro classes de usuários: o dono do arquivo, qualquer usuário do grupo do dono, qualquer usuário do domínio do dono e outros.
+
+

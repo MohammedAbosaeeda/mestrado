@@ -1,0 +1,50 @@
+% ------------------------------------------------------------------------------
+\section{Conclusões}
+\label{sec:discussion}
+% Aplicações para sistemas embarcados usualmente necessitam interagir com
+% diversos tipos de dispositivos de hardware como sensores, atuadores, 
+% transmissores, receptores e \emph{timers}.
+%
+% Interface de função estrangeira é o mecanismo adotado por Java para superar as
+% limitações da linguagem e permitir acesso direto a memória e a dispositivos de
+% hardware. 
+% Entretanto, como mostrado na seção \ref{sec:related_work}, as principais FFIs 
+% Java não são eficientes em termos de consumo de recursos, ou possuem limitações
+% de projeto que dificultam o desenvolvimento de novas interfaces entre Java e os
+% dispositivos de hardware.
+%
+Neste artigo, apresentou-se um meio de realizar a interface entre componentes 
+de hardware e aplicações Java para sistemas embarcados. 
+Isto foi obtido utilizando-se a interface de função estrangeira da JVM KESO e o
+EPOS.
+
+% O EPOS permite o desenvolvimento de aplicações portáveis, independentes de
+% especificidades de máquina. 
+% Isto é conseguido utilizando-se o conceito de mediadores de hardware, os quais
+% sustentam um contrato de interface entre abstrações de sistemas e a máquina.
+
+% O JVM KESO compila o bytecode de uma aplicação Java em código C e gera as partes
+% da JVM necessárias pela aplicação. 
+% A FFI da KESO também utiliza esta abordagem estática, gerando o código C 
+% especificado nas classes \emph{Weavelet}. 
+% Então o código C gerado pelo compilador KESO e pela FFI da KESO são compilados
+% em conjunto em código nativo, utilizando-se um compilador C padrão.
+
+Nós avaliamos nossa abordagem em termos de desempenho, consumo de memória e 
+portabilidade.
+Para a aplicação utilizando o mediador de hardware da UART o sobrecusto 
+de tempo obtido foi menos de 0.04 \% do tempo total de execução da aplicação e
+nossa solução é 38 vezes mais rápido do que a JNI da Sun.
+O consumo de memória para tal aplicação foi de 33KB, incluindo todo o suporte
+de ambiente de execução, o qual é adequado para diversos sistemas embarcados.
+Utilizando o EPOS nós obtivemos portabilidade para várias plataformas e 
+utilizando o conceito de componentes híbridos podemos utilizar os mesmos 
+adaptadores de código nativo tanto para componentes implementados em 
+hardware como implementados em software.
+
+Visando avaliar nossa abordagem em uma aplicação real, nós escrevemos
+adaptadores de código nativo para um componente o qual realizada estimativa de
+movimento para codificação de vídeo H.264.
+
+% ------------------------------------------------------------------------------
+

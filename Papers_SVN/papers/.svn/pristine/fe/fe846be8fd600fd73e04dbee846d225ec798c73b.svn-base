@@ -1,0 +1,56 @@
+\documentclass[preprint,5p]{elsarticle}
+
+\usepackage[english]{babel}
+
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{lineno}
+
+\selectlanguage{english}
+
+\journal{Ad Hoc Networks}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Heuristics for Energy-aware Routing in Mobile Wireless Sensor Networks}
+
+\author{Alexandre Massayuki Okazaki and Arliones Hoeller Jr.}
+\ead{\{alexandre,arliones\}@das.ufsc.br}
+\address{Department of Automation and Systems Engineering (DAS)}
+\address{ }
+\author{Ant{\^o}nio Augusto Fr{\"o}hlich}
+\ead{guto@lisha.ufsc.br}
+\address{Software and Hardware Integration Lab (LISHA)}
+\address{ }
+\address{ }
+\address{Federal University of Santa Catarina (UFSC)}
+\address{P.O.Box 476, 88040-900 -- Florian{\'o}polis -- Brazil}
+
+\hyphenation{net-works MA-NET through meth-odologies pher-o-mone light-weight de-mand trans-ceiver o-ver-head to-pol-o-gy}
+
+\begin{abstract}
+No abstract yet\ldots
+\end{abstract}
+
+\begin{keyword}
+Mobile Wireless Sensor Networks \sep Ant Colony Optimization \sep Routing Protocols \sep Dynamic Topologies
+\end{keyword}
+
+\end{frontmatter}
+
+\input{files/intro.tex}
+\input{files/related.tex}
+\input{files/adhop.tex}
+\input{files/ea_adhop.tex}
+\input{files/evaluation.tex}
+\input{files/conclusion.tex}
+
+\bibliographystyle{elsarticle-num}
+\bibliography{paper}
+
+\end{document}

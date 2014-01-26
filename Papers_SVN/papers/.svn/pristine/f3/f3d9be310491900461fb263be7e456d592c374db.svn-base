@@ -1,0 +1,136 @@
+% ------------------------------------------------------------------------------
+\section{Practical Experiments} \label{eval}
+% + Practical Experiments
+% First shows speedup and quality results for DMEC
+% using 1 (without partitioning) to 6 worker threads.
+% Show that speedup is high and quality is kept acceptable.
+% 
+% Then, show speedup and quality results for DMEC integrated to JM and compares
+%  to the original JM (and, if possible, to other works).
+% 
+
+% + JM
+% + Dizer como realizamos os experimentos. E/ou quais as variáves observadas:
+%   Evaluate the component in isolation DMEC to show its speedup.
+%    And how it scales.
+%   Evaluate the component in JM to show sppeedup and PSNR.
+We have evaluated DMEC in two stages.
+First, in order to verify how DMEC's performance scales from 
+one to six \emph{Workers} instances, we have evaluated all DMEC implementations 
+in a test case.
+The test case application mimics the behavior of an H.264 encoder: it provides 
+DMEC with pictures, obtain the ME results 
+(motion vectors and motion cost), and checks if the results are correct.
+Secondly, in order to assess DMEC influence on the final video quality, we have
+evaluated all DMEC implementations in the
+JM H.264 Reference Encoder~\cite{site:jm}.
+The PSNR degradation is computed as the absolute PNSR difference between the
+original encoder and the optimized ones.
+
+% P: Dizer pq focamos em luma
+For inter macroblock modes in H.264 (i.e. modes related to the ME),
+the motion cost for chrominance components derives from the motion cost for 
+luminance components~\cite{1101854}. 
+Consequently the PSNR for chrominance components derives from the PSNR for 
+luminance components. 
+For this reason, in this paper we focus on the PSNR variation of the luminance 
+component.
+
+Figure \ref{fig:dmec-speedup_workers} show the speedup of DMEC in there
+test case application with a different number of \emph{Workers} instances.
+For such test, we have used an arbitrary set of pictures with a resolution of
+1080p (Full-HD).
+The speedup is normalized to one \emph{Worker} instance (speedup of 1X).
+
+% TODO
+% \textit{Comments about results in: Cell BE, Muticore IA32, and HW.}
+It is worth to mention that for each number of \emph{Worker} instances
+a different partition mode was used, according to
+Figure \ref{fig:picture_partition}.
+For one \emph{Worker} instance we have used the ``Single Partition'',
+for two \emph{Worker} instances we have used the ``2x1'' partition and so on,
+up to the ``2x3'' partition mode (used for six \emph{Worker} instances).
+
+Besides the additional performance obtained by using a higher number of \emph{Worker} instances,
+the partition mode also has influence on the speedup.
+The reason of such influence is that, during the partitioning process, the dimensions of the
+search window shrinks, thus reducing the area of the picture searched for
+similarities.
+
+\fig{.45}{dmec-speedup_workers}{Time performance scalability of DMEC}
+
+% Sobre RD curves
+% Figures XXX show the speedup of DMEC while tested already integrated to JM.
+% The obtained values are compared to the ones obtained while using the original
+% JM, without DMEC.
+In order to evaluate in details the behavior of DMEC for distinct values 
+of encoding bit-rates, we have used the BD-PSNR (Bjøntegaard Delta PSNR) metric
+using the following values of QP (Quantization Parameter): 16,20,24,28; as 
+described in \cite{gisle_bjntegaard_calculation_2001}.
+It is important to evaluate quality (PSNR) for distinct bit-rates to test 
+whether the approach can be used in distinct scenarios of application.
+Figure \ref{fig:crowd-bitrate_psnr} shows the rate-distortions (RD) curves using the
+original JM encoder and the optimized encoder using DMEC.
+The video sequence used for this curves was \texttt{Crowd Run}, a 1080p sequence with  a
+high ammount of motion.
+Lower values of bit-rate are obtained for higher values of QP since by using
+higher values for QP more data is discarded, thus increasing the
+compression ratio. 
+The two curves very near from each other indicates that the DMEC
+presents a good rate-distortion performance for all the evaluated bit-rates.
+
+\fig{.45}{crowd-bitrate_psnr}{RD curve of a 1080p video sequence}
+
+We have evaluated also the speedup obtained in the
+% encoding time
+ME run time
+while using
+DMEC for the same QP values we used for BD-PSNR.
+Figure \ref{fig:crowd-bitrate_speedup} shows the obtained values while using
+6 \emph{Worker} instances.
+For Muticore IA32, a speedup of around 9 times is obtained for all
+bit-rate values.
+For Cell BE this value is about 2 times.
+A small speedup for the Cell BE, while compared to Multicore IA32 and the dedicated hardware, is due
+to the memory transferences (picture samples and ME results) which is performed using
+the DMA requisitions of Cell BE.
+
+
+\fig{.45}{crowd-bitrate_speedup}{Speedup vs bit-rate of a 1080p sequence}
+%
+% \multfigtwov{.65}{bd_psnr}{bd_speedup} {bd} {RD curve (a) and speedup vs bit-rate (b) of 1080p sequence}
+
+% Discussion
+
+
+% Falar do paralelismo / particionamento de dados
+% Qualidade ficou boa mesmo particionando e desempenho aumentou: speedup ~ 70%
+%The strategy of ME distribution based on picture partitioning has been shown 
+%effective.
+% We have obtained a speedup higher than XXX\% without loosing quality.
+%Data partitioning is effective because the visual interdependence between
+%partitions is not significant to influence on the encoding quality, and allows
+%for a speedup because it enables the simultaneous processing of each picture
+%partition.
+
+% - Falar da comunicação
+% - Necessidade via espaço de endereçamentos diferentes
+% A arquitetura Cell Broad Band demonstrou-se uma arquitetura interessante para o
+% processamento paralelo de vídeo, pois possui unidades funcionais dedicadas 
+% (i.e. SPEs) para processamento de dados. 
+% A principal dificuldade encontrada em trabalhar-se com o Cell foi a capacidade 
+% limitada da memória local das SPEs.
+% Outra dificuldade foi lidar com as transferências de memória entre SPE e PPE. 
+% Isto em fato foi superado pelas estratégias que desenvolvemos de baferização e 
+% também com a utilização do Element Interconect Bus (EIB) do Cell que realiza 
+% DMAs com altas taxas de transferências.
+% 
+% - Solução 1: Buffer de preditores, contribuiu bastante
+% A estratégia de armazenamento de preditores nas SPEs foi significativa no 
+% aumento do desempenho, pois vetores de movimentos necessários para o cálculo da
+% ME não precisam ser consultados na memória principal. É coerente a decisão de 
+% manter uma cópia local destes vetores, pois todos os vetores que a ME irá 
+% precisar foram calculados pela partição em questão e por nenhuma outra.
+
+
+% ------------------------------------------------------------------------------

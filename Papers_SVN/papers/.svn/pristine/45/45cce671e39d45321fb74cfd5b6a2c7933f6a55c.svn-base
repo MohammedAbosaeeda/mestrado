@@ -1,0 +1,63 @@
+%-------------------------------------------------------------------------------
+% IDENTIFICADORES INTERNOS
+%-------------------------------------------------------------------------------
+\section{Identificadores Internos}
+
+Os arquivos de um sistema são acessados por processos de usuários e são fisicamente armazenados em discos. Arquivos, usuários e periféricos são entidades que devem ser identificadas, tanto perante os usuários, quanto perante o sistema operacional. Para os usuários tais entidades estão associadas a nomes, entretanto, o sistema operacional faz uso de identificadores especiais. A seguir pode-se ver como estas entidades estão definidas no {\sdfs}.
+
+
+\subsection {Identificadores de Usuários}
+
+Usuários são os agentes que manipulam os arquivos do sistema, logo, é importante que o sistema identifique-os, possibilitando assim validações de acessos. Um usuário qualquer é identificado perante o sistema por uma estrutura de 64 bits com três campos:
+
+\begin {itemize}
+
+\item Identificador de {\host}: Número de 32 bits que identifica um {\host} perante o mundo. Esse número é o número IP ({\ip}) da {\inet} \cite{pos81a}; 
+
+\item Identificador de grupo: Número de 16 bits que identifica um grupo de usuários em um {\host};
+
+\item Identificador local de usuário: Número de 16 bits que identifica um usuário dentro de um determinado grupo.
+
+\end {itemize}
+
+
+\subsection {Identificadores de Ports}
+
+Os {\ports} utilizados para a comunicação entre processos são identificados globalmente por uma estrutura de 48 bits formada por dois campos:
+
+\begin {itemize}
+
+\item Identificador de {\host}: Como definido anteriormente, é um número de 32 bits equivalente ao número IP da {\inet};
+
+\item Identificador local de {\port}: Número de 16 bits que identifica um {\port} em um {\host}.
+
+\end {itemize}
+
+
+\subsection {Identificadores de Arquivos}
+
+Os identificadores de arquivos adotados pelo {\sdfs} são estruturas de 80 bits formadas por quatro campos descritos como segue:
+
+\begin {itemize}
+
+\item Identificador de {\host}: Como definido anteriormente, é um número de 32 bits equivalente ao número IP da {\inet};
+
+\item Identificador de dispositivo: Número de 16 bits que identifica uma classe de dispositivos em um {\host}. Esse identificador é um elemento interno do sistema operacional. A única exigência é que 16 bits sejam suficientes para diferenciar todos os tipos de dispositivos de um {\host};
+
+\item Identificador de unidade: Número de 16 bits que identifica uma unidade de um tipo de dispositivo. Este campo complementa o identificador de dispositivo;
+
+\item Identificador de arquivo: Número de 16 bits que identifica um arquivo em um dispositivo.
+
+\end {itemize}
+
+
+\subsection {Nomes de Arquivos}
+
+A figura \ref{path} mostra uma definição formal, através de um diagrama de sintaxe, de um {\path}. O {\token} {\host} é aquele definido pela rede {\inet}. Ele é formado por uma lista de nomes separados por "." que identifica um dado {\host} na rede. Maiores informações sobre a nomenclatura utilizada pela {\inet} podem ser obtidas em \cite{pos82}.
+
+\putpict {../fig/path.ps} {14} {1.6} {Diagrama de sintaxe de um {\path}} {path}
+
+
+
+
+

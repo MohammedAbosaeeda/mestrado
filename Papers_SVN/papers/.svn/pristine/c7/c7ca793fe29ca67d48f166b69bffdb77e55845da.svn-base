@@ -1,0 +1,42 @@
+\section{Framework Metaprogramado do \epos{}}
+\label{sec:epos}
+
+%\epos{} é um SO para sistemas embarcados multi-plataforma baseado em componentes~\cite{Froehlich:2001}. \epos{} tem um arquitetura altamente escalável que é moldada para suportar as necessidades das aplicações. \epos{} implementa aspectos através de adaptadores de cenários~\cite{Froehlich:sci:2000}. Combinações distintas de componentes do sistema e adaptadores de cenários acarreta a diferentes arquiteturas de software. Neste contexto, \epos{} implementa um framework que define como os componentes são organizados em um sistema funcional. O framework é realizado por um metaprograma estático em C++, sendo assim executado na compilação do sistema, adaptando os componentes selecionados para coexistir entre eles e as aplicações.
+
+\epos{} é um SO para sistemas embarcados multi-plataforma baseado em componentes que possui uma arquitetura altamente escalável moldada para suportar as necessidades das aplicações~\cite{Froehlich:2001}. O \epos{} implementa aspectos\footnote{Como na tradicional programação orientada a aspectos (AOP).} através de adaptadores de cenários~\cite{Froehlich:sci:2000}, que quando combinados com distintos componentes do sistema, formam diferentes arquiteturas de software. Neste contexto, o \epos{} implementa um framework que define como os componentes são organizados de forma a gerar um sistema funcional. O framework é realizado por um metaprograma estático em C++, sendo assim executado na compilação do sistema, adaptando os componentes selecionados para coexistir entre eles, aspectos e as aplicações.
+
+\begin{figure}
+ \hspace{0.033\textwidth}
+ \begin{minipage}{0.45\textwidth}
+  \centering
+  \includegraphics[scale=0.5]{fig/framework}
+  \caption{Framework metaprogramado do \epos{}.}
+  \label{fig:framework}
+  \end{minipage}
+  \begin{minipage}{0.45\textwidth}
+  \centering
+  \includegraphics[scale=0.5]{fig/epos_fmk_reconf}
+  \caption{Framework para RDS.}
+  \label{fig:framework-reconf}
+  \end{minipage}
+\end{figure}
+
+% \begin{figure}
+% \centering
+% \begin{tabular}{c c}
+% \includegraphics[scale=0.5]{fig/framework} & \includegraphics[scale=0.5]{fig/framework-reconf} \\
+% (a) Framework metaprogramado do \epos{}. & (b) Framework para reconfiguração. \\
+% \end{tabular}
+% \caption{(a) Visão geral do framework metaprogramado do \epos{}~\cite{Froehlich:2001}. (b) Framework metaprograma do \epos{} para reconfiguração de software.}
+% \label{fig:framework}
+% \end{figure}
+
+Uma visão geral do framework metaprogramado do \epos{} é demonstrado na Figura~\ref{fig:framework}. Um cliente (aplicação ou componente) deseja invocar um método de um componente (e.g. Thread, UART, etc). A classe parametrizada \handle{} recebe um componente do sistema como parâmetro. Ela verifica se o objeto foi corretamente criado e encaminha a invocação de método ao elemento \stub{} que verifica se o aspecto de invocação remota está ativo para o componente (o aspecto é selecionado pelo componente através de sua classe \textit{Trait}~\cite{Stroustrup:1997}). Se o aspecto não está habilitado, \stub{} herdará o adaptador de cenário do componente, caso contrário herdará o \proxy{} do componente (\textit{Stub$<$Componente, true$>$}). Consequentemente, se \textit{Traits$<$Componente$>$::remote = false} então \handle{} usa o adaptador de cenário como \stub{}; se verdadeiro, \handle{} usa o \proxy{}.
+
+O elemento \proxy{} é responsável por enviar uma mensagem com a invocação do método do componente para o seu \agent{}. A mensagem contém os identificadores do objeto, método e classe que são usados pelo \agent{} para invocar o método correto, associando-os a uma tabela de métodos. O elemento \agent{} recebe esta mensagem e invoca o método através do \adapter{}. A classe \adapter{} aplica os aspectos suportados pelo \scenario{} antes e depois da chamada real do método. Cada instância do \scenario{} consulta o \textit{Traits} do componente para verificar quais aspectos estão habilitados, agregando o aspecto de cenário correspondente. Quando um aspecto não é selecionado para o componente, uma implementação vazia é utilizada. Neste caso, nenhum código é gerado na imagem final do sistema, similar a um \textit{aspect weaver} na programação orientada a aspectos tradicional. 
+
+A estrutura do framework é totalmente transparente para as aplicações devido ao uso de dois \textit{namespaces}: um para as aplicações e outro para o sistema. Em tempo de compilação, os componentes do sistema são exportados para o \textit{namespace} da aplicação, conforme demonstra a Figura~\ref{prg:export}. Consequentemente, uma invocação de método da aplicação para um componente do sistema é realizada da mesma maneira, mas ao invés de chamar o método real, a chamada é feita através do framework. Da mesma foram, quando componentes do sistema desejam invocar métodos de componentes reconfiguráveis também devem fazê-lo através do \textit{namespace} da aplicação.
+
+\prg{export}{Exportando um componente para o \textit{namespace} da aplicação.}
+
+Foi observado neste trabalho que a estrutura \proxy{}/\agent{} do framework cria um nível de indireção entre as invocações de métodos do cliente para os componentes do sistema que possuem o aspecto de invocação remota habilitado, isolando os componentes e os tornando independente de posição na memória. Neste cenário, da perspectiva do cliente, uma invocação remota é realizada sem o conhecimento da localização do componente. Essa isolação pode também ser aplicada para RDS, pois somente o \agent{} é ciente da posição do componente na memória. Diferentemente do aspecto de invocação remota presente no \epos{}, este trabalho propõe substituir a invocação de método entre o \proxy{} e \agent{} para uma simples invocação de método entre eles. Sendo assim, o mesmo nível de indireção pode residir no mesmo espaço de endereçamento de um nodo. A Figura~\ref{fig:framework-reconf} exemplifica este cenário na estrutura do framework.

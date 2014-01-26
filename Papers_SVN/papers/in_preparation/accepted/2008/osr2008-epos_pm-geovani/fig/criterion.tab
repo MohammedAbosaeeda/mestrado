@@ -1,0 +1,9 @@
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Thread}   & \textbf{Phase} & \textbf{Deadline} & \textbf{Period} & \textbf{Times} \\
+   & \textbf{(ms)} & \textbf{(ms)} & \textbf{(ms)} & \\\hline
+
+\class{Sensing}   &  0       & 150  & 170 & {$\infty$} \\\hline
+
+\class{Communication}      &  150  & 20 & 170 & {$\infty$} \\\hline
+\end{tabular}

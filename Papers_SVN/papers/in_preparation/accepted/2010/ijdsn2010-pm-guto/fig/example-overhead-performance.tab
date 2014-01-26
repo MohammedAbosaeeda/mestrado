@@ -1,0 +1,11 @@
+\begin{tabular}{p{4cm}cc}
+\textbf{EPOS Configuration} & \textbf{Context Switch} & \textbf{I/O Path} \\
+\hline
+No PM			& 33	& 380 \\
+With Autonomouns PM	& 42	& 440 \\
+\end{tabular}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../pm"
+%%% End:

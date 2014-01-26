@@ -1,0 +1,337 @@
+From - Wed Dec 13 10:47:22 2000
+Received: from jduato.gap.upv.es (jduato.gap.upv.es [158.42.50.131])
+	by prosun.first.gmd.de (8.9.3/8.9.3) with ESMTP id UAA27132
+	for <guto@first.gmd.de>; Tue, 12 Dec 2000 20:20:08 +0100 (MET)
+Received: from gap.upv.es (jduato@localhost [127.0.0.1])
+	by jduato.gap.upv.es (8.9.3/8.9.3) with ESMTP id UAA06859;
+	Tue, 12 Dec 2000 20:11:37 +0100
+Sender: jduato@cyborg.gap.upv.es
+Message-ID: <3A367869.5295DDCA@gap.upv.es>
+Date: Tue, 12 Dec 2000 20:11:37 +0100
+From: Jose Duato <jduato@gap.upv.es>
+Organization: Universidad Politecnica de Valencia
+X-Mailer: Mozilla 4.51 [en] (X11; I; Linux 2.2.7 i586)
+X-Accept-Language: en
+MIME-Version: 1.0
+To: guto@first.gmd.de, Dhabaleswar Panda <panda@cis.ohio-state.edu>
+Subject: Notification for CAC '01
+Content-Type: multipart/mixed;
+ boundary="------------70AA2DC27E207118343CFEF3"
+Status: RO
+X-Mozilla-Status: 8001
+X-Mozilla-Status2: 00000000
+X-UIDL: 1970e66d78cad8759946388283b25b34
+
+This is a multi-part message in MIME format.
+--------------70AA2DC27E207118343CFEF3
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+Dear Author,
+
+We regret to inform you that your paper has not been accepted for
+presentation at the Workshop on Communication Architecture for
+Clusters (CAC '01). Please find attached the reviews for this paper.
+You may find the comments in the reviews helpful in the development
+of further research along the lines described in the paper.
+
+Thank you for considering the Workshop on Communication Architecture
+for Clusters to submit your work.
+
+Sincerely
+
+D.K. Panda and Jose Duato
+--------------70AA2DC27E207118343CFEF3
+Content-Type: text/plain; charset=us-ascii;
+ name="05.reviews"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+ filename="05.reviews"
+
+
+Workshop on Communication Architecture for Clusters (CAC '01)
+
+                      --Referee's Report--
+
+     Please return this report by November 28th, by e-mail to
+                
+        cac01@cis.ohio-state.edu
+
+
+      Please do not alter any existing fields/labels in this form.
+
+Paper Number:  5
+
+Paper Title:    Application oriented communication systems for
+clusters of workstations 
+
+_____________________________________________________________________
+Place a number for each item below corresponding to your evaluation.
+(5=outstanding, 4=high, 3=medium, 2=fair, 1=poor)
+
+Interest/Importance to CAC:  3
+
+Quality of presentation:  2
+
+Technical contribution of paper:  2
+
+Confidence in your evaluation:  4
+_____________________________________________________________________
+(5=strong accept, 4=accept, 3=maybe, 2=reject, 1=strong reject)
+
+Recommended action for paper:  2
+_____________________________________________________________________
+
+Regardless of the recommendations, please state specific comments and
+suggestions that can be communicated to the author(s):
+
+Put comments here:
+
+To validate the concept of application oriented communication systems
+the authors should employ it in a context of a real application -
+demonstrating how different components can be actually configured 
+and employed,  and what benefits be achieved. Microbenchmarking of 
+communication primitives, regardless of how successful they are,
+is not sufficient to prove the overall idea that the paper
+is promoting. 
+
+The paper adds very little to what was already published on EPOS.
+Description of the EPOS communication system on Myrinet
+appeared in [10] and experimental results seem to be the
+same as in [8] - Figures 4 & 5. It would be interesting to see performance 
+for other EPOS communicators than just a datagram.
+
+
+
+_____________________________________________________________________
+
+
+
+      Workshop on Communication Architecture for Clusters (CAC '01)
+
+                       --Referee's Report--
+
+      Please return this report by November 28th, by e-mail to
+
+	cac01@cis.ohio-state.edu
+
+
+       Please do not alter any existing fields/labels in this form.
+
+Paper Number:  05
+
+Paper Title:     Application-oriented Communication Systems for 
+Clusters  of Workstations
+
+_____________________________________________________________________
+Place a number for each item below corresponding to your evaluation.
+(5=outstanding, 4=high, 3=medium, 2=fair, 1=poor)
+
+Interest/Importance to CAC:  3
+
+Quality of presentation:  3
+
+Technical contribution of paper:  2
+
+Confidence in your evaluation:  5
+_____________________________________________________________________
+(5=strong accept, 4=accept, 3=maybe, 2=reject, 1=strong reject)
+
+Recommended action for paper:  3
+_____________________________________________________________________
+
+Regardless of the recommendations, please state specific comments and
+suggestions that can be communicated to the author(s):
+
+Put comments here:
+
+This paper describes a method for constructing customized systems 
+using object-oriented design. Using this method, a communication
+system for Myrinet boards is  developed and evaluated (not yet
+complete) on a Myrinet-based cluster machine.
+
+The topic of customizable systems, including customizable 
+communication systems, and using object-oriented methods, has been
+investigated in much previous  work. There has been work on
+object-oriented construction of communication protocols, on  the
+construction of object-oriented operating systems, themselves
+constructed with OO  technologies,  etc. Much of such research has
+used meta-objects and/or reflection and/or  policy objects, the
+latter actually being much like the wrappers (scenario adapters),  to
+create customized systems. Compared to  such work, what appears to be
+slightly new in  this paper is its arguments about  family-oriented
+design and 'rich' interfaces. The  fact that good performance is
+attained for their communication system is not that surprising.  The
+same has been shown to hold for other  OO-based operating system 
+constructs...typically,  a couple of additional procedure calls and
+worse yet for communications, some extra copying  may result. Low
+level optimizations can sometimes remove  those, as well.
+
+
+_____________________________________________________________________
+
+
+
+Workshop on Communication Architecture for Clusters (CAC '01)
+
+                      --Referee's Report--
+
+     Please return this report by November 28th, by e-mail to
+
+        cac01@cis.ohio-state.edu
+
+
+      Please do not alter any existing fields/labels in this form.
+
+Paper Number:  05
+
+Paper Title: Application otiented communication systems for
+             Clusters of Workstations
+
+_____________________________________________________________________
+Place a number for each item below corresponding to your evaluation.
+(5=outstanding, 4=high, 3=medium, 2=fair, 1=poor)
+
+Interest/Importance to CAC:  3
+
+Quality of presentation:  3
+
+Technical contribution of paper:  2
+
+Confidence in your evaluation:  5
+_____________________________________________________________________
+(5=strong accept, 4=accept, 3=maybe, 2=reject, 1=strong reject)
+
+Recommended action for paper:  2
+_____________________________________________________________________
+
+Regardless of the recommendations, please state specific comments and
+suggestions that can be communicated to the author(s):
+
+Put comments here:
+
+The paper identifies inter-node communication as a performance
+constraint for cluster applications and suggests that application
+driven communications could be a means of significantly improving
+this condition. It includes strong but vague arguments alluding to
+inadequate performance while failing to provide concrete examples
+in the real world application space. In fact, there is not question
+that for some applications, inter-node communications is inadequate
+as the authors attest. But for many application algorithms,
+contemporary communications networks are proving sufficient. The
+authors spend the majority of the paper describing their approach
+without any quantitative evidence in support of the specific
+decisions being made. While showing some preliminary measurements
+of low level mechanisms, they present no quantitative evidence for
+either their premise or their solution. While there may be merit
+in the underlying work, the submission is premature and poorly
+presented to provide compelling or even interesting substantiation
+work. I would not suggest including this paper in the technical
+program.
+
+
+
+_____________________________________________________________________
+
+
+     Workshop on Communication Architecture for Clusters (CAC '01)
+
+                      --Referee's Report--
+
+     Please return this report by November 28th, by e-mail to
+		
+	cac01@cis.ohio-state.edu
+
+
+      Please do not alter any existing fields/labels in this form.
+
+Paper Number:  5
+
+Paper Title:     Application-Oriented Communication Systems for
+		 Clusters of Workstations
+
+_____________________________________________________________________
+Place a number for each item below corresponding to your evaluation.
+(5=outstanding, 4=high, 3=medium, 2=fair, 1=poor)
+
+Interest/Importance to CAC:  4
+
+Quality of presentation:  2
+
+Technical contribution of paper:  2
+
+Confidence in your evaluation:  4
+_____________________________________________________________________
+(5=strong accept, 4=accept, 3=maybe, 2=reject, 1=strong reject)
+
+Recommended action for paper:  2
+_____________________________________________________________________
+
+Regardless of the recommendations, please state specific comments and
+suggestions that can be communicated to the author(s):
+
+Put comments here:
+
+This paper proposes use of application-oriented system design
+techniques to construct application-specific communication systems for
+cluster platforms. The former techniques rely upon the existence of a
+set of (or a family of) "components" implementing certain well-defined
+interfaces and "scenarios" dictated by application requirements. The
+scenario drives the selection of components most suited for an
+application, with typically an automatic mechanism provided for either
+specializing the component to the scenario and/or efficiently
+assembling the required components to achieve exactly the subset of
+abstractions required by the application.
+
+The authors use this technique to support various communication
+abstractions (datagrams, streams, active messages, asynchronous remote
+copy, distributed shared memory) and "scenario adapters" such as
+access control, reliability, etc. The paper describes how the various
+components are efficiently implemented on the Myrinet platform, and
+discusses some preliminary experiences with combining them into a
+couple of application-specific runtime systems.
+
+The main problem with the paper is that although the premise of
+generating custom run-time systems from a set of orthogonal components
+specialized for scenarios is an interesting one, the concrete example
+of communication systems does not demonstrate the benefits of this
+approach very well:
+
+1. It is not immediately obvious how the scenario adapters (protected,
+   reliable, flawless, shared) can be implemented independent of the
+   communication abstractions (datagram, stream, etc.). If the
+   implementation of the scenario adapters needs to be customized for
+   each abstraction, then does the component-based technique offer any
+   advantage in programming effort?
+
+2. The notion of an "inflated interface" is reasonable if it provides
+   a uniform abstraction to the application that isolates the
+   programmer from having to worry about implementation details. At
+   implementation time, the interface can be realized by the component
+   best suited to application requirements and underlying hardware
+   characteristics. However, the example given in Section 3 is just
+   the union of the interfaces supported by the components: the
+   programmer still needs to make a decision about which of the
+   abstractions to use.
+
+3. An argument put forward by the authors is that this technique
+   results in a compact runtime system, because only the used
+   components are included. This argument is a bit misleading because
+   the unused components are likely to have only a negligible impact
+   on I-Cache performance.
+
+4. The authors do not provide any evidence of how a component
+   implementation was specialized to application requirements (as
+   opposed to just selecting the components required by the
+   application): this could have actually resulted in significant
+   savings, e.g., by customizing buffer sizes in the implementations
+   to the message sizes used by the application. The authors should
+   look at the "CustoMalloc: efficient synthesized memory allocators"
+   work by Dirk Grunwald and Ben Zorn @ Univ. of Colorado for a
+   pointer to some very relevant related work. 
+
+
+
+--------------70AA2DC27E207118343CFEF3--
+
+

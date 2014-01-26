@@ -1,0 +1,260 @@
+
+\documentclass{llncs}
+
+\usepackage[latin1]{inputenc}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{verbatim}
+
+\newcommand{\fig}[4][htbp]{
+  \begin{figure}[#1] {\centering\scalebox{#2}{\includegraphics{fig/#3}}\par}
+    \caption{#4\label{#3}}
+  \end{figure}
+}
+\newcommand{\figR}[5][htbp]{
+  \begin{figure}[#1]{\centering\scalebox{#2}{\includegraphics[angle=#5]{fig/#3}}\par}
+    \caption{#4\label{#3}}
+  \end{figure}
+}
+\newcommand{\figTC}[4][htbp]{
+  \begin{figure*}[#1] {\centering\scalebox{#2}{\includegraphics{fig/#3}}\par}
+    \caption{#4\label{#3}}
+  \end{figure*}
+}
+
+\newcommand{\epos}{\textsc{Epos}}
+
+\begin{document}
+
+\title{An application-specific implementation of IEEE802.15.4 MAC for WSN}
+
+\author{Tiago Rogério Mück \and Rodrigo Vieira Steiner \and Antônio Augusto Fröhlich}
+
+\institute{
+Laboratory for Software and Hardware Integration \\
+Federal University of Santa Catarina \\
+Florian\' opolis, SC, Brazil \\
+\{tiago,rodrigo,guto\}@lisha.ufsc.br
+}
+
+\mainmatter
+
+\maketitle
+
+\begin{abstract}
+This paper presents a configurable, low-overhead implementation of the IEEE802.15.4 MAC for Wireless Sensor Networks (WSN) that can support a large variety of application classes. We accomplished this through C-MAC, a configurable protocol for medium access control. To improve C-MAC configurability we analyzed existing WSN MACs categories, which enabled us to evaluate new configuration parameters. The experimental results shows that we were able to achieve different network characteristics for IEEE802.15.4 by changing the C-MAC configuration points.
+\end{abstract}
+
+\section{Introduction} % Rodrigo
+\label{INTRO}
+Wireless sensor networks are highly dependent on efficient Medium Access Control (MAC) protocols to make effective use of the few resources available on traditional motes, bandwidth and energy in particular, but also memory and processing power. This assertion is confirmed by the large number of MAC protocol proposals available from the literature.
+
+Nevertheless, most of the optimizations proposed by specific MAC protocols focus on specific segments of the design space, so that what is considered optimization by one class of applications can represent a strong limitation for others. For instance, a protocol optimized for massive data dissemination on a firmware update operation (i.e. short, reliable, low-latency multicast) is certainly not the best choice for sporadic environment monitoring (i.e. long-lasting, sporadic unicasts).
+
+While several protocols have been designed and implemented for medium access control in wireless sensor networks \cite{ye:2002, polastre:2004, vandam:2003, ieee:2006}, comparisons in different application scenarios show that there is no optimal protocol for wireless sensors since existing protocols do not provide adequate configuration mechanisms for the application to configure the communication channel.
+
+\begin{comment}
+In order to provide applications an adequate configuration mechanism, we propose C-MAC \cite{wanner:2007}, a highly configurable MAC protocol. C-MAC works as a framework of medium access control strategies that can be combined to produce application-specific protocols. Applications may adjust different communication parameters, such as duty cycle and contention mechanism, to instantiate different communication protocols. C-MAC's meta-programmed implementation yields smaller footprint and higher performance than equivalent protocols for wireless sensor networks. 
+
+In this article, we implemented and evaluated EPOS C-MAC in the scope of EPOS-Mote project. Through the formalization of the main categories of MACs we were able to improve C-MAC giving it a greater level of configurability. The EPOS-Mote devices used in this work feature an IEEE802.15.4 compliant radio, which enabled us to evaluate additional configuration parameters, such as beaconing and forward error correction.
+\end{comment}
+
+In this article, we implemented and evaluated EPOS C-MAC \cite{wanner:2007}, a highly configurable MAC protocol, in the scope of EPOS-Mote project. C-MAC works as a framework of medium access control strategies that can be combined to produce application-specific protocols. Applications may adjust different communication parameters, such as duty cycle and contention mechanism, to instantiate different communication protocols. C-MAC's meta-programmed implementation yields smaller footprint and higher performance than equivalent protocols for wireless sensor networks. Through the analysis of the main categories of MACs we were able to improve C-MAC giving it a greater level of configurability. %The EPOS-Mote devices used in this work feature an IEEE802.15.4 compliant radio, which enabled us to evaluate additional configuration parameters, such as beaconing and forward error correction.
+
+In Section \ref{MAC_WSN} we discuss MAC protocols for wireless sensor networks. In Section \ref{CMAC} we present the C-MAC framework. We present the EPOS Mote project and evaluation results in Section \ref{EPOS_MOTE} and \ref{RESULTS}. This paper concludes with Section \ref{CONCLUSION}.
+
+\section{MAC protocols for WSN} % Rodrigo
+\label{MAC_WSN}
+A Medium Access Control (MAC) protocol decides when a network node may access the medium, and tries to ensure that different nodes do not interfere with each other's transmissions. The MAC protocol is also responsible for treating or signaling collisions to the upper layers in the protocol stack.
+
+In the context of wireless sensor networks, the MAC protocol should use the radio as efficiently as possible, even compromising performance (latency, throughput and reliability) for energy efficiency (power consumption). To accomplish this, these protocols are designed specifically to diminish the main sources of power overhead, which are \cite{langendoen:2005}:
+
+\textbf{Idle listening:} If a node does not know when it will receive messages from one of its neighbors, it will have to keep the radio turned on in receive mode all the time. As the cost of reception is much greater than the cost of standing-by, this is perhaps the greatest source of overhead, and thus the main target of optimizations.
+
+\textbf{Collisions:} If two nodes transmit at the same time and interfere with each others' transmission, data is corrupted, both transmissions must be repeated, and the energy spent on the first tries is wasted.
+
+\textbf{Overhearing:} As the radio channel is a shared medium, a receiver may hear packets which are not directed to itself.
+
+\textbf{Traffic fluctuations:} When a phenomenon is detected by many neighboring nodes in a densely installed network, the nodes will compete for the radio channel, and will waste power while waiting for a transmission window.
+
+Existing MAC protocols for wireless sensor networks can be classified, according with its functionality, into four categories \cite{klues:2007}: channel polling, scheduled contention, time division multiple access, or hybrid.
+
+Nodes executing a channel polling protocol will follow the state machine presented in Figure \ref{bmac}. They will periodically turn on their radios to check for activity, which is known as Low Power Listening (LPL). If any activity is detected, the radio will be kept on, in order to receive a packet. Otherwise, the radio will be immediately turned off. Communication occurs when a sender node verifies that the channel is free, through Clear Channel Assessment (CCA), and starts to transmit the preamble. Receivers will notice radio activity and will be prepared to receive the data. An example of this kind of protocol is the B-MAC \cite{polastre:2004}. B-MAC main characteristics is that all packets preamble must be greater than, or equal to, the inactivity period in which the radio will be off in a receiver node. By this requirement, the protocol ensures that a receiver will wake up and detect radio activity at least once before the sender finishes transmitting the preamble. Another example is the X-MAC \cite{buettner:2006}, which is an improvement of B-MAC. X-MAC piggybacks the receiver address into the preamble, this way solving the overhearing problem. Since a receiver can detect if the packet is destined to itself before actually receiving it, it can either turn off the radio (case the packet is not destined to it) or send an acknowledgment to the sender, which will stop sending the preamble and start to send the data.
+
+% TODO ack received preamble
+\fig{.28}{bmac}{Channel polling based protocols state machine.}
+
+Scheduled contention protocols program the time in which neighboring nodes must wake up in order to communicate. At the beginning of each active period neighboring nodes must trade additional information in order to keep synchronized. After that, nodes willing to transmit data will contend for channel access, through Carrier Sense Multiple Access (CSMA). Figure \ref{smac} shows the state machine of scheduled contention based protocols. Examples of this kind of protocol are S-MAC \cite{ye:2002}, which has a fixed duty cycle, and T-MAC \cite{vandam:2003}, which has an adaptive duty cycle.
+
+%TODO NÂO TEM PREAMBULO????!!!!???? + CSMA-CA não CCA
+\fig{.28}{smac}{Scheduled contention based protocols state machine.}
+
+Time Division Multiple Access (TDMA) protocols also program the time in which a node must wake up in order to communicate. The big difference is that each node, not a group of nodes, gains a specific time slot to transmit. This way, a node does not have to contend for channel access and there are no collisions. Nonetheless, these optimizations come at a price, which is lower throughput. Since a node can only transmit during its own time slot, it will have to remain in silence even if other nodes are not transmitting during their own slots. Also this kind of protocol is sensitive to topology changes, and needs to reallocate the time slots whenever it happens. Figure \ref{tdma} shows the state machine of a TDMA-based protocol.
+%The protocol developed by Sohrabi and Pottie \cite{sohrabi:1999}
+
+\fig{.28}{tdma}{TDMA-based protocols state machine.}
+
+Hybrid protocols mix some of the characteristics of two or more categories. An example is Z-MAC \cite{rhee:2008}, which combines a TDMA-based slot allocation for all nodes, but allows nodes to contend for channel access during other nodes slots using a channel polling approach.
+
+Another kind of hybrid protocol is the IEEE802.15.4. It is a standard that provides specifications for both the physical and the MAC layer \cite{ieee:2006}. The MAC layer control the access to the physical layer in two different ways. On it's basic operating mode, it behaves like an channel polling MAC, using CSMA-CA and acknowledgement packets to handle collisions. On the other operating mode, known as beacon-enabled network, the IEEE802.15.4 works as scheduled contention MAC with TDMA features, by dividing the nodes active cycle in time slots. A parcel of the time slots are allocated to specific nodes, and it allows all the nodes to contend for the non-allocated slots. Also, on a beacon-enabled network, the devices are divided into FFDs (\emph{Full Function Device}) and RFDs (\emph{Reduced Function Device}), where a RFD can only communicate with a FFD, and only a FFD can become the network coordinator (the node that generates beacons to synchronize the nodes duty cycle).
+
+
+\section{C-MAC framework} % Rodrigo
+\label{CMAC}
+C-MAC\cite{wanner:2007} is a medium access control protocol for wireless sensor networks equipped with low power radio transceivers. It allows the configuration of several communication parameters (e.g. synchronization, data detection, acknowledgments, contention, sending and receiving), in order to adjust the protocol to the needs of different applications. C-MAC is implemented over EPOS~\cite{frohlich:2001}, an operating system based on the \emph{Application-driven Embedded System Design} (ADESD) methodology~\cite{frohlich:2001}. Its configurable characteristics are instantiated through static meta-programming and function inlining, achieving small memory footprint and high performance.
+
+The list of configurable points in C-MAC assembled on the previous proposal treated some of the protocol's characteristics (e.g. synchronization, contention and error handling) in a very macroscopic way. Through the analysis of the main families of protocols, we were able to expand C-MAC and provide a larger range of configurable points. The main C-MAC configuration points now include:
+
+\textbf{Physical layer configuration:} These are the configuration points defined by the communication hardware (e.g. frequency, transmit power, date rate).
+
+\textbf{Synchronization and organization:} Provides mechanisms to send or receive synchronization data to organize the network and synchronize the nodes duty cycle.
+
+\textbf{Collision-avoidance mechanism:} Defines the contention mechanisms used to avoid collisions. May be comprised of a carrier sense algorithm (e.g. CSMA-CA), the exchange of contention packets (\emph{Request to Send} and \emph{Clear to Send}), or a combination of both.
+
+\textbf{Acknowledgment mechanism:} The exchange of \emph{ack} packets to determine if the transmission was successful.
+
+\textbf{Error handling and security:} Determine which mechanisms will be used to ensure the consistency of data (e.g. CRC check) and the data security.
+
+C-MAC is implemented through a state machine that is activated by send / receive requests, or it is activated periodically by a timer interrupt if the MAC doesn't have a full duty cycle. Figure \ref{cmac_new_lite} shows an overview of the C-MAC's state machine. The protocol remains on the \emph{OFF} state, where the radio is powered off, until one of the previous events triggers the transition to the \emph{SYNC} state. On the \emph{SYNC} state the synchronization and organization characteristics of the protocol are implemented. On the receive side, the spectrum is scanned for data packets preambles on the \emph{LPL} (\emph{Low Power Listen}) state, and after the data is received (\emph{RX} state), it goes through the error handling and security mechanism (\emph{UNPACK} state) and an acknowledgement packet is transmitted (\emph{ACK TX} state). On the transmit side, error handling and security are appended to the packet on the \emph{PACK} state. The collision-avoidance mechanism implemented on the \emph{CONTENTION} state checks if the channel is idle and the data is transmitted. The \emph{ACK RX} state implements acknowledgement packets reception.
+
+\fig{.50}{cmac_new_lite}{C-MAC state machine.}
+
+The characteristic of each state can be configured or removed to match the target protocol specification. Due to the use of function inlining and static meta-programming, when a certain characteristic is not selected, no overhead associated with it is added to the final object code of the protocol. The characteristics introduced in C-MAC to allow the implementation of a configurable application-specific IEE802.15.4 were mainly new configuration points inside the \emph{SYNC} state to provide the nodes synchronization and organization using network beaconing. For both the beacon-enabled and beacon-disabled network, CSMA-CA was added to the \emph{CONTENTION} state.
+
+\section{The EPOS-Mote} % Tiago
+\label{EPOS_MOTE}
+
+The goal of the EPOS-Mote project is to develop an \epos-based WSN node focused on environmental monitoring. The nodes have the following main requirements:
+
+\textbf{Low energy consumption:} Usually it is not practicable to often send teams to the field to replace the nodes batteries, or the nodes may become inaccessible for long time periods (e.g. nodes inside bags of coffee monitoring its storage conditions).
+
+\textbf{Environmental monitoring features:} The nodes must feature sensors to measure the environmental conditions, such as temperature, humidity, etc.
+
+\textbf{Environmental integration:} The environment should not be affected by the nodes presence and vice-versa, so the nodes must be as small, salubrious and strong as possible.
+
+Figure \ref{eposmote_block_diagram} shows the overview of the EPOS-Mote's architecture. Its hardware is based on the ATmega1281~\cite{atmel:ATMEGA1281} and AT86RF230~\cite{atmel:AT86RF230} 
+platforms from Atmel. The ATmega1281 microcontroller has 128 Kbytes of programmable flash and 8 Kbytes of data memory. It offers a low-power and low-cost solution with reasonable performance. The AT86RF230 radio is a low-power IEEE802.15.4 compliant hardware that works on the 2.4 GHz frequency range with O-QPSK modulation. AT86RF230 integrates most of the components required for communication, thus allowing a small hardware project. A SHT11 sensor is used to measure the environment temperature and humidity. Yet expensive, this sensor is used due to its very small size. Figure \ref{eposmote_pound} shows the final hardware. The EPOS-Mote is littler than a £2 coin.
+
+\fig{.40}{eposmote_block_diagram}{Architectural overview of EPOS-Mote.}
+
+\fig{.11}{eposmote_pound}{EPOS-Mote side-by-side with a £2 coin.}
+
+\section{Experimental results}
+\label{RESULTS}
+
+In order to evaluate the new configuration points introduced into C-MAC we implemented a configurable IEEE802.15.4 MAC on the EPOS-Mote. C-MAC was evaluated by varying the following parameters available on IEEE802.15.4:
+
+\begin{itemize}
+ \item Full Beacon-enabled.
+ \item Full Non-beacon.
+ \item Non-beacon without CSMA-CA.
+ \item Non-beacon without ACK.
+ \item Non-beacon without both CSMA-CA and ACK.
+\end{itemize}
+
+We used an network topology where one node is defined as the coordinator and the other nodes are placed around the coordinator in a way that each node is within range of other nodes, and may potentially interfere in the communications of every other node. This topology was configured to simulate a typical environmental monitoring application, where the coordinator receives data transmitted periodically by other nodes monitoring the environment. Other important parameters used in the experiments setup are shown in Table \ref{results_table_params}. The \emph{beacon order} and \emph{superframe order} parameters are used only on the beacon-enabled configuration to control the nodes duty cycle according to the specifications in the IEEE802.15.4 standard~\cite{ieee:2006}.
+
+%\fig{.5}{results_net_topology}{Network topology used on the evaluation.}
+
+\begin{table}
+\caption{Configuration parameters used on the experiments}
+\label{results_table_params}
+\centering
+\begin{tabular}{ll}
+\hline\noalign{\smallskip}
+Parameter & Value \\
+\noalign{\smallskip}
+\hline
+\noalign{\smallskip}
+Compiler & GCC 4.0.2 \\
+Microcontroller clock & 1 MHz \\
+Packet size & 64 bytes \\
+TX power & 3 dBm \\
+Beacon order & 7 \\ 
+Superframe order & 4 \\ 
+Duty cycle & 12\% \\ 
+\hline
+\end{tabular}
+\end{table}
+
+
+To analyze memory footprint we used the avr-size tool, from GNU Binutils version 2.19. The results for each configuration used can be seen in Table \ref{results_table_mem}. As expected, the more complex the configuration, the more worse was it footprint. Thus, the configuration with no beacons, CSMA and ACK yielded the best footprint, while the Full/Beacon-enabled configuration yielded the worst. Nevertheless, C-MAC's meta-programmed implementation, along with EPOS's component architecture also delivered equivalent functionality with smaller footprint than other known MAC protocols for WSN~\cite{polastre:2004, buettner:2006, ye:2002, vandam:2003}.
+% As for the data area, which is equal for all configurations, this is due to a implementation issue, but it can be even improved, which is already in our future work list.
+%In order to evaluate the memory used by local variable, consider measuring the max stack size or something like that
+
+%\fig{.6}{results_plot_mem}{Memory footprint}
+\begin{table}
+\caption{Memory footprint of C-MAC on EPOS}
+\label{results_table_mem}
+\centering
+\begin{tabular}{lcc}
+\hline\noalign{\smallskip}
+Configuration & Code (bytes) & Data (bytes) \\
+\noalign{\smallskip}
+\hline
+\noalign{\smallskip}
+No CSMA-CA / ACK & 3248 & 185 \\
+No ACK & 3572 & 185 \\ 
+No CSMA-CA & 3768 & 202 \\ 
+Full & 4092 & 202 \\ 
+Full/Beacon-enabled & 5344 & 215 \\
+\hline
+\end{tabular}
+\end{table}
+
+To evaluate latency, we measured the round-trip time of a packet between two nodes. The results in Table \ref{results_table_latency} shows that the latency increases as more features of the protocol are enabled. On a beacon enabled network, the beacon order and superframe order parameters shown in Table \ref{results_table_params} results in a duty cycle of 12\% with a sleep period of about 2 seconds, which is the dominating factor when this configuration is used. On the other side the time spent with idle listening is reduced, thus reducing the energy consumption as can be seen in Figure \ref{results_plot_energy}.
+
+%\fig{.6}{results_plot_latency}{Latency}
+\begin{table}
+\caption{Round-trip time of a packet between two nodes}
+\label{results_table_latency}
+\centering
+\begin{tabular}{lc}
+\hline\noalign{\smallskip}
+Configuration & RTT (ms)\\
+\noalign{\smallskip}
+\hline
+\noalign{\smallskip}
+No CSMA-CA / ACK & 60 \\
+No ACK & 68 \\ 
+No CSMA-CA & 71 \\ 
+Full & 79 \\ 
+Full/Beacon-enabled & 1882 \\
+\hline
+\end{tabular}
+\end{table}
+
+Figure \ref{results_plot_throu} shows the variations of the average throughput as the number of nodes on the network increases. The overall throughput improves as the features of the protocol are removed and presents small variations as the number of nodes increase, this is due to the low network traffic and the non-coincidence of the period of transmission of the nodes. The exception is when we enable the use of ACK packets and disable CSMA-CA. With this configuration there is a high packet loss due to collisions and the retransmissions ends up reducing the protocol's performance. 
+
+\fig{.6}{results_plot_throu}{Average network throughput (logarithmic scale).}
+
+The low duty cycle used on the Full/Beacon-enabled configuration yielded the worse throughput. This configuration also yielded the biggest performance deterioration with the increase on the number of nodes. This is due to the fact that all nodes try to communicate at the same small period, increasing the chance of collisions and the packet loss rate, as can be seen in Figure \ref{results_plot_pkt_loss}. For the configurations without beacon synchronization, the packet loss rate varies similar to the throughput.
+
+\fig{.6}{results_plot_pkt_loss}{Average packet loss rate.}
+
+C-MAC's energy efficiency were evaluated by measuring the energy consumed per byte received at the coordinator. Figure \ref{results_plot_energy} shows the results. As expected, the configurations with beacon synchronization yielded the best results through the synchronization of the nodes duty cycle. Except for the beacon-enabled configuration, the energy received per byte decreases as the number of nodes increases. This happens because the main source of energy consumption is the idle listening, keeping the total energy consumed uniform as the topology changes. As the network traffic increases, the average energy consumed per byte also decreases. This is not the case on the beacon-enabled configuration, showing that it successfully treated the idle listening problem.
+
+\fig{.6}{results_plot_energy}{Energy consumed per byte received on the coordinator.}
+
+With C-MAC, it's possible to adjust the protocol according to the application's requirements. The results showed that we can easily control the trade-offs among memory footprint, latency, throughput, reliability and energy consumption, by using different configurations of IEE802.15.4. For example, on environments where there are a big number of nodes transmitting very often, but there is no need to guarantee the delivery of messages, an implementation without acknowledgment packets can be used to increase the network throughput. On environments that contains a big number of nodes and they will transmit as little as possible to save energy, a configuration with CSMA-CA and acknowledgment packets can be used to guarantee the message exchange. On applications with more tolerant energy consumption requirements, the beacons can be disabled to obtain higher throughput and lower latency.
+
+\begin{comment}
++ Describe the experiments
+- Picture of the network topology.
+- Number of nodes varies from to 2 to x (the picture must express this variation)
+- Justify why the topology was used.
+- Talk about the evaluated metrics (memory footprint, latency and throughput, loss rate and energy consumption) (may this should go to the above paragraph or have its own ???)
+
++ Comments about the results
+- Talk about the trade-offs we can have among the evaluated metrics by using different configurations of IEE802.15.4
+- Talk about examples of apps that will benefit from a application-specific implementation of IEEE802 (will be hard to find these examples)
+\end{comment}
+
+\section{Conclusion} % Tiago
+\label{CONCLUSION}
+This paper presented an application-specific implementation of IEEE802.15.4 MAC using the C-MAC framework. Through the analysis of the main classes of MAC protocols for WSN, we were able to expand C-MAC's configuration points in order to cover a wider range of protocols. We evaluated memory footprint, latency, throughput, packet loss rate and energy consumption of C-MAC by varying the main configuration points of IEEE802.15.4. The results showed that C-MAC's modular project and implementation yielded excellent efficiency and allowed the implementation of a configurable IEEE802.15.4 that trades off performance and energy consumption according to the applications requirements.
+
+\bibliographystyle{IEEEtran}
+\bibliography{references.bib}
+
+\end{document}

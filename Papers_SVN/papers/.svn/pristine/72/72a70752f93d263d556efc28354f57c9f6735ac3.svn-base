@@ -1,0 +1,13 @@
+% Apresentação do ambiente experimental.
+
+\note{Exemplos implementados, testados e medidos conforme...}
+
+% Exemplo simples para demonstrar o uso do sistema
+%\subsection{Termômetro}
+\label{sec:termometro}
+\input{termometro}
+
+% Exemplo complexo para demonstrar a eficácia do sistema
+%\subsection{Ponte FM/GPRS para Redes de Sensores Sem Fio}
+%\label{sec:ponte_rssf}
+%\input{ponte_rssf}

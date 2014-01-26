@@ -1,0 +1,92 @@
+Dear Mr. Tiago Mück,
+
+I have received the reviews on your submission to TODAES.
+Unfortunately, the reviewers generally agree that the paper should not be considered for publication in TODAES.
+
+Although the basic idea behind the paper is assessed to be valuable, there is a fundamental lack of a convincing comparison framework with alternative scientific and/or industry-relevant approaches to demonstrate the reduction of design effort in more quantitative and convincing terms.
+
+Attached are detailed comments from the reviewers.
+
+Thank you for considering publication in ACM TODAES.
+
+Sincerely,
+
+Dr. davide bertozzi, AE TODAES
+
+
+---------------------  REVIEWER COMMENTS  --------------
+
+
+Referee: 1
+Comments to the Author
+The topic of the paper is interesting and relevant for other researchers and practitioners in the field. However, I have a number of concerns with the presentation and the evaluation of the approach. All the issues might be fixed with some changes and extra pages, but a major revision would be required.
+
+Presentation
+------------
+
+1. My general impression is that there is a lack of focus in the paper. For example, section ("related work") thoroughly describes AOP design and implementation approaches that can be used on the  hardware level. However, section 3.1 then jumps to configurable features, which is a different problem. It takes 1.5 pages until you slowly return to "aspects".
+
+2. Do readers who are not familiar with AOP really understand what you are talking about? I don't think so. Wouldn't it be possible to combine a short introduction to AOP with a better motivation of your work?
+
+Evaluation
+----------
+
+There are two problems.
+
+1. The level of detail of your case study is not sufficient. I am wondering whether the template code is still readable and whether it is a tedious tasks to write down all the scenario adapters. Please
+analyse how much glue code a developer would have to write with your design methodology. Maybe you could also present the code of one scenario adapter as an example. This might also help to gain evidence
+that there is an "increased level of flexibility and reusability".
+
+2. You should compare your approach with at least one from the related work section. In section 3.3 you argue that there are advantages over "classic AOP". Are there also disadvantages? You could, for instance, follow the AspectC++ approach and run the woven code in the simulator if it can't be synthesized. Then you could compare code quality and performance.
+
+Details
+-------
+
+Page 1, line 34: Does using SystemC really mean OOP? What about dynamic binding? Maybe you could phrase that more carefully?
+
+Page 2, line 15; page 3, line 10: This year's AOSD MISS workshop had some more papers on AOSD and hardware descriptions. These might be relevant for you.
+
+Page 6, line 17: I don't understand what you mean by "pointcuts are defined by the scenario adapter".
+
+Page 8, line 9: "schedule" -> "schedules"
+
+Page 8, line 41: "aspects classes" -> remove "s" or add "'"?
+
+Page 10, line 16: "Another advantage" is not the right term to use here. The previous paragraph describes shortcomings of ADESD and a way to "circumvent this limitation". It is no "advantage".
+
+Page 10, line 20: Does AspectC++ *always* introduce dynamic pointers? As far as I understood, simple aspects lead to simple code transformations.
+
+Page 10, line 21: Space missing in front of "[OSCI 2010]"
+
+Page 10, line 30: "results *of* the evaluation of ..."
+
+Page 10, line 48: "most used" -> "most frequently used"
+
+Page 10, line 49: one space too much
+
+Page 11, line 51: "The size debugging"?
+
+Page 12, line 17: "scenarios adapters" -> remove "s"?
+
+Page 13, line 46: I haven't seen the "domain engineering strategy", but this might be related to the lack of focus mentioned above.
+
+
+Referee: 2
+Comments to the Author
+In your case study you refer to area and timing alone. How about code size?
+LOC is a poor metric for design complexity - but at least an indication.
+The AOP code is not exactly easy to read - especially for design engineers.
+
+In your evaluation you use Celoxica's Agility compiler. That product is not on the market any more. For a meaningful evaluation you should better go for a more mainstream solution. (Forte Cynthesiser, C-Silicon, CatapultC, or very new AutoESL)
+
+
+Referee: 3
+Comments to the Author
+The paper has the undoubtful merit of leveraging AOP to ease/enable systemc-based hardware design and to some extent to prove that capability of the proposed approach to materialize negligible area overhead and path delay degradation. However, the paper is seriously lacking a convincing demonstration of the reduced design effort with respect to alternative approaches, which do exist. In particular, the following issues should be addressed:
+- authors use a small subset of SystemC for the sake of low level synthesis. This subset should be compared with that of alternative scientific approaches or of products with practical industrial relevance. Moreover, authors should discuss about the feasibility of extending the abstraction level of the System modeling style, since in recent years industry is slowly shifting away from SystemC RTL coding and fostering mainly TLM.
+- The reviewer encourages authors to consider more recent tools than the Agility Compiler for evalaution, which is not maintained any more (e.g. , CatapultC).
+- the case study should be more thoroughly investigated, given its low complexity. For instance: how much glue code should the user write?
+- again, the case study should undergo alternative approaches with practical relevance, maybe inspired by the previous work section or by industry-relevant approaches.
+
+As regards paper presentation, authors should try to bridge the gap with unexpert readers (of AOP) in the initial part of the paper, and to provide more detailed insights in the latter part, where this really matters since a convincing assessment of design effort reduction is mandatory. From this respect, I wonder whether readers can really take profit by reading AOP code.
+Finally, authors should more clearly differentiate this work from their past contributions.

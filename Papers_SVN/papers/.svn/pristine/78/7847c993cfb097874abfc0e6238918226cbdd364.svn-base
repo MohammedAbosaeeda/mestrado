@@ -1,0 +1,328 @@
+\section{Controle de acesso ao meio (MAC)}
+\label{sec:MAC}
+
+%introdução
+Rádios de banda estreita suportam, tipicamente, esquemas simples de modulação,
+deixando a cargo do software o controle da comunicação, o que incorre em maior
+custo de processamento. Por outro lado, rádios de banda larga empregam técnicas
+de modulação sofisticadas, como \emph{Direct-Sequence Spread Spectrum} (DSSS) e
+\emph{Phase Shift Keying} (PSK), que são mais resistentes a ruído e
+interferências, mas apresentam pouca flexibilidade e impõem sobrecustos em
+termos de consumo de energia. Neste contexto, rádios de baixa potência se
+apresentam como uma alternativa viável para comunicação sem-fio para sistemas
+embarcados como \rssf.
+
+Nesta seção faremos uma breve revisão de técnicas de controle de acesso ao meio
+para redes sem-fio. Também serão apresentadas alternativas existentes de
+implementações de MACs específicos para aplicações de \rssf.
+
+%MACs para RSSF
+\subsection{Protocolos de acesso ao meio}
+
+\Rssf apresentam um canal de comunicação único e compartilhado em que duas ou
+mais transmissões podem ocorrer simultaneamente, gerando interferência e
+invalidando a comunicação. Para viabilizar a comunicação neste meio, um
+\emph{protocolo de múltiplo acesso} se faz necessário. Este tipo de protocolo
+implementa um algoritmo distribuído de controle de acesso ao meio (MAC -
+\textit{Medium Access Control}) qeu determina como as estações compartilha o
+canal, ou seja, determinam quando uma estação pode iniciar uma transmissão.
+
+Abordagens de MAC para controle de acesso múltiplo podem, geralmente, ser
+classificados em três classes:
+\begin{itemize}
+  \item \textbf{Particionamento de canal:} estas abordagens dividem o canal
+  disponível e aloca uma parte do canal para uso exclusivo de um determinado
+  nodo. Exemplos deste tipo de abordagem é o FDMA, que divide o canal em faixas
+  de frequência, e o TDMA, que divide o canal em fatias de tempo.
+  \item \textbf{Acesso aleatório:} estas abordagens permitem a ocorrência de
+  colisões. Diferentes abordagens constituem diferentes modelos pelos quais é
+  possível, ou não, identificar, recuperar, evitar, ou eliminar colisões.
+  \item \textbf{Passagem de permissão:} nestes protocolos, o compartilhamento do
+  canal é estritamente coordenado para evitar colisões. Normalmente implementam
+  técnicas de passagem de ficha (\textit{token-passing}).
+\end{itemize}
+
+É comum que implementações de protocolos de controle de acesso ao meio utilizem
+mais de uma destas técnicas em conjunto, permitindo uma melhor exploração do
+canal disponível e oferecendo diferentes características de transmissão de dados
+às aplicações que o utilizam.
+
+\subsubsection{TDMA - Time Division Multiple Access}
+
+No TDMA, dispositivos compartilham o mesmo canal de frequência pela divisão do
+sinal em fatias de tempo (\emph{time slots}). Neste protocolo, cada nodo de uma
+rede transmite, exclusivamente, dentro da fatia que foi previamente alocada a
+ele. Esta tecnologia é utilizada, por exemplo, em sistemas 2G de telefonia
+celular digital, como no GSM. O emprego de \emph{time slots} também é bastante
+explorada em \rssf, especialmente em aplicações que querem evitar contenção de
+dados e colisões. Uma abordagem TDMA é utilizada pelo MAC do padrão IEEE
+802.15.4 para em seu período livre de contenção (CFP - \textit{Contention-Free
+Period}).
+
+Uma característica peculiar das abordagens TDMA diz respeito a necessidade de
+manter a sincronização dos nodos na rede de modo a garantir que todos concordam
+com as bordas das fatias de tempo do protocolo. No padrão IEEE 802.15.4 esta
+sincronização é realizada através de uma técnica chamada \emph{beaconing}, em
+que um nodo ``mestre'' emite, periodicamente, \emph{beacons}, pacotes especiais
+que contêm a configuração do canal (e.g., quais fatias de tempo estão alocadas
+para quais nodos), e também são utilizados como baliza para determinar a borda
+de início de um período de transmissão no protocolo.
+
+\subsubsection{FDMA - Frequency Division Multiple Access}
+
+No FDMA, nodos compartilham um canal dividindo o espectro do canal em bandas de
+frequência. Através desta divisão, cada banda de frequência pode ser alocado a
+um único nodo, ou a um conjunto diferente de nodos, eliminando ou, ao menos,
+diminuindo a ocorrência de contenção. A divisão do espectro de frequência em
+vários canais é bastante utilizado em redes sem-fio, inclusive sendo seu uso
+previsto nos padrões IEEE 802.11 (WiFi) e IEEE 802.15.4.
+
+Um dos principais problemas relacionados ao FDMA é o \textit{crosstalk}. Este
+fenômeno ocorre em algumas situações em que o sinal transmitido em uma banda de
+frequência interfere no sinal de uma banda de frequência adjacente. Este
+problema é geralmente causado por erros ou na emissão do sinal no transmissor ou
+na filtragem no receptor, e geralmente é minimizado com o emprego de
+dispositivos moduladores e demoduladores de melhor qualidade.
+
+\subsubsection{ALOHA e \textit{slotted} ALOHA}
+
+O protocolo ALOHA (também referenciado como ALOHA Puro, ou \textit{Pure ALOHA})
+foi implementado como protocolo de controle de acesso ao meio da ALOHAnet, que
+foi a primeira demonstração de uma rede sem-fio de dados~\cite{Abramson:1970}. O
+protocolo original (Puro) é bem simples: se um nodo tem dados a enviar, ele
+envia; se há uma colisão, o nodo tenta novamente no futuro. No ALOHA, portanto,
+não há verificação de sinal ocupado. Outro problema do protocolo advém da
+determinação de quanto tempo um nodo deve esperar antes de efetuar uma
+retransmissão, ficando a qualidade do canal de comunicação dependente da
+eficiência do algoritmo de \textit{backoff} utilizado.
+
+Para reduzir o volume de colisões do ALOHA há uma variação chamada
+\textit{slotted} ALOHA. Nesta variação, o tempo é dividido em fatias de tamanho
+igual, que também deve equivaler ao tempo máximo de transmissão de um pacote na
+rede. Nodos que desejam transmitir iniciam transmissão apenas no início de cada
+fatia de tempo, garantindo que apenas ocorrerão colisões caso dois nodos tenham
+dados prontos para enviar no início da fatia de tempo. Se um nodo inicia a
+transmissão de uma pacote sozinho no início de uma fatia de tempo é garantido
+que terminará a transmissão sem colisão. Como no ALOHA Puro, a eficiência do
+algoritmo de \textit{backoff} continua sendo de crucial importância para impedir
+que colisões ocorram com muita frequência.
+
+
+\subsection{CSMA - Carrier Sense Multiple Access, e variações CD e CA}
+
+O CSMA é um protocolo MAC probabilístico. Este protocolo verifica, sempre, o
+estado da rede no momento do envio de um pacote, ou seja, ele apenas transmite
+se o meio estiver livre. Caso o dispositivo encontre o meio livre, ele transmite
+seu pacote com uma probabilidade $p$, caso esteja ocupado, ele aguara por um
+período de tempo e tenta novamente. No momento da transmissão, ``transmitir com
+uma probabilidade $p$'' significa que nem sempre que o protocolo encontrar o
+meio livre ele transmitirá o pacote. Esta medida visa a redução de colisões, já
+que mais de um nodo podem decidir transmitir em um mesmo instante, sentindo,
+simultaneamente, o meio livre. Na versão CSMA $p$-persistente, $p$ define a
+probabilidade de o protocolo utilizar o meio caso o detecte livre. No caso
+especial CSMA $1$-persistente, o MAC vai transmitir pacotes sempre que encontrar
+o meio livre ($1$, neste caso, equivale a uma probabilidade de 100\%).
+
+Duas modificações do CSMA são largamente utilizadas em redes padronizadas: o
+CSMA/CD (CSMA with Collision Detection - Detecção de Colisão) e o CSMA/CA (CSMA
+with Collision Avoidance - Prevenção de colisão). O CSMA/CD é utilizado no
+padrão IEEE 802.3. Ao detectar uma colisão, o MAC CSMA/CD pode, eventualmente,
+tentar se recuperar da colisão ou, caso não seja possível recuperar, reiniciar a
+transmissão. Este MAC é bastante utilizado em redes cabeadas. Já o CSMA/CA é
+utilizado em redes sem-fio, incluindo os padrões IEEE 802.11 (WiFi) e IEEE
+802.15.4.
+
+No algoritmo CSMA/CA (\textit{Carrier-Sense Multiple Access with Collision
+Avoidance}) uma estação que deseja realizar uma transmissão verifica o meio para
+determinar se está livre. Caso o meio estiver livre, transmite-se o quadro. Do
+contrário, a estação aguarda um intervalo de tempo aleatório antes de verificar
+o meio novamente. O CSMA/CA busca solucionar os problemas clássicos de
+transmissão sem-fio conhecidos como ``problema da estação escondida'' e
+``problema da estação exposta''. Basicamente, o CSMA/CA utiliza sinalizações RTS
+(\textit{Ready to Send}) e CTS (\textit{Clear to Send}) para verificar a
+existência de atividade de rádio no canal em uso na região do receptor.
+
+%revisão de métodos de MAC
+\subsection{MACs para \rssf}
+
+Um protocolo de controle de acesso ao meio (MAC) decide quando um nodo de rede
+pode acessar o meio, tentando garantir que nodos não interfiram nas transmissões
+uns dos outros. No contexto de \rssf, protocolos MAC são ainda responsáveis por
+implementar o uso eficiente do rádio, que é frequentemente o componente mais
+crítico em termos de consumo de energia. Um MAC neste cenário normalmente
+considera métricas tradicionais de rede como latência, vazão e disponibilidade
+menos importantes que o baixo consumo de energia. Com isso, os principais fontes
+de sobrecusto em comunicação via rádio (i.e., escuta ociosa, colisões, escuta
+desnecessária e flutuações no tráfego) definem metas seguidas por, praticamente,
+todos os MACs neste contexto~\cite{Langendoen:2005}.
+
+O \emph{B-MAC} é um protocolo MAC para \rssf com \textit{carrier sense}, ou
+seja, um protocolo que observa o uso do meio antes de utilizá-lo para envio de
+dados~\cite{Polastre:2004}. Ele provê uma interface que permite reconfiguração
+online, o que permite que os serviços de rede ajustem seus mecanismos. Estas
+reconfigurações incluem aspectos como ligar e desligar o uso de CCA
+(\textit{Clear Channel Assessment}), o envio de mensagens de reconhecimento
+(ACKs), ajuste do tamanho do preâmbulo e do intervalo de escuta. Uma limitação
+do B-MAC é que um receptor tem que esperar até que o preâmbulo seja
+completamente transmitido para iniciar a troca de dados, mesmo se o receptor já
+estiver acordado no início da transmissão. Além deste atraso, isto ainda implica
+num problema conhecido como escuta desnecessária (\textit{overhearing}), onde
+receptores permanecem acordados (e, portanto, consumindo energia) até o final do
+preâmbulo para, apenas após este momento, descobrir que o pacote não era
+endereçado a eles. Estas limitações são resolvidas pelo \emph{X-MAC}, que usa
+preâmbulos curtos dentro dos quais o endereço do receptor está
+``escondido''~\cite{Buettner:2006}. Assim, um receptor pode identificar se um
+pacote é destinado a ele antes de receber o pacote inteiro, podendo ou
+simplesmente desligar o rádio, caso não seja o destinatário, ou enviar um ACK ao
+transmissor, avisando-o de que este pode parar de enviar o preâmbulo e iniciar o
+envio do pacote de dados. Como ambos os protocolos são baseados no CSMA eles
+sofrem do problema da estação escondida.
+
+\emph{S-MAC} é um protocolo MAC para \rssf também é baseado no
+CSMA~\cite{Ye:2002}, mas ele utiliza um mecanismo de RTS/CTS para evitar o
+problema da estação escondida. Nodos vizinhos trocam informação de sincronização
+para que acordem simultaneamente para se comunicar. Uma grande limitação do
+S-MAC é que ele não permite nenhum tipo de configuração, nem estática, nem
+dinâmica, apresentando um período de atividade (\textit{duty cycle}) fixo que
+pode terminar por desperdiçar energia (\textit{idle listening}). O \emph{T-MAC},
+que é uma versão melhorada do S-MAC, trata deste problema e adapta,
+dinamicamente, seu \textit{duty cycle} através de um mecanismo refinado baseado
+em \textit{timeouts}.
+%Although the RTS/CTS mechanism solves the hidden terminal problem, it
+%introduces the external terminal problem, to which both these protocols are
+%exposed.
+Nestes protocolos, a troca de informação necessária para manter os nodos
+sincronizados produz um certo sobrecusto.
+
+O \emph{Z-MAC} é um protocolo híbrido, que combina TDMA e CSMA~\cite{Rhee:2008}.
+Ele usa um escalonamento TDMA, mas permite que nodos disputem as fatias alocadas
+a outros nodos utilizando CSMA. O protocolo dá aos nodos aos quais as fatias de
+tempo foram alocadas exclusividade para iniciar transmissões logo no início do
+período alocado. Caso o nodo dono da fatia não inicia sua transmissão, outros
+nodos começam a disputar o uso do meio através de um CSMA. O Z-MAC prevê o
+cálculo e atribuição das fatias de tempo no momento da implantação da rede, o
+que limita sua adaptabilidade.
+
+O MAC do padrão \emph{IEEE 802.15.4} controla o acesso dos protocolos de mais
+alto nível à camada física por dois modos distintos~\cite{IEEE:2006}.
+Em um modo de operação básico, ele utiliza CSMA/CA e pacotes de reconhecimento
+(ACK) para tratar colisões. Em outro modo, conhecido como modo com
+\textit{beacons}, o MAC utiliza quadros chamados \textit{beacons} para
+sincronizar os dispositivos na rede. Neste modo, o período de atividade da rede
+é divido em duas partes: um com contenção (CAP - \textit{Contention Access
+Period}) e um livre de contenção (CFP - \textit{Contention Free Period}). No
+CAP, os nodos operam normalmente no CSMA/CA, com possibilidade de colisões
+durante a contenção. No CFP, contudo, o protocolo divide o meio em fatias de
+tempo (GTS - \textit{Guaranteed Time Slots}), que são alocadas a nodos que
+podem, então, se comunicar sem a possibilidade de colisões. O frame de
+\textit{beacon} é transmitido periodicamente pelo nodo coordenador da rede e,
+além de servir como baliza para sincronização da rede, transporta informações de
+configuração como, por exemplo, a tabela de alocação dos GTSs, informação sobre
+dados pendentes para leitura, que são utilizados na sincronização de dados da
+rede, e a definição do período de atividade da rede, o que permite que
+dispositivos entrem em modo de baixo consumo de energia, desligando seus rádios,
+durante a fase de inatividade. O modo \textit{beacon} permite uma melhor
+sincronização entre os dispositivos, baixando o consumo de energia, mas ao preço
+de uma menor vazão.
+
+\subsection{C-MAC}
+\label{sec:cmac}
+
+o \emph{C-MAC} (\textit{Configurable MAC}) é um protocolo MAC altamente
+configurável para \rssf implementado como um arcabouço de estratégias de
+controle de acesso ao meio que podem ser combinadas para produzir protocolos
+específicos a uma determinada aplicação~\cite{Wanner:IESS:2007}. Ele permite que
+programadores de aplicação configure diversos parâmetros de comunicação (e.g.,
+sincronização, contenção, detecção de erros, reconhecimento, empacotamento, etc)
+para ajustar o protocolo especificamente para a aplicação sendo desenvolvida.
+Embora altamente configurável, as instâncias do C-MAC configuradas para operar
+conforme o B-MAC produziram melhores resultados que a implementação original
+deste protocolo em termos de tamanho de código e dados, desempenho e eficiência
+na utilização da rede. Isto se deve às técnicas de metaprogramação estática
+usadas na implementação do C-MAC em C++, que permitem ao compilador gerar uma
+série de otimizações reduzindo, especialmente, sobrecusto introduzido por
+chamadas de funções e por polimorfismo.
+
+A versão original do C-MAC, no entanto, definiu os elementos configuráveis do
+protocolo de modo relativamente grosseiro. Por exemplo, sincronização foi
+modelada como um único e grande componente, que precisava ser reimplementado
+para todo novo protocolo, mesmo sabendo que aspectos como geração de preâmbulo e
+sincronização de relógio são comuns a, praticamente, qualquer protocolo. Uma
+revisão do projeto foi então realizada para refinar os componentes do C-MAC
+~\cite{Steiner:ICUMT:2010}. Nesta revisão do C-MAC foi realizada uma decomposição dos
+protocolos MAC tradicionais para obter uma máquina de estados generalizada para
+cada um das três principais categorias de MAC~\cite{Klues:2007}: \emph{channel
+pooling}, \emph{scheduled contention} e TDMA. As
+Figuras~\ref{fig:channel_polling},~\ref{fig:scheduled_contention}
+e~\ref{fig:tdma} apresentam as máquinas de estados desenvolvidas. É importante
+notar que estas máquinas de estado incluem funcionalidades exclusivas de alguns
+tipos de MAC. Dependendo da configuração adotada, estados das máquinas de
+estados podem ser suprimidos. Como exemplo, pode-se citar o estado \texttt{TX
+ACK PREAMBLE} na máquina de estados da Figura~\ref{fig:channel_polling}, que é
+utilizada pelo X-MAC; 
+
+\fig{channel_polling}{Máquina de estados para protocolos baseados em
+\emph{channel polling}.}{scale=.6}
+
+\fig{scheduled_contention}{Máquina de estados para protocolos baseados em
+\emph{scheduled contention}.}{scale=.6}
+
+\fig{tdma}{Máquina de estados para protocolos baseados em TDMA.}{scale=.6}
+
+Uma análise cuidadosa destas máquinas de estado levou à definição da máquina de
+estados para o C-MAC (Figura~\ref{fig:cmac}). Cada estado representa um
+microcomponente que pode ter diferentes implementações. Estes microcomponentes
+junto das transições de estados podem ser combinados para produzir protocolos
+específicos para cada aplicação. A implementação desta máquina de estados
+utiliza técnicas de metaprogramação estática (templates C++) para remover
+estados que não fazem parte de uma determinada instância do protocolo. Quando um
+estado é removido da máquina de estados, as entradas do estado removido são
+encaminhadas diretamente ao(s) próximo(s) estados conectado(s) a ele, mantendo a
+semântica original das transições. Além de ser capaz de acomodar protocolos
+representativos em qualquer das três categorias estudadas, a máquina de estados
+do C-MAC ainda suporta protocolos híbridos, como Z-MAC e IEEE 802.15.4.
+
+\fig{cmac}{Máquina de estados do C-MAC.}{scale=.6}
+
+Na máquina de estados apresentada na Figura~\ref{fig:cmac} existem quatro
+``macro estados'': \texttt{SYNCHRONOUS SYNC}, \texttt{ASYNCHRONOUS SYNC},
+\texttt{RX CONTENTION} e \texttt{TX CONTENTION}. Estes estados, na verdade, são
+abstrações de outras máquinas de estados específicas para estas funções
+complexas executadas pelo protocolo, e são arpesentados na
+Figura~\ref{fig:synchronous_sync},~\ref{fig:asynchronous_sync},~\ref{fig:cmac_tx_contention}
+e,~\ref{fig:cmac_rx_contention}.
+
+\fig{synchronous_sync}{Máquina de estados \texttt{SYNCHRONOUS SYNC}.}{scale=.6}
+\fig{asynchronous_sync}{Máquina de estados \texttt{ASYNCHRONOUS SYNC}.}{scale=.6}
+\fig{cmac_tx_contention}{Máquina de estados \texttt{TX CONTENTION}.}{scale=.6}
+\fig{cmac_rx_contention}{Máquina de estados \texttt{RX CONTENTION}.}{scale=.6}
+
+Através desta máquina de estados é possível prover um maior número de pontos
+configuráveis num framework com um alto nível de reuso. Os principais pontos
+configuráveis do C-MAC incluem:
+\begin{itemize}
+  \item \textbf{Configuração da camada física:} através da disponibilização de
+  funcionalidades que adaptam o hardware abaixo do MAC para atender às
+  funcionalidades incluídas na instância do C-MAC em uso (e.g., frequência,
+  potência de transmissão, taxa de transmissão);
+  \item \textbf{Sincronização e organização:} permite configurar os dispositivos
+  para enviar ou receber dados de sincronização para organizar a rede e
+  sincronizar dados ou os períodos de atividade (\textit{duty cycle});
+  \item \textbf{Mecanismo de prevenção de colisões (colision avoidance):} define
+  os mecanismos de contenção usados para prevenir colisões. Pode incluir um
+  algoritmo CSMA-CA, a troca de pacotes de controle de contenção (RTS/CTS) ou
+  uma combinação dos dois;
+  \item \textbf{Mecanismo de reconhecimento:} a troca de pacotes ``ACK'' para
+  determinar o sucesso de uma transmissão, incluindo reconhecimento de pacotes
+  de dados e de preâmbulo.
+  \item \textbf{Tratamento de erros e segurança:} determinar que mecanismos
+  serão usados para garantir a consistência dos dados (e.g., CRC, checksum) e
+  segurança dos dados.
+\end{itemize}
+
+Testes realizados com o C-MAC apresentaram desempenho ligeiramente superior a
+outros protocolos configurados de modo equivalente, porém apresentou um menor
+tamanho~\cite{Wanner:IESS:2007}. Esta vantagem, contudo, é aumentada pelo
+sistema de configuração do C-MAC, que permite a criação de protocolos
+específicos para aplicações, que terminam por ter apenas os sobrecustos
+estritamente necessários.

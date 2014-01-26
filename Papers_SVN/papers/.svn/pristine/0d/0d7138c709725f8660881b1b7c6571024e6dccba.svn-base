@@ -1,0 +1,198 @@
+@inproceedings{parnin2011automated,
+  title={Are automated debugging techniques actually helping programmers},
+  author={Parnin, C. and Orso, A.},
+  booktitle={Proceedings of the 2011 International Symposium on Software Testing and Analysis},
+  pages={199--209},
+  year={2011},
+  organization={ACM}
+}
+
+@inproceedings{zhang2009capturing,
+  title={Capturing propagation of infected program states},
+  author={Zhang, Z. and Chan, WK and Tse, TH and Jiang, B. and Wang, X.},
+  booktitle={Proceedings of the the 7th joint meeting of the European software engineering conference and the ACM SIGSOFT symposium on The foundations of software engineering},
+  pages={43--52},
+  year={2009},
+  organization={ACM}
+}
+
+@article{zheng2003statistical,
+  title={Statistical debugging of sampled programs},
+  author={Zheng, A.X. and Jordan, M.I. and Liblit, B. and Aiken, A.},
+  journal={Advances in Neural Information Processing Systems},
+  volume={16},
+  year={2003}
+}
+
+@inproceedings{zheng2006statistical,
+  title={Statistical debugging: simultaneous identification of multiple bugs},
+  author={Zheng, A.X. and Jordan, M.I. and Liblit, B. and Naik, M. and Aiken, A.},
+  booktitle={Proceedings of the 23rd international conference on Machine learning},
+  pages={1105--1112},
+  year={2006},
+  organization={ACM}
+}
+
+@article{parsa2011statistical,
+  title={Statistical debugging using a hierarchical model of correlated predicates},
+  author={Parsa, S. and Asadi-Aghbolaghi, M. and Vahidi-Asl, M.},
+  journal={Artificial Intelligence and Computational Intelligence},
+  pages={251--256},
+  year={2011},
+  publisher={Springer}
+}
+@article{sasirekha2011program,
+  title={Program slicing techniques and its applications},
+  author={Sasirekha, N. and Robert, A.E. and Hemalatha, D.M.},
+  journal={Arxiv preprint arXiv:1108.1352},
+  year={2011}
+}
+
+@article{Xu:2005:BSP:1050849.1050865,
+ author = {Xu, Baowen and Qian, Ju and Zhang, Xiaofang and Wu, Zhongqiang and Chen, Lin},
+ title = {A brief survey of program slicing},
+ journal = {SIGSOFT Softw. Eng. Notes},
+ issue_date = {March 2005},
+ volume = {30},
+ number = {2},
+ month = mar,
+ year = {2005},
+ issn = {0163-5948},
+ pages = {1--36},
+ numpages = {36},
+ url = {http://doi.acm.org/10.1145/1050849.1050865},
+ doi = {10.1145/1050849.1050865},
+ acmid = {1050865},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {debugging, dependence analysis, pointer analysis, program analysis, program slicing},
+} 
+
+@inproceedings{lei2005minimization,
+  title={Minimization of randomized unit test cases},
+  author={Lei, Y. and Andrews, J.H.},
+  booktitle={Software Reliability Engineering, 2005. ISSRE 2005. 16th IEEE International Symposium on},
+  pages={10--pp},
+  year={2005},
+  organization={IEEE}
+}
+
+@article{artho2011iterative,
+  title={Iterative delta debugging},
+  author={Artho, C.},
+  journal={International Journal on Software Tools for Technology Transfer (STTT)},
+  volume={13},
+  number={3},
+  pages={223--246},
+  year={2011},
+  publisher={Springer}
+}
+
+@inproceedings{burger2008replaying,
+  title={Replaying and isolating failing multi-object interactions},
+  author={Burger, M. and Zeller, A.},
+  booktitle={Proceedings of the 2008 international workshop on dynamic analysis: held in conjunction with the ACM SIGSOFT International Symposium on Software Testing and Analysis (ISSTA 2008)},
+  pages={71--77},
+  year={2008},
+  organization={ACM}
+}
+
+@inproceedings{qi2011locating,
+  title={Locating failure-inducing environment changes},
+  author={Qi, D. and Ngo, M.N. and Sun, T. and Roychoudhury, A.},
+  booktitle={Proceedings of the 10th ACM SIGPLAN-SIGSOFT workshop on Program analysis for software tools},
+  pages={29--36},
+  year={2011},
+  organization={ACM}
+}
+
+@inproceedings{orso2005selective,
+  title={Selective capture and replay of program executions},
+  author={Orso, A. and Kennedy, B.},
+  booktitle={ACM SIGSOFT Software Engineering Notes},
+  volume={30},
+  number={4},
+  pages={1--7},
+  year={2005},
+  organization={ACM}
+}
+
+@ONLINE{qemu,
+title = {About QEMU},
+month = Nov,
+year = {2011},
+url = {http://www.qemu.org}
+}
+
+@ONLINE{gdb,
+title = {GDB: The GNU Project Debugger},
+month = Nov,
+year = {2011},
+url = {http://www.gnu.org/s/gdb/}
+}
+
+@BOOK{Froehlich:2001,
+  AUTHOR = {Ant{\^{o}}nio Augusto Fr{\"{o}}hlich},
+  TITLE = {Application-Oriented Operating Systems},
+  PUBLISHER = {GMD - Forschungszentrum Informationstechnik},
+  YEAR = 2001,
+  NUMBER = 17,
+  SERIES = {GMD Research Series},
+  ADDRESS = {Sankt Augustin},
+  MONTH = AUG
+}
+
+@INPROCEEDINGS{Li,
+author={Xiang Li and Li, E.Q. and Yen-Kuang Chen},
+booktitle={Acoustics, Speech, and Signal Processing, 2004. Proceedings. (ICASSP '04). IEEE International Conference on},
+title={Fast multi-frame motion estimation algorithm with adaptive search strategies in H.264},
+year={2004},
+month={may},
+volume={3},
+number={},
+pages={ iii - 369-72 vol.3},
+keywords={ H.264/AVC video coding standard; MPEG-4; PSNR; adaptive search strategies; full search algorithm; matching point minimization; multi-frame motion estimation; speed-up performance; image sequences; minimisation; motion estimation; search problems; video coding;},
+doi={10.1109/ICASSP.2004.1326558},
+ISSN={1520-6149}
+}
+
+@INPROCEEDINGS{dmec,
+author={Ludwich, M.K. and Frohlich, A.A.},
+booktitle={Computing System Engineering (SBESC), 2011 Brazilian Symposium on},
+title={Interfacing Hardware Devices to Embedded Java},
+year={2011},
+month={nov.},
+volume={},
+number={},
+pages={176 -181},
+keywords={H.264 video coding;embedded Java applications;hardware device abstraction;hardware device interfacing;motion estimator;Java;embedded systems;motion estimation;video coding;},
+doi={10.1109/SBESC.2011.32},
+ISSN={},}
+
+@article{cancianferramenta,
+  title={Ferramenta de Suporte ao Projeto Automatizado de Sistemas Computacionais Embarcados},
+  author={Cancian, R.L. and Stemmer, M.R. and Schulter, A. and Fr{\"o}lich, A.A.}
+}
+
+@inproceedings{artzi2010directed,
+  title={Directed test generation for effective fault localization},
+  author={Artzi, S. and Dolby, J. and Tip, F. and Pistoia, M.},
+  booktitle={Proceedings of the 19th international symposium on Software testing and analysis},
+  pages={49--60},
+  year={2010},
+  organization={ACM}
+}
+
+@ARTICLE{Wiegand,
+author={Wiegand, T. and Sullivan, G.J. and Bjontegaard, G. and Luthra, A.},
+journal={Circuits and Systems for Video Technology, IEEE Transactions on},
+title={Overview of the H.264/AVC video coding standard},
+year={2003},
+month={july },
+volume={13},
+number={7},
+pages={560 -576},
+keywords={H.264/AVC standardization;H.264/AVC video coding standard;ISO/IEC Moving Picture Experts Group;ITU-T Video Coding Experts Group;compression performance;rate-distortion efficiency;standardization history;video broadcast;video representation;video storage;video streaming;video telephony;IEC standards;ISO standards;code standards;data compression;rate distortion theory;standardisation;telecommunication standards;video coding;},
+doi={10.1109/TCSVT.2003.815165},
+ISSN={1051-8215}
+}

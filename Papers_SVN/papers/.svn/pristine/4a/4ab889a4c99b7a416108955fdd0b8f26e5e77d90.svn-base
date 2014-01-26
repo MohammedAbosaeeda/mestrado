@@ -1,0 +1,30 @@
+\begin{tabular}{|c|l|l|}
+\hline
+\multicolumn{3}{|c|}{\textbf{Requisitos funcionais}}\\
+\hline
+\textbf{ID}    & \textbf{Requisito}   & \textbf{Descrição} \\
+\hline
+1 & Detectar queda              & Detectar queda do modo mais seguro possível, evitando\\
+  &                             & geração de falsos positivos. \\
+\hline
+2 & Comunicar queda             & Progamar informação de ocorrência de uma queda. \\
+\hline
+3 & Identificar origem          & Deverá ser possível identificar a pulseira (pessoa)\\
+  & da queda                    & que caiu, bem como sua localização aproximada. \\
+\hline
+4 & Comunicar central           & A informação da queda deve ser comunicada a uma central\\
+  &                             & de controle remota conectada à Internet. \\
+\hline
+\multicolumn{3}{|c|}{ }\\
+\hline
+\multicolumn{3}{|c|}{\textbf{Requisitos não-funcionais}}\\
+\hline
+\textbf{ID}    & \textbf{Requisito}   & \textbf{Descrição} \\
+\hline
+5 & Dimensões                   & As dimensões devem ser reduzidas de modo a permitir o \\
+  &                             & confortável do sistema como uma pulseira. \\
+\hline
+6 & Energia                     & O consumo deve ser baixo de modo a permitir a maior \\
+  &                             & durabilidade possível da bateria da pulseira. \\
+\hline
+\end{tabular}

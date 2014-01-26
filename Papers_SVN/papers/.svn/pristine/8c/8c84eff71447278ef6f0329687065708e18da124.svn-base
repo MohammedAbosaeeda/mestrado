@@ -1,0 +1,89 @@
+\section{Introdução}
+
+
+%- Gerência de energia é importante para sistemas embarcados
+
+Sistemas embarcados são plataformas computacionais dedicados a executar um
+determinado conjunto de tarefas com objetivos específicos, como
+monitorar e/ou controlar os ambientes nos quais estão inseridos. Normalmente, 
+esses sistemas apresentam rigorosas limitações em termos das capacidades de 
+processamento e de memória. Além disso, muitos deles, devido à 
+natureza móvel das suas aplicações, são alimentados por baterias com uma
+limitada carga de energia. Essas limitações fazem com que uma gerência eficiente
+do consumo de energia e que não ocasione interferência significativa 
+na execução da aplicação seja utilizada.
+
+%- Gerência em outros trabalhos (economizam energia). Nao eh suficiente...
+
+O \emph{hardware} dos sistemas embarcados disponibiliza diferentes 
+mecanismos para realizar a gerência do consumo de energia. Dentre eles, 
+os mais conhecidos são as técnicas de \textsc{DVS} (Dynamic Voltage
+Scaling)~\cite{Pouwelse:2001,Weiser:1994} e 
+hibernação de recursos~\cite{Kravets:1998,Helmbold:1996,Flinn:1999}.
+%e conjuntos de distintos modos de operação (CITAR).
+Alguns trabalhos na literatura exploram a integração dessas técnicas com
+abordagens que garantem \QoS{} (\qos{}). A maioria dessas abordagens,
+entretanto, apenas busca minimizar o consumo de energia com o foco 
+principal nas métricas tradicionais de \qos{}, como para processamento, 
+memória e comunicação. 
+Como apresentado em um trabalho anterior~\cite{Wiedenhoft:WTR:2007}, nós
+argumentamos que não é suficiente apenas garantir métricas tradicionais de
+\qos{} se a carga da bateria termina antes do término das tarefas.
+
+%- Neste trabalho a idéia é utilizar a energia como parâmetro de QoS (citar meus artigos) para atender o tempo de duração do sistema e além disso atender os \deadlines{} temporais das tarefas de tempo real.
+
+Neste trabalho utilizamos a energia como um novo parâmetro de \qos{} para
+atender o tempo de duração do sistema especificado pelo usuário, ou seja, 
+\qos{} em termos de energia. Nos propomos,
+também, a garantir os \deadlines{} das tarefas \emph{hard} pela sua 
+importância em sistemas embarcados de tempo real. 
+A proposta desta abordagem é garantir a energia e os \deadlines{} das
+tarefas \emph{hard} de tempo real, não com o objetivo de minimizar o consumo de
+energia, mas otimizar a funcionalidade do sistema.
+
+%- Como fazer? - usando técnicas da computação imprecisa (explicar o que é)
+
+Para alcançar nosso objetivo, o controle de \qos{} foi inspirado na computação
+imprecisa~\cite{Liu:1994,Lin:1987a,Lin:1987b}. A computação imprecisa divide as
+tarefas em duas partes: uma com o fluxo obrigatório e outra com o fluxo
+opcional. O fluxo obrigatório é a parte \emph{hard} da tarefa, e deve sempre 
+ser executado com o seu \deadline{} atendido. O fluxo opcional é a parte
+``melhor esforço'' da tarefa, e caso seja necessário, é possível que não seja 
+executado. A partir desse conceito de divisão, o escalonador da computação
+imprecisa impede a execução das partes opcionais quando existe a possibilidade
+do \deadline{} de 
+alguma parte obrigatória não ser atendido, e assim, reduz a demanda por
+processamento do sistema. No nosso escalonador, além dessa possibilidade, 
+propomos que as partes opcionais não sejam escalonadas quando o nível de energia
+não será suficiente para atender o tempo especificado pela aplicação.
+Esse controle cria períodos ociosos no sistema, que permite ao escalonador
+usar técnicas de gerência de energia para diminuir o consumo dos componentes
+durante os períodos ociosos criados.
+
+%- Protótipo no EPOS e escalonador EDF...
+
+O escalonador proposto é baseado no escalonador \textsc{EDF} 
+(\emph{Earliest Deadline
+First})~\cite{Liu:1973} para garantir os \deadlines{} das tarefas, no qual 
+as tarefas com maiores \deadlines{} possuem menores prioridades.
+Um protótipo desta proposta foi implementado no
+\epos{}~\cite{Marcondes:ETFA:2006}, um sistema operacional embarcado baseado em
+componentes. \epos{} disponibiliza um conjunto de mecanismos para a gerência do
+consumo de energia, desde uma infra-estrutura que permite as aplicações 
+realizarem a apropriada gerência~\cite{Hoeller:DIPES:2006}, até um 
+gerente com diferentes modos de operação que realiza a gerência para a
+aplicação~\cite{Wiedenhoft:ETFA:2007}. 
+Além desses mecanismos, o \epos{} possui um
+sistema de monitoramento da carga da bateria, que informa a energia
+restante.%(CITAR RAPHAEL).
+
+%- Divisão das seções
+
+Este artigo é estruturado como segue. Seção~\ref{sc:relacionados} apresenta os
+trabalhos relacionados. Seção~\ref{sc:proposta} descreve o escalonador
+desenvolvido neste trabalho, com a sua devida formalização. 
+Seção~\ref{sc:implementacao} abrange a implementação do ambiente da computação
+imprecisa e do escalonador proposto no sistema operacional embarcado escolhido.
+Seção~\ref{sc:conclusao} finaliza com a conclusão do artigo.
+%e apresenta as  futuras direções para este trabalho.
+

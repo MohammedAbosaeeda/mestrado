@@ -1,0 +1,67 @@
+\section{Introduction}
+\label{sec:intro}
+
+Low energy consumption is an important non-functional requirement for the design
+of battery-powered embedded systems. Reliable information on the system energy
+source is of paramount importance to design an energy-efficient system.
+% Nowadays, with cheaper lithium batteries becoming available, such batteries are
+% being increasingly used in embedded systems. Lithium batteries present different
+% electrical characteristics when compared to ordinary batteries (alkaline),
+% including enhanced capacity at smaller sizes and, most important, stabler
+% voltage levels.
+%Measuring current isn't feasible, so it is usual to keep track of battery voltage
+In order to keep track of exact energy consumption at runtime, traditional
+approaches rely on continuous measurements of the amount of current drained from
+the battery. Besides the additional hardware required to perform this task,
+%(a shunt resistor between system and battery connected to an ADC)
+software support for sampling such circuitry may compromise system performance
+due to the requirement of fine grained information needed to sample this
+continuous signal.
+
+\fig{sampled_real_discharge}{Sampled discharge plotted against real discharge
+for a CR2 series Panasonic lithium
+battery~\cite{Panasonic:Lithium:2006}.}{scale=.37}
+
+To cope with this requirement mobile systems provide means to measure battery
+voltage by which it is possible to infer battery charge through an approximate
+discharge model for a given battery. This approach, however, brings limitations
+to the task of estimating battery charge.
+%which adds to the \emph{good} voltage stability of Lithium-based batteries.
+Among the reported problems~\cite{Mundra:2008,Penella:2010} there is one of
+special interest for the task of precisely estimating battery charge on
+embedded systems: the low accuracy and long response time of voltage-based
+battery state-of-charge models. This problem is related to the diminished
+precision of such voltage measurements implied by low resolution
+analog-to-digital converters and to the oscillation on the battery voltage-levels
+due to variations on the applied charge. It can be easily illustrated by
+Figure~\ref{fig:sampled_real_discharge}. The figure shows that during most of
+system lifetime the battery-voltage response time varies greatly. For instance,
+if an energy-related decision lowers system utilization on day 50, this decision
+may last until the next expected voltage drop, around day 100, making an unique
+decision stay in effect for $14\%$ of system lifetime. We can also see that the
+scheduler misses the opportunity of raising system utilization because its
+monitor is not able to rapidly inform that the system is not using the expected
+amount of energy. Instead of gradually raising system utilization and keeping it
+higher during a longer period of time, it only acts by the end of a given
+period, causing bursts in system utilization for short periods of times.
+
+In this paper we propose a software-based energy consumption accounting scheme.
+We rely on the fact that energy consumption is a cross-cutting concern,
+orthogonal to all system components~\cite{Lohmann:2005}, to enable accurate
+monitoring of energy consumption in a component-based operating system for
+embedded systems. This scheme monitors the execution of operating system
+functionalities. In order to make this approach feasible, we derived two
+different profiles for energy accounting which can be applied to devices with
+different operational behavior. We evaluate the effect of out approach on system
+performance.
+
+The remaining of this paper is organized as follows.
+Section~\ref{sec:related} presents an overview of related work.
+Section~\ref{sec:account} describes the software-based energy accounting
+approach proposed in this paper.
+Section~\ref{sec:impl_epos} describes the implementation of this approach in the
+\epos~Project.
+Section~\ref{sec:case} presents a case-study of the proposed approach on a
+wireless sensor network system.
+Section~\ref{sec:concl} summarizes this paper and gives some insights on future
+work.

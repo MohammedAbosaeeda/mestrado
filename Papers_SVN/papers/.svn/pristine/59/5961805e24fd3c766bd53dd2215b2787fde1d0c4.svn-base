@@ -1,0 +1,1823 @@
+% Bibliography on Operating Systems
+% References selected by Guto (May 2000)
+
+@InProceedings{Accetta:1986,
+  author =	 "Michael J. Accetta and Robert V. Baron and William
+                  J. Bolosky and David B. Golub and Richard F. Rashid
+                  and Avadis Tevanian and Michael Young",
+  title =	 "{Mach: a New Kernel Foundation for UNIX Development}",
+  booktitle =	 "Proceedings of the Summer 1986 USENIX Conference",
+  address =	 "Atlanta, U.S.A.",
+  pages =	 "93--113",
+  month =	 jun,
+  year =	 1986
+}
+
+@InProceedings{Anderson:1991,
+  author =	 "Thomas E. Anderson and Henry M.Levy and Brian
+                  N. Bershad and Edward D.Lazowska",
+  title =	 "{The Interaction of Architecture and Operating System
+                  Design}",
+  booktitle =	 "Proceedings of the Fourth International Conference on
+                  Architectural Support for Programming Languages and
+                  Operating Systems",
+  address =	 "Santa Clara, U.S.A.",
+  pages =	 "108-120",
+  month =	 apr,
+  year =	 1991,
+  url =          "http://www.acm.org/pubs/articles/proceedings/asplos/106972/p108-anderson/p108-anderson.pdf"
+}
+
+@Article{Anderson:1992,
+  author =	 "Thomas E. Anderson and Brian N. Bershad and Edward
+                  D. Lazowska and Henry M. Levy",
+  title =	 "{Scheduler Activations: Effective Kernel Support for
+                  the User-level Management of Parallelism}",
+  journal =	 "ACM Transactions on Computer Systems",
+  volume =	 10,
+  number =	 1,
+  pages =	 "53--79",
+  month =	 feb,
+  year =	 1992,
+  url =          "http://www.acm.org/pubs/articles/journals/tocs/1992-10-1/p53-anderson/p53-anderson.pdf",
+  abstract =	 "Threads are the vehicle for concurrency in many
+                  approaches to parallel programming. Threads can be
+                  supported either by the operating system kernel or by
+                  user-level library code in the application address
+                  space, but neither approach has been fully
+                  satisfactory. This paper addresses this
+                  dilemma. First, we argue that the performance of
+                  kernel threads is inherently worse than that of
+                  user-level threads, rather than this being an artifact
+                  of existing implementations; managing parallelism at
+                  the user level is essential to high-performance
+                  parallel computing. Next, we argue that the problems
+                  encountered in integrating user-level threads with
+                  other system services is a consequence of the lack of
+                  kernel support for user-level threads provided by
+                  contemporary multiprocessor operating systems; kernel
+                  threads are the wrong abstraction on which to support
+                  user-level management of parallelism. Finally, we
+                  describe the design, implementation, and performance
+                  of a new kernel interface and user-level thread
+                  package that together provide the same functionality
+                  as kernel threads without compromising the performance
+                  and flexibility advantages of user-level management of
+                  parallelism."
+}
+
+@InProceedings{Anderson:1992a,
+  author =	 "Thomas Anderson",
+  title =	 "{The Case for Application-Specific Operating Systems}",
+  booktitle =	 "Proceedings of the Third Workshop on Workstation
+                  Operating Systems",
+  address =	 "Key Biscayne, U.S.A.",
+  pages =	 "92--94",
+  month =	 apr,
+  year =	 1992,
+  url =          "http://sunsite.berkeley.edu:80/Dienst/Repository/2.0/Body/ncstrl.ucb/CSD-93-738/postscript"
+}
+
+@InProceedings{Assumpcao:1994,
+  author =	 "Jecel M. Assumpcao Jr",
+  title =	 "{Adaptive Compilation in the Merlin System for
+                  Parallel Machines}",
+  booktitle =	 "IEEE/USP International Workshop on High Performance
+                  Computing",
+  pages =	 "155--166",
+  month =	 mar,
+  year =	 1994,
+  url =		 "http://www.lsi.usp.br/~jecel/jpaper1.ps.gz"
+}
+
+@Book{Bach:1987,
+  author =	 "Maurice J. Bach",
+  title =	 "{The Design of the UNIX Operating System}",
+  publisher =	 "Prentice-Hall",
+  year =	 1987
+}
+
+@InProceedings{Back:2000,
+  author =	 "Godmar Back and Patrick Tullmann and Leigh Stoller and
+                  Wilson C. Hsieh and Jay Lepreau",
+  title =	 "{Techniques for the Design of Java Operating Systems}",
+  booktitle =	 "Proceedings of the 2000 USENIX Annual Technical
+                  Conference",
+  address =	 "San Diego, U.S.A.",
+  month =	 jun,
+  year =	 2000,
+  url =          "http://www.cs.utah.edu/flux/papers/javaos-usenix00-base.html",
+  abstract =	 "Language-based extensible systems, such as Java
+                  Virtual Machines and SPIN, use type safety to provide
+                  memory safety in a single address space. By using
+                  software to provide safety, they can support more
+                  efficient IPC. Memory safety alone, however, is not
+                  sufficient to protect different applications from each
+                  other. Such systems need to support a process model
+                  that enables the control and management of
+                  computational resources. In particular, language-based
+                  extensible systems should support resource control
+                  mechanisms analogous to those in standard operating
+                  systems. They need to support the separation of
+                  processes and limit their use of resources, but still
+                  support safe and efficient IPC. We demonstrate how
+                  this challenge is being addressed in several
+                  Java-based systems. First, we lay out the design
+                  choices when implementing a process model in
+                  Java. Second, we compare the solutions that have been
+                  explored in several projects: Alta, K0, and the
+                  J-Kernel. Alta closely models the Fluke operating
+                  system; K0 is similar to a traditional monolithic
+                  kernel; and the J-Kernel resembles a microkernel-based
+                  system. We compare how these systems support resource
+                  control, and explore the tradeoffs between the various
+                  designs."
+}
+
+@Book{Bar:2000,
+  author =	 "Moshe Bar",
+  title =	 "Linux Internals",
+  publisher =	 "Osborne McGraw-Hill",
+  year =	 2000
+}
+
+@InProceedings{Baum:1999,
+  author =	 "Lothar Baum",
+  title =	 "{Towards Generating Customized Run-time Platforms from
+                  Generic Components}",
+  booktitle =	 "Proceedings of the 11th Conference on Advanced Systems
+                  Engineering",
+  address =	 "Heidelberg, Germany",
+  month =	 jun,
+  year =	 1999,
+  url =          "http://www.uni-kl.de/AG-Nehmer/Projekte/GeneSys/Papers/Caise99.ps",
+  abstract =	 "Embedded systems require run-time platforms that are
+                  tailored for the specific application's
+                  needs. Extending on existing technology for flexible
+                  system software, this paper presents a generative
+                  approach for building tailormade run-time platforms
+                  from generic software components. Generic components
+                  are pre-fabricated building blocks providing generic
+                  parameters in order to tailor them for the solution of
+                  specific problems. The values of these generic
+                  parameters are chosen based on requirements that are
+                  derived from the target application. Generators then
+                  allow to instantiate generic components to customized
+                  software elements with minimal manual
+                  intervention. Important prerequisites for ..."
+}
+
+@Article{Bershad:1991,
+  author =	 "Brian N. Bershad and Thomas E. Anderson and Edward
+                  D. Lazowska and Henry M. Levy",
+  title =	 "{User-level Interprocess Communication for Shared
+                  Memory Multiprocessors}",
+  journal =	 "ACM Transactions on Computer Systems",
+  volume =	 9,
+  number =	 2,
+  pages =	 "175--198",
+  month =	 may,
+  year =	 1991,
+  url =
+                  "http://www.acm.org/pubs/articles/journals/tocs/1991-9-2/p175-bershad/p175-bershad.pdf"
+}
+
+@InProceedings{Bershad:1995,
+  author =	 "Brian N. Bershad and Stefan Savage and Przemyslaw
+                  Pardyak and Emin Gün Sirer and Marc E. Fiuczynski and
+                  David Becker and Craig Chambers and Susan J. Eggers",
+  title =	 "{Extensibility, Safety and Performance in the SPIN
+                  Operating System}",
+  booktitle =	 "Proceedings of the 15th ACM Symposium on Operating
+                  System Principles",
+  address =	 "Copper Mountain, U.S.A.",
+  pages =	 "267--284",
+  month =	 dec,
+  year =	 1995,
+  url =          "http://www.cs.washington.edu/research/projects/spin/www/papers/SOSP95/sosp95.ps"
+}
+
+@InProceedings{Beuche:1999,
+  author =	 "Danilo Beuche and A. Guerrouat and H. Papajewski and
+                  Wolfgang Schröder-Preikschat and Olaf Spinczyk and Ute
+                  Spinczyk",
+  title =	 "{The PURE Family of Object-Oriented Operating Systems
+                  for Deeply Embedded Systems}",
+  booktitle =	 "Proceedings of the 2nd IEEE International Symposium on
+                  Object-Oriented Real-Time Distributed Computing",
+  address =	 "St Malo, France",
+  month =	 may,
+  year =	 1999,
+  url =		 "http://www-ivs.cs.uni-magdeburg.de/bs/papers/isorc99/isorc99.ps"
+}
+
+
+@InProceedings{Beuche:2000,
+  author =	 "Danilo Beuche and Wolfgang Schröder-Preikschat and
+                  Olaf Spinczyk and Ute Spinczyk",
+  title =	 "{Streamlining Object-Oriented Software for Deeply
+                  Embedded Applications}",
+  booktitle =	 "Proceedings of the TOOLS Europe 2000",
+  year =	 2000,
+  address =	 "Saint Malo, France",
+  month =	 jun,
+  url =          "http://ivs.cs.uni-magdeburg.de/bs/papers/toolse00/toolse2000.ps.gz",
+  abstract =	 "Most of today's computer systems are embedded and a
+                  substantial amount of them a re deeply embedded
+                  systems with very limited resources. Object­oriented
+                  software is rarely to be found in those systems. In
+                  this paper we discuss reasons why currently object
+                  orientation is seldom used in this area. We also
+                  propose a set of design and implementation techniques
+                  based o n modern object­ oriented methods, which
+                  reconcile the reusability and flexibility of
+                  object­orie nted software with the required efficiency
+                  of deeply embedded systems."
+}
+
+
+@Article{Birrel:1984,
+  author =	 "Andrew D. Birrell and Bruce Jay Nelson",
+  title =	 "{Implementing Remote Procedure Calls}",
+  journal =	 "ACM Transactions on Computer Systems",
+  year =	 1984,
+  volume =	 2,
+  number =	 1,
+  pages =	 "39--59",
+  month =	 feb,
+  url =
+                  "http://www.acm.org/pubs/articles/journals/tocs/1984-2-1/p39-birrell/p39-birrell.pdf"
+}
+
+@InProceedings{Bolosky:1997,
+  author =	 "William J. Bolosky and Richard P. Draves and Robert
+                  P. Fitzgerald and Christopher W. Fraser and Michael
+                  B. Jones and Todd B. Knoblock and Rick Rashid",
+  title =	 "{Operating System Directions for the Next Millennium}",
+  booktitle =	 "Proceedings of the Sixth Workshop on Hot Topics in
+                  Operating Systems",
+  address =	 "Cape Cod, U.S.A.",
+  pages =	 "106--110",
+  month =	 may,
+  year =	 1997,
+  url =
+                  "http://www.research.microsoft.com/research/sn/Millennium/mgoals.html",
+  abstract =	 "We believe it is time to reexamine the operating
+                  system's role in computing. Operating systems exist to
+                  create an environment in which compelling applications
+                  come to life. They do that by providing abstractions
+                  built on the services provided by hardware. We argue
+                  that advances in hardware and networking technology
+                  enable a new kind of operating system to support
+                  tomorrow's applications. Such an operating system
+                  would raise the level of abstraction for developers
+                  and users, so that individual computers, file systems,
+                  and networks become unimportant to most computations
+                  in the same way that processor registers, disk
+                  sectors, and physical pages are today."
+}
+
+@Misc{CACM:may:2000,
+  key =		 "EGH00",
+  title =	 "{Special Section on Embedding the Internet}",
+  howpublished = "In Deborah Estrin and Ramesh Govindan and John Heidemann,
+                  editors, \emph{Communications of the ACM}, 43(5):38--73",
+  month =	 may,
+  year =	 2000,
+  url =          "http://www.acm.org/pubs/contents/journals/cacm/2000-43/#5"
+}
+
+@Article{CACM:may:2000a,
+  title =	 "{Special Section on Embedding the Internet}",
+  key =		 "CACM",
+  editor =	 "Deborah Estrin and Ramesh Govindan and John Heidemann",
+  journal =	 "Communications of the ACM",
+  year =	 2000,
+  volume =	 43,
+  number =	 5,
+  pages =	 "38--73",
+  month =	 may,
+  url =          "http://www.acm.org/pubs/contents/journals/cacm/2000-43/#5"
+}
+
+@TechReport{Cahill:1996,
+  author =	 "Vinny Cahill",
+  title =	 "{Flexibility in Object-Oriented Operating Systems: A
+                  Review}",
+  institution =	 "Trinity College Dublin",
+  year =	 1996,
+  number =	 "TCD-CS-96-05",
+  address =	 "Dublin, Ireland",
+  month =	 jul,
+  url =          "ftp://ftp.cs.tcd.ie/pub/tech-reports/reports.96/TCD-CS-96-05.ps.gz",
+  abstract =	 "This report presents a review of recent research into
+                  flexible operating systems. In this context, flexible
+                  operating systems are taken to be those whose designs
+                  have been motivated to some degree by the desire to
+                  allow the system to be tailored, either statically or
+                  dynamically, to the requirements of specific
+                  applications or application domains. We begin by
+                  presenting a review of recent research into flexible
+                  system software with particular emphasis on the
+                  motivations for providing flexibility and the
+                  different approaches to achieving flexibility that are
+                  available. We then provide an overview of the main
+                  technologies for achieving flexibility in system
+                  software that have been employed.... "
+}
+
+@Article{Campbell:1987,
+  author =	 "Roy H. Campbell and Gary M. Johnston and Vincent
+                  F. Russo",
+  title =	 "{Choices (Class Hierarchical Open Interface for Custom
+                  Embedded Systems)}",
+  journal =	 "Operating Systems Review",
+  volume =	 21,
+  number =	 3,
+  pages =	 "9--17",
+  year =	 1987
+}
+
+@Article{Campbell:1992,
+  author =	 "Roy H. Campbell and Nayeem Islam and Peter Madany",
+  title =	 "{Choices, Frameworks and Refinement}",
+  journal =	 "Computing Systems",
+  year =	 1992,
+  volume =	 5,
+  number =	 3,
+  pages =	 "217--257",
+  url =          "http://choices.cs.uiuc.edu/Papers/Conferences/Woos91.frameworks.pdf"
+}
+
+@Article{Chase:1992,
+  author =	 "Jeffrey S. Chase and Henry M. Levy and Edward
+                  D. Lazowska and Miche Baker-Harvey",
+  title =	 "{Lightweight Shared Objects in a 64-Bit Operating
+                  System}",
+  journal =	 "SIGPLAN Notices",
+  year =	 1992,
+  volume =	 27,
+  number =	 10,
+  pages =	 "397--413",
+  url =          "ftp://ftp.cs.washington.edu/tr/1992/03/UW-CSE-92-03-09.PS.Z"
+}
+
+@Article{Cheriton:1984,
+  author =	 "David R. Cheriton",
+  title =	 "{The V Kernel: A Software Base for Distributed
+                  Systems}",
+  journal =	 "IEEE Software",
+  volume =	 1,
+  number =	 2,
+  pages =	 "19--43",
+  year =	 1984,
+  month =        apr
+}
+
+@Article{Clark:1985,
+  author =	 "D. Clark",
+  title =	 "{The Structuring of Systems Using Upcalls}",
+  journal =	 "Operating Systems Review",
+  volume =	 19,
+  number =	 5,
+  pages =	 "171--180",
+  year =	 1985,
+}
+
+@InProceedings{Cordsen:1991,
+  author =	 "Jörg Cordsen and Wolfgang Schröder-Preikschat",
+  title =	 "{Object-Oriented Operating System Design and the
+                  Revival of Program Families}",
+  booktitle =	 "Proceedings of the Second International Workshop on
+                  Object Orientation in Operating Systems",
+  pages =	 "24--28",
+  address =	 "Palo Alto, U.S.A.",
+  month =	 oct,
+  year =	 1991
+}
+
+@PhdThesis{Cordsen:1996,
+  author =	 "Jörg Cordsen",
+  title =	 "{Virtuell Gemeinsamer Speicher},",
+  school =	 "Technical University of Berlin",
+  year =	 1996,
+  address =	 "Berlin, Germany"
+}
+
+@Article{Cordsen:1998,
+  author =	 "Jörg Cordsen and Wolfgang Schröder-Preikschat",
+  title =	 "{On The Symbiosis of Memory and Communication in the
+                  Programming of Parallel Applications}",
+  journal =	 "Future Generation Computer Systems",
+  volume =	 13,
+  pages =	 "373--383",
+  year =	 1998
+}
+
+@Book{Custer:1993,
+  author =	 "Helen Custer",
+  title =	 "{Inside Windows-NT}",
+  publisher =	 "Microsoft Press",
+  year =	 1993
+}
+
+@Article{Dennis:1965,
+  author =	 "Jack B. Dennis",
+  title =	 "{Segmentation and the Design of Multiprogrammed
+                  Computer Systems}",
+  journal =	 "Journal of the ACM",
+  year =	 1965,
+  volume =	 12,
+  number =	 4,
+  pages =	 "589--602",
+  month =	 oct
+}
+
+@TechReport{Dijkstra:1965,
+  author =	 "Edsger Wybe Dijkstra",
+  title =	 "{Cooperating Sequential Processes}",
+  institution =	 "Technical University of Eindhoven",
+  number =	 "EWD-123",
+  address =	 "Eindhoven, The Netherlands",
+  month =	 "",
+  year =	 1965,
+  url = "http://www.cs.utexas.edu/users/EWD/ewd01xx/EWD123.PDF"
+}
+
+@Article{Dijkstra:1968,
+  author =	 "Edsger Wybe Dijkstra",
+  title =	 "{The Structure of the THE-Multiprogramming System}",
+  journal =	 "Communications of the ACM",
+  volume =	 11,
+  number =	 5,
+  pages =	 "341--346",
+  month =	 may,
+  year =	 1968
+}
+
+@InCollection{Dijkstra:1971,
+  author =	 "Edsger Wybe Dijkstra",
+  title =	 "{Hierarchical Ordering of Sequential Processes}",
+  booktitle =	 "Operating Systems Techniques",
+  pages =	 "72--93",
+  publisher =	 "Academic Press",
+  year =	 1971,
+  url =		 "http://www.cs.utexas.edu/users/EWD/ewd03xx/EWD310.PDF"
+}
+
+@InProceedings{Dorward:1990,
+  author =	 "Sean Dorward and Ravi Sethi and Jonathan E. Shopiro",
+  title =	 "{Adding New Code to a Running C++ Program}",
+  booktitle =	 "Proceedings of the C++ Conference",
+  pages =	 "279--292",
+  address =	 "San Francisco, U.S.A.",
+  month =	 apr,
+  year =	 1990,
+}
+
+@InProceedings{Draves:1993,
+  author =	 "Richard P. Draves",
+  title =	 "{The Case for Run-time Replaceable Kernel Modules}",
+  booktitle =	 "Proceedings of the Fourth Workshop on Workstation
+                  Operating Systems",
+  address =	 "Napa, U.S.A.",
+  pages =	 "160--164",
+  month =	 oct,
+  year =	 1993,
+  url =
+                  "http://www.research.microsoft.com/scripts/pubDB/pubsasp.asp?RecordID=92"
+}
+
+@InProceedings{Druschel:1993,
+  author =	 "Peter Druschel",
+  title =	 "{Efficient Support for Incremental Customization of OS
+                  Services}",
+  booktitle =	 "Proceedings of the Third International Workshop on
+                  Object Orientation in Operating Systems",
+  pages =	 "108--111",
+  year =	 1993,
+  address =	 "Asheville, U.S.A.",
+  month =	 dec,
+  url =          "ftp://ftp.cs.arizona.edu/xkernel/Papers/customization.ps",
+  abstract =	 "This paper argues that efficient, incremental
+                  customization of OS services can be achieved using a
+                  twofold strategy: an object-oriented architecture that
+                  relies on composition to facilitate code reuse and
+                  customization; and, an OS structure that places a
+                  minimal set of trusted functions into the kernel, with
+                  all remaining services collocated with application
+                  code in user-level protection domains. 1 Introduction
+                  Historically, operating systems have followed the
+                  abstract machine model, providing a black box
+                  abstraction of services available to applications. It
+                  has been the task of the OS implementor to provide a
+                  generic implementation of these services, one that
+                  offers good performance to a..."
+}
+
+@article{Druschel:1998,
+  author =	 "Peter Druschel and Gaurav Banga and Jeffrey C. Mogul",
+  title =	 "{Better Operating System Features for Faster Network
+                  Servers}",
+  journal =	 "Performance Evaluation Review",
+  year =	 1998,
+  volume =	 26,
+  number =	 3,
+  pages =	 "",
+  month =	 dec,
+  url =		 "http://www.cs.rice.edu/~druschel/wisp98.ps.gz"
+}
+
+@InProceedings{Engler:1995,
+  author =	 "Dawson R. Engler and M. Frans Kaashoek and James
+                  O'Toole",
+  title =	 "{Exokernel: An Operating System Architecture for
+                  Application-level Resource Management}",
+  booktitle =	 "Proceedings of the Fifteenth ACM Symposium on
+                  Operating Systems Principles",
+  address =	 "Copper Mountain Resort, U.S.A.",
+  pages =	 "251--266",
+  month =	 dec,
+  year =	 1995,
+  url =
+                  "http://www.pdos.lcs.mit.edu/papers/exokernel-sosp95.ps",
+}
+
+@inproceedings{Engler:1995a,
+  author =	 "Dawson R. Engler and M. Frans Kaashoek",
+  title =	 "{Exterminate All Operating System Abstraction}",
+  booktitle =	 "Proceedings of the Fifth Workshop on Hot Topics in
+                  Operating Systems",
+  address =	 "Orcas Island, U.S.A.",
+  pages =	 "",
+  month =	 may,
+  year =	 1995,
+  url =		 "http://www.pdos.lcs.mit.edu/~engler/hotos-jeremiad.ps"
+}
+
+@Article{Engler:1995b,
+  author =	 "Dawson R. Engler and M. Frans Kaashoek and James
+                  O'Toole",
+  title =	 "{The Operating System Kernel as a Secure Programmable
+                  Machine}",
+  journal =	 "Operating Systems Review",
+  volume =	 29,
+  number =	 1,
+  pages =	 "78--82",
+  month =	 jan,
+  year =	 1995
+}
+
+@Article{Fabry:1974,
+  author =	 "Robert S. Fabry",
+  title =	 "{Capability-Based Addressing}",
+  journal =	 "Communications of the ACM",
+  year =	 1974,
+  volume =	 17,
+  number =	 7,
+  pages =	 "403--412",
+  month =	 aug
+}
+
+@InProceedings{Ford:1997,
+  author =	 "Bryan Ford and Godmar Back and Greg Benson and Jay
+                  Lepreau and Albert Lin and Olin Shivers",
+  title =	 "{The Flux OSKit: A Substrate for Kernel and Language
+                  Research}",
+  booktitle =	 "Proceedings of the 16th ACM Symposium on Operating
+                  Systems Principles",
+  address =	 "St. Malo, France",
+  pages =	 "38--51",
+  month =	 oct,
+  year =	 1997,
+  url =		 "ftp://mancos.cs.utah.edu/papers/oskit-sosp16.ps.gz"
+}
+
+@InProceedings{Ford:1997a,
+  author =	 "Bryan Ford and Kevin Van Maren and Jay Lepreau and
+                  Stephen Clawson and Bart Robinson and Jeff Turner",
+  title =	 "{The Flux OS Toolkit: Reusable Components for OS
+                  Implementation}",
+  booktitle =	 "Proceedings of the Sixth Workshop on Hot Topics in
+                  Operating Systems",
+  address =	 "Cape Cod, U.S.A.",
+  pages =	 "14--19",
+  month =	 may,
+  year =	 1997,
+  url =		 "ftp://mancos.cs.utah.edu/papers/oskit-hotos6.ps.gz"
+}
+
+@inproceedings{Garnatz:1996,
+  author =	 "Thomas Garnatz and others",
+  title =	 "{Experience made with the Design and Development of a
+                  Message-Passing Kernel for a Dual-Processor-Node
+                  Parallel Computer}",
+  booktitle =	 "Proceedings of the Hawaii International Conference on
+                  System Sciences",
+  address =	 "Maui, U.S.A.",
+  pages =	 "",
+  month =	 jan,
+  year =	 1996,
+  url =		 ""
+}
+
+@InProceedings{Gentleman:1988,
+  author =	 "W. M. Gentleman and S. A. MacKay and D. A. Stewart and
+                  M. Wein",
+  title =	 "{An Introduction to the Harmony Realtime Operating
+                  System}",
+  booktitle =	 "Newsletter of the IEEE Computer Society Technical
+                  Committee on Operating Systems",
+  pages =	 "3--6",
+  month =	 "Summer",
+  year =	 1988,
+  url =		 "http://wwwsel.iit.nrc.ca/psdocs/NRC29288.ps",
+  abstract =	 "Harmony is a multitasking multiprocessor operating
+                  system for realtime control with particular emphasis
+                  on embedded systems for industrial
+                  applications. Harmony has been under development at
+                  the National Research Council of Canada (NRCC)
+                  Laboratories for five years and has had two releases,
+                  with the third due in the summer of 1988. Harmony was
+                  developed to serve a need at the NRCC for a flexible
+                  system for realtime control of robotics experiments
+                  and for the development of experimental robot
+                  controllers. This paper introduces the basic concepts
+                  of Harmony and provides a brief overview of its
+                  functionality. "
+}
+
+@InProceedings{Gentleman:1989,
+  author =	 "W. M. Gentleman",
+  title =	 "{Managing Configurability in Multi-installation
+                  Realtime Programs}",
+  booktitle =	 "Proceedings of the Canadian Conference on Electrical
+                  and Computer Engineering",
+  address =	 "Vancouver, Canada",
+  pages =	 "823--827",
+  month =	 nov,
+  year =	 1989,
+  url =		 "http://wwwsel.iit.nrc.ca/psdocs/NRC30938.ps",
+  abstract =	 "Realtime programs that will be installed at many sites
+                  have aspects that cause installation, maintenance and
+                  evolution to be labour intensive if approached with
+                  conventional tools and techniques intended for single
+                  installation programs. Representative difficulties of
+                  this kind are described, along with tools and
+                  techniques which are available to address them."
+}
+
+@Article{Habermann:1976,
+  author =	 "A. Nico Habermann and Lawrence Flon and Lee
+                  W. Cooprider",
+  title =	 "{Modularization and Hierarchy in a Family of Operating
+                  Systems}",
+  journal =	 "Communications of the ACM",
+  volume =	 19,
+  number =	 5,
+  pages =	 "266--272",
+  year =	 1976,
+  url =		 "http://doi.acm.org/10.1145/360051.360076",
+  abstract =	 "This paper describes the design philosophy used in the
+                  construction of a family of operating systems. It is
+                  shown that the concepts of module and level do not
+                  coincide in a hierarchy of functions. Family members
+                  can share much software as a result of the
+                  implementation of run-time modules at the lowest
+                  system level."
+}
+
+@InProceedings{Haertig:1997,
+  author =	 "Hermann Härtig and Michael Hohmuth and Jochen Liedtke
+                  and Sebastian Schönberg and Jean Wolter",
+  title =	 "{The Performance of µ-Kernel-Based Systems}",
+  booktitle =	 "Proceedings of the 16th ACM Symposium on Operating
+                  System Principles",
+  address =	 "Saint-Malo, France",
+  pages =	 "66--77",
+  month =	 oct,
+  year =	 1997,
+  url =		 "http://os.inf.tu-dresden.de/papers_ps/sosp97.ps",
+  abstract =	 "First-generation µ-kernels have a reputation for being
+                  too slow and lacking sufficient flexibility. To
+                  determine whether L4, a lean second-generation
+                  µ-kernel, has overcome these limitations, we have
+                  repeated several earlier experiments and conducted
+                  some novel ones. Moreover, we ported the Linux
+                  operating system to run on top of the L4 µ-kernel and
+                  compared the resulting system with both Linux running
+                  native, and MkLinux, a Linux version that executes on
+                  top of a first-generation Mach-derived µ-kernel. For
+                  L4Linux, the AIM benchmarks report a maximum
+                  throughput which is only 5\% lower than that of native
+                  Linux. The corresponding penalty is 5 times higher for
+                  a co-located in-kernel version of MkLinux, and 7 times
+                  higher for a user-level version of MkLinux. These
+                  numbers demonstrate both that it is possible to
+                  implement a high-performance conventional operating
+                  system personality above a µ-kernel, and that the
+                  performance of the µ-kernel is crucial to achieve
+                  this. Further experiments illustrate that the
+                  resulting system is highly extensible and that the
+                  extensions perform well. Even real-time memory
+                  management including second-level cache allocation can
+                  be implemented at user-level, coexisting with
+                  L4Linux."
+}
+
+@Article{Hansen:1993,
+  author =	 "Per Brinch-Hansen",
+  title =	 "{Monitors and Concurrent Pascal: a Personal History}",
+  journal =	 "ACM SIGPLAN Notices",
+  year =	 1993,
+  volume =	 28,
+  number =	 3,
+  pages =	 "1--35",
+  month =	 mar,
+  url =          "http://www.acm.org/pubs/articles/proceedings/plan/154766/p1-hansen/p1-hansen.pdf"
+}
+
+@Article{Hoare:1974,
+  author =	 "Charles Anthony Richard Hoare",
+  title =	 "{Monitors: An Operating System Structuring Concept}",
+  journal =	 "Communications of the ACM",
+  year =	 1974,
+  volume =	 17,
+  number =	 10,
+  pages =	 "549--557",
+  month =	 oct,
+  url =          "http://www.cmpe.boun.edu.tr/~rxk00500/monitor/feb96.html",
+  abstract =	 "This paper develops Brinch-Hansen's concept of a
+                  monitor as a method of structuring an operating
+                  system. It introduces a form of synchronization,
+                  describes a possible rnctltotl of implementation in
+                  terms of semaphorcs and gives a suitable proof
+                  rule. Illustrative examples include a single rcsourcc
+                  scheduler, a bounded buffer, an alarm clock, a buffer
+                  pool, a disk head optimizer, and a version of the
+                  problem of readers and writers."
+}
+
+@Article{Howarth:1961,
+  author =	 "David J. Howarth and Tom Kilburn",
+  title =	 "{The Manchester University Atlas Operating System,
+                  Part II: User's Description}",
+  journal =	 "Computer Jorunal",
+  year =	 1961,
+  volume =	 4,
+  number =	 3,
+  pages =	 "226--229",
+  month =	 oct
+}
+
+@Article{Hutchinson:1991,
+  author =	 "Norman C. Hutchinson and Larry L. Peterson",
+  title =	 "{The \textit{x}-Kernel: An Architecture for
+                  Implementing Network Protocols}",
+  journal =	 "IEEE Transactions on Software Engineering",
+  volume =	 17,
+  number =	 1,
+  month =	 jan,
+  year =	 1991,
+  pages =	 "64--76",
+  url =          "ftp://ftp.cs.arizona.edu/xkernel/Papers/architecture.ps"
+}
+
+@article{Hwang:1982,
+  author =	 "K. Hwang and W. J. Croft and G. H. Goble and B. W. Wah
+                  and F. A. Briggs and W. R. Simmons and C. L. Coates",
+  title =	 "{A Unix-based Local Computer Network with Load
+                  Balancing}",
+  journal =	 "IEEE Computer",
+  volume =	 15,
+  number =	 4,
+  pages =	 "55--66",
+  month =	 apr,
+  year =	 1982
+}
+
+@Article{Jones:1980,
+  author =	 "Anita K. Jones and Peter M. Schwarz",
+  title =	 "{Experience Using Multiprocessor Systems - A Status
+                  Report}",
+  journal =	 "ACM Computing Surveys",
+  year =	 1980,
+  volume =	 12,
+  number =	 2,
+  pages =	 "121--165",
+  month =	 jun,
+  url =          "http://www.acm.org/pubs/articles/journals/surveys/1980-12-2/p121-jones/p121-jones.pdf",
+  abstract =	 "Multiprocessors, at least potentially, offer
+                  attractive computation gains along the dimensions of
+                  reliability, cost/performance, absolute performance,
+                  and more. Only when the hardware, operating system,
+                  utility software, and application are considered can
+                  one determine whether the potentials have been
+                  realized. There are a number of myths about the
+                  inherent complexity or simplicity and efficiency or
+                  inefficiency of multiprocessors. This paper is a
+                  status report based on experience with programming a
+                  modest number of multiprocessors. Some of these myths
+                  are discussed, and are confirmed or debunked where
+                  experience permits. Because of insufficient
+                  experience, the credibility of many myths remains an
+                  open question."
+}
+
+@InProceedings{Jones:1995,
+  author =	 "Michael B. Jones and Paul J. Leach and Richard
+                  P. Draves and Joseph S. Barrera",
+  title =	 "{Modular Real-time Resource Management in the Rialto
+                  Operating System}",
+  booktitle =	 "Proceedings of the Fifth Workshop on Hot Topics in
+                  Operating Systems",
+  address =	 "Orcas Island, U.S.A.",
+  pages =	 "12--17",
+  month =	 may,
+  year =	 1995,
+  url =		 "ftp://ftp.research.microsoft.com/pub/tr/tr-95-16.ps",
+  abstract =	 "This paper describes ongoing investigations into
+                  algorithms for modular distributed real-time resource
+                  management. These investigations are being conducted
+                  in the context of the Rialto operating system-an
+                  object-based real-time kernal and programming
+                  environment currently being developed within Microsoft
+                  Research. Some of the goals of this research include
+                  developing appropriate real-time programming
+                  abstractions to allow multiple independent real-time
+                  programs to dynamically coexist and share resources on
+                  the same hardware platforms. Use of these abstractions
+                  is intended both to allow individual applications to
+                  reason about their own resource requirements and for
+                  per-machine system resource planner applications to
+                  reason about and control resource allocations between
+                  potentially competing applications. The set of
+                  resources being managed is dynamically extensible, and
+                  may include remote resources in distributed
+                  environments. The local planner conducts resouce
+                  negotiations with individual applications on behalf of
+                  the user, with the goal of maximizing the user's
+                  perceived utility of the set of running applications
+                  with respect to resource allocations for those
+                  applications. "
+}
+
+@inproceedings{Kaashoek:1997,
+  author =	 "M. Kaashoek and D. Engler and G. Ganger and
+                  H. Brice\~no and R. Hunt and D. Mazières and
+                  T. Pinckney and R. Grimm and J. Jannotti and
+                  K. Mackenzie",
+  title =	 "{Application Performance and Flexibility on Exokernel
+                  Systems}",
+  booktitle =	 "Proceedings of the 16th ACM Symposium on Operating
+                  Systems Principles",
+  address =	 "Saint Malo, France",
+  pages =	 "",
+  month =	 oct,
+  year =	 1997,
+  url =		 "http://www.pdos.lcs.mit.edu/papers/exo-sosp97.html"
+}
+
+@Misc{Kabay:2000,
+  author =	 "Mich Kabay",
+  title =	 "{Feedback from Bad Operating Systems}",
+  howpublished = "Network World Security Newsletter",
+  month =	 apr,
+  year =	 2000,
+  note =         "[http://www.nwfusion.com/newsletters/sec/0417sec1.html]",
+  url =		 "http://www.nwfusion.com/newsletters/sec/0417sec1.html"
+}
+
+@Article{Kilburn:1961,
+  author =	 "Tom Kilburn and David J. Howarth and R.B. Payne and
+                  Frank H. Sumner",
+  title =	 "{The Manchester University Atlas Operating System,
+                  Part I: Internal Organization}",
+  journal =	 "Computer Jorunal",
+  year =	 1961,
+  volume =	 4,
+  number =	 3,
+  pages =	 "222--225",
+  month =	 oct
+}
+
+@Article{Koldinger:1992,
+  author =	 "Eric J. Koldinger and Jeffrey S. Chase and Susan
+                  J. Eggers",
+  title =	 "{Architectural Support for Single Address Space
+                  Operating Systems}",
+  journal =	 "Operating Systems Review",
+  year =	 1992,
+  volume =	 26,
+  pages =	 "175--186",
+  month =	 oct,
+  url =          "ftp://ftp.cs.washington.edu/tr/1992/03/UW-CSE-92-03-10.PS.Z"
+}
+
+@inproceedings{Kopetz:1993,
+  author =	 "H. Kopetz and G. Fohler and G. Gruensteidl and
+                  H. Kantz and G. Pospischil and P. Puschner and
+                  J. Reisinger and R. Schlatterbeck and W. Schuetz and
+                  A. Vrchoticky and R. Zainlinger",
+  title =	 "{Real-Time System Development: The Programming Model
+                  of MARS}",
+  booktitle =	 "Proceedings of the International Symposium on
+                  Autonomous Decentralized Systems",
+  address =	 "Kawasaki, Japan",
+  pages =	 "190--199",
+  month =	 mar,
+  year =	 1993,
+  url =          "http://www.vmars.tuwien.ac.at/papers/ps-files/rr-11-92.ps.gz",
+  abstract =	 "The systematic development of fault-tolerant realtime
+                  systems with guaranteed timeliness requires an
+                  appropriate system architecture and a rigorous design
+                  methodology. The first part of this paper describes
+                  those services of the architecture that help to
+                  simplify the work of the real-time programmer, taking
+                  MARS as an example. The second part deals with the
+                  ``programming in the large'' activities, i.e., the
+                  systematic derivation of task timing parameters from
+                  the requirements specification. The following core
+                  section of the paper focuses on ``programming to meet
+                  a time budget'' and presents the programming
+                  interface, the programming environment, and the
+                  testing and support tools. The architecture and most
+                  of the presented tools have been implemented and can
+                  be demonstrated on a faulttolerant prototype
+                  application."
+}
+
+@Book{Lelffer:1989,
+  author =	 "Samuel J. Leffler and Marshall Kirk McKusick and
+                  Michael J. Karels",
+  title =	 "{The Desing and Implementation of The 4.3 BSD UNIX
+                  Operating System}",
+  publisher =	 "Addison-Wesley",
+  year =	 1989
+}
+
+@Article{Levin:1993,
+  author =	 "Roy Levin and David D. Redell",
+  title =	 "An Evaluation of the Ninth SOSP Submissions -or- How
+                  (and How Not) to Write a Good Systems Paper",
+  journal =	 "Operating Systems Review",
+  year =	 1983,
+  volume =	 17,
+  number =	 3,
+  pages =	 "35--40",
+  month =	 jul,
+  url = "http://gatekeeper.dec.com/pub/DEC/SRC/publications/levin/SOSPhowto.html"
+}
+
+@Article{Levy:1991,
+  author =	 "Henry M. Levy and Ewan D. Tempero",
+  title =	 "{Modules, Objects, and Distributed Programming: Issues
+                  in RPC and Remote Object Invocation}",
+  journal =	 "Software --- Practice and Experience",
+  volume =	 21,
+  month =	 jan,
+  number =	 1,
+  pages =	 "77--90",
+  year =	 1991
+}
+
+@InProceedings{Liedtke:1993,
+  author =	 "Jochen Liedtke",
+  title =	 "{Improving IPC by Kernel Design}",
+  booktitle =	 "Proceedings of the 14th Symposium on Operating Systems
+                  Principles",
+  address =	 "Asheville, U.S.A.",
+  month =	 dec,
+  pages =        "175--188",
+  year =	 1993,
+  url =		 "ftp://borneo.gmd.de/pub/rs/sosp-14.ps"
+}
+
+@Article{Liedtke:1994,
+  author =	 "Jochen Liedtke",
+  title =	 "{A Short Note on Implementing Thread Exclusiveness and
+                  Address Space Locking}",
+  journal =	 "Operating Systems Review",
+  volume =       28,
+  number =       3,
+  pages =        "38--42",
+  month =	 jul,
+  year =	 1994,
+  url =		 "ftp://borneo.gmd.de/pub/rs/osr-28-3.ps"
+}
+
+@Article{Liedtke:1996,
+  author =	 "Jochen Liedtke",
+  title =	 "{On Microkernel Construction}",
+  journal =	 "Operating Systems Review",
+  volume =       29,
+  number =       5,
+  pages =        "237--250",
+  month =	 jan,
+  year =	 1996,
+  url =		 "http://borneo.gmd.de/~liedtke/L4/sosp95.ps"
+}
+
+@InProceedings{Madany:1989,
+  author =	 "Peter Madany and Roy H. Campbell and Vincent F. Russo
+                  and D. E. Leyens",
+  title =	 "{A Class Hierarchy for Building Stream-Oriented File
+                  Systems}",
+  booktitle =	 "Proceedings of the European Conference on
+                  Object-Oriented Programming",
+  pages =	 "311--328",
+  year =	 1989,
+  address =	 "Nottingham, U.K.",
+  month =	 mar,
+  url =
+                  "http://choices.cs.uiuc.edu/Papers/Conferences/Ecoop89.stream.file.pdf"
+}
+
+@TechReport{Maheshwari:1994,
+  author =	 "Umesh Maheshwari",
+  title =	 "{Extensible Operating Systems}",
+  institution =	 "MIT Laboratory for Computer Science",
+  year =	 1994,
+  type =	 "Area Exam Report",
+  address =	 "Cambridge, U.S.A.",
+  month =	 nov,
+  url =          "",
+  abstract =	 "To exploit the high performance afforded by the
+                  hardware, applications must be allowed to customize
+                  the operating system according to their needs. A
+                  pertinent question is: What interface should the
+                  operating system kernel provide to the user-level
+                  code? This interface should be efficient, extensible,
+                  and safe, but need not provide high-level
+                  abstractions. Abstractions and policies are better
+                  left to user-level libraries and servers. This paper
+                  tries to find the suitable kernel interface by
+                  studying two areas: First, the implications of placing
+                  the system code in libraries, servers, and the
+                  kernel. Second, the appropriate level of kernel
+                  support for protected allocation of the various... "
+}
+
+@Article{Marsh:1991,
+  author =	 "Brian D. Marsh and Michael L. Scott and Thomas
+                  J. LeBlanc and Evangelos P. Markatos",
+  title =	 "{First-class User-level Threads}",
+  journal =	 "Operating System Review",
+  year =	 1991,
+  volume =	 25,
+  number =	 5,
+  pages =	 "110--121",
+  month =	 oct,
+  url =          "http://www.acm.org/pubs/articles/proceedings/ops/121132/p110-marsh/p110-marsh.pdf"
+}
+
+@Article{Moessenboeck:1994,
+  author =	 "Hanspeter Mössenböck",
+  title =	 "{Extensibility in the Oberon System}",
+  journal =	 "Nordic Journal of Computing",
+  volume =	 1,
+  number =	 1,
+  pages =	 "77--93",
+  month =	 feb,
+  year =	 1994
+}
+
+@InProceedings{Montz:1995,
+  author =	 "Allen B. Montz and David Mosberger and Sean
+                  W. O'Malley and Larry L. Peterson and Todd
+                  A. Proebsting",
+  title =	 "{Scout: a Communications-oriented Operating System}",
+  booktitle =	 "Fifth Workshop on Hot Topics in Operating Systems ",
+  address =	 "Orcas Island, U.S.A.",
+  month =	 may,
+  pages =	 "",
+  year =	 1995,
+  url =
+                  "ftp://ftp.cs.arizona.edu/xkernel/Papers/scout_hotos.ps",
+  abstract =	 "Scout is new communication-centric operating
+                  system. The principle scout abstraction (the path) is
+                  an attempt to capture all of the operating system
+                  infrastructure necessary to insure that a given
+                  network connection can achieve high and predictable
+                  performance in the face of other connections and other
+                  system loads."
+}
+
+@InProceedings{Mueller:1993,
+  author =	 "Frank Mueller",
+  title =	 "{A Library Implementation of POSIX Threads under
+                  UNIX}",
+  booktitle =	 "Proceedings of the Winter 1993 USENIX Conference",
+  pages =	 "29--42",
+  year =	 1993,
+  address =	 "San Diego, U.S.A.",
+  month =	 jan,
+  url =          "http://www.informatik.hu-berlin.de/~mueller/ftp/pub/PART/pthreads_usenix93.ps.Z",
+  abstract =	 "Recently, there has been an effort to specify an IEEE
+                  standard for portable operating systems for open
+                  systems, called POSIX. One part of it, the POSIX
+                  1003.4a threads extension (Pthreads for short) [12],
+                  describes the interface for light-weight threads that
+                  rely on shared memory and have a smaller context frame
+                  than processes. This paper describes and evaluates the
+                  design and implementation of a library of Pthreads
+                  calls that is solely based on UNIX. It shows that a
+                  library implementation is feasible and can result in
+                  good performance. This work can also be used as a
+                  comparison of the performance of other
+                  implementations, or as a prototyping, testing, and
+                  debugging system in the regular..."
+}
+
+@Article{Mullender:1984,
+  author =	 "Sape J. Mullender and Andrew S. Tanenbaum",
+  title =	 "{Protection and Resource Control in Distributed
+                  Operating Systems}",
+  journal =	 "Computer Networks",
+  year =	 1984,
+  volume =	 8,
+  pages =	 "412--432",
+  month =	 nov
+}
+
+@Article{Mullender:1986,
+  author =	 "Sape J. Mullender and Andrew S. Tanenbaum",
+  title =	 "{The Design of a Capability-based Distributed
+                  Operating System}",
+  journal =	 "The Computer Journal",
+  volume =	 29,
+  number =	 4,
+  pages =	 "289--300",
+  year =	 1986
+}
+
+@Article{Mullender:1990,
+  author =	 "Sape J. Mullender and Guido van Rossum and Andrew
+                  S. Tanenbaum and Robbert van Renesse and Hans van
+                  Staveren",
+  title =	 "{Amoeba: a Distributed System for the 1990s}",
+  journal =	 "IEEE Computer",
+  volume =	 23,
+  number =	 5,
+  year =	 1990,
+  pages =	 "44--53",
+  month =	 may
+}
+
+@inproceedings{Nolte:1998,
+  author =	 "Jörg Nolte and Wolfgang Schröder-Preikschat",
+  title =	 "{Dual Objects -- An Object Model for Distributed
+                  System Programming}",
+  booktitle =	 "Proceedings of the Eigth ACM SIGOPS European Workshop,
+                  Support for Composing Distributed Applications",
+  year =	 1998,
+  url =		 "http://www.acm.org/sigops/EW98/papers.html"
+}
+
+@Book{Organick:1972,
+  author =	 "Elliott Organick",
+  title =	 "{The Multics System: an Examination of its Structure}",
+  publisher =	 "MIT Press",
+  address =	 "Cambridge, U.S.A.",
+  year =	 1972
+}
+
+@Article{Pike:1993,
+  author =	 "Rob Pike and Dave Presotto and Ken Thompson and Howard
+                  Trickey and Phil Winterbottom",
+  title =	 "{The Use of Name Spaces in Plan 9}",
+  journal =	 "Operating Systems Review",
+  volume =	 27,
+  number =	 2,
+  pages =	 "72--76",
+  month =	 apr,
+  year =	 1993,
+  url =		 "",
+  abstract =	 "Plan 9 is a distributed system built at the Computing
+                  Sciences Research Center of AT&T Bell Laboratories
+                  (now Lucent Technologies, Bell Labs) over the last few
+                  years. Its goal is to provide a production-quality
+                  system for software development and general
+                  computation using heterogeneous hardware and minimal
+                  software. A Plan 9 system comprises CPU and file
+                  servers in a central location connected together by
+                  fast networks. Slower networks fan out to
+                  workstation-class machines that serve as user
+                  terminals. Plan 9 argues that given a few carefully
+                  implemented abstractions it is possible to produce a
+                  small operating system that provides support for the
+                  largest systems on a variety of architectures and
+                  networks. The foundations of the system are built on
+                  two ideas: a per-process name space and a simple
+                  message-oriented file system protocol."
+}
+
+@Article{Pike:1995,
+  author =	 "Rob Pike and Dave L. Presotto and Sean Dorward and Bob
+                  Flandrena and Ken Thompson and Howard Trickey and Phil
+                  Winterbottom and",
+  title =	 "{Plan 9 from Bell Labs}",
+  journal =	 "Computing Systems",
+  volume =	 8,
+  number =	 2,
+  pages =	 "221--254",
+  year =	 1995,
+  url =		 ""
+}
+
+@Misc{Pike:2000,
+  author =	 "Rob Pike",
+  title =	 "{Systems Software Research is Irrelevant}",
+  howpublished = "Online",
+  month =	 feb,
+  year =	 2000,
+  note =	 "[http://cm.bell-labs.com/who/rob/utah2000.ps]"
+}
+
+@Book{Preikschat:1994,
+  author =	 "Wolfgang Schröder-Preikschat",
+  title =	 "{The Logical Design of Parallel Operating Systems}",
+  publisher =	 "Prentice-Hall",
+  address =	 "Englewood Cliffs, U.S.A.",
+  year =	 1994
+}
+
+@Article{Preikschat:1994a,
+  author =	 "Wolfgang Schröder-Preikschat",
+  title =	 "{PEACE - A Software Backplane for Parallel Computing}",
+  journal =	 "Parallel Computing",
+  volume =	 20,
+  number =	 10,
+  pages =	 "1471--1485",
+  year =	 1994
+}
+
+@Article{Pu:1988,
+  author =	 "Calton Pu and Henry Massalin and John Ioannidis",
+  title =	 "{The Synthesis Kernel}",
+  journal =	 "Computing Systems",
+  volume =	 1,
+  number =	 1,
+  pages =	 "11--32",
+  month =	 jan,
+  year =	 1988,
+  url =		 "ftp://ftp.cse.ogi.edu/pub/dsrg/synthetix/synt-1.ps.gz",
+  abstract =	 "The Synthesis distributed operating system combines
+                  efficient kernel calls with a high-level, orthogonal
+                  interface. The key idea is the use of a code
+                  synthesizer in the kernel to generate specialized
+                  (thus short and fast) kernel routines for specific
+                  situations. We have three methods to synthesize code:
+                  Factoring Invariants to bypass redundant computations;
+                  Collapsing Layers to eliminate unnecessary procedure
+                  calls and context switches; and Executable Data
+                  Structures to shorten data structure traversal
+                  time. Applying these methods, the kernel call
+                  synthesized to read /dev/mem takes about 15
+                  microseconds on a 68020 machine. A simple model of
+                  computation called a synthetic machine supports
+                  parallel and distributed processing. The interface to
+                  synthetic machine consists of six operations on four
+                  kinds of objects. This combination of a high-level
+                  interface with the code synthesizer avoids the
+                  traditional trade-off in operating systems between
+                  powerful interfaces and efficient implementatios."
+}
+
+@InProceedings{Pu:1995,
+  author =	 "Calton Pu and Tito Autrey and Andrew Black and Charles
+                  Consel and Crispin Cowan and Jon Inouye and Lakshmi
+                  Kethana and Jonathan Walpole and Ke Zhang",
+  title =	 "{Optimistic Incremental Specialization: Streamlining a
+                  Commercial Operating System}",
+  booktitle =	 "Proceedings of the 15th ACM Symposium on Operating
+                  System Principles",
+  address =	 "Copper Mountain, U.S.A.",
+  pages =	 "267--284",
+  month =	 dec,
+  year =	 1995,
+  keywords =	 "Synthetix",
+  url =		 "ftp://cse.ogi.edu/pub/dsrg/synthetix/sosp95.ps.gz"
+}
+
+@InProceedings{Reid:2000,
+  author =	 "Alastair Reid and Matthew Flatt and Leigh Stoller and
+                  Jay Lepreau and Eric Eide",
+  title =	 "{Knit: Component Composition for Systems Software}",
+  booktitle =	 "Proceedings of the Fourth Symposium on Operating
+                  Systems Design and Implementation",
+  pages =	 "347--360",
+  year =	 2000,
+  address =	 "San Diego, U.S.A.",
+  month =	 oct,
+  url =		 "http://www.cs.utah.edu/flux/papers/knit-osdi00.pdf",
+  abstract =	 "Knit is a new component definition and linking
+                  language for systems code. Knit helps make C code more
+                  understandable and reusable by third parties, helps
+                  eliminate much of the performance overhead of
+                  componentization, detects subtle errors in component
+                  composition that cannot be caught with normal
+                  component type systems, and provides a foundation for
+                  developing future analyses over C-based components,
+                  such as cross-component optimization. The language is
+                  especially designed for use with component kits, where
+                  standard linking tools provide inadequate support for
+                  component configuration. In particular, we developed
+                  Knit for use with the OSKit, a large collection of
+                  components for building low-level systems. However,
+                  Knit is not OSKit-specific, and we have implemented
+                  parts of the Click modular router in terms of Knit
+                  components to illustrate the expressiveness and
+                  flexibility of our language. This paper provides an
+                  overview of the Knit language and its applications."
+}
+
+@MastersThesis{Roemke:2001,
+  author =	 "Sascha Römke",
+  title =	 "{Ein XML-basiertes Konfigurationswekzeug für
+                  Betribssysteme am Baispiel EPOS}",
+  school =	 "Otto-von-Guericke-Universität",
+  year =	 2001,
+  type =	 "Studienarbeit",
+  address =	 "Magdeburg, Germany"
+}
+
+@InProceedings{Rossum:1990,
+  author =	 "Guido van Rossum",
+  title =	 "{AIL - A Class-Oriented Stub Generator for Amoeba}",
+  booktitle =	 "Workshop on Progress in Distributed Operating Systems
+                  and Distributed Systems Management",
+  pages =	 "13--21",
+  year =	 1990,
+  volume =	 443,
+  series =	 "Lecture Notes in Computer Science"
+}
+
+@article{Rozier:1988,
+  author =	 "M. Rozier and V. Abrossimov and F. Armand and I. Boule
+                  and M. Gien and M. Guillemont and F. Herrman and
+                  C. Kaiser and S. Langois and P. Leonard and
+                  W. Neuhauser",
+  title =	 "{Overview of the CHORUS Distributed Operating
+                  Systems}",
+  journal =	 "Computing Systems Journal",
+  volume =	 1,
+  number =	 4,
+  pages =	 "305-370",
+  year =	 1988
+}
+
+@Book{Rubini:1997,
+  author =	 "Alessandro Rubini",
+  title =	 "{Linux Device Drivers}",
+  publisher =	 "O'Reilly",
+  address =	 "Sebastopol, U.K.",
+  year =	 1997
+}
+
+@Book{Rubini:2001,
+  author =	 "Alessandro Rubini and Jonathan Corbet",
+  title =	 "Linux Device Drivers",
+  publisher =	 "O'Reilly",
+  edition =	 2,
+  year =	 2001
+}
+
+@InProceedings{Schmidt:1991,
+  author =	 "Henning Schmidt",
+  title =	 "{Making PEACE a Dynamic Alterable System}",
+  booktitle =	 "Proceedings of the Second European Distributed Memory
+                  Computing Conference",
+  pages =	 "422--431",
+  address =	 "Munich, Germany",
+  month =	 apr,
+  year =	 1991
+}
+
+@InProceedings{Schmidt:1994,
+  author =	 "Henning Schmidt",
+  title =	 "{Strategies Towards Dynamic Alterability}",
+  booktitle =	 "Proceedings of the Twenty-Seventh Annual Hawaii
+                  International Conference on System Sciences",
+  pages =	 "",
+  address =	 "Maui, U.S.A.",
+  month =	 jan,
+  year =	 1994,
+}
+
+@InProceedings{Schoen:1998,
+  author =	 "Friedrich Schön and Wolfgang Schröder-Preikschat and
+                  Olaf Spinczyk and Ute Spinczyk",
+  title =	 "{Design Rationale of the PURE Object-Oriented Embedded
+                  Operating System}",
+  booktitle =	 "Proceedings of the International IFIP WG 10.3/WG 10.5
+                  Workshop on Distributed and Parallel Embedded Systems",
+  pages =	 "",
+  address =	 "Paderborn, Germany",
+  month =	 oct,
+  year =	 1998,
+  url =		 "http://www-ivs.cs.uni-magdeburg.de/bs/papers/dipes98/dipes98.ps"
+}
+
+@PhdThesis{Schroeder:1986,
+  author =	 "Wolfgang Schröder",
+  title =	 "{A Family of UNIX-Like Operating Systems -- Use of
+                  Processes and the Message-Passing Concept in
+                  Structured Operating System Design},",
+  school =	 "Technical University of Berlin",
+  year =	 1986,
+  address =	 "Berlin, Germany"
+}
+
+@InProceedings{Seltzer:1996,
+  author =	 "Margo I. Seltzer and Yasuhiro Endo and Christopher
+                  Small and Keith A. Smith",
+  title =	 "{Dealing with Disaster: Surviving Misbehaved Kernel
+                  Extensions}",
+  booktitle =	 "Proceedings of the 1996 Symposium on Operating System
+                  Design and Implementation",
+  address =	 "San Diego, U.S.A.",
+  pages =	 "213--227",
+  month =	 oct,
+  year =	 1996,
+  url =          "http://www.eecs.harvard.edu/~vino/vino/osdi-96/paper.ps"
+}
+
+@Book{Silberschatz:1998,
+  author =	 "Abraham Silberschatz and Peter Galvin and James Peterson",
+  title =	 "{Operating Systems Concepts}",
+  publisher =	 "John Wiley and Sons",
+  year =	 1998,
+  edition =	 "fifth",
+  isbn =         0471364142
+}
+
+@InProceedings{Small:1995,
+  author =	 "Christopher Small and Margo Seltzer",
+  title =	 "{Structuring the Kernel as a Toolkit of Extensible,
+                  Reusable Components}",
+  booktitle =	 "Proceedings of the 1995 International Workshop on
+                  Object Orientation in Operating Systems",
+  pages =	 "134--137",
+  year =	 1995,
+  address =	 "Lund, Sweden",
+  month =	 aug,
+  url =          "http://www.eecs.harvard.edu/~vino/vino/papers/iwooos-95.ps",
+  abstract =	 "Applications often require functionality that is
+                  implemented in the kernel, but is not directly
+                  available to the user level. While extensible
+                  operating systems allow kernel functionality to be
+                  augmented, we believe that the emphasis on
+                  extensibility is misplaced. Applications should be
+                  able to reuse kernel code directly and the emphasis
+                  should be placed on designing a kernel with that reuse
+                  in mind. The advantage of structuring the kernel as a
+                  set of reusable, extensible tools is that applications
+                  can avoid re-implementing functionality that is
+                  already present in the kernel. This will lead to
+                  smaller applications, fewer lines of total code, and a
+                  more unified computing environment that ..."
+}
+
+@InProceedings{Steindl:1997,
+  author =	 "Christoph Steindl",
+  title =	 "{Reflection in Oberon}",
+  booktitle =	 "Proceedings of the Joint Modular Languages Conference",
+  pages =	 "282--296",
+  address =	 "Linz, Austria",
+  month =	 mar,
+  year =	 1997,
+  url =          "http://www.ssw.uni-linz.ac.at/Research/Projects/Reflection/JMLC97/meta.ps",
+  abstract =	 "We introduce metaprogramming facilities into the
+                  Oberon V4 system. Metaprogramming means that a module
+                  can access the structure of other modules (i.e.,
+                  procedures, types, run-time data) at run time. We
+                  discuss how type safety can be enforced in an
+                  environment with strong typing. Finally we show how
+                  metaprogramming can be used to implement an
+                  easy-to-use database interface and conclude with a
+                  comparison with other metaprogramming systems for
+                  statically-typed programming languages."
+}
+
+@PhdThesis{Szyperski:1992,
+  author =	 "Clemens A. Szyperski",
+  title =	 "{Insight Ethos: On Object Orientation in Operating
+                  Systems}",
+  school =	 "Swiss Federal Institute of Technology",
+  address =	 "Zurich, Switzerland",
+  year =	 1992
+}
+
+@Book{Tanenbaum:1987,
+  author =	 "Andrew S. Tanenbaum",
+  title =	 "Operating Systems Design and Implementation",
+  publisher =	 "Prentice-Hall",
+  year =	 1987
+}
+
+@Book{Tanenbaum:1992,
+  author =	 "Andrew S. Tanenbaum",
+  title =	 "Modern Operating Systems",
+  publisher =	 "Prentice-Hall",
+  year =	 1992
+}
+
+@Book{Tanenbaum:1994,
+  author =	 "Andrew S. Tanenbaum",
+  title =	 "Distributed Operating Systems",
+  publisher =	 "Prentice-Hall",
+  year =	 1994,
+  isbn =         0132199084
+}
+
+@Book{Tanenbaum:1997,
+  author =	 "Andrew S. Tanenbaum and Albert S. Woodhull",
+  title =	 "Operating Systems",
+  publisher =	 "Prentice-Hall",
+  year =	 1997,
+  edition =      "second",
+  isbn =         0136386776
+}
+
+@Article{Tennenhouse:2000,
+  author =	 "David Tennenhouse",
+  title =	 "{Proactive Computing}",
+  journal =	 "Communications of the ACM",
+  volume =	 43,
+  number =	 5,
+  pages =	 "43--50",
+  month =	 may,
+  year =	 2000
+}
+
+@Article{Thompson:1974,
+  author =	 "Ken Thompson and Dennis M. Ritchie",
+  title =	 "{The UNIX Timesharing System}",
+  journal =	 "Communications of the ACM",
+  volume =	 17,
+  number =	 7,
+  pages =	 "365--375",
+  year =	 1974
+}
+
+@Article{Thompson:1978,
+  author =	 "Ken Thompson",
+  title =	 "{UNIX Implementation}",
+  journal =	 "The Bell System Technical Journal",
+  volume =	 57,
+  number =	 6,
+  pages =	 "1932--1946",
+  month =        jul,
+  year =	 1978,
+  url =          "http://www.spelman.edu/~compsci/cis343/docs/unix-implement.ps"
+}
+
+@TechReport{Thomsen:2001,
+  author =	 "Casper Thomsen and Dennis Kristensen and Martin Dalum
+                  and Dennis Andersen and and Michael Kaldal and Nicolaj
+                  Søndberg-Madsen and Thorsten Jørgen Ottosen",
+  title =	 "ChaOS --- An RCX OS where chaos is only in the name",
+  institution =	 "Aalborg University",
+  year =	 2001,
+  number =	 "E2-113-f1a",
+  month =	 may,
+  url =		 "http://www.cs.auc.dk/~nesotto/report.ps",
+  abstract =	 " This report describes the development of an operating
+                  system for the LEGO RCX entitled ChaOS. ChaOS has a
+                  monolithic kernel written in C++. The analysis phase
+                  describes hardware architecture, structure of the
+                  operating system, memory- and process management. The
+                  analysis considers general OS theory, but focus is on
+                  the RCX platform. Two other RCX OSs are assessed for
+                  each subject. Development of an operating system
+                  introduce classic problems as deadlock, live-lock and
+                  starvation which have also been taken into
+                  consideration. The design phase describes a kernel
+                  based on a ``we brake for nob ody'' policy. This
+                  promotes a kernel without priority inversion. Four
+                  different schedulers can be chosen from. Strong binary
+                  semaphores ensures mutual exclusion on shared
+                  resources. The design and implementation uses
+                  assertions according to the Design by Contract
+                  scheme. The semaphores have been verified in Spin and
+                  a stress test have been executed to conclude on the
+                  stability of ChaOS. "
+}
+
+@MastersThesis{Tientcheu:1999,
+  author =	 "Gilles Pokam Tientcheu",
+  title =	 "{Communication Strategies to Support Medium/Fine Grain
+                  Parallelism on SMP Workstations Clustered by High
+                  Speed Networks}",
+  school =	 "Technical University of Berlin",
+  year =	 1999,
+  type =	 "Diplomarbeit",
+  address =	 "Berlin, Germany",
+  month =	 dec
+}
+
+@Article{Torrellas:1993,
+  author =	 "Josep Torrellas and Andrew Tucker and Anoop Gupta",
+  title =	 "{Benefits of Cache-Affinity Scheduling in
+                  Shared-Memory Multiprocessors: a Summary}",
+  journal =	 "ACM Performance Evaluation Review",
+  year =	 1993,
+  volume =	 21,
+  number =	 1,
+  month =	 jun,
+  pages =	 "272--274",
+  url =          "http://www.acm.org/pubs/articles/proceedings/metrics/166955/p272-torrellas/p272-torrellas.pdf"
+}
+
+@Article{Tucker:1989,
+  author =	 "Andrew Tucker and Anoop Gupta",
+  title =	 "{Process Control and Scheduling Issues for
+                  Multiprogrammed Shared-Memory Multiprocessors}",
+  journal =	 "Operating System Review",
+  year =	 1989,
+  volume =	 23,
+  number =	 5,
+  pages =	 "159--166",
+  month =	 dec,
+  url =          "http://www.acm.org/pubs/articles/proceedings/ops/74850/p159-tucker/p159-tucker.pdf",
+  abstract =	 "Shared-memory multiprocessors are frequently used in a
+                  time-sharing style with multiple parallel applications
+                  executing at the same time. In such an environment,
+                  where the machine load is continuously varying, the
+                  question arises of how an application should maximize
+                  its performance while being fair to other users of the
+                  system. In this paper, we address this issue. We first
+                  show that if the number of runnable processes
+                  belonging to a parallel application significantly
+                  exceeds the effective number of physical processors
+                  executing it, its performance can be significantly
+                  degraded. We then propose a way of controlling the
+                  number of runnable processes associated with an
+                  application dynamically, to ensure good
+                  performance. The optimal number of runnable processes
+                  for each application is determined by a centralized
+                  server, and applications dynamically suspend or resume
+                  processes in order to match that number. A preliminary
+                  implementation of the proposed scheme is now running
+                  on the Encore Multimax and we show how it helps
+                  improve the performance of several applications. In
+                  some cases the improvement is more than a factor of
+                  two. We also discuss implications of the proposed
+                  scheme for multiprocessor schedulers, and how the
+                  scheme should interface with parallel programming
+                  languages."
+}
+
+@inproceedings{Wheat:1994,
+  author =	 "S. Wheat and others",
+  title =	 "{PUMA: An Operating System for Massively Parallel
+                  Systems}",
+  booktitle =	 "Proceedings of the Twenty-Seventh Anual Hawaii
+                  International Conference on System Sciences",
+  pages =	 "",
+  address =	 "Maui, U.S.A.",
+  month =	 jan,
+  year =	 1994
+}
+
+@Book{Wirth:1992,
+  author =	 "Niklaus Wirth and Jurg Gutknecht",
+  title =	 "{Project Oberon - The Design of an Operating System
+                  and Compiler}",
+  publisher =	 "Addison-Wesley",
+  address =	 "Reading, U.S.A.",
+  year =	 1992,
+  abstract =	 "This first-hand account of the design, development and
+                  implementation of Oberon completes the Oberon
+                  trilogy. The main design principle behind this project
+                  -- that few core Features: are necessary to produce a
+                  sophisticated computer system -- is amply illustrated
+                  as the story evolves into an account of the design and
+                  development of an integrated text and graphics system,
+                  an assembler, a compiler, programming tools, a file
+                  and print server and an electronic mail
+                  server. Contents: Historical background and
+                  motivation; Basic concepts and structure of the
+                  system; The tasking system; The display system; The
+                  text system; The module loader; The file system;
+                  Storage layout and management; Device drivers; The
+                  network; A dedicated server for file distribution,
+                  Electronic mail and printing; The compiler; A graphics
+                  editor; Building and Maintenance tools.",
+}
+
+@Article{Xu:1990,
+  author =	 "Jia Xu and David Lorge Parnas",
+  title =	 "{Scheduling Processes with Release Times, Deadlines,
+                  Precedence, and Exclusion Relations}",
+  journal =	 "IEEE Transactions on Software Engineering",
+  year =	 1990,
+  volume =	 16,
+  number =	 3,
+  pages =	 "360--369",
+  month =	 mar
+}
+
+@InProceedings{Yokote:1989,
+  author =	 "Yasuhiko Yokote and Fumio Teraoka and Mario Tokoro",
+  title =	 "{A Reflective Architecture for an Object-oriented
+                  Distributed Operating System}",
+  booktitle =	 "Proceedings of the European Conference on
+                  Object-Oriented Programming",
+  address =	 "Nottingham, U.K.",
+  pages =	 "89--106",
+  month =	 mar,
+  year =	 1989,
+  url =
+                  "ftp://ftp.csl.sony.co.jp/CSL/CSL-Papers/89/SCSL-TR-89-001.ps.Z"
+}
+
+@InProceedings{Yokote:1992,
+  author =	 "Yasuhiko Yokote",
+  title =	 "{The Apertos Reflective Operating System: The Concept
+                  and Its Implementation}",
+  booktitle =	 "Proceedings of the ACM Conference on Object-oriented
+                  Programming Systems, Languages and Aplications",
+  address =	 "Vancouver, Canada",
+  pages =	 "414--434",
+  month =	 oct,
+  year =	 1992,
+  url =
+                  "ftp://ftp.csl.sony.co.jp/CSL/CSL-Papers/92/SCSL-TR-92-014.ps.Z",
+  abstract =	 "This paper proposes a framework for constructing an
+                  operating system in an open and mobile computing
+                  environment. The framework provides object/metaobject
+                  separation and metahierarchy. In the framework, we
+                  view object migration as a basic mechanism to
+                  accomodate object heterogeneity. The relevance of the
+                  proposed framework to existing system structures is
+                  discussed. We then present a practical implementation
+                  of the Apertos operating system in this framework,
+                  where reflectors are introduced for metaobject
+                  programming and MetaCore for providing common
+                  primitives. We present some evaluation results of the
+                  Apertos operating system. We also present related work
+                  in terms of reflection mechanisms and systems."
+}
+
+@InProceedings{Yokote:1993,
+  author =	 "Yasuhiko Yokote",
+  title =	 "{Kernel Structuring for Object-oriented Operating
+                  Systems: The Apertos Approach}",
+  booktitle =	 "Proceedings of the International Symposium on Object
+                  Technologies for Advanced Software",
+  pages =	 "",
+  address =	 "Kanazawa, Japan",
+  month =	 nov,
+  year =	 1993,
+  url =          "ftp://ftp.csl.sony.co.jp/CSL/CSL-Papers/93/SCSL-TR-93-014.ps.Z",
+  abstract =	 "This paper addresses the issues faced when
+                  constructing an operating system and its kernel with
+                  object-oriented technology. We first propose
+                  object/metaobject separation, a means of constructing
+                  an object-oriented operating system and its
+                  kernel. This method divides the implementing system
+                  facilities and applications into two types: objects
+                  and metaobjects. This paper presents the concept of
+                  object/metaobject separation and discusses why
+                  object/metaobject separation is required in terms of
+                  limitations in the micro-kernel and object-oriented
+                  technologies. We also discuss an example of using
+                  object/metaobject separation as implemented in
+                  Apertos. This paper then proposes mechanisms which
+                  efficiently implement object/metaobject
+                  separation. These are characterized by meta-level
+                  context management, and are implemented in the Apertos
+                  operating system. Metalevel context management is
+                  designed to reduce the overhead of control transfer
+                  between an object and its metaspace. Here, metaobjects
+                  reflectors, MetaCore, Context, and Activity are
+                  introduced to represent the metahierarchy of an
+                  object's execution. Finally, we present the evaluation
+                  results of the Apertos implementation, and discuss the
+                  relationship with previous work."
+}
+
+@Article{Zhao:1987,
+  author =	 "Wei Zhao and Krithi Ramamritham and John A. Stankovic",
+  title =	 "{Scheduling Tasks with Resource Requirements in Hard
+                  Real-Time Systems}",
+  journal =	 "IEEE Transactions on Software Engineering",
+  year =	 1987,
+  volume =	 13,
+  number =	 5,
+  pages =	 "564--577"
+}
+
+@Manual{elf,
+  title =	 "{Tool Interface Standard: Executable and Linking
+                  Format Specification (version 1.2)}",
+  organization = "Intel",
+  month =	 may,
+  year =	 1995,
+  url =		 "http://x86.ddj.com/ftp/manuals/tools/elf.pdf"
+}
+
+
+

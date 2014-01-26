@@ -1,0 +1,31 @@
+On Component-Based Communication Systems for Clusters of Workstations
+
+Antônio Augusto Fröhlich 
+GMD-FIRST Kekuléstraße 7
+12489 Berlin, Germany
+guto@first.gmd.de
+
+Wolfgang Schröder-Preikschat
+University of Magdeburg
+Universitätsplatz 2
+39106 Magdeburg, Germany
+wosch@ivs.cs.uni-magdeburg.de }
+
+Most of the communication systems used to support high performance
+computing in clusters of workstations have been designed focusing on
+"the best" solution for a certain network architecture. However, a
+definitive best solution, independently of how well tuned to the
+underlying hardware it is, cannot exist, for parallel applications
+communicate in quite different ways. In this paper, we describe a novel
+design method that supports the construction of run-time systems as an
+assemblage of components that can be configured to closely match the
+demands of any given application. We also describe how this method has
+been deployed in the development of a communication system in the realm
+of EPOS, a project that aims at delivering automatically generated
+application-oriented run-time support systems.  The communication system
+in question has been implemented for a cluster of PCs interconnected
+with Myrinet, and corroborates the effectiveness of the proposed design
+method.
+
+Keywords: application-oriented system design, software components,
+cluster computing, user-level communication

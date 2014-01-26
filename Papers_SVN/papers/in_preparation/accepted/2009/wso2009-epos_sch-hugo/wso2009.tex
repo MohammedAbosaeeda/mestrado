@@ -1,0 +1,302 @@
+\documentclass[12pt]{article}
+
+\usepackage{sbc-template}
+\usepackage{graphicx,url}
+\usepackage[brazil]{babel}
+\usepackage[latin1]{inputenc}
+
+\let\algorithm\relax
+\let\endalgorithm\relax
+\usepackage[figure,linesnumbered]{algorithm2e}
+
+\usepackage{listings}
+\lstset{keywordstyle=\bfseries, flexiblecolumns=true,showstringspaces=false,breaklines=true, frame=single,numbers=left}   \lstloadlanguages{[ANSI]C++,HTML}
+\lstdefinestyle{prg} {basicstyle=\tiny, lineskip=-0.15ex, showspaces=false}
+
+\newcommand{\prg}[3][tbp]{
+\begin{figure}[#1]
+    \lstinputlisting[language=C++,style=prg]{fig/#2.cc}
+  \caption{#3\label{prg:#2}}
+\end{figure}
+}
+
+% para inserir uma figura, use \fig{label}{<nome_arq>}{<caption>}{opcoes graphic: width=5cm, scale=0.5}{opcoes figure: ht}
+%\newcommand{\fig}[5]{
+%    \begin{figure}[#5] {\centering{\includegraphics[#4]{fig/#2}}\par}
+%    \caption{#3} \label{fig:#1}
+%    \end{figure}
+%}
+
+%% TODO: Abstract e figura 1 ...
+
+\hyphenation{mo-delagem mode-lagem modela-gem reusabi-lidade reu-sabilidade ope-racional opera-cional operacio-nal es-calonador esca-lonador escalo-nador escalona-dor ele-mentos escalo-namento escalona-mento ca-racterizando carac-terizando}
+
+\newcommand{\fig}[4][ht]{
+  \begin{figure}[#1] {\centering\scalebox{#2}{\includegraphics{fig/#3}}\par}
+    \caption{#4\label{fig:#3}}
+  \end{figure}
+}
+\sloppy
+
+\title{Modelagem e Implementação de Escalonadores de Tempo Real para Sistemas Embarcados}
+
+\author{Hugo Marcondes\inst{1}, Rafael Cancian\inst{2}, Marcelo Stemmer\inst{2}, Antônio Augusto Fröhlich\inst{1} }
+
+
+\address{Laboratório de Integração de Software e Hardware -- Universidade Federal de Santa Catarina\\
+  Caixa Postal 476 -- 88049-900 -- Florianópolis -- SC -- Brazil
+\nextinstitute
+  Departamento de Automação e Sistemas -- Universidade Federal de Santa Catarina\\
+\email{\{hugo,guto\}@lisha.ufsc.br,\{cancian,marcelo\}@das.ufsc.br}
+}
+
+\begin{document}
+
+\maketitle
+
+ % To do.\\
+ % Natureza e escopo: Escalonadores de tarefa, escalonamento em tempo-real, co-design, modelagem de escalonadores\\
+ % Abordagem: apresentação de escalonadores e suas diferenças, apresentação de análise e modelagem que permite a substituição de diferentes escalonadores, incluindo escalonadores de tempo-real, e em software ou hardware, e discussão de aspectos de implementação relacionados à modelagem
+\begin{abstract}
+Embedded systems frequently require an integrated hardware/software design within real time constrains. One of the concerns of real time is the task management of a system, respecting several the real time constrains. This is achieved by an adequate selection of a scheduling policy. This work proposes the design and implementation of real time schedulers for embedded systems, within the context of Application Oriented System Design (AOSD). The use of AOSD enabled the development of schedulers where the policy is detached from the scheduling mechanism, fostering a better reusability of the scheduling components. The results shows that such design could be implemented to scale from 8 bits microcontrollers, 32 bits architectures and to specific hardware implemented design.
+\end{abstract}
+
+\begin{resumo}
+% Devido a suas características, sistemas embarcados freqüentemente demandam um projeto integrado de software e hardware com restrições de tempo real. O coração de um sistema de tempo real está no gerenciamento das tarefas que o compõem, e na garantia de que estas são executadas de acordo com as suas restrições temporais, realizada geralmente pela escolha de um política adequada para o escalonamento e a respectiva análise de escalonabilidade. Este trabalho apresenta a modelagem e implementação de escalonadores de tempo real para sistemas embarcados, no contexto do projeto de sistemas orientados à aplicação. Desta forma, foi possível implementar escalonadores onde a política de escalonamento e o seu mecanismo fossem separados, promovendo uma maior reusabilidade dos artefatos envolvidos e permitindo o suporte a algoritmos mais complexos e específicos, comuns no domínio de tempo real. Os resultados apresentados demonstram que esta implementação permite o uso de uma estrutura de escalonamento que escala desde microcontroladores de 8 bits, arquiteturas de 32 bits, e até mesmo para implementações dedicadas de hardware.
+\end{resumo}
+
+\section{Introdução}
+
+% adaptabilidade do SO no contexto de ES - application oriented
+%Sistemas operacionais provêm suporte de execução às aplicações.
+Sistemas operacionais para sistemas dedicados devem ser adaptados para prover apenas o suporte necessário a uma aplicação bem definida. Desta forma, fatorar o sistema operacional em componentes selecionáveis e configuráveis é uma boa alternativa para modelar e projetar sistemas operacionais dedicados. Por outro lado, sistemas dedicados freqüentemente demandam um projeto integrado de software e hardware e apresentam uma grande variedade em termos de arquiteturas de hardware, desde microcontroladores de 8 bits até ao projeto de chips dedicados (ASIC), dificultantdo a tarefa de modelar e implementar componentes reusáveis que possam ser efetivamente aplicados nessa gama de arquiteturas.
+
+% Escalonadores de tempo-real
+% Intrisicamente relacionada com temporizadores/ sincronizadores
+Dentre as principais famílias de componentes que formam um Sistema Operacional Embarcado (SOE) estão as tarefas, os temporizadores, os sincronizadores e os escalonadores de tarefas. Entretanto, essas famílias de componentes estão intrinsecamente relacionadas, de modo que, sem o devido projeto, um componente não pode ser modificado/adaptado sem influenciar os demais. No caso de sistemas de tempo real, tais componentes devem ainda ser projetados de forma a garantir restrições tais como a previsibildade do tempo máximo de execução destes.
+
+Mesmo numa única família, a adaptação de componentes para diferentes cenários de execução pode não ser fácil. Escalonadores de tarefas, por exemplo, apresentam uma miríade de algoritmos e características, incluindo escalonadores de tempo real altamente especializados e relativamente complexos. Nesses casos, permitir que um sistema operacional embarcado possua suporte a qualquer algoritmo (tempo real ou não), independente de suas características, sem exigir alterações no código de outras partes e componentes do sistema, é um grande desafio; principalmente em um sistema embarcado onde há grandes restrições de recursos computacionais.
+
+% Migração de algoritmos para HW  -> redução de sobrecusto
+Além das grandes diferenças algoritmicas e conceituais nos escalonadores, o projeto integrado de software e hardware desses sistemas permite que as funcionalidades tipicamente encontrada nos sistemas operacionais possam ser implementadas em hardware, seja através de dispositivos de lógica programável e até mesmo através do projeto de ASICs, sendo comum a implementação de escalonadores de tarefas em hardware, dado que esse é um componente executado com muita freqüência e fonte de sobrecusto (\textit{overhead}). Assim, um sistema operacional embarcado adaptável à aplicação deve permitir que esse componente seja implementado em ambos os domínios (software e hardware) de forma eficiente.
+
+% Tratar a variabilidade de escalonamento - AOSD
+Todos esses problemas não podem ser resolvidos simplesmente com uma implementação cuidadosa, e demandam um projeto de sistema adequado e engenhoso. Neste artigo nós focamos na descrição da análise e modelagem dos principais componentes relacionados aos escalonadores e aspectos avançados de implementação que, apenas juntos, permitem a solução adequada dos problemas apresentados. Para a modelagem foi utilizada a metodologia de engenharia de domínio, segundo a AOSD (\textit{Application Oriented System Design}) \cite{frohlich:2001}, que agrega uma série de paradigmas de programação para guiar o projeto de sistemas adaptados à aplicação. Nossas contribuições incluem um modelo eficiente e a apresentação de técnicas de implementação para adaptação de escalonadores em sistemas operacionais embarcados orientados à aplicação, além de permitir sua execução em diferentes arquiteturas, incluindo pequenos microcontroladores de 8 bits.
+%<< (de alguma forma, acho que deveria ser dito que a maioria dos trabalhos publicados trata de modelos teóricos, mas não de implementações funcionais, e implementar pode não ser tão direto e óbvio como se pode pensar) >>
+
+% Estrutura
+Este artigo está organizado da seguinte forma: A seção 2 apresenta conceitos e a descrição de alguns escalonadores encontrados na bibliografia, bem como a descrição das principais técnicas utilizadas neste trabalho. As seções 3 e 4 apresentam o desenvolvimento realizado e resultados alcançados, o que inclui o modelo conceitual básico e aspectos da implementação realizada. Por fim, a seção 5 apresenta algumas conclusões e considerações finais.
+
+
+\section{Fundamentação e Trabalhos Relacionados}
+
+%RASCUNHO DO PARÁGRAFO: Contextualizar as possíveis diferenças entre SOs em relação a tarefas e escalonadores: mono tarefa, tarefas cooperantes, tarefas concorrentes. Necessidade de escalonadores no último caso, que necessitam de temporizadores e sincronizadores.
+%Sistemas operacionais embarcados devem adaptar-se às necessidades das aplicações as quais provêem suporte de execução, de forma a exigir o mínimo de recursos computacionais. Essas adaptações costumam exigir alterações em muitos componentes do sistema, pois estes estão interrelacionados. Assim, por exemplo, podem necessitar prover suporte para mono-tarefa, tarefas cooperantes ou tarefas concorrentes. Apenas nesse último caso precisam de escalonadores de tarefas, que podem ser implementados por algoritmos muito distintos, podem ser separados em políticas e mecanismos, podem ser de prioridade fixa ou dinâmica, preemptivos ou não, entre outras distinções \cite{Deitel:2005} \cite{Tanenbaum:2000} \cite{Silberschatz:2000}. Além disso, escalonadores precisam de gerenciadores de tempo como alarmes que, por sua vez, precisam de temporizadores. Escalonadores também precisam conhecer informações específicas das tarefas que irão escalonar (o modelo da tarefa), como prioridade, tempo de chegada, deadline, período, entre várias outras, e isso depende de seu algoritmo. Também as tarefas concorrentes precisam de mecanismos de sincronização, como semáforos ou mutexes que, por sua vez, também dependem dos escalonadores; por fim, se forem sincronizadores de tempo real, também necessitarão de temporizadores (para \textit{timeouts} em operações \texttt{P()}, por exemplo) e de funcionalidade diferenciada (para tratar a inversão de prioridade, por exemplo) \cite{buttazzo:97}.
+
+%apresentar alguns algoritmos de escalonamento
+O escalonamento de tarefas é considerado o coração de um sistema operacional, e dezenas de diferentes escalonadores têm sido propostos, principalmente escalonadores de tempo real para classes de aplicações específicas. Muitos escalonadores podem ser implementados através da ordenação em uma fila de tarefas prontas, conforme um critério determinado. Isso inclui os escalonadores mais conhecidos, como FIFO, alternância circular (\textit{round-robin}), prioridade, SPF (\textit{Shortest Process First}), RM (\textit{Rate Monotonic}), EDF (\textit{Earliest Deadline First}) entre vários outros \cite{Deitel:2005}. Entretanto, outros algoritmos são muito mais complexos. Algoritmos como DSS (\textit{dynamic sporadic server}) e \textit{dynamic priority exchange server} \cite{buttazzo:97} permitem o uso de filas separadas para tarefas períodicas e aperiódicas e também que pelo menos uma tarefa periódica especial atenda tarefas aperiódicas com regras específicas de temporização, consumo e concessão de ``créditos'' (\textit{budgets}); Algoritmos como \textit{Elastic Task Model} \cite{buttazzo:98} permitem mudar parâmetros das tarefas, como seu período, para adaptar-se à carga atual do sistema. Vários outros exemplos poderiam ilustrar as grandes diferenças entre as dezenas de escalonadores de tarefas propostos na literatura, de modo que suportá-los de forma transparente não é uma tarefa óbvia.
+
+Por sua importância, vários sistemas operacionais embarcados já permitem a adaptação de seus escalonadores, mesmo dinamicamente. Entretanto, essa adaptação normalmente restringe-se a alguns poucos algoritmos específicos que alteram apenas a ordenação de uma fila, como FIFO, \textit{round-robin}, prioridade, EDF e RM. Algumas poucas soluções permitem a subtituição por algoritmos mais elaborados. Entre elas está o S.Ha.R.K. (uma evolução do Hartik) \cite{Shark:2008}, que inclui algoritmos como PS (\textit{Polling Server}), DS (\textit{Deferrable Server}), SS (\textit{Sporadic Server}), CBS (\textit{Constant Bandwidth Server}) e CBS-FT (\textit{Fault Tolerant CB}). Além disso, muitos sistemas operacionais de tempo real usam algoritmos de escalonamento que não consideram o prazo máximo de execução das tarefas (\textit{deadline}), ou seja, usam escalonadores não tempo real para escalonar tarefas tempo real. Entretanto, além de exigir garantias de atendimento dos prazos das tarefas, muitas aplicações embarcadas de tempo real exigem ainda mais dos escalonadores. Dentre vários exemplos, podemos citar aplicações multimídia, que exigem que a taxa de execução das tarefas de vídeo e áudio seja constante (minimizando o \textit{jitter}). Para atender esse tipo de exigência faz-se necessária a utilização de algoritmos específicos, como o CBS \cite{buttazzo:98}, já que os algoritmos usuais não são adequados, pois desconsideram totalmente o \textit{jitter}. Disso conclui-se que não há um suporte adequado a esse tipo de aplicação quando o SOE não provê escalonadores específicos, e esse é o caso de muitos SOE, inclusive de tempo real.
+
+% há várias alternativas de SOE e SOTR, mas muitas possuem grandes limitações
+Grande parte dos sistemas operacionais de tempo real disponíveis hoje, tal como o \textit{Embedded RT Linux}, QNX e VxWorks, tem seu uso prático em plataformas profundamente embarcadas limitado, devido ao tamanho do código gerado e a dificuldade de portabilidade. Além disso, a grande maioria dos sistemas operacionais de tempo real não consideram co-design em seu projeto e, portanto, ignoram as possibilidades de configuração do hardware. Assim, embora haja muitas alternativas supostamente disponíveis de sistemas operacionais de tempo real para sistemas embarcados, poucas realmente são aplicáveis a várias arquiteturas (principalmente aquelas com maiores restrições de recursos) e adaptáveis às necessidades das aplicações-alvo.
+
+Vários trabalhos de hardware/software co-design para sistemas de tempo real já foram propostos. Implementações em hardware para escalonadores de tarefas foram propostos, dentre outros, por \cite{mooney:2000}, que implementaram um escalonador cíclico, e por \cite{kuacharoen:2003}, que implementaram os algoritmos de prioridade, RM e EDF. Além do suporte para escalonamento de tarefas, \cite{kohout:2003} desenvolveram suporte para gerenciamento do tempo e de eventos, pois são atividades muito comuns aos STR e com alto paralelismo intrínseco. Entretanto, uma limitação desse suporte é que apenas escalonamentos com prioridade fixa são possíveis. O projeto \emph{HThread}~\cite{Anderson:2006} propõem um modelo de programação que permite que tarefas implementadas em hardware interajam com tarefas em software, através da implementação de escalonadores e dispositivos de sincronização em ambos os domínios (hardware e software). Outros tipos de suporte também foram propostos, como o de gerenciamento de memória \cite{shalan:2000} e o de protocolos de acesso a recurso \cite{akgul:2003}, que implementa o protocolo de herança de prioridade para evitar \textit{deadlocks} e o bloqueio ilimitado de tarefas. %Suportes mais completos incluem conjuntamente o escalonamneto, comunicação inter-processos, gerenciamento de interrupções, gerenciamento de recursos, sincronização e gerenciamento do tempo. Esse suporte em hardware costuma ser chamado de Unidade de Tempo Real - RTU (\textit{Real-Time Unit}).
+
+%\fig{mediator_ip}{O uso de mediadores de hardware para inferir IPs \cite{polpeta:2005}.}{width=10cm}
+
+%Suportes mais completos incluem conjuntamente o escalonamneto, comunicação inter-processos, gerenciamento de interrupções, gerenciamento de recursos, sincronização e gerenciamento do tempo. Esse suporte em hardware costuma ser chamado de Unidade de Tempo Real - RTU (\textit{Real-Time Unit}). As RTUs normalmente são acessadas através de registradores mapeados em memória contrados por um \textit{driver} único, que permite o programador acessar o hardware. Apesar de ser possível, não se tem conhecimento de uma interface para essas características de TR que tornem seu mecanismo de acesso transparente ao programador da aplicação.
+
+Nesse cenário, o EPOS (\textit{Embedded Parallel Operating System}) surge como uma alternativa viável de sistema operacional de tempo real multiplataforma para sistemas embarcados. O EPOS compreende um \textit{framework} e ferramentas para geração de sistemas operacionais, sendo um produto da \textit{Application-Oriented System Design} (AOSD)~\cite{frohlich:2001}, que combina diversos paradigmas de projeto que visam guiar o desenvolvimento de componentes de software altamente adaptaveis e reutilizáveis. A AOSD incluiu avanços como os adaptadores de cenários \cite{frohlich:2000} e os mediadores de hardware \cite{polpeta:2004} que permitem grande eficiência na geração automática de sistemas operacionais dedicados à aplicação. Posteriormente o EPOS foi expandido para gerar automaticamente não apenas o suporte de software, mas também o suporte de hardware (IPs - \textit{Intelectual Properties}) necessários e suficientes para a aplicação, ou seja, a geração automática de SoCs (\textit{Systems-on-a-chip}) orientadas à aplicação, já detalhado em publicações anteriores \cite{polpeta:2005}. Atualmente EPOS tem portes funcionais para diversas arquiteturas entre elas, IA32, PPC, SparcV8, MIPS e AVR.
+
+\section{Análise e Modelagem}
+
+
+%A figura \ref{fig:diag} apresenta algumas dessas interrelações entre componentes que dificultam a adaptação eficiente de um sistema operacional embarcado.
+%\fig{.45}{diag}{Interrelação entre algumas famílias de componentes de um sistema operacional}
+
+% Realizado a engenharia de domínio de forma a identificar
+O processo de análise e modelagem de escalonadores de tarefas tempo real iniciou com a realização da engenharia deste domínio, de acordo com a AOSD, de forma a identificar as principais semelhanças e diferenças entre os conceitos do domínio, viabilizando desta forma a identificação das entidades que compõem o domínio de escalonamento de tempo real. A figura~\ref{fig:sch_classmodel} apresenta o modelo conceitual de classes destas entidades.
+
+% --> INCLUIR A MULTIPLICIDADE NA ASSOCIAÇÃO ENTRE ALARM E TIMER %
+\fig{0.8}{sch_classmodel}{Modelo proposto para escalonadores de tarefas}
+
+Neste modelo conceitual, as tarefas são representadas através da classe \texttt{Thread}, que define o fluxo de execução da tarefa, implementando as funcionalidades tradicionais deste tipo de abstração encontrada na literatura. Esta classe também atende apenas aos requisitos de tarefas aperiódicas. A definicação de uma tarefa periódica é realizada através de uma especialização da classe \texttt{Thread} que agrega a esta mecanismos para a reexecução do fluxo de forma periódica, através do uso da abstração \texttt{Alarm}, responsável por reativar a tarefa sempre que um novo período se inicia. A classe \texttt{Alarm} por sua vez utiliza um \texttt{Timer} que irá fornecer o gerenciamento da passagem do tempo para o \texttt{Alarm}. Cada \texttt{PeriodicThread} possui seu próprio \texttt{Alarm} (embora alarmes possam existir sem threads periódicas), que podem compartilhar o(s) \textit{timer(s)} da arquitetura. Cabe destacar que este é um modelo conceitual, e não um modelo de implementação. 
+Assim, por exemplo, embora um \texttt{Alarm} conceitualmente utilize um \texttt{Timer} de hardware, essa associação exige a implementação de um mediador de hardware (\textit{driver}) do \texttt{Timer}, que não aparece no modelo. Outras classes relacionadas também não foram apresentadas pois não estão diretamente associadas ao escalonador, foco deste trabalho.
+
+As classes \texttt{Scheduler} e \texttt{SchedulingCriteria} definem a estrutura para realizar o escalonamento das tarefas. Ressalta-se umas das principais diferenças entre as abordagem tradicionais de modelagem de escalonadores, que geralmente apresentam uma hierárquia de especializações de um escalonador genérico, de forma a extende-lo para outras políticas de escalonamento. De forma a reduzir a complexidade de manutenção do código, geralmente ocasionada pelo uso de uma hierárquia complexa de especializações, assim como promover o reuso de código, o modelo separa a sua política de escalonamento (\textit{scheduling criteria}) de seu mecanismo (implementação de filas). Esta separação é uma decorrência do processo de engenharia de domínio que permitiu identificar os aspectos comuns a todas as políticas de escalonamento, permitindo a separação destes aspectos (contidos no componente \texttt{Scheduler}) da caracterização de tais políticas (suas diferenças, expressas no componente \texttt{SchedulingCriteria}).
+
+Esta separação entre o mecanismo e a política de escalonamento foi fundamental para a implementação de escalonadores em hardware. De fato, o escalonador em hardware implementa apenas o mecanismo de escalonamento, que realiza a ordenação das tarefas baseado na política selecionado. Isto permite que o mesmo componente em hardware possa ser utilizado independente da política selecionada. A separação do mecanismo de escalonamento e a sua política é realizada através da separação do algoritmo de ordenamento e o mecanismo de comparação entre os elementos com compõem a lista do escalonador. Desta forma, cada política de escalonamento define a maneira como os elementos serão ordenados na respectiva fila.
+
+% Config Features - Elastic Scheduling / Preemption / EnergyAware / AdmissionControl
+Adicionalmente, durante o processo de análise e de engenharia de domínio foi identificada uma série de características que, segundo a AOSD, definem propriedades configuráveis (\texttt{configurable features}) \cite{frohlich:2001} de seus componentes. De fato, tais características representam pequenas variações de uma entidade do domínio que podem ser ativadas ou não, alterando de forma sutil o comportamento do mesmo. Dentre tais propriedades configuráveis, foi identificada a característica do escalonamento ser preemptivo, o controle de admissão das tarefas, assim como a consideração de parâmetros de consumo de energia, permitindo que o mecanismo realize também políticas de qualidade de serviço (QoS)~\cite{Wiedenhoft:08}.
+
+\fig{0.57}{sch_seq_reschedule}{Diagrama de seqüência do reescalonamento de tarefas.}
+
+Outra característica identificada é relativa aos escalonadores que precisam alterar propriedades do modelo de tarefas utilizado. Conforme visto na seção de fundamentação, algoritmos de escalonamento elástico (como o \textit{elastic task model}), permitem que o período das tarefas periódicas possam ser aumentados, caso a taxa de utilização da CPU esteja alta, e depois restaurados. Outros escalonadores não triviais, como o CBS e DSS possuem característica análoga. Essa característica é modelada como uma propriedade configurável aplicável aos \texttt{SchedulingCriteria} relativos a tarefas periódicas, assim como a classe \texttt{PeriodicThread}, habilitando funções que alteram a periodicidade ou outra propriedade das tarefas, uma vez que a política de escalonamento a solicite. Desta forma, mesmo algoritmos complexos podem ser suportados e adaptados sem exigir especializações de classes que complicariam o projeto.
+
+De forma a ilustrar as interações entre os componentes do escalonador proposto, a figura~\ref{fig:sch_seq_reschedule} apresenta a interação dos componentes durate o rescalonamento ocorrido quando a fatia de tempo concedida para a tarefa em execução termina. Neste contexto, o \texttt{Timer} é responsável por gerar interrupções periódicas, que são contadas pelo \texttt{Alarm}. Quando o estouro da fatia de tempo concedido a tarefa atual é expirado, o \texttt{Alarm} invoca o método da classe \texttt{Thread} para solicitar o reescalonamento das tarefas. Este por sua vez irá verificar qual é a tarefa que está em atual execução, assim como invocar o método \emph{choose()} do \texttt{Scheduler}. Este retorna um ponteiro para a tarefa que deve ser executada. Neste ponto é realizada uma verificação para identificar se é necessário realizar uma troca de contexto de execução para uma tarefa de maior prioridade. Caso a troca seja necessária, os estados das tarefas envolvidas no processo são atualizados e uma troca de contexto é realizada na \texttt{CPU}; caso contrário o processo finaliza, mantendo a tarefa atual em execução.
+
+Novamente, ressalta-se que a figura~\ref{fig:sch_seq_reschedule} representa um modelo conceitual, e não de implementação. As classes \texttt{Timer} e \texttt{CPU} apresentadas representam hardware, embora possuam implementação de seus respectivos mediadores em software. As mensagens \texttt{interrupt} e \texttt{handler}, deste modo, não representam métodos implementados em software, mas sim o sinal elétrico de interrupção e a invocação, pelo hardware, do tratador dessa interrupção, respectivamente. A mensagem \texttt{switch-context}, por sua vez, corresponde a um método implementado no mediador de hardware da CPU.  %%% --> ENTÃO O OBJETO :CPU REPRESENTA TANTO HARDWARE QUANTO SOFTWARE. TALVEZ PRECISE SER SEPARADO PARA NÃO DAR CONFUSÃO %
+
+%RASCUNHO DO PARÁGRAFO: Finalizar seção, fazendo um link com desenvolvimento e implementação. Citar outros aspectos da modelagem que sejam importantes, talvez citando exemplos, etc
+
+\section{Implementação e Resultados}
+
+%RASCUNHO: Descrição da implementação dos componentes
+Esta seção apresenta os detalhes de implementação dos principais componentes do escalonador proposto, em especial a implementação do mecanismo de escalonamento em software e em hardware. Em seguida é apresentado como as principais políticas de escalonamento baseado foram implementadas através das \texttt{SchedulingCriteria}.
+
+\subsection{Escalonador em software}
+
+A implementação do escalonador em software segue o modelo tradicional de lista. Esta lista pode ser configurada para ser implementada utilizando uma ordenação convencional de seus elementos, assim como uma ordenação de forma relativa, onde cada elemento armazena o seu parâmetro de ordenamento na fila pela diferença deste com o elemento anterior, ou seja, seu parâmetro será sempre relativo ao elemento anterior, e assim por diante. Esta estrutura se torna especialmente interessante na implementação de políticas que possuem o seu ordenamento influenciado pela passagem do tempo, como o algoritmo EDF. Uma vez que o tempo é sempre crescente (como o \textit{deadline} absoluto, critério utilizado pelo EDF), a utilização de uma lista convencional resultará em um estouro do limite das variáveis após um certo tempo. Esse tempo pode ser de apenas algumas horas, dependendo da freqüência, em um microcontrolador de 8 bits, causando o comportamento incorreto e inesperado do escalonador, o que é inadmissível em um sistema de tempo real. O uso de uma lista relativa nesses casos, elimina o problema de estouro de variável, cuja ocorrência é dificilmente detectada.
+%De forma a ilustrar com mais clareza essa questão considere a figura~\ref{fig:relative_scheduling}. Esta figura demonstra o comportamento da fila de escalonamento relativo após alguns eventos conforme será explicado.
+
+%\fig{0.9}{relative_scheduling}{Funcionamento da fila de escalonamento relativo.}
+
+%Considere o escalonamento EDF, e as seguintes tarefas possuindo os \emph{deadlines}: T1 - 10 ut, T2 - 15 ut e T3 - 23 ut, sendo \emph{ut} a abreviação de unidade de tempo. A figura~\ref{fig:relative_scheduling}(a) apresenta a fila de escalonamento no momento em que as três tarefas são ativadas. Nesta situação, a cabeça da fila apresenta o seu \emph{deadline} atual, e os demais elementos armazenam o seu \emph{deadline} relativo ao elemento anterior. Desta forma, o seu deadline efetivo é a soma dos valores armazenados em todos os elementos anteriores a ele. A cada ocorrência de uma unidade de tempo, o \emph{deadline} de todos os elementos são atualizados, contudo, por se tratar de uma fila relativa, para realizar essa atualização, bastar decrementar o valor do cabeça da fila, uma vez que o valor dos elementos seguintes estão todos ajustados em relação a este. A figura~\ref{fig:relative_scheduling}(b) apresenta a fila após a passagem de uma unidade de tempo.
+
+%Quando a tarefa termina, esta é então retirada da fila e o seu \emph{deadline} remanescente é acrescentado ao próximo elemento de forma a manter a coerência dos valores na fila. A figura~\ref{fig:relative_scheduling}(c) apresenta a fila de escalonamento quando a tarefa T1 encerra a sua execução, após 8 unidades de tempo, desta forma, o saldo existente pela sua conclusão antes do \emph{deadline} é adicionado ao próximo elemento da lista. Neste sentido, possíveis perdas de \emph{deadline} são sinalizadas quando uma tarefa conclui e o seu valor na fila de escalonamento é negativo. A figura~\ref{fig:relative_scheduling}(d), mostra a situação da fila de escalonamento quando a tarefa T1 é reativada. Note que neste momento a T2 possui um \emph{deadline} relativo de 6 unidades de tempo e, por isso, segundo o algoritmo EDF, tem prioridade de escalonamento. Desta forma a tarefa T1 é inserida entre a tarefa T2 e T3, ajustando os valores destes elementos da lista para manter a coerência da mesma.
+%citar que o objetivo disto tudo é evitar overflow na lista
+
+Independente do uso de filas relativas ou convencionais, o critério utilizado pelo algoritmo de ordenamento da fila é realizado pelo \texttt{SchedulingCriteria}. De forma geral, este componente pode ser visualizado como uma especialização do tipo inteiro que define o ordenamento da fila, e implementa a sobrecarga de seus operadores aritméticos e de comparação, de forma a estabelecer políticas mais complexas de ordenamento, exigidas por vários algoritmos. Por exemplo, no caso de algoritmos multifilas,  a \texttt{SchedulingCriteria} pode encapsular dois parâmetros de ordenamento: a identificação da fila e a prioridade do elemento dentro desta fila, além de sobrecarregar o operador de comparação menor-igual ($\leq$) para que ambos os parâmetros sejam avaliados durante a comparação entre dois elementos, durante a sua inserção ordenada no mecanismo de escalonamento. O uso de sobrecarga de operadores mantém o projeto elegante, evita a grande hierarquia de classes e provê suporte adequado a algoritmos mais complexos.
+
+A figura~\ref{prg:impl-software}(a) apresenta alguns trechos da implementação dos critérios de escalonamento, em que pode-se observar a sobrecarga do operador \texttt{int()} (linha 6) e do operador $\leq$ (linha 14). A figura~\ref{prg:impl-software}(b) apresenta parte do escalonador metaprogramado, tornando-se independente da entidade \texttt{T} a ser escalonada (normalmente \texttt{Thread}) e da implementação da lista (também metaprogramada). A figura~\ref{prg:impl-software}(c) apresenta parte do arquivo de configuração do SOE em que é possível especificar a política e o mecanismos a serem utilizados.
+
+% SUGIRO APRESENTAR O CÓDIGO DE ALGUNS CRITÉRIOS, COMO SOLICITA O PRIMEIRO REVISOR %
+
+\begin{figure*}[ht]
+\center{
+	\hspace{0.0cm}
+	\begin{minipage}[b]{0.45\linewidth}
+		\lstinputlisting[language=C++,style=prg]{fig/criteria.cc}
+		\vspace{-0.3cm}
+		\center{(a)}
+	\end{minipage}
+	\hspace{0.5cm}
+	\begin{minipage}[b]{0.45\linewidth}
+		\lstinputlisting[language=C++,style=prg]{fig/scheduler.cc}
+		\vspace{-0.3cm}
+		\center{(b)}
+		\lstinputlisting[language=C++,style=prg]{fig/traits.cc}
+		\vspace{-0.3cm}
+		\center{(c)}
+	\end{minipage}
+}
+	\caption{Implementação: (a) critérios de escalonamento; (b) escalonador; (c) seleção do algoritmo utilizado}
+	\label{prg:impl-software}
+\end{figure*}
+
+\subsection{Escalonador em hardware}
+
+O componente \texttt{Scheduler} foi implementado como um componente híbrido de hardware e software~\cite{Marcondes:IFAC:2008}, e desta forma, uma implementação em hardware deste componente também foi realizada. A figura~\ref{fig:scheduler_hw} apresenta a organização de blocos lógicos da implementação do componentes em hardware.
+
+\fig{0.80}{scheduler_hw}{Diagrama de blocos do componente escalonador em hardware.}
+
+De acordo com os conceitos de componentes híbridos, a implementação do escalonador em hardware segue um estrutura funcional bem definida. Basicamente, este componente implementa uma lista ordenada de elementos que é armazenada em uma memória interna do componente. Um módulo controlador (\texttt{Controladora}) é responsável por interpretar os dados recebidos pela interface do componente em hardware e invocar o processo correspondente com a funcionalidade requisitada (através do sinal de \texttt{command}, da interface). Esta implementação, tal qual a implementação em software realiza a inserção de elementos na fila de escalonamento de forma ordenada, ou seja, a fila é sempre mantida ordenada, de acordo com as informações contidas no \texttt{SchedulingCriteria}. Internamente a este componente, uma lista-ligada duplamente encadeada é implementada.
+
+É importante ressaltar dois aspectos da implementação deste componente devido a restrições inerentes de sua implementação em hardware, em especifico com o foco em dispositivos de lógica programável. Ambos aspectos são relacionados a restrição de recursos provenientes deste meio. Idealmente um escalonador em hardware deveria explorar ao máximo o paralelismo inerente deste, contudo, o custo pela exploração máxima deste paralelismo em termos de consumo de recursos da FPGA se torna extremamente alto, principalmente na implementação da comparadores paralelos de forma a realizar a busca de elementos e também a busca pela posição de inserção de elementos, de forma paralela.
+
+Em especial, o uso de ponteiros de 32 bits, para expressar referências aos elementos armazenados na lista (neste caso \texttt{Threads}) torna-se muito custoso, quando busca em comparações destes ponteiros devem ser realizadas. Por outro lado, o número máximo de \texttt{Threads} a serem escalonadas em um sistema embarcado é conhecido de antemão, por isso, foi adotado um mapeamento entre o endereçamento de objetos da arquitetura (do tamanho da palavra da arquitetura) para um endereçamento interno a este componente que irá utilizar tantos bits quanto forem necessários para endereçar apenas o número máximo de elementos que este componente suporta, reduzindo assim, a lógica gasta pela implementação do mesmo.
+
+O outro aspecto está relacionado à busca pela posição do elemento durante a inserção na fila. Idealmente, a busca por esta posição poderia ser implementada através de uma comparação paralela de todos os elementos da lista, de forma a encontrar a posição de inserção em apenas um ciclo de execução do componente. Contudo, esta abordagem, além de aumentar o consumo de recursos e lógica conforme já mencionado, ainda gera um impacto no atraso máximo do circuito devido à sua maior complexidade, reduzindo também a freqüência de operação do mesmo. Desta forma, se optou pela implementação de uma busca seqüencial pela posição de inserção na lista, percorrendo a mesma. Nesta abordagem, apesar do tempo de inserção de elementos variar, essa variação pode ser na maioria dos casos escondida na realidade pelo paralelismo entre a execução do componente em hardware e a \textsc{Cpu}. Desta forma, durante a operação de inserção, o controle é imediatamente devolvido a \textsc{Cpu}, enquanto o hardware se mantém em um estado de inserção do elemento na fila.
+
+\subsection{Avaliação da implementação do modelo proposto}
+
+% Descrição da aplicação de teste
+A avaliação da implementação do modelo proposto foi realizada através da uso de uma aplicação sintética de tempo real, onde foi definido um conjunto de tarefas periódicas. A configuração dos componentes do EPOS foi realizada através das ferramentas desenvolvidas para o sistema que gera um conjunto de parâmetros que efetuam a ligação da interface utilizada pela aplicação à respectiva implementação do componente selecionado. A figura~\ref{prg:app_test} ilustra a implementação desta aplicação teste. A figura~\ref{prg:app_test}~(a) apresenta a implementação de cada tarefa, sendo que neste caso, a tarefa apenas consome ciclos de CPU, de forma a simular uma tarefa qualquer. A figura~\ref{prg:app_test}~(b) apresenta a aplicação principal, que é responsável por ativar e criar no sistema as tarefas que serão executadas (linhas 5--10), definindo os parâmetros de  de cada tarefa, de acordo com a política de escalonamento utilizada, neste caso, é utilizado a política \textsc{Edf}, definindo desta forma o período, deadline e número de ativações que a tarefa deve ter.
+
+\begin{figure*}[ht]
+\center{
+	\hspace{0.0cm}
+	\begin{minipage}[b]{0.30\linewidth}
+		\lstinputlisting[language=C++,style=prg]{fig/thread.cc}
+		\vspace{-0.3cm}
+		\center{(a)}
+	\end{minipage}
+	\hspace{0.75cm}
+	\begin{minipage}[b]{0.50\linewidth}
+		\lstinputlisting[language=C++,style=prg]{fig/main.cc}
+		\vspace{-0.3cm}
+		\center{(b)}
+	\end{minipage}
+}
+	\caption{Aplicação de teste: (a) código de cada tarefa e (b) criação das tarefas}
+	\label{prg:app_test}
+\end{figure*}
+
+Esta aplicação foi compilada para as arquiteturas PowerPC (32 bits) e AVR (8 bits), utilizando os algortimos de escalonamento \textsc{Edf}, \textsc{Rate Monotonic} e \textsc{Prioridade}. A tabela~\ref{tab:results_sw} apresenta o tamanho da aplicação gerada para cada política e arquitetura testada. Os testes também demonstraram o correto funcionamento das políticas utilizadas.
+
+\begin{table}[htb]
+\begin{center}
+\begin{tabular}{ l | c | c | c | c |}
+	& \multicolumn{2}{|c|}{\textsc{Ppc32}} & \multicolumn{2}{|c|}{\textsc{Avr8}} \\
+\hline
+	& .text  & .data & .text  & .data \\
+\hline
+EDF & 51052 & 300 & 49246 & 853 \\
+\hline
+Rate Monotonic & 47908 & 272 & 36800 & 1003 \\
+\hline
+Prioridade & 47864 & 272 & 36790 & 1003 \\
+\hline
+\end{tabular}
+\caption{Memória consumida pela aplicação teste}
+\label{tab:results_sw}
+\end{center}
+\end{table}
+
+Os testes também foram realizados utilizando o escalonamento em hardware. Neste caso, utilizando uma plataforma de experimentação da FPGA \textsc{Virtex4}, que integra um processador PowerPC 405 e blocos de lógica programável, permitindo assim a prototipação rápida de aceleradores em hardware dedicados.
+
+\begin{table}[htb]
+\begin{center}
+\begin{tabular}{| c | c | c | c | c |}
+\hline
+\# Máx. Tarefas & Logic Usage & Slices & Máx. Freq. \\
+\hline
+2	&5\%	&326	&214.6 Mhz\\
+\hline
+4	&10\%	&551	&161.5 Mhz\\
+\hline
+8	&19\%	&1078	&138.8 Mhz\\
+\hline
+16	&36\%	&2015	&123.4 Mhz\\
+\hline
+24	&51\%	&2833	&114.6 Mhz\\
+\hline
+32	&73\%	&3997	&113.4 Mhz\\
+\hline
+48	&103\%	&5665	&82.0 Mhz\\
+\hline
+\end{tabular}
+\caption{Resultados de utilização da FPGA para o componente \texttt{Scheduler}}
+\label{tab:scheduler-hwsize}
+\end{center}
+\end{table}
+
+O modelo de FPGA disponível nesta plataforma de experimentação (ML 403) é o modelo \texttt{XC4VFX12} que provê 5,412 slices de lógica para a implementação dos aceleradores. A tabela~\ref{tab:scheduler-hwsize} apresenta a área consumida desta FPGA, de acordo com o número máximo de tarefas que o escalonador pode gerenciar.
+
+\section{Conclusões}
+
+%Rever objetivos (estrutura de escalomento adaptável as diferentes politicas de escalonamento
+%Destacar pontos fortes:
+%   - Facilidade no definição de novas politicas.
+%    - Plataforma para experimentação.
+%    - Ambiente de execução real (não é simulador).
+%    - Mais importante -> RODA EM microcontrolador de 8bits !
+% Limitações da abordagem proposta:
+% - Pontos da modelagem ainda em aberto ?
+% Agradecimentos
+
+Este artigo apresentou a modelagem para a implementação de escalonadores de tarefas tempo real, de acordo com a AOSD. O uso de técnicas como a engenharia de domínio possibilitou o isolamento das diferenças presentes nas políticas de escalonamento, possibilitando um melhor reuso dos artefatos de projeto (implementação das políticas de escalonamento e do mecanismo de escalonamento), e permitiu que a abordagem proposta seja utilizada não apenas no desenvolvimento de sistemas reais, assim como também seja utilizada como uma plataforma de experimentação de algoritmos de escalonamento de tempo real, disponível para a realização de testes práticos nas arquiteturas atualmente suportadas pelo sistema EPOS, que variam desde microcontroladores de 8 bits a arquiteturas de 32 bits.
+
+%Neste artigo mostramos que, ainda atualmente, muitos trabalhos relacionados ao suporte de hardware para STR são simplórios frente à complexidade de tais sistemas e/ou são implementados de maneira isolada, mais como prova de conceitos do que como resultado de uma metodologia para desenvolvimento de STR com hardware/software co-design. Mostramos também a necessidade de que os esforços envolvidos no desenvolvimento desses suportes não sejam repetidos a cada nova implementação, mas que possam ser integrados de maneira consistente num sistema concebido de forma a possibilitar seu reuso e particionamento hw/sw independente do cenário de execução. Nesse sentido, propusemos e estamos desenvolvendo componentes reutilizáveis de software e de hardware para um sistema que já permite a geração automática de SoCs para aplicações sem restrições de tempo real.
+
+%Nós apresentamos brevemente neste artigo algumas estratégias sendo utilizadas para determinar, implementar e compor componentes de software e hardware para tempo real, em especial os escalonadores de tarefas. Os componentes estão sendo desenvolvidos em linguagens distintas, C++ e VHDL, sendo selecionados/adaptados automaticamente pela ferramenta de geração. Mostramos também que, embora essa abordagem não possua as vantagens conseguidas pelo uso de uma linguagem de descrição única, ela permite que se chegue facilmente à geração do sistema completo, incluindo todo o software e a síntese final do hardware, e não apenas sua simulação. O protótipo de um componente hw/sw para escalonamento de tarefas genérico e independente de cenário já está sendo incluído ao repositório do EPOS, e demais componentes estão sendo decompostos, modelados, implementados e testados.
+
+%Por fim, com a implementação e inclusão de todos os componentes, este projeto deve representar um avanço à modelagem, engenharia de software e co-design para sistemas de tempo real. Trabalhos futuros incluem a implementação dos componentes de software para outros portes do EPOS, independente de executarem sobre hardware fixo ou configurável, e o porte para novas arquiteturas.
+
+
+\bibliographystyle{sbc}
+\bibliography{wso2009}
+
+\end{document}

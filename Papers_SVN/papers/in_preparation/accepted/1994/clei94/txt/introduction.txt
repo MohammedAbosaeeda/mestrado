@@ -1,0 +1,11 @@
+%-------------------------------------------------------------------------------
+% INTRODUÇÃO
+%-------------------------------------------------------------------------------
+\section {Introdução}
+
+Os últimos anos têm registrado o surgimento de uma série de idéias inovadoras na área de sistemas operacionais, muitas delas motivadas pela contínua evolução do {\hw}, outras resultando do amadurecimento natural de alguns conceitos. Termos como comunicação, distribuição, paralelismo e heterogeneidade têm sido intensamente explorados, entretanto, não raras vezes esses conceitos aparecem restringidos pela tecnologia atual.
+
+O {\SDFS} é uma proposta inovadora de sistema de arquivos, livre de vários preconceitos e baseada numa visão ainda futurista de um ambiente computacional com número de unidades processadoras equiparável ao número de tarefas e, onde as entidades comunicantes dispõem de canais de comunicação hoje encontrados apenas em barramentos internos de computadores. A ânsia pela comunicação efetiva de dados, imagens e voz, resultará muito em breve em canais de comunicação de alguns Gbytes/s. Isso, aliado à rápida redução do custo das unidades processadoras, permitirá a construção de sistemas computacionais mais eficientes, onde problemas complexos poderão ser tratados na sua essência, simplificando muitas das estruturas formadoras de um sistema operacional.
+
+Este artigo descreve a implementação de uma versão preliminar da proposta de um sistema de arquivos distribuído contida em \cite{fro93}, analisando principalmente os aspectos inovadores, como a divisão do sistema de arquivos em um conjunto de servidores, um mecanismo original de localização de servidores, a transparência de localidade alcançada pela extensão do mecanismo de {\link} e outros. A funcionalidade do sistema de arquivos está inteiramente baseada no {\unix} \cite{bac87}, tendo sua descrição sido excluída deste texto.
+

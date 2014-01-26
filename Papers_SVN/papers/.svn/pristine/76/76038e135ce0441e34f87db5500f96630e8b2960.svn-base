@@ -1,0 +1,220 @@
+%-------------------------------------------------------------------------------
+% ARTIGO PARA O WAIS96
+%-------------------------------------------------------------------------------
+\documentstyle[times,12pt]{artigo}
+
+%-------------------------------------------------------------------------------
+% NOVOS COMANDOS
+%-------------------------------------------------------------------------------
+\newcommand {\putpict} [5] {
+  \begin {figure} [htb]
+  \centerline {
+    \psfig{figure={#1},width=#2,height=#3}
+  }
+  \caption{#4}
+  \label{#5}
+  \end{figure}
+}
+
+%-------------------------------------------------------------------------------
+% MACROS
+%-------------------------------------------------------------------------------
+\def\eth{\sc Ethernet}
+\def\feth{\sc Fast Ethernet}
+\def\gateway{\em gateway}
+\def\inet{\sc Internet}
+\def\inf{\sc Rede INF}
+\def\hub{\em hub}
+\def\switch{\em switch}
+\def\sw{\em software}
+
+%-------------------------------------------------------------------------------
+% DEFINIÇÃO DAS PÁGINAS
+%-------------------------------------------------------------------------------
+\oddsidemargin  0in
+\topmargin   -0.3in
+\textheight   9.5in
+\textwidth    6.31in
+
+% Margem superior de 3.5cm
+% Margens laterais de 3cm
+% Margem inferior de 2cm
+% Sem numero de página
+%\oddsidemargin	4.6mm
+%\evensidemargin	4.6mm
+%\topmargin	-2.04cm
+%\headheight	1cm
+%\headsep        2cm
+%\footskip	1.5cm 
+%\textheight	238mm
+%\textwidth	150mm
+\parskip	0.5em
+\pagestyle{empty}
+
+\begin{document}
+
+%-------------------------------------------------------------------------------
+% CAPA
+%-------------------------------------------------------------------------------
+\title{\bf Rede do Departamento de Informática da UFSC}
+
+\author{Antônio Augusto M. Fröhlich}
+
+\date{}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\begin{center}
+  Universidade Federal de Santa Catarina \\
+  Centro Tecnológico \\
+  Departamento de Informática e de Estatística \\
+  88.049.970 - Florianópolis - SC - Brasil \\
+  Tel.:(048)231-9498 Fax:(048)231-9770 \\
+  E-mail: guto@inf.ufsc.br
+\end{center}
+
+%-------------------------------------------------------------------------------
+% INCLUI DEFINIÇÕES PARA AS FIGURAS
+%-------------------------------------------------------------------------------
+\input{psfig}
+
+%-------------------------------------------------------------------------------
+% RESUMO
+%-------------------------------------------------------------------------------
+\begin{abstract}
+
+Este artigo apresenta a rede de computadores do Departamento de Informática e de Estatística da UFSC, suas principais características e estratégias de administração. Trata-se de uma rede local departamental, com cerca de 500 usuários que está conectada à {\inet} desde 1992. A rede, dentro do seu processo natural de amadurecimento, está passando por uma reestruturação a fim de segmentar o tráfego relativo aos servidores de arquivos e consequentemente aproveitar melhor a banda disponível.
+
+\end{abstract}
+
+%-------------------------------------------------------------------------------
+% ABSTRACT
+%-------------------------------------------------------------------------------
+\begin{englishabstract}
+
+This paper presents the major characteristics and administrative strategies of the computer network in use at the Computer Science Department of Federal University of Santa Catarina. The departmental LAN gathers more than 500 users that are connected to {\inet} since 1992. The network is now under a re-structuring process that intends to confine traffic related to file servers, thus optimizing the use of available bandwidth.
+
+\end{englishabstract}
+
+%-------------------------------------------------------------------------------
+% INTRODUÇÃO
+%-------------------------------------------------------------------------------
+\section{Introdução}
+
+A rede de computadores do Departamento de Informática e de Estatística da UFSC, doravante denominada {\inf}, entrou em operação em 1992. Naquela época, a rede contava com algumas poucas estações de trabalho e microcomputadores conectados através de uma rede {\eth} 10 Base 2. Ainda no primeiro semestre de 92 a {\inf} se conectou à {\inet} através do Ponto de Presença da Rede Nacional de Pesquisa em Santa Catarina.
+
+Desde sua criação, a {\inf} vem passando por uma série de reestruturações a fim de expandi-la e estabilizá-la. O estado atual da rede conta com cerca de 15 estações de trabalho, 10 terminais X e mais de 100 microcomputadores que são utilizados diariamente por cerca de 500 usuários. A {\inf} hoje é uma rede estável, com uma política administrativa refinada ao longo dos quatro anos de operação que garante a satisfação de grande parte dos usuários.
+
+Entretanto, o processo de acompanhamento da rede vinha apontado uma série de gargalos no que diz respeito ao acesso aos servidores de arquivos. Decidiu-se então partir para uma nova etapa de reestruturação da rede visando confinar o tráfego relativo a arquivos. A idéia básica desta nova reestruturação é a de aproximar usuários dos arquivos por eles acessados. O processo de confinamento de tráfego se encontra em andamento e deverá estar concluído no início do ano letivo de 1996.
+
+Nas próximas seções serão discutidas a estrutura da rede, sua topologia, seus equipamentos componentes, o {\sw} nela utilizado e as estratégias de administração e gerência.
+
+ 
+%-------------------------------------------------------------------------------
+% Estrutura da Rede INF
+%-------------------------------------------------------------------------------
+\section{Estrutura da Rede INF}
+
+A {\inf} está sofrendo uma profunda reestruturação física, que deverá estar completamente consolidada no começo do ano letivo de 1996. Uma vez que o processo de reestruturação não altera as condições operacionais da rede, ela será descrita como se a restauração já tivesse sido completamente executada.
+
+A figura \ref{top} mostra a estrutura geral da {\inf}. Como se pode observar, o ponto concentrador de todo o tráfego da rede é um {\switch} {\eth} que segmenta a rede em 4 sub-redes:
+
+\begin{itemize}
+\item Laboratórios (2) de ensino e pesquisa do Curso de Pós-Graduação em Ciências da Computação;
+\item Laboratórios (3) de ensino do Curso de Bacharelado em Ciências da Computação;
+\item Laboratórios (2) de pesquisa do departamento;
+\item Salas de professores e setores administrativos do departamento.
+\end{itemize}
+
+\putpict{inf.ps}{\textwidth}{6cm}{Estrutura geral da {\inf}.}{top}
+
+Com vistas a confinar o tráfego na {\inf}, além da segmentação da rede, decidiu-se pela aproximação de usuários e arquivos. Para tal, optou-se pela presença de um servidor de arquivos e de impressão em cada segmento da rede. Hoje estes servidores são todos estações de trabalho SUN com, pelo menos, 2 Gbytes de disco e uma impressora laser. Como existe uma relação bastante clara entre usuários e laboratórios, cada servidor mantém os diretórios dos seus respectivos usuários, bem como o {\sw} que comumente é utilizado em cada laboratório.
+
+Além dos servidores das sub-redes, a rede conta com um servidor global que está diretamente conectado ao {\switch} através de um barramento de alta velocidade ({\feth}). Este servidor mantém arquivos que são acessados por toda a rede. Além disto, ele é o ponto central da administração da rede, desempenhando vários outros papéis além do de servidor de arquivos:
+
+\begin{itemize}
+\item Servidor de DNS para o domínio inf.ufsc.br;
+\item Servidor NIS mestre;
+\item Servidor FTP;
+\item Servidor http (primeiro da América Latina, cadastrado no CERN em dezembro de 1992);
+\item Servidor de MAIL;
+\item Servidor de acesso doméstico (6 modens V.34);
+\item Servidor de documentação;
+\item Gerente da rede.
+\end{itemize}
+
+A conexão dos servidores das sub-redes com o {\switch} é feita através de par trançado ({\eth} 10 Base T). Cada servidor está conectado, também através de par trançado, a um {\hub} {\eth} ao qual se conectam outros {\hub}s, estações de trabalho e microcomputadores. Os {\hub}s e o {\switch} utilizados são passivos de gerenciamento SNMP, que vem sendo utilizado para identificar dificuldades estruturais bem como os gargalos de tráfego da rede.
+ 
+
+%-------------------------------------------------------------------------------
+% Protocolos Adotados na Rede INF
+%-------------------------------------------------------------------------------
+\section{Protocolos Adotados na Rede INF}
+
+A {\inf} utiliza exclusivamente o protocolo TCP/IP. Visando melhor gerir a rede de microcomputadores, no passado tentou-se alternativas híbridas, envolvendo IPX e Net Beui para suportar respectivamente Netware e Windows NT. Contudo, uma vez que um dos principais objetivos dos microcomputadores é o acesso a {\inet}, sempre se fez necessária a presença de {\gateway}s para traduzir os outros protocolos em TPC/IP. O amadurecimento dos pacotes TPC/IP para DOS/WINDOWS, principalmente dos que suportam NFS, fez com que se optasse pelo uso exclusivo de TPC/IP em toda a rede.
+
+No que diz respeito a roteamento, a {\inf} apresenta uma estrutura simples. Existe uma única conexão à {\inet} e também um único ponto de concentração do tráfego interno, de tal forma que o protocolo RIP é suficiente para a troca de informações de roteamento entre os {\gateway}s.
+
+O serviço de correio eletrônico da {\inf} está baseado em SMTP, embora se tenha disponibilizado um servidor POP para os usuários que acessam MAIL através de ferramentas que não falam SMTP. A {\inf} tem um único {\em mail exchanger} que é o servidor principal. Cada um dos servidores das sub-redes mantém os {\em mail boxes} dos usuários associados.
+
+O acesso a arquivos remotos na rede se dá exclusivamente através de NFS. O servidor principal, bem como os servidores das sub-redes, atuam tanto como clientes, quanto como servidores NFS. Esses servidores interagem de forma a definir um espaço de nomes de arquivos homogêneo para todo o domínio, ou seja, os arquivos são vistos sempre com o mesmo nome, independentemente do ponto da rede onde estejam sendo acessados. Entretanto, nem todos os arquivos podem ser vistos de todos os pontos da rede.
+
+Os servidores NFS rodam um {\em daemon} de autenticação para os microcomputadores que agem apenas como clientes PC-NFS. A definição de quais arquivos devem ser disponibilizados em quais micros é feita com base no perfil dos usuários de cada laboratório ou até de máquinas específicas. Uma vez que todos os microcomputadores do departamento possuem discos, {\sw} muito específicos ou em fase de avaliação são instalados nos discos locais.
+
+Com a reestruturação da {\inf} todos os microcomputadores deverão ser capazes de {\em boot} remoto, utilizando RARP, BOOTP e TFTP. Desta forma, cada microcomputador é inicializado a partir de uma imagem remota de sistema, que inclui DOS, {\em drives} de rede e PC-NFS. Uma vez ativado o PC-NFS, este é utilizado para acessar os demais {\sw} disponíveis na rede.
+
+Embora o departamento esteja desenvolvendo pesquisas com CMIP, o gerenciamento atual da rede está baseado em SNMP. Os equipamentos de rede são, na maioria das vezes, passíveis de gerenciamento SNMP e os servidores das sub-redes rodam agentes SNMP que são monitorados pelo servidor principal.
+
+Os usuários da {\inf} estão todos cadastrados em um único banco de dados de senhas que é disseminado pela rede através do protocolo NIS. Desta forma, não temos usuários de máquinas específicas, mas sim da rede como um todo.
+
+O acesso doméstico será provido aos usuários através de linhas discadas que suportam SLIP e PPP. A falta de definição por um único protocolo se dá pela diversidade de pacotes de acesso doméstico, alguns desenvolvidos para operação com SLIP e outros com PPP.
+
+
+%-------------------------------------------------------------------------------
+% Softwares Utilizados na Rede INF
+%-------------------------------------------------------------------------------
+\section{Softwares Utilizados na Rede INF}
+
+Todas as estações de trabalho SUN rodam SunOS 4.1.3. A decisão de utilizar um sistema fora de produção, em detrimento do sistema operacional Solaris, está baseada principalmente na estabilidade administrativa e na grande quantidade de {\sw} de domínio público compilados para SunOS hoje disponíveis na {\inf} (aproximadamente 2 Gbytes). Além de estações SUN a rede conta com estações RS6000 da IBM rodando AIX 4.x. Todas as estações são servidoras NFS e clientes ou servidoras escravas NIS.
+
+O {\sw} de gerência utilizado na {\inf} é o Sun Net Manager 1.0, que monitora os equipamentos gerenciáveis da rede, bem como os agentes executando nas estações. Apesar de ser um {\sw} bastante restrito, a sua combinação com os monitores internos do sistema operacional constitui uma poderosa ferramenta de gerência.
+
+Os microcomputadores, no que diz respeito a {\sw}, podem ser divididos em duas grandes classes: Unix e Windows. Cerca de dez microcomputadores executam versões de público domínio do Unix (Linux ou NetBSD). Estes microcomputadores são também servidores NFS e clientes NIS. Os demais microcomputadores executam MS-DOS, Windows e PC-NFS. Estes micros fazem uso da rede tanto para acesso a arquivos quanto para acesso à {\inet}.
+
+
+%-------------------------------------------------------------------------------
+% Políticas da Rede INF
+%-------------------------------------------------------------------------------
+\section{Políticas da Rede INF}
+
+As políticas envolvidas na administração da {\inf} vem sendo amadurecidas ao longo dos 4 anos de operação e hoje mostram-se adequadas frente ao conjunto de usuários.
+
+Os usuários da rede têm associadas quotas de acordo com uma tabela de categorias que os classificam em: servidores técnico-administrativos, alunos de graduação, alunos de pós-graduação, pesquisadores e professores. Entretanto, não existem restrições de acesso a {\sw} e nem a rede. Qualquer {\sw} disponível na rede pode ser acessado por qualquer usuário, independentemente da sua classe. Da mesma forma, todos os usuários possuem e-mail e são usuários da {\inet}.
+
+A administração da {\inf} é desempenhada por um administrador geral, um administrador para cada sub-rede e um administrador de MAIL, FTP e WWW. Estas são as únicas pessoas com acesso administrativo ao sistema, sendo que qualquer modificação ou instalação de novos {\sw} é atribuição delas.
+
+Esta política simples, que permite acesso igualitário a todos usuários, vem mostrando-se muito eficiente, uma vez que não se perde tempo justificando porque um dado usuário pode fazer algo que outro não pode. Observou-se inclusive que a ausência de proibições em demasia conduz os usuários a suas áreas de trabalho, enquanto que as distinções conduzem a atritos desnecessários.
+
+Quanto a segurança da {\inf}, tenta-se manter o sistema o mais fechado possível. Executa-se uma razoável quantidade de monitores de acesso que visam levantar {\em logs} das atividades da rede. Contudo, uma vez que se trata de uma rede acadêmica de curso de computação, a maior segurança da rede são os {\em backups}. Um {\em backup} seletivo dos servidores de arquivos é feito automaticamente todas as semanas, quando os diretórios de usuário e os arquivos administrativos do sistema são salvos em fitas DAT. 
+
+%-------------------------------------------------------------------------------
+% Conclusão
+%-------------------------------------------------------------------------------
+\section{Conclusão}
+
+A rede de computadores do Departamento de Informática e de Estatística atende hoje cerca de 500 usuários, entre eles servidores, alunos, pesquisadores e professores, que a  utilizam para ensino, pesquisa, troca de informações e lazer. A política de tratamento dos usuários, que permite que todos acessem os recursos da rede, vem sendo aprovada pela maioria dos usuários. O ponto mais crítico da rede, sob o ponto de vista dos usuários, é o congestionamento e a estabilidade.
+
+A fim de garantir a estabilidade e distribuir o tráfego sobre a {\inf}, iniciou-se há alguns meses um processo de reforma estrutural. Após a conclusão deste processo, a rede deverá apresentar um alto grau de confinamento de tráfego, tanto pela segmentação, quanto pela aproximação de servidores de arquivos e usuários e uma maior estabilidade física pela substituição dos barramentos de cabos coaxiais por {\hub}s.
+
+%-------------------------------------------------------------------------------
+% REFERÊNCIAS BIBLIOGRÁFICAS
+%-------------------------------------------------------------------------------
+%\begin{thebibliography}{WWW 88W}
+
+%\bibitem[BAC 87] {bac87} BACH, M., {\it The Design of the UNIX Operating System}, Englewood Cliffs: Prentice-Hall, 1987.
+
+%\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,893 @@
+@INPROCEEDINGS{Abrach:2003,
+  AUTHOR =	 {H. Abrach and S. Bhatti and J. Carlson and H. Dai and
+                  J. Rose and A. Sheth and B. Shucker and J. Deng and
+                  R. Han},
+  TITLE =	 {MANTIS: System Support For MultimodAl NeTworks of
+                  In-situ Sensors},
+  BOOKTITLE =	 {2nd ACM International Workshop on Wireless Sensor
+                  Networks and Applications},
+  PAGES =	 {50 -- 59},
+  YEAR =	 2003,
+  ADDRESS =      {San Diego, CA},
+  PDF =		 {../docs/Abrach-2003.pdf},
+  ABSTRACT =	 {The MANTIS MultimodAl system for NeTworks of In-situ
+                  wireless Sensors provides a new multithreaded embedded
+                  operating system integrated with a general-purpose
+                  single-board hardware platform to enable flexible and
+                  rapid prototyping of wireless sensor networks. The key
+                  design goals of MANTIS are ease of use, i.e. a small
+                  learning curve that encourages novice programmers to
+                  rapidly prototype novel sensor networking applications
+                  in software and hardware, as well as flexibility, so
+                  that expert researchers can leverage or develop
+                  advanced software features and hardware extensions to
+                  suit the needs of advanced research in wireless sensor
+                  networks.}
+}
+
+@ARTICLE{Akkaya:2004,
+  AUTHOR =	 {Kemal Akkaya and Mohamed Younis},
+  TITLE =	 {A survey on routing protocols for wireless sensor
+                  networks},
+  JOURNAL =	 {Ad Hoc Networks},
+  VOLUME =	 2,
+  YEAR =	 2004,
+  PDF =		 {../docs/Akkaya-2004.pdf},
+  ABSTRACT =	 {Recent advances in wireless sensor networks have led
+                  to many new protocols specifically designed for sensor
+                  networks where energy awareness is an essential
+                  consideration. Most of the attention, however, has
+                  been given to the routing protocols since they might
+                  differ depending on the application and network
+                  architecture. This paper surveys recent routing
+                  protocols for sensor networks and presents a
+                  classification for the various approaches pursued. The
+                  three main categories explored in this paper are
+                  data-centric, hierarchical and location-based. Each
+                  routing protocol is described and discussed under the
+                  appropriate category. Moreover, protocols using
+                  contemporary methodologies such as network flow and
+                  quality of service modeling are also discussed. The
+                  paper concludes with open research issues.}
+}
+
+@ARTICLE{Akyildiz:2002,
+  AUTHOR =	 {Ian F. Akyildiz and Weilian Su and Yogesh
+                  Sankarasubramaniam and Erdal Cayirci},
+  TITLE =	 {A Survey on Sensor Networks},
+  JOURNAL =	 {IEEE Communications Magazine},
+  VOLUME =	 40,
+  NUMBER =	 8,
+  PAGES =	 {102--114},
+  MONTH =	 AUG,
+  YEAR =	 2002,
+  PDF =		 {../docs/Akyildiz-2002.pdf},
+  ABSTRACT =	 {Recent advancement in wireless communications and
+                  electronics has enabled the development of low-cost
+                  sensor networks. The sensor networks can be used for
+                  various application areas (e.g., health, military,
+                  home). For different application areas, there are
+                  different technical issues that researchers are
+                  currently resolving. The current state of the art of
+                  sensor networks is captured in this article, where
+                  solutions are discussed under their related protocol
+                  stack layer sections. This article also points out the
+                  open research issues and intends to spark new
+                  interests and developments in this field.}
+}
+
+@INPROCEEDINGS{Asada:1998,
+  AUTHOR =	 {G. Asada and M. Dong and T.S. Lin and F. Newberg and
+                  G. Pottie and W.J. Kaiser and H.O. Marcy.},
+  TITLE =	 {Wireless Integrated Network Sensors: Low Power Systems
+                  on a Chip.},
+  BOOKTITLE =	 {Proceedings of the 1998 European Solid State Circuits
+                  Conference.},
+  ADDRESS =	 {The Hague, Netherlands},
+  MONTH =	 SEP,
+  YEAR =	 1998,
+  PDF =		 {../docs/Asada-1998.pdf},
+  ABSTRACT =	 {Wireless Integrated Network Sensors (WINS) now provide
+                  a new monitoring and control capability for
+                  transportation, manufacturing, health care,
+                  environmental monitoring, and safety and
+                  security. WINS combine sensing, signal processing,
+                  decision capability, and wireless networking
+                  capability in a compact, low power system. WINS
+                  systems combine microsensor technology with low power
+                  sensor interface, signal processing, and RF
+                  communication circuits. The need for low cost presents
+                  engineering challenges for implementation of these
+                  systems in conventional digital CMOS technology. This
+                  paper describes micropower data converter, digital
+                  signal processing systems, and weak inversion CMOS RF
+                  circuits. The digital signal processing system relies
+                  on a continuously operating spectrum
+                  analyzer. Finally, the weak inversion CMOS RF systems
+                  are designed to exploit the properties of high-Q
+                  inductors to enable low power operation. This paper
+                  reviews system architecture and low power circuits for
+                  WINS.}
+}
+
+@inproceedings{Beutel:2004,
+  author =	 "Jan Beutel and Oliver Kasten and Friedemann Mattern
+                  and Kay R{\"o}mer and Frank Siegemund and Lothar
+                  Thiele",
+  title =	 "Prototyping Wireless Sensor Network Applications with
+                  BTnodes",
+  booktitle =	 "1st European Workshop on Wireless Sensor Networks
+                  (EWSN)",
+  year =	 "2004",
+  month =	 jan,
+  publisher =	 "Springer-Verlag",
+  isbn =	 "3-540-20825-9",
+  pages =	 "323--338",
+  address =	 "Berlin, Germany",
+  PDF =		 {../docs/Beutel-2004.pdf},
+  ABSTRACT =	 {We present a hardware and software platform for rapid
+                  prototyping of augmented sensor network systems, which
+                  may be temporarily connected to a backend
+                  infrastructure for data storage and user interaction,
+                  and which may also make use of actuators or devices
+                  with rich computing resources that perform complex
+                  signal processing tasks. The use of Bluetooth as the
+                  wireless networking technology provides us with a rich
+                  palette of Bluetooth-enabled commodity devices, which
+                  can be used as actuators, infrastructure gateways, or
+                  user interfaces. Our platform consists of a
+                  Bluetooth-based sensor node hardware (the BTnode), a
+                  portable operating system component, and a set of
+                  system services. This paper gives a detailed
+                  motivation of our platform and a description of the
+                  platform components. Though using Bluetooth in
+                  wireless sensor networks may seem counterintuitive at
+                  first, we argue that the BTnode platform is indeed
+                  well suited for prototyping applications in this
+                  domain. As a proof of concept, we describe two
+                  prototype applications that have been realized using
+                  the BTnodes.}
+}
+
+@INPROCEEDINGS{Braginsky:2002,
+  AUTHOR =	 {David Braginsky and Deborah Estrin},
+  TITLE =	 {Rumor routing algorthim for sensor networks},
+  BOOKTITLE =	 {Proceedings of the 1st ACM international workshop on
+                  Wireless sensor networks and applications},
+  PAGES =	 {22--31},
+  ADDRESS =	 {Atlanta, Georgia, USA},
+  MONTH =	 SEP,
+  YEAR =	 2002,
+  PDF =		 {../docs/Braginsky-2002.pdf},
+  ABSTRACT =	 {Advances in micro-sensor and radio technology will
+                  enable small but smart sensors to be deployed for a
+                  wide range of environmental monitoring
+                  applications. In order to constrain communication
+                  overhead, dense sensor networks call for new and
+                  highly efficient methods for distributing queries to
+                  nodes that have observed interesting events in the
+                  network. A highly efficient data-centric routing
+                  mechanism will offer significant power cost
+                  reductions, and improve network longevity. Moreover,
+                  because of the large amount of system and data
+                  redundancy possible, data becomes disassociated from
+                  specific node and resides in regions of the
+                  network. This paper describes and evaluates through
+                  simulation a scheme we call Rumor Routing, which
+                  allows for queries to be delivered to events in the
+                  network. Rumor Routing is tunable, and allows for
+                  tradeoffs between setup overhead and delivery
+                  reliability. It’s intended for contexts in which
+                  geographic routing criteria are not applicable because
+                  a coordinate system is not available or the phenomenon
+                  of interest is not geographically correlated.}
+}
+
+@INPROCEEDINGS{Culler:2001,
+  AUTHOR =	 {David E. Culler and Jason Hill and Philip Buonadonna
+                  and Robert Szewczyk and Alec Woo},
+  TITLE =	 {A Network-Centric Approach to Embedded Software for
+                  Tiny Devices},
+  BOOKTITLE =	 {EMSOFT},
+  PUBLISHER =	 {Springer},
+  SERIES =	 {Lecture Notes in Computer Science},
+  VOLUME =	 {2211},
+  ADDRESS =	 {Tahoe City, CA, USA},
+  MONTH =	 OCT,
+  YEAR =	 2001,
+  PDF =		 {../docs/Culler-2001.pdf},
+  ABSTRACT =	 {The ability to incorporate low-power, wireless
+                  communication into embedded devices gives rise to a
+                  new genre of embedded software that is distributed,
+                  dynamic, and adaptive. This paper describes the
+                  network-centric approach to designing software for
+                  highly constrained devices embodied in TinyOS. It
+                  develops a tiny Active Message communication model and
+                  shows how it is used to build non-blocking
+                  applications and higher level networking capabilities,
+                  such as multihop ad hoc routing. It shows how the
+                  TinyOS event-driven approach is used to tackle
+                  challenges in implementing the communication model
+                  with very limited storage and the radio channel
+                  modulated directly in software in an energy efficient
+                  manner. The open, component-based design allows many
+                  novel relationships between system and application.}
+}
+
+@INPROCEEDINGS{Estrin:2001,
+  AUTHOR =	 {D. Estrin and L. Girod and G. Pottie and
+                  M. Srivastava},
+  TITLE =	 {Instrumenting The World With Wireless Sensor Networks},
+  BOOKTITLE =	 {Proceedings of the International Conference on
+                  Acoustics, Speech and Signal Processing},
+  ADDRESS =	 {Salt Lake City, Utah},
+  MONTH =	 MAY,
+  YEAR =	 2001,
+  PDF =		 {../docs/Estrin-2001.pdf},
+  ABSTRACT =	 {Pervasive micro-sensing and actuation may
+                  revolutionize the way in which we understand and
+                  manage complex physical systems: from airplane wings
+                  to complex ecosystems. The capabilities for detailed
+                  physical monitoring and manipulation offer enormous
+                  opportunities for almost every scientific discipline,
+                  and it will alter the feasible granularity of
+                  engineering. We identify opportunities and challenges
+                  for distributed signal processing in networks of these
+                  sensing elements and investigate some of the
+                  architectural challenges posed by systems that are
+                  massively distributed, physically-coupled, wirelessly
+                  networked, and energy limited.}
+}
+
+@inproceedings{Handziski:2004,
+  author =	 {Vlado Handziski and Joseph Polastre and Jan-Hinrich
+                  Hauer and Cory Sharp},
+  title =	 {Flexible hardware abstraction of the TI MSP430
+                  microcontroller in TinyOS},
+  booktitle =	 {Proceedings of the 2nd international conference on
+                  Embedded networked sensor systems},
+  year =	 {2004},
+  isbn =	 {1-58113-879-2},
+  pages =	 {277--278},
+  address =	 {Baltimore, MD, USA},
+  doi =		 {http://doi.acm.org/10.1145/1031495.1031534},
+  publisher =	 {ACM Press},
+  PDF =		 {../docs/Handziski-2004.pdf},
+  ABSTRACT =	 {Wireless sensor networks (WSNs) promote
+                  energy-efficiency as the main design criterion. This
+                  introduces rather conflicting requirements for the
+                  hardware adaptation layer. Maximizing the efficiency
+                  requires that the presentation must closely mimic the
+                  underlying hardware model. On the other hand,
+                  increasing the level of abstraction simplifies the
+                  development, but at the cost of lowered efficiency
+                  because it obstructs the link between the application
+                  and the hardware. As new microcontrollers and radios
+                  are introduced for use in WSNs, applications must be
+                  able to effectively use new low power features and
+                  peripherals. The MSP430 family of microcontrollers by
+                  Texas Instruments is specifically designed for
+                  ultra-low-power applications. It incorporates a 16-Bit
+                  RISC CPU, peripherals and a clock system. The
+                  MSP430F149 is one of the most popular members of the
+                  family. As shown in Fig. 1, it has 60 KB Flash, 2 KB
+                  of RAM and a flexible clock system sourced by an
+                  internal digitally controlled oscillator (DCO) and/or
+                  two external oscillators. It also contains a 12-Bit
+                  A/D Converter, two independent timers and two USARTs.}
+}
+
+@inproceedings{Handziski:2005,
+  author =	 {Vlado Handziski and Joseph Polastre and Jan-Hinrich
+                  Hauer and Cory Sharp and Adam Woliszand David Culler},
+  title =	 {Flexible Hardware Abstraction for Wireless Sensor
+                  Networks},
+  booktitle =	 {Proceedings of the Second European Workshop on
+                  Wireless Sensor Networks (EWSN '05)},
+  year =	 {2005},
+  address =	 {Istambul, Turkey},
+  PDF =		 {../docs/Handziski-2005.pdf},
+  ABSTRACT =	 {We present a flexible Hardware Abstraction
+                  Architecture (HAA) that balances conflicting
+                  requirements of Wireless Sensor Networks (WSNs)
+                  applications and the desire for increased portability
+                  and streamlined development of applications. Our
+                  three-layer design gradually adapts the capabilities
+                  of the underlying hardware platforms to the selected
+                  platform-independent hardware interface between the
+                  operating system core and the application code. At the
+                  same time, it allows the applications to utilize a
+                  platform’s full capabilities – exported at the second
+                  layer, when the performance requirements outweigh the
+                  need for cross-platform compatibility.We demonstrate
+                  the practical value of our approach by presenting how
+                  it can be applied to the most important hardware
+                  modules that are found in a typical WSN platform. We
+                  support our claims using concrete examples from
+                  existing hardware abstractions in TinyOS and our
+                  implementation of the MSP430 platform that follows the
+                  architecture proposed in this paper.}
+}
+
+@INPROCEEDINGS{Heidemann:2001,
+  AUTHOR =	 {John Heidemann and Fabio Silva and Chalermek
+                  Intanagonwiwat and Ramesh Govindan and Deborah Estrin
+                  and Deepak Ganesan},
+  TITLE =	 {Building Efficient Wireless Sensor Networks with
+                  Low-Level Naming},
+  BOOKTITLE =	 {Proceedings of the Symposium on Operating Systems
+                  Principles},
+  MONTH =	 OCT,
+  YEAR =	 2001,
+  PUBLISHER =	 "{ACM}",
+  ADDRESS =	 "Banff, Alberta, Canada",
+  PAGES =	 "146--159",
+  PDF =		 {../docs/Heidemann-2001.pdf},
+  ABSTRACT =	 {In most distributed systems, naming of nodes for
+                  low-level communication leverages topological location
+                  (such as node addresses) and is independent of any
+                  application. In this paper, we investigate an emerging
+                  class of distributed systems where low-level
+                  communication does not rely on network topological
+                  location. Rather, low-level communication is based on
+                  attributes that are external to the network topology
+                  and relevant to the application. When combined with
+                  dense deployment of nodes, this kind of named data
+                  enables in-network processing for data aggregation,
+                  collaborative signal processing, and similar
+                  problems. These approaches are essential for emerging
+                  applications such as sensor networks where resources
+                  such as bandwidth and energy are limited. This paper
+                  is the first description of the software architecture
+                  that supports named data and in-network processing in
+                  an operational, multi-application sensor-network. We
+                  show that approaches such as in-network aggregation
+                  and nested queries can significantly affect network
+                  traffic. In one experiment aggregation reduces traffic
+                  by up to 42\% and nested queries reduce loss rates by
+                  30\%. Although aggregation has been previously studied
+                  in simulation, this paper demonstrates nested queries
+                  as another form of in-network processing, and it
+                  presents the first evaluation of these approaches over
+                  an operational testbed.}
+}
+
+@INPROCEEDINGS{Hill:2000,
+  AUTHOR =	 {Jason Hill and Robert Szewczyk and Alec Woo and Seth
+                  Hollar and David Culler and Kristofer Pister},
+  TITLE =	 {System architecture directions for networked sensors},
+  BOOKTITLE =	 {Proceedings of the ninth international conference on
+                  Architectural support for programming languages and
+                  operating systems},
+  PAGES =	 {93--104},
+  ADDRESS =	 {Cambridge, Massachusetts, United States},
+  YEAR =	 2000,
+  PDF =		 {../docs/Hill-2000.pdf},
+  ABSTRACT =	 {Technological progress in integrated, low-power, CMOS
+                  communication devices and sensors makes a rich design
+                  space of networked sensors viable. They can be deeply
+                  embedded in the physical world and spread throughout
+                  our environment like smart dust. The missing elements
+                  are an overall system architecture and a methodology
+                  for systematic advance. To this end, we identify key
+                  requirements, develop a small device that is
+                  representative of the class, design a tiny
+                  event-driven operating system, and show that it
+                  provides support for efficient modularity and
+                  concurrency-intensive operation. Our operating system
+                  fits in 178 bytes of memory, propagates events in the
+                  time it takes to copy 1.25 bytes of memory, context
+                  switches in the time it takes to copy 6 bytes of
+                  memory and supports two level scheduling. The analysis
+                  lays a groundwork for future architectural advances.}
+}
+
+@article{Hill:2004,
+  author =	 {Jason Hill and Mike Horton and Ralph Kling and
+                  Lakshman Krishnamurthy},
+  title =	 {The platforms enabling wireless sensor networks},
+  journal =	 {Communications of the ACM},
+  volume =	 {47},
+  number =	 {6},
+  year =	 {2004},
+  issn =	 {0001-0782},
+  pages =	 {41--46},
+  publisher =	 {ACM Press},
+  PDF =		 {../docs/Hill-2004.pdf},
+  ABSTRACT =	 {Wireless sensor networks combine processing, sensing,
+                  and communications into tiny embedded
+                  devices. Peer-to-peer communication protocols then
+                  combine the individual devices into an interconnected
+                  mesh network where data is seamlessly routed among all
+                  the nodes. These networks require no external
+                  infrastructure and can scale to hundreds or even
+                  thousands of nodes. Here, we explore the standard
+                  sensor network platforms where devices range from
+                  millimeter-size custom silicon to PDA-size integrated
+                  units. Critical to the operation of any sensor network
+                  device is the ability to satisfy harsh always-on power
+                  requirements. Unlike cell phones and wireless laptops,
+                  periodic recharging is not possible for most wireless
+                  sensor networks. In many cases, devices are placed in
+                  the field for years at a time without maintenance or
+                  human intervention of any kind.}
+}
+
+@inproceedings{Hohlt:2004,
+  author =	 {Barbara Hohlt and Lance Doherty and Eric Brewer},
+  title =	 {Flexible power scheduling for sensor networks},
+  booktitle =	 {Proceedings of the third international symposium on
+                  Information processing in sensor networks},
+  year =	 {2004},
+  isbn =	 {1-58113-846-6},
+  pages =	 {205--214},
+  address =	 {Berkeley, California, USA},
+  doi =		 {http://doi.acm.org/10.1145/984622.984653},
+  publisher =	 {ACM Press},
+  PDF =		 {../docs/Hohlt-2004.pdf},
+  ABSTRACT =	 {We propose a distributed on-demand power-management
+                  protocol for collecting data in sensor networks. The
+                  protocol aims to reduce power consumption while
+                  supporting fluctuating demand in the network and
+                  provide local routing information and synchronicity
+                  without global control. Energy savings are achieved by
+                  powering down nodes during idle times identified
+                  through dynamic scheduling. We present a real
+                  implementation on wireless sensor nodes based on a
+                  novel, two-level architecture. We evaluate our
+                  approach through measurements and simulation, and show
+                  how the protocol allows adaptive scheduling and
+                  enables a smooth trade-off between energy savings and
+                  latency. An example current measurement shows an
+                  energy savings of 83\% on an intermediate node.},
+}
+
+@INPROCEEDINGS{Intanagonwiwat:2000,
+  AUTHOR =	 {Chalermek Intanagonwiwat and Ramesh Govindan and
+                  Deborah Estrin},
+  TITLE =	 {Directed diffusion: a scalable and robust
+                  communication paradigm for sensor networks},
+  BOOKTITLE =	 {Mobile Computing and Networking},
+  PAGES =	 {56--67},
+  ADDRESS =	 { Boston, Massachusetts, USA},
+  YEAR =	 {2000},
+  PDF =		 {../docs/Intanagonwiwat-2000.pdf},
+  ABSTRACT =	 {Advances in processor, memory and radio technology
+                  will enable small and cheap nodes capable of sensing,
+                  communication and computation. Networks of such nodes
+                  can coordinate to perform distributed sensing of
+                  environmental phenomena. In this paper, we explore the
+                  directed diffusion paradigm for such
+                  coordinatio. Directed diffusion is data-centric in
+                  that all communication is for named data. All nodes in
+                  a directed diffusion-based network are
+                  application-aware. This enables diffusion to achieve
+                  energy savings by selecting empiracally good paths and
+                  by caching and processing data in-network. We explore
+                  and evaluate the use of directed diffusion for a
+                  simple remote-surveillance sensor network.},
+}
+
+@inproceedings{Kahn:1999,
+  author =	 "J. M. Kahn and R. H. Katz and K. S. J. Pister",
+  title =	 "Next Century Challenges: Mobile Networking for ''Smart
+                  Dust''",
+  booktitle =	 "International Conference on Mobile Computing and
+                  Networking ({MOBICOM})",
+  year =	 1999,
+  pages =	 "271--278",
+  address =      "Seattle, Washington, USA",
+  url =		 "citeseer.ist.psu.edu/kahn99next.html",
+  PDF =		 {../docs/Kahn-1999.pdf},
+  ABSTRACT =	 {Large-scale networks of wireless sensors are becoming
+                  an active topic of research. Advances in hardware
+                  technology and engineering design have led to dramatic
+                  reductions in size, power consumption and cost for
+                  digital circuitry, wireless communications and Micro
+                  ElectroMechanical Systems (MEMS). This has enabled
+                  very compact, autonomous and mobile nodes, each
+                  containing one or more sensors, computation and
+                  communication capabilities, and a power supply. The
+                  missing ingredient is the networking and applications
+                  layers needed to harness this revolutionary capability
+                  into a complete system. We review the key elements of
+                  the emergent technology of ``Smart Dust'' and outline
+                  the research challenges they present to the mobile
+                  networking and systems community, which must provide
+                  coherent connectivity to large numbers of mobile
+                  network nodes co-located within a small volume.},
+}
+
+@INPROCEEDINGS{Levis:2002,
+  AUTHOR =	 {Philip Levis and David Culler},
+  TITLE =	 {Maté: A Tiny Virtual Machine for Sensor Networks},
+  BOOKTITLE =	 { Proceedings of the 10th International Conference on
+                  Architectural Support for Programming Languages and
+                  Operating Systems},
+  ADDRESS =	 {San Jose, California},
+  MONTH =	 OCT,
+  YEAR =	 2002,
+  PDF =		 {../docs/Levis-2002.pdf},
+  ABSTRACT =	 {Composed of tens of thousands of tiny devices with
+                  very limited resources (``motes''), sensor networks
+                  are subject to novel systems problems and
+                  constraints. The large number of motes in a sensor
+                  network means that there will often be some failing
+                  nodes; networks must be easy to repopulate. Often
+                  there is no feasible method to recharge motes, so
+                  energy is a precious resource. Once deployed, a
+                  network must be reprogrammable although physically
+                  unreachable, and this reprogramming can be a
+                  significant energy cost. We present Maté, a tiny
+                  communication-centric virtual machine designed for
+                  sensor networks. Maté's high-level interface allows
+                  complex programs to be very short (under 100 bytes),
+                  reducing the energy cost of transmitting new
+                  programs. Code is broken up into small capsules of 24
+                  instructions, which can self-replicate through the
+                  network. Packet sending and reception capsules enable
+                  the deployment of ad-hoc routing and data aggregation
+                  algorithms. Maté's concise, high-level program
+                  representation simplifies programming and allows large
+                  networks to be frequently reprogrammed in an
+                  energy-effcient manner; in addition, its safe
+                  execution environment suggests a use of virtual
+                  machines to provide the user/kernel boundary on motes
+                  that have no hardware protection mechanisms.}
+}
+
+@InProceedings{Levis:2004,
+  author =	 "Philip Levis and Sam Madden and David Gay and Joseph
+                  Polastre and Robert Szewczyk and Alec Woo and Eric
+                  Brewer and David Culler",
+  title =	 "The Emergence of Networking Abstractions and
+                  Techniques in Tiny{OS}",
+  booktitle =	 "First Symposium on networked system design and
+                  implementation (NSDI04)",
+  address =	 "San Francisco, California, USA",
+  pages =	 "1--14",
+  year =	 "2004",
+  PDF =		 {../docs/Levis-2004.pdf},
+}
+
+@INPROCEEDINGS{Mainwaring:2002,
+  AUTHOR =	 {Alan Mainwaring and David Culler and Joseph Polastre
+                  and Robert Szewczyk and John Anderson},
+  TITLE =	 {Wireless sensor networks for habitat monitoring},
+  BOOKTITLE =	 {Proceedings of the 1st ACM international workshop on
+                  Wireless sensor networks and applications},
+  PAGES =	 {88--97},
+  ADDRESS =	 {Atlanta, Georgia, USA},
+  MONTH =	 SEP,
+  YEAR =	 2002,
+  PDF =		 {../docs/Braginsky-2002.pdf},
+  ABSTRACT =	 { We provide an in-depth study of applying wireless
+                  sensor networks to real-world habitat monitoring. A
+                  set of system design requirements are developed that
+                  cover the hardware design of the nodes, the design of
+                  the sensor network, and the capabilities for remote
+                  data access and management. A system architecture is
+                  proposed to address these requirements for habitat
+                  monitoring in general, and an instance of the
+                  architecture for monitoring seabird nesting
+                  environment and behavior is presented. The currently
+                  deployed network consists of 32 nodes on a small
+                  island off the coast of Maine streaming useful live
+                  data onto the web. The application-driven design
+                  exercise serves to identify important areas of further
+                  work in data sampling, communications, network
+                  retasking, and health monitoring.}
+}
+
+@INPROCEEDINGS{Meguerdichian:2001,
+  AUTHOR =	 {Seapahn Meguerdichian and Farinaz Koushanfar and
+                  Miodrag Potkonjak and Mani Srivastava},
+  TITLE =	 {Coverage Problems in Wireless Ad-Hoc Sensor Networks},
+  BOOKTITLE =	 {IEEE Infocom 2001},
+  ADDRESS =	 {Anchorage, Alaska},
+  MONTH =	 APR,
+  YEAR =	 2001,
+  PDF =		 {../docs/Meguerdichian-2001.pdf},
+  ABSTRACT =	 {Wireless ad-hoc sensor networks have recently emerged
+                  as a premier research topic. They have great longterm
+                  economic potential, ability to transform our lives,
+                  and pose many new system-building challenges. Sensor
+                  networks also pose a number of new conceptual and
+                  optimization problems. Some, such as location,
+                  deployment, and tracking, are fundamental issues, in
+                  that many applications rely on them for needed
+                  information. In this paper, we address one of the
+                  fundamental problems, namely coverage. Coverage in
+                  general, answers the questions about quality of
+                  service (surveillance) that can be provided by a
+                  particular sensor network. We first define the
+                  coverage problem from several points of view including
+                  deterministic, statistical, worst and best case, and
+                  present examples in each domain. By combining
+                  computational geometry and graph theoretic techniques,
+                  specifically the Voronoi diagram and graph search
+                  algorithms, we establish the main highlight of the
+                  paper - optimal polynomial time worst and average case
+                  algorithm for coverage calculation. We also present
+                  comprehensive experimental results and discuss future
+                  research directions related to coverage in sensor
+                  networks.}
+}
+
+@article{Perrig:2004,
+  author =	 {Adrian Perrig and John Stankovic and David Wagner},
+  title =	 {Security in wireless sensor networks},
+  journal =	 {Communications of the ACM},
+  volume =	 {47},
+  number =	 {6},
+  year =	 {2004},
+  issn =	 {0001-0782},
+  pages =	 {53--57},
+  doi =		 {http://doi.acm.org/10.1145/990680.990707},
+  publisher =	 {ACM Press},
+  PDF =		 {../docs/Perrig-2004.pdf},
+  ABSTRACT =	 {Wireless sensor network applications include ocean and
+                  wildlife monitoring, manufacturing machinery
+                  performance monitoring, building safety and earthquake
+                  monitoring, and many military applications. An even
+                  wider spectrum of future applications is likely to
+                  follow, including the monitoring of highway traffic,
+                  pollution, wildfires, building security, water
+                  quality, and even people’s heart rates. A major
+                  benefit of these systems is that they perform
+                  in-network processing to reduce large streams of raw
+                  data into useful aggregated information. Protecting it
+                  all is critical.}
+}
+
+@InProceedings{Polastre:2005,
+  author =	 "Joseph Polastre and Robert Szewczyk and David Culler",
+  title =	 "Telos: Enabling Ultra-Low Power Wireless Research",
+  booktitle =	 "The Fourth International Conference on Information
+                  Processing in Sensor Networks: Special track on
+                  Platform Tools and Design Methods for Network Embedded
+                  Sensors (IPSN/SPOTS)",
+  year =	 2005,
+  address =	 "Los Angeles, California",
+  month =	 APR,
+  PDF =		 {../docs/Polastre-2005.pdf},
+  ABSTRACT =	 {We present Telos, an ultra low power wireless sensor
+                  module (“mote”) for research and
+                  experimentation. Telos is the latest in a line of
+                  motes developed by UC Berkeley to enable wireless
+                  sensor network (WSN) research. It is a new mote design
+                  built from scratch based on experiences with previous
+                  mote generations. Telos’ new design consists of three
+                  major goals to enable experimentation: minimal power
+                  consumption, easy to use, and increased software and
+                  hardware robustness. We discuss how hardware
+                  components are selected and integrated in order to
+                  achieve these goals. Using a Texas Instruments MSP430
+                  microcontroller, Chipcon IEEE 802.15.4-compliant
+                  radio, and USB, Telos's power profile is almost
+                  one-tenth the consumption of previous mote platforms
+                  while providing greater performance and throughput. It
+                  eliminates programming and support boards, while
+                  enabling experimentation with WSNs in both lab,
+                  testbed, and deployment settings.}
+}
+
+@ARTICLE{Pottie:2000,
+  AUTHOR =	 {G. J. Pottie and W. J. Kaiser},
+  TITLE =	 {Wireless integrated network sensors},
+  JOURNAL =	 {Communications of the ACM},
+  VOLUME =	 43,
+  NUMBER =	 5,
+  PAGES =	 {51--58},
+  MONTH =	 MAY,
+  YEAR =	 2000,
+  PDF =		 {../docs/Pottie-2000.pdf},
+  ABSTRACT =	 {Wireless integrated network sensors (WINS) provide
+                  distributed network and Internet access to sensors,
+                  controls, and processors deeply embedded in equipment,
+                  facilities, and the environment. The WINS network
+                  represents a new monitoring and control capability for
+                  applications in such industries as transportation,
+                  manufacturing, health care, environmental oversight,
+                  and safety and security. WINS combine microsensor
+                  technology and low-power signal processing,
+                  computation, and low-cost wireless networking in a
+                  compact system.}
+}
+
+@inproceedings{Romer:2004,
+  author =	 "Kay R{\"o}mer",
+  title =	 "Tracking Real-World Phenomena with Smart Dust",
+  booktitle =	 "1st European Workshop on Wireless Sensor Networks
+                  (EWSN)",
+  year =	 "2004",
+  month =	 jan,
+  publisher =	 "Springer-Verlag",
+  isbn =	 "3-540-20825-9",
+  pages =	 "28--43",
+  address =	 "Berlin, Germany",
+  PDF =		 {../docs/Romer-2004.pdf},
+  ABSTRACT =	 {So-called ``Smart Dust'' is envisioned to combine
+                  sensing, computing, and wireless communication
+                  capabilities in an autonomous, dust-grain-sized
+                  device. Dense networks of Smart Dust should then be
+                  able to unobtrusively monitor real-world processes
+                  with unprecedented quality and scale. In this paper,
+                  we present and evaluate a prototype implementation of
+                  a system for tracking the location of real-world
+                  phenomena (using a toy car as an example) with Smart
+                  Dust. The system includes novel techniques for node
+                  localization, time synchronization, and for message
+                  ordering specifically tailored for large networks of
+                  tiny Smart Dust devices. We also point out why more
+                  traditional approaches developed for early macro
+                  prototypes of Smart Dust (such as the Berkeley Motes)
+                  are not well suited for systems based on true Smart
+                  Dust.}
+}
+
+@article{Ruiz:2003,
+  author =	 {Linnyer B. Ruiz and Jos\'{e} Marcos S. Nogueira and
+                  Antonio A. F. Loureiro},
+  title =	 {{MANNA:} A Management Architecture for Wireless Sensor
+                  Networks},
+  journal =	 {{IEEE} Communications Magazine},
+  month =	 {February},
+  year =	 {2003},
+  volume =	 {41},
+  number =	 {2},
+  pages =	 {116--125},
+  note =	 {{ISSN} 0163-6804},
+  PDF =		 {../docs/Ruiz-2003.pdf},
+  ABSTRACT =	 {Wireless sensor networks (WSNs) are bewming an
+                  increasingly important technology that will be used in
+                  a variety of applications such as environmental
+                  monitoring, infrastructure management, public safety,
+                  medical, home and office security, transportation, and
+                  militaq. WSNs will also play a key role in pervasive
+                  computing where computing devices and people are
+                  connected to the Internet. Until now, WSNs and their
+                  applications have been developed without considering a
+                  management solution. This is a critical problem sincc
+                  nctworks comprising tens of thousands of nodes are
+                  expected to be used in some of the applications
+                  above. This article proposes the MANNA managemcnt
+                  architccture for WSNs. In particular, it prescnts the
+                  functional, information, and.physical management
+                  architectures that take into account specific
+                  characteristics of this type of network. Some of them
+                  are restrict physical resources such as energy and
+                  computing power, frequent reconfiguration and
+                  adaptation, and faults caused by nodes
+                  unavailable. The MANNA architecture considers three
+                  management dimensions: functional areas,
+                  management. levels, and WSN functionalities. These
+                  dimensions are specified to the management of a WSN
+                  and are the basis for a list of management functions,
+                  The article also proposes WSN models to guide the
+                  management activities and the use of correlation in
+                  the WSN management. This is a first step into a
+                  largely uncxplored research area.}
+}
+
+@article{Szewczyk:2004,
+  author =	 {Robert Szewczyk and Eric Osterweil and Joseph Polastre
+                  and Michael Hamilton and Alan Mainwaring and Deborah
+                  Estrin},
+  title =	 {Habitat monitoring with sensor networks},
+  journal =	 {Communications of the ACM},
+  volume =	 {47},
+  number =	 {6},
+  year =	 {2004},
+  issn =	 {0001-0782},
+  pages =	 {34--40},
+  publisher =	 {ACM Press},
+  PDF =		 {../docs/Szewczyk-2004.pdf},
+  ABSTRACT =	 {Historically, the study of microclimate and habitat
+                  utilization have been largely observational, with
+                  climatic and behavioral variables being extrapolated
+                  from a few or even individual measurement
+                  sites. Today, densely deployed sensor networks are
+                  being scaled to the size of the organisms under study,
+                  ampling phenomena at frequencies the organisms
+                  encounter, and dispersed in patterns that capture the
+                  full range of environmental exposures to provide the
+                  fine-grain information needed for accurate modeling
+                  and prediction.},
+}
+
+@inproceedings{Vieira:2003,
+  author =	 {Marcos Augusto Menezes Vieira and Di\'{o}genes
+                  Cec\'{i}lio {da Silva Jr.} and Claudionor
+                  J. N. {Coelho Jr.} and Jos\'{e} M. da Mata},
+  title =	 {Survey on Wireless Sensor Network Devices},
+  year =	 {2003},
+  booktitle =	 {Proceedings of the 9th {IEEE} International Conference
+                  on Emerging Technologies and Factory Automation
+                  ({ETFA'03})},
+  month =	 {September},
+  address =	 {Lisbon, Portugal},
+  PDF =		 {../docs/Vieira-2003.pdf},
+  ABSTRACT =	 {Wireless sensor networks are networks of compact
+                  microsensors with wireless communication
+                  capability. These small devices are relatively cheap
+                  with the potential to be disseminated in large
+                  quantities. Emerging applications of data gathering
+                  range from the environmental to the military. As
+                  autonomous devices they can provide pervasive
+                  distributed and collaborative network of computer
+                  nodes. Architectural challenges are posed for
+                  designers such as computational power, energy
+                  consumption, energy sources, communication channels
+                  and sensing capabilities. Embedded Systems provide the
+                  computational platform for hardware and software
+                  components to interact with the environment and other
+                  nodes. This survey presents the current
+                  state-of-the-art for wireless sensor nodes,
+                  investigating and analyzing these challenges. We
+                  discuss the characteristics and requirements for a
+                  sensor node mainly processing, communications, power
+                  and sensing components. In this survey we present a
+                  comprehensive comparative study of sensor nodes
+                  platforms, energy management techniques, off-the-shelf
+                  microcontrollers, battery types and radio devices.},
+}
+
+@INPROCEEDINGS{Woo:2001,
+  AUTHOR =	 {Alec Woo and David E. Culler},
+  TITLE =	 {{A transmission control scheme for media access in
+                  sensor networks}},
+  BOOKTITLE =	 {Proceedings of the 7th annual international conference
+                  on Mobile computing and networking},
+  PAGES =	 {221--235},
+  ADDRESS =	 {Rome, Italy},
+  YEAR =	 2001,
+  PDF =		 {../docs/Woo-2001.pdf},
+  ABSTRACT =	 {We study the problem of media access control in the
+                  novel regime of sensor networks, where unique
+                  application behavior and tight constraints in
+                  computation power, storage, energy resources, and
+                  radio technology have shaped this design space to be
+                  very different from that found in traditional mobile
+                  computing regime. Media access control in sensor
+                  networks must not only be energy efficient but should
+                  also allow fair bandwidth allocation to the
+                  infrastructure for all nodes in a multihop network. We
+                  propose an adaptive rate control mechanism aiming to
+                  support these two goals and find that such a scheme is
+                  most effective in achieving our fairness goal while
+                  being energy effcient for both low and high duty cycle
+                  of network traffic.},
+}
+
+@article{Woo:2004,
+  author =	 {Alec Woo and Sam Madden and Ramesh Govindan},
+  title =	 {Networking support for query processing in sensor
+                  networks},
+  journal =	 {Communications of the ACM},
+  volume =	 {47},
+  number =	 {6},
+  year =	 {2004},
+  issn =	 {0001-0782},
+  pages =	 {47--52},
+  doi =		 {http://doi.acm.org/10.1145/990680.990706},
+  publisher =	 {ACM Press},
+  PDF =		 {../docs/Woo-2004.pdf},
+  ABSTRACT =	 {Sensor networks have the potential to support
+                  applications ranging from habitat and structural
+                  monitoring, to home and building automation, to supply
+                  chain management. Users are typically interested in
+                  continuous streams of information representing the
+                  evolving status of systems, combined with periodic
+                  statistical reports about specific phenomena. Query
+                  processing systems, including Directed Diffusion [3],
+                  TinyDB [6], and Cougar [10], provide high-level
+                  interfaces that allow users to collect and process
+                  such continuous streams. They are especially
+                  attractive as ways to efficiently implement monitoring
+                  applications without forcing users to write complex,
+                  low-level code for managing multihop network
+                  topologies or for acquiring samples from sensors.},
+}
+
+

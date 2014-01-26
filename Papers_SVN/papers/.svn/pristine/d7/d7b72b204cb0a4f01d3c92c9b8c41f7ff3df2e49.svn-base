@@ -1,0 +1,12 @@
+
+\begin{tabular}{|l||l|l|l|}
+\hline
+          & Normal    & Debugged   & Debugged \\
+Parameter & scheduler & scheduler  & scheduler \\
+          &           & hand coded & scenario adapter \\
+\hline
+4-input LUTs & 2887 & 2978 & 3037 \\
+Flip Flops & 663 & 754 & 842 \\
+Longest path delay (ns) & 32.76 & 32.76 & 32.76 \\
+\hline
+\end{tabular}

@@ -1,0 +1,529 @@
+@article{Okazaki:2011,
+    author = {Okazaki, A.M. and Frohlich, A.A.},
+    booktitle = {18th International Conference on Telecommunications},
+    title = {AD-ZRP: Ant-based routing algorithm for dynamic wireless sensor networks},
+    year = {2011},
+    month = {may.},
+    pages = {15-20},
+    doi = {10.1109/CTS.2011.5898910},
+}
+
+
+@techreport{mc13224v,
+  author = {Freescale Semiconductor},
+  title = "{MC1322x Advanced ZigBee-Compliant Platform-in-Package (PiP) for the 2.4 GHz IEEE 802.15.4 Standard}",
+  year = {2010},
+}
+
+@inproceedings{Steiner:2010,
+  author = {Rodrigo Vieira Steiner and Tiago Rogério Mück and Antônio Augusto Fröhlich},
+  title  = "{C-MAC: a Configurable Medium Access Control Protocol for Sensor Networks}",
+  booktitle = {Proceedings of the IEEE Sensors Conference},
+  year   = {2010},
+}
+
+@article{Rexford:2010,
+ author = {Rexford, Jennifer and Dovrolis, Constantine},
+ title = "{Future Internet architecture: clean-slate versus evolutionary research}",
+ journal = {Commun. ACM},
+ volume = {53},
+ issue = {9},
+ month = {September},
+ year = {2010},
+ issn = {0001-0782},
+ pages = {36--40},
+ numpages = {5},
+ acmid = {1810906},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+} 
+
+@inproceedings{Meisel:2010,
+ author = {Meisel, Michael and Pappas, Vasileios and Zhang, Lixia},
+ title = "{Ad hoc networking via named data}",
+ booktitle = {Proceedings of the fifth ACM international workshop on Mobility in the evolving internet architecture},
+ series = {MobiArch '10},
+ year = {2010},
+ isbn = {978-1-4503-0143-5},
+ location = {Chicago, Illinois, USA},
+ pages = {3--8},
+ numpages = {6},
+ acmid = {1859986},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {ad-hoc networking, architecture design},
+} 
+
+@inproceedings{Jacobson:2009,
+ author = {Jacobson, Van and Smetters, Diana K. and Thornton, James D. and Plass, Michael F. and Briggs, Nicholas H. and Braynard, Rebecca L.},
+ title = "{Networking named content}",
+ booktitle = {Proceedings of the 5th international conference on Emerging networking experiments and technologies},
+ series = {CoNEXT '09},
+ year = {2009},
+ isbn = {978-1-60558-636-6},
+ location = {Rome, Italy},
+ pages = {1--12},
+ numpages = {12},
+ doi = {http://doi.acm.org/10.1145/1658939.1658941},
+ acmid = {1658941},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {content routing, content-based security, content-centric networking},
+}
+
+@online{eposmote,
+    title = "{EPOS Project}",
+    url = {http://epos.lisha.ufsc.br}}
+}
+
+@INPROCEEDINGS{Duquennoy:2009,
+author={Duquennoy, S. and Grimaud, G. and Vandewalle, J.-J.},
+booktitle={Embedded Software and Systems, 2009. ICESS '09. International Conference on}, title="{The Web of Things: Interconnecting Devices with High Usability and Performance}",
+year={2009},
+month={may},
+volume={},
+number={},
+pages={323 -330},
+keywords={HTTP;Internet;Smews;TCP-IP stack;Web application;Web browser;Web protocols;Web servers;hardware-constrained devices;open-source license;Internet;file servers;online front-ends;transport protocols;},
+doi={10.1109/ICESS.2009.13},
+ISSN={},}
+
+@book{Doraswamy:1999,
+ author = {Doraswamy, Naganand and Harkins, Dan},
+ title = "{IPSec: The New Security Standard for the Internet, Intranets, and Virtual Private Networks}",
+ year = {1999},
+ isbn = {0130118982},
+ publisher = {Prentice Hall PTR},
+ address = {Upper Saddle River, NJ, USA},
+}
+
+@book{Perkins:1997,
+ author = {Perkins, Charles E. and Alpert, Sherman R. and Woolf, Bobby},
+ title = "{Mobile IP; Design Principles and Practices}",
+ year = {1997},
+ isbn = {0201634694},
+ edition = {1st},
+ publisher = {Addison-Wesley Longman Publishing Co., Inc.},
+ address = {Boston, MA, USA},
+}
+
+@manual{TCP:1981,
+  author =	{{RFC 793}},
+  title =	{{TRANSMISSION CONTROL PROTOCOL}},
+  year =	{1981},
+  month =	{September},
+  pages =	{91}
+}
+
+@inproceedings{Balakrishnan:1995,
+ author = {Hari Balakrishnan, Srinivasan Seshan, Elan Amir and Randy H. Katz},
+ title = {Improving TCP/IP performance over wireless networks},
+ booktitle = {Proceedings of the 1st annual international conference on Mobile computing and networking },
+ year = {1995},
+ isbn = {0-89791-814-2},
+ pages = {2--11},
+ location = {New York, NY, USA},
+ doi = {http://portal.acm.org/citation.cfm?id=215544},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+}
+
+@conference{Braun:2007,
+  author =	{Torsten Braun, Thiemo Voigt and Adam Dunkels},
+  title =	{{TCP support for sensor networks}},
+  booktitle =	{Fourth Annual Conference on Wireless on Demand Network Systems and Services},
+  year =	{2007},
+  month =	{January},
+  pages =	{162--169}
+}
+
+@conference{Ganesh:2009,
+  author =	{S. Ganesh, R. Amutha},
+  title =	{{Energy efficient transport protocol for wireless sensor networks}},
+  booktitle =	{2nd IEEE International Conference on Computer Science and Information Technology},
+  year =	{2009},
+  month =	{August},
+  pages =	{464--468}
+}
+
+@inproceedings{Elrahim:2011,
+  author =	{Adel Gaafar A. Elrahim, Hussein A. Elsayed, Salwa El Ramlf and Magdy M, Ibrahim},
+  title =	{{Improving TCP congestion control for wireless sensor networks}},
+  booktitle =	{4th Annual Caneus Fly by Wireless Workshop},
+  year =	{2011},
+  month =	{June},
+  pages =	{1--6},
+  address =	{Montreal, QC, Canada}
+}
+
+@conference{Jardak:2008,
+  author =	{Jardak, C. and Meshkova, E. and Riihijarvi, J. and Rerkrai, K. and Mahonen, P.},
+  title =	{{Implementation and Performance Evaluation of nanoIP Protocols: Simplified Versions of TCP, UDP, HTTP and SLP for Wireless Sensor Networks}},
+  booktitle =	{IEEE Wireless Communications and Networking Conference},
+  year =	{2008},
+  month =	{March},
+  pages =	{2474--2479}
+}
+
+
+
+
+
+
+
+
+
+
+@inproceedings{Gilsinn:2001,
+ author = {Gilsinn, J. D. and Lee, K.},
+ title = {Wireless interfaces for IEEE 1451 sensor networks},
+ booktitle = {Proceedings of the First ISA/IEEE Conference Sensor for Industry},
+ year = {2001},
+ isbn = {0-7803-6659-X},
+ pages = {45--50},
+ location = {Rosemont, IL , USA},
+ doi = {http://doi.acm.org/10.1109/SFICON.2001.968497},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+}
+
+@conference{Song:2008,
+  author =	{Eugene Y. Song and Kang Lee},
+  title =	{{Understanding IEEE 1451-Networked Smart Transducer Interface Standard - What Is a Smart Transducer?}},
+  booktitle =	{IEEE Instrumentation \& Measurement Magazine},
+  volume =	{11},
+  number =	{2},
+  year =	{2008},
+  month =	{April},
+  pages =	{11--17}
+}
+
+@conference{Oostdyk:2006,
+ title={{A Kennedy Space Center implementation of IEEE 1451 networked smart sensors and lessons learned}},
+ author={Oostdyk, R. L. and Mata, C. T. and Perotti, J. M.},
+ booktitle={IEEE Aerospace Conference},
+ volume={2},
+ pages={20},
+ year={2006}
+}
+
+@inproceedings{Lee:XXX,
+  author =	{Kang Lee},
+  title =	{{A Synopsis of the IEEE P1451- Standards for Smart Transducer Communication}},
+  url =		{ieee1451.nist.gov/1451synosis-599F.pdf},
+ booktitle = {Proceedings of the 17th IEEE Instrumentation and Measurement Technology Conference},
+ year = {2000},
+ isbn = {0-7803-5890-2},
+ pages = {525--528},
+ address = {Baltimore, MD},
+ doi = {http://doi.acm.org/10.1109/IMTC.2000.848791},
+ publisher = {IEEEXPLORE},
+ address = {New York, NY, USA},
+}
+
+@inproceedings{Lee:2000,
+  author =	{Kang Lee},
+  title =	{{IEEE 1451: A Standard in Support of Smart Transducer Networking}},
+  booktitle =	{17th IEEE Instrumentation and Measurement Technology Conference},
+  volume =	{2},
+  year =	{2000},
+  month =	{May},
+  pages =	{525--528},
+  address =	{Baltimore, MD, USA},
+  isbn =	{0-7803-5890-2}
+}
+
+@manual{IEEE1451.0:2007,
+  author =	{{IEEE 1451.0}},
+  title =	{{IEEE Standard for a Smart Transducer Interface for Sensors and Actuators - Common Functions, Communication Protocols, and Transducer Electronic Data Sheet (TEDS) Formats}},
+  year =	{2007},
+  month =	{September},
+  pages =	{335},
+  isbn =	{978-0-7381-5598-2}
+}
+
+@manual{IEEE1451.5:2007,
+  author =	{{IEEE 1451.5}},
+  title =	{{IEEE Standard for a Smart Transducer Interface for Sensors and Actuators - Wireless Communication Protocols and Transducer Electronic Data Sheet (TEDS) Formats}},
+  year =	{2007},
+  month =	{October},
+  pages =	{236},
+  isbn =	{978-0-7381-5600-2}
+}
+
+@misc{AES:2001,
+    author = {NIST},
+    title = {{Advanced Encryption Standard (AES)}},
+    howpublished = {{Federal Information Processing Standards Publication 197}},
+    month = {November},
+    year = {2001}
+}
+
+@inproceedings{Song:2006,
+ author = {Song, E. Y. and Lee, K.},
+ title = {An Implementation of the Proposed IEEE 1451.0 and 1451.5 Standards},
+ booktitle = {Proceedings of the 2006 IEEE Sensors Applications Symposium},
+ year = {2006},
+ isbn = {0-7803-9580-8},
+ pages = {72--77},
+ location = {Rosemont, IL , USA},
+ doi = {http://doi.acm.org/10.1109/SAS.2006.1634240},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+}
+
+@conference{Lee:2007,
+ title={{Wireless Sensor Network Based on IEEE 1451.0 and IEEE 1451.5-802.11}},
+ author={Lee, K. and Song, E.},
+ booktitle={8th International Conference on Electronic Measurement and Instruments},
+ volume={11},
+ pages={4--7},
+ year={2007},
+ organization={Citeseer}
+}
+
+@book{Frohlich:2001,
+  author =	{Antônio Augusto Fr\"ohlich},
+  title =	{{Application-Oriented Operating Systems}},
+  publisher =	{GMD - Forschungszentrum Informationstechnik},
+  year =	{2001},
+  address =	{Sankt Augustin},
+  pages =	{200},
+  isbn =	{3-88457-400-0},
+  url =		{http://www.lisha.ufsc.br/~guto/publications/aoos.pdf}
+}
+
+@inproceedings{Marcondes:2006,
+  author =	{Hugo Marcondes and Arliones Stevert Hoeller Junior and Lucas Francisco Wanner and Rafael Luiz Cancian and Danillo Moura Santos and Antônio Augusto M. Fr\"ohlich},
+  title =	{{EPOS: Um Sistema Operacional Port\'avel para Sistemas Profundamente Embarcados}},
+  booktitle =	{III Workshop de Sistemas Operacionais},
+  year =	{2006},
+  month =	{Julho},
+  pages =	{31--45},
+  address =	{Campo Grande, MS, Brasil}
+}
+
+@misc{Lisha:2010,
+  author =	{LISHA},
+  title =	{{EPOS Project}},
+  howpublished = {website},
+  year =	{2010},
+  url =		{http://epos.lisha.ufsc.br}
+}
+
+@article{Frohlich:2008,
+  author =	{Antônio Augusto Fr\"ohlich and Lucas Francisco Wanner},
+  title =	{{Operating System Support for Wireless Sensor Networks}},
+  journal =	{Journal of Computer Science},
+  volume =	{4},
+  number =	{4},
+  year =	{2008},
+  pages =	{272--281}
+}
+
+@conference{Mainwaring:2002,
+  author =	{Alan Mainwaring and Joseph Polastre and Robert Szewczyk and David Culler and John Anderson},
+  title =	{{Wireless Sensor Networks for Habitat Monitoring}},
+  booktitle =	{International Workshop on Wireless Sensor Networks and Applications},
+  year =	{2002},
+  pages =	{88--97},
+  address =	{Atlanta, Georgia, USA},
+  isbn =	{1-58113-589-0}
+}
+
+@inproceedings{Fu:2003,
+  author = {Fu, Xinwen and Graham, Bryan and Bettati, Riccardo and Zhao, Wei},
+  title = {Active Traffic Analysis Attacks and Countermeasures},
+  booktitle = {Proceedings of the 2003 International Conference on Computer Networks and Mobile Computing},
+  series = {ICCNMC '03},
+  year = {2003},
+  isbn = {0-7695-2033-2},
+  pages = {31--},
+  url = {http://portal.acm.org/citation.cfm?id=950787.950964},
+  acmid = {950964},
+  publisher = {IEEE Computer Society},
+  address = {Washington, DC, USA},
+} 
+
+@article{Huai:2009,
+  author =      {Lian Huai and Xuecheng Zou and Zhenglin Liu and Yu Han},
+  title =       {An Energy-Efficient AES-CCM Implementation for IEEE802.15.4 Wireless Sensor Networks},
+  journal =     {Networks Security, Wireless Communications and Trusted Computing, International Conference on},
+  volume =      {2},
+  isbn =        {978-0-7695-3610-1},
+  year =        {2009},
+  pages =       {394-397},
+  doi =         {http://doi.ieeecomputersociety.org/10.1109/NSWCTC.2009.246},
+  publisher =   {IEEE Computer Society},
+  address =     {Los Alamitos, CA, USA},
+}
+
+@conference{Lee:2010,
+  author =	{Hyeopgeon Lee and Kyounghwa Lee and Yongtae Shin},
+  title =	{{Implementation and Performance Analysis of AES-128 CBC algorithm in WSNs}},
+  booktitle =	{The 12th International Conference on Advanced Communication Technology},
+  year =	{2010},
+  pages =	{243--248},
+  isbn =	{978-1-4244-5427-3}
+}
+
+@article{Zhou:2008,
+  author =      {Yun Zhou and Yuguang Fang and Yanchao Zhang},
+  title =       {Securing Wireless Sensor Networks: A Survey},
+  journal =     {IEEE Communications Surveys \& Tutorials},
+  volume =      {10},
+  year =        {2008},
+  pages =       {6-28},
+  publisher =   {IEEE Communications Society},
+}
+
+@INPROCEEDINGS{Chang:2010, 
+  author={Chang, J.K.-T. and Shaoshan Liu and Gaudiot, J. and Chen Liu}, 
+  booktitle={Performance Computing and Communications Conference (IPCCC), 2010 IEEE 29th International}, title={Hardware-assisted security mechanism: The acceleration of cryptographic operations with low hardware cost}, 
+  year={2010}, 
+  month={dec.}, 
+  volume={}, 
+  number={}, 
+  pages={327 -328}, 
+  keywords={INTEL performance analyzer;Intel64-based machines;VTune;cryptographic algorithm;generic cryptographic accelerator;hardware-assisted security mechanism:;hotspot function;low hardware cost;software performance;cryptography;microprocessor chips;software performance evaluation;}, 
+  doi={10.1109/PCCC.2010.5682293}, 
+  ISSN={1097-2641},
+}
+
+@INPROCEEDINGS{Swain:2010, 
+    author={Swain, A.R. and Hansdah, R.C.}, 
+    booktitle={Communication Systems and Networks (COMSNETS), 2010 Second International Conference on}, title={An energy efficient and Fault-Tolerant Clock Synchronization Protocol for wireless sensor networks}, 
+    year={2010}, 
+    month={jan.}, 
+    volume={}, 
+    number={}, 
+    pages={1 -10}, 
+    keywords={TinyOS;fault-tolerant clock synchronization protocol;peer-to-peer system;synchronization error;wireless sensor networks;fault tolerant computing;protocols;synchronisation;wireless sensor networks;}, 
+    doi={10.1109/COMSNETS.2010.5432009}, 
+    ISSN={},
+}
+
+@INPROCEEDINGS{Fontanelli:2009, 
+    author={Fontanelli, D. and Petri, D.}, 
+    booktitle={Advanced Methods for Uncertainty Estimation in Measurement, 2009. AMUEM 2009. IEEE International Workshop on}, title={An algorithm for WSN clock synchronization: Uncertainty and convergence rate trade off}, 
+    year={2009}, 
+    month={july}, 
+    volume={}, 
+    number={}, 
+    pages={74 -79}, 
+    keywords={WSN clock synchronization;convergence rate trade off;tight time synchronization;wireless sensor network;clocks;convergence of numerical methods;synchronisation;time measurement;wireless sensor networks;}, 
+    doi={10.1109/AMUEM.2009.5207595}, 
+    ISSN={},
+}
+
+@INPROCEEDINGS{Fontanelli:2010,
+  author={Fontanelli, D. and Macii, D.}, 
+  booktitle={Instrumentation and Measurement Technology Conference (I2MTC), 2010 IEEE}, title={Towards master-less wsn clock synchronization with a light communication protocol}, 
+  year={2010}, 
+  month={may}, 
+  volume={}, 
+  number={}, 
+  pages={105 -110}, 
+  keywords={dat fusion;data aggregation;distributed proportional integral consensus controller;distributed task scheduling;light communication protocol;master less WSN clock synchronization;network traffic;processing delays;random communication;time synchronization;wireless sensor network;PI control;protocols;sensor fusion;synchronisation;telecommunication control;wireless sensor networks;}, 
+  doi={10.1109/IMTC.2010.5488010}, 
+  ISSN={1091-5281},
+}
+
+@INPROCEEDINGS{Sun:2010,
+  author={Hung-Min Sun and Shih-Ying Chang and Tello, A.B. and Yen-Hsuen Chen},
+  booktitle={Computer Symposium (ICS), 2010 International},
+  title={An authentication scheme balancing authenticity and transmission for wireless sensor networks},
+  year={2010},
+  month={dec.},
+  volume={},
+  number={},
+  pages={222 -227},
+  keywords={MAC;Reed Solomon codes;WSN;cryptographic protocol;message authentication code;wireless sensor network;Reed-Solomon codes;cryptographic protocols;message authentication;wireless sensor networks;},
+  doi={10.1109/COMPSYM.2010.5685515},
+  ISSN={},
+}
+
+@INPROCEEDINGS{Moises:2009,
+  author={Moises, S.R. and Gina, G.G. and Gonzalo, D.S.},
+  booktitle={Electrical, Communications, and Computers, 2009. CONIELECOMP 2009. International Conference on},
+  title={An Authentication Protocol for Sensor Networks Using Pairings},
+  year={2009},
+  month={feb.},
+  volume={},
+  number={},
+  pages={168 -172},
+  keywords={authentication protocol;message source;node authenticity;node impersonation;public key cryptography;wireless sensor networks;message authentication;protocols;public key cryptography;wireless sensor networks;},
+  doi={10.1109/CONIELECOMP.2009.14},
+  ISSN={},
+}
+
+@inproceedings{Karlof:2004,
+  author = {Karlof, Chris and Sastry, Naveen and Wagner, David},
+  title = {TinySec: a link layer security architecture for wireless sensor networks},
+  booktitle = {Proceedings of the 2nd international conference on Embedded networked sensor systems},
+  series = {SenSys '04},
+  year = {2004},
+  isbn = {1-58113-879-2},
+  location = {Baltimore, MD, USA},
+  pages = {162--175},
+  numpages = {14},
+  url = {http://doi.acm.org/10.1145/1031495.1031515},
+  doi = {http://doi.acm.org/10.1145/1031495.1031515},
+  acmid = {1031515},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  keywords = {link layer security, sensor network security},
+} 
+
+@INPROCEEDINGS{Luk:2007,
+  author={Luk, M. and Mezzour, G. and Perrig, A. and Gligor, V.},
+  booktitle={Information Processing in Sensor Networks, 2007. IPSN 2007. 6th International Symposium on},
+  title={MiniSec: A Secure Sensor Network Communication Architecture},
+  year={2007},
+  month={april},
+  volume={},
+  number={},
+  pages={479 -488},
+  keywords={MiniSec;TinySec;ZigBee;authentication;data secrecy;multi-source broadcast communication;replay protection;secure sensor network communication architecture;single-source communication;broadcasting;telecommunication security;wireless sensor networks;},
+  doi={10.1109/IPSN.2007.4379708},
+  ISSN={},
+}
+
+@INPROCEEDINGS{Jinwala:2009,
+  author={Jinwala, D. and Patel, D. and Patel, S. and Dasgupta, K.S.},
+  booktitle={Computer Science and Information Engineering, 2009 WRI World Congress on},
+  title={Replay Protection at the Link Layer Security in Wireless Sensor Networks},
+  year={2009},
+  month={31 2009-april 2},
+  volume={1},
+  number={},
+  pages={160 -165},
+  keywords={MiniSec framework;TinySec framework;bloom-filter-based approach;broadcast communication;hash functions;link layer security protocols;replay protection;unicast communication;wireless sensor networks;protocols;telecommunication security;wireless sensor networks;},
+  doi={10.1109/CSIE.2009.246},
+  ISSN={},
+}
+
+@online{Skipjack:1998,
+  title={National Security Agency, Skipjack and KEA algorithm specifications},
+  year={1998},
+  month={may},
+  url = {http://cryptome.org/jya/skipjack-spec.htm}
+}
+
+@inproceedings{Gay:2003,
+  author = {Gay, David and Levis, Philip and von Behren, Robert and Welsh, Matt and Brewer, Eric and Culler, David},
+  title = {The nesC language: A holistic approach to networked embedded systems},
+  booktitle = {Proceedings of the ACM SIGPLAN 2003 conference on Programming language design and implementation},
+  series = {PLDI '03},
+  year = {2003},
+  isbn = {1-58113-662-5},
+  location = {San Diego, California, USA},
+  pages = {1--11},
+  numpages = {11},
+  url = {http://doi.acm.org/10.1145/781131.781133},
+  doi = {http://doi.acm.org/10.1145/781131.781133},
+  acmid = {781133},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  keywords = {C, TinyOS, components, concurrency, data races, first-order, modules, nesC, programming languages},
+}

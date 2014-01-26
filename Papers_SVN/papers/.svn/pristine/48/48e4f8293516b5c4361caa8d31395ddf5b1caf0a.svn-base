@@ -1,0 +1,76 @@
+% ------------------------------------------------------------------------------
+\section{Strategies for ME Optimization} \label{sota}
+ME is a technique employed to explore the
+similarity between neighboring pictures in a video sequence.
+Figure \ref{fig:motion_estimation} illustrates the ME process for the neighboring
+pictures \emph{A} and \emph{B}.
+By searching for similarities between these two pictures, it is possible to determine
+which blocks from picture \emph{A} are also found in picture \emph{B}.
+Such displacement of picture blocks is encoded by \emph{motion vectors}
+(represented by the small arrows in the bottom side of
+Figure \ref{fig:motion_estimation}). 
+There are several strategies to optimize the execution time of ME:
+fast-search algorithms, macroblock subsampling, sample truncation, 
+multi-resolution ME, subsampled motion-field estimation, 
+and parallel and hardware implementations of algorithms.
+
+\fig{.4}{motion_estimation}{Motion Estimation}
+
+
+% P3 ... Pn-1
+% Um paragrafo para cada estratégia dizendo:
+% + how these solutions match/ contribute to Goals { g1, g2, .., gn} and Features {f1 , f2 , ..., fn}
+% + And what set of features F is still missing? (GAP)
+%
+% P3 - fast-search
+\emph{Fast-search algorithms} are BMAs that look only in 
+specific positions of the search window
+\cite{SunNingning:TSS:2009, ShipingZhu:DS:2009}.
+The search window defines the region of the reference frame that is scanned for a macroblock
+partition similar to the current one. 
+Only the motion vectors that correspond to the match with the lowest \emph{motion cost} 
+are chosen. 
+The main drawback of this approach is that, since some positions of the search 
+window are discarded, it is possible to find suboptimal motion vectors.
+
+% P4 macroblock subsampling and sample truncation
+Two other strategies to optimize ME during block-matching are \textit{macroblock 
+subsampling} and \textit{sample truncation}. 
+Macroblock subsampling takes into consideration only a macroblock partition 
+(i.e. some samples of a macroblock) while the matching for a 
+position of the search window is being performed. 
+Sample truncation is performed by ignoring the least significant bits of a 
+sample. 
+These strategies have been used separately
+\cite{liu:sub:1993} (subsampling),
+\cite{ChiaChunLin:PMRME:2007} (truncation), and
+integrated \cite{Ludwich:WebMedia:2011} (subsampling and truncation).
+
+% P5 multi-resolution ME
+\emph{Multi-resolution ME} is the strategy in which the motion 
+vectors are computed for distinct resolutions of the same frame. 
+Motion vectors computed in a more coarse level can be successively refined until
+the finest level (higher resolution). 
+If the search is performed sequentially as in 
+\cite{ChiaChunLin:FastAlgPlusArch:2006}, the time of ME can be increased due to
+the dependencies between distinct levels. 
+On the other hand, if the search is executed in parallel for each resolution 
+level, as in \cite{ChiaChunLin:PMRME:2007}, hardware functional units need to be
+replicated. 
+A similar technique is \emph{subsampled motion-field estimation} 
+\cite{liu:sub:1993}, which is based on the assumption that motion vectors of neighboring 
+blocks tends to be similar. Thus, for each block, only a set of motion 
+vectors (a motion-field) is computed, while the others are interpolated.
+
+% P7 | P6 parallel and hardware implementations of algorithms
+Other strategies for optimizing motion estimation are based on finding 
+parallelism in ME stages, especially in the block-matching algorithms, in order
+to execute them simultaneously. 
+These parallel strategies commonly have been the base for dedicated hardware implementations. 
+The \emph{Sum of Absolute Differences} (SAD) is a metric of error used in 
+block-matching algorithms. This technique is frequently parallelized using functional 
+units in hardware \cite{ChiaChunLin:PMRME:2007,HoyoungChang:HW:2009}, 
+Hardware implementations of shared buffers for frame data are also
+common \cite{HoyoungChang:HW:2009, HaibingYin:HW:2010}.
+
+% ------------------------------------------------------------------------------

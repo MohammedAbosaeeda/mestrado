@@ -1,0 +1,74 @@
+\begin{thebibliography}{10}
+
+\bibitem{jffs}
+Axis Communications.
+\newblock {\em {The Journalling Flash File System (JFFS)}}, online edition,
+  December 2002.
+\newblock [http://developer.axis.com/software/jffs/].
+
+\bibitem{Grossman:1996}
+Steve Grossman.
+\newblock Future trends in flash memories.
+\newblock In {\em Proceedings of the 1996 IEEE International Workshop on Memory
+  Technology, Design and Testing (MTDT'96)}, Singapore, August 1996. IEEE.
+
+\bibitem{ftl}
+Intel Co.
+\newblock {\em {Understanding the Flash Translation Layer (FTL)
+  Specification}}, online edition, December 1998.
+\newblock [ftp://download.intel.com/design/flcomp/applnots/29781602.pdf].
+
+\bibitem{intel-flash:2002}
+Intel Co.
+\newblock {\em {What is Flash Memory}}, online edition, October 2002.
+\newblock [http://www.intel.com/design/flcomp/articles/298312.pdf].
+
+\bibitem{Katti:1994}
+R.~Katti.
+\newblock {Solid State Memory Study Final Report}.
+\newblock Technical Report JPL-1994-539, Jet Propulsion Laboratory, St. Paul,
+  U.S.A., February 1994.
+
+\bibitem{trueffs}
+Microsoft Co.
+\newblock {\em {Linear Flash Memory Devices on Microsoft Windows CE 2.1}},
+  online edition, December 2002.
+\newblock
+  [http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dnce21/htm%
+l/flash21.asp].
+
+\bibitem{vfs}
+PalmSource, Inc.
+\newblock {\em {Virtual File System}}, online edition, December 2002.
+\newblock [http://www.palmos.com/dev/support/docs/].
+
+\bibitem{Rajkanan:1996}
+Kamal Rajkanan.
+\newblock Flash memory technologies --- a review.
+\newblock In {\em Proceedings of the 1996 IEEE - International Workshop on
+  Memory Technology, Design and Testing (MTDT'96)}, Singapore, August 1996.
+  IEEE.
+
+\bibitem{Rosenblum:1992}
+Mendel Rosenblum and John~K. Ousterhout.
+\newblock {The Design and Implementation of a Log-structured File System}.
+\newblock {\em ACM Transactions on Computer Systems}, 10(1):26--52, 1992.
+
+\bibitem{st-flash:2001}
+ST Microeletronics.
+\newblock {\em {Background Information: Flash Memories}}, online edition,
+  February 2001.
+\newblock [http://us.st.com/stonline/press/news/back2002/b979m.htm].
+
+\bibitem{Woodhouse:2001}
+David Woodhouse.
+\newblock {JFFS: The Journalling Flash File System}.
+\newblock In {\em Proceedings of the Ottawa Linux Symposium 2001}, Ottawa,
+  Canada, July 2001.
+
+\bibitem{mtd}
+David Woodhouse.
+\newblock {\em {Memory Technology Device}}, online edition, December 2002.
+\newblock [http://www.linux-mtd.infradead.org/tech/].
+
+\end{thebibliography}

@@ -1,0 +1,371 @@
+\section{Sensores e aquisição de dados}
+\label{sec:sensores}
+
+%introdução
+Um sensor é um dispositivo que responde a estímulos físicos (e.g., luz,
+temperatura, pressão, campo magnético ou movimento) e transmite um impulso
+resultante. Um sensor normalmente interage com um sistema digital, provendo
+informações sobre o mundo analógico. Essa informação pode ser fornecida através
+de um sinal analógico, que é convertido para valores digitais através de um
+conversor analógico-digital externo ao sensor, ou através de uma interface
+digital que converte internamente os sinais analógicos. Interfaces de dados de
+sensores podem variar amplamente mesmo dentro da mesma classe de
+sensores~\cite{Wanner:MSC:2006}.
+
+%tipos de sensores
+\subsection{Tipos de sensores}
+
+Devido ao pequeno porte e às suas limitações em termos de disponibilidade de
+energia, módulos de \rssf normalmente empregam sensores eletrônicos ou óticos
+com relativa eficiência energética. É o caso de, por exemplo, termistores para
+medir temperatura, foto-didos para medir luminosidade ou acelerômetros
+para medir deslocamento.
+
+De maneira a possibilitar um melhor entendimento dos desafios envolvidos no
+projeto e implementação de um sistema de aquisição de dados de sensores, esta
+seção apresenta alguns dispositivos sensores usados em nodos de sensor
+contemporâneos. Esta não é uma lista exaustiva, mas deve prover um caso geral de
+uso de dispositivos sensores em \rssf.
+
+\subsubsection{Termistores}
+
+Um termistor é um resistor cuja resistência varia com mudanças de temperatura. A
+equação de Steinhart-Hart é uma aproximação de terceira ordem amplamente
+utilizada para determinar a curva de resposta de um termistor:
+\begin{equation}
+\label{eq:steinhart_hart}
+T = \frac{1}{a + b.ln{R_t} + c.(ln{R_t})^3}
+\end{equation}
+onde $a$, $b$, e $c$ são parâmetros Steinhart-Hart específicos para cada
+termistor, $T$ é a temperatura Kelvin, e $R_t$ é a resistência em Ohms
+apresentada pelo termistor na temperatura atual. Um termistor normalmente é
+ligado a um conversor analógico-digital através de um circuito divisor de tensão
+simples. A estimativa de temperatura baseada em leituras do ADC pode depender do
+cálculo em tempo de execução de funções de aproximação complexas (e.g., a
+equação Steinhart-Hart), ou pode fazer uso de tabelas de conversão previamente
+calculadas. Termistores diferentes podem ter constantes de tempo e precisão
+diferentes, bem como diferentes constantes de dissipação de energia.
+
+\subsubsection{Sensores digitais de temperatura}
+
+A família SHT1x~\cite{Sensirion:SHT1x:2005} de sensores de umidade e temperatura provê
+um exemplo de sensores digitais de temperatura usados em \rssf. O sensor é
+fabricado pela Sensirion, e provê leituras digitais calibradas por uma interface
+SPI de dois fios. Um microcontrolador pode e ler dados do sensor enviando um
+comando específico solicitando uma medida temperatura para o sensor pela
+interface SPI. Ao completar da leitura, o sensor envia um sinal de dados
+prontos. O microcontrolador pode, então, ler os dados acompanhados de um código
+CRC para validação. Depois dessa transmissão, o sensor entra em modo inativo. Os
+coeficientes de calibração são programados na memória interna do sensor, e são
+usados internamente durante as leituras para calibrar os sinais lidos. Dados
+sensoriais providos pelo SHT1x podem ser convertidos para valores de temperatura
+através de uma e função linear. Um registrador de status provê uma interface de
+detecção de baixa tensão, configura a resolução da leitura (por exemplo, 8 bits,
+16 bits) e controla um aquecedor interno.
+
+\subsubsection{Foto-resistores e foto-diodos}
+
+Um foto-resistor é um componente eletrônico cuja resistência diminui com o
+aumento da intensidade de luz incidente. A maioria dos foto-resistores são
+implementados através de células de sulfeto de cádmio, que usam a habilidade
+desse material de variar sua resistência (por exemplo, apresentando $2k\Omega$
+em condições de baixa luminosidade e $500\Omega$ quando exposto à luz). Essas
+células também são capazes de reagir a uma ampla gama de frequências, incluindo
+infravermelho, luz visível ultravioleta. Como no caso dos termistores,
+foto-resistores normalmente fazem interface com um conversor analógico-digital
+através de um circuito divisor de tensão.
+
+Um foto-diodo é um semicondutor que responde a estímulo óptico. Foto-diodos
+operam pela absorção de fótons que geram uma variação na corrente que flui
+através deles. Um circuito RC (resistor-capacitor) auxiliar tem sua fonte de
+corrente afetada por este sensor, o que permite a detecção da presença ou
+ausência de quantidades diminutas de luz através de medidas de tensão no
+resistor desse circuito auxiliar.
+
+\subsubsection{Sensores digitais de luminosidade}
+
+O sensor TSL2550~\cite{TAOS:TSL:2005}, fabricado pela TAOS, provê um exemplo de
+sensor digital de luminosidade usado em \rssf. Ele combina dois foto-diodos e um
+conversor analógico-digital de 12 bits num circuito integrado para prover
+medidas de luz com uma sensitividade parecida com a do olho humano. Um dos
+foto-diodos é sensível a luz visível e infravermelha, enquanto o segundo
+foto-diodo é sensível primariamente a luz infravermelha.
+
+Dados de sensoriamento são lidos através de uma interface de dois fios SMBus. Um
+registrador de controle gere o dispositivo, e dois registradores de ADC
+armazenam os dados de para leitura. As saídas dos dois canais ADC podem ser
+usadas em uma função linear para se obter um valor que aproxima a resposta do
+olho humano na unidade comumente utilizada de Lux.
+
+\subsubsection{Magnetômetros}
+
+Magnetômetros são sensores capazes de medir força e/ou direção de campos
+magnéticos. Magnetômetros podem ser divididos em magnetômetros escalares, que
+medem a força total do campo magnético ao qual eles são expostos, e
+magnetômetros de vetor, que têm a capacidade de medir a componente do campo
+magnético em determinada direção. Um conjunto de magnetômetros de vetor podem
+ser combinados para permitir a definição de força, declinação e inclinação de um
+campo magnético. A família Honeywell HMC100x~\cite{Honeywell:HMC:2005} de sensores
+magnetoresistivos são dispositivos de pontes resistivas simples que requerem
+apenas uma fonte de tensão para medir campos a magnéticos. Esses dispositivos
+são capazes de medir qualquer campo magnético ambiente ou aplicado em um eixo
+sensível. A tensão de saída do sensor é linear em relação ao campo magnético
+aplicado.
+
+\subsubsection{Acelerômetros}
+
+Acelerômetros são usados para medir mudanças na velocidade. Na sua forma mais
+simples, um acelerômetro é composto por uma massa suspensa e um dispositivo
+sensível à deflexão. A família Analog Devices
+ADXL345BCCZ-RL7~\cite{Analog:ADXL345:2009} provê um exemplo de acelerômetros com
+2 eixos e baixo consumo de energia. O sensor provê tanto saídas analógicas
+quanto digitais. O valor de saída do sensor é linear em relação à aceleração
+aplicada, e calibração para baixas gravidades podem usar o campo gravitacional
+da Terra como referência.
+
+%aquisição de dados
+\subsection{Calibração de sensores}
+
+Dados lidos diretamente de sensores precisam ser calibrados para garantir um
+determinado nível de qualidade. Imprecisões nas medições podem surgir por
+diversas razões~\cite{Albertazzi:2008}:
+\begin{itemize}
+    \item \textbf{Definição do mensurando:} diz respeito ao conhecimento
+    disponível acerca da grandeza física que é objeto de estudo.
+    \item \textbf{Procedimento de medição:}  diz respeito aos procedimentos
+    utilizados para realizar a medição. Neste caso se aplica, por exemplo, a
+    precisão dos modelos matemáticos sendo utilizados para a medição de uma
+    determinada grandeza.
+    \item \textbf{Condições ambientais:} diz respeito a condições que podem
+    interferir no resultado de uma medição, como por exemplo, interferência
+    eletromagnética ou de pressão atmosférica sobre o sistema de medição.
+    \item \textbf{Sistema de medição:} diz respeito a interferência gerada no
+    resultado de uma medição pelos equipamentos utilizados no processo. Esta
+    interferência pode vir, por exemplo, da incerteza do sensor utilizado ou
+    erros de arredondamento na conversão analógico-digital.
+    \item \textbf{Operador:} diz respeito a erros que possam ser ocasionados
+    pela ação humana quando o procedimento de medição depende da ação de um
+    operador. Normalmente, este fator tem pouco efeito em aplicações de \rssf,
+    já que estas aplicações tendem a operar de modo autônomo.
+\end{itemize}
+
+Estes fatores agem sobre o sistema formado pelo mensurando (objeto de estudo) e
+pelo sistema de medição que, no caso das \rssf, é formado pelo sensor escolhido,
+pelo conversor analógico-digital ou pelo microcontrolador no caso de um sensor
+digital. O que resulta destas interferências é uma variação no valor indicado.
+Para tornar as leituras mais confiáveis é necessário, de algum modo, compensar o
+efeito destas interferências.
+
+As interferências geradas por estes agentes no processo de medição podem ser
+agrupados de modo a formar duas variáveis de erro: o erro sistemático e o erro
+aleatório. O erro sistemático é aquela parcela do erro que se mantém constante
+entre várias medições. Para permitir uma correção das medidas, é possível
+definir uma estimativa do erro sistemático chamada de \emph{Tendência}. A
+\emph{Tendência} pode ser determinada através de medições sucessivas de um
+mensurando com valores conhecidos. Por exemplo, para calibrar um sensor de
+temperatura, pode-se realizar leituras sucessivas deste sensor em um ambiente
+com temperatura constante conhecida. A \emph{Tendência} é dada, neste caso, pela
+diferença entre a média das leituras realizadas e o valor do mensurando. Este
+procedimento é conhecido calibração do sensor.
+
+Não há meio de se estimar o valor exato do erro aleatório, mas é possível,
+através de tratamento estatísticos de uma série de amostras realizadas sobre um
+mensurando com valores conhecidos, determinar a repetitividade do sistema de
+medição e, consequentemente, seu erro máximo. Do ponto de vista de \rssf é
+importante analisar o erro máximo do sistema definido para verificar sua
+adequação à aplicação que se pretende desenvolver. Outra característica
+importante do erro aleatório é que a soma dos erros aleatórios de medidas
+sucessivas de um mesmo mensurando tende a se anular no infinito. Logo, a média
+de sucessivas medições pode diminuir o efeito deste erro, gerando resultados
+mais confiáveis.
+
+%modelos de interfaceamento destes sensores com processadores
+% \subsection{Interfaces de senores}
+% interfaces analógicas e digitais
+
+%fusão de dados
+%\subsection{Fusão de dados}
+
+\subsection{Sensores no \emote}
+
+Como apresentado na Seção~\ref{sec:emote_arch}, o \emote apresenta uma interface
+padrão para um módulo de entrada e saída que deve ser utilizada para conectar os
+sensores a serem utilizados pela aplicação em questão. No atual estágio de
+desenvolvimento, o \emote conta com a \emph{startup board}, um módulo de entrada
+e saída que, além de componentes como interface USB, botões e LEDs, conta com um
+sensor de temperatura do tipo termistor, modelo
+ERT-J1VG103FA~\cite{Panasonic:ERTJ:2004}, e um acelerômetro digital de 3 eixos,
+modelo ADXL345BCCZ-RL7~\cite{Analog:ADXL345:2009}. A fim de exemplificar o
+processo de calibração de um sensor, vamos aqui demonstrar como foi realizada a
+calibração do sensor de temperatura da \emph{startup board} do \emote.
+
+O mediador\footnote{Mediador é o artefato de software que realiza interface do
+sistema operacional com o hardware no Projeto \epos} do sensor de temperatura foi
+implementado utilizando a Equação de Steinhart-Hart~(\ref{eq:steinhart_hart}).
+Os valores dos parâmetros de Steinhard-Hart podem ser
+calculados~\cite{Steinhart:1968} a partir de dados fornecidos pelo fabricante
+do termistor, e são substituídos na Equação~\ref{eq:steinhart_hart} de modo a
+montar o modelo matemático do sensor em uso:
+\begin{eqnarray}
+%T = \frac{1}{a + b.ln{R} + c.(ln{R})^3}\\
+\label{eq:stnhrt_a}a = 1,0750492 \times 10^{-3}\\
+\label{eq:stnhrt_b}b = 0.27028218 \times 10^{-3}\\
+\label{eq:stnhrt_c}c = 0.14524838 \times 10^{-6}
+\end{eqnarray}
+
+Para efetuar este cálculo, é necessário conhecer a resistência apresentada pelo
+termistor. Como o termistor está conectado ao ADC por um circuito divisor de
+tensão a resistência pode ser calculada da seguinte forma:
+\begin{eqnarray}
+V_s = I.(R+R_t)\\
+V_o = I.R\\
+com\;I\;constante\;no\;divisor,\;logo,\; \frac{V_s}{R+R_t} =
+\frac{V_o}{R}\\ \label{eq:r_t_value}isolando\;R_t,\; R_t = R.\left ( \frac{V_s}{V_o} - 1 \right)
+\end{eqnarray}
+onde $V_s$ é a tensão de entrada do circuito de divisão de tensão, $I$ é a
+corrente que passa pelas resistências (igual tanto sobre o resistor do divisor
+de tensão quanto sobre o termistor), $R$ é a resistência conhecida do resistor
+do divisor de tensão, $V_o$ é a tensão de saída do divisor, que é lido pelo
+conversor analógico-digital, e $R_t$ é o valor atual da resistência do
+termistor, que se deseja obter.
+
+Ao final, substituindo o valor da resistência atual do termistor definido pela
+Equação~(\ref{eq:r_t_value}), e os parâmetros de Steinhart-Hart definidos
+em~(\ref{eq:stnhrt_a}),~(\ref{eq:stnhrt_b}) e~(\ref{eq:stnhrt_c}) na
+Equação~(\ref{eq:steinhart_hart}) (Steinhart-Hart), e ainda, sabendo que o valor
+do resistor utilizado no circuito divisor de tensão é de $10\;k\Omega$,
+podemos chegar à equação para o cálculo da temperatura amostrada pelo termistor
+estudado.
+% Primeiro, vamos simplificar o termo que calcula o logaritmo natural da
+% resistência do termistor:
+% \begin{eqnarray}
+% ln\;R_t = ln \left [ R \times \left ( \frac{V_s}{V_o} - 1 \right ) \right ]\\
+% ln\;R_t =\;ln\;R + ln \left( \frac{V_s}{V_o} - 1 \right)\\
+% com\;R\;conhecido,\;logo,\;ln\;R_t\;=\;ln\;10^4 + ln \left( \frac{V_s}{V_o} - 1
+% \right)\\ ln\;R_t =\;2,302585093 + ln \left( \frac{V_s}{V_o} - 1 \right)\\
+% considerando,\; L_{R_t} = ln\;R_t\\
+% \nonumber temos,\\
+% T^{-1} = \left[
+%   1,0750492 +
+%   (0.27028218\,\times\,L_{R_t}) +
+%   \left(0.14524838\times10^{-3} \times L_{R_t}^3\right)
+% \right]\times10^{-3}
+% T = \left\{
+% \frac{1}{
+% a +
+% (b \times L_{R_t}) +
+% [c \times (L_{R_t})^3]
+% }
+% \right\}
+% \end{eqnarray}
+
+A calibração do sensor de temperatura foi realizado por comparação com outro
+sensor de temperatura, modelo SHT-11~\cite{Sensirion:SHT1x:2005}, previamente
+calibrado. Ambos os sensores foram conectados a um \emote, e os dois \emote
+foram colocados em uma caixa hermeticamente fechada. Os \emote utilizados
+tiveram seus timers configurados igualmente, e foram conectados a uma mesma
+fonte de alimentação. Eles foram programados para realizar 1000 medidas de
+temperatura espaçadas de 10 segundos cada e armazená-las em sua memória interna.
+Ao final das medições, as leituras foram enviadas por rádio para uma
+estação-base, de onde a tendência do sistema foi extraída. A correção, definida
+como o inverso da tendência ($C\,=\,-Td$), foi então inserida no sistema,
+ficando a equação final de temperatura do termistor assim definida:
+\begin{equation}
+T = \left\{
+\frac{1}{
+a +
+(b \times ln\,R_t) +
+[c \times (ln\,R_t)^3]
+}
+\right\}
++ C
+\end{equation}
+com a indicação $T$ expressa em Kelvin. A implementação deste modelo, na
+linguagem \textsc{C++}, para o sistema operacional \epos, é apresentada na
+Figura~\ref{prg:steinhart_hart_epos}.
+
+É importante destacar que as arquiteturas utilizadas no \emote, \textsc{Avr} e
+\textsc{Arm7-TDMI-S}, não apresentam unidade de ponto flutuante (FPU), logo, o
+sistema carece de software adicional para executar as operações em ponto fixo,
+chegando a resultados semelhantes, porém com muito mais demanda de
+processamento. Por isso, é comum utilizar, em algumas aplicações, versões de
+mediadores para o termistor que utilizem tabelas pré-calculadas de conversão das
+leituras do ADC para um valor equivalente de temperatura, ao custo, neste caso,
+de um consumo extra de espaço de armazenamento. De qualquer modo, o processo de
+calibração descrito acima continua sendo necessário, neste caso, para a
+construção da tabela que ficará armazenada na memória do nodo.
+
+\prg{C}{steinhart_hart_epos}{Código para implementação do termistor calibrado
+em C++ para o \epos.}
+
+\subsection{Abstrações de sensores no \epos}
+\label{sec:epos_sensing}
+
+Do ponto de vista do programador da aplicação, abstrair questões específicas
+como o procedimento de calibração de sensores descrito acima é de grande
+importância. Neste contexto, o \epos fornece suporte de sensoriamento às
+aplicações através de uma interface de software/hardware que abstrai famílias de
+sensores de forma uniforme~\cite{Wanner:ETFA:2006}. O sistema define classes de
+dispositivos baseado em sua finalidade (e.g. medir aceleração ou temperatura), e
+estabelece um substrato comum para cada classe. Para cada dispositivo são
+armazenadas propriedades e parâmetros operacionais, de maneira similar ao TEDS
+(\textit{Transducer Electronic Data Sheet}) do padrão IEEE 1451. Uma camada fina
+de software adapta dispositivos individuais (e.g., a converte leituras de ADC em
+valores contextualizados, aplica as correções) para adequá-lo às características
+mínimas da sua classe de sensores. Desta forma, um termistor simples é exportado
+para a aplicação exatamente do mesmo modo que um sensor de temperatura digital
+complexo~\cite{Wanner:JCC:2008}.
+
+\fig{sensor_classes}{Diagrama de classes das abstrações de
+sensoriamento do \epos.}{scale=.1}
+
+A Figura~\ref{fig:sensor_classes} apresenta um diagrama de classes com as
+abstrações de sensoriamento do \epos. No subsistema de sensoriamento do \epos,
+métodos comuns a todos dispositivos de sensoriamento são definidos pela
+interface \texttt{Sensor\_Common}. O método \texttt{get()} provê leituras para
+um único sensor em um único canal (i.e. habilita o dispositivo, espera os dados
+estarem disponíveis, lê o sensor, desabilita o dispositivo e retorna a leitura
+convertida em unidades físicas previamente determinadas). Os métodos
+\texttt{enable()}, \texttt{disable()}, \texttt{data\_ready()} e
+\texttt{get\_raw()} permitem que o sistema operacional e as aplicações realizem
+controle de grão fino sobre leituras de sensores (e.g., realizar leituras
+sequenciais, obter dados não convertidos de sensores). O método
+\texttt{convert(int v)} pode ser utilizado para converter valores não
+processados de sensores em unidades científicas ou de engenharia. O método
+\texttt{calibrate()} executa calibragem específica para cada sensor.
+
+Cada família de sensor pode especializar a interface \texttt{Sensor\_Common}
+para abstrair adequadamente características específicas da família. A família
+\texttt{Magnetometer} pode adicionar, por exemplo, métodos para realizar
+leituras em diferentes eixos de sensibilidade. A família \texttt{Thermistor},
+por outro lado, provavelmente não precisará estender a interface comum. Cada
+família também define uma estrutura \texttt{Descriptor} específica, que define
+campos como precisão, dados para calibração e unidades físicas. Cada dispositivo
+sensor implementa uma das interfaces definidas, e preenche a estrutura
+\texttt{Descriptor} da família com valores específicos do sensor. Valores padrão
+de configuração para cada dispositivo (e.g., frequência, ganho, etc.) são
+armazenados em uma estrutura de \emph{traits de configuração}.
+
+Sempre que o sistema operacional ou uma aplicação precisam fazer referência a um
+dispositivo de sensoriamento, estes podem utilizar um \emph{dispositivo
+específico} e realizar operações específicas do dispositivo, ou utilizar a
+\emph{classe do dispositivo}, e restringir-se às operações definidas por aquela
+classe. Uma realização utilizando metaprogramação estática da classe do
+dispositivo agrega os dispositivos disponíveis em uma configuração do sistema.
+
+\tab{sensing_footprint}{Tamanhos de código e dados de componentes de
+sensoriamento (em bytes).}
+
+\tab{sampling_rates}{Taxas de amostragem dos sistemas de sensoriamento (em Hz).}
+
+A Tabela~\ref{tab:sensing_footprint} apresenta características de tamanho de
+código e dados do subsistema de sensoriamento do \epos em comparação com as estruturas
+equivalentes dos sistemas TinyOS e MANTIS OS. A Tabela~\ref{tab:sampling_rates}
+mostra as taxas máximas de amostragem possíveis no \epos, também em comparação
+com os outros sistemas. O baixo sobrecusto e alta taxa de amostragem no \epos
+são resultado direto do projeto do sistema, que minimiza dependências entre
+componentes de sensoriamento e o resto do sistema. No \epos, um componente que
+abstrai um sensor analógico normalmente depende apenas do conversor
+analógico-digital da plataforma e do seu subsistema de I/O, que são abstraídos
+por operadores metaprogramados \textit{inline}. Estes mecanismos envolvidos no
+desenvolvimento do \epos serão melhores descritos na Seção~\ref{sec:epos}.

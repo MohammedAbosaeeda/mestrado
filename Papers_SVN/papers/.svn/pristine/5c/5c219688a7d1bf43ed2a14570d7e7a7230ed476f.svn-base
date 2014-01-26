@@ -1,0 +1,155 @@
+@INPROCEEDINGS{lickly:08:cases,
+  author = {Ben Lickly and Isaac Liu and Sungjun Kim and Hiren D. Patel and Stephen A. Edwards and Edward A. Lee},
+  title = {Predictable programming on a precision timed architecture},
+  booktitle = {Proc. of  International Conference on Compilers, Architectures and Synthesis for Embedded Systems},
+  year = {2008},
+  pages = {137--146},
+}
+
+
+@inproceedings{Shi:2008,
+ author = {Shi, Zheng and Burns, Alan},
+ title = {Real-Time Communication Analysis for On-Chip Networks with Wormhole Switching},
+ booktitle = {Proceedings of the Second ACM/IEEE International Symposium on Networks-on-Chip},
+ series = {NOCS '08},
+ year = {2008},
+ isbn = {978-0-7695-3098-7},
+ pages = {161--170},
+ numpages = {10},
+ url = {http://dl.acm.org/citation.cfm?id=1397757.1397996},
+ acmid = {1397996},
+ publisher = {IEEE Computer Society},
+ address = {Washington, DC, USA},
+ keywords = {wormhole switching, real-time, schedulable analysis},
+}
+
+
+
+@ARTICLE{976921, 
+author={Benini, L. and De Micheli, G.}, 
+journal={Computer}, title={Networks on chips: a new SoC paradigm}, 
+year={2002}, 
+month={jan}, 
+volume={35}, 
+number={1}, 
+pages={70 -78}, 
+keywords={SoC design methodologies;SoC paradigm;average values;complex SoCs;complex electronic engines;design objectives;deterministic models;future SoC designs;hardware design;integrated solution;interacting system-on-chip components;interconnecting components;layered methodology;layered micronetwork design methodology;modular component-based approach;networks on chips;on-chip micronetworks;plug-and-play fashion;probabilistic metrics;process technologies;software design;stochastic models;system on chip;time-to-market pressure;hardware-software codesign;microprocessor chips;multiprocessor interconnection networks;reconfigurable architectures;}, 
+doi={10.1109/2.976921}, 
+ISSN={0018-9162},}
+
+@article{Goossens:2005:NCC:1092232.1092305,
+ author = {Goossens, Kees and Dielissen, John and Radulescu, Andrei},
+ title = {$\AE$thereal Network on Chip: Concepts, Architectures, and Implementations},
+ journal = {IEEE Des. Test},
+ issue_date = {September 2005},
+ volume = {22},
+ number = {5},
+ month = sep,
+ year = {2005},
+ issn = {0740-7475},
+ pages = {414 - 421},
+ numpages = {8},
+ url = {http://dx.doi.org/10.1109/MDT.2005.99},
+ doi = {10.1109/MDT.2005.99},
+ acmid = {1092305},
+ publisher = {IEEE Computer Society Press},
+ address = {Los Alamitos, CA, USA},
+ keywords = {Network Architecture and Design, Real-time and embedded systems},
+}
+
+
+@inproceedings{Zeferino:2003:SPS:942808.943980,
+ author = {Zeferino, Cesar Albenes and Susin, Altamiro Amadeu},
+ title = {SoCIN: A Parametric and Scalable Network-on-Chip},
+ booktitle = {Proceedings of the 16th symposium on Integrated circuits and systems design},
+ series = {SBCCI '03},
+ year = {2003},
+ isbn = {0-7695-2009-X},
+ pages = {169--},
+ url = {http://dl.acm.org/citation.cfm?id=942808.943980},
+ acmid = {943980},
+ publisher = {IEEE Computer Society},
+ address = {Washington, DC, USA},
+ keywords = {Systems-on-Chip, Embedded Systems, FPGA},
+} 
+
+@incollection{Sepulveda:2010:IQN:1985581.1985589,
+ author = {Sep\'{u}lveda, Johanna and Pires, Ricardo and Strum, Marius and Chau, Wang Jiang},
+ chapter = {Implementation of QoSS (quality-of-security service) for NoC-based SoC protection},
+ title = {Transactions on computational science X},
+ editor = {Gavrilova, Marina L. and Tan, C. J. Kenneth and Moreno, Edward David},
+ year = {2010},
+ isbn = {3-642-17498-1, 978-3-642-17498-8},
+ pages = {187 - 201},
+ numpages = {15},
+ url = {http://dl.acm.org/citation.cfm?id=1985581.1985589},
+ acmid = {1985589},
+ publisher = {Springer-Verlag},
+ address = {Berlin, Heidelberg},
+ keywords = {network-on-chip, performance, quality-of-security-service, security, system-on-chip},
+} 
+
+@INPROCEEDINGS{5536964,
+author={Lusala, A.K. and Legat, J.},
+booktitle={Circuits and Systems (ISCAS), Proceedings of 2010 IEEE International Symposium on}, title={Combining circuit and packet switching with bus architecture in a NoC for real-time applications},
+year={2010},
+month={30 2010-june 2},
+volume={},
+number={},
+pages={2880 -2883},
+keywords={CDMA-based bus architecture;CDMA-based circuit switching;NoC;QoS;hybrid network on chip architecture;on-chip interconnection network;packet switching;quality of service;real-time applications;traffic streaming;code division multiple access;integrated circuit interconnections;network-on-chip;packet switching;quality of service;real-time systems;},
+doi={10.1109/ISCAS.2010.5536964},
+ISSN={},}
+
+@INPROCEEDINGS{1509429,
+author={Lemaire, R. and Clermidy, F. and Durand, Y. and Lattard, D. and Jerraya, A.A.},
+booktitle={Rapid System Prototyping, 2005. (RSP 2005). The 16th IEEE International Workshop on}, 
+title={Performance evaluation of a NoC-based design for MC-CDMA telecommunications using NS-2},
+year={2005},
+month={june},
+volume={},
+number={},
+pages={ 24 - 30},
+keywords={ 4G modem; MC-CDMA telecommunication; NS-2; NoC-based design; SoC; bandwidth constraint; interconnection constraint; network simulation tool; networks-on-chip; performance evaluation; code division multiple access; integrated circuit design; mobile communication; modems; performance evaluation; system-on-chip;},
+doi={10.1109/RSP.2005.37},
+ISSN={1074-6005},}
+
+@BOOK{12:Dally:2004,
+ author = {Dally, William. J. and Towles, Brian},
+ title = {{Principles and practices of interconnection networks.}},
+ year = {2004},
+ publisher = {Morgan Kaufmann},} 
+
+@BOOK{13:Forouzan:2004,
+ author = {Forouzan, Behrouz A.},
+ title = {{Data Communications and Networking.}},
+ year = {2004},
+ publisher = {MacGraw-Hill},}
+
+@ARTICLE{dAElite,
+author={Stefan, R. and Molnos, A. and Goossens, K.},
+journal={IEEE Transactions on Computers}, 
+title={dAElite: A TDM NoC Supporting QoS, Multicast, and Fast Connection Set-up},
+year={2012},
+month={May},}
+
+@INPROCEEDINGS{TTNoC,
+author={Paukovits, C. and Kopetz, H.},
+booktitle={In Proceedings of the
+IEEE International Conference on Embedded and Real-Time Computing Systems and Applications (RTCSA)}, title={Concepts of switching in the Time-Triggered Network-on-Chip},
+year={2008},
+pages={120 - 129},}
+
+@inproceedings{Millberg:2004:GBU:968879.969206,
+ author = {Millberg, Mikael and Nilsson, Erland and Thid, Rikard and Jantsch, Axel},
+ title = {Guaranteed Bandwidth Using Looped Containers in Temporally Disjoint Networks within the Nostrum Network on Chip},
+ booktitle = {Proceedings of the conference on Design, automation and test in Europe - Volume 2},
+ series = {DATE '04},
+ year = {2004},
+ isbn = {0-7695-2085-5},
+ pages = {20890--},
+ url = {http://dl.acm.org/citation.cfm?id=968879.969206},
+ acmid = {969206},
+ publisher = {IEEE Computer Society},
+ address = {Washington, DC, USA},
+} 

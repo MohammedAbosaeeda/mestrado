@@ -1,0 +1,69 @@
+EPS = .
+PDF = .
+CGM = .
+PNG = .
+PPM = .
+FIG2DEV = fig2dev
+GNU2EPS = gnuplot
+EPS2PDF = epstopdf --filter
+PDF2PPM = pdftoppm -singlefile -r 300
+XMI2EPS = umbrello --export eps
+
+%.eps: %.fig
+	$(FIG2DEV) -L eps -N $< $(EPS)/$@
+
+%.pdf: %.fig
+	$(FIG2DEV) -L pdf -N -c -p a $< $(PDF)/$@
+
+%.cgm: %.fig
+	$(FIG2DEV) -L cgm $< $(CGM)/$@
+
+%.png: %.fig
+	$(FIG2DEV) -L png -N -m 2 -b 5 -S 0 $< $(PNG)/$@
+
+%.ppm: %.pdf
+	$(PDF2PPM) $< $(PPM)/$(subst .ppm,,$@)
+
+%.eps: %.gnu
+	$(GNU2EPS) $< > $(EPS)/$@
+
+%.pdf: %.gnu
+	$(GNU2EPS) $< | $(EPS2PDF) > $(PDF)/$@
+
+%.eps: %.xmi
+	$(XMI2EPS) $< > $(EPS)/$@
+
+%.pdf: %.xmi
+	$(XMI2EPS) $< | $(EPS2PDF) > $(PDF)/$@
+
+
+all: pdf
+
+eps: fig2eps gnu2eps # xmi2eps
+fig2eps: $(subst .fig,.eps,$(wildcard *.fig))
+gnu2eps: $(subst .gnu,.eps,$(wildcard *.gnu))
+xmi2eps: $(subst .xmi,.eps,$(wildcard *.xmi))
+
+pdf: fig2pdf gnu2pdf # xmi2pdf
+fig2pdf: $(subst .fig,.pdf,$(wildcard *.fig))
+gnu2pdf: $(subst .gnu,.pdf,$(wildcard *.gnu))
+xmi2pdf: $(subst .xmi,.pdf,$(wildcard *.xmi))
+
+cgm: fig2cgm gnu2cgm # xmi2cgm
+fig2cgm: $(subst .fig,.cgm,$(wildcard *.fig))
+gnu2cgm: $(subst .gnu,.cgm,$(wildcard *.gnu))
+xmi2cgm: $(subst .xmi,.cgm,$(wildcard *.xmi))
+
+png: fig2png gnu2png # xmi2png
+fig2png: $(subst .fig,.png,$(wildcard *.fig))
+gnu2png: $(subst .gnu,.png,$(wildcard *.gnu))
+xmi2png: $(subst .xmi,.png,$(wildcard *.xmi))
+
+ppm: pdf fig2ppm gnu2ppm # xmi2ppm
+fig2ppm: $(subst .fig,.ppm,$(wildcard *.fig))
+gnu2ppm: $(subst .gnu,.ppm,$(wildcard *.gnu))
+xmi2ppm: $(subst .xmi,.ppm,$(wildcard *.xmi))
+
+
+clean:
+	rm -rf *.cgm *.png *.ppm *.eps

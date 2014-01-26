@@ -1,0 +1,19 @@
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Predictor} & \textbf{Average daily} & \textbf{Absolute}   \\
+                   & \textbf{error (\%)}    & \textbf{error (\%)} \\
+\hline
+\hline
+EWMA               & $45.50~_{-}^{+}~5.23$  & $-2.73$ \\
+\hline
+WCMA               & $13.46~_{-}^{+}~12.95$ & $-2.94$ \\
+\hline
+Constant           & $5.63~_{-}^{+}~3.77$   & $0$     \\
+\hline
+Recent Average     & $15.91~_{-}^{+}~5.10$  & $9.09$  \\
+\hline
+First derivative   & $7.12~_{-}^{+}~6.19$   & $1.75$  \\
+\hline
+Second derivative  & $13.52~_{-}^{+}~14.17$ & $7.24$ \\
+\hline
+\end{tabular}

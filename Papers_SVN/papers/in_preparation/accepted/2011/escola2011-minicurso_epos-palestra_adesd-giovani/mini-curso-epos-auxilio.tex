@@ -1,0 +1,120 @@
+\documentclass[11pt,twocolumn]{article}
+\usepackage[brazil]{babel}
+\usepackage{graphicx,url}
+\usepackage[utf8]{inputenc}  
+\usepackage{listings}
+\usepackage{subfigure}
+\usepackage{cite}
+\lstset{keywordstyle=\bfseries, flexiblecolumns=true}                           
+\lstloadlanguages{[ANSI]C++}
+\lstdefinestyle{prg} {basicstyle=\scriptsize\ttfamily, lineskip=-0.2ex, tabsize=1,  showspaces=false,breaklines=true,showstringspaces=false,frame=single}
+
+\sloppy
+
+\title{Construindo Sistemas Embarcados com o OpenEPOS\\
+\normalsize{- - Minicurso - -}}
+
+\author{Giovani Gracioli e Antônio Augusto Fröhlich\\
+Laboratório de Integração Software/Hardware (LISHA)\\
+Universidade Federal de Santa Catarina (UFSC)\\
+88040-900 -- Florianópolis -- SC -- Brasil\\
+\{giovani,guto\}@lisha.ufsc.br
+}
+
+\newcommand{\fig}[4][ht!]{
+  \begin{figure}[#1]
+    {\centering{\includegraphics[#4]{fig/#2}}\par}
+    \caption{#3}
+    \label{fig:#2}
+  \end{figure}
+}
+
+\newcommand{\prg}[3][ht!]{
+  \begin{figure}[#1]
+      \lstinputlisting[language=C++,style=prg]{fig/#2.cc}
+    \caption{#3\label{prg:#2}}
+  \end{figure}
+}
+
+\usepackage{multirow}
+%\setlength{\tabcolsep}{1mm}
+\newcommand{\tab}[4][h]{
+  \begin{table}
+    {\centering\footnotesize\textsf{\input{fig/#2.tab}}\par}
+    \caption{#3}\label{tab:#2}
+  \end{table}
+}
+
+\begin{document}
+
+\maketitle
+     
+\begin{abstract}
+Este mini-curso aborda a construção de sistemas embarcados sob a perspectiva do OpenEPOS. O mini-curso é dividido em duas partes: uma teórica e outra prática. A parte teórica apresenta os principais conceitos relacionados com o OpenEPOS. A parte prática foca em exercícios onde são implementadas aplicações utilizando o sistema operacional. As atividades práticas cobrem o desenvolvimento de aplicações multi-thread, uso da infraestrutura de mediadores de hardware e da pilha de comunicação, incluindo ICMP/IP.
+\end{abstract}
+
+\section{Introdução}
+
+O projeto e a implementação de sistemas embarcados atualmente apresentam enormes desafios. As aplicações embarcados estão se tornando cada vez mais complexas conforme o avanço da indústria de semi-condutores, que tornou possível o uso de recursos computacionais que antes só eram encontrados em sistemas de computação de propósito geral. Se por um lado as aplicações estão mais complexas, do outro ainda existe a pressão do mercado para a entrega do produto de forma rápida. Neste contexto, a utilização de um sistema operacional embarcado e baseado em componentes ajuda na aceleração do projeto e desenvolvimento de aplicações embarcadas, bem como na reutilização dos componentes, tanto de hardware como de software. Este mini-curso apresenta a construção de sistemas embarcados sob a perspectiva do sistema operacional \textsc{EPOS}.
+
+\section{Embedded Parallel Operating System}
+
+O \textsc{EPOS} (\textit{Embedded Parallel Operating System})~\cite{Froehlich:2001,Marcondes:2006} é um arcabouço baseado em componentes para a geração de ambientes dedicados de suporte de tempo de execução. O arcabouço do \textsc{EPOS} permite que programadores desenvolvam aplicações independentes de plataforma e ferramentas de análise permitem que componentes sejam adaptados automaticamente para atender aos requisitos destas aplicações particulares. Por definição, uma instância do sistema agrega todo suporte necessário para a sua aplicação dedicada, e nada mais.
+
+%O projeto modular do \textsc{EPOS} foi guiado pela metodologia Projeto de Sistemas Embarcados Guiado pela Aplicação (ADESD - \textit{Application-Driven Embedded System Design}). A ADESD baseia-se nas conhecidas estratégias de decomposição de domínio por trás do Projeto Baseado em Famílias (FBD - \textit{Family-Based Design}) e Orientação a Objetos (OO) como, por exemplo, análise de atributos comuns e variabilidade, para adicionar o conceito de identificação e separação de aspectos ainda nos estágios iniciais do projeto~\cite{Froehlich:2001}. Deste modo, a ADESD guia a engenharia de domínio para famílias de componentes, das quais dependências de cenários de execução são fatoradas na forma de aspectos e relacionamentos externos são capturados em um arcabouço de componentes. Esta estratégia de engenharia de domínio trata consistentemente algumas das questões mais relevantes do desenvolvimento de software baseado em componentes: reúso, gerenciamento da complexidade e composição.
+
+%\fig{aosd}{Processo de decomposição de domínio da ADESD.}{width=.7\columnwidth}
+
+%A Figura~\ref{fig:aosd} mostra o processo de decomposição de domínio no projeto de sistemas embarcados guiado pela aplicação. Abstrações são identificadas a partir do domínio do problema e organizadas em famílias, de acordo com suas características comuns. Dependências de cenário são modeladas como aspectos que podem ser aplicados através de adaptadores de cenário. Famílias de abstrações são visíveis para aplicações através de interfaces infladas, que exportam seus membros como um único ``super-componente''. As arquiteturas de sistema são capturadas em arcabouços de componentes, que são definidos em termos de aspectos de cenário.
+
+Abstrações (ou componentes) no \textsc{EPOS} representam abstrações tradicionais de sistemas operacionais e implementam serviços como gerenciamento de memória e de processos, sincronização de processos, gerenciamento de tempo e comunicação. Todas as funções dependentes de arquitetura são abstraídas através de mediadores de hardware, que exportam para as abstrações as funcionalidades necessárias através de interfaces independentes de plataformas~\cite{Polpeta2004}. Mediadores de hardware são funcionalmente equivalentes aos \emph{drivers} de dispositivos em SOs baseados em \textsc{Unix}, mas não apresentam uma camada de abstração de hardware (HAL - \emph{Hardware Abstraction Layer}) tradicional. Mediadores provêm uma interface entre os componentes do SO e o hardware através de técnicas de metaprogramação estática que ``diluem'' o código do mediador nos componentes em tempo de execução. Consequentemente, o código gerado não possui chamadas a métodos, nem camadas ou mensagens, atingindo uma maior portabilidade e reúso em comparação com as HALs tradicionais.
+
+\subsection{Gerenciamento de Processos}
+
+No \textsc{EPOS}, processos são gerenciados pelas abstrações \texttt{Thread} e \texttt{Task}. Cada thread armazena seu contexto em sua própria pilha. O mediador de hardware \texttt{CPU} define o conjunto de dados que precisa ser armazenado para um fluxo de execução e, deste modo, cada arquitetura define seu próprio contexto. Já o gerenciamento de memória é realizado pela família de mediadores \texttt{MMU} (\textit{Memory Management Unit}). A Figura~\ref{prg:thread} apresenta um exemplo da criação de uma \texttt{Thread}.
+
+\prg{thread}{Exemplo da utilização dos componentes Thread e Alarm.}
+
+\subsection{Gerenciamento de Tempo}
+
+Tempo no \textsc{EPOS} é tratado pela família de abstrações \texttt{Timepiece}, composta pelas abstrações \texttt{Clock}, \texttt{Alarm} e \texttt{Chronometer}. A abstração \texttt{Clock} é responsável por armazenar o tempo corrente e está disponível apenas em sistemas que possuem dispositivos de relógios de tempo-real (\texttt{RTC}). A abstração \texttt{Chronometer} é utilizada para realizar medições de tempo com alta precisão e a abstração \texttt{Alarm} é utilizada para gerar eventos, acordar uma Tarefa/Thread ou chamar uma função após um tempo definido. A família de abstrações \texttt{Timepiece} é suportada pelos mediadores \texttt{Timer}, \texttt{TimeStamp Counter (TSC)} e \texttt{Real-Time Clock (RTC)}~\cite{Froehlich:Timers:2011}. A Figura~\ref{prg:thread} demonstra o uso do método \texttt{delay} do componente \texttt{Alarm} dentro da execução da função \texttt{func\_a}. A Figura~\ref{prg:chron} demonstra o utilização do componente \texttt{Chronometer}, que é usado para realizar medidas de tempo.
+
+\prg{chron}{Exemplo da utilização do componente Chronometer.}
+
+\subsection{Sincronização entre Processos}
+
+A família de abstrações \texttt{Synchronizer} provê mecanismos que garantem a consistência de dados em ambientes com processos concorrentes. O membro \texttt{Mutex} implementa um mecanismo de exclusão mútua que entrega duas operações atômicas: \texttt{lock} e \texttt{unlock}. O membro \texttt{Semaphore} implementa, como o próprio nome diz, um semáforo, que é uma variável inteira cujo valor apenas pode ser manipulado indiretamente através das operações atômicas \texttt{p} e \texttt{v}. O membro \texttt{Condition} realiza uma abstração de sistema inspirada no conceito de variável de condição, que permite a uma thread esperar que um predicado se torne válido. A Figura~\ref{prg:semaphore} apresenta uma implementação do tradicional programa jantar dos filósofos utilizando os componentes \texttt{Thread} e \texttt{Semaphore}.
+
+\prg{semaphore}{Implementação do programa jantar dos filósofos com Semaphore.}
+
+\subsection{Entrada e Saída}
+
+Controle de entrada e saída (I/O) de dispositivos periféricos é disponibilizado no \textsc{EPOS} pelo mediador de hardware correspondente. O mediador \texttt{Machine} armazena as regiões de I/O e trata o registro dinâmico de interrupções. O mediador \texttt{IC} (\textit{Interrupt Controller}) trata a ativação ou desativação de interrupções individuais. Para lidar com as diferentes interrupções existentes em diferentes plataformas e contextos, \textsc{EPOS} atribui um nome e uma sintaxe independente de plataforma a interrupções pertinentes ao sistema (e.g., interrupção de timer, interrupção de conversão completa no ADC).
+
+\section{Instalação}
+
+O OpenEPOS está disponível no endereço \url{http://epos.lisha.ufsc.br}. Basta fazer o registro e clicar em \texttt{EPOS Software} para ter acesso ao arquivo com o sistema. Além disso, para a compilação do sistema, é necessário fazer o download dos compiladores. Neste mini-curso serão utilizados os compiladores para IA32 e ARM7, também disponíveis na mesma página. Os compiladores devem ser descompactados em \texttt{/urs/local}:
+
+\begin{verbatim}
+	/usr/local/ia32/gcc
+	/usr/local/arm/gcc
+\end{verbatim}
+
+Para a execução do OpenEPOS será utilizado o emulador QEMU para IA32 e ARM7. Para instalá-lo, em máquinas utilizando Ubuntu, basta digitar:
+
+\begin{verbatim}
+	sudo apt-get install qemu
+	sudo apt-get install qemu-kvm-extras
+\end{verbatim}
+
+\section{Conclusão}
+\label{sec:conc}
+
+Este documento brevemente discute os principais conceitos e componentes que fazem parte do sistema operacional \textsc{EPOS}. O foco do mini-curso está no desenvolvimento de sistemas embarcados sob a perspectiva do \textsc{EPOS}. 
+
+Com a utilização de um sistema operacional orientado à aplicação, é possível construir sistemas embarcados que possuem somente o suporte necessário para a sua aplicação dedicada, sem nenhum sobrecusto adicional. Além disso, o mini-curso é dedicado a demonstrar a utilização e a eficiência do uso de técnicas avanças de engenharia de software na construção de sistemas dedicados.
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

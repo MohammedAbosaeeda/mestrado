@@ -1,0 +1,20 @@
+
+\begin{tabular}{|c||l|l|}
+\hline
+Direction           & \multicolumn{2}{c|}{Type of communication}\\
+                    & \multicolumn{1}{c|}{Master} & \multicolumn{1}{c|}{Slave}\\
+\hline
+SW$\rightarrow$HW   & \parbox{2.9cm}{HAL sends commands to the HW using a bus.}&  
+                      \parbox{2.9cm}{Bus interface receives commands and triggers the operations.}\\    
+\hline
+HW$\rightarrow$SW   & \parbox{2.9cm}{HW interrupts SW and waits for the operation to finish. It may transfer data to/from the main memory (e.g. DMA).}&
+                      \parbox{2.9cm}{An ISR calls the requested operation and signalizes HW when finished.}\\
+\hline
+SW$\rightarrow$SW   & \multicolumn{2}{c|}{Function call interface}\\
+\hline
+HW$\rightarrow$HW   & \multicolumn{2}{c|}{Signals/Handshaking}\\
+\hline
+\end{tabular}
+
+
+

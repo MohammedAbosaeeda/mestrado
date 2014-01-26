@@ -1,0 +1,254 @@
+%\documentstyle[times,art10,twocolumn,latex09_Palma]{article}
+
+\documentclass[times,10pt,twocolumn]{article} 
+\usepackage{latex09_Palma}
+%\usepackage[latin1]{inputenc}
+\usepackage{times}
+\usepackage{graphicx,url}
+
+%------------------------------------------------------------------------- 
+% take the % away on next line to produce the final camera-ready version 
+%\pagestyle{empty}
+
+%------------------------------------------------------------------------- 
+\begin{document}
+
+\title{EPOS-Plasma SoC: A High Functionality, Low Overhead SW/HW Platform for Deeply Embedded Systems}
+
+\author{Tiago de Albuquerque Reis and Antonio Augusto Frohlich\\
+  Laboratory for Software/Hardware Integration\\
+  Federal University of Santa Catarina\\
+  88040-900 Florianopolis -- SC -- Brazil\\
+  \{reis, guto\}@lisha.ufsc.br
+}
+
+\maketitle
+\thispagestyle{empty}
+
+
+\begin{abstract}
+A system-on-a-chip should be as small and cheap as possible. To achieve this goal, this work presents a SoC that unites the advantages of an application-focused portable API with operating system functionalities with the simplicity of the Plasma processor. Therefore, a small system, in terms of software and hardware, was obtained while maintaining the same functionalities and abstraction level when compared to similar systems.
+\end{abstract}
+
+
+\section{Introduction}
+Systems-on-Chips (SoC) promotes software and hardware integration to create the final product that is generally focused on a specific application. The increasing complexity of such systems makes the search for design strategies that minimize the responsibility and increase the productivity of designers become an important topic on the field. In this context, Platform-based Design (PBD) shows it's importance proposing platforms as component libraries and it's integration rules~\cite{sv2002}. These platforms allows the designer to focus on the application by abstracting the system's details.
+
+Defining methodologies and strategies to generate application-specific systems are a challenge to PBD~\cite{tesefauze}. A way of obtaining this is through the utilization of API-based development frameworks, with operating system functionalities to allow the designer to focus on the application and abstract the hardware layer.
+
+If such API is also portable, non-recurring engineering (NRE) costs and time-to-market are reduced. NRE costs are reduced because the same application can be used with different system architectures, allowing to choose the most appropriate, while time-to-market can be improved by the provided hardware and software abstractions. 
+
+This paper proposes that an application-focused portable API can adapt to different hardware architectures while keeping the same abstraction level to the application. Therefore, processors with different functionalities can be used in the same way, in other words, hardware with less resources are better used. This generates an economy in hardware production costs or FPGA reconfigurable area.
+
+\section{EPOS API}
+EPOS is a framework for building architecture-independent dedicated application support systems~\cite{wannerjcs2008}. The generated system is composed only by the application and the necessary software and hardware support, which is achieved by generating the system after a domain engineering step. It differs from HALs by better exploring the architectural variability of embedded systems through an extensive domain analysis. This domain engineering consists of a systematic development of a domain model and its implementation~\cite{eposwso2006}. A domain model is a representation of common and variant aspects of a representative number of systems into a domain~\cite{czarnecki97}.
+
+This support system comes from the variations and similarities identified on embedded operating systems domain: scheduling politics, synchronization, timing, memory management, interrupt handling and I/O support~\cite{eposwso2006}. Making such characteristics configurable, a certain level of portability is achieved, thus allowing a better adaptation to different hardwares and applications~\cite{portabilidade}. Therefore, EPOS API tries to be as complete as possible, considering the OS domain, giving these functionalities even for very small embedded computers. 
+
+Hardware Mediators abstracts all hardware architecture dependent units~\cite{polpeta2004hmp}. Such artifacts exports the necessary functionalities to the higher level System Abstractions through a software/hardware interface. These abstractions represents the standard operating systems services previously cited (Figure \ref{fig:comp}).
+
+
+\begin{figure}[!htb]
+\centering
+\resizebox{8.5cm}{!}{\includegraphics{figuras/components.eps}}
+\caption{Components overview}
+\label{fig:comp}
+\end{figure}
+
+The execution context, that depends on the CPU registers, and the stack manipulation, that depends on the application binary interface (ABI), are defined by the CPU architecture. To treat such architectural dependencies, the process management is done by a CPU mediator (Figure \ref{fig:cpu}). This mediator abstracts the providing architecture, for example, the abstraction Context defines the data that characterizes the execution flow and that needs to be stored for context changes.
+
+\begin{figure}[!htb]
+\centering
+\resizebox{8.5cm}{!}{\includegraphics{figuras/cpu.eps}}
+\caption{CPU mediator}
+\label{fig:cpu}
+\end{figure}
+
+Process in EPOS are managed by the \emph{Task} and \emph{Thread} abstractions, which represents activities and the entities that perform them, respectively. The \emph{Thread} abstraction implements the standard aperiodic functionalities found in the literature~\cite{tanenbaum}. This abstraction may also be used to define periodic tasks through the \emph{PeriodicThread} specialization which uses an Alarm to execute the thread each period and a Timer to measure the time passing. To manage the task scheduling, the \emph{Scheduler} and \emph{SchedulingCriteria} abstractions are provided. The task scheduling are implemented in two different classes to separate the scheduling politics (criteria) from the mechanism (queue implementation) (Figure \ref{fig:sch}).
+
+\begin{figure}[!htb]
+\centering
+\resizebox{8.1cm}{!}{\includegraphics{figuras/sch.eps}}
+\caption{Thread scheduling infrastructure}
+\label{fig:sch}
+\end{figure}
+
+To guarantee data consistency on EPOS' shared process environment, the \emph{Synchronizer} family is used (Figure \ref{fig:sync}). It is composed of three members: \emph{Mutex}, for mutual exclusion using lock and unlock operations; \emph{Semaphore}, which implements a semaphore with P and V operations; and \emph{Condition}, a condition variable that allows a thread to wait for a predicate in a shared variable to become true.
+
+\begin{figure}[!htb]
+\centering
+\resizebox{6cm}{!}{\includegraphics{figuras/sync.eps}}
+\caption{Synchronizer family}
+\label{fig:sync}
+\end{figure}
+
+Also important in multiprocess systems, the notion of time passing is done by the \emph{Timepiece} family. There is an abstraction to generate events (function calls or thread wake-up) called \emph{Alarm}. Time measurements are done through the \emph{Chronometer} abstraction and, for systems with real-time clocks, the \emph{Clock} abstraction stores the current time.
+
+The memory management tasks like address space protection, address translation and memory allocation are done by the MMU family of mediators, which interfaces with the hardware MMU. Systems without MMU considers that both physical and logical addresses are the same, keeping the same interface. The address space is represented by the \emph{Address\_Space}, a container to the memory's physical regions called \emph{Segments} (Figure \ref{fig:mem}).
+
+\begin{figure}[!htb]
+\centering
+\resizebox{8.5cm}{!}{\includegraphics{figuras/mem.eps}}
+\caption{Memory management}
+\label{fig:mem}
+\end{figure}
+
+%\begin{figure}[!htb]
+%\centering
+%\resizebox{8.5cm}{!}{\includegraphics{figuras/memclass.eps}}
+%\caption{Memory classes}
+%\label{fig:memclass}
+%\end{figure}
+
+The external communication of embedded systems is made by sensors and actuators that interacts with the environment where it is located. Such devices may have several access interfaces and each one of them needs a mediator to interface with EPOS.
+
+Beside these basic functionalities, some efforts extended EPOS by adding filesystem support, wireless sensor networks support, DSP API and power management support.
+
+As EPOS was conceived in a storageless environment, the growing number of embedded systems with storage support, such as Flash memories, created the necessity of being able to manage files and organize them in directories. A filesystem support was proposed~\cite{hugomono} using a set of families of abstractions to implement the functionalities of the storage hardware as well as volume, allocation and meta-data management.
+
+In his work, Wiedenhoft proposes an approach to explore energy as QoS parameter to battery-powered embedded systems. This work aims at guaranteeing the application to finish and preserve deadlines of real-time tasks without running out of batteries~\cite{grw}.
+
+Motivated by the lack of systems that correctly deals with sensor networks application requirements or presents prohibitive overhead~\cite{wannerjcs2008} an operating system support, based on EPOS, was proposed to provide applications with hardware support, configurable communication, power management and data acquisition.
+
+As the number of multimedia applications in embedded systems grows, addressing application portability is an important issue since most applications are developed targeting a specific platform. Since tailoring this kind of application for a specific hardware is important for performance, an API is proposed to abstract hardware details. The application gets tied to the API but porting it to different DSPs becomes a simple operation. This API is composed of common DPS functionalities like AAC encoding, FIR filtering or matrix operations and the portability is achieved by hardware mediators, like EPOS itself.
+
+
+\section{Plasma}
+
+Plasma is a 32-bit RISC softcore processor that supports all MIPS I instructions, except the patented unaligned load and store \emph{opcodes}~\cite{plasma}. It's currently on the third version and is considered stable.
+
+This MIPS machine can be used to execute code generated by the GNU C Compiler that doesn't generate the unsupported instructions by default. The VHDL code implements either a two or three-stage pipeline, interrupt controller, hardware multiplier, timer and UART, SRAM, DDR SDRAM, Ethernet and Flash controllers running at 25 MHz (Figure \ref{fig:plasma}).
+
+\begin{figure}[!htb]
+\centering
+\resizebox{8cm}{!}{\includegraphics{figuras/plasma.eps}}
+\caption{Plasma block diagram}
+\label{fig:plasma}
+\end{figure}
+
+This processor was chosen because of its simplicity and small size thus indicated for embedded systems, besides being open source. This facilitates code changes like inserting and removing functionalities and/or adjusting the processor to different FPGA models.
+
+There are several softcore processor currently available, among them LEON and OpenRISC 1200 are very popular in the literature.
+
+LEON2 is a 32-bit SPARC V8 machine with Harvard architecture (different caches for instructions and data)~\cite{leon2}. It is currently discontinued in favor of its successor: LEON3. It's modular with several IPs that can be inserted or removed from the SoC and a coprocessor interface to ease the communication. LEON's main features are hardware multiplier and divider, interrupt controller, two 24-bit timers, watchdog, 16-bit GPIO, Ethernet MAC, PCI interface and Power Down mode. It also has controllers for PROM, SRAM, SDRAM and UART (Figure \ref{fig:leon}). On our tests it ran at 54 MHz.
+
+\begin{figure}[!htb]
+\centering
+\resizebox{8cm}{!}{\includegraphics{figuras/leon.eps}}
+\caption{LEON2 block diagram}
+\label{fig:leon}
+\end{figure}
+
+OpenRISC 1200 is an open source implementation of OpenRISC 1000 family of processors. It's a 32-bit RISC machine based on MIPS with Harvard architecture. OpenRISC 1200 features includes a 5-stage pipeline, virtual memory support (MMU), debug unit, high resolution timer, programmable interrupt controller and power management support~\cite{or1200} (Figure \ref{fig:or1200}).
+
+\begin{figure}[!htb]
+\centering
+\resizebox{7.5cm}{!}{\includegraphics{figuras/or1200.eps}}
+\caption{OpenRISC 1200 block diagram~\cite{or1200}}
+\label{fig:or1200}
+\end{figure}
+
+%As principais características de ambos processadores são apresentados na Tabela \ref{tab:features}. As características marcadas com (*) indica que se trata um controlador implementado no processador para aquela tecnologia.
+%
+%\begin{table}[htbp]
+%\begin{center}
+%\begin{tabular}{|l|c|c|}
+%    \hline
+%    Característica     & Plasma & LEON2  \\ \hline
+%    Freqüência         & 25 MHz & 54 MHz \\ 
+%    \textit{Pipeline} (estágios)& 2 ou 3 & 5      \\
+%    Interrupções       & Sim    & Sim    \\
+%    Multiplicador (HW) & Sim    & Sim    \\
+%    Divisor (HW)       & Não    & Sim    \\
+%    \textit{Timer}              & Sim    & Sim    \\
+%    \textit{Watchdog}           & Não    & Sim    \\
+%    GPIO               & 32 bits & 16 bits \\
+%    UART*               & Sim    & Sim    \\
+%    SRAM*               & Sim    & Sim    \\
+%    SDRAM*              & Não    & Sim    \\
+%    DDR-SDRAM*          & Sim    & Não    \\
+%    \textit{Flash}*              & Sim    & Não    \\
+%    PROM*               & Não    & Sim    \\
+%    \textit{Ethernet}*           & Sim    & Sim    \\
+%    Interface PCI       & Não    & Sim    \\ \hline
+%    \end{tabular} \\[3mm]
+%\caption{Comparação de características entre Plasma e LEON2}
+%\label{tab:features}
+%\end{center}
+%\end{table}
+
+To make a quantitative comparison between them, their number of look-up tables (LUT) and the size of the same software generated for them was measured. The results can be seen on Tables 1 and 2. The LEON2 and OpenRISC 1200 values were taken from the literature~\cite{polpeta2005} \cite{whitham2006mpa}.
+
+\begin{center}
+\textbf{Table 1} - Size comparison of Plasma, LEON2 and OpenRISC 1200 (LUTs)\\[3mm]
+\begin{tabular}{|l|c|c|}
+    \hline
+           & Full   & Custom \\ \hline
+    Plasma & 3756  & 3625    \\ 
+    Leon2  & 14582  & 6792   \\
+    OR1200 & 5286  & -    \\ \hline
+    \end{tabular} \\[8mm]
+\end{center}
+
+Table 1 shows two sizes for each processor, the total number of LUTs with all functionalities enabled and the number of LUTs using only the necessary part of the processors to execute a producer/consumer application on EPOS. The greater number of features of LEON2 reflects on its size, almost four times bigger than Plasma. OpenRISC 1200 is sightly bigger than Plasma, also justified by the number of features.
+
+\begin{center}
+\textbf{Table 2} - Size of EPOS on Plasma and LEON2 (bytes)\\[3mm]
+\begin{tabular}{|l|c|c|c|c|}
+    \hline
+           &  .text & .data & .bss & total \\ \hline
+    Plasma &  16692 & 68    & 221  & 16981 \\ 
+    Leon2  &  8988  & 28    & 8400 & 17416 \\ \hline
+    \end{tabular} \\[8mm]
+\end{center}
+
+Table 2 presents the size of EPOS with a producer/consumer application that uses the UART as a shared bounded buffer, for each architecture, except for OpenRISC 1200 which is not currently supported by EPOS. Even with a large different between the processor sizes, the resulting code is almost the same, proving that code size isn't a penalty for a smaller processor size.
+
+\section{Mapping EPOS into the Hardware}
+The first configured entity was the CPU mediator, setted to Sparc V8 and MIPS for LEON2 and Plasma, respectively. Since Plasma has no hardware MMU, both system were set to use a \emph{flat} address space.
+
+The producer/consumer experimental application uses the UART to send and receive data so, to provide the programmer with a high-level communication system, the \emph{Serial\_Communicator} abstraction was selected to be instantiated. An interrupt mechanism was used to signalize the threads when new data in the UART buffer is available. To achieve this, both Interrupt Controller (IC) mediator and IP were selected. EPOS implements architecture independent ISRs by using the \emph{handle\_wrapper} template-function. This function encapsulates architecture-specific operations, like context saving and restoring.
+
+To complete the support for this application, the Thread and Synchronizer (represented by the Semaphore member) System Abstractions were also selected. As the thread scheduler requires a timer, a hardware timer must be present and its mediator instantiated.
+
+With the System Abstractions chosen and the depending Hardware Mediators configured the systems were generated, obtaining the results previously presented and shown on Figures \ref{fig:cplasma} and \ref{fig:cleon}.
+
+\begin{figure}[!htb]
+\centering
+\resizebox{7cm}{!}{\includegraphics{figuras/plasmacustom.eps}}
+\caption{Custom Plasma}
+\label{fig:cplasma}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\resizebox{8cm}{!}{\includegraphics{figuras/customleon.eps}}
+\caption{Custom LEON2}
+\label{fig:cleon}
+\end{figure}
+
+
+\section{Case Study}
+An example of use of such SoC is to do video encoding. By engaging an video encoding hardware module to Plasma, this module can be controlled by software through an application running on EPOS. To achieve that, an encoder proposed by Husemann~\cite{husemann} was used.
+
+In this VHDL implementation, two complementary techniques were used to increase the Motion Estimation (ME) algorithm performance: 4:1 sub-sampling and truncation of the two least significant bits of each sample. The results shown a small loss of quality, less than 0.25 dB of noise, but with a performance increase when compared to other architectures, needing only 130 clock cycles at 1.55 MHz to encode H.264 CIF resolution at 3 frames per second. The chip area needed for this implementation is considered competitive by the authors: 71800 gates, about 860 LUTs.
+
+With a small change to Plasma one can add memory mapped registers to communicate with external modules. This way, the application can control the module's execution through control registers and read and write data through I/O registers.
+
+With the addition of this module to the SoC, the total system size becomes 4485 LUTs (about 377000 gates), 14,6\% of a Xilinx Virtex 4 SX35 FPGA configurable area. %As the application only forwards data to the module and receives the results, the software size increases insignificantly.
+
+Considering the system's functionality, less than 15\% of an medium size FPGA can be considered small, thus suitable for embedded systems. As the Plasma processor is used only as a bridge between the software and the encoder module, it still can be used to perform other operations, not limiting the SoC to video encoding.
+
+\section{Conclusion}
+Using EPOS with Plasma and LEON2, two softcore processors with a great difference in functionality number, can be done with the same API which doesn't need to change its size to adapt. This is possible through AOSD, by knowing what the application needs, it uses the hardware resources intelligently. This way, a SoC made with a smaller (and cheaper) hardware may reach the same functional level of larger ones.
+
+This kind of solution is important to embedded systems due to its commercial feasibility is directly connected to the production costs. This work approaches this issue in two ways: decreasing the project's development costs by the abstraction provided by EPOS and decreasing the production costs by using a small and simple hardware that, together with EPOS, owes nothing in terms of functionality.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\bibliographystyle{latex09_Palma}
+\bibliography{latex09_Palma}
+
+\end{document}

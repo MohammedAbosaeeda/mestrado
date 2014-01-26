@@ -1,0 +1,24 @@
+#FIG 3.2  Produced by xfig version 3.2.5-alpha5
+Landscape
+Center
+Inches
+Letter  
+100.00
+Single
+-2
+1200 2
+2 2 0 1 0 7 50 -1 -1 0.000 0 0 -1 0 0 5
+	 1200 1500 8700 1500 8700 5475 1200 5475 1200 1500
+4 0 0 50 -1 0 12 0.0000 4 195 5715 1500 1800 template <> struct Traits<PC_NIC>: public Traits<PC_Common>\001
+4 0 0 50 -1 0 12 0.0000 4 195 105 1500 2025 {\001
+4 0 0 50 -1 0 12 0.0000 4 195 3915 1500 2250     typedef LIST<PCNet32, PCNet32> NICS;\001
+4 0 0 50 -1 0 12 0.0000 4 195 7065 1500 2700     static const unsigned int PCNET32_UNITS = NICS::Count<PCNet32>::Result;\001
+4 0 0 50 -1 0 12 0.0000 4 195 5250 1500 2925     static const unsigned int PCNET32_SEND_BUFFERS = 8;\001
+4 0 0 50 -1 0 12 0.0000 4 195 5580 1500 3150     static const unsigned int PCNET32_RECEIVE_BUFFERS = 8;\001
+4 0 0 50 -1 0 12 0.0000 4 195 6240 1500 3600     static const unsigned int E100_UNITS = NICS::Count<E100>::Result;\001
+4 0 0 50 -1 0 12 0.0000 4 195 4785 1500 3825     static const unsigned int E100_SEND_BUFFERS = 8;\001
+4 0 0 50 -1 0 12 0.0000 4 195 5115 1500 4050     static const unsigned int E100_RECEIVE_BUFFERS = 8;\001
+4 0 0 50 -1 0 12 0.0000 4 195 6270 1500 4500     static const unsigned int C905_UNITS = NICS::Count<C905>::Result;\001
+4 0 0 50 -1 0 12 0.0000 4 195 4800 1500 4725     static const unsigned int C905_SEND_BUFFERS = 8;\001
+4 0 0 50 -1 0 12 0.0000 4 195 5130 1500 4950     static const unsigned int C905_RECEIVE_BUFFERS = 8;\001
+4 0 0 50 -1 0 12 0.0000 4 195 165 1500 5175 };\001

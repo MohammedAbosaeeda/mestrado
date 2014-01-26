@@ -1,0 +1,18 @@
+\section{Introduction}
+\label{sec:intro}
+%What?
+
+The evolution of Internet is tightly coupled to the evolution of society. Today, billions of people access, communicate, and make business through the web. Although well-succeeded, the Internet was designed in the 1970s to support communication between systems with specific characteristics. However, the rapid evolution of technologies related to the implementation of distributed embedded systems, such as Wireless Sensor Networks (WSNs), vehicles, and domestic equipments, has changed the Internet paradigm and placed new requirements for the Future Internet.
+
+People, Internet of Contents, Internet of Services, and Int ernet of Things are the basis for the Future Internet~\cite{Duquennoy:2009}. The Future Internet will be composed by billions of wireless devices, with small processing, memory, energy, and bandwidth capabilities. In the Future Internet, these small devices are active members in business, information, social, and industrial activities where they can interact and communicate with each other in order to process information and offer services, based on standard and interoperable communication protocols. %They are identifiable and integrated into the information network.
+
+%Why?
+
+In addition, the standard communication protocols (e.g. TCP/IP) specifically designed for the Internet are not well-suited for the new Future Internet requirements (e.g. small memory, processing, energy, and bandwidth consumption, as well as trustful communication). Trustful communication guarantees are essential to provide full, self-contained, and secure services. The main TCP/IP drawbacks that affect its use in the Future Internet are the address shortage, overloaded semantics, and security issues.
+
+%Suggestion of how.
+In this context, we propose a new embedded system infrastructure towards a trustful Future Internet. The infrastructure is composed by an embedded platform, EPOSMote II~\cite{eposmote}, and a stack of communication protocols (UDP@NDN@C-MAC) designed specifically to guarantee a reliable network while still committed with the Future Internet requirements. C-MAC is a configurable Medium Access Control protocol for resource-constrained WSNs~\cite{steiner:2010}. It has some characteristics, such as CRC and data security, that help to improve the communication reliability as well as small memory footprint. \emph{Named Data Networking} (\textsc{NDN}) is a content-centric network protocol that uses data as the first class entity~\cite{Jacobson:2009}. This helps to improve security because one only needs to worry about the security of the data itself and not about securing the whole communication channel. The task of securing data can be accomplished by end-to-end cryptographic signatures and encryption, leaving only open the task of key management among the data sending/receiving nodes. UDP, C-MAC, and \textsc{NDN} can together provide a trustful communication infrastructure for the Future Internet.
+
+%Paper's organization
+
+The rest of this paper is organized as follows. Section~\ref{sec:tcp_ip} presents the current TCP/IP limitations that affect its use in the Future Internet. Section~\ref{sec:solution} presents the components that shape our trustful infrastructure for Future Internet. Finally, Section~\ref{sec:conclusions} concludes the paper.

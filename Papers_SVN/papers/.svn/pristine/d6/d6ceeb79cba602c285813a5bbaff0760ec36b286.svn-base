@@ -1,0 +1,32 @@
+
+@InProceedings{Mens:1997,
+  author =	 "Kim Mens and Cristina Videira Lopes and Bedir
+                  Tekinerdogan and Gregor Kiczales",
+  title =	 "{Aspect-Oriented Programming Workshop Report}",
+  booktitle =	 "Workshopes of the European Conference on
+                  Object-oriented Programming'97",
+  address =	 "Jyväskylä, Finland",
+  pages =	 "483--496",
+  month =	 jun,
+  year =	 1997,
+  url =		 ""
+}
+
+
+
+@Manual{posix,
+  title =	 "{POSIX - Portable Operating System Interface for
+                  Computing Environments}",
+  organization = "Institute of Electrical and Electronics Engineers",
+  year =	 1988
+}
+
+@Manual{pthreads,
+  title =	 "{Threads Extensions for Portable Operating Systems}",
+  organization = "Institute of Electrical and Electronics Engineers",
+  note =	 "POSIX 1003.4a",
+  month =	 apr,
+  year =	 1993
+}
+
+

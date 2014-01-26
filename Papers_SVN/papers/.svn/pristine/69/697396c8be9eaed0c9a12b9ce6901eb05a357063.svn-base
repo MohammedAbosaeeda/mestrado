@@ -1,0 +1,23 @@
+OK:
+--------------------------------------
+1- Explain better the trends of DSE in Introduction. -> mudar o foco para ESDesign.
+2- What the authors mean by using "hardware". The term "configurable features" is not clear on the text. Stay more clear that hardware could be implemented as a collection of interconected ICs or by a FPGA, etc ... 
+--configurable feature -> static.
+3- Tie the results on the previous paper publish at RSP2006 !!!
+4- Include a Thread Semaphore 
+
+To Review:
+--------------------------------------
+
+5- Explain that every component on the system could behave as client and/or server to another component.
+passagem de SW->HW mediator is proxy
+passar componente cliente para HW -> complica ... puxa componentes de SW para HW.
+
+client --->   mediator 
+              |  | ^     ^interrupt ---> Software Client !!! Kabong !!! Requesting a service within a interrupt-handling !
+              |  +-+     |
+              |  poll    |
+              V  status  |
+             CMD         +
+
+

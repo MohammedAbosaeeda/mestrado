@@ -1,0 +1,147 @@
+% Introduction for Application-Driven Power Management For Deeply
+% Embedded Systems.
+
+% Embedded Systems Definitions:
+%
+% An embedded system is a combination of computer hardware and
+% software, and perhaps additional mechanical or other parts, designed
+% to perform a specific function\cite{Barr:1999}.
+
+
+\note{Tratamento do consumo de energia é importante para sistemas
+  profundamente embarcados. Hardware existente provê vários mecanismos
+  para controle do consumo de energia que não são satisfatoriamente
+  explorados pelas estratégias existentes.}
+
+%%% a motivação de porque precisa PM em embedded systems está fraca.
+
+Embedded systems are used to monitor and control different objects of
+interrest, such as machines, motors, electronic devices, natural
+habitats, etc. As these systems find encompassing usage, increases the
+need for them to operate in a \emph{power-aware} fashion, i.e., to
+control their power consumption. However, most methodologies,
+techniques, and software standards for power management developed so far
+were conceived for general purpose systems, where processing and memory
+overhead are usually insignificant, and are not suited for the severely
+resource-limited, deeply embedded systems.
+
+\note{Gerenciamento do consumo de energia hoje:\\
+  - Soluções tradicionais (técnicas e padrões) para computação
+  genérica não se adaptam bem devido ao overhead.\\
+  - Exemplos: ACPI, APM, DPM, DVFS, Event-Accounting, heuristicas.}
+
+%%% O argumento de que ACPI e APM tem ``poucos'' modos de operacao 
+%%% não cola. Não ia ser esquecido ACPI/APM para este artigo?
+
+\textsc{Acpi} and \textsc{Apm} are two widely used power management
+standards that specify interfaces between software and hardware to
+control power consumption. Although both are widely used in general
+purpose computer hardware, they require processing capabilities or
+hardware support that may not allow their use in embedded systems.  As
+embedded systems hardware usually present several different low
+power ``operating modes'' with specific semantics for each device,
+managing power consumption in terms of standard ``energy levels'' for
+very heterogenous hardware may be too restrictive. 
+
+%%% explicar o overhead associado/porque não dá certo pra embedded
+
+In addition to these standards, several techniques were developed to
+gather system information at runtime, and use this information to guide
+decisions regarding power management. These techniques are classified as
+\emph{Dynamic Power Management} (DPM)~\cite{Benini:1998}, and include,
+for example, \emph{Dynamic Voltage and Frequency Scaling} (DVFS)
+techniques, which dynamically reduce processor frequency or voltage
+whenever possible, in order to reduce power
+consumption~\cite{Bellosa:2003,Joseph:2001,Pillai:2001}.
+
+\note{- Várias opções disponíveis para plataformas embarcadas\\
+- DVS, troca de modos de operação: análise dinâmica do comportamento é ruim!}
+
+%%% a troca entre software e hardware está meio brusca.
+
+Embedded systems devices are typically very simple and resource-limited,
+but may provide a wide range of configurable hardware characteristics.
+For example, an Atmel ATMega~\cite{ATMega16:2004} microcontroller offers
+eight different operating modes, and allows fine-grain configuration of
+most of its devices (e.g. ADC, UART), with direct impact on power
+consumption. Operation in variable voltages and frequencies may also be
+possible with external circuitry. On the other hand, software
+environments for embedded systems (i.e. embedded operating systems and
+libraries) fall short of providing adequate power management support.
+
+
+\note{Enfatizar a falta de padronização e a necessidade de um ambiente
+  onde o desenvolvimento de aplicações power-aware seja facilitado.}
+
+%%% dá pra melhorar/expandir o argumento.
+
+Embedded operating systems typically provide a simple \emph{Hardware
+  Abstraction Layer} (HAL), and offer primitive support for scheduling,
+file systems, communication, etc. In most of these systems, applications
+are expected to handle power management through a platform-specific HAL.
+In this scenario, application portability is compromised, as the application
+must adapt to the particular characteristics of specific hardware.
+
+%\section{Objetivos}
+%\label{sec:objetivos}
+
+\note{Introduzir gerência dirigida pela aplicação e o controle hierárquico de componentes:\\
+  - O que é isso?\\
+  - Porque sistemas embarcados se beneficiam disso?\\
+  - Como isso é possível?}
+
+This work explores application-driven power management, in order to
+allow \emph{power aware} operation of deeply embedded systems, without
+compromising application portability and without incurring excessive
+overhead. The goal of our power management system is to allow
+applications to express when certain software components are not being
+used, permitting the system to migrate hardware resources associated
+with these components to lower power levels. Several issues regarding
+architectural diferences between different hardware devices and
+cuncurrent access of hardware resources by different software components
+emerged from this goal. In order to deal with these these issues, our
+system was built upon the following structures:
+
+
+\begin{description}
+\note{Interface genérica configurável}
+
+\item{Generic Power Management Interface:} A generic power management
+  interface was specified to allow changes of operating modes to have
+  the same semantics across all system components. This interface is
+  thus simple and uniform, is present in every system component, and
+  contributes to application portability.
+
+\item{Message Propagation:} In order to make full use of operating
+  system services, as well as to allow application portability,
+  applications are expected to use high level system components, and not
+  simply its hardware abstraction layer. However, for applications to
+  manage power consumption though these \emph{software} components, a
+  mechanism must be stablished, through which messages are propagated
+  through the system's hardware and software component hierarchy. In
+  order to allow system-wide power management, a global component that
+  agregates information regarding every component currently present in
+  the system was specified.
+
+\note{Redes de Petri garantem corretude(?)}
+
+  %%% meio mal explicado. como as redes se relacionam com os componentes
+  %%% na prática?
+
+\item{Formalization of changes in operating modes:} In order to allow
+  consistent migrations in the power state of a component, a formal
+  model was specified though a Petri net system. In this model, pre- and
+  post-conditions for state migrations of every system component were
+  defined. Generic programming resources were used to resolve the Petri
+  net in compilation time, avoiding the overhead of a runtime
+  interpreter.
+
+
+\end{description}
+
+
+\note{Estrutura}
+As próximas seções discutirão como estas estruturas foram projetadas e
+implementadas no sistema operacional
+\textsc{Epos}~\cite{Froehlich:2001}. Na seção 2, ... Até o final.
+

@@ -1,0 +1,16 @@
+\begin{tabular}{|l|c|c|c|c|}%c|}
+\hline
+\textbf{Setup}  & \multicolumn{4}{c|}{\textbf{Sizes in bytes}}  \\
+\hline
+\hline
+Section         & .text  & .data & .bss & \textbf{Total}  \\
+\hline
+\hline
+Original         & 29,146 & 396   & 325  & \textbf{29,867} \\
+\hline
+with accounting  & 31,914 & 454   & 337  & \textbf{32,705} \\
+\hline
+\hline
+Increase         & 9.5\%  & \multicolumn{2}{c|}{9.71\%} & \textbf{9.5\%} \\ 
+\hline
+\end{tabular}

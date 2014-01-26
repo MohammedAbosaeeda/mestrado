@@ -1,0 +1,113 @@
+%-------------------------------------------------------------------------------
+% ARTIGO A SER SUBMETIDO A SBRC
+%-------------------------------------------------------------------------------
+\documentstyle[DINA4,12pt]{artigo}
+
+%-------------------------------------------------------------------------------
+% NOVOS COMANDOS
+%-------------------------------------------------------------------------------
+\newcommand {\putpict} [5] {
+  \begin {figure} [htb]
+  \centerline {
+    \psfig{figure={#1},width=#2cm,height=#3cm}
+  }
+  \caption{#4}
+  \label{#5}
+  \end{figure}
+}
+
+%-------------------------------------------------------------------------------
+% MACROS
+%-------------------------------------------------------------------------------
+\def\unix{{\sc UNIX}}
+\def\buffer{{\em buffer}}
+\def\buffers{{\em buffers}}
+
+%-------------------------------------------------------------------------------
+% DEFINIÇÃO DAS PÁGINAS
+%-------------------------------------------------------------------------------
+
+% Formato A4; pagina a 2cm do topo; texto a 4cm do topo
+% margens laterais de 3cm; margem inferior de 2,5cm
+%\oddsidemargin 4.6mm \evensidemargin 4.6mm
+%\topmargin -1.54cm \headheight 1cm \headsep 1.5cm \footskip 30pt
+%\textheight = 232mm 
+\oddsidemargin 6mm
+
+% seta espaco 1.5, separacao maior entre paragrafos,
+% indentacao de +-10 espacos, sem numero de pagina
+%\setlength{\parskip}{2ex}
+\setlength{\parindent}{3.5em}
+\pagestyle{empty}
+
+\sloppy
+
+\begin{document}
+
+%-------------------------------------------------------------------------------
+% CAPA
+%-------------------------------------------------------------------------------
+\title{UM SISTEMA DE ARQUIVOS PARA AMBIENTES DISTRIBUÍDOS}
+
+\author{
+  Antônio Augusto Medeiros Fröhlich
+  \thanks{Bacharel em Ciências da Computação (UFRGS/1991); Mestrando do CPGCC/UFSC; Áreas de interesse: Sistemas Operacionais, Sistemas Distribuídos, Redes de Computadores; E-mail: guto@inf.ufsc.br} \\
+  Thadeu Botteri Corso
+  \thanks{Mestre em Ciências da Computação (UFRGS/1978); Áreas de interesse: Sistemas Operacionais, Sistemas Distribuídos, Linguagens de Programação; E-mail: thadeu@inf.ufsc.br }
+}
+
+\date{}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\vspace{0.2cm}
+\begin{center}
+  Universidade Federal de Santa Catarina \\
+  Centro Tecnológico \\
+  Pós Graduação em Ciências da Computação \\
+  88.049.970 - Florianópolis - SC - Brasil \\
+  Tel.:(0482)32-9738 Fax:(0482)32-9770
+\end{center}
+
+%-------------------------------------------------------------------------------
+% INCLUI DEFINIÇÕES PARA AS FIGURAS
+%-------------------------------------------------------------------------------
+\input{psfig}
+
+%-------------------------------------------------------------------------------
+% RESUMO
+%-------------------------------------------------------------------------------
+\vspace{0.3cm}
+\begin{abstract}
+
+Este artigo apresenta uma proposta original para a implementação de um sistema de arquivos para ambientes distribuídos, organizado segundo o modelo cliente-servidor com alto grau de paralelismo interno provido pela sua decomposição em uma coleção de servidores autônomos, cada um dos quais possuindo ainda vários fluxos internos de execução.
+
+\end{abstract}
+
+%-------------------------------------------------------------------------------
+% ABSTRACT
+%-------------------------------------------------------------------------------
+\vspace{0.3cm}
+\begin{englishabstract}
+
+This paper presents an original proposal for the implementation of a file system for distributed environments, organized according to the client-server model with a high internal parallelism provided by its division in a collection of independent servers, each one with several threads of execution.
+
+\end{englishabstract}
+\newpage
+
+%-------------------------------------------------------------------------------
+% SEÇÕES DO DOCUMENTO (já passados pelo conversor de acentos)
+%-------------------------------------------------------------------------------
+\input{intro.tex}
+\input{kernel.tex}
+\input{arq.tex}
+\input{name.tex}
+\input{file.tex}
+\input{buffer.tex}
+\input{end.tex}
+\input{bib.tex}
+
+\end{document}
+

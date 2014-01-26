@@ -1,0 +1,260 @@
+%!PS-Adobe-2.0 EPSF-2.0
+%%Title: diagramaSequencia.fig
+%%Creator: fig2dev Version 3.2 Patchlevel 4
+%%CreationDate: Fri Mar 16 19:03:15 2007
+%%For: grw@falcao (Geovani Ricardo Wiedenhoft)
+%%BoundingBox: 0 0 582 462
+%%Magnification: 1.0000
+%%EndComments
+/$F2psDict 200 dict def
+$F2psDict begin
+$F2psDict /mtrx matrix put
+/col-1 {0 setgray} bind def
+/col0 {0.000 0.000 0.000 srgb} bind def
+/col1 {0.000 0.000 1.000 srgb} bind def
+/col2 {0.000 1.000 0.000 srgb} bind def
+/col3 {0.000 1.000 1.000 srgb} bind def
+/col4 {1.000 0.000 0.000 srgb} bind def
+/col5 {1.000 0.000 1.000 srgb} bind def
+/col6 {1.000 1.000 0.000 srgb} bind def
+/col7 {1.000 1.000 1.000 srgb} bind def
+/col8 {0.000 0.000 0.560 srgb} bind def
+/col9 {0.000 0.000 0.690 srgb} bind def
+/col10 {0.000 0.000 0.820 srgb} bind def
+/col11 {0.530 0.810 1.000 srgb} bind def
+/col12 {0.000 0.560 0.000 srgb} bind def
+/col13 {0.000 0.690 0.000 srgb} bind def
+/col14 {0.000 0.820 0.000 srgb} bind def
+/col15 {0.000 0.560 0.560 srgb} bind def
+/col16 {0.000 0.690 0.690 srgb} bind def
+/col17 {0.000 0.820 0.820 srgb} bind def
+/col18 {0.560 0.000 0.000 srgb} bind def
+/col19 {0.690 0.000 0.000 srgb} bind def
+/col20 {0.820 0.000 0.000 srgb} bind def
+/col21 {0.560 0.000 0.560 srgb} bind def
+/col22 {0.690 0.000 0.690 srgb} bind def
+/col23 {0.820 0.000 0.820 srgb} bind def
+/col24 {0.500 0.190 0.000 srgb} bind def
+/col25 {0.630 0.250 0.000 srgb} bind def
+/col26 {0.750 0.380 0.000 srgb} bind def
+/col27 {1.000 0.500 0.500 srgb} bind def
+/col28 {1.000 0.630 0.630 srgb} bind def
+/col29 {1.000 0.750 0.750 srgb} bind def
+/col30 {1.000 0.880 0.880 srgb} bind def
+/col31 {1.000 0.840 0.000 srgb} bind def
+
+end
+save
+newpath 0 462 moveto 0 0 lineto 582 0 lineto 582 462 lineto closepath clip newpath
+-66.8 522.7 translate
+1 -1 scale
+
+/cp {closepath} bind def
+/ef {eofill} bind def
+/gr {grestore} bind def
+/gs {gsave} bind def
+/sa {save} bind def
+/rs {restore} bind def
+/l {lineto} bind def
+/m {moveto} bind def
+/rm {rmoveto} bind def
+/n {newpath} bind def
+/s {stroke} bind def
+/sh {show} bind def
+/slc {setlinecap} bind def
+/slj {setlinejoin} bind def
+/slw {setlinewidth} bind def
+/srgb {setrgbcolor} bind def
+/rot {rotate} bind def
+/sc {scale} bind def
+/sd {setdash} bind def
+/ff {findfont} bind def
+/sf {setfont} bind def
+/scf {scalefont} bind def
+/sw {stringwidth} bind def
+/tr {translate} bind def
+/tnt {dup dup currentrgbcolor
+  4 -2 roll dup 1 exch sub 3 -1 roll mul add
+  4 -2 roll dup 1 exch sub 3 -1 roll mul add
+  4 -2 roll dup 1 exch sub 3 -1 roll mul add srgb}
+  bind def
+/shd {dup dup currentrgbcolor 4 -2 roll mul 4 -2 roll mul
+  4 -2 roll mul srgb} bind def
+ /DrawEllipse {
+	/endangle exch def
+	/startangle exch def
+	/yrad exch def
+	/xrad exch def
+	/y exch def
+	/x exch def
+	/savematrix mtrx currentmatrix def
+	x y tr xrad yrad sc 0 0 1 startangle endangle arc
+	closepath
+	savematrix setmatrix
+	} def
+
+/$F2psBegin {$F2psDict begin /$F2psEnteredState save def} def
+/$F2psEnd {$F2psEnteredState restore end} def
+
+$F2psBegin
+10 setmiterlimit
+0 slj 0 slc
+ 0.06000 0.06000 sc
+%
+% Fig objects follow
+%
+% 
+% here starts figure with depth 50
+% Polyline
+7.500 slw
+n 3825 2700 m 4125 2700 l 4125 3225 l 3825 3225 l
+ cp gs col0 s gr 
+% Polyline
+ [60] 0 sd
+n 3975 2100 m
+ 3975 2700 l gs col0 s gr  [] 0 sd
+% Polyline
+n 2625 1500 m 5325 1500 l 5325 1950 l 2625 1950 l
+ cp gs col0 s gr 
+/Helvetica-Bold ff 270.00 scf sf
+2775 1800 m
+gs 1 -1 sc (:Imprecise_Thread) col0 sh gr
+% Ellipse
+n 1350 1200 168 168 0 360 DrawEllipse gs col0 s gr
+
+% Polyline
+n 1350 1350 m
+ 1350 1800 l gs col0 s gr 
+% Polyline
+n 1350 1800 m
+ 1200 1950 l gs col0 s gr 
+% Polyline
+n 1350 1800 m
+ 1500 1950 l gs col0 s gr 
+% Polyline
+n 1350 1500 m
+ 1575 1500 l gs col0 s gr 
+% Polyline
+ [60] 0 sd
+n 1350 2100 m
+ 1350 2400 l gs col0 s gr  [] 0 sd
+% Polyline
+n 1200 2400 m 1500 2400 l 1500 8700 l 1200 8700 l
+ cp gs col0 s gr 
+% Polyline
+15.000 slw
+gs  clippath
+3840 2790 m 3840 2610 l 3400 2610 l 3760 2700 l 3400 2790 l cp
+eoclip
+n 1500 2700 m
+ 3825 2700 l gs col0 s gr gr
+
+% arrowhead
+30.000 slw
+n 3400 2790 m 3760 2700 l 3400 2610 l 3400 2790 l  cp gs 0.00 setgray ef gr  col0 s
+% Polyline
+15.000 slw
+gs  clippath
+6840 3540 m 6840 3360 l 6400 3360 l 6760 3450 l 6400 3540 l cp
+eoclip
+n 1500 3450 m
+ 6825 3450 l gs col0 s gr gr
+
+% arrowhead
+30.000 slw
+n 6400 3540 m 6760 3450 l 6400 3360 l 6400 3540 l  cp gs 0.00 setgray ef gr  col0 s
+% Polyline
+7.500 slw
+n 1350 1500 m
+ 1125 1500 l gs col0 s gr 
+% Polyline
+n 10050 4650 m 10350 4650 l 10350 5325 l 10050 5325 l
+ cp gs col0 s gr 
+% Polyline
+n 9450 1950 m 10800 1950 l 10800 1500 l 9450 1500 l
+ cp gs col0 s gr 
+% Polyline
+ [60] 0 sd
+n 10200 2100 m
+ 10200 4650 l gs col0 s gr  [] 0 sd
+% Polyline
+n 8850 5550 m 5625 5550 l 5625 7575 l 8850 7575 l
+ cp gs col0 s gr 
+% Polyline
+n 5625 5850 m 6150 5850 l
+ 6150 5550 l gs col0 s gr 
+% Polyline
+ [60] 0 sd
+n 6975 2100 m
+ 6975 3450 l gs col0 s gr  [] 0 sd
+% Polyline
+n 6825 3450 m 7125 3450 l 7125 7725 l 6825 7725 l
+ cp gs col0 s gr 
+% Polyline
+15.000 slw
+gs  clippath
+7110 4110 m 7110 4290 l 7550 4290 l 7190 4200 l 7550 4110 l cp
+eoclip
+n 7125 3750 m 7650 3750 l 7650 4200 l
+ 7125 4200 l gs col0 s gr gr
+
+% arrowhead
+30.000 slw
+n 7550 4110 m 7190 4200 l 7550 4290 l 7550 4110 l  cp gs 0.00 setgray ef gr  col0 s
+% Polyline
+15.000 slw
+gs  clippath
+10065 4740 m 10065 4560 l 9625 4560 l 9985 4650 l 9625 4740 l cp
+eoclip
+n 7125 4650 m
+ 10050 4650 l gs col0 s gr gr
+
+% arrowhead
+30.000 slw
+n 9625 4740 m 9985 4650 l 9625 4560 l 9625 4740 l  cp gs 0.00 setgray ef gr  col0 s
+% Polyline
+15.000 slw
+gs  clippath
+7110 6960 m 7110 7140 l 7550 7140 l 7190 7050 l 7550 6960 l cp
+eoclip
+n 7125 6600 m 7650 6600 l 7650 7050 l
+ 7125 7050 l gs col0 s gr gr
+
+% arrowhead
+30.000 slw
+n 7550 6960 m 7190 7050 l 7550 7140 l 7550 6960 l  cp gs 0.00 setgray ef gr  col0 s
+% Polyline
+7.500 slw
+n 5775 1950 m 9000 1950 l 9000 1500 l 5775 1500 l
+ cp gs col0 s gr 
+/Helvetica ff 210.00 scf sf
+1725 2625 m
+gs 1 -1 sc (Thread::self\(\)) col0 sh gr
+/Helvetica ff 210.00 scf sf
+2100 3375 m
+gs 1 -1 sc (optional\(\)) col0 sh gr
+/Helvetica-Bold ff 270.00 scf sf
+5925 1800 m
+gs 1 -1 sc (self :Imprecise_Thread) col0 sh gr
+/Helvetica-Bold ff 270.00 scf sf
+9600 1800 m
+gs 1 -1 sc (:Battery) col0 sh gr
+/Helvetica-Bold ff 210.00 scf sf
+5700 5775 m
+gs 1 -1 sc (alt) col0 sh gr
+/Helvetica ff 210.00 scf sf
+7725 4050 m
+gs 1 -1 sc (scheduler\(\)) col0 sh gr
+/Helvetica ff 210.00 scf sf
+7275 4575 m
+gs 1 -1 sc (battery_estimate\(\)) col0 sh gr
+/Helvetica ff 210.00 scf sf
+7800 6900 m
+gs 1 -1 sc (func_opt\(\)) col0 sh gr
+/Helvetica-Bold ff 210.00 scf sf
+5700 6225 m
+gs 1 -1 sc ([estimate >= paramDuration]) col0 sh gr
+% here ends figure;
+$F2psEnd
+rs
+showpage

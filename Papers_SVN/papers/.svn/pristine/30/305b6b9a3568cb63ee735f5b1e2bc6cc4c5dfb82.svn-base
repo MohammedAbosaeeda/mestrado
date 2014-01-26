@@ -1,0 +1,135 @@
+********** bibliography
+
+  Finally, please note that all bibliography entries lack a lot of
+  details: name of the conference/journal, volume number, page
+  numbers, etc.
+
+Bibliography is incomplete, no conference or journal sources are provided. You must include it in each citation to allow the reader to find cited papers.
+
+
+********** performance metrics
+
+  Also, a major weakness of the paper is the lack of performance
+  figures and comparison with other systems. Without such an
+  evaluation, it is hard to evaluate whether the proposed approach is
+  valuable or not.
+
+
+You should add first experimental results of your protocols.
+
+
+Several of the arguments made in the paper are not substantiated with
+empirical data.
+
+Miss first experimental results.
+
+ The paper does not present any
+implementation details or quantitative evaluation of the proposed
+architecture. 
+
+
+********** baseline architecture
+
+To make your architecture believable, you definitely need a better description
+and motivation of the design decisions as well as a prototype implementation 
+to demonstrate its benefits.
+
+- how is the architecture different from other architectures based on Myrinet 
+networks?
+
+
+********** presentation
+
+
+The first thing that has to be improved in this paper is its presentation:
+
+- the title does not match the content
+
+
+Incomplete introduction adn bibliography. Paper not focused on the real original work.
+
+
+This paper should be only focused on lightweigth protocols with myrinet NIC and not be interfered by PPS.
+
+The abstract is too general and too vague and should more adress keypoints and challenges present in the paper.
+
+The introduction is also not really focused on the paper and remains vague on the benefits of clusters.
+If EPOS is the purpose of the paper, you must cite it in abstract and introduction.
+
+The detailed description of Myrinet is
+superfluous and could
+have simply been referenced.
+
+The paper has no related work section that
+describes
+how this work compliments, extends, or differs from other operating
+system research
+and development.
+
+Unfortunately, the claims from the abstract and introduction do not match the
+actual content of the paper. Most of the paper is a discussion about authors' 
+previous work (Epos) and the Myrinet networks in general. 
+
+
+********** contribution
+
+- clarify what the original contribution is; in section 3.2, it's never
+very clear where the general discussion about previous work ends, and
+where your contribution begins.
+
+  The main problem with this paper is that the contribution does not
+  clearly appear. It mainly stems from the presentation of the
+  authors' implementation which lacks too many details about how the
+  lightweight communication protocols can be customized by the
+  applications, how the overall software architecture is designed,
+  etc. Without these details, it is hard to understand how the EPOS
+  system better meet the needs of parallel applications than other
+  existing communication subsystems.
+
+
+Clearly fails to present the contribution of the authors: the
+description of their environment is not precise enough to get an idea
+of what the authors have done. Actually the paper only describes the
+Myrinet architecture and the design of existing lightweight protocols
+such as BIP...
+
+
+The paper does not go into sufficient level of detail to understand
+what's new and/or
+different about EPOS.  
+
+It's never clear
+what exactly the original contribution is, and why the proposed idea would
+perform better than existing approaches.
+
+********** lightweight protocols
+
+- if this architecture is supposed to support many low-level Myrinet protocols,
+you should present at least one or two protocols to illustrate the idea
+(this part is just hand-waved in 3.4).
+
+
+********** other
+
+2.2 : "network hardware does not provide..." : you only speak about NIC and not about network equipments (routers, switchs..).
+
+"many network interfaces are equipped..." : not so many : Myrinet is the most faous ! but what about other choices ? you should cite them (Quadrics...) 
+
+
+
+
+
+- how about a comparison of Epos with the Pebbles component-based system?
+
+
+
+
+It's very hard to evaluate this paper in terms of technical merit in the 
+absence of any implementation and evaluation. Some of the design decisions
+seem outrightly wrong. As you mention, the architecture presented in Fig
+2 has 4 copy operations for small messages, one more than the minimum
+imposed by the Myrinet network. Also, the architecture from Fig 3 should
+perform worse than the previous one (one more copy from user to kernel 
+and vice-versa for every message). 
+
+

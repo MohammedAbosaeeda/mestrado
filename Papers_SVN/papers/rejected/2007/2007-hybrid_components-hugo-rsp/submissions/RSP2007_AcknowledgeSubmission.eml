@@ -1,0 +1,99 @@
+From Fabrice.Kordon@lip6.fr Fri Jan 19 22:29:42 2007
+Return-Path: <Fabrice.Kordon@lip6.fr>
+X-Spam-Checker-Version: SpamAssassin 3.1.4 (2006-07-26) on sagan
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.3 required=5.0 tests=BAYES_00 autolearn=ham 
+	version=3.1.4
+X-Original-To: hugom@lisha.ufsc.br
+Delivered-To: hugom@lisha.ufsc.br
+Received: from isis.lip6.fr (isis.lip6.fr [132.227.60.2])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.lisha.ufsc.br (Postfix) with ESMTP id 5863C1071EC
+	for <hugom@lisha.ufsc.br>; Fri, 19 Jan 2007 22:33:12 -0200 (BRST)
+Received: from src.lip6.fr (src.lip6.fr [132.227.64.100])
+          by isis.lip6.fr (8.13.5.20060614/lip6) with ESMTP id l0K0RehD023240
+          ; Sat, 20 Jan 2007 01:27:40 +0100 (CET)
+X-pt: isis.lip6.fr
+Received: from [132.227.64.7] (padishium [132.227.64.7])
+          by src.lip6.fr (8.12.9-20030917/jtpda-5.4+victor) with ESMTP id l0K0RXuX021613
+          ; Sat, 20 Jan 2007 01:27:40 +0100
+Mime-Version: 1.0
+Message-Id: <p06230914c1d712f5da1a@[132.227.64.7]>
+In-Reply-To: <200701191813.55641.hugom@lisha.ufsc.br>
+References: <200701191813.55641.hugom@lisha.ufsc.br>
+Date: Sat, 20 Jan 2007 01:29:42 +0100
+To: Hugo Marcondes <hugom@lisha.ufsc.br>
+From: Fabrice Kordon <Fabrice.Kordon@lip6.fr>
+Subject: RSP'2007: acknowledge for your submission (was Re: RSP-2007:
+ PDF-056)
+Cc: pnevmati@ics.forth.gr,
+ ken@unb.ca,
+ Michel.Lemoine@onera.fr,
+ pnevmati@ics.forth.gr,
+ Jérôme Hugues <hugues@enst.fr>
+Content-Type: text/plain;
+  charset="iso-8859-1" ;
+  format="flowed"
+Content-Transfer-Encoding: 8bit
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-3.0rc7 (isis.lip6.fr [132.227.60.2]); Sat, 20 Jan 2007 01:27:41 +0100 (CET)
+X-Scanned-By: MIMEDefang 2.56 on 132.227.60.2
+X-UID: 11386
+X-Length: 3798
+Status: R
+X-Status: NC
+X-KMail-EncryptionState:  
+X-KMail-SignatureState:  
+X-KMail-MDN-Sent:  
+X-Bogosity: Unsure, tests=bogofilter, spamicity=0.500000, version=1.0.3
+
+>Dear RSP2007 Program Committee,
+>
+>I'm sending the manuscript of paper number 056, as informed in the RSP2007
+>submission process. Notice that the abstract text has suffer some
+>modifications, please, if possible, update the database.
+>
+>Paper - 056
+>Actual Abstract:
+>Design space exploration helps the developer determine the best compromise
+>between the metrics involved in the design of embedded systems. For
+>successful use of it, is important that the system has the ability to adapt
+>itself in order to achieve the desired metrics of development, specially the
+>partition of components between hardware and software. We define hybrid
+>hardware/software component as a software engineering construct that freely
+>combine hardware and software elements. Nonetheless, devising the proper
+>interface for such a component is certainly not a straightforward task. This
+>paper presents a strategy to handle the construction of a hybrid
+>hardware/software component \emph{architecture} that delivers architectural
+>transparency to clients, enabling an effective design space exploration.
+>
+>Sincerily,
+>
+>Hugo Marcondes
+>Associated Researcher
+>Laboratory for Hardware and Software Integration
+>http://www.lisha.ufsc.br/
+>
+>Attachment converted: Padisha XIV:PAPER_056.pdf (PDF /«IC») (00119C29)
+
+
+	Hello,
+
+This is an acknowledge of the paper you submitted to RSP'2007:
+
+We have got an electronic version we have opened correctly.
+
+Thank you for your submission to RSP'2007.
+
+Best regards.
+
+-- 
+
+--------------------------------------------------------------------------
+Prof. Fabrice Kordon          Laboratoire d'Informatique de Paris 6/SRC
+Tel: +33 1 44 27 88 20         Université Pierre & Marie Curie
+Fax: +33 1 44 27 87 71         4 place Jussieu, 75252 Paris Cedex 05
+http://www-src.lip6.fr/homepages/Fabrice.Kordon (Home)
+http://www-src.lip6.fr/~Fabrice.Kordon (administrative)
+--------------------------------------------------------------------------
+

@@ -1,0 +1,180 @@
+% ------------------------------------------------------------------------------
+\section{Cases study} \label{sec:eval}
+This section presents the evaluation of the proposal to interface hardware
+devices and embedded VHLL, introduced at Section \ref{sec:proposal}, on the
+context of embedded \java~and embedded \lua.
+In order to evaluated our proposal three cases study are presented: serial
+communication, distributed motion estimation, and temperature sensing.
+The proposal was evaluate according to the following metrics: performance,
+memory consumption, platform portability, developer support, and reuse of
+native code adapters among distinct FFIs.
+
+\subsection{Serial Communication}
+% NOTA:  Acho que é interessante citar os meus papers anteriores IADIS AC 2011.
+% Algo como, resultados iniciais mostrados para KESO em \cite...
+The first case study evaluated as a synthetic application which uses the
+\emph{Universal Asynchronous Receiver Transmitter} (UART) hardware device for
+serial communication.
+Such application, was evaluated in \java, using the KESO FFI, for the
+architectures IA32, AVR8, and PPC32.
+The Figure \ref{progjava:uart_app} shows the \java~source of the application,
+which uses the UART hardware mediator in order to write characters on a serial
+device.
+
+\progjava{uart_app}{UART application.}
+
+The \java~ class \emph{UART}, generated as one of the outputs of EBG, is the
+\java~counterpart of the UART hardware mediator and has only native methods
+without implementation.
+The other output of EBG is the native code adapter already tailored to be
+integrated with the KESO JVM.
+This integration process is show in details in our previous work
+\cite{Ludwich:IADIS_AC:2011}.
+At such work the UART application using our approach is compared to the a
+equivalent application written using the \emph{Java Standard Edition} platform,
+which uses the \emph{Java Native Interface} (JNI) as FFI, running on Linux.
+Our approach is around 38X faster than using JNI and Linux.
+
+\subsection{Distributed Motion Estimation}
+% Dizer que nosso trabalho anterior mostra a versão em Java feita a mão?
+% Dizer que neste trabalho a versão Java foi automaticamente gerada e mostrar a
+% versão em Lua.
+The second case study for the proposed method is a real application which uses
+a component to perform \emph{Motion Estimation} (ME) for H.264 video encoding.
+In this case study we have generated native code adapters for \java~and \lua.
+Such component for ME computation was developed for the project the Brazilian
+project ``Rede H.264'', which aims to develop standards and products for the
+Brazilian Digital Television \cite{RedeH264:2009}.
+
+Motion Estimation is a technique used to explore the similarity between
+neighboring frames in a video sequence, thus enabling them to be differentially
+encoded, improving the compress ratio of the generated bitstream
+\cite{citeulike:1269699}.
+ME is a significant stage for H.264 encoding, since it consumes around 90\% of
+the total time of the encoding process \cite{XiangLi:2004}.
+In order to improve the performance of ME, the component uses a data
+partitioning strategy where the motion estimation for each partition of the
+picture is performed in parallel in a specific functional unit, such as a core
+of a multicore processor.
+
+% O DMEC é implementado como um componente em C++ e é exportado para a
+% \textit{VHLL}
+% alvo desenvolvendo-se um adaptador de código nativo para cada objeto sendo
+% abstraído.
+
+Our previous work shows handmade native code adapters for KESO
+JVM \cite{Ludwich:IADIS_AC:2011}.
+In the present work we have used the EBG to generate the same adapter for KESO
+JVM and also an adapter for the LuaVM.
+In the case of \lua~the native code adapter is a C code using the FFI of \lua~
+that is ready to be used.
+In the case of KESO JVM the native code adapter is a \emph{weavelet}
+class, which is used during the KESO generation process, generating the final
+native code adapter.
+
+In order to test the ME component we wrote an application with mimics the
+behavior of an H.264 encoder, it provides the component with pictures, get from
+the component the ME results (motion vectors and motion cost), and checks if
+the results are correct.
+The Figure \ref{progjava:dmec_java_app} shows the Java version of the
+application, and the Figure \ref{proglua:dmec_lua_app} shows the same
+application written in \lua.
+
+\progjava{dmec_java_app}{ME Java application.}
+
+\proglua{dmec_lua_app}{ME Lua application.}
+
+% \multprogjavatwoh{dmec_java_app}{dmec_lua_app}{ME Java and Lua applications.}
+
+
+\subsection{Temperature Sensing}
+The third case study is an application for temperature sensing.
+This is a distributed application, composed by a \emph{Sensor} node which
+measures the temperature and sends the obtained measures to a \emph{Sink} node
+which receive the temperature values and process them.
+The communication between the nodes is performed by radio on the context of a
+\emph{Wireless Sensor Network} (WSN).
+
+The Figure \ref{progjava:sensor_app} shows the application executed by the
+Sensor node, and the Figure \ref{progjava:sink_app} shows the application
+executed by the Sink node.
+Both applications are written in \java.
+We have generated native code adapters for the temperature sensor
+mediator (\emph{Temperature\_Sensor}), and for the network interface card
+(\emph{NIC}) mediator which abstracts the radio used for communicating between
+the nodes.
+
+\progjava{sensor_app}{Sensor application.}
+\progjava{sink_app}{Sink application.}
+
+The target FFIs were KESO FFI and NanoVM FFI.
+The application remains the same for both virtual machines.
+The application which runs on KESO JVM was deployed in the AVR8 (8 bit)
+architecture, and the application which runs on NanoVM was deployed in the ARM7
+architecture (32 bit).
+The platform used was the \emph{EPOS Mote} (version AVR8 and ARM7).
+\emph{EPOS Mote} is an open source and open hardware mote for WSN which runs
+the EPOS system \cite{EposMoteSite}.
+
+In order to evaluate the performance of the generated native code adapters,
+we have measured the time overhead for accessing the hardware mediators used by
+the temperature sensing application.
+Table \ref{tab:tempsensing_app_time_overhead_keso_epos_avr8} shows the
+results for the AVR8 architecture using the KESO FFI.
+Table \ref{tab:tempsensing_app_time_overhead_nanovm_epos_arm7} shows the
+results for the ARM7 architecture using the NanoVM FFI.
+For the temperature sensor device was measured the time of the \emph{sample}
+method which samples the temperature from the environment.
+For the NIC has measured the time for send an arbitrary message.
+%  
+\begin{table}[t]
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Method} & \textbf{Total ($\mu s$)} &
+\textbf{Device ($\mu s$)} &
+\textbf{Overhead (\%)}\\
+\hline
+\emph{Temp::sample} & 334.22 & 330 & 1.26 \\
+\hline
+\emph{NIC::send} & 8586.22 & 8580 & 0.072 \\
+\hline
+\end{tabular}
+\caption{Time overhead generated by the native code adapters.
+Architecture AVR8, KESO FFI.}
+\label{tab:tempsensing_app_time_overhead_keso_epos_avr8}
+\end{center}
+\end{table}
+% 
+\begin{table}[t]
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Method} & \textbf{Total ($\mu s$)} &
+\textbf{Device ($\mu s$)} &
+\textbf{Overhead (\%)}\\
+\hline
+\emph{Temp::sample} & 946.04 & 942 & 0.43 \\
+\hline
+\emph{NIC::send} & 958.39 & 950 & 0.87 \\
+\hline
+\end{tabular}
+\caption{Time overhead generated by the native code adapters.
+Architecture ARM7, NanoVM FFI.}
+\label{tab:tempsensing_app_time_overhead_nanovm_epos_arm7}
+\end{center}
+\end{table}
+% 
+%
+The ``Total'' time and the ``Device'' time from the two tables are not
+comparable, since they are obtained from distinct platforms.
+However, the overhead value is, and it is less than 1.3\% for all devices.
+The time overhead generated by NanoVM should be bigger than in KESO JVM because
+NanoVM has an overhead for interpreting the \java~bytecode.
+KESO JVM does not have this kind of overhead since all bytecode is translated
+to C and then to native code.
+However, this is not seen comparing the tables because the bytecode
+interpretation overhead was not measured for NanoVM.
+The measure overhead from NanoVM comes specifically from the native method,
+which uses ``push'' and ``pop'' operations to interact with NanoVM stack for
+obtaining the method's arguments and for returning the method's results.

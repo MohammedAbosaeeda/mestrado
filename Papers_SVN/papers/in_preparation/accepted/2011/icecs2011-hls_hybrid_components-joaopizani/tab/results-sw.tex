@@ -1,0 +1,26 @@
+\begin{table}[h]
+    \begin{center}
+        \begin{tabular}{cccc}
+            \toprule
+            \textbf{Metric} & \textbf{SW-only} & \textbf{Unified} & \textbf{difference}
+            \tabularnewline
+            \midrule
+            Code size                     & 29580 B                 & 29700 B                 & 0.41\%
+            \tabularnewline
+            \emph{insert} execution time  & 51 $\times 10^{-1}\mu$s & 53 $\times 10^{-1}\mu$s & 3.92\%
+            \tabularnewline                                           
+            \emph{remove} execution time  & 27 $\times 10^{-1}\mu$s & 29 $\times 10^{-1}\mu$s & 7.41\%
+            \tabularnewline                                           
+            \emph{suspend} execution time & 32 $\times 10^{-1}\mu$s & 34 $\times 10^{-1}\mu$s & 6.25\%
+            \tabularnewline                                           
+            \emph{resume} execution time  & 42 $\times 10^{-1}\mu$s & 43 $\times 10^{-1}\mu$s & 2.38\%
+            \tabularnewline                                           
+            \emph{choose} execution time  & 61 $\times 10^{-1}\mu$s & 67 $\times 10^{-1}\mu$s & 9.84\%
+            \tabularnewline
+            \bottomrule
+        \end{tabular}
+    \end{center}
+    \caption{Comparison of generated code size and execution time between SW-only and unified
+        scheduler versions}
+    \label{tab:results-sw}
+\end{table}

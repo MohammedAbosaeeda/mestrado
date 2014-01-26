@@ -1,0 +1,49 @@
+\section{Introduction}
+\label{sec:intro}
+%What?
+%WSNs can be applied to a wide range of applications, such as home automation, industrial sensing and control, surveillance, and environmental monitoring.
+Wireless communication channels are easily eavesdropped.
+This is a problem for many WSN applications in which security is a critical issue.
+Anyone in the network range can listen and interfere with the communication traffic, making the network vulnerable to all kinds of attacks, such as impersonation, tampering, and replay attacks.
+
+%Why?
+The use of cryptography solves the problem of confidentiality.
+Nevertheless, through traffic analysis, someone monitoring the network for a determined period of time can associate certain messages with certain events~\cite{Fu:2003}.
+Therefore, even if the observer cannot decrypt the message, he can correlate it with an event, and through replay attacks cause a network misbehaviour.
+Furthermore, even if the message is signed it can still suffer from the same problem.
+Since the message content is not being altered there is nothing to invalidate it.
+A solution to this problem is to mask the channel -- send dummy traffic when no actual messages are being sent, keeping bandwidth usage constant.
+Thus avoiding traffic analysis.
+Nonetheless, this is impractical in WSNs as it would increase packet traffic, consequently increasing energy consumption and substantially reducing the network lifetime.
+
+%Suggestion of how.
+In this article, we describe the implementation and evaluation of a trustful infrastructure for WSNs.
+This infrastructure is composed by an embedded platform, EPOSMote II~\cite{eposmote}, and a stack of communication protocols (TCP/IP/C-MAC). 
+The use of TCP provides end-to-end reliability and ordered delivery.
+In order to not redo TCP work, e.g. acknowledgement and packet retransmission, we make use of the Configurable Medium Access Control (C-MAC) in the data link layer~\cite{steiner:2010}.
+To this end we configured C-MAC in a very simplistic form, using only CSMA and backoff periods.
+To countermeasure the security threats present in WSNs we make use of data encryption and authentication through the network base station.
+Our authentication scheme has a temporal property that protects the network against replay attacks.
+
+Cryptography algorithms are extremely expensive in terms of execution time because they require many arithmetic and logic operations to be executed, which makes traditional general-purpose processor inefficient for this scenario.
+Hardware acceleration for cryptographic algorithms not only enhances the performance of the security systems but also leaves the computing resources available to a more useful work~\cite{Chang:2010}.
+Thus, we make use of the hardware-assisted security mechanism present in EPOSMote II to encrypt and decrypt all necessary data using the Advanced Encryption Standard (AES)~\cite{AES:2001}.
+
+%designed specifically to guarantee a trustful communication while still compromised with the low utilization of resources.
+%Although communication in WSNs is error-prone, TCP provides reliable and ordered packet delivery.
+%As to not redo TCP's work we make use of the Configurable Medium Access Control (C-MAC) in the data link layer.
+%To this end we configured C-MAC in a very simplistic form, using only CSMA and backoff periods.
+
+%Aiming to solve these vulnerabilities, we propose the use of Transmission Control Protocol (TCP)~\cite{TCP:1981} and Advanced Encryption Standard (AES)~\cite{AES:2001} algorithm.
+%However, in most cases, a wireless sensor, which represents a device that generates an electrical signal proportional to a physical, biological, or chemical parameter, is a resource-constrained embedded system and must operate for a long time with its limited energy.
+%Then, two important factors that should be considered are the footprint and the sensor battery's useful life.
+
+%TCP is a connection-oriented protocol, which provides end-to-end reliability, in addition to guarantee delivery in order.
+%The word reliable refers to the ability of perform a function even in unexpected situations, and TCP accomplishes this through packet retransmissions.
+%However, when using wireless links, where high error rates and intermittent connectivity characteristics are presents, the large number of retransmissions due to the lost of packets reduces the link's bandwidth, thereby causing a significant degradation in the network.
+%This paper presents some solutions present in the state-of-the-art, which enable the use of TCP protocol in WSN.
+
+%Paper's organization
+In Section~\ref{sec:solution} we describe our infrastructure in details.
+In Section~\ref{sec:results} we present an evaluation of our implementation, followed by our conclusions in Section~\ref{sec:conclusions}.
+

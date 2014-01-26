@@ -1,0 +1,16 @@
+\section{Desenvolvimento do Software}
+
+\fig{diagram1.png}{Maquina de estados da aplicação de detcção de quedas}{width=\columnwidth}
+
+O projeto de software do sistema foi feito com base na plataforma escolida, o \epos, com isso se mostrou necessária a utilização de dois hardwares distintos, um para a pulseira e outro para gateway, e consequentemente notou-se também a necessidade de duas aplicações distintas, uma de detecção de quedas e envio de sinal e outra de gateway.
+
+A aplicação de detecção de quedas e envio de sinal consiste de um algoritmo de detecção de quedas, de um sistema de comunicação com o usuário e de um sistema de envio de sinal para o gateway. O algoritmo de detecção de quedas foi implementado com base no manual do acelerômetro que contem uma aplicação que detecta quedas. A comunicação com o usuário foi implementado usando um botão e um LED de forma que quando a queda é detectada o LED é acesso e permanece assim por um determinado período de tempo ou o até botão ser pressionado, caso o botão não seja pressionado o sinal de queda é enviado ao gateway. O sistema de envio de sinal usado foi o NIC já implementado no EPOS, enviando uma string que indica queda e informa o id da pulseira que a detectou.
+
+Para o gateway enviar o sinal para internet foi utilizado um gateway GPRS que é capaz de pegar dados de uma porta serial e envia-los a um servidor. Sendo assim a aplicação do gateway foi feita de forma a enviar um sinal alertando uma queda e o id da pulseira que a detectou em caso de recebimento de sinal de uma das pulseiras.
+
+Foi criado uma aplicação usando Django para mostrar os dados em uma pagina na internet. Essa aplicação abre uma porta do servidor em que são enviados os dados pelo gateway GPRS e lê a saída dessa porta, caso essa porta receba um sinal alertando uma queda a aplicação imprime na tela uma mensagem de queda e o id da pulseira que a detectou.
+
+O projeto de software pode ser valido por inteiro usando o hardware padrão do \epos~sem que fosse necessário projetar e construir o hardware final do produto antes da validação da aplicação, o que se mostra eficiente uma vez que os projetos de hardware e software podem ser desenvolvidos em paralelo e o software pode ser valido antes de iniciar a produção do hardware.
+
+Ao final do desenvolvimento do software os testes necessários para sua validação foram realizados no \emote, visto que este apresenta as mesma características do hardware do produto. Isto nos economizou tempo, uma vez que não foi necessário esperar o hardware final ficar pronto para validarmos o software, e dinheiro, já que não foi preciso produzir um protótipo apenas visando testar o software.
+

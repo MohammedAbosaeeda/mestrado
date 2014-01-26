@@ -1,0 +1,6 @@
+template<typename T> class SafePointer {
+...
+  SafePointer(): _exists(false){}
+  SafePointer(T thing, bool exists = true): _exists(exists), _thing(thing) {}
+...
+};

@@ -1,0 +1,14 @@
+class Vector{
+   My_class* v;
+   int sz;
+public:
+   Vector();
+   Vector(int);
+   
+   My_class& elem (int i) {return v[i]; }
+   My_class& operator [] (int i);
+   
+   void swap(Vector &);
+   
+   // ...
+};

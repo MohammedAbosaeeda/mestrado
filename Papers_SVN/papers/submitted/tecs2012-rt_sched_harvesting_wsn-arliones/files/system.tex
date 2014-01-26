@@ -1,0 +1,99 @@
+\section{System Design and Implementation}
+\label{sec:design}
+
+The \epos~Project (Embedded Parallel Operating System) aims at automating the development of embedded systems so that developers can concentrate on the applications~\cite{Project:EPOS:2012}.
+\epos~relies on the Application-Driven Embedded System Design (\adesd) method~\cite{Frohlich:2001} to guide the development of both software and hardware components that are adaptable.
+The adaptation of components takes place during design and aims at fulfilling the requirements of applications.
+\epos~has a set of tools to support developers in selecting, configuring, and plugging components into an application-specific framework~\cite{Schulter:JOT:2007}.
+The combination of methodology, components, frameworks, and tools enable the automatic generation of application-specific embedded system instances.
+
+Besides the run time support system and tools, the \epos~Project has driven the development of hardware platforms, being the \emote~among them.
+\emote~is a modular platform for wireless sensor network applications.
+The implementation of the approach described in this paper used the \emote~platform.
+The implementation also modified \epos's scheduler and power manager.
+The following sections describe the implementation.
+
+\subsection{\emote}
+\label{sec:emote}
+
+The \emote~is a modular platform for building wireless sensor network applications.
+Figure~\ref{fig:emote2_epos-block_diagram} shows the block diagram with the three modules of the platform.
+The \texttt{Processing Module} incorporates the core processing and communication components of the system.
+There are two different versions of this module: one based on Atmel ZigBit System-in-a-Package (SiP) and another, used in this work, based on Freescale MC13224V System-on-a-Chip (SoC).
+Both present RF transceivers compatible with IEEE 802.15.4 standard~\cite{IEEE802154:2006} and an integrated processor, which is an 8-bit AVR for the Atmel SiP and a 32-bit ARM7 for the Freescale SoC.
+
+The application designer can adapt the hardware to the needs of each application through the power supply and IO interfaces factored out on \emote~design.
+The power interface features separate signals for the power source (i.e. $V_{cc}$, $V_{dd}$ and $Gnd$) and an $I^2C$ interface for communicating with the processing module.
+The IO interface has 34 pins available for custom designs, including a bypass of the power source, all $ADC$ channels, $SPI$, $UART$ and several $GPIO$ pins.
+The \emote~Project developed a \emph{Start-Up} board to be connected to the IO interface that features a $USB$ converter, a thermistor, a 3-axis accelerometer, LEDs, and push buttons.
+This work also used the \emph{Start-up} board.  
+
+\wfig{emote2_epos-block_diagram}{Block diagram of the \emote~platform.}{width=.6\columnwidth}
+
+To account for energy consumption of \emote~we first need to produce its power characterization and map it to the energy model described in Section~\ref{sec:en_model}.
+This information comes either from the components datasheets, when available, or from measurements in a real system.
+Table~\ref{tab:emote-energy_currents} shows values of current drains of system devices in different operating modes to be used by time-based accounters.
+Table~\ref{tab:emote-energy_consumptions} shows how much energy each monitored event consumes.
+The event accounting system uses this information to estimate the amount of consumed energy.
+
+\mytab{emote-energy_currents}{Current drain of CPU and Radio components of the \emote.}
+
+\mytab{emote-energy_consumptions}{Energy consumption of monitored events of the \emote.}
+
+\subsection{\epos~Power Manager}
+\label{sec:epospm}
+
+Once energy is a non-functional property of computing systems~\cite{Lohmann:2005}, the design of \epos~power manager uses aspect-oriented programming~\cite{Mens:1997} to implement its functionalities in a way that is orthogonal to other components of the operating system.
+\epos~implements aspects as constructs called \emph{Scenario Adapters}~\cite{Frohlich:SCI:2000} that rely on the static metaprogramming capability of C++ (templates).% and does not require the use of extra tools such as aspect weavers.
+
+\wfig{uml-class-pm}{UML class diagram of \epos~power manager.}{width=\columnwidth}
+
+Figure~\ref{fig:uml-class-pm} shows a class diagram of the \epos~power manager designed as a scenario adapter.
+The base class \texttt{Power\_Manager} wraps the target class, i.e. the class that the aspect modifies.
+The wrapping happens through inheritance and function overriding (from the \emph{Adapter Design Pattern}~\cite{GangOfFour:1994}).
+Additional methods may be easily included, as is the case of the \texttt{power} methods in of the base \texttt{Power\_Manager} class.
+\texttt{Power\_Manager} is, in turn, a facade (from the \emph{Facade Design Pattern}~\cite{GangOfFour:1994}) to other power management functionalities implemented by other components.
+For instance, \texttt{Power\_Manager\_Shared} and \texttt{Power\_Manager\_Instances} are responsible for, respectively, controlling of operating modes for shared components, and keeping of object references for system-wide power management actions~\cite{Hoeller:DIPES:2006}.
+
+An extension to \epos~power manager, the \texttt{Power\_Manager\_Accounter}, implements the energy model described in Section~\ref{sec:en_model}.
+This extension enables the energy consumption accounting functionality in \epos.
+The \texttt{account(e:Event)} method accounts the events using the event-based profile (Equation~\ref{eq:en_dev_ev}), which may be called in a wrapped method if the event generated by such a method is a monitored one.
+As concerning overhead issues, it is important to note that \texttt{account(e:Event)}, which increments an event counter, is an inline function, thus incurring in no overheads due to function calls at runtime.
+Also, the branches that implement the facade at \texttt{power(m:OP\_Mode)} of \texttt{Power\_Manager} use constant boolean values which \epos~defines at configuration time, before system generation.
+As such, these are subject to compiler optimizations that remove the branches in the final binaries of the system.
+Table~\ref{tab:pm-overhead} presents the impact of the proposed accounter in terms of code size and data memory usage.
+As can be seen, the accounting mechanism aggregates 2,768 bytes of code (ROM) and 70 bytes of data (RAM) to the original, fully functional \texttt{Power\_Manager}.
+
+\mytab{pm-overhead}{Memory footprint of \epos~power manager.}
+
+\subsection{\epos~Real-Time Scheduling}
+\label{sec:epossched}
+
+Figure~\ref{fig:uml-class-ea_sched} shows the three main components forming the real-time scheduling support on \epos: \texttt{Thread}, \texttt{Criterion}, and \texttt{Scheduler}.
+The \texttt{Thread} class represents an aperiodic task and defines its execution flow, with its own context and stack.
+This class implements traditional thread functionalities, such as suspend, resume, sleep, and wake up operations.
+The \texttt{Periodic\_Thread}\footnote{A periodic thread in \epos~is conceptually equivalent to a real-time periodic task.} provides support for periodic tasks by extending the \texttt{Thread} class and aggregating mechanisms related to the re-execution of the periodic task.
+The \texttt{wait\_next} method performs a \texttt{p} operation on a semaphore, forcing the thread to sleep until it reaches the next activation instant.
+Each periodic thread aggregates an \texttt{Alarm} object that is responsible for performing a \texttt{v} operation that, periodically, releases and wakes up the thread.
+
+\wfig{uml-class-ea_sched}{UML class diagram of the scheduling structure of \epos.}{width=\columnwidth}
+
+The \texttt{Scheduler} class and \texttt{Criterion} subclasses define the structure that realizes task scheduling.
+Usually, object-oriented OS scheduler implementations use a hierarchy of specialized classes of an abstract scheduler class.
+In this case, subclasses specialize the abstract class to provide different scheduling policies~\cite{Marcondes:EPS:2009}.
+\epos~reduces the complexity of maintaining such hierarchy and promotes code reuse by detaching the scheduling policy (here represented by the \texttt{Criterion} subclasses) from its mechanism (e.g., data structure implementations as lists and heaps).
+The data structure in the scheduler class uses the defined scheduling criterion to order the tasks accordingly.
+During compilation, the \texttt{Trait}\footnote{A trait class is a template class that associates information of a component at compile time.} class of \texttt{Thread} defines the scheduling criterion.
+For example, \texttt{typedef Scheduling\_Criteria::EAEDF Criterion} defines the scheduling criterion as Energy-Aware EDF.
+The \texttt{Scheduler} consults the information that the criterion class provides to define the appropriate use of lists and operations.
+
+Each criterion class defines the priority of a task, which the scheduler uses to choose a task (\texttt{operator ()}), and other criterion features, such as preemption and timing, for instance.
+In this work, we extended the EDF and RM criterions to support energy-aware operation.
+We created a flag (\texttt{ENERGY\_AWARE}) that informs the scheduler whether the criterion is energy-aware or not.
+As shown in the sequence diagram of Figure~\ref{fig:uml-seq-ea_sched}, the scheduler uses the flag to decide whether it must check for energy availability or not before dispatching a best-effort task.
+It is important to highlight that flags are static and constant values\footnote{In C++: \texttt{static const bool ENERGY\_AWARE = true;}} and, due to this reason, the compiler optimizes the if-statements that verify whether the criterion in use is energy-aware or not, reducing the runtime overhead.
+
+\wfig{uml-seq-ea_sched}{UML sequence diagram of the adaptation of the scheduling mechanism of \epos.}{width=0.8\columnwidth}
+
+With this separation of concerns among scheduler, criterion, and thread, it is straightforward to add new scheduling policies into the system.
+Moreover, in cases where a scheduling policy requires specific scheduling treatment, a new scheduler may be created by extending the existing schedulers through metaprogramming specialization techniques~\cite{Czarnecki:2000}.

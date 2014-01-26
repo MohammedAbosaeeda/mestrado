@@ -1,0 +1,26 @@
+% ------------------------------------------------------------------------------
+\section{Conclusions} \label{sec:conc}
+This paper introduces a method used to abstract hardware devices in order to
+be used by VHLLs applications in the embedded system scenario.
+This method can be used for constructing hardware components libraries for
+embedded VHLLs applications.
+It is also presented EBG, a tool which automates the task of generating native
+code adapters.
+The EBG shows that, when hardware devices and FFIs are properly factorated,
+the adaptation of a hardware device to a VHLL can be treated as an aspect
+weaving problem thus, enabling the reuse of native code adapters by distinct
+FFIs.
+
+The proposal was applied for embedded \java~and embedded \lua, in three cases
+study.
+Four hardware mediators were evaluated, UART, DMEC, TemperatureSensor, and NIC.
+The overhead of time and memory was less than 1.3\% take in to consideration all
+cases, which indicates that our approach if feasible for embedded systems.
+Applications were deployed in the IA32, AVR8, ARM7, and PPC32 architectures,
+showing the portability of the native code adapters developed using the proposed
+approach.
+
+% ------------------------------------------------------------------------------
+
+
+

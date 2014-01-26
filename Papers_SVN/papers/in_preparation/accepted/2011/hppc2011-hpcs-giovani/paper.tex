@@ -1,0 +1,211 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{times}
+\usepackage{graphicx,url}
+\usepackage{listings}
+\usepackage{subfigure}
+\usepackage{multirow}
+\usepackage{pictexwd}
+\usepackage[absolute]{textpos}
+\usepackage[english]{babel}
+
+\lstset{keywordstyle=\bfseries,
+  flexiblecolumns=true,
+  showstringspaces=false,
+  breaklines=true
+}
+\lstloadlanguages{[ANSI]C++,HTML}
+\lstdefinestyle{prg} {basicstyle=\small\sffamily, showspaces=false}
+
+
+\newcommand{\prg}[3][ht!]{
+\begin{figure}[#1]
+  \lstinputlisting[language=C++,style=prg,showspaces=false,frame=single,breaklines=true,numbers=left,stepnumber=1,numbersep=-6pt]{fig/#2.cc}
+  \caption{#3}
+  \label{prg:#2}
+\end{figure}
+}
+
+\newcommand{\fig}[4][ht!]{
+	\begin{figure}[#1]
+	{\centering{\includegraphics[#4]{fig/#2}}\par}
+	\caption{#3}
+	\label{fig:#2}
+	\end{figure}
+}
+
+\newcommand{\figFull}[4][ht!]{
+	\begin{figure*}[#1]
+	{\centering{\includegraphics[#4]{fig/#2}}\par}
+	\caption{#3}
+	\label{fig:#2}
+	\end{figure*}
+}
+
+\def\sharedaffiliation{%
+\end{tabular}
+\begin{tabular}{cc}}
+
+\begin{document}
+
+\title{An embedded operating system API for monitoring hardware events in multicore processors}
+	
+\author{
+  \IEEEauthorblockN{Giovani Gracioli and Ant\^{o}nio Augusto Fr\"{o}hlich}\\
+  \IEEEauthorblockA{
+	Software/Hardware Integration Lab\\
+	Federal University of Santa Catarina\\
+	88040-900 - Florian\'{o}polis, SC, Brazil \\
+	\{giovani,guto\}@lisha.ufsc.br
+  }
+}
+
+\maketitle
+
+\begin{abstract}
+This paper presents an operating system API for monitoring hardware events specifically designed for embedded systems that use multicore processors. The proposed API uses the concepts from the Application-Driven Embedded System Design (ADESD) to construct a simple and lightweight interface for handling the complexity of today's Performance Monitoring Units (PMUs). In order to demonstrate the API usage, we monitored an event associated with bus snoops in a real processor. Based on the experience learned, we propose a set of guidelines, such as features for monitoring address space intervals and OS trap generation, that can help hardware designers to improve the PMU capabilities in the future, considering the embedded operating system's point of view.
+\end{abstract}
+
+\begin{keywords}
+Hardware performance counters, embedded systems, operating system, multicore architectures
+\end{keywords}
+
+\section{Introduction}
+
+Hardware Performance Counters (HPCs) are special registers available in the most modern microprocessors through the hardware Performance Monitoring Unit (PMU). HPCs offer support for counting or sampling several microarchitectural events, such as cache misses and instructions counting, in real-time~\cite{Sprunt:02}. However, they are difficult to use due to the limited hardware resources (for example Intel Nehalem supports event counting with seven event counters and AMD Opteron provides four HPCs to measure hardware events) and complex interface (e.g., low-level and specific to microarchitecture implementation)~\cite{Azimi:2005}.
+
+Nevertheless, it is possible to use multiplexing techniques in order to overcome the limitation in the number of HPCs~\cite{May:01, Sprunt:02} or specific libraries that make the use of HPCs easier~\cite{Dongarra:2003}, while adding a low overhead to the application. Thus, HPCs can be used together with OS techniques, such as scheduling and memory management, to monitor and identify performance bottlenecks in order to perform dynamic optimizations~\cite{Azimi:2009}. In multicore systems, for instance, it is possible to count the number of snoop requests, last-level cache misses, and evicted cache lines. 
+
+As the utilization of multicore processors in the embedded system domain is increasing, an API for handling the complexity of HPCs specifically designed to this domain is desirable. The current HPCs APIs, initially proposed to general purpose computing, such as PAPI~\cite{Dongarra:2003}, are not the most suitable for embedded systems because they can use a substantial amount of extra code, which makes the communication between software and hardware PMUs slower, or require the initialization and creation of lists or event sets that decrease the performance. Moreover, these APIs provide several functionalities that cannot be of interest in an embedded application, such as user-defined events or performance modeling metrics. Hence, an API specifically tailored for the application's needs can be useful and provide a better performance for such applications. 
+
+This paper proposes a HPC API for monitoring hardware events specifically designed for embedded multicore systems. The API is designed following the Application-Driven Embedded System Design (ADESD) concepts~\cite{Froehlich:2001} and it is able to provide to operating systems a simple and lightweight interface for handling the communication between applications and PMUs. Through an API usage example, in which a hardware event is used by the OS to help scheduling decisions, we were able to identify the main drawbacks of the current PMUs. As a consequence, we propose a set of guidelines, such as features for monitoring address space intervals and OS trap generation, that can help hardware designers to improve the PMU capabilities in the future, considering the embedded operating system's point of view.
+
+The rest of this paper is organized as follows. Section~\ref{sec:related_work} presents the related work. Section~\ref{sec:adesd} provides an overview of the ADESD methodology and the Embedded Parallel Operating System (\textsc{Epos}). Section~\ref{sec:proposed_api} presents the proposed PMU API. Section~\ref{sec:discussion} discusses how the current PMUs could be improved in order to provide more detailed information to OSs. Finally, Section~\ref{sec:conc} concludes the paper.
+
+\section{Related Work}
+\label{sec:related_work}
+
+The Performance API (PAPI) is the most used open source cross-platform interface for hardware performance counters~\cite{Dongarra:2003,papi}. PAPI consists of a machine-dependent layer, a high level interface that provides access to read, start, and stop counters, and a low-level interface that provides additional features. It is not our target, however, to make a comparison between PAPI and our implementation. PAPI supports a wide range of platforms, was designed to general-purpose computing systems, and has been under development for more than 10 years. Instead, our interface is designed to embedded applications, which usually have their requirements known at design time. Thus, it is possible to generate only the needed code for the application and nothing else.
+
+Linux abstracts the usage of HPCs through a performance counter subsystem. A performance monitoring tool (\emph{perf}) uses this subsystem and allows developers to obtain and analyze the performance of their applications. The tool also supports a command to record data into files which can be later analyzed using a \emph{report} command. Other tools such as Intel Vtune~\cite{intelperf} and AMD CodeAnalyst~\cite{codeanalyst} offer a ``friendly'' interface to monitor performance of processors and applications through the use of HPCs. However, embedded systems usually do not have a control interface. 
+
+Considering HPCs as an alternative to easily detect sharing pattern among threads and help scheduling decisions in multicore processors, Bellosa and Steckermeier were the first to suggest using HPCs to dynamically co-locate threads onto the same processor~\cite{Bellosa:1996}. Tam et al. use HPCs to monitor the addresses of cache lines that are invalidated due to cache-coherence activities and to construct a summary data structure for each thread, which contains the addresses of each thread that are fetching from the cache~\cite{Tam:2007}. Based on the information from this data structure, the scheduler mounts a cluster composed of a set of threads, and allocates a cluster to a specific core. West et al.~\cite{West:2010} propose an online technique based on a statistical model to estimate per-thread cache occupancies online through the use of HPCs. However, data sharing among cores is not considered by the authors.
+
+\textit{Distributed Intensity Online} (DI) is a multicore scheduler that reads the number of cache misses online and distributes threads across caches such that the miss rates are distributed as evenly as possible~\cite{Zhuravlev:2010}. Calandrino and Anderson have proposed a cache-aware scheduling algorithm~\cite{Calandrino:2009}. The algorithm uses HPCs to estimate the working set of each thread and to schedule them in order to avoid cache thrashing and provide real-time guarantees for soft real-time applications. However, to correctly estimate the working set, the threads must not share data and and the data size of the running threads must be less than the cache size.
+
+In general, the above related work neither use nor propose an efficient API to handle the complexity of hardware performance counters in embedded systems. In this paper, we propose a simple and lightweight API for a common PMU family available in today's multicore processors (the Intel family of PMUs).
+
+\section{Application-Driven Embedded System Design}
+\label{sec:adesd}
+
+Application-Driven Embedded System Design (ADESD) is a methodology to guide the development of application-oriented operating system from domain analysis to implementation~\cite{Froehlich:2001}. ADESD is based on the well-known domain decomposition strategies found in \textit{Family-Based Design} (FSB)~\cite{Parnas:1976}, \textit{Object-Oriented Design} (OOD)~\cite{Booch:2004}, \textit{Aspect-Oriented Programming} (AOP)~\cite{Kiczales:97}, and \textit{Component-Based Design} (CBD)~\cite{Vincentelli:2001} in order to define components that represent significant entities in different domains. 
+
+Figure~\ref{fig:adesd} shows an overview of the ADESD methodology. The problem domain is analyzed and decomposed into independent abstractions\footnote{An abstraction is a class (component) with a well-defined interface and behavior.} that are organized as members of a family, as defined in the FBD. To reduce environment dependences and to increase abstractions re-usability, ADESD aggregates the aspects separation (from AOP) to the decomposition process. Thus, it is possible to identify scenario variations and non-functional properties and to model them as \textit{scenario aspects} that crosscut the entire system. The \textit{scenario adapter} wraps an abstraction and apply into it a corresponding set of aspects that are enabled to that abstraction~\cite{Frohlich:SCI:2000}.
+
+\fig{adesd}{ADESD methodology overview.}{scale=.68}
+
+Families of abstractions are visible to application developers through \textit{Inflated Interfaces} that export their members as an unique ``super component''. These \textit{inflated interfaces} allow developers to postpone the decision about which component should be used until enough configuration knowledge is acquired. An automatic configuration tool is responsible for binding an \textit{inflated interface} to one of the family members, choosing the appropriate member that realizes the required interface.
+
+\subsection{Embedded Parallel Operating System}
+
+Embedded Parallel Operating System (\textsc{Epos})~\footnote{\textsc{Epos} is available online at \url{http://epos.lisha.ufsc.br}.} is the first practical case study of ADESD. \textsc{Epos} is a multi-platform, component-based, embedded system
+framework in which traditional OS services are implemented through adaptable, platform-independent \emph{System Abstractions}. Platform-specific support is implemented through \emph{Hardware Mediators}~\cite{Polpeta2004}, which are functionally equivalent to device drivers in \textsc{Unix}, but do not build a traditional HAL. Instead, they sustain the interface contract between abstractions and hardware components by means of static metaprogramming and method inlining techniques that ``dilute'' mediator code into abstractions at compile-time (no calls, no layers, no messages; mostly embedded assembly).
+ 
+Figure~\ref{fig:cpu_hardware_mediator} presents an example of hardware mediators: the CPU hardware mediators family. This family handles the most dependencies of process management. The class \texttt{CPU::Context} defines the execution context for each architecture. The method \texttt{CPU::switch\_context} is responsible for the context switching, receiving the old and new contexts. The CPU mediators also implement several functionalities as interrupt enabling and disabling and test and set lock operations. Each architecture defines a set of registers and specific address, but the same interface remains. Thus, it is possible to keep the same operations for platform-independent components, such as threads, synchronizers, and timers.
+
+\fig{cpu_hardware_mediator}{CPU hardware mediators.}{scale=.31}
+
+The proposed API was implemented as a PMU hardware mediator family and a component in the \textsc{Epos} operating system and will be presented in the next section.
+
+\section{The Proposed API}
+\label{sec:proposed_api}
+
+The proposed performance monitoring API was designed following the ADESD methodology. The monitoring infrastructure is composed by a PMU hardware mediator family and a platform-independent component. The interface of this component is used by application developers. Moreover, the component uses the hardware mediators in order to configure and read the HPCs. In the next subsections we present the hardware mediator family, the OS component, an example of how to use the API, and a practical use (OS scheduling). 
+
+\subsection{PMU Hardware Mediator Family}
+
+We have designed a hardware mediator interface for the Intel PMU family. Figure~\ref{fig:pmu_class_diagram} shows the UML class diagram of the interface. The Intel processors, depending on the microarchitecture (e.g., Nehalem, Core, Atom, etc), have different PMU versions. Each version provides different features and variable number of HPCs. For example, the PMU version 2 has two performance counters that can be configured with general events and three fixed performance counters that count specific events, while the PMU version 3 extends the version 2 and provides support for simultaneous multi-threading, up to 8 general-purpose performance counters, and precise event based sampling~\cite{intelsys}. Yet, pre-defined architectural events, such as unhalted core cycles, last-level cache misses, and branch instruction retired, are shared by all the three versions.
+
+\figFull{pmu_class_diagram}{UML class diagram for the proposed PMU hardware mediator API.}{scale=.35}
+
+Configuring an event involves programming performance event select registers (IA32\_PERFEVTSELx) corresponding to a specific physical performance counter (IA32\_PMCx). In order to select an event, the PERFEVTSELx register must be written with the selected event, unit, and several control masks. The unit mask qualifies the condition that the selected event is detected. For example, to configure the PMC0 to count the number of snoop responses to bus transactions, the PERFEVTSEL0 must be written with the EXT\_SNOOP event mask (0x77) and two unit masks that define the conditions when the event should be counted. 
+
+The designed PMU hardware mediator family represents the described Intel PMU organization. A base class IA32\_PMU implements the Intel PMU version 1 and common services for both version 2 and 3, including the pre-defined architectural events. Also, this class declares memory mapped registers and PMCs. The IA32\_PMU\_Version2 and IA32\_PMU\_Version3 extends the base class and implement specific services only available on that version. Finally, available hardware events are listed by specific microarchitecture classes. For instance, Intel\_Core\_Micro\_PMU and Intel\_Nehalem\_PMU list all available events masks for the Intel Core and Intel Nehalem microarchitectures, respectively.
+
+The hardware mediator interface could be used by a platform-independent component. This component is the one responsible for implementing ``intelligent'' logic by using the mediators. For instance, event ratios such as Cycles per Retired Instruction (CPI), parallelization ratio, modified data sharing ratio, and bus utilization ratio, combine two or more hardware events in order to provide useful insight into the application performance issues~\cite{intelperf}. Moreover, a platform-independent component could also multiplex the hardware counters in order to overcome the limitation on the number of hardware counters. Multiplexing techniques divide the usage of counters over the time, providing to users a view that there exists more hardware counters than processors really support~\cite{Dongarra:2003}. We also propose a performance monitoring component, which is described below.
+
+\subsection{Performance Monitoring Component}
+
+Figure~\ref{fig:perf_mon} shows the performance monitoring component (\texttt{Perf\_Mon}). It provides a set of methods to configure and read several event ratios and specific hardware events, such as last-level cache misses and L1 data cache snooped. The component hides from the users all the complexity of configuring, writing, and reading the hardware counters. Moreover, it also provides means for handling possible overflow in the counters.
+
+\fig{perf_mon}{Performance monitoring OS component.}{scale=.38}
+
+The performance monitoring component uses the presented hardware mediator family. However, due to function inlining, the code of the mediators is dissolved into the component. For example, consider the code in Figure~\ref{prg:perfmon}. There is a method for configuring the event CPU\_CLK\_UNHALTED\_BUS and another method for reading the event. The code of the mediator \texttt{Intel\_Core\_Micro\_PMU::config()} is diluted into the \texttt{cpu\_clk\_unhalted\_bus()} method, thus there is no overhead associated to method calls.
+
+At the same way, the code for reading the performance counter 0 is diluted into the \texttt{get\_cpu\_clk\_unhalted\_bus()} and no method calling or argument passing is generated in the final system image. Consequently, the generated image only aggregates the code needed by the application and nothing else. In the future, we plan to add into the component and the hardware mediator family a support for other PMU families, as those found in the ARM and PowerPC processors. To this end, we plan to make a complete domain analysis and extracted the common events of each PMU family. Thus, it will be possible to add a platform-independent layer for all PMUs. Moreover, we want to improve the PMU infrastructure, adding support for multiplexing and interrupt generation.
+
+\prg{perfmon}{Perf\_Mon using the hardware mediator. The hardware mediator code is ``dissolved'' into the component at compilation time.}
+
+\subsection{API Usage}
+\label{sec:api_usage}
+
+In order to exemplify the API usage, we have designed a benchmark to generate shared cache memory invalidations in a multicore processor (Intel Core 2 Q9550). The benchmark is composed by two versions of an application: a sequential and a parallel. Both applications execute the same code (2 functions), but the parallel runs the two functions (in two different threads) in different cores at the same time and share two arrays of data. We also implemented a third version (best-case), in which both functions execute in parallel but do not share data. The objective is to demonstrate the utility of the proposed API in a multicore processor.  
+
+Figure~\ref{prg:api_example} shows how the API is used by the parallel and best-case applications. At the beginning of a thread (func0), the performance monitoring component is created and the method for monitoring the number of snoops in the L1 data cache is started. At the end of the function, the hardware event is read and printed in the screen. For the sequential version, the performance monitoring component is created in the main function, since the two functions are executed in a sequential order in the same core. We choose this event because it represents memory coherency activities between the cores.
+
+\prg{api_example}{An example of how to use the proposed API.}
+
+The benchmark was also implemented on top of \textsc{Epos}. Each application was executed 10 times in the Intel Core 2 Q9550 processor, then we extracted the average number of snoops for each of them. The arrays' size was set to 8~MB (4~MB each). Each function has a loop with 10000 repetitions in which math operations are executed using the data in the arrays. Figure~\ref{fig:l1_data_cache_snooped} shows the measured values. We can clearly see the difference among the three applications. The sequential and best-case applications have obtained almost the same number of events, about 100.000. The parallel one obtained about 3 orders of magnitude more events and was slower than the sequential one. This confirms the software behavior -- each function in parallel application frequently reads/writes the same cache lines, generating snoops in the bus and cache line invalidations. The explanation for snoops in the sequential and best-case applications is the natural implementation of a multicore OS, where shared variables are used to guarantee mutual exclusion in some data structures. The hardware event correctly measures the bus activities and can be used by the OS to improve performance. The standard deviation for the sequential, parallel, and best-case application was 4.83\%, 0.13\%, and 5.05\% respectively. 
+
+\fig{l1_data_cache_snooped}{API usage example: number of snoops in the L1 data cache for the three benchmark applications.}{scale=.7}
+
+In order to compare the obtained values in terms of correctness, we ran the same three benchmark applications in the Linux 2.6.32 and used the \emph{perf} Linux tool to read the number of snoops. We also ran each application for 10 times and extracted the average value. The evaluation was executed in the same Intel Q9550 processor. Figure~\ref{fig:l1_data_cache_snooped_linux} shows the obtained values. Linux has obtained in average 30\% more snoops than \textsc{Epos} and the standard deviation was also higher. The standard deviation for the sequential, parallel, and best-case application was 8.27\%, 2.85\%, and 9.96\% respectively. As \textsc{Epos} generates a system image composed by only the needed code, the influence of other OS parts in the execution of an application decreases. Consequently, the measured hardware events in \textsc{Epos} are more precise than those obtained in Linux.
+
+\fig{l1_data_cache_snooped_linux}{Number of snoops in the L1 data cache for the three benchmark applications running in Linux.}{scale=.7}
+
+\subsection{Helping the OS Scheduling}
+
+As an example to demonstrate the efficiency of HPCs to operating systems, we have used the same event (l1 data cache snooped) to monitor the number of snoops at run-time and help the OS scheduling decisions. We have added in the \textsc{Epos} reschedule method a call to read the hardware event during a scheduling quantum (10~ms). We observed in the previous graph that during a quantum, the sequential and best-case applications obtained up to 100 events. By setting a threshold value (1000 in this case) we can detect when there is frequent snoops for cache lines and thus take a decision. Figure~\ref{prg:scheduler_mod} shows the code exemplifying the changes. When the threshold value is reached, it is possible to move a thread to a core closer to the data (in case of a ccNUMA processor) and thus improving the application performance as demonstrated by Tam et al.~\cite{Tam:2007}. 
+
+\prg{scheduler_mod}{Modifying the OS scheduling.}
+
+\section{Discussion}
+\label{sec:discussion}
+
+In this section we provide a discussion about the API overhead and possible features that could be added in the future PMUs in order to improve their support particularly for embedded systems.
+
+\subsection{API Overhead}
+
+In order to demonstrate the performance of the proposed API, we have measured the memory overhead introduced by the API methods. The method for configuring the hardware counter (the same number of snoops hardware event as used above) occupied 32 bytes and 11 instructions and the method for reading the counter occupied 100 bytes and 40 instructions with no method calls, only inlined assembly code (Section~\ref{sec:api_usage} provides a code example of how these methods were implemented). Other APIs designed to general-purpose computing, such as PAPI~\cite{papi}, require the initialization and creation of lists or event sets that decrease the performance. Moreover, these APIs provide several functionalities that cannot be of interesting of an embedded application, such as user-defined events or performance modeling metrics. Thus, an interface specific tailored for the application's needs can provide a better performance. Polpeta and Fr\"{o}hlich have compared \textsc{Epos} hardware mediators to HALs implemented on eCos and uClinux in terms of performance and memory consumption~\cite{Polpeta05onthe}. The authors have shown that hardware mediators have better results in both metrics.
+
+The proposed interface could also be easily implemented to represent other PMU families, such those from the PowerPC and ARM processors. The API was implemented in C++ using the ADESD concepts in the \textsc{Epos} operating system. \textsc{Epos} is a component-based operating system, thus the same proposed PMU infrastructure could be used by other component-based operating systems without much implementation effort. 
+
+\subsection{Improving the PMU Support}
+
+Initially, hardware designers have added PMU capabilities into processors to collect information for their own use~\cite{Tam:2007}. However, PMUs features have become useful for other performance measurements, such as energy consumption management, memory partitioning, and scheduling decision. In consequence, the hardware designers are now adding more functionalities to PMUs, which can certainly help the software developer even more. Below we provide a discussion about desired features that could help hardware designers to improve PMU features in multicore processors:
+
+\begin{itemize}
+	\item \textbf{Data address registers:} storing data addresses that generated an event could certainly provide to the OS a powerful mean to perform optimizations. The IBM Power5 processor has a similar feature, but it could be improved. In this processor, the last data address accessed is stored into a special register. Thus, the last monitored event can be associated to the last address accessed. The work proposed by Tam et al. used this feature to estimate the memory consumption of the system threads and to help a cache memory partition mechanism, improving the system performance~\cite{Tam:2009:ASPLOS}. It would be interesting if data address registers were associated to events that are representative to an OS, such as last-level cache misses, bus snoops, and bus transactions. 
+	
+	The recent Intel processors have support for precise event-based sampling (PEBS) that identifies instructions that cause key performance events and allows the developers to allocate a PEBS buffer in memory to hold the samples (e.g., program counter and general-purpose registers values) collected during the program execution, which is extremely important for debugging mechanisms, such as tracing and replay~\cite{Gracioli:2009}.
+	
+	\item \textbf{Monitoring address space intervals:} in a multicore processor, several threads run in different cores and share the same address space. From the OS point of view, monitoring only the address spaces that are used by specific threads would allow a more precise view of the software behavior and consequently a more correct action could be taken by the OS.
+	
+	\item \textbf{Processing cycles spent in specific events:} especially for embedded hard real-time applications, where deadlines must be always met, bus cycles spent in specific events are extremely important for estimating the influence of shared resources in the threads execution time. In the Intel processors, for example, there are events for measuring the bus cycles spent accessing the shared cache, bus cycles when data is sent on the front-side bus, bus cycles when the HIT and HITM pins are asserted in the bus, and so on. However, it is difficult to get the cycles for a specific event, as a cache miss or a bus snoop. Improving the PMU capabilities for providing the precise number of cycles in an event could ease the OS task of guaranteeing the deadlines for real-time applications running in multicore processors.
+	
+	\item \textbf{OS trap generation:} PMUs could generate traps for the OS according to pre-defined numbers associated to events. This feature would allow the OS to be interrupted only when the number of hardware events is reached. Therefore, the OS could handle the exception and take a decision based on the the event that generated the trap. 
+\end{itemize}
+
+\section{Conclusion}
+\label{sec:conc}
+
+This paper presented an API for monitoring hardware events in multicore processors considering the embedded system domain. The API was designed following the concepts from the Application-Driven Embedded System Design (ADESD), thus it is possible to generate only the needed code for the application and nothing else, achieving a good performance. The method for configuring a hardware counter occupied 32 bytes and 11 instructions and the method for reading the counter occupied 100 bytes and 40 instructions with no calls, only inlined assembly code. 
+
+Based on the experience learned during the implementation and tests, we proposed a set of guidelines that can help the hardware designers to improve the PMU capabilities in the future considering the embedded operating system's point of view: data address registers available to the OS, features for monitoring address space intervals, events for measuring processing cycles spent in specific events, and OS trap generation according to pre-configured events. As future work, we plan to use the proposed API together with a real-time scheduling in order to provide hard real-time guarantees for real-time applications running on multicore processors.
+
+\section*{Acknowledgments}
+This work was supported by the Coordination for Improvement of Higher Level Personnel (CAPES) grant, project RH-TVD 006/2008.
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

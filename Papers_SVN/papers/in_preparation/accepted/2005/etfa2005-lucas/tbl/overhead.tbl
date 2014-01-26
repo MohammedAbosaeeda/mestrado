@@ -1,0 +1,11 @@
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{c|c|c|c}%|c}
+		& Mantis	& TinyOS	& EPOS	\\%& Stand-alone	\\
+\hline
+.text (bytes)	& 22486		& 9990		& 5522	\\%& 1274		\\
+\hline
+.data (bytes)	& 74		& 16		& 22	\\%& 4		\\
+\hline
+.bss  (bytes)	& 711		& 358		& 152	\\%& 0		\\	
+\end{tabular}
+	

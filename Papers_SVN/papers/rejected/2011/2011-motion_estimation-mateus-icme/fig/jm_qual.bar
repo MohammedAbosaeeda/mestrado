@@ -1,0 +1,21 @@
+# http://www.burningcutlery.com/derek/bargraph/
+=cluster;4:1 subsampling;2 LSB truncation;Full optimization
+=patterns
+=table
+max=0.5
+#=norotate
+font=Helvetica
+fontsz=14
+yformat=%g
+ylabel=PSNR optimization - PSNR original (dB)
+#extraops=set size 1.2,1
+
+#				4:1 subsampling     2 LSB truncation  Full optimization
+ForemanQCIF     0.33                0.06              0.37
+ForemanCIF      0.45                0.09              0.48
+MobileCIF 		0.44                0.04              0.46
+City4CIF 		0.2                 0.07              0.2
+Stockholm720p   0.28                0.1               0.29
+Sunflower       0.13                0.17              0.13
+CrowdRun        0.33                0.10              0.34
+Mean            0.31                0.09              0.32  

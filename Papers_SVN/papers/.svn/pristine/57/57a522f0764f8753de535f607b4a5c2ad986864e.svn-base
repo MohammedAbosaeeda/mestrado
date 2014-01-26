@@ -1,0 +1,316 @@
+@InProceedings{Richards:2003,
+  author =       "Mark A. Richards and Daniel P. Campbell and Kenneth
+                  M. Mackenzie",
+  title =        "The Morphware Stable Interface: a Software Framework
+                  for Polymorphous Computing Architectures",
+  booktitle =    "Proceedings of the 28th Annual GOMACTech Conference",
+  year =         2003,
+  address =      "Tampa, U.S.A.",
+  month =        mar,
+  url =          "http://www.morphware.org/GOMAC_03_paper_Richards.pdf",
+  abstract =     "Polymorphous computing architectures (PCAs) rapidly
+                  `morph` low-level hardware configurations to achieve
+                  high performance on computation styles ranging from
+                  very specialized streaming to very general threaded
+                  applications. We describe an emerging concept called
+                  the Morphware Stable Interface (MSI) for a portable,
+                  scalable software development framework to harness
+                  both the power and complexity of PCAs.a"
+}
+
+@article{Compton:2002,
+ author = {Katherine Compton and Scott Hauck},
+ title = {Reconfigurable computing: a survey of systems and software},
+ journal = {ACM Comput. Surv.},
+ volume = {34},
+ number = {2},
+ year = {2002},
+ issn = {0360-0300},
+ pages = {171--210},
+ doi = {http://doi.acm.org/10.1145/508352.508353},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+}
+
+
+
+@TechReport{Morphware:2004,
+  author =	 "Morphware Forum",
+  title =	 "Introduction to Morphware: Software Architecture for
+                  Polymorphous Computing Architectures",
+  institution =	 "Georgia Institute of Technology and Space and Naval
+                  Warfare Systems Center San Diego",
+  year =	 2004,
+  month =	 feb,
+  url =		 "http://www.morphware.org/PCA101/",
+  abstract =	 "This document gives an overview of the elements and
+                  structure of the MSI. After reading this document an
+                  application programmer will understand the basic
+                  concepts used in developing PCA applications. Also, as
+                  an example of the type of defense applications that
+                  will benefit from a PCA system, a benchmark developed
+                  under the PCA program, the Integrated Radar Tracker,
+                  is described. Detailed descriptions of the concepts
+                  introduced in this document are found in other MSI
+                  documents. At the time of this writing, the MSI is
+                  still under development, so the framework described
+                  here is subject to change."
+}
+
+@InProceedings{Hartenstein:2004,
+  author =	 "Reiner Hartenstein",
+  title =	 "The Digital Divide of Computing",
+  booktitle =	 "Proceedings of the 1st Conference on Computing
+                  Frontier",
+  pages =	 "357--362",
+  year =	 2004,
+  address =	 "Ischia, Italy",
+  month =	 apr,
+  abstract =	 "This presentation urges for creating more awareness of
+                  the impact of configware engineering onto embedded
+                  system development and examines the requirements of
+                  overdue CSE curricular upgrades. Because of the impact
+                  of reconfigurable computing, configware engineering
+                  has proceeded from niche to mainstream. Morphware has
+                  become an essential and indispensable ingredient in
+                  SoC (System on a Chip) design and beyond. It turns
+                  embedded system design from hardware / software
+                  co-design into configware / software co-design [1] [2]
+                  [3] [4]. This hot development, supported by the
+                  fastest growing segment of the semiconductor market
+                  [5], provides morphware [6] [7] as an alternative
+                  RAM-based 'programmable' (more precisely called:
+                  'reconfigurable') platform for parallelism avoiding
+                  the limitations of classical high performance
+                  computation [8] [9] [10] caused by the von Neumann
+                  paradigm [11] [12] [13]. The digital divide of
+                  computing determines who is qualified to take off
+                  toward new horizons in high performance computing,
+                  and, who is not. Currently the typical CS graduate is
+                  not."
+}
+
+
+@Article{Azevedo:2005,
+  author =	 "Rodolfo Azevedo and Sandro Rigo and Marcus Bartholomeu
+                  and Guido Araújo and Cristiano Araújo and Edna Barros",
+  title =	 "The ArchC Architecture Description Language",
+  journal =	 "International Journal of Parallel Programming",
+  year =	 2005,
+  volume =	 33,
+  number =	 5,
+  pages =	 "453--484",
+  month =	 oct,
+  abstract =	 "This paper presents an architecture description
+                  language (ADL) called ArchC, which is an open-source
+                  SystemC-based language that is specialized for
+                  processor architecture description. Its main goal is
+                  to provide enough information, at the right level of
+                  abstraction, in order to allow users to explore and
+                  verify new architectures, by automatically generating
+                  software tools like simulators and co-verification
+                  interfaces. ArchC\u2019s key features are a
+                  storage-based co-verification mechanism that
+                  automatically checks the consistency of a refined
+                  ArchC model against a reference (functional)
+                  description, memory hierarchy modeling capability, the
+                  possibility of integration with other SystemC IPs and
+                  the automatic generation of high-level SystemC
+                  simulators and assemblers. We have used ArchC to
+                  synthesize both functional and cycle-based simulators
+                  for the MIPS and Intel 8051 processors, as well as
+                  functional models of architectures like SPARC V8,
+                  TMS320C62x, XScale and PowerPC. "
+}
+
+@article{Koch:2005,
+    author = {Reinhold Kock},
+    title = {Morphware},
+    year = {2005},
+    journal = {Scientific American Magazine},
+    volume = {293},
+    number = {2},
+    pages = {44-51},
+    month = {Aug}
+}
+
+@inproceedings{Yokote:1992,
+ author = {Yasuhiko Yokote},
+ title = {The Apertos reflective operating system: the concept and its
+implementation},
+ booktitle = {OOPSLA '92: conference proceedings on Object-oriented programming
+systems, languages, and applications},
+ year = {1992},
+ isbn = {0-201-53372-3},
+ pages = {414--434},
+ location = {Vancouver, British Columbia, Canada},
+ doi = {http://doi.acm.org/10.1145/141936.141970},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+}
+
+@PHDTHESIS{Szyperski:1992,
+  AUTHOR = {Clemens A. Szyperski},
+  TITLE = {{Insight Ethos: On Object Orientation in Operating
+                  Systems}},
+  SCHOOL = {Swiss Federal Institute of Technology},
+  ADDRESS = {Zurich, Switzerland},
+  YEAR = 1992
+}
+
+@ARTICLE{Agarwal:1999,
+  TITLE = {Raw Computation},
+  AUTHOR = {Anant Agarwal},
+  JOURNAL = {Scientific American},
+  URL = {http://www.sciam.com/article.cfm?articleID=00040704-9646-1C72-9EB7809EC588F2D7},
+  VOLUME = 281,
+  NUMBER = 2,
+  PAGES = {44--47},
+  MONTH = AUG,
+  YEAR = 1999,
+  PDF = {../cache/Hardware/Agarwal_1999.pdf},
+  ABSTRACT = {The Oxygen project is based on the premise that computation will eventually become as freely available as air. To achieve this goal, however, computer scientists, software designers and electrical engineers must rethink the basic architecture that underlies current computer systems. My colleagues and I in the Raw project at the M. I.T. Laboratory for Computer Science are developing an entirely new kind of microprocessor for the Oxygen project. Called the Raw chip, it will deliver unprecedented performance, energy efficiency and cost-effectiveness because of its flexible design: by exposing its wiring to the software system, the chip itself can be customized to suit the needs of whatever application is running on it. }
+}
+
+@inproceedings{Taylor:2004,
+ author = {Michael Bedford Taylor and Walter Lee and Jason Miller and David Wentzlaff and Ian Bratt and Ben Greenwald and Henry Hoffmann and Paul Johnson and Jason Kim and James Psota and Arvind Saraf and Nathan Shnidman and Volker Strumpen and Matt Frank and Saman Amarasinghe and Anant Agarwal},
+ title = {Evaluation of the Raw Microprocessor: An Exposed-Wire-Delay Architecture for ILP and Streams},
+ booktitle = {ISCA '04: Proceedings of the 31st annual international symposium on Computer architecture},
+ year = {2004},
+ isbn = {0-7695-2143-6},
+ pages = {2},
+ location = {M\&\#252;nchen, Germany},
+ publisher = {IEEE Computer Society},
+ address = {Washington, DC, USA},
+}
+
+@inproceedings{Bellosa:2000,
+ author = {Frank Bellosa},
+ title = {The benefits of event: driven energy accounting in power-sensitive systems},
+ booktitle = {EW 9: Proceedings of the 9th workshop on ACM SIGOPS European workshop},
+ year = {2000},
+ isbn = {1-23456-789-0},
+ pages = {37--42},
+ location = {Kolding, Denmark},
+ doi = {http://doi.acm.org/10.1145/566726.566736},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+ }
+
+@inproceedings{Panda:2001,
+ author = {Preeti Ranjan Panda},
+ title = {SystemC: a modeling platform supporting multiple design abstractions},
+ booktitle = {ISSS '01: Proceedings of the 14th international symposium on Systems synthesis},
+ year = {2001},
+ isbn = {1-58113-418-5},
+ pages = {75--80},
+ location = {Montr\&\#233;al, P.Q., Canada},
+ doi = {http://doi.acm.org/10.1145/500001.500018},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+}
+
+@inproceedings{Moy:2005,
+ author = {Matthieu Moy and Florence Maraninchi and Laurent Maillet-Contoz},
+ title = {Pinapa: an extraction tool for SystemC descriptions of systems-on-a-chip},
+ booktitle = {EMSOFT '05: Proceedings of the 5th ACM international conference on Embedded software},
+ year = {2005}, 
+ isbn = {1-59593-091-4},
+ pages = {317--324},
+ location = {Jersey City, NJ, USA},
+ doi = {http://doi.acm.org/10.1145/1086228.1086286},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+} 
+
+@inproceedings{Schulz-Key:2004,
+ author = {C. Schulz-Key and M. Winterholer and T. Schweizer and T. Kuhn and W. Rosenstiel},
+ title = {Object-oriented modeling and synthesis of SystemC specifications},
+ booktitle = {ASP-DAC '04: Proceedings of the 2004 conference on Asia South Pacific design automation},
+ year = {2004},
+ isbn = {0-7803-8175-0},
+ pages = {238--243},
+ location = {Yokohama, Japan},
+ doi = {http://dx.doi.org/10.1109/ASP-DAC.2004.147},
+ publisher = {IEEE Press},
+ address = {Piscataway, NJ, USA},
+}
+
+@inproceedings{Seppo:2001,
+    title = {SystemC Based Object Oriented System Design},
+    author = {Virtanen, Seppo and Truscan, Dragos and Lilius, Johan},
+    year = {2001},
+    month = {Sep},
+    Booktitle = {Fourth International Forum on Design Languages (FDL'01)},
+    organization = {ECSI},
+    address = {Lyon, France},
+    keywords = {object oriented system design, SystemC},
+}
+
+@inproceedings{Dutt:1999,
+ author = {Shantanu Dutt and Vimalvel Shanmugavel and Steve Trimberger},
+ title = {Efficient incremental rerouting for fault reconfiguration in field programmable gate arrays},
+ booktitle = {ICCAD '99: Proceedings of the 1999 IEEE/ACM international conference on Computer-aided design},
+ year = {1999},
+ isbn = {0-7803-5832-5},
+ pages = {173--177},
+ location = {San Jose, California, United States},
+ publisher = {IEEE Press},
+ address = {Piscataway, NJ, USA},
+ }
+
+@article{Noguera:2004,
+ author = {Juanjo Noguera and Rosa M. Badia},
+ title = {Multitasking on reconfigurable architectures: microarchitecture support and dynamic scheduling},
+ journal = {Trans. on Embedded Computing Sys.},
+ volume = {3},
+ number = {2},
+ year = {2004},
+ issn = {1539-9087},
+ pages = {385--406},
+ doi = {http://doi.acm.org/10.1145/993396.993404},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+ }
+
+@inproceedings{Huebner:2004,
+ author = {Michael Huebner and Tobias Becker and Juergen Becker},
+ title = {Real-time LUT-based network topologies for dynamic and partial FPGA self-reconfiguration},
+ booktitle = {SBCCI '04: Proceedings of the 17th symposium on Integrated circuits and system design},
+ year = {2004},
+ isbn = {1-58113-947-0},
+ pages = {28--32},
+ location = {Pernambuco, Brazil},
+ doi = {http://doi.acm.org/10.1145/1016568.1016583},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+}
+
+@article{Robertson:2004,
+ author = {Ian Robertson and James Irvine},
+ title = {A design flow for partially reconfigurable hardware},
+ journal = {Trans. on Embedded Computing Sys.},
+ volume = {3},
+ number = {2},
+ year = {2004},
+ issn = {1539-9087},
+ pages = {257--283},
+ doi = {http://doi.acm.org/10.1145/993396.993399},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+}
+
+@inproceedings{Colavin:2003,
+ author = {Osvaldo Colavin and Davide Rizzo},
+ title = {A scalable wide-issue clustered VLIW with a reconfigurable interconnect},
+ booktitle = {CASES '03: Proceedings of the 2003 international conference on Compilers, architecture and synthesis for embedded systems},
+ year = {2003},
+ isbn = {1-58113-676-5},
+ pages = {148--158},
+ location = {San Jose, California, USA},
+ doi = {http://doi.acm.org/10.1145/951710.951731},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+}
+
+

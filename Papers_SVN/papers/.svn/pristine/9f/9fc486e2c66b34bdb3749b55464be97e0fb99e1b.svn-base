@@ -1,0 +1,76 @@
+
+
+the authors failed to clearly identify (or name)
+examples of crosscutting concerns that are promising candidates to be handled
+by AOP. Without these examples the proposed approach is too abstract and the
+paper itself is simply an introduction into AOP (without a clear link to
+hardware design). For the same reason it is somehow hard to follow the paper.
+
+The authors fail to articulate specific advantages of the use of AOP concepts
+in this context of the hardware synthesis and implementation from SystemC.  
+They do not provide clear evidence of values provided by AOP for modeling the
+functionality of hardware components using SystemC, which cannot be easily
+provided without using AOP.
+
+The authors proposes an extension to the state of the art, trying to
+analyze the impact of AOP on the final synthesized design.
+This would be a very interesting analysis, if the authors proposed a clear
+set of rules to apply AOP in HW design.
+
+Their desired design methodology needs to be explained in more detail even if
+it is based on a well-known design methodology (Application-driven Embedded
+System design in section 4). 
+
+It would be nice to see a set of guidelines specifically for designing
+hardware components based on the proposed method. In fact, their design
+methodology is not clearly mentioned in the paper. Is it all manual, is there
+any kind of automation, what is the complexity of writing code in this style
+(compare to a traditional way), etc.?
+
+I would expect that to provide values of AOP to
+designers who model their hardware functionalities, one would create a library
+of basic building blocks of the AOP so that the user can natively write the
+models using the AOP concepts, such as specifying a set of scenarios, their
+causality relations etc.
+
+
+the missing part is that they don’t show the advantages of using their
+approach. They have used their proposed AOP-bases methodology for implementing
+a debugger which is closed to the related work for verification. Since they
+have claimed this method provides more flexibility and code-reuse for modeling
+hardware, they need to apply this method to model the complete task scheduler
+or what else. The authors
+mention compress/decompress, but the experimental results did not show it.
+Power efficiency is also another benefit that was mentioned as a potential
+benefit but was not evaluated. 
+
+Concerning experimental results:
+- they are not well commented. The text does not report what "4-input LUTs"
+means in tables 1 and 2. Also the meaning of "occupied slices" is not reported.
+They are not so well-known concepts to skip a brief sentence
+describing their meaning.
+- It is impossible to understand wether the gained results have general
+validity without presenting a larger number of results.
+- A section showing the advantages of using AOP instead of OOP for modeling
+the proposed case study is missing. For example, the authors could show
+the benefit of using AOP instead of OOP during design space exploration
+or code reuse.
+
+Evaluation should also include other metrics. I would assume one of the
+purposes of AOP is to save effort in making cross-cutting modifications, so
+it would be useful to show how many lines a piece of code needs to be
+modified, or how much less time it takes the designer to successfully reuse
+a module.
+
+If so, how did the authors evaluate reusability? And flexibility?
+Usually, such features are evaluated with design metrics (e.g. C&K metrics for OO software), which have not been presented.
+
+Considering the results presented in tables 1 and 2, it is worth show the numbers for the debugged family of components synthesized in isolation.
+Hence, it would be possible to evaluate how exactly is the overhead introduced by the proposed approach that uses metaprogramming to implement AOP features, since overhead imposed by these components may be always the same independently from any "binding" method.
+
+Moreover, it is surprising to see the longest path delay (LPD) for the hand code Scheduler+Debugger.
+Although the authors claimed that this feature is negligible, it would be interesting to understand why this version has a shorter delay than the original scheduler (which has no overhead, as depicted in the other features).
+Is this result improved only by the place and route algorithm of Xilinx ISE?
+
+In addition, it is interesting to evaluate performance in terms of cycles needed to complete scheduler's services.
+Or does each service need only one cycle to complete?

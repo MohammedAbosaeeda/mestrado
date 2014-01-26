@@ -1,0 +1,13 @@
+%-------------------------------------------------------------------------------
+% DISTRIBUICAO DA ÁRVORE DE DIRETORIOS
+%-------------------------------------------------------------------------------
+\section{Distribuição da Árvore de Diretórios}
+
+Os clientes do {\sdfs} podem solicitar serviços relativos a arquivos remotos fornecendo um {\path} apropriado, entretanto, existem arquivos remotos que são freqüentemente acessados, tornando esse método inconveniente. Uma boa alternativa é a replicação de arquivos, todavia, se esses arquivos vierem a ser alterados em algum dos {\hosts} envolvidos, a replicação pode trazer grandes dificuldades para que se possa garantir a integridade dos arquivos envolvidos. Além da consistência dos arquivos, memória secundária ainda é um recurso razoavelmente caro e geralmente disponível em menor quantidade do que se deseja. Isso justifica o esforço de definir-se um mecanismo de compatilhamento de arquivos entre {\hosts}.
+
+Uma das técnicas utilizada pelo {\sdfs} para permitir que arquivos remotos sejam acessados transparentemente por vários {\hosts} é similar a utilizada pelo {\nfs} da {\sun} \cite{sun92}, onde a funcionalidade do serviço "mount" é expandida para permitir que a árvore de diretórios seja acrescida de sub-árvores remotas. A outra técnica envolve {\links} remotos. No {\sdfs} é possível que um arquivo (diretório) remoto seja ligado à árvore local. Isso dispensa a necessidade de montar-se explicitamente uma sub-árvore remota, entretanto, degenera a estrutura da árvore de diretórios em um grafo, possivelmente, cíclico. A implementação dos diretórios do {\sdfs} envolve identificadores globais de arquivos, permitindo que aplicativos como o "find" ou o "tar" distingam arquivos remotos de arquivos locais, minizando assim os efeitos negativos da ocorrência de ciclos no grafo de diretórios. Um exemplo de árvore de diretórios com {\links} remotos pode ser vista na figura \ref{dir}.
+
+\putpict {../fig/dir.ps} {13} {6.5} {Árvore de diretórios com {\links} remotos} {dir}
+
+
+

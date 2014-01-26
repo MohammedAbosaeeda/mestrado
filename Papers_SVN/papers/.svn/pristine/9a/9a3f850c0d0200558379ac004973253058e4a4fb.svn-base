@@ -1,0 +1,57 @@
+Embedded systems are becoming more and more complex, yet, there is no
+room for development strategies that incur in extended time-to-market in
+this extremely competitive sector.  In this context, \emph{Programmable
+  Logic Devices}~(PLD) define a compromise between system complexity and
+development costs. Furthermore, recent advances in programmable logic
+devices are enabling developers to integrate complex designs into a
+single silicon pastille. These \emph{Systems-On-Chip}~(\textsc{SoC})
+have several advantages over traditional circuit board implementations,
+including the level of integration, power consumption, maintainability
+and most other development metrics.
+
+Nevertheless, getting a \textsc{SoC} out off a \emph{Field-Programmable
+  Gate Array}~(FPGA) is not a trivial task and requires an intricate
+engineering process. Several strategies have been proposed for this
+purpose, having in common a methodology to devise components, usually
+referred to as \emph{Intellectual Property}~(\textsc{IP}), and to
+assembly these components together in a functioning system. The
+reusability of such soft \textsc{IP}s can be considerably increased by
+isolating their core functionalities from interfacing aspects, thus
+enabling the creation of libraries of pre-verified {IP}s that can be
+integrated as a \textsc{SoC} with the use of additional ``glue logic''.
+
+In order to automate the development of \textsc{SoC}s, much effort has
+been payed to supporting tools that assist designers in selecting and
+configuring the most adequate \textsc{IP}s and also in generating the
+necessary glue logic. These tools usually presuppose an standardized
+interconnect, such as \textsc{Wishbone}~\cite{Wishbone},
+\textsc{Amba}~\cite{Amba}  or \textsc{Coreconnect}~\cite{Coreconnect}, 
+and thus can be very effective. For instance, the
+\textsc{Coral}~\cite{Bergamaschi:2000} tool from IBM uses the concept
+of \emph{Virtual Design}~\cite{Bergamaschi:2000a} to provide the
+designer with simplified \textsc{IP} descriptions that hide many
+implementation details.
+
+Some \emph{embedded systems} can be completely implemented in hardware
+using this approach, but the more complex the application, the greater
+is the probability it will need some kind of \emph{run-time support
+  system} and an \emph{application program}. This is, after all, the
+reason why so many groups are concentrating efforts to develop processor
+soft cores~\cite{openrisc,leon,etc}. Nevertheless, run-time support
+systems are often neglected by currently available \textsc{SoC}
+development methodologies and tools, being mostly restricted to simple
+processor scheduling routines and the definition of a
+\textsc{software/hardware interface}~\cite{SOPCBuilder, ISE, acadêmico}.
+The gap between software and hardware gets even bigger when we recall
+that one of the primary goals of an operating system is to grant the
+portability of applications, since ordinary operating systems cannot go
+with the dynamics of \textsc{SoC}s.
+
+In this paper, we consider the deployment of
+\textsc{Application-Oriented System Design}~(AOSD)~\cite{Froehlich:2001}, 
+a design methodology originally proposed for run-time support systems,
+to guide the complete development of embedded systems, including
+software and hardware components as well as their integration as a
+\textsc{SoC}. The results obtained so far are encouraging and will be
+discussed in details in the subsequent sections.
+

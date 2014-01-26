@@ -1,0 +1,44 @@
+% Programming Languages have a main role in computational systems development.
+% Among them, the
+Managed Programming Languages (MPLs), from which
+\java~and \lua~are examples, provide developers with features to improve their
+productivity such as object-orientation, domain-specific constructs, and APIs,
+which allows expressing his ideas in a high level of abstraction.
+Furthermore, features as
+automatically memory management, memory protection, and
+exception handling, avoid
+errors such as memory leak, access to dangling pointers, and
+unpredictable behavior.
+
+Several initiatives have been taken on the last decade in order to enable the
+use of MPLs
+% not only for general propose systems as well
+for embedded systems,
+fulfilling time and resource usage requirements impose by these systems.
+However, in order to be useful in embedded systems, MPLs must provide
+features for interacting with the environment where the embedded system is
+deployed.
+Such interaction is usually implemented by using hardware devices, such as
+sensors, actuators, transmitters, receivers, timers and alarms.
+The interface between hardware devices and MPL is commonly implemented by hand,
+which decreases the productivity of developers and can
+easily lead to programming errors on the resultant binding code.
+
+% nota pode reduzir e jogar a questão do automatico mais pra cima
+This paper presents a method to abstract hardware devices in order to be used by
+applications written using MPLs in the embedded systems scenario.
+Hardware mediators abstract and organize hardware devices
+in a suitable manner for embedded systems fulfilling time and resource
+consumption requirements.
+By isolating hardware mediators from the specificities of an MPL, the problem of
+adapting a hardware device to work with a new MPL can be faced as an aspect
+weaving problem which can be automatically solved by using a proper tool.
+
+We have evaluated the proposed method for the MPLs \java~and \lua~
+% among three cases study encompassing,
+%video encoding, serial communication, and temperature sensing.
+in a case study encompassing H.264 video encoding.
+The obtained results corroborate the suitability of the proposed method to adapt
+a hardware device to a new MPL automatically while fulfilling
+requirements of performance and memory consumption.
+

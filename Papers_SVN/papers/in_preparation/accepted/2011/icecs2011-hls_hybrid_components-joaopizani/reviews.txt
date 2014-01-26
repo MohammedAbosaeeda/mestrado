@@ -1,0 +1,38 @@
+****************************************
+Reviewer #1 Comments
+****************************************
+the paper modifies the scheduler from the EPOS OS, allowing it to be implemented both in hardware and in
+software using the same code. The approach is interesting and shows a good implementation in both case,
+close to hand-optimized RTL in hardware and with little loss in the software implementation when compared
+to the original version.
+
+It is not clear from the paper how the methodology was applied and why it is better than others. The result
+of comparable performance and size with the same code is impressive but it is not apparent how it can be
+replicated in other uses. The limitation addressed in the code comes from the toolchain (null pointer) and
+the inclusion of a wrapper that produces a single pointer of entry. Is the simplicity of the modification
+an artifact of the scheduler code or it derives from the code following the recommendations of the
+methodology?.
+
+
+****************************************
+Reviewer #2 Comments
+****************************************
+The design, implementation and evaluation of a resource scheduler with a single C++ description, is presented
+in this paper. The topic is interesting, and the problem discussed is important. The major concern of this
+paper is that how the proposed scheduler manages both hardware and software, and what the advantage is by
+using single language. There is a lot of prior work for high-level synthesis of schedulers as authors
+mentioned. The advantage and features of the proposed mechanism shall be explained and evaluated by
+comparing with the other approaches.
+
+
+****************************************
+Reviewer #3 Comments
+****************************************
+The paper describes the design and implementation of a resource scheduler from a C++ description.
+
+The paper is more like a case study mostly using available tools in hand. The development of the HW/SW
+resource schedular is not very clear to show the originality of the work. The result section doesn't compare
+to any other previous work.
+
+It is not clear if the last two paragraphs of the paper are part of the Conclusion. It just seems that they
+came out from no where. You should not have new ideas in the conclusion section.

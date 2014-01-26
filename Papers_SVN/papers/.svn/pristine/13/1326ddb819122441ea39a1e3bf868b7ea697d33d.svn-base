@@ -1,0 +1,116 @@
+\documentclass{acm_proc_article-sp}
+
+\usepackage{graphicx,url}
+\usepackage[portuges]{babel}   
+\usepackage[utf8]{inputenc}
+\usepackage{paralist}
+
+
+\newcommand{\fig}[4][htb]{
+  \begin{figure}[#1]
+    {\centering{\includegraphics[#4]{fig/#2}}\par}
+%    \caption{#3}
+    \label{fig:#2}
+  \end{figure}
+}
+
+\newcommand{\tab}[4][h]{
+  \begin{table}[h]
+    {\centering\footnotesize\textsf{\input{fig/#2.tab}}\par}
+%    \caption{#3}
+    \label{tab:#2}
+  \end{table}
+}
+
+\newcommand{\emote}{\textsc{EPOSMote}}
+\newcommand{\epos}{\textsc{Epos}}
+\newcommand{\eplc}{\textsc{EposMotePLC}}
+
+\begin{document}
+	
+	\title{
+	  {\centering\textwidth}
+	  \begin{tabular}[t]{ccc}
+	    \raisebox{-0.7cm}[0pt][0pt]{\resizebox*{!}{1.5cm}{\includegraphics{fig/ufsc}}}
+	    &
+	    \textbf{\Large Universidade Federal de Santa Catarina}
+	    &
+	    \raisebox{-0.7cm}[0pt][0pt]{\resizebox*{!}{1cm}{\includegraphics{fig/logolisha}}}\\
+	    &\textbf{\Large Laboratório de Integração Software/Hardware} &\\
+	    &\textbf{\Small http://www.lisha.ufsc.br --- Fone/Fax: +55 48 3721-9516} &
+	 \end{tabular}
+	 \newline
+	 \newline
+	 {\LARGE \bf Smart Cities - Viabilizando Cidades Inteligentes}
+	}
+
+\maketitle
+
+\section*{}
+A rápida evolução da tecnologia tem ocasionado uma mudança expressiva no
+ambiente urbano. Há uma crescente instrumentação de áreas urbanas com sensores
+interconectados por redes sem fio que fornecem diversos dados sobre o
+ambiente. O desenvolvimento de sistemas capazes de tirar proveito das novas
+tecnologias de informação e comunicação e que façam uso da massa de dados
+disponível, agregando-lhes significado e integrando-as de uma forma sensível
+ao contexto em que são produzidos, será capaz de prover novos níveis de
+``inteligência urbana'', viabilizando a concepção de Cidades Inteligentes
+(smart cities).
+
+\fig{smartgrid2}{}{width=\columnwidth}
+
+Uma cidade inteligente necessita de soluções para vários problemas, como
+trânsito, vigilância, atendimento de emergência, monitoramento ambiental,
+saúde, educação e inclusão digital, bem como permite uma maior eficiência e
+transparência na gestão pública. Para que os objetivos das cidades
+inteligentes sejam alcançados é preciso fomentar o conceito de computação
+ubíqua, no qual a presença de tecnologia computacional está presente no
+dia-a-dia das pessoas, seja nos objetos, ambientes, ferramentas, veículos,
+equipamentos e edificações.
+
+\section*{Viabilizando Cidades Inteligentes}
+
+Para viabilizar o paradigma da computação ubíqua, vários desafios precisam ser suplantados. Inicialmente, o ambiente físico precisa ser instrumentado por intermédio do uso de dispositivos sensores. Tais sensores devem ser conectados e trabalharem de forma colaborativa, formando uma rede de sensores. Logo, modelos de armazenamento, tratamento e disseminação de dados específicos para redes de sensores urbanas devem ser investigados de modo a prover soluções customizadas para esses ambientes, respeitando o requisito de eficiência em energia de tais redes.
+
+\fig{cia2-overview}{}{width=\columnwidth}
+
+\section*{Internet das Coisas} 
+
+Um dos pilares de Cidades Inteligentes é a integração de Redes de Sensores sem
+Fio com objetos cotidianos, que passariam então a interagir entre si e com a
+infraestrutura das Cidades Inteligentes para nos propiciar comodidade e
+segurança, traz a tona o conceito de Internet das Coisas (do inglês Internet
+of things – IoT). De forma a viabilizar a implementação de comunicação entre
+milhares de objetos é fundamental que novos protocolos sejam estudados, uma
+vez que as tecnologias atuais demandam um capacidade computacional e
+energética incompatíveis com o conceito de IoT.
+
+\fig{iot}{}{width=\columnwidth}
+
+\section*{Smart Grids}
+
+Smart grid é o uso de tecnologia da informação para o provimento de energia em
+uma Cidade Inteligente. SmartGrids envolvem a instalação de sensores nas
+linhas da rede de energia elétrica estabelecendo uma comunicação confiável em
+dua vias com os dispositivos que utilizam a rede. Desta forma, é possivel que
+a operação e o desempenho da rede sejam sentidos pela concesionária de
+energia, que pode agir para que o sistema disponibilize-a da maneira mais
+eficiente. De fato, com o uso desta tecnologia se vislumbra um futuro em que a
+própria geração de energia possa ser realizada de forma distribuida, com o uso
+de energias limpas, utilizando o sistema de tecnologia da informação para
+coordenar de uma forma confiável o sistema.
+
+\section*{Smart Spaces}
+
+Smart Space é a aplicação do conceito de ambientes inteligentes no espaço
+público de uma cidade. Aplicações para SmartSpaces envolvem a distribuição de
+uma rede de sensores sem fio responsáveis por coletar informações do ambiente
+e implementar serviços inteligentes aos cidadões. Exemplos de aplicações em
+SmartSpaces envolve aplicações como monitoramento de rios, monitoramento de
+trânsito, monitoramento de condições ambientais, segurança pública e o
+fornecimentos de serviços tais como alertas e informativos aos cidadões.
+
+O LISHA atualmente esta participando de uma rede de instituições que irá investigar diversas tecnologias para Cidades Inteligentes, realizando experimentações em aplicações de sensoriamento de rios e de tráfego urbano.
+
+\end{document}
+

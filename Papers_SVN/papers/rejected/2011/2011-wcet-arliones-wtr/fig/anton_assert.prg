@@ -1,0 +1,1 @@
+subprogram "__aeabi_ddiv" time 42 cycles; end "__aeabi_ddiv";

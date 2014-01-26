@@ -1,0 +1,28 @@
+Algorithm RandomExchangeConfigurationParameters
+  Input: Test configuration file.
+  Output: Report of tries
+
+  traits ← ReturnTraitFile(Test confguration file)
+  application ← ReturnApplicationFile(Test configuration file)
+
+  if hasConfigurationValue(Test confguration file), then
+     for each configuration in the Test configuration file, do 
+        line ← SearchTheConfigurationLine(configuration, traits)
+
+        if hasIntervalValue(configuration), then
+   	   for each value in the intervalValue(configuration), do 
+	     newTrait ← ExchangeValue(line, traits)
+	     report ← report + compileAndEmulate(application, newTrait)
+
+  else 
+     if hasMaxSizeValue(Test confguration file), then
+        maxNumberTries ← ReturnMaxSize(Test configuration file)
+     else
+        maxNumberTries ← RandomNumber()
+    
+     while tries < maxNumberTries, do
+	line ← RandomNumber()
+        newTrait ← ExchangeValue(line, traits)
+        report ← report + compileAndEmulate(application, newTrait)
+
+return report

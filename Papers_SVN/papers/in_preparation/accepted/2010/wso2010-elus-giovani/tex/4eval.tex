@@ -1,0 +1,111 @@
+\section{Avaliação}
+\label{sec:evaluation}
+
+A avaliação do \ELUS{} considerou três métricas: consumo de memória, sobrecusto nas chamadas de métodos introduzido pelo nível de indireção e \vtable{} e tempo de reconfiguração. Foi usado o compilador GNU g++ 4.0.2 e a ferramenta GNU \textit{objdump} 2.16.1 para gerar o sistema e analisar as métricas. A plataforma utilizada na avaliação foi o Mica2, composto de um microcontrolador ATMega128, com 4KB de RAM, 128KB de Flash, 4KB de EEPROM e um conjunto de periféricos incluindo comunicação via rádio.
+
+\subsection{Consumo de Memória}
+
+Na primeira avaliação, o suporte à RDS foi habilitado somente para o componente \textit{Chronometer} composto por 8 métodos atualizáveis~\cite{timer}. O objetivo foi medir o sobrecusto de memória associado à infra-estrutura do framework. A Tabela~\ref{tab:memory} apresenta o consumo de memória dos elementos do \ELUS{}. O framework necessitou de cerca de 2.6KB de memória de código, 42 bytes de dados para o \textit{Dispatcher} e atributos de controle e 52 bytes para dados não-inicializados para tabela hash. \textsc{Reconfigurator} precisou de 70 bytes de dados para o buffer de recebimento de dados via rede (40 bytes) e variáveis de controle. \textsc{Application Update} usou 210 bytes de memória de código. Para esta configuração, o total de memória utilizada foi 3.5KB de código e 148 bytes de dados.
+
+\begin{table}
+ \hspace{0.0\textwidth}
+ \begin{minipage}{0.48\textwidth}
+  \centering
+\scriptsize{
+\caption{Consumo de memória do \ELUS{}.} 
+\begin{tabular}{|c|c|c|c|c|}\hline
+\textbf{\ELUS{}} & \multicolumn{4}{c|}{\textbf{Tamanho Seção (bytes)}} \cr
+\cline{2-5}
+\textbf{Elementos} & \textbf{.text} & \textbf{.data} & \textbf{.bss} & \textbf{.bootloader} \cr
+\hline
+\textbf{Reconfigurator} 	& 410 & 0 & 70 & 0  \cr\hline
+\textbf{Code Manager} 		& 16 & 0 & 2 & 375  \cr\hline
+\textbf{App. Update} 		& 210 & 0 & 0 & 0  \cr\hline
+\textbf{OS Box} 		& 76 & 0 & 0 & 0  \cr\hline
+\textbf{Framework} 		& 2620 & 43 & 52 & 0  \cr\hline
+\hline
+\textbf{Total} & 3452 & 43 & 124 & 375 \cr
+\hline
+\end{tabular}
+}
+\label{tab:memory}
+\end{minipage}
+ \hspace{0.0\textwidth}
+ \begin{minipage}{0.48\textwidth}
+  \centering
+\scriptsize{
+\caption{Tempo de reconfiguração para um componente.}
+\begin{tabular}{c|c|c|}
+\cline{2-3}
+ & \multicolumn{2}{|c|}{\textbf{Tempo (em ciclos)}}\cr
+\cline{2-3}
+ & \textbf{Atualização} & \textbf{Atualização} \cr
+& \textbf{mesma posição} & \textbf{nova posição} \cr
+\cline{1-3}
+\multicolumn{1}{|c|}{\textbf{Agent Update}} & 238 & 290 \cr
+\hline
+\multicolumn{1}{|c|}{\textbf{Reconfigurator}}  & 65 & 65 \cr
+\hline
+\multicolumn{1}{|c|}{\textbf{OS Box}} & 59 & 59 \cr
+\hline
+\hline
+\multicolumn{1}{|c|}{\textbf{Total}}	& 362 & 414 \cr\hline
+\end{tabular}
+}
+\label{tab:time}
+\end{minipage}
+\end{table}
+
+O segundo teste de memória avaliou o consumo dos métodos individuais do framework para um componente genérico. Este teste considerou somente o consumo de memória do framework, desprezando a memória necessária pelo componente. O objetivo foi medir o sobrecusto adicionado quando um componente é marcado como reconfigurável. A Figura~8 apresenta os valores dessa avaliação. O total mínimo com o construtor, destrutor, o método de atualização e um método sem parâmetro e valor de retorno para um componente foi de 1.6KB de código e 26 bytes de dados.
+
+\begin{figure}
+ \hspace{0.0\textwidth}
+ \begin{minipage}{0.48\textwidth}
+  \centering
+\scriptsize{
+\caption{Consumo de memória dos métodos individuais do framework do \ELUS.}
+\begin{tabular}{|c|c|c|}\hline
+\textbf{Método} & \multicolumn{2}{c|}{\textbf{Tamanho da seção (bytes)}} \cr
+\cline{2-3}
+\textbf{do Framework} & \textbf{.text} & \textbf{.data} \cr
+\hline
+Create				& 180  & 0  \cr\hline
+Destory 			& 138  & 0  \cr\hline
+Método sem parâmetro  	& 94 & 0  \cr
+e valor de retorno 		& & 	\cr\hline
+Método com um parâmetro   	& 98 & 0  \cr
+e sem valor de retorno 	& &  \cr\hline
+Método sem parâmetro 	& 112  & 0  \cr
+e com valor de retorno 		& &  \cr\hline
+Método com um parâmetro  	& 126 & 0  \cr
+e valor de retorno 		& &  \cr\hline
+Update	 			& 1250  & 0   \cr\hline
+Dispatcher 			& 0  & 2 X (n. de métodos)  \cr\hline
+Semaphore 			& 0  & 18   \cr\hline
+\hline
+\textbf{Tamanho mínimo}  & 1662 & 26 \cr
+\hline
+\end{tabular}
+}
+\label{tab:per}
+\end{minipage}
+\hspace{0.0\textwidth}
+ \begin{minipage}{0.48\textwidth}
+  \centering
+  %\fig{invTime.pdf}{Comparison of invocation time among a regular method invocation, through vtable and through \ELUS{}.}{totalheight=0.2\textheight, width=0.45\textwidth}
+  \caption{Comparação dos tempos de invocação de método entre uma invocação normal, através da vtable e do \ELUS{}.}
+  \includegraphics[totalheight=0.235\textheight, width=\textwidth]{fig/invTime_pt}
+  \label{fig:invTime}
+\end{minipage}
+\end{figure}
+
+
+\subsection{Tempo de Invocação de Método}
+
+O nível de indireção entre uma aplicação e um componente cria um sobrecusto de invocação. Antes da chamada real do método, o \agent{} deve recuperar os argumentos da mensagem, o objeto associado ao componente em uma tabela hash e finalmente chamar o método através da sua \vtable{}. A Figura~\ref{fig:invTime} apresenta uma comparação entre os tempos de invocação de métodos de um componente normal, através de uma \vtable{} e através do \ELUS{}, usando 4 tipos de métodos. O desempenho do \ELUS{} foi cerca de 10 vezes pior que a \vtable{}. Como será visto na Seção~\ref{sec:analysis}, esse desempenho é melhor que os trabalhos relacionados.
+
+\subsection{Tempo de Reconfiguração}
+
+A Tabela~2 apresenta os tempos de reconfiguração em 2 cenários de atualização: (i) quando o novo código de um componente é menor ou igual ao antigo, sendo assim uma atualização na mesma posição do componente e (ii) quando o novo código de um componente é maior que o antigo, identificando uma atualização em uma nova posição. Por motivos de comparação com os trabalhos relacionados, este teste não considerou o tempo de recebimento de dados pela rede no \textsc{Reconfigurator} e o tempo de escrita dos dados na flash. Foram considerados os tempos de chamada do \textsc{Reconfigurator} para a ``SO Box'', o tempo na ``SO Box'' para acessar o \textit{Dispatcher} e chamar o método \textit{update} do \agent{} e o tempo para o \agent{} recuperar os dados e executar uma reconfiguração.
+
+O \textsc{Reconfigurator} consome 65 ciclos do microcontrolador para chamar a ``SO Box''. A ``SO Box'' consome 59 ciclos para atingir o estado quiescente (operações \textit{p()} e \textit{v()} no semáforo) e chamar o método \textit{update} do \agent{}. Finalmente, o método de atualização gasta 238 ciclos para executar uma atualização no cenário (i) e 290 ciclos no cenário (ii).

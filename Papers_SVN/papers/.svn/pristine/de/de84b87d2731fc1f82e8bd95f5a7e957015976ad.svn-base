@@ -1,0 +1,10 @@
+%-------------------------------------------------------------------------------
+% INTRODUÇÃO
+%-------------------------------------------------------------------------------
+\section {Introdução}
+
+Neste trabalho propomos uma definição preliminar para um sistema de arquivos experimental organizado segundo o modelo cliente-servidor e orientado a objetos. Nesse modelo todos os elementos do sistema são vistos como objetos e são manipulados pelos processos clientes através da solicitação de serviços aos processos servidores correspondentes.
+
+A funcionalidade do sistema de arquivos aqui proposto é equivalente à presente em um sistema do tipo \unix. Sua organização segundo o modelo cliente-servidor, o transforma numa peça de {\em software} independente do núcleo do sistema operacional, possibilitando inclusive que servidores e clientes rodem em processadores distintos. Além das vantagens naturais dessa organização, pretendemos subdividir o prórprio sistema de arquivos em mais de um servidor autônomo, aumentando o paralelismo de execução e tornando mais simples a tarefa de sua construção.
+
+Mais precisamente, o sistema de arquivos deverá ser dividido em servidor de nomes de objetos, servidor de arquivos e servidor de {\em buffers}, cada um dos quais com múltiplos fluxos internos de execução. Alguns desses servidores poderão ainda ser replicados para tornar o sistema, como um todo, mais eficiente.

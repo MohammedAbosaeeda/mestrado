@@ -1,0 +1,29 @@
+% ------------------------------------------------------------------------------
+% NOTA TODO: Revisar / Reescrever esta subseção: Serial Communication
+\subsection{Serial Communication}
+% NOTA:  Acho que é interessante citar os meus papers anteriores IADIS AC 2011.
+% Algo como, resultados iniciais mostrados para KESO em \cite...
+The first case study evaluated as a synthetic application which uses the
+\emph{Universal Asynchronous Receiver Transmitter} (UART) hardware device for
+serial communication.
+Such application, was evaluated in \java, using the KESO FFI, for the
+architectures IA32, AVR8, and PPC32.
+The Figure \ref{progjava:uart_app} shows the \java~source of the application,
+which uses the UART hardware mediator in order to write characters on a serial
+device.
+
+\progjava{uart_app}{UART application.}
+
+The \java~ class \emph{UART}, generated as one of the outputs of EBG, is the
+\java~counterpart of the UART hardware mediator and has only native methods
+without implementation.
+The other output of EBG is the native code adapter already tailored to be
+integrated with the KESO JVM.
+This integration process is show in details in our previous work
+\cite{Ludwich:IADIS_AC:2011}.
+At such work the UART application using our approach is compared to the a
+equivalent application written using the \emph{Java Standard Edition} platform,
+which uses the \emph{Java Native Interface} (JNI) as FFI, running on Linux.
+Our approach is around 38X faster than using JNI and Linux.
+
+% ------------------------------------------------------------------------------

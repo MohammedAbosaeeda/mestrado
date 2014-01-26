@@ -1,0 +1,146 @@
+@article{wanner:2007,
+  title={{Configurable medium access control for wireless sensor networks}},
+  author={Wanner, L.F. and de Oliveira, A.B. and Frohlich, A.A.},
+  journal={IFIP International Federation For Information Processing-Publications},
+  volume={231},
+  pages={401--410},
+  year={2007},
+  publisher={Springer}
+}
+
+@article{rhee:2008,
+ author = {Rhee, Injong and Warrier, Ajit and Aia, Mahesh and Min, Jeongki and Sichitiu, Mihail L.},
+ title = {Z-MAC: a hybrid MAC for wireless sensor networks},
+ journal = {IEEE/ACM Trans. Netw.},
+ volume = {16},
+ number = {3},
+ year = {2008},
+ issn = {1063-6692},
+ pages = {511--524},
+ doi = {http://dx.doi.org/10.1109/TNET.2007.900704},
+ publisher = {IEEE Press},
+ address = {Piscataway, NJ, USA},
+}
+
+@conference{sohrabi:1999,
+  title={{Performance of a novel self-organization protocol for wireless ad-hoc sensor networks}},
+  author={Sohrabi, K. and Pottie, GJ},
+  booktitle={IEEE VTS 50th Vehicular Technology Conference, 1999. VTC 1999-Fall},
+  volume={2},
+  year={1999}
+}
+
+@conference{ye:2002,
+  title={{An energy-efficient MAC protocol for wireless sensor networks}},
+  author={Ye, W. and Heidemann, J. and Estrin, D.},
+  booktitle={IEEE INFOCOM},
+  volume={3},
+  pages={1567--1576},
+  year={2002},
+  organization={Citeseer}
+}
+
+@inbook{langendoen:2005,
+  title={{Embedded Systems Handbook}},
+  chapter={Energy-Efficient Medium Access Control},
+  author={Langendoen, K. and Halkes, G.},
+  year={2005},
+  publisher={CRC Press}
+}
+
+@inproceedings{buettner:2006,
+ author = {Buettner, Michael and Yee, Gary V. and Anderson, Eric and Han, Richard},
+ title = {X-MAC: a short preamble MAC protocol for duty-cycled wireless sensor networks},
+ booktitle = {SenSys '06: Proceedings of the 4th international conference on Embedded networked sensor systems},
+ year = {2006},
+ isbn = {1-59593-343-3},
+ pages = {307--320},
+ location = {Boulder, Colorado, USA},
+ doi = {http://doi.acm.org/10.1145/1182807.1182838},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+}
+
+@inproceedings{klues:2007,
+ author = {Klues, Kevin and Hackmann, Gregory and Chipara, Octav and Lu, Chenyang},
+ title = {A component-based architecture for power-efficient media access control in wireless sensor networks},
+ booktitle = {SenSys '07: Proceedings of the 5th international conference on Embedded networked sensor systems},
+ year = {2007},
+ isbn = {978-1-59593-763-6},
+ pages = {59--72},
+ location = {Sydney, Australia},
+ doi = {http://doi.acm.org/10.1145/1322263.1322270},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ }
+
+
+@inproceedings{polastre:2004,
+ author = {Polastre, Joseph and Hill, Jason and Culler, David},
+ title = {Versatile low power media access for wireless sensor networks},
+ booktitle = {SenSys '04: Proceedings of the 2nd international conference on Embedded networked sensor systems},
+ year = {2004},
+ isbn = {1-58113-879-2},
+ pages = {95--107},
+ location = {Baltimore, MD, USA},
+ doi = {http://doi.acm.org/10.1145/1031495.1031508},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+}
+
+@inproceedings{vandam:2003,
+ author = {van Dam, Tijs and Langendoen, Koen},
+ title = {An adaptive energy-efficient MAC protocol for wireless sensor networks},
+ booktitle = {SenSys '03: Proceedings of the 1st international conference on Embedded networked sensor systems},
+ year = {2003},
+ isbn = {1-58113-707-9},
+ pages = {171--180},
+ location = {Los Angeles, California, USA},
+ doi = {http://doi.acm.org/10.1145/958491.958512},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+}
+
+@techreport{ieee:2006,
+ author = {{IEEE Computer Society}},
+ title = {{IEEE Standard 802 Part 15.4: Wireless Medium Access Control (MAC) and Physical Layer (PHY) Specifications for Low-Rate Wireless Personal Area Networks (WPANs)}},
+ type = {Technical report},
+ institution = {{The Institue of Electrical and Electronics Engineers}},
+ year = {2006},
+}
+
+@manual{atmel:ATMEGA1281,
+ author = {{Atmel}},
+ title = {{8-bit Microcontroller with 64K/128K/256K Bytes In-System Programmable Flash}},
+ type = {Technical report},
+ institution = {{Atmel}},
+ year = {2007},
+}
+
+@manual{atmel:AT86RF230,
+ author = {{Atmel}},
+ title = {{Low Power 2.4 GHz Transceiver for ZigBee, IEEE 802.15.4, 6LoWPAN, RF4CE and ISM Applications}},
+ type = {Technical report},
+ institution = {{Atmel}},
+ year = {2007},
+}
+
+@inproceedings{gracioli:2008,
+ author = {Giovani Gracioli and Danillo Santos and Roberto Matos and Lucas Wanner and Antônio Augusto Fröhlich},
+ title = {{One-shot Time Management Analysis in EPOS}},
+ booktitle = {Proceedings of the XXVII International Conference of the Chilean Computer Science Society},
+ year = {2008},
+ pages = {92--99},
+ location = {Punta Arenas, Chile},
+}
+
+@PhdThesis{frohlich:2001,
+author = {Antônio Augusto Fröhlich},
+title = {{Application-Oriented Operating Systems}},
+school = {{Technical University of Berlin}},
+year = {2001},
+key = {},
+type = {},
+address = {Berlin},
+}
+

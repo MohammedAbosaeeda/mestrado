@@ -1,0 +1,82 @@
+% + Introduction
+% 
+% This section states that MPLs (such as Java and Lua) can be used to improve
+% productivity in embedded systems development, however, in order to be useful
+% MPLs must abstract hardware devices.
+% Then, this section remember that FFI is used to access hardware, and points
+% out that FFI does not guide the developer on how to abstract hardware devices.
+%  Then, the proposed is summarized stating that the adaptation of a hardware
+% device to a MPL can be faced as an aspect weaving problem.
+% 
+% ------------------------------------------------------------------------------
+\section{Introduction}
+A Managed Programming Language (MPL), from which \java~and \lua~are examples,
+is a kind of programming language that provides developers with features to
+improve productivity.
+Productivity improvement is obtained by using constructs at a higher level
+of abstraction and by features that reduce the occurrence of programming errors
+or make program debug faster.
+Productivity improvement is provided by features such as
+object-orientation, domain-specific constructs, and APIs
+which enable the developer to express and validate his ideas in a
+shorter period.
+Automatic memory management such as garbage collection avoids programming errors
+such as memory leaky.
+Memory protection generates explicit errors when one tries to access uninitialized
+references or trespass arrays boundaries, avoiding unpredictable behavior.
+Similarly, exception handling makes programs violations explicit reducing the time
+spent on program debugging
+\cite{Bond:2009,Pizlo:2010,Esmaeilzadeh:2011,Phipps:1999}.
+% se tiver se escolher apenas 1 referência, por causa de espaço, colocar: Phipps:1999
+
+%---
+During the last decade, several initiatives have been taken in order to
+enable the use of MPLs
+in the embedded systems scenario fulfilling the time and resource requirements
+impose by such systems.
+However, a useful MPL for embedded systems is the one which provide developers
+with features for interacting with the environment where the embedded system is
+deployed.
+% However, in order to be really useful for embedded systems MPLs must provide
+% features for interacting with the environment where the embedded system is
+% inserted on.
+Such interaction is usually implemented by using hardware devices.
+Sensors and actuators enable the system to interact with the environment.
+Transmitters and receivers are used for communicating with other systems.
+Timers and alarms are used to implement real-time operations.
+%---
+
+The interaction between MPLs and hardware devices is performed by using the so
+called Foreign Function Interface (FFI).
+However, FFIs do not specify how to abstract hardware or how
+to organize these abstractions.
+% De repente acrescentar isso:
+% Neither do the "classical" binding generators...
+This work aims to fulfill this gap by introducing a method to interface hardware
+devices and applications written using MPLs in the context of embedded systems.
+We propose a method to abstract such hardware devices, and we show that the
+problem of adapting a hardware device to be used by an MPL can be faced as an
+aspect weaving problem.
+Thus, the binding between the device and the language is generated automatically.
+Our method is automated by a tool which uses a meta-model to represent
+hardware device abstractions and FFI aspects.
+
+The next sections of this paper are organized in the following way: Section
+\ref{sec:relat} reviews how hardware devices can be abstracted and organized,
+how MPLs interact with hardware devices, and what the approaches to
+facilitate such interaction are.
+Section \ref{dercs} makes an overview of the meta-model we have used in our tool.
+Section \ref{sec:proposal} introduces the proposed method for
+abstracting hardware devices and shows how the adaptation of a hardware device
+for a specific MPL can be solved as an aspect weaving.
+Section \ref{sec:eval} presents
+%our cases study
+our case study
+as well obtained results
+on evaluating our proposal automatically adapting a hardware mediator to
+three FFIs (two for \java~and one for \lua) while fulfilling
+requirements of performance and memory consumption.
+Finally, Section \ref{sec:conc} presents our final considerations.
+
+% ------------------------------------------------------------------------------
+

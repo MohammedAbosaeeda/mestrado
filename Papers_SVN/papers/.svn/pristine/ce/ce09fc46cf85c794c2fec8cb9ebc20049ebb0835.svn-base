@@ -1,0 +1,16 @@
+\begin{table}[htb]
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{ } & \textbf{.data} & Overhead & \textbf{.code} & Overhead \\
+\hline
+\hline
+\textbf{Base system} & 183 & 0\% & 9,596 & 0\% \\
+\hline
+\textbf{Managing (UART)} & 186 & 1.64\% & 10,302 & 7.36\% \\
+\hline
+\textbf{Managing all} & 189 & 3.28\% & 10,338 & 7.73\% \\
+\hline
+\end{tabular}
+\caption{System footprints. Sizes in bytes.}
+\label{tbl:therm_size}
+\end{table}

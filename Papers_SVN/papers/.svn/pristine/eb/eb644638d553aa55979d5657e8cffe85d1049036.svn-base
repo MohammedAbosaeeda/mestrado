@@ -1,0 +1,285 @@
+\documentclass[10pt, conference, compsocconf]{IEEEtran} % SEES 2012
+\usepackage{balance} % SEES 2012
+
+\usepackage[english]{babel}	% for multilingual support
+
+\usepackage[utf8]{inputenc} % for use utf8
+\usepackage{graphicx}
+
+\usepackage[caption=false]{subfig} % Para usar duas ou mais figuras como uma só.
+
+\usepackage{algorithmic}
+\usepackage{algorithm}
+
+
+% ------------------------------------------------------------------------------
+
+% Command to use code as figure ------------------------------------------------
+\usepackage{listings}
+\lstset{keywordstyle=\bfseries, flexiblecolumns=true}
+\lstloadlanguages{[ANSI]C++,HTML}
+\lstdefinestyle{prg} {basicstyle=\small\sffamily, lineskip=-0.2ex, showspaces=false}
+
+% header C
+\newcommand{\headerc}[3][tbp]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=C,style=prg]{fig/#2.h}
+   \caption{#3\label{headerc:#2}}
+ \end{figure}
+}
+
+% C
+\newcommand{\progc}[3][tbp]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=C,style=prg]{fig/#2.c}
+   \caption{#3\label{progc:#2}}
+ \end{figure}
+}
+
+% header C++
+\newcommand{\headercpp}[3][tbp]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=C++,style=prg]{fig/#2.hh}
+   \caption{#3\label{headercpp:#2}}
+ \end{figure}
+}
+
+
+% C++
+\newcommand{\progcpp}[3][tbp]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=C++,style=prg]{fig/#2.cc}
+   \caption{#3\label{progcpp:#2}}
+ \end{figure}
+}
+
+% Java
+\newcommand{\progjava}[3][tbp]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=Java,style=prg]{fig/#2.java}
+   \caption{#3\label{progjava:#2}}
+ \end{figure}
+}
+
+
+% Para colocar 2 programas como um só - dispostos horizontalmente
+\newcommand{\multprogjavatwoh}[5][htbp]{
+\begin{figure*}[#1]
+  \centering
+
+\subfloat[]{\label{fig:#2}\lstinputlisting[language=Java,style=prg
+]{fig/#2.java}}
+
+\subfloat[]{\label{fig:#3}\lstinputlisting[language=Pascal,
+style=prg]{fig/#3.lua}}
+  \caption{#5}
+  \label{fig:#4}
+\end{figure*}
+}
+% e.g.
+%\multfigtwoh{fig_plot_time_orig}{fig_plot_time_mod}
+%{fig_plot_time_all}
+%{Original (a) and modified (b) benchmarks execution time comparison.}
+
+
+% Lua
+\newcommand{\proglua}[3][tbp]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=Pascal,style=prg]{fig/#2.lua}
+   \caption{#3\label{proglua:#2}}
+ \end{figure}
+}
+
+% KCL
+\newcommand{\progkcl}[3][tbp]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=C++,style=prg]{fig/#2.kcl}
+   \caption{#3\label{progkcl:#2}}
+ \end{figure}
+}
+
+% OCL
+\newcommand{\progocl}[3][tbp]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=C++,style=prg]{fig/#2.ocl}
+   \caption{#3\label{progocl:#2}}
+ \end{figure}
+}
+
+% OIL
+\newcommand{\progoil}[3][tbp]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=C++,style=prg]{fig/#2.oil}
+   \caption{#3\label{progoil:#2}}
+ \end{figure}
+}
+
+% ------------------------------------------------------------------------------
+
+% Commands to insert figures ---------------------------------------------------
+\newcommand{\figu}[4][ht]{
+  \begin{figure}[#1] {\centering\scalebox{#2}{\includegraphics{fig/#3}}\par}
+    \caption{#4\label{fig:#3}}
+  \end{figure}
+}
+
+\newcommand{\fig}[4][ht]{
+  \begin{figure}[#1] {\centering\scalebox{#2}{\includegraphics{fig/#3}}\par}
+    \caption{#4\label{fig:#3}}
+  \end{figure}
+}
+% fig usage:
+% \fig{<scale>}{<file>}{<caption>}
+% e.g.: \fig{.4}{uml/uml_comportamental_dia}{Diagramas comportamentais da UML}
+% The figure label will be "fig:" plus <file>.
+% The figure file must lie in the "fig" directory.
+
+\newcommand{\figtwocolumn}[4][ht]{
+  \begin{figure*}[#1] {\centering\scalebox{#2}{\includegraphics{fig/#3}}\par}
+    \caption{#4\label{fig:#3}}
+  \end{figure*}
+}
+
+\newcommand{\figb}[4][hb]{
+  \begin{figure}[#1] {\centering\scalebox{#2}{\includegraphics{fig/#3}}\par}
+    \caption{#4\label{fig:#3}}
+  \end{figure}
+}
+
+% Para colocar 2 figuras como uma só - dispostas horizontalmente
+\newcommand{\multfigtwoh}[6][htbp]{
+\begin{figure*}[#1]
+  \centering
+  \subfloat[]{\label{fig:#3}\scalebox{#2}{\includegraphics{fig/#3}}}
+  \subfloat[]{\label{fig:#4}\scalebox{#2}{\includegraphics{fig/#4}}}
+  \caption{#6}
+  \label{fig:#5}
+\end{figure*}
+}
+% e.g.
+%\multfigtwoh{.65}{fig_plot_time_orig}{fig_plot_time_mod}
+%{fig_plot_time_all}
+%{Original (a) and modified (b) benchmarks execution time comparison.}
+
+% Para colocar 2 figuras como uma só - dispostas verticalmente
+\newcommand{\multfigtwov}[6][htbp]{
+\begin{figure}[#1]
+  \centering
+  \subfloat[]{\label{fig:#3}\scalebox{#2}{\includegraphics{fig/#3}}}\\
+  \subfloat[]{\label{fig:#4}\scalebox{#2}{\includegraphics{fig/#4}}}
+  \caption{#6}
+  \label{fig:#5}
+\end{figure}
+}
+% e.g.
+%\multfigtwov{.35}{fig_epos_mem_framework}{fig_epos_mem_framework_spm}
+%{fig_epos_mem_framework_all}
+%{EPOS memory mapping before (a) and after (b) using the new framework}
+
+
+% Alguns outros comandos:
+\newcommand{\lua}{\textsc{Lua}}
+\newcommand{\java}{\textsc{Java}}
+\newcommand{\python}{\textsc{Python}}
+\newcommand{\ruby}{\textsc{Ruby}}
+
+
+% ------------------------------------------------------------------------------
+
+\begin{document}
+
+% \title{VHLL binding generation as an AOP problem}
+% \title{Efficient generation of wrappers for hardware devices in the embedded
+% system scenario}
+\title{VHLL binding generation for the embedded system scenario}
+
+
+\author{\IEEEauthorblockN{Mateus Krepsky Ludwich and Antônio Augusto Fröhlich}
+\IEEEauthorblockA{Laboratory for Software and Hardware Integration (LISHA)\\
+Federal University of Santa Catarina (UFSC)\\
+Florianópolis, Brazil\\
+\{mateus,guto\}@lisha.ufsc.br}
+}
+
+\maketitle
+
+\begin{abstract}
+Programming Languages have a main role in computational systems development.
+Among them, the so called Very-High Level Languages (VHLL), from which \java~and
+\lua~are examples, provide developers with features to improve their
+productivity.
+
+Several initiatives have been taken on the last ten years in order to enable the
+use of VHLLs not only for general propose systems as well for embedded
+systems fulfilling the time and resource usage requirements impose by these
+systems.
+However, in order to be really useful in embedded systems VHLLs must provide
+features for interacting with the environment where the embedded system
+is inserted on.
+Such interaction is usually implemented by using hardware devices, such as
+sensors and actuators, transmitters and receivers, and timers and alarms.
+
+This paper presents a method to abstract hardware devices in order to be used by
+applications written using VHLL in the embedded systems scenario.
+Hardware mediators are used to abstract and to organize hardware devices
+in a suitable manner for embedded systems fulfilling time and resource
+consumption requirements.
+By isolating hardware mediators from the specificities a VHLL the problem of
+adapting a hardware device to work with a new VHLL can be faced as an aspect
+weaving problem.
+The proposed method is evaluated on the VHLLs \java~and \lua~among three
+cases study encompassing serial communication, video encoding, and temperature
+sensing.
+The obtained results corroborate the suitability of the proposed method on the
+requirements of performance, memory consumption, reuse, and portability.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Binding Generation, Embedded Systems, Foreign Function Interface
+
+\end{IEEEkeywords}
+
+\IEEEpeerreviewmaketitle
+
+%-------------------------------------------------------------------------------
+% Section <Introduction>
+\input{tex/intro}
+
+% ------------------------------------------------------------------------------
+% Section <Java requirements for embedded systems>
+\input{tex/relat}
+
+% ------------------------------------------------------------------------------
+% Section <proposal>
+\input{tex/proposal}
+
+% ------------------------------------------------------------------------------
+% Section <Evaluation>
+\input{tex/eval}
+
+% ------------------------------------------------------------------------------
+% Section <Discussion>
+\input{tex/conclusions}
+
+% ------------------------------------------------------------------------------
+% trigger a \newpage just before the given reference
+% number - used to balance the columns on the last page
+% adjust value as needed - may need to be readjusted if
+% the document is modified later
+%\IEEEtriggeratref{8}
+% The "triggered" command can be changed if desired:
+%\IEEEtriggercmd{\enlargethispage{-5in}}
+
+% Better way for balancing the last page:
+
+\balance
+
+% References
+\bibliographystyle{IEEEtran}
+\bibliography{hw,os,pl,mm}
+
+
+\end{document}
+
+%------------------------------------------------------------------------------
+

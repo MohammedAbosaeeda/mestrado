@@ -1,0 +1,22 @@
+\begin{tabular}{@{}l@{}l@{}r@{\hspace{0.4mm}}r@{\hspace{1.5mm}}r@{}}
+\toprule
+\multicolumn{2}{c}{\multirow{2}{*}{Component}}             & \multicolumn{3}{c}{Execution time (cycles)} \\
+\cmidrule(l){3-5}
+                              &           & \multicolumn{1}{c}{Behavior} & \multicolumn{1}{c}{Comm.} & \multicolumn{1}{c}{OH}\\
+
+\midrule
+HW->                         & \textit{encode}    & 404  & 2015 & 83.3\% \\ 
+ADPCM(SW)                    & \textit{decode}    & 324  & 2015 & 86.1\%\\
+\midrule
+HW->                         & \textit{add\_sample}(x700)& 47027  & 1051400 & 95.7\% \\
+DTMF(SW)                     & \textit{do\_dtmf}  & 540803 & 1502 & 0.3\% \\
+\midrule
+SW->                         & \textit{encode}    & 1  & 1769 & 99.9\%  \\             
+ADPCM(HW)                    & \textit{decode}    & 1  & 1769 & 99.9\%  \\
+\midrule
+SW->                         & \textit{add\_sample}(x700)& 700  & 1136800 & 99.9\%\\
+DTMF(HW)                     & \textit{do\_dtmf}  & 6341  & 1624 & 20.4\%\\
+\bottomrule
+\end{tabular}
+
+

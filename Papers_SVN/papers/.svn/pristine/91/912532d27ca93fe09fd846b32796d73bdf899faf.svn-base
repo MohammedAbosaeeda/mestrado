@@ -1,0 +1,19 @@
+%-------------------------------------------------------------------------------
+% CONCLUSÃO
+%-------------------------------------------------------------------------------
+\section {Conclusão}
+
+Neste trabalho apresentamos um sistema de arquivos para ambientes distribuídos organizado segundo o modelo cliente-servidor e orientado a objetos. Definimos que o sistema será implementado por três servidores autônomos:
+
+\begin {itemize}
+
+\item O servidor de nomes de objetos, responsável pelo mapeamento de objetos em arquivos e também pela manutenção da árvore de objetos;
+
+\item O servidor de arquivos, responsável pela organização dos dados em disco;
+
+\item O servidor de {\em buffers}, responsável por um mecanismo de armazenamento temporário de blocos de disco.
+
+\end {itemize}
+
+Além de propormos os servidores do sistema de arquivos, definimos uma estrutura genérica para a implementação dele com um elevado grau de paralelismo. Entretanto, a realização desta proposta pressupõe a existência de um núcleo com as características abordadas no seção 2. Esse núcleo vem sendo desenvolvido em outro projeto associado ao nosso. A indisponibilidade atual de tal núcleo, nos levou a simulá-lo sobre o sistema operacional SunOS versão 4.1.3 da Sun Microsystems. Apesar de termos conseguido reconstituir quase toda a funcionalidade do núcleo, algumas limitações foram impostas ao sistema, prejudicando a consolidação de alguns conceitos (principalmente no que diz respeito a transparência de localidade) e a avaliação de seu desempenho.
+

@@ -1,0 +1,35 @@
+% ------------------------------------------------------------------------------
+\section{DMEC} \label{dmec}
+% + DMEC
+% Describes the Distributed Motion Estimation Component (DMEC).
+% Describes its parallelization Strategy (picture partition) as well the
+% Coordinator-Worker model
+
+
+% 1º parte independente de distribuído
+% * Diagrama de classes: Interface PictureMotionEstimator                         (fig 3.1 relat tec): pme.dia
+% Dizer que DMEC foi projetado seguindo os conceitos de ME.
+% Engenharia de domínio da codificação de vídeo.
+
+
+% ------------------------------------------------------------------------------
+% 
+% Some notes
+% DMEC Interfaces:
+% 
+% \emph{PictureMotionEstimator}
+% 
+% \emph{TransferenceManager}
+% 
+% \emph{SynchronizationManager}
+% 
+% 
+% \emph{Coordinator} implements \emph{PictureMotionEstimator}
+% 
+% \emph{Worker} kind of implements \emph{PictureMotionEstimator}.
+% The interface is other but it also performs match.
+% The \emph{Worker} interface has a entry point ``run'', a match method,
+% and some methods to gather the pictures and put the pictures back.
+% 
+% A \emph{Worker} uses the interfaces
+% \emph{TransferenceManager} and \emph{SynchronizationManager}

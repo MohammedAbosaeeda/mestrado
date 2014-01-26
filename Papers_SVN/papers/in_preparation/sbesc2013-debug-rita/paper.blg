@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2012/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: paper.aux
+The style file: abbrv.bst
+Database file #1: references.bib
+Warning--can't use both volume and number fields in orso2005selective
+You've used 20 entries,
+            2118 wiz_defined-function locations,
+            629 strings with 7570 characters,
+and the built_in function-call counts, 8223 in all, are:
+= -- 843
+> -- 367
+< -- 14
++ -- 147
+- -- 123
+* -- 548
+:= -- 1282
+add.period$ -- 70
+call.type$ -- 20
+change.case$ -- 118
+chr.to.int$ -- 0
+cite$ -- 21
+duplicate$ -- 346
+empty$ -- 634
+format.name$ -- 123
+if$ -- 1810
+int.to.chr$ -- 0
+int.to.str$ -- 20
+missing$ -- 22
+newline$ -- 103
+num.names$ -- 42
+pop$ -- 137
+preamble$ -- 1
+purify$ -- 100
+quote$ -- 0
+skip$ -- 266
+stack$ -- 0
+substring$ -- 508
+swap$ -- 128
+text.length$ -- 14
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 76
+warning$ -- 1
+while$ -- 83
+width$ -- 22
+write$ -- 234
+(There was 1 warning)

@@ -1,0 +1,167 @@
+% -----------------------------------------------------------------------------
+\section{Interface entre dispositivos de hardware e linguagens de altíssimo nível}
+\label{sec:proposal}
+% <N> + Fala do problema de acessar HW. Falar que usamos mediadores HW EPOS e FFI KESO.
+% <N> Falar também que UART é usada como exemplo.
+%
+% + Qual é a proposta?
+Nossa proposta para realizar a interface entre linguagens de programação de
+altíssimo nível e dispositivos de hardware é baseada em exportar estes 
+dispositivos para a API da linguagem. 
+Os dispositivos de hardware a serem exportados possuem uma interface bem 
+definida, utilizando o conceito de mediadores de hardware da ADESD. 
+Nós utilizamos a interface de função estrangeira da JVM KESO de forma a exportar
+mediadores EPOS para Java. 
+Esta seção explica como nós abstraímos componentes de hardware para serem 
+utilizados por aplicações Java embarcadas. A utilização da abordagem é 
+exemplificada abstraindo-se para Java um dispositivo de hardware 
+transmissor-receptor assíncrono universal 
+(UART - \emph{Universal Asynchronous Receiver Transmitter}).
+
+%\subsection{Hardware devices access}
+% + Conceito de HW mediators do EPOS 
+O EPOS utiliza o conceito de mediadores de hardware para abstrair 
+especificidades de dispositivos de hardware distintos. 
+Os mediadores de hardware sustentam um contrato de interface entre as abstrações
+de sistema (e.g. \emph{threads}) e o hardware, permitindo à estas abstrações 
+independência de plataforma \cite{Polpeta:2004}.
+A geração da implementação do mediador para uma plataforma específica é executada 
+em tempo de compilação. 
+Utilizando-se técnicas de meta programação e \emph{inlining} de funções é 
+possível dissolver os mediadores entre as abstrações que os utilizam, o que 
+evita sobrecusto de tempo no uso de mediadores.
+
+% KESO FFI
+A KESO provê uma interface de função estrangeira para realizar a interface entre
+código Java e código C ou C++. 
+A FFI da KESO utiliza uma abordagem estática assim como a KNI da Sun, realizando
+a interface entre Java e código nativo em tempo de compilação. 
+A interface de função estrangeira da KESO é chamada de 
+\emph{KESO Native Interface (KNI)}, mas neste artigo ela é referida como 
+FFI da KESO para evitar confusões com a KNI da Sun.
+
+% AOP concepts
+O projeto da FFI da KESO adota alguns conceitos de Programação Orientada a 
+Aspectos (AOP - Aspect-Oriented Programming). 
+%\cite{Kiczales97aspect-orientedprogramming}. 
+Utilizando a FFI da KESO é possível ``escrever'' pontos de corte 
+(\emph{point cuts}) especificando os pontos de junção (\emph{join points}) de um
+programa Java (como por exemplo, métodos e classes Java) que irão ser afetados 
+pelos conselhos (\emph{advices}) fornecidos. 
+Um \emph{advice}, neste caso, é o código que representa a implementação do um 
+método nativo. 
+A figura \ref{fig:weavelet_extension_generic} ilustra a utilização da FFI da
+KESO.
+Os aspectos (\emph{aspects}), os quais agrupam os \emph{point cuts} e os 
+\emph{advices} são representados na API da FFI da KESO pela classe 
+abstrata \emph{Weavelet}. 
+Estendendo a classe \emph{Weavelet} e implementando alguns de seus métodos, é
+possível especificar quais métodos e classes Java serão afetados e qual código 
+nativo deve ser gerado. 
+
+\fig{.3}{weavelet_extension_generic}{Utilizando a FFI KESO}
+
+% + É o parágrafo principal de todo o paper.
+% Diz que usamos KESO FFI para criar um binding para cada mediador EPOS.
+% Diz que escrevemos Weavelets para especificar o código gerado. E mais ou menos
+%  como eles operam: pointcuts, advices, wove...
+% Mostra a figura: acessando HW devices
+Nós utilizamos a FFI do KESO para criar um adaptador para cada mediador EPOS que
+deve ser acessado pelo Java, provendo Java com componentes de hardware. 
+A abordagem utilizada é mostrada na figura \ref{fig:accessing_hw}. 
+A classe Java, a qual representa a contraparte Java do mediador de hardware que 
+está sendo abstraído, especifica assinaturas de métodos mas não os implementa, 
+uma vez que tais métodos representam métodos nativos.
+Então, uma classe \emph{weavelet} da FFI do KESO é utilizada para especificar a
+implementação de cada método nativo. 
+Mais especificamente, a classe \emph{weavelet} especifica quais métodos da 
+classe Java deseja-se interceptar 
+(o equivalente aos \emph{pointcuts} de uma linguagem de AOP) e quais os 
+respectivos códigos que devem ser gerados 
+(o equivalente aos \emph{advices} em AOP). 
+Durante a tradução de bytecode Java em C, o compilador da KESO entrelaça (\emph{wove})
+as assinaturas dos métodos nativos da classe Java com os \emph{advices} 
+especificados pelo \emph{weavelet}, gerando o código dos adaptadores que realizam
+a interface entre a classe Java e o mediador de hardware EPOS.
+
+\fig{.2}{accessing_hw}{Interface Hardware/Java} 
+
+% + KESO FFI API/Framework
+A implementação de cada método nativo, especificada no \emph{weavelet}, é 
+basicamente uma chamada para cada método do mediador EPOS que está sendo 
+exportado ao Java.
+Na implementação do método \emph{affectMethod} é possível especificar um padrão
+o qual representa um elemento do programa Java
+(uma assinatura de método, por exemplo), assim como qual código deverá ser gerado 
+quando o compilador KESO reconhece tal padrão.
+O trecho de código da figura \ref{prgjava:weav_uart_put} mostra a especificação de um
+adaptador de código nativo a ser gerado para um método virtual chamado 
+de \emph{m1}. 
+Este método possui um único parâmetro do tipo carácter e não possui retorno
+(tipo \emph{void}).
+O \emph{eposHWMediator} é um campo da classe adaptadora o qual aponta para o
+objeto mediador de hardware do EPOS. É possível adicionar campos nas classes
+adaptadoras implementando-se o método \emph{addFields} da classe abstrata 
+\emph{Weavelet}.
+
+\prgjava{weav_uart_put}{Especificando os adaptadores de código nativo}
+
+% + Fala que objetos EPOS podem ser destruídos pelo GC do KESO, usando 
+% finalizers
+Quando cria-se um objeto Java (chamando-se \emph{new}) que representa uma 
+abstração de hardware, o objeto adaptador de código nativo, pode alocar objetos 
+EPOS como por exemplo o \emph{eposHWMediator} do programa da figura 
+\ref{prgjava:weav_uart_put}.
+O objeto Java será desalocado automaticamente pelo coletor de lixo da KESO JVM
+e o objeto EPOS, segundo nossa abordagem, é desalocado chamando-se o método 
+\emph{finalizer} da classe Java. Como o coletor de lixo da KESO JVM utiliza
+algoritmos determinísticos é garantido que os \emph{finalizers} de Java são 
+sempre chamados.
+
+% +Comentar mais vantagens do uso do KESO - otimizações 
+% Nota: retirar este parágrafo para caber em 12 páginas para o sbesc 2011?
+A FFI da KESO é integrada com o compilador KESO então, durante a compilação de
+bytecode Java em C, instâncias de classes \emph{weavelet} são criadas e 
+utilizadas na geração de código nativo. Apesar de que o código especificado por 
+uma \emph{weavelet} não é objeto das análises estáticas executadas pelo 
+compilador KESO, a FFI da KESO ainda apresenta algumas vantagens interessantes,
+as quais nos motivaram a utilizá-la. 
+Por exemplo, se o compilador KESO identifica que o código da aplicação não 
+utiliza algum método nativo, ele não gera o código nativo para aquele método, 
+reduzindo o consumo de memória, o que é altamente desejável em um cenário de
+sistemas embarcados.
+
+%\subsection{UART example}
+% + Escrevemos uma aplicação de UART. 
+% * Figura código Java da aplicação
+Nós escrevemos uma pequena aplicação utilizando o mediador de hardware UART para
+ilustrar nossa proposta de abstração de dispositivos de hardware para Java
+embarcado.
+A aplicação, mostrada pelo programa da figura \ref{prgjava:application}, utiliza
+a UART para escrever caracteres em um dispositivo serial.
+
+\prgjava{application}{Exemplo UART}
+
+% + O que é Java, o que é C/C++
+% * Figura aplicação UART (parte Java e parte C/C++ área cinza escuro e cinza claro)
+A classe Java \emph{UART} é a contraparte Java da classe UART do mediador de 
+hardware EPOS e possui apenas métodos nativos sem quaisquer implementação.
+Então, o \emph{UART\_Weavelet} é utilizado para especificar a implementação de
+cada método da \emph{UART}. A abordagem é a mesma apresentada pelo programa da
+figura \ref{prgjava:weav_uart_put}.
+A figura \ref{fig:overall_uart_application}, por sua vez, mostra a arquitetura
+geral do programa exemplo UART, mostrando as principais classes envolvidas e
+distinguindo a parte de código Java (abaixo da área cinza-escuro) da parte de
+código C/C++ (abaixo da área cinza-claro). Pode-se observar que as classes em
+Java correspondem à quase todo código escrito, incluindo a classe da aplicação
+\emph{UART\_Test}, a classe \emph{UART} do lado Java e o \emph{UART\_Weavelet}.
+% Our application 
+% class \emph{UART\_Test} extends the KESO class \emph{Task}. This means that an
+% instance of our class will be implemented by an OSEK task created by KESO, 
+% during the system generation. The \emph{launch} method is the task's entry point.
+
+\figtwocolumn{.3}{overall_uart_application}{Arquitetura do programa UART}
+
+
+% -----------------------------------------------------------------------------
+

@@ -1,0 +1,229 @@
+% ------------------------------------------------------------------------------
+\section{Proposal} \label{sec:proposal}
+% + Um método de geração de adaptadores de código nativo deve levar em conta os
+% seguintes requisitos:
+% 
+% Desempenho e consumo eficiente de recursos
+% Portabilidade entre diferentes plataformas de hardware
+% Facilidade de uso do método
+% Reuso de adaptadores de código nativo entre FFIs distintas
+%
+% 
+% This section introduces our approach for abstracting hardware components to be
+% used by VHLLs applications in the context of embedded systems.
+% In order to be feasible for embedded systems, a method for generating native
+% code adapters should fulfill several requirements such as performance and
+% efficiently resource usage, and portability among different hardware
+% platforms.
+% It should be also taken in to consideration the support that such method
+% offers % to the developer in order to facilitate the creation of new adapters.
+% Besides that a native code adapter should be
+In order to be feasible for embedded systems, a method for generating native
+code adapters should fulfill several requirements such as performance and
+efficiently resource usage, portability among different hardware platforms,
+support to the developer, and reuse of native code adapters among distinct
+VHLLs and FFIs.
+This section shows our approach to fulfill each of these requirements.
+
+\subsection{Achieving performance and efficient resource usage}
+% Desempenho e consumo eficiente de recursos 
+% 
+% Tempo de resposta em VHLL igual a em HLLs convencionais (e.g. C/C++)
+%   Vazão (throughput)
+%   Restrições de tempo real
+Ideally, the response time of a hardware device accessed by using native code
+adapters should be the same than the response time obtained when accessing the
+same device using languages such as C and C++ which support direct hardware
+access.
+% 
+% Adaptadores de código nativo devem ter impacto mínimo no consumo de recursos
+% como memória e energia
+Similarly to performance, the usage of resources such as memory and energy due
+to the use of a native code adapter should be kept at the minimum to not impact
+in the overall resource usage of the system.
+
+% Obtidos com mediadores de hardware e FFIs focadas em SEs
+Performance and efficient resource usage is achieved by using hardware
+mediators.
+Hardware mediators allow for development of efficient native code adapters due
+two reasons.
+The first reason is related to the design of hardware mediators, since there is
+a mediator for each device in the platform, it is eliminated the overhead
+caused by monolithic HALs.
+The second reason is related to the techniques used to implement the hardware
+mediators.
+Using static metaprogramming techniques is possible to dissolve mediators among
+the abstractions that use it, eliminating method call overhead for the
+mediator methods.
+
+\subsection{Achieving platform portability}
+% Figura \ref{fig:native_code_adapter_and_hw_mediator}.
+% \figtwocolumn{.35}{native_code_adapter_and_hw_mediator}{Relação adaptador de
+% código nativo e mediadores de hardware.}
+% 
+% -Possíveis soluções
+%  --Implementação do gerenciador de dispositivos dentro do adaptador de código
+% nativo
+%    ---Não portável
+%
+% -Utilização de HAL monolítica
+%  --Inadequado para SEs
+%
+% Solução adotada
+% Mediadores de Hardware
+
+One of the options to provide for the native code adapter hardware device
+control is to implement the device driver inside the native code adapter.
+This option is totally platform dependent, as the device driver is specific for
+a platform thus, using this approach the native code adapter must be
+rewritten for each new platform available.
+
+A possible solution for the portability issue is by using a HAL.
+In such case, the native code adapter implements its methods by using the
+methods provided by the HAL.
+However, as presented at Section \ref{sec:relat}, HALs are not suitable for
+embedded systems because HALs concentrate all the resources available in a
+platform, generating unnecessary interdependency between devices.
+Therefore, a native code adapter that relies on a HAL will also contain
+abstractions for all platform resources even it does not use such abstractions.
+
+Our approach relies on hardware mediators to provide for native code adapters
+platform portability.
+A hardware mediator provides a single interface, which can have several
+implementations.
+All methods of a native code adapter are built using the mediator interface
+thus, the native code adapter turns to be independent of hardware platform.
+% Como existe um mediador de hardware para cada dispositivo de hardware presente
+% em uma plataforma, elimina-se a interdependência entre dispositivos gerada por
+% uma HAL, o que é adequado para sistemas embarcados.
+% Além disso, para cada mediador de hardware a ser utilizado, é desenvolvido um
+% adaptador de código nativo, obtendo-se um controle fino sobre os recursos
+% presentes na plataforma.
+
+\subsection{Support for developers}
+% - Abordagens utilizadas
+%     --Geração automática de adaptadores de código nativo
+%         ---Evita erros de programação na utilização da FFI
+% 
+%     --Representação intermediária para descrever mediadores e FFIs
+%         ---Semântica definida vs transformações sintáticas
+
+The automation of the native code adapters creation by a tool besides
+facilitating the task of creating new adapters, avoids programming errors on
+manually using a FFI.
+For this reason the proposed method for abstracting hardware devices was
+automated by a tool called \emph{Extensible Binding Generator} (EBG).
+
+% 
+% Como mostrado nos exemplos da Seção \ref{sec:relat}, diversas FFIs, como
+% KNI, NanoVM FFI e Lua FFI, exigem que o desenvolvedor faça o
+% ``\textit{parsing}''
+% de cada argumento do método nativo manualmente, devendo lembrar-se da ordem em
+% que os parâmetros formais são declarados, além de ter em mente as diferenças
+% semânticas entre das diferentes linguagens que a \textit{FFI} envolve.
+% 
+% % ++
+% A opção do \textit{EBG} de utilizar uma representação intermediária com
+% semântica
+% definida, para descrever os mediadores de hardware e aspectos de \textit{FFI}
+% ao
+% invés de transformações meramente sintáticas sobre o código fonte, permite uma
+% noção de tipos de dados o que contribui para evitar que o código gerado possua
+% erros semânticos.
+
+% ++
+The Figure \ref{fig:ebg_complete_chain} presents the generation flow of a
+system according to our proposal for abstracting hardware devices for VHLLs in
+the embedded system scenario.
+% The hardware mediators are going to be used by the embedded application are
+% identified from the application analysis.
+From the application analysis is possible to identify the hardware
+mediators that the embedded application is going to use.
+Then, the needed hardware mediators are selected and used as input to EBG.
+The other EBG's input is the selection of the target VHLL and FFI.
+EBG has as outputs native code adapters already tailored for the target FFI,
+and the VHLL counterpart of the hardware mediators.
+
+\figtwocolumn{.6}{ebg_complete_chain}{Native code adapters generation flow.}
+
+The VHLL counterpart of the hardware mediators is compiled together with the
+application by a standard VHLL compiler, generating the correspondent bytecode.
+This bytecode can be externalized as is the case of the \emph{class} files of
+\java~or direct send to the VHLL interpreter, as is the default case for \lua.
+The native code adapters generated by the EBG and the application bytecode are
+then integrated to the runtime support system (usually a virtual machine) of the
+target VHLL.
+Finally, the runtime support system of the VHLL which includes EPOS and the
+hardware mediators are compiled by GCC, generating the final system image.
+
+
+\subsection{Achieving reuse between distinct FFIs}
+% - A componente dos adaptadores de código nativo que controla o hardware deve
+% poder ser reutilizada por diferentes FFIs
+%
+% - Separação dos adaptadores de código nativo em componentes funcional e não
+% funcional
+%   -- Componente funcional (Mediadores de Hardware)
+%   -- Componente não funcional (Descrições de FFI)
+%
+% - Componentes não funcional fatoradas com aspectos
+%   -- Adaptação de um mediador para uma FFI específica ->
+%      Weaving entre mediador e aspecto de FFI
+% 
+The reuse of a native code adapter among distinct FFIs is obtained by factoring
+the adapter in functional part (FFI independent) and in non-functional part (FFI
+dependent) and by composing these parts in order to generate the final native
+code adapter which is going to be used by a specific FFI.
+
+The functional part of a native code adapter is responsible to control the
+hardware device.
+Such part is dependent only of the device been abstracted and can be
+\emph{reused} by distinct FFIs.
+The functional part of a native code adapter corresponds to a hardware mediator
+and its methods.
+
+The non-functional part of a native code adapter is dependent of the target FFI.
+Such part corresponds to the methods and concepts defined by the API of the
+target FFI.
+
+The composition of the functional and non-functional parts of a native code
+adapter is then faced as an aspect \emph{weaving} of the Aspect Oriented
+Programming (AOP).
+In such case the hardware mediator is the component to be adapted and the
+aspects are represented by the description of the FFI itself which is going to
+modify the hardware mediator.
+
+% ++
+The Figure \ref{fig:ebg_architecture} shows the internal organization of the
+EBG tool.
+For each mediator selected as an EBG input are applied the aspects of the
+selected FFI, adapting the mediator to the FFI's API.
+The composition of the mediator and aspects is executed by the \emph{Weaver}
+module.
+Both hardware mediator and FFI aspects are described in an internal
+representation language of EBG.
+This internal representation is similar to an abstract syntax tree.
+The output of the \emph{Weaver} module enters in the \emph{Generator} module
+which transforms the internal EBG representation in source code in the
+programming language required by the target FFI.
+
+\figtwocolumn{.5}{ebg_architecture}{EBG architecture.}
+
+
+% \subsubsection{Representação de Mediadores e Aspectos de FFI}
+% Utilizado metamodelo DERCS
+% Elementos estruturais e comportamentais - Representação dos Mediadores
+% Elementos de orientação a aspecto - Aspectos de FFI
+% 
+% Composição de aspectos realizada em nível de modelo
+% 
+% Novas adaptações de aspecto
+% ... figuras?
+% 
+% \subsubsection{Composição de Aspectos}
+% ...
+% 
+% \subsubsection{Geração dos adaptadores}
+% ...
+
+% ------------------------------------------------------------------------------

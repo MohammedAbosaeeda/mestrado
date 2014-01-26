@@ -1,0 +1,136 @@
+\documentclass[12pt]{article}
+
+\usepackage{sbc-template}
+
+\usepackage{graphicx,url}
+
+\usepackage[brazil]{babel}   
+\usepackage[latin1]{inputenc}  
+\usepackage{listings}
+\usepackage{subfigure}
+\usepackage{cite}
+\usepackage{multicol}
+
+
+     
+\sloppy
+
+\newcommand{\epos}{\textsc{Epos}}
+
+\newcommand{\qos}{QoS}
+\newcommand{\QoS}{quality of service}
+
+\newcommand{\ov}{\emph{overhead}}
+\newcommand{\ovs}{\emph{overheads}}
+%\newcommand{\ov}{sobrecusto}
+%\newcommand{\ovs}{sobrecustos}
+
+\newcommand{\deadline}{\emph{deadline}}
+\newcommand{\deadlines}{\emph{deadlines}}
+
+\newcommand{\thr}{\emph{threshold}}
+\newcommand{\Thr}{\emph{Threshold}}
+
+\newcommand{\tos}{TinyOS}
+\newcommand{\mos}{Mantis OS}
+\newcommand{\sos}{SOS}
+%\newcommand{\wsn}{rede de sensor sem fio}
+%\newcommand{\wsns}{redes de sensores sem fio}
+\newcommand{\wsn}{Wireless Sensor Networks}
+\newcommand{\wsns}{Wireless Sensor Networks}
+
+\lstloadlanguages{[ANSI]C++}
+\lstdefinelanguage{XML} {
+  keywords={xml,version,DOCTYPE,SYSTEM,EPOSConfig,family,member,name,type,
+  feature,trait,class,performance,codesize,energy,power,default,pos,pre}}
+\lstdefinestyle{prg} {basicstyle=\small\sffamily, lineskip=-0.2ex}
+\lstdefinestyle{prgbox} {basicstyle=\small\sffamily lineskip=-0.2ex}
+\lstdefinestyle{inlineprg} {basicstyle=\small\sffamily}
+
+\newcommand{\prg}[4][htbp]{
+  \begin{figure}[#1]
+    \linespread{1}
+    \vspace{\parskip}
+    \makebox[\textwidth][c]{
+      \lstinputlisting[language=#2,style=prg]{prg/#3.prg} }
+    \vspace{0.4\parskip}
+    \caption{#4\label{prg:#3}}
+  \end{figure}
+}
+
+
+
+%\title{Uso das Técnicas da Computação Imprecisa para a Gerência de Energia em Sistemas Embarcados}
+
+\title{Using Imprecise Computation Techniques for Power Management in Real-Time Embedded Systems}
+
+\author{Geovani R. Wiedenhoft, Antônio A. Fröhlich}
+%\author{Luciana P. Nedel\inst{1}, Rafael H. Bordini\inst{2}, Flávio Rech
+%  Wagner\inst{1}, Jomi F. Hübner\inst{3} }
+
+
+\address{Laboratory for Software and Hardware Integration\\
+Federal University of Santa Catarina\\
+  PO Box 476 -- 88049-900 -- Florian\'{o}polis, SC, Brazil\\
+    \email{\{grw,guto\}@lisha.ufsc.br}
+}
+
+\begin{document} 
+
+\maketitle
+
+\begin{abstract}
+
+
+Embedded systems present severe limitations in terms of processing and memory
+capabilities and are often powered by batteries, making energy 
+an important resource to be managed. This work explores energy as
+a parameter for Quality of Service (QoS) of embedded systems. The goal is to
+guarantee the battery lifetime specified by the application and yet preserve 
+the deadlines of essential (hard real-time) tasks. We propose equations to
+check at project-time if a given set of tasks are schedulable. At execution-time, a
+preemptive scheduler for imprecise tasks based on the Earliest-Deadline First (EDF) algorithm 
+prevents the optional subtasks execution when ever there is the possibility of  
+deadline loss or battery exhaustion.
+A prototype was developed in \epos{} 
+%(\emph{Embedded Parallel Operating System}) 
+using power management mechanisms provided by the system.
+
+
+\end{abstract}
+
+%\begin{resumo} 
+
+%Os sistemas embarcados apresentam rigorosas limitações em relação às 
+%capacidades 
+%de processamento e memória e, por muitas vezes, são alimentados por baterias, o
+%que torna o consumo de energia uma outra importante limitação a ser gerenciada.
+%Este trabalho explora a energia como parâmetro da \QoS{} de sistemas embarcados.
+%O objetivo é garantir o tempo de duração da bateria especificado pela aplicação,
+%com a execução e garantia dos \deadlines{} de, no mínimo, tarefas prioritárias
+%especificadas previamente. Nesse contexto, nós propomos equações que verificam
+%em tempo de projeto se as tarefas são escalonáveis. Em tempo de execução um
+%escalonador preemptivo para tarefas imprecisas baseado no algoritmo 
+%\textsc{EDF} impede que as tarefas executem suas partes opcionais caso os 
+%\deadlines{} das partes obrigatórias ou o tempo de duração da bateria possam não
+%ser atendidos. Um protótipo foi desenvolvido no \epos{} (\emph{Embedded Parallel
+%Operating System}) com a utilização de seus mecanismos de gerência de energia.
+
+
+%\end{resumo}
+
+
+\input{textos/introduction}
+\input{textos/related}
+%%\input{textos/motivacao}
+\input{textos/concepts}
+\input{textos/proposal}
+\input{textos/implementation}
+\input{textos/conclusion}
+
+
+
+\bibliographystyle{sbc}
+\bibliography{bibs/powerManager,bibs/hardware,bibs/impreciseComputations,bibs/lisha,bibs/wsn,bibs/os,bibs/rt,bibs/minhas}
+
+\end{document}

@@ -1,0 +1,92 @@
+\section{Energy-aware ADHOP}
+\label{sec:energy_aware_adhop}
+
+Energy-aware routing algorithms usually differ in the way they choose routes.
+Some algorithms only consider the energy of the transmitter and neglect the energy consumption of the receivers when determining the routes.
+Others only consider the energy on the receiver.
+In a few others, depending on the approach, the nodes compete or cooperate to save energy and balance the energy consumption in the network.
+Also, there is the possibility of increasing the data delivery ratio due to a better connectivity when the algorithms prevent nodes in the network from running out of energy too early.
+
+%- How ADHOP can use energy as heuristic information to reduce, balance, or just improve the delivery ratio in the network.
+In its design, ADHOP uses different heuristics for different purposes, i.e. it can adapt itself to different types of networks to achieve a certain goal.
+The EA-ADHOP approach aims at using the adaptability of its algorithm to achieve energy efficiency without sacrificing delivery ratio.
+This algorithm can thereby work competitively or cooperatively to save energy or balance the network.
+
+%- Explain how ADHOP take these energy information in the neighborhood. (Protocol structure - previous section)
+%- What kind of energy information can be used, and how they are translated to the operations of deposit and evaporation. (Equations)
+%   * Residual energy.
+%   * Energy consumption.
+%   * Estimated battery lifetime.
+All energy information can be collected and shared involuntarily by ants as they traverse the network.
+In the \emph{Heuristic Inf.} field (Figure \ref{fig:protocol}), all ants attach some relevant information to the energy-aware routing, such as residual energy, lifetime, or consumed energy.
+The algorithm uses such information to calculate the pheromone deposit ratio and the evaporation ratio (Equations~\ref{eq:pheromone_increasing} and \ref{eq:evaporation}).
+For instance, ADHOP can use the following cooperative heuristic: ``\emph{Always transmit the data to the neighbor node with higher estimated lifetime}'', as shown in Figure~\ref{fig:ant_energy}.
+In this heuristic, the ants bring the estimated lifetime of the last neighbor node from which they came from.
+The $\varphi$ value depends on the value assigned in the \emph{Heuristic Inf.} field.
+Meanwhile, the algorithm decrease the evaporation ratio to the nodes with higher estimated lifetime by decreasing the $\rho$ value.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{fig/ant_energy.pdf}
+\caption{EA-ADHOP - Choosing the node with higher lifetime.}
+\label{fig:ant_energy}
+\end{figure}
+
+% Heuristic metrics
+EA-ADHOP may use two distinct energy-aware metrics to guide its routing.
+% Battery charge
+The first metric considered is the battery charge.
+In this configuration, the \emph{Heuristic Inf.} field of ants receives a value representing the current charge of the battery at the nodes.
+The range of this value is $(0,1]$, representing the battery charge ranging from 0\% to 100\%.
+The battery charge metric is viable in WSNs where the energy source is symmetric, i.e. in WSNs where every battery in every node is the same size.
+For instance, suppose two nodes in a network, being one powered by a battery of 1000 mAh and another one with a battery of 200 mAh.
+If the first one is 30\% charged, it has 300 mAh remaining, and if the second one is 50\% it has 100 mAh remaining.
+In this scenario, ADHOP would deposit more pheromone in the link to the node with less energy, once the relative charge on that node would be larger.
+This would render undesired behavior of the pheromone control mechanism.
+
+% Lifetime
+To cope with heterogeneous network nodes, the use of an estimative of battery lifetime instead of battery charge would suffice.
+In the battery lifetime configuration, an assumption exists that there is a targeted operation lifetime for the network.
+Thus, the \emph{Heuristic Inf.} field of ants receives a value representing the proximity of the estimated lifetime of a node to its targeted lifetime.
+The range of this value also is $(0,1]$, representing the percentage of the estimated lifetime of a node compared to the targeted lifetime of the system.
+The approach for defining the estimated battery lifetime is in Equations~\ref{eq:discharge_rage}, \ref{eq:estimated_lifetime}, and \ref{eq:lifetime_metric}.
+Firstly, the lifetime estimator defines the rate at which the system consumes energy ($D_i$).
+The discharge rate is the division of the amount of consumed energy by the amount of elapsed time.
+Afterwards, the division of the current battery charge by the computed discharge rate would give the estimated lifetime ($\hat{L}$).
+Finally, there is a correction of the estimated lifetime to the $(0,1]$ range performed by dividing $\hat{L}$ by the time remaining to reach the targeted lifetime ($L_T$).
+Whenever the estimated lifetime is larger than the targeted lifetime, the heuristic metric value ($H_L$) assumes the value of one.
+
+\begin{eqnarray}
+\label{eq:discharge_rage}D_i = \frac{E_{batt}^i - E_{batt}^0}{t_i}\\
+\label{eq:estimated_lifetime}\hat{L} = \frac{B_i}{D_i}\\
+\label{eq:lifetime_metric}H_L = min \left (~1~,~\frac{\hat{L}}{(L_T - t_i)}~\right )
+\end{eqnarray} 
+
+%- Dependences for implementation: how to acquire the information above.
+To build energy-awareness in ADHOP, it needs access to energy-related information.
+There are three facets of energy that may to be taken into account in wireless sensor network systems: consumption, production, and storage.
+In this system, only consumption and storage are considered.
+This system uses a combination of measurements and event accounting to monitor energy~\cite{Hoeller:SMC:2011}.
+
+Equations~\ref{eq:en_dev_time} through~\ref{eq:energy} show the employed energy consumption model.
+Depending on the behavior of a given component, or the information available about its energy consumption, the designer may choose to monitor energy consumption based either on the time the device spends in a particular operating mode or on the events generated by the device.
+$E_{tm}^i(d,\phi)$ defines the energy consumed by a single device ($d$) over time as a function of current drain ($I$) and time ($t$) spent in an operating mode ($m$) with a specific configuration ($\phi$).
+$E_{ev}^i(d,\phi)$ is the sum of the energy consumed by events that are relevant in terms of energy consumption.
+During execution, the system accounts for these events ($\chi$).
+Each event has a known worst-case energy consumption ($E_e(\phi)$) that is subject to a specific configuration ($\phi$).
+In the case of a device consuming energy in both ways, both energy consumption profiles can be applied.
+Finally, $E_{tot}^i(\phi)$ is the sum of the estimated energy consumption of all system devices ($\Delta$), during the $ith$ iteration.
+\begin{eqnarray}
+\label{eq:en_dev_time} E_{tm}^i(d,\phi) = (t_{end} - t_{begin}) \times I(d,m,\phi)\\
+\label{eq:en_dev_ev} E_{ev}^i(d,\phi) = \sum_{e=0}^{|\chi|} (E_e(\phi) \times \chi_e)\\
+\label{eq:energy} E_{tot}^i(\phi) = \sum_{d=0}^{|\Delta|}{(E_{tm}^i(d,\phi) + E_{ev}^i(d,\phi))}\\
+\label{eq:batt_charge} E_{batt}^i = E_{batt}^{(i-1)} - E_{tot}^{i}(\phi)
+\end{eqnarray}
+
+$E_{tm}^i$ is updated either on every operating mode change or periodically, when $E_{ev}^i$ and $E_{tot}^i$ are also updated.
+The period of the iterations ($i$) vary from application to application and has already been subject of previous studies~\cite{Hoeller:SMC:2011}.
+The amount of energy available to the system in a given moment ($E_{batt}^i$) can be estimated as shown in Equation~\ref{eq:batt_charge}.
+Given a previously known battery charge ($E_{batt}^{(i-1)}$), current battery charge comes from the subtraction of the amount of energy consumed in a period ($E_{tot}^i(\phi)$).
+
+% section energy_aware_adhop (end)
+

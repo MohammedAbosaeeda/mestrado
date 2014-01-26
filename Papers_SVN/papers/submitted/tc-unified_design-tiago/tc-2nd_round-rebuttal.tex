@@ -1,0 +1,589 @@
+\documentclass[english,10pt]{letter}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{babel}
+\usepackage[top=.5in,bottom=.5in,left=1in,right=1in,noheadfoot]{geometry}
+\usepackage{graphicx,url,color}
+\definecolor{Red}{rgb}{.9,0,0}
+\definecolor{Green}{rgb}{0,.9,0}
+\definecolor{Blue}{rgb}{0,0,.9}
+\definecolor{Gray}{rgb}{.8,.8,.8}
+
+\address{\sffamily
+\begin{tabular}{p{9.5cm}r}
+&Tiago Rogério Mück  and\\
+&Prof.~Dr.~Ant\^{o}nio Augusto Fr\"{o}hlich\\
+&Federal University of Santa Catarina\\
+&Florian\'{o}polis, 88040-000, Brazil\\
+&Phone: +55 (48) 3721-9516\\
+&E-Mail: \{tiago,guto\}@lisha.ufsc.br\\
+    \\
+\multicolumn{2}{r}{\today}
+\end{tabular}
+}
+
+\date{}
+
+\signature{
+  %\begin{center}
+   %\raisebox{-.9cm}[0pt][0pt]{\includegraphics[scale=1]{}\\
+%    \hrulefill\\
+%    Tiago~Rogério~Mück~and~Antônio~Augusto~Fröhlich
+  %\end{center}
+\vspace{-1cm}
+\begin{tabular}{p{8cm}}
+Tiago Rogério Mück and Antônio Augusto Fröhlich
+\end{tabular}
+}
+
+\newcommand\rev[1]{Reviewer's comment: {\em #1}}
+
+\begin{document}
+
+\begin{letter}{IEEE Transactions on Computers\\
+    Editor-in-Chief\\
+    Prof. Dr. Albert Y. Zomaya
+}
+\opening{Dear Prof. Zomaya,}
+\setlength{\parskip}{1.5ex}
+
+A revised version of the manuscript "Unified Design of Hardware and Software Components",
+initially submitted to the IEEE Transactions on Computers on July 2012 (log
+number TC-2012-06-0397.R1), has just been uploaded through the manuscript submission site under
+the title ``Towards Unified Design of Hardware and Software Components Using C++''. 
+
+First of all, we would like to thank the reviewers for the detailed discussion. In summary, the
+main changes carried out in this resubmission were:
+
+\begin{itemize}
+    \item the manuscript title was changed to ``Towards Unified Design of Hardware and Software
+Components Using C++''
+    \item Figure 2 and the second paragraph in section 4.1 were changed to explain more clearly the
+issue of mapping object-oriented design to physical implementations;
+    \item To clarify the points highlighted by the reviewers regarding the general applicability of
+our approach, major changes were performed in the remaining of section 4 and in section 5:
+    \begin{itemize}
+        \item We extended the 6th paragraph of section 4.2 and moved it a new section \emph{4.2.1
+Scheduler implementation}. This section gives more details about our example;
+        \item The explanation of how hardware/software concerns influences component implementations
+was improved and moved to section a new section \emph{4.2.2 Scheduler implementation for HW/SW};
+        \item Former section 4.2.1 became section 4.2.3;
+        \item For improved readability, the scenario adapter example in section 4.3.1 is now part
+of a new section \emph{4.3.4 Example: adapting the Scheduler};
+        \item The definition of the dispatching aspect was improved to show how different synthesis
+tools and interfaces can be supported and abstracted;
+       \item We extended section 5 with more details about the implementation of proxies and
+agents, emphasizing how different target platforms can be supported;
+    \end{itemize}
+    \item Case studies description in section 6 is summarized to reduce the section size and make
+room for the improvements above;
+    \item Improved section 7 with some direction for future work.
+\end{itemize}
+
+Please find below a more detailed description of how we have addressed the issues pointed out by
+each reviewer.
+
+\textbf{\large Reviewer \#1}
+
+\begin{enumerate}
+\item \rev{The examples are not discussed very well. Instead of giving some details, the authors add
+some basic literature on programming. For me, this is not a satisfactory response to review and I
+cannot understand why the authors did not simply explain their examples.}
+\vspace{2mm}
+
+We have reviewed the previous manuscript considering the reviewer opinion. In the revised version,
+we have substantially extended the description of our example in section 4.2. The new sections
+4.2.1 and 4.2.2 now gives more details about the how hardware/software specific concerns are
+detached from the base implementation of the scheduler. Sections 4.3 and 5.1 were also extended in
+order to explain how our design artifacts can be used to support different synthesis approaches and
+target platforms. We cover this concern in the next answer and in the answer for Review \#3,
+comment \#3.
+
+%%%%%%%%%%%%%%%
+
+\item \rev{An important conecern in my review was that the proposed approach is only useful when
+using a high-level synthesis tool, which supports synthesis of functions. The authors responded to
+this concern by simply adding a sentence that their proposed approach could be used with other
+synthesis tools as well. So far, so good, but I am not interested in reading that the proposed
+approach could be used with other tools I am interested in understanding how it works.}
+\vspace{2mm}
+
+We have extended the description of the dispatching mechanism in section 4.3.1 and given more
+details related to its specialization considering different interface synthesis requirements. In the
+revised manuscript, Figure 6 illustrates this process and shows specializations for two different
+entry-point definitions: one based on a single function and one based on a SystemC module. We believe
+this new example gives the reader a clearer understanding on how our static metaprogrammed approach
+can be further applied to different C++-based synthesis tools.
+
+\end{enumerate}
+
+\textbf{\large Reviewer \#2}
+
+\begin{enumerate}
+\item \rev{The only complain I have is a minor style issue. We now have section 4.2.1, but there is
+no section 4.2.2. The authors may want to merge section 4.2.1 into section 4.2.}
+\vspace{2mm}
+
+We thank the reviewer for pointing out this issue. This has been addressed in the revised
+manuscript.
+\end{enumerate}
+
+
+\textbf{\large Reviewer \#3}
+
+\begin{enumerate}
+\item \rev{References to Wikipedia should be replaced by well recognised literature.}
+\vspace{2mm}
+
+We have changed the previous references about OOP, UML, and C++ to the following ones:
+
+\begin{verbatim}
+ [6] K. Czarnecki and U. W. Eisenecker, Generative programming: methods,
+     tools, and applications. New York, USA: ACM Press/Addison-
+     Wesley Publishing Co., 2000.
+[34] C. Larman, Applying UML And Patterns: An Introduction To Object-
+     Oriented Analysis And Design And Iterative Development. Prentice
+     Hall PTR, 2005.
+[35] A. Alexandrescu, Modern C++ Design: Generic Programming and
+     Design Patterns Applied, ser. C++ in-Depth Series.     Addison-
+     Wesley, 2001.
+\end{verbatim}
+
+%%%%%%%%%%%%%%%
+
+\item \rev{The approach is technically based on C++. For this reason I would propose to modify the
+title of the article in the following way: ``Towards a Unified C++-based Design of Hardware and
+Software Components''}
+\vspace{2mm}
+
+We would like to thank the reviewer for the suggestion. Although the object/aspect oriented domain
+decomposition is independent from the implementation language, we agree that our current approach
+has been driven by technical characteristics of C++ and the support of HLS tools for C++-based
+languages.
+
+%%%%%%%%%%%%%%%
+
+\item \rev{The overall approach is targeted for a specific implemenation platform, as described in
+Section 5.2. Still it becomes not clear how the proposed approach supports a separation of the
+behaviour/functionality and the mapping to the implementation platform (including certain
+artefacts). For instance, a real-time operating system could be considered as platform artefact. For
+reuseablilty of the behaviour model (i.e. retargeting to another platform with a different or even
+without an operating system) the separation of functionality and structure should be as explicit as
+possible. The approach presented in the article seems to be very tailored to the EPOS environment.
+If this should be a remaining limitation of the work I would appreciate if you would metion this in
+the future work.}
+\vspace{2mm}
+
+We presented the platform described in 5.2 as a possible ``implementation instance'' of the
+mechanisms mentioned earlier on section 5, however our approach is not limited to that particular
+system architecture. Nevertheless, we agree with the reviewer comment since we have skipped some
+details on how this portability can be provided. In the revised manuscript, we have improved the
+first paragraphs of section 5 and figure 7 in order to illustrate how different implementation
+approaches can be encapsulated using templates and static metaprogramming. This encapsulation is
+performed by first separating in different classes the component-specific and the platform-specific
+behavior of proxies/agents. Different platform-specific behavior is supported by specializing the
+related classes in a way in which the correct platform can then be automatically chosen through
+configurations provided in system trait classes. A comprehensive example of this approach has also
+been added to section 4.3.1 (please, refer to Review \#1, comment \#2)
+
+
+%%%%%%%%%%%%%%%
+
+\item \rev{In general the conclusion could be significantly improved by a summary of the advantages
+and drawbacks of the proposed approach. In an outlook on future work possible solutions for the
+mitigation of existing drawbacks could be described. This would definitely further enhance the
+quality of the article.}
+\vspace{2mm}
+
+Although we have chosen to keep a more conceptual discussion at section 4.4, we extended section
+7 to stress the contribution and also provide our prospect for future work:
+
+\begin{verbatim}
+  Our future works are twofold. As the comparison
+between hardware implementations suggests, new fea-
+tures must be considered in order to provide a better
+support for high throughput data-oriented applications.
+Our main concern with this aspect is on the seamless
+integration of stream-oriented interfaces with our object-
+oriented modeling approach. Furthermore, though the
+application of our design strategy to new cases, we also
+aim to identify new hardware/software aspects that can
+be encapsulated using the proposed mechanisms.
+\end{verbatim}
+
+\end{enumerate}
+
+
+\vspace{1cm}
+\closing{Sincerely,}
+
+\clearpage
+
+\textbf{\large Annex: Changes in the first resubmission}
+\vspace{1cm}
+
+Main changes carried out in the first resubmission:
+
+\begin{itemize}
+    \item In section 3, we added an explanation about basic OOP concepts and extended the
+description of ADESD and AOP;
+    \item Minor changes in section 4.1 to make the purpose of Figure 2 clearer;
+    \item To clarify the points highlighted by the reviewers and improve the paper organization,
+major changes were performed in the remaining of section 4:
+    \begin{itemize}
+        \item We extended the original section \emph{4.2.1 Component implementation} and merged
+its contents in to the top-level section \emph{4.2 Defining C++ unified descriptions};
+        \item Concerns related to the limitations of high-level synthesis were moved to a new
+section \emph{4.2.1 Synthesis considerations};
+        \item We added a paragraph about bit-accurate data types in the new section 4.2.1;
+        \item The original subsection 4.2.2 became subsection 4.3 and was extended to provide a
+more detailed explanation about our approach to apply hardware/software aspects and to consider
+alternative solutions;
+        \item Former sections \emph{4.2.3 Wrapping communication} and \emph{4.3 Implementation
+flow summary} moved to a new section \emph{5 Deployment of unified components};
+        \item We added a new section \emph{4.4 Summary and discussion} that summarizes our approach
+and discuss other methods for describing hardware and software in a common language;
+    \end{itemize}
+    \item We extended section 5 with more details about the implementation of proxies and agents;
+    \item Minor changes in section 6 (former section 5):
+    \begin{itemize}
+        \item Details of the base SoC platform moved to section 5;
+        \item Error bars added to measured execution times;
+        \item Improved the readability of Table 5;
+        \item Minor changes to reduce the section size
+    \end{itemize}
+\end{itemize}
+
+Please find below a more detailed description of how we have addressed the issues pointed out by
+each reviewer.
+
+\textbf{\large Reviewer \#1}
+
+\begin{enumerate}
+\item \rev{In my opinion, the main weakness of the paper lies in the presentation of proposed
+solution in section 4. Instead of giving general guidelines, the authors only present sample code
+snippets, which provide solutions for their running example.}
+\vspace{2mm}
+
+We have carefully analyzed the way we present our approach, and we agree that the most general
+guidelines were indeed not very clear. In summary, these guidelines consists in the following: 
+1) limiting component interaction to method calls allow the creation of a
+generic external mechanism; 2) components that require resource allocation must be designed in order
+to deal with links to the expected resources, thus allowing such allocation to be performed
+externally using the most suitable approach for hardware or software; and 3) the C++ in the unified
+implementation must be synthesizable. We have reorganized and extended section 4 in order to make
+the considerations above clearer.
+\vspace{2mm}
+
+The latter guideline does not affect the actual design of the components, but consists
+mostly of coding guidelines that must be followed due to current limitations of high-level
+synthesis. Such guidelines were all moved to a new section \emph{4.2.1 Synthesis considerations}.
+\vspace{2mm}
+
+The former ones must be considered during the domain decomposition process; otherwise the
+incorporation of hardware/software characteristics using the proposed aspect weaving approach would
+not be possible. Since explaining the OOP decomposition process itself is not in the scope of this
+paper, we have showed the \emph{Scheduler} as a case that satisfies the considerations mentioned
+above. In order to make clearer how this is achieved, we have extended the description of the
+Scheduler in section \emph{4.2 Defining C++ unified descriptions}. Also, to better demonstrate how
+hardware/software characteristics can then be applied in a systematic way using the proposed
+scenario adapters, we have reorganized and extended section \emph{4.3 HW/SW aspects
+encapsulation}: section 4.3.1 first presents the hardware/software aspects in details; section 4.3.2
+then shows their aggregation to build a scenario; and section 4.3.3 describes the scenario adapter
+definition. We have also replaced the previous scenario diagram of Figure 4 by a more detailed one
+which shows the inheritance/template specialization structure more clearly.
+\vspace{2mm}
+
+We have also created a new section \emph{4.4 Summary and discussion}. This section summarizes
+our strategy and highlights the points mentioned above. It also includes a discussion suggested in
+the comments 2 and 4 from reviewer \#3.
+
+\item \rev{Often, the code snippets are even not discussed at all, which makes it difficult to even
+comprehend this particular solution. Especially, I do have problems understanding the Traits example
+on page six in the right column.}
+\vspace{2mm}
+
+We thank the reviewer for pointing out these issues. We have improved the explanation of all code
+snippets. The provided explanations, however, assumes prior knowledge about object-oriented
+constructs in C++ and templates. Due to the page limit, we cannot review more general C++ concepts
+in the paper. Therefore, we have only added the following footnote (page 3, third paragraph) that
+provides some resources to which the reader may refer:
+
+\scriptsize\begin{verbatim}
+       1. this paper assumes prior knowledge about OOP, UML and C++.
+An overview of the relevant concepts is available at [31], [32], and
+[33]. The reader may also refer to [34], [7], and [35] for an indepth
+explanation.
+\end{verbatim}\normalsize
+
+The following additional references were added:
+
+\begin{verbatim}
+[31] "Wikipedia - Class diagram," 2012,
+     http://en.wikipedia.org/wiki/Class_diagram.
+[32] "Wikipedia - Object-oriented programming," 2012,
+     http://en.wikipedia.org/wiki/Object-oriented_programming.
+[33] The C++ Resources Network, "Templates," 2012,
+     http://www.cplusplus.com/doc/tutorial/templates/.
+[34] C. Larman, Applying UML And Patterns: An Introduction To Object-
+     Oriented Analysis And Design And Iterative Development. Prentice
+     Hall PTR, 2005.
+[35] A. Alexandrescu, Modern C++ Design: Generic Programming and
+     Design Patterns Applied, ser. C++ in-Depth Series.     Addison-
+     Wesley, 2001.
+\end{verbatim}
+
+Regarding the specific Traits example, we have extended the explanation of the trait concept in the
+second paragraph of section 4.3.2. Additional code examples are provided in sections 4.3.2 and
+4.3.3. We have also added a reference to the original proposal of the trait concept, which provides
+additional examples:
+
+\begin{verbatim}
+[43] N. C. Myers, "Traits: a new and useful template technique," C++
+     Report, June 1995. [Online]. Available: http://www.cantrip.org/
+     traits.html
+\end{verbatim} 
+
+\item \rev{No alternative solutions are discussed. This would have been interesting especially for
+the static allocation and dispatching aspects. In particular, the proposed dispatching strategy is
+very specific for the CatapultC high-level synthesis. Nearly all other HLS tools do not use a single
+function signature for describing hardware components. They typically require to present hardware
+components as SystemC modules having signal ports or transaction sockets. In this case, the proposed
+solution could not be applied directly.}
+\vspace{2mm}
+
+We agree with the reviewer in the sense that in our explanation we mentioned only one of the
+possible approaches; however, this is not a limitation for our proposal. Our current implementation
+of the dispatcher is compliant only with CatapultC since it is the tool used in our experimental
+evaluation. Nevertheless, the technical effort to define a top-level SystemC module for another
+HLS tool is about the same. To highlight the alternative solutions, we have added the following
+sentences in the last paragraph of section 4.3.1: 1) \emph{In Calypto's CatapultC [1] and Xilinx's
+AutoESL [5], for instance, the top-level interface of the resulting hardware block (port directions
+and sizes) is inferred from a single function signature}; and 2) \emph{Some tools require the
+definition of the entry point as a SystemC module with signal ports used to define the IO protocol.
+Our current implementation is compliant only with CatapultC, since it is the tool used in our
+experimental evaluation. Nevertheless, the Dispatch aspect can be specialized to support different
+entry-point requirements and different IO protocols (e.g. two-way handshaking, bus-based, etc). Upon
+system generation, the desired dispatcher can be selected using a \emph{Trait}}.
+\vspace{2mm}
+
+We have also added more details to Figure 4, which makes clearer the specialization of the
+\emph{Dispatch} aspect.
+
+\item \rev{Moreover, why do the authors define their own allocation class while the standard
+template library is already providing a ready to use implementation? In summary, by only providing
+some examples, it is not clear what exact solution is proposed. Hence, the applicability of the
+solution and its limitations remain unclear.}
+\vspace{2mm}
+
+In principle, we could have relied on STL; however, current STL implementations are not
+synthesizable. Nevertheless we agree that STL should be mentioned in the paper as a possible
+alternative. We have added the following sentence in the third paragraph of section 4.3.1: \emph{A
+similar approach that uses external allocators for containers such as lists is provided by the C++
+standard template library (STL) [42]. In principle, we could have relied on STL; however, current
+STL implementations are not synthesizable.}
+\vspace{2mm}
+
+Also in section 4.3.1, we have extended the explanation of the List code example and added a code
+snippet showing part of the \emph{Static Alloc} aspect implementation.  We believe this will give
+the reader a clearer idea of the applicability of our allocators.
+
+\item \rev{Although the paper addresses an important topic and the results clearly show the benefits
+of the proposed approach, the presentation of the key contributions is in my opinion too weak to
+accept the paper for publication. As only some illustrative examples are given without providing
+more general guidelines, the paper looks more like a case study presentation than a research paper.}
+\vspace{2mm}
+
+In the answer for comment \#1 we have described how we have addressed these issues. We would like to
+thank the reviewer for the constructive comments and we hope that the improvements to the
+manuscript will be sufficient to answer the main concerns raised by the reviewer.
+
+\end{enumerate}
+
+\textbf{\large Reviewer \#2}
+
+\begin{enumerate}
+\item \rev{Without reading the previous work of the authors it is very hard to get a deeper
+understanding of the technical concept and soundness of the approach. Section 3 should better aim on
+giving an introduction to the general concepts of aspects and aspect weaving. Currently section 3
+points to previous work and gives only little high-level/abstract information.}
+\vspace{2mm}
+
+We would like to thank the reviewer for pointing out this issue. We agree that a reader with little
+background on OOP, AOP
+and C++ may find it difficult to understand the ideas shown in the paper. In the revised
+manuscript, the first paragraph of section 3 presents some basic concepts of OOP. We also extended
+the description of AOP concepts and the ADESD methodology in the subsequent paragraphs. As mentioned
+by reviewer \#3, an introduction to UML and C++ templates was also missing. However, due to the page
+limit, we cannot provide an in-depth explanation of these concepts, but we have added a footnote
+that provides additional references. Please refer to comment 2 from reviewer \#1 for these changes.
+
+\item \rev{In Section 4.1 the comparison of TLM-based communication and communication in
+object-oriented modes seems to be a little strange. Without giving further details on the
+methodology behind the presented approach (incl. different models for the application, execution
+platform and the mapping of application elements to component of the execution platform) this
+comparison is dangerous. Communication in object-oriented application models describe application
+specific communication, while TLM models describe how communication is realized in the execution
+platform through physical channels.}
+\vspace{2mm}
+
+Our goal with Figure 2 is not to provide a direct comparison between OOP and TLM as methodologies
+for the same purpose. We believe the following sentence may induce the reader to this
+misunderstanding: \emph{This strategy provides a clear separation between communication and
+behavior, but it is still too hardware-oriented since it basically provides higher-level versions of
+RTL signals.}
+\vspace{2mm}
+
+This sentence was removed and we have done minor changes in the second paragraph of section 4.2 to
+emphasize our main goal with Figure 2, which is to illustrate the problem that arises when an
+object-oriented approach is used to describe hardware/software components. As described in the
+paper: \emph{In OOP the original structure will be "disassembled" if different objects in the same
+class hierarchy represent components that are to be implemented in different domains. For example,
+C2 is ``inside`` C1 in the OO model in Figure 2, but, in the final implementation, C1 could be
+implemented as a hardware component while C2 could run as software in a processor}. This also
+motivates the use of the proxy/agent mechanism described in section 5. Such problem does not exists
+in the TLM model, since, as highlighted by the reviewer, TLM is closer to the execution platform. 
+
+\item \rev{Section 4.2 aims at defining C++ unified description. This section appears to focus only
+on some specific issues like the use of pointers, static polymorphism, allocation, and dispatching.
+These issues are indeed important but the overall description of the unified description is missing.
+The presented techniques from template meta programming are interesting, but the description is not
+sufficient for understanding how these techniques are applied in a systematic way in an overall
+unified description.}
+\vspace{2mm}
+
+We have described how we have addressed this issue in the answer to comments 1 and 2 from Reviewer
+\#1.
+
+\item \rev{Section 4.2.3 presents the idea of a Remote Method invocation with marshaling and
+unmarshaling services. It remains unclear how these techniques are supported by the presented
+methodology. Nothing about interrupt handling for software calls is mentioned. }
+\vspace{2mm}
+
+We agree with the reviewer. The link between proxies/agents and their actual implementation was
+indeed unclear since the information was scattered among sections \emph{4 Unified hardware/software
+design} and \emph{5 Case study}. We have addressed this with the following changes in the revised
+manuscript:  former sections \emph{4.2.3 Wrapping communication} and \emph{4.3 Implementation
+flow summary} were moved to a new section \emph{5 Deployment of unified components}, becoming sections
+5.1 and 5.3 respectively; added a new section \emph{5.2 Implementation platform}.
+\vspace{2mm}
+
+The new section 5.2 describes the execution platform that is later used to deploy the case studies.
+This description provides details of the run-time support, which includes the information requested by
+the reviewer about interrupt handling for software calls.
+
+\item \rev{A Trait is a very generic template meta programming technique. It remains unclear how
+this technique solves the problem of HW/SW communication.}
+\vspace{2mm}
+
+In this context, the traits only encapsulate the information that the HLS tool or the compiler
+need to define if the component itself or its proxy is going to be instantiated. In the answer to
+comment 2 from Reviewer \#1, we provide a better description of the trait concept. We have also
+extended the explanation of the code snippet in the last paragraph of section 5.1.
+
+\item \rev{In the case-study error bars should be added to measured execution times.}
+\vspace{2mm}
+
+We have added error bars to Figures 13 and 15b. The figures now show that the execution time of
+the scheduler varies significantly according to the number of threads in the system, which is an
+expected result since we have experimented with 8 threads. This explanation was added to the third
+paragraph of section 6.1.
+
+\item \rev{The main focus of the case-study is on the comparison of component implementations using
+C++ with the presented unified C++ approach. The evaluation is quite extensive and could be
+reduced.}
+\vspace{2mm}
+
+We have reduced the case study section by moving the paragraphs that described Figure 11 in the original
+submission to the new section 5.2. Additionally, in order to comply with the page limit, we chose
+to reduce the description of the PABX system in the first paragraph of section 6 and removed the
+PABX system diagram from Figure 8.
+
+\item \rev{The results presented in Table 5 are hard to understand.}
+\vspace{2mm}
+
+Table 5 and its description were improved. The values in ()'s were moved to the \emph{System}
+column, since these values are used to define the "system" overhead (e.g. the memory footprint of
+the run-time support, FPGA area of the RTSNoC interconnect, etc.), while the \emph{Total} column
+shows the total area footprint.
+\end{enumerate}
+
+\textbf{\large Reviewer \#3}
+
+\begin{enumerate}
+\item \rev{On the general approachability of the text. The authors seem to assume that readers
+understand many concepts like "aspect-oriented programming", and do not really explain these
+concepts in the paper. More explanations on the concepts of OOP/UML and C++ template will be
+helpful. I understand that many basic concepts take much space to explain. Yet the author should at
+least say something like "we assume that the readers are comfortable with C++ templates and UML
+diagrams in the reset of this paper. For information on these, please see [xx] and [yy] for more 
+explanation."}
+\vspace{2mm}
+
+Please refer to the answer to comment 1 from Reviewer \#2.
+
+\item \rev{While the proposed method could work well for the purpose of describing hardware and
+software in a unified way, comparison with other methods for the same purpose is missing. For
+example, it is possible to use C (with extensions/pragmas) to describe both hardware and software (I
+know people in the industry doing so), and I believe what static metaprogramming offers can also be
+achieved using C language constructs, like macros and \#ifdef blocks. Discussion on the advantage of
+the proposed approach should be elaborated, with comparison to possible alternatives (not
+necessarily experiemtal comparison). For example, one of the advantages I can see is that the
+proposed approach is more systematic and thus can potentially offer better checking at the syntax
+level; i.e., a domain-specific compiler may easily inform the designer about missing constructs.
+Yet, a disadvantage could be that a coding style using static-metaprogramming can be difficult to
+debug. Comparisons like this could help the reader better understand the proposed method and
+appreciate its unique advantages.}
+\vspace{2mm}
+
+Indeed, old CPP macros are still widely used in practice and it is important to provide this kind
+of comparison in the paper. We would like to thank the reviewer for the suggestion. The second and
+third paragraphs of section 4.4 address these points.
+
+\item \rev{There are more differences in hardware design and software design that may need
+attention. For example, for high-level synthesis, bit-accurate data types are very useful. By using
+only enough bit widths for operators, storage elements and interconnects, significant saving in
+resource/power can be achieved. On the other hand, software compilers usually only use 8/16/32/64
+bit for integers. The tool used in your experiments, Catapult-C, supports the ac\_int/ac\_fixed
+datatypes in C++. I wonder if bit-accurate datatypes are used in your experimental evaluation? How
+do you unify the hardware/software description if bit-accurate datatypes are needed? My personal
+experience is that there can be subtle issues when overflow occurs.}
+\vspace{2mm}
+
+We have implemented our current components using the standard C++ data types (for instance, some of
+the data types can be seen in the UML diagrams in figures 9, 10, and 11) to ensure maximum
+flexibility of the unified code. However, we agree that bit-accurate data types are crucial to
+optimize the area of the final hardware design. We have addressed this point in the fifth paragraph
+of section 4.2.1. A possible way to provide bit accuracy while keeping a certain degree of
+uniformity is to use C++ typedef statements to define all allowed data types according to the target
+domain. For instance, a 5-bit integer can be defined in hardware using \texttt{typedef ac\_int<5>
+int5} and in software using \texttt{typedef char int5}, since \texttt{char} is the smallest native
+type with the required width. We believe this is a reasonable solution since most compilers and
+processor architectures support only 8/16/32/64-bit integer types, therefore true bit-accuracy in
+software would require additional shifting and masking operations that may add a significant
+overhead.
+
+\item \rev{The approach, as a coding style, can be applied to a more general class of "module
+selection" problem. The scenarios considered do not have to be limited to either "software" or
+"hardware". In high-level synthesis, the design space can be explored by using different pragmas
+(like loop unrolling/pipeling), and each implementation could be a scenario. Some of the techniques
+described in this paper can actually encode multiple sets of implementation options in a unified
+description.}
+\vspace{2mm}
+
+Although we consider that tuning the hardware microarchitecture using synthesis directives is
+part of the design space exploration and out of the scope of this paper; this is indeed an
+interesting direction for future works. The hardware scenario could be extended to also provide
+such kind of semantics in order to aid the design space exploration process. A possible approach
+would be, for instance, to specify synthesis directives using C's pragmas within an aspect. This
+aspect would have to be specialized for each component, HLS tool, and intended hardware
+microarchitecture, since each of these would require a different set of pragmas.
+\vspace{2mm}
+
+The last paragraph of section 4.4 address the points highlighted above.
+
+\end{enumerate}
+
+\end{letter}
+
+\end{document}

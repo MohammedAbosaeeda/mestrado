@@ -1,0 +1,130 @@
+% ------------------------------------------------------------------------------
+\section{Fundamentals} \label{fund}
+
+Energy-aware task scheduling has been a subject of intense research for the last three decades.
+Specifically for wireless sensor network systems, energy-aware issues have been investigated from a design-time perspective, mainly in four fronts:
+ low-power hardware design~\cite{Polastre:2005};
+ low-power communication protocols~\cite{Huang:2012,Pantazis:2012};
+ low-power applications~\cite{Mottola:2011};
+ and efficient energy sources~\cite{Sharma:2010}.
+A little effort has been dedicated to optimize the system performance through task scheduling while reducing energy cost in wireless sensor networks~\cite{Kulkarni:2011}.
+
+In this paper, we build on previous research~\cite{Hoeller:SMC:2011} in order to identify the benefits of having a more precise way of monitoring the energy source on real-time wireless sensor network systems.
+We specifically focus on wireless sensor networks systems that harvest energy from solar irradiation through photovoltaic cells.
+Within this context, this section describes a few fundamentals of the used technologies.
+
+\subsection{Solar Energy} \label{solar_usage}
+
+Power management is one of the main research topics in wireless sensor networks.
+Batteries, which have a limited energy capacity, are the most common option for powering sensors. % What would be the alternative with ``less limited capacity''?
+Sleeping modes and low power communication protocols \cite{Raghunathan:2006} emerged as a solution to extend systems' lifetime.
+Although this allows a better distribution of the consumed energy along the network, the idea of energy harvesting has been applied in order to deliver more energy to the nodes.
+This implies on further enhancement of system quality, as volume of communication and processing may be raised proportionally to the amount of available energy.
+
+\begin{table}[h]
+\renewcommand{\arraystretch}{1.3}
+\caption{Power Densities of Harvesting Technologies}
+\label{tab:power}
+\centering
+\begin{tabular}{c||c}
+\hline
+\bfseries Harvesting technology & \bfseries Power density			\\
+\hline\hline
+Solar cells (outdoors at noon) 				& $15~mW/cm^{2}$			\\
+Piezoelectric (shoe inserts)   				& $330~\mu W/cm^{3}$  	\\
+Vibration (small microwave oven) 			& $116~\mu W/cm^{3}$   	\\
+Thermoelectric $(10^\circ C$ $gradient)$ 	& $40~\mu W/cm^{3}$    	\\
+Acoustic noise (100dB)   					& $330~nW/cm^{3}$ 		\\
+\hline
+\end{tabular}
+\end{table}
+
+%\begin{center}
+%\begin{threeparttable}
+%\caption{Power Densities of Harvesting Technologies}
+%\label{tab:power}
+%\begin{tabular}{rlcc}
+%\hline
+%& $Harvesting technology$ 						& $Power$ $density$	\\
+%\hline
+%& $Solar$ $cells$ $(outdoors$ $at$ $noon)$ 		& $15mW/cm^{2}$		\\
+%& $Piezoelectric$ $(shoe$ $inserts)$   			& $330\mu W/cm^{3}$  	\\
+%& $Vibration$ $(small$ $microwave$ $oven)$ 		& $116\mu W/cm^{3}$   	\\
+%& $Thermoelectric$ $(10^\circ C$ $gradient)$ 	& $40\mu W/cm^{3}$    	\\
+%& $Acoustic$ $noise$ $(100dB)$   				& $330nW/cm^{3}$ 	\\
+%\hline
+%\end{tabular}
+%\end{threeparttable}
+%\end{center}
+
+As Table~\ref{tab:power} shows, different harvesting technologies present different power densities~\cite{Roundy:2003}.
+Also, it is shown that the solar modality presents the highest power density.
+However, many parameters should be taken into account when planning to operate a photovoltaic module, including solar irradiance, temperature variation, mechanical position and the photovoltaic module's electrical characteristics.
+Through experimentation,  photovoltaic cells' characteristic power and current curves, like the ones in Figure~\ref{fig:pv_plot}, are obtained under known operating parameters (e.g. temperature of $25~^\circ C$ and an irradiance of $1000~W/m^{2}$).
+These curves demonstrate that solar cells are remarkably versatile as they can operate from the state of open circuit -- where, theoretically, there is no current flowing -- to the state of short circuit -- where, theoretically, there is no voltage drop between the positive and negative terminals of the solar cell.
+The solar cell power curve is nothing but the product of voltage and current values in \emph{y} and \emph{x} axis.
+With this concept in mind, and assuming positive values for voltage and current, the power curve must have at least one maximum value.
+In order to extract the maximum power of the environment, a solar panel must operate as close as possible to this maximum power point.
+Normally, the maximum power is extracted from the solar panel by applying to it the $V_{MPP}$ (voltage at maximum power point).
+% There are several ways of achieving this goal.
+Electronic circuits, called \emph{maximum power point trackers} (MPPT), are responsible for ensuring the operation on this point.
+
+\fig{1}{pv_plot}{Typical solar cell voltage-current and voltage-power curves of polycrystalline silicon cells.}
+
+
+The idea of operating a solar panel as close as possible to its $V_{MPP}$ is not new \cite{Schoeman:1982}.
+The microelectronic industry has already developed integrated circuits able to keep a solar panel operating on its $V_{MPP}$.
+Most of these ICs, however, are dedicated to high power applications and present high power consumption, making it generally incompatible with low-power energy harvesting systems.
+Hence, MPPT circuits for low power applications are also being investigated.
+These circuits operate by detecting changes on the solar panel, computing the new $V_{MPP}$ and applying this voltage to the photovoltaic module.
+Changes in the behavior of the photovoltaic module happen mainly due to variations in temperature and solar irradiance.
+Thus, sensors are needed to monitor state changes.
+As these sensors imply in extra load in the system, its use also is often unfeasible in energy-sensitive or low-power systems.
+
+In order to solve this problem, electronic circuits were developed to extract the solar cell information directly from its electrical characteristics.
+Methods as Perturb and Observe~\cite{Liu:2004,Tan:2008}, Incremental Conductance~\cite{Jain:2004,Qin:2011}, Fractional Open Circuit Voltage~\cite{Ahmad:2010,Dondi:2008}, Constant Voltage~\cite{Yu:2002} are the most known.
+Although these are interesting methods, the solution described here is focused on working as close as possible to the MPP through an ideal match between the battery and the photovoltaic module.
+Although it is not the most efficient method, it is the simplest way of operating a solar panel closely to its MPP, and its efficiency have already been proved~\cite{Raghunathan:2005}.
+Besides its simplicity, this circuit provides accurate battery information to the sensing platform, what drove a significant improvement in its structure.
+
+\subsection{Energy consumption monitoring} \label{consumption}
+
+Since this work is strongly related with the energy consumption of the sensing platform, it is convenient to elucidate the currently implemented method for estimating its energy consumption and how it can be improved.
+The current method, Battery Level Monitoring by Event Accounting~\cite{Hoeller:SMC:2011}, proposes the energy consumption model described by Equations~\ref{eq:en_dev_time} through~\ref{eq:en_tm_ev} to estimate the battery charge.
+
+\begin{eqnarray}
+E_{tm}(dev) = (t_{end} - t_{begin}) \times I_{dev,mode} \label{eq:en_dev_time}\\
+E_{ev}(dev) = \sum_{event\_counters} E_i * counter \label{eq:en_dev_ev}\\
+E_{tot}(dev) = E_{tm}(dev) + E_{ev}(dev) \label{eq:en_tm_ev}
+\end{eqnarray}
+
+% In the equations,
+% $E_{tm}(dev)$ is the energy consumption in the time-based profile for a specific device,
+% $t_{end}$ and $t_{begin}$ denote timestamps,
+% and $I$ is the current of a device at a given operating mode.
+% $E_{ev}$ denotes the sum of energy ($E_i$) consumed by the observed events ($counters$). $E_{tot}$ is the energy consumption in the combined profile.
+
+The idea is to estimate the energy consumed by the devices in the sensing platform through two different perspectives.
+The first one (Equation \ref{eq:en_dev_time}) is dedicated to devices ($dev$) operating with constant current ($I$) over a time period ($t$) and in a determined mode ($mode$).
+The second perspective (Equation \ref{eq:en_dev_ev}) is event-based (e.g., sensor sampling), where energy consumed by specific events ($E_i$) are accumulated periodically according to the number of accounted events ($counter$).
+Finally, this total energy consumption (Equation \ref{eq:en_tm_ev}) is defined by the sum of $E_{tm}(dev)$ and $E_{ev}(dev)$.
+
+Components' datasheets are the base to estimate the inputs for equations~\ref{eq:en_dev_time} and~\ref{eq:en_dev_ev} (i.e. $I_{dev,mode}$ and $E_i$).
+Therefore, those equations render a pessimistic but safe estimation.
+In order to avoid underestimations when considering the worst case, the system measures battery voltage periodically to estimate actual battery charge.
+The battery energy ($E_{batt}$) is then calculated as shown in Equation~\ref{eq:batt_update}, where $E_{volt}$ is the battery energy estimation based on the battery voltage reading.
+
+\begin{equation}
+E_{batt} = max\left(E_{volt} , E_{batt} - \sum_{i = 0}^{\#devs} E_{tot}(i)\right) \label{eq:batt_update}
+\end{equation}
+
+%change expression time to time
+Measuring the battery voltage through a shunt resistor is the drawback of this method due to its power loss.
+This results in sporadic measurements.
+Besides providing the sensing platform with an energy harvesting circuit, the work in this paper also contributes to the performance of the scheduling mechanism.
+The performance enhancement is achieved by replacing $E_{volt}$ by the energy consumption readings of the battery monitor IC, which are more accurate.
+Also, the measurement may be realized with a higher frequency in the new approach, since these measurements are supported by the power coming from the solar panels.
+% It is known that there are more efficient circuits using MPPT techniques~\cite{Lopez:2010,Win:2010}, however, none of those works provide a solution with energy harvesting and energy schedulers simultaneously.
+% Besides that, the results of this work are meant to be compared with MPPT circuits, in order to investigate for which cases MPPT circuits are more suitable.
+
+% ------------------------------------------------------------------------------

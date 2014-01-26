@@ -1,0 +1,13 @@
+\section{Conclusions}
+\label{sec:conclusions}
+A basic end-to-end communication based on locations and connections is not an option for a Future Internet infrastructure-free environment where content consumers move through the network all the time. Also, with a high amount of content providers, it might be difficult to discover and use only secure and trusted sources of content. The often needed use of resource-constrained sensors in these networks only introduces more requirements to each node.
+
+In order to provide a solid solution to this scenario, we proposed a stack of communication protocols, in the scope of the EPOSMote project, that meet our requirements for a trustful infrastructure for Future Internet.
+Each protocol in our stack has a well defined function and was chosen to avoid unnecessary overhead.
+At the link layer, we apply a configurable protocol that allows us to adapt its functionality for each application.
+%and yet supporting NDN, which approaches several problems of TCP/IP including security requirements that are not considered in the IP architecture.
+At the network layer, NDN approaches several problems of the IP architecture including security requirements. 
+However, NDN is not a standard and leaves some open issues.
+Therefore we are still deciding which key distribution scheme, signature, and encryption algorithms best suit our needs, considering performance requirements such as latency and computational cost of signature generation and verification.
+At the transport layer, we have chosen UDP for its simplicity.
+We are looking forward to evaluate our proposal in a real environment with several Future Internet services and consumers.

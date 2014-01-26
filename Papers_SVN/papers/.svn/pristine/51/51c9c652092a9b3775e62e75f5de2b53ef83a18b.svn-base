@@ -1,0 +1,207 @@
+\section{Implementation in \textsc{EPOS}: a Case Study}\label{sec:epos}
+
+In order to validate the power management strategy for embedded systems
+proposed in this paper, which includes an API specification, guidelines
+for power management infrastructure implementation through
+aspect-programs, and design constraints for the development of
+autonomous power management agents, these mechanisms have been
+implemented in \textsc{Epos} along with the hypothetical remote
+monitoring application described in section~\ref{sec:api}. 
+
+\subsection{\textsc{Epos} Overview}
+
+\textsc{Epos}, the Embedded Parallel Operating System, aims at building
+tailor-made execution platforms for specific
+applications~\cite{Frohlich:JCS:2008}. It follows the principles of
+\emph{Application-driven Embedded System Design}~\cite{Frohlich:2001} to
+engineer families of software and hardware components that can be
+automatically selected, configured, adapted, and arranged in a component
+framework according with the requirements of particular applications.
+
+An application written based on \textsc{Epos} published interfaces can
+be submitted to a tool that performs source code analysis to identify
+which components are needed to support the application and how these
+components are being deployed, thus building an execution scenario for
+the application. Alternatively, users can specify execution scenarios
+by hand or also review an automatically generated one. A build-up
+database, with component descriptions, dependencies, and composition
+rules, is subsequently accessed by the tool to proceed component
+selection and configuration, as well as software/hardware partitioning
+based on the availability of chosen components in each domain. If
+multiple components match the selection criteria, then a cost model is
+used, along with user specifications for non-functional properties,
+such as performance and energy consumption, to choose one of
+them\footnote{Design-space exploration is currently being pursued in
+  \textsc{Epos} by making the cost model used by the building tool
+  dynamic.}.
+
+After being chosen and configured, software components can still
+undergo application-specific adaptations while being plugged into a
+statically metaprogrammed framework that is subsequently compiled to
+yield a run-time support system. This application-specific system can
+assume several shapes, from simple libraries to operating system
+micro-kernels. On the hardware side, component selection and
+configuration yields an architecture description that can be either
+realized by discrete components (e.g. microcontrollers) or submitted
+to external tools for \textsc{IP} synthesis. An overview of the whole
+process can be seen in figure~\ref{fig:epos_tools}.
+
+\wfig{epos_tools}{scale=.75}{Overview of tools involved in
+  \textsc{Epos} automatic generation.}
+
+
+\subsection{Example Application}
+
+The remote sensing application described in section~\ref{sec:api} was
+implemented in \textsc{Epos} as excerpted in
+figure~\ref{prg:example-source-epos}. When submitted to \textsc{Epos}
+tools, the remote sensing program yielded a run-time library that
+realizes the required interfaces and a hardware description that could
+be matched by virtually any hardware platform in the system build-up
+database. We forced the selection of a well-known platform, the Mica2
+sensor node~\cite{Hill:2004} by manually binding \texttt{Communicator}
+to the \textsc{CC1000} radio on the Mica2 platform and \texttt{Actuator}
+to a led. 
+
+In the experiment, energy for the system was delivered by two
+high-performance alkaline AA batteries with a total capacity of 58320~J
+(5400~mAh at 3~V), in excess of table~\ref{tab:example-energy_estimates}
+estimates of what would be necessary to match the intended life-time of
+one year (3576~mAh at 3~V). The system was configured with a scheduling
+quantum of 15 ms and a battery monitoring period of one day.  Energy
+accounting was enabled and produced statistics that were used by the
+scheduler on every thread dispatching.
+
+The experiment was profiled during approximately one week using a
+digital oscilloscope. From the collected data, we determined the average
+energy consumption per hour to be of 5.07 J. We then extrapolated the
+total energy consumption for one year to be of 4112~mAh. This
+extrapolation projects a system lifetime of 479 days, confirming that
+the system will match the expectations in this respect. This experiment
+also shows that the energy overhead caused by the implemented power
+management mechanisms is largely compensated by the power it saves (as
+calculated in section~\ref{sec:api}, running the example application
+without any power management would demand 40 times more energy than the
+predicted 3576~mAh). It is also important to notice that the additional
+536~mAh cannot be entirely accounted to power management. A fraction of
+it arises from the additional circuitry needed to couple the key
+components considered at design-time, another fraction from the
+non-linear discharge nature of the chosen batteries, and yet another can
+be accounted to misleading estimates published by manufacturers.
+
+This experiment also allowed us to asses the strategy overhead in terms
+of memory and CPU utilization.
+Table~\ref{tab:example-overhead-footprint} shows the memory increase
+caused by the proposed mechanisms.  The reference system was stripped of
+any PM capabilities and than enriched with the PM API, power accounting,
+and finally the autonomous manager integrated into the scheduler. The
+considerable increase in size for every step is justified by the fact
+that they affect all components in the system. The PM API required
+versions of mediators that are able to control the power mode of
+associated devices plus a global \texttt{System} object and access
+control to handle event propagation conflicts as described in
+section~\ref{sec:petri_nets}. Accounting enriched components with
+counters and the associated maintenance code. The autonomous manager
+required battery monitoring plus statistics handling and decision making
+support.
+
+\tab{.75\textwidth}{example-overhead-footprint}{Power management memory
+  overhead (sizes in bytes).}
+
+In respect to performance, the proposed mechanisms only substantially
+affect hardware mediators and the scheduler. Other system components,
+although adorned with \texttt{power()} methods and event counters, do
+not have their original behavior altered by the aspect programs
+responsible for power management and therefore show no performance
+loss\footnote{Some event counters are initialized at object construction
+  time through modified versions of operator \texttt{new}, but this
+  small overhead is usually restricted to start up phases.}.  In order
+to precisely asses the overhead caused by the proposed power management
+mechanisms, we inserted simple primitives to switch a led on and off
+around target methods and obtained the average active period with an
+oscilloscope. Table~\ref{tab:example-overhead-performance} shows the
+increase in execution time for context switch and I/O operations. The
+calculations performed by the scheduler to keep statistics and decide
+whether a best-effort task can be dispatched extended context switch
+time by 9$\mu$s (the target platform features an 8-bit AVR running at
+8MHz). The increment in the path to I/O devices caused by auto-resume
+and accounting was measured to be 60$\mu$s and reveals weakness of the
+target architecture to handle the associated arithmetics. Platforms
+capable of keeping event counters associated to I/O ports in hardware
+could eliminate a reasonable fraction of this overhead.
+
+\tab{.75\textwidth}{example-overhead-performance}{Power management
+  performance overhead (times in $\mu$s).}
+
+\subsection{Autonomous Power Manager}
+
+The example application discussed along this article has been conceived
+to support the explanation of the proposed power management strategy.
+Its implementation described in the previous section also allowed us to
+confirm most of the claimed benefits. Nonetheless, it does not feature a
+best-effort task that could corroborate the proposed autonomous power
+manager design.  Therefore, we extended it with two additional
+best-effort threads on a second experiment: thread \texttt{Calibrator}
+periodically calibrates the temperature sensor, and thread
+\texttt{Display} shows the current temperature on a led display.  Both
+threads make use of hardware components available in the original
+platform, but with a significant difference: \texttt{Calibrator} uses
+the thermometer, which it shares with \texttt{Monitor} and
+\texttt{Recovery}, while \texttt{Display} uses dedicated leds. This
+distinction is important to drive the power manager through a situation
+in which the decision about suspending resources (ADC in the
+thermometer) used by a frozen best-effort task (\texttt{Calibrator})
+must consider hard real-time tasks demands (\texttt{Monitor} and
+\texttt{Recovery}). The threads were created with periods of 100 seconds
+and 100 ms, respectively.
+
+% \begin{lstlisting}[language=C++,style=prg]
+% Periodic_Thread(&calibrator, BEST_EFFORT, 100000000);
+% Periodic_Thread(&display, BEST_EFFORT, 100000);
+% \end{lstlisting}
+
+Just like the example application, this second experiment was profiled
+during approximately one week using a digital oscilloscope and a new
+battery set. The results of the experiment are summarized in
+table~\ref{tab:example-energy_measurements}, which presents the system
+average energy consumption for five different setups: (a) executing
+without the additional threads; (b) executing the \texttt{Calibrator}
+thread with hard real-time priority and \texttt{Display} as best-effort;
+(c) the reverse situation, \texttt{Display} as hard real-time and
+\texttt{Calibrator} as best-effort; (d) with both threads running with
+hard-real time priority; and (e) with both threads running in
+best-effort priority.
+
+\tab{.75\textwidth}{example-energy_measurements}{Energy consumption
+  under different autonomous power manager setups (RT = hard
+  real-time / BE = best-effort).}
+
+Setup (a) is equivalent to the example application evaluated in the
+previous section and produced equivalent results. Setup (b) is impacted
+by the periodic ADC operations performed by \texttt{Calibrator} (100
+samplings every 100 seconds). The best-effort thread \texttt{Display}
+has virtually no chance to execute in this setup, since the accounting
+system quickly feeds the scheduler with information indicating that the
+desired lifetime of 365 days cannot be matched under the observed energy
+consumption rate. Setup (c) features a similar situation, but with
+switched roles. The led display used has a high tool on energy, so the
+system reached a lifetime of only 84 days. In this setup,
+\texttt{Calibrator} is the thread that is prevented from executing,
+however, the ADC it uses (via the thermometer abstraction) is not
+implicitly put to sleep, since it is also used by the \texttt{Monitor}
+and \texttt{Recovery} hard real-time threads.
+
+For setup (d), both threads have been configured as hard real-time, so
+they are always executed. This reduces the system's lifetime to about 76
+days.  Setup (e) is the one that best characterizes the proposed
+autonomous power manager. Running the additional threads in best-effort
+priority enables the scheduler to suppress their execution whenever the
+energy budget needed to achieve the specified lifetime is threatened.
+This smoothly drives the system toward the desired lifetime, enabling
+both threads to run just sporadically when the battery monitor indicates
+that there is enough energy.
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "pm"
+%%% End:

@@ -1,0 +1,265 @@
+% + Related Work
+%
+% This section reviews how hardware devices can be abstracted and organized:
+% it reviews the concept of HAL and it is shown why HAL (monolith) is not
+% suitable for embedded systems.
+% Then, hardware mediators are presented as an alternative to HAL.
+%
+% Then it presents the concept of FFI (how MPLs interact with hardware devices)
+% and show its limitations: it does not guide the developers on the abstraction
+% of hardware devices, manual utilization of an FFI can be error
+% prone (manual parsing), developer must take into consideration the semantics
+% of two distinct languages.
+% 
+% Then it presents the approaches to facilitate such interaction.
+% Generators are presented as a alternative, but they not focus on hardware
+% abstraction.
+%
+% [Talvez apresentar as outras coisas que existem além de FFI... ver aquele
+% paper "desmistifing magic" ...]
+% [Frameworks maybe
+% such as KESO FFI ...(no... I'm going to considerer just as a FFI) ]
+%
+% HAL Java is another approach...(hardware objects)
+%
+%
+% Resumindo:
+% \ref{sec:relat} reviews how hardware devices can be abstracted and organized,
+% how MPLs interact with hardware devices, and what are the approaches to
+% facilitate such interaction.
+% 
+% ------------------------------------------------------------------------------
+\section{Related work} \label{sec:relat}
+% In order to understand how hardware devices can be used
+% 
+% Two research fields are direct related to our work: how to abstract and organize
+% hardware devices to be used by high-level languages which direct memory access
+% support, such as C and C++,  and how these abstractions relate to MPLs.
+%
+Two research fields are direct related to our work: how to abstract and organize
+hardware devices to be used by software, and how make these abstractions
+accessible to MPLs.
+% 
+% This section reviews how MPL interact to hardware devices, and how hardware
+% devices are abstracted and organized to be used by software.
+
+\subsection{Hardware abstraction}
+\emph{Hardware Abstraction Layer} (HAL) is an approach to abstract
+hardware specificities, providing the operating system (OS)
+with abstract hardware devices.
+The hardware device abstraction is performed by services such as interruption
+handling, re-initialization handling, DMA transferences, timers' control, and
+multiprocessors synchronization \cite{Tanenbaum:2007:MOS:1410217}.
+
+In order to port a HAL to a new hardware platform,
+it is necessary to implement all services provided by such HAL.
+However, many services provided by a HAL might not be used by an application
+and providing all these services generates unnecessary memory and performance
+overhead.
+% 
+An example of overhead caused by the way HALs are designed and implemented is
+the \textsc{uCLinux}, an OS which target embedded systems. % CITE uCLinux.
+\textsc{uCLinux} inherits several of its features from \textsc{Linux},
+among them, the file system abstraction.
+Such fact impacts not only on the OS size, but also in all system
+initialization infrastructure and application loading \cite{Polpeta:2004}.
+
+An alternative to monolithic HALs are the modularized or component-based HALs.
+An example of component-based HAL can be found on \textsc{eCos} OS \cite{Massa:2002}.
+% XXX TODO referencia melhor (mais atual) para eCos
+Although, the HAL used by \textsc{eCos} is based on software components, it is
+not generated according to application needs, thus it can carry unnecessary code
+for the system.
+In the case of SOCs generated from the micro-architecture LEON2, for example,
+the \textsc{eCos} system assumes the existence of an UART device what is not
+necessarily true \cite{Polpeta:2004}.
+% 
+As \textsc{eCos}, the AUTOSAR initiative \cite{AUTOSAR-site} proposes an approach based on a
+modularized HAL.
+However, some AUTOSAR implementations solve the problem of using HALs with
+unnecessary code during the AUTOSAR generation process.
+This is the case of the KESO JVM, which provides Java for OSEK/AUTOSAR systems \cite{Thomm:2010}.
+During the configuration step of KESO, prior to linking, it is possible to select and
+combine basic software modules to create an application-oriented HAL.
+
+The development of components for abstracting hardware devices can be guided by
+a methodology based on domain engineering.
+That is the case of the Application-Driven Embedded System Design (ADESD)
+methodology \cite{Froehlich:2001} which has been used
+for abstracting hardware devices without
+generating unnecessary interdependencies between the devices been abstracted.
+The Embedded Parallel Operating System (EPOS) is ADESD main case study.
+At EPOS the abstractions, obtained from domain decomposition, are OS abstractions
+such as threads, semaphores, abstractions for communication such as network,
+channels, and others.
+In order to provide system abstractions with the needed hardware access, ADESD
+defines the concept of \emph{hardware mediator}.
+Hardware mediators sustain an interface contract between system abstractions and
+the machine, allowing for such abstractions to be machine-independent \cite{Polpeta:2004}.
+% 
+% Another interesting alternative to the monolithic HALs approach is the concept
+% of \emph{hardware mediator}, proposed by the Application-Driven Embedded System
+% Design (ADESD) methodology \cite{Froehlich:2001}.
+% ADESD uses domain engineering for to identify abstractions which, in the
+% operating systems domain, are threads, semaphores, abstractions for communication
+% such as network, channels, and others. The \emph{hardware mediator} then,
+% sustain an \emph{interface contract} between system abstractions and the machine,
+% allowing for such abstractions to be machine-independent \cite{Polpeta:2004}.
+% 
+
+Figure \ref{fig:hardware_mediator-gs} shows hardware mediators, and their
+relation to system abstractions.
+Besides been componentized and application-driven, hardware mediators are
+designed to be efficient.
+By using metaprogramming techniques and function inlining, it is possible to
+dissolve mediators in the abstractions that use them.
+Thus, the overhead of HAL service invocation is avoided.
+
+\figtwocolumn{.7}{hardware_mediator-gs}{Hardware Mediators.}
+
+As an example, Figure \ref{progcpp:hardware_mediator_code_example} shows part of the
+implementation of the \emph{CPU} hardware mediator for the IA32 architecture.
+The atomic methods
+\emph{finc} (\emph{Fetch and Increment}) and
+\emph{fdec} (\emph{Fetch and Decrement}) are used to implement semaphore
+operations \emph{v} and \emph{p}.
+Both methods are implemented using inline assembly and in a header (.h) file.
+Such methods are dissolved in the binding code generated by our tool,
+eliminating method invocation overhead and improving performance.
+
+\progcpp{hardware_mediator_code_example}{Implementation of the CPU mediator.}
+
+
+% \subsection{FFIs}
+\subsection{Hardware abstraction and MPLs}
+Automatic memory management is one of the main features provided by MPLs.
+Allocated objects are automatically freed after they are no longer needed,
+releasing developers from writing code to deallocate objects and eliminating the
+risk of memory leak.
+On the other hand, because MPLs use automatic memory management, the object
+address is only known by the runtime support system of the MPLs (e.g. Virtual Machine).
+Therefore, MPLs are unable to directly control memory mapped devices in the
+way languages such as C and C++ do (by using the concept of \emph{pointer}).
+MPLs also do not provide the concept of \emph{inline assembly}, used to
+control hardware devices by using dedicated I/O assembly instructions.
+In other to solve these limitations, MPLs use a mechanism called Foreign
+Function Interface (FFI).
+
+FFI is a mechanism that allows for programs written in one language to use
+constructs of a program written in another.
+The language that defines the FFI is called \emph{host language} and the
+language that has its constructs used is called \emph{guest language}.
+The host language is usually a higher level language (i.e. MPL) and the guest
+language is usually a lower level language, such as C and C++.
+% 
+The FFI mechanism has a high importance to MPLs, since runtime libraries of the
+MPL are often implemented by using FFI.
+This is the case of the Java Standard Platform (JSE), which uses FFI to
+implement packages such as \emph{java.io}, \emph{java.net} and \emph{java.awt}.
+% TODO: referencia sobre os pacotes Java e FFI...
+% 
+% However a FFI by itself does not guide the developers on the abstraction of
+% hardware devices, it just provides for the developers a way to access
+% constructions of other languages capable of access hardware devices directly.
+
+% NOTA: de repente trocar o exemplo do sum por algo mais a ver com hardware devices...
+The manual utilization of a FFI, however, is error prone.
+First, developers
+must take into consideration the semantics of two distinct languages
+(the host and the guest language).
+Second, many FFIs
+% such as KNI, NanoVM FFI and Lua FFI (cite...) demands
+demand
+the developer to make the ``\emph{parsing}'' of each native method manually.
+The following code illustrates the implementation of a sum method using the
+Java FFI KNI
+(a FFI used as based for many Java Virtual Machines - JVMs, targeting embedded systems)
+\cite{_k_2002}.
+% 
+\begin{verbatim}
+KNIEXPORT KNI_RETURNTYPE_VOID
+Java_simplemath_Adder_sum() {
+    jint a = KNI_GetParameterAsInt(1);
+    jint b = KNI_GetParameterAsInt(2);
+    KNI_ReturnInt(a + b);
+}
+\end{verbatim}
+% 
+In order to obtain the sum arguments, the developer must remember the order
+of the formal parameter declaration, represented by the indexes ``1'' and ``2''
+passed to FFI functions.
+
+% In order to solve the problem of manual parsing of native methods arguments and
+% to deal with the semantic differences between the languages handled by the FFI,
+% it is possible to generate the binding code or part of it.
+% 
+% The task of writing binding code can be facilitate in two ways: by having an
+% high level API to create bindings, and by using tools to automatically
+% generating them (partially or completely).
+% 
+% Binding code generators solve the problem of manual parsing of native methods
+% arguments and help to overcome the semantic differences between the languages
+% handled by the FFI.
+\emph{Binding code generators} solve the problem of manual parsing native methods
+arguments and deal with the semantic differences between the languages
+encompassed by an FFI.
+They generate the binding code (or part of it) from the
+native source code or from higher-level descriptions.
+% 
+The \textit{SWIG} \cite{swig-site} tool and the
+Python's foreign function library \emph{ctypeslib} \cite{ctypeslib-site},
+for example, generate binding code from C/C++ header files,
+avoiding the manual parsing of arguments.
+The former supports several languages as output, including Python, D,
+and Java, and the later focuses on Python programs.
+The \emph{Jeannie} language encompass the semantics of C and \java~therefore, it
+is capable of perform some semantic verifications such as to check that Java members are in
+fact accessible, i.e., that references to fields, methods and members types obey
+their visibility (private, protected, public, or default) \cite{1297030}.
+A \emph{Jeannie} program then is used to automatically generate JNI wrappers.
+% Ravit et al. present a tool which aims to utilize high level features of the
+% host language to be used in the binding code. Their tool generates Python
+% bindings taken as input C code and interface descriptions containing,
+% for example, information about functions and their parameters \cite{Ravitch:2009:AGL:1542476.1542516}.
+
+\subsection{Discussion} \label{sota_disc}
+Several FFI and binding code generator limitations had motivated us on the
+elaboration of a method to abstract hardware devices for MPLs.
+First, an FFI by itself does not guide the developers on the abstraction of
+hardware devices, it just provides for the developers a way to access
+constructs of other languages, such as \emph{pointers} and \emph{inline assembly},
+capable of access hardware devices directly.
+Binding code generators make easy the use of FFIs, solving the problem of manual
+parsing of native methods arguments and dealing with the semantic differences
+between host and guest language.
+However, as FFIs, binding code generators do not deal with the problem of
+device abstraction.
+
+% XXXTODO Meio que repeteco de coisas da introdução.
+% Por enquanto deixar assim, mas depois revisar.
+The method presented in this paper uses the concept of hardware mediators to
+abstract hardware devices and a set of FFI focused on embedded systems to
+perform the interaction between hardware devices and MPLs.
+The binding code is generated from descriptions of hardware mediators and
+from descriptions of FFIs.
+Furthermore, the adaptation of a hardware mediator to
+a FFI is automatically performed, through an aspect \emph{weaving} process.
+% Mencionar / Citar AOP?
+
+A work close related to ours is presented by Schoeberl et al. \cite{Schoeberl:2011}.
+By using the concept of \emph{hardware object}, it is possible to access memory
+addresses from the real machine, allowing the implementation of device drivers
+in Java.
+This is performed by extending a special Java class (the \emph{HardwareObject} class)
+which has special treatment from the point of view of the JVM.
+A modified version of the JVM has special implementations for
+\emph{getfield} and \emph{putfield} bytecodes, capable of accessing hardware
+addresses outside the Java heap.
+% However, hardware objects are platform-dependent, as in oppose to
+% hardware mediators used in our approach.
+% Device drivers in Java are benefited from the Java type safe and runtime checks (e.g. array bound checking)
+However, the work of Schoeberl et al. focus only on Java, while our work focus on
+the reuse of the functional part of a binding code (i.e. the device driver) though
+several FFIs and MPLs, as explained in Section \ref{sec:proposal}.
+
+% ------------------------------------------------------------------------------

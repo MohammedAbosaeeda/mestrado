@@ -1,0 +1,13 @@
+<test>
+   <application name="philosopher_dinner_app"></application>
+      <configuration>
+         <trait id="ARCH">	
+            <value>IA32</value>
+	    <value>AVR8</value>
+         </trait>	
+
+         <Breakpoint>
+            <path>"/home/breakpoint_philosopher.txt"<path>
+         </Breakpoint>
+   </configuration>
+<test>

@@ -1,0 +1,617 @@
+\documentclass[a4paper, 10pt, conference]{IEEEtran}
+
+\usepackage[latin1]{inputenc}	% for Latin languages
+\usepackage[T1]{fontenc}	% for ISO and UTF characters
+\usepackage[english]{babel}	% for multilingual support
+\usepackage{graphicx}
+\usepackage[caption=false,font=footnotesize]{subfig}
+\usepackage{verbatim}
+\usepackage{fancyvrb}
+\usepackage{color}
+
+
+\include{utils}
+
+\let\VERBATIM\verbatim
+\def\verbatim{%
+\def\verbatim@font{\small\ttfamily}%
+\VERBATIM}
+
+\begin{document}
+
+\title{Run-time Scratch-pad Memory Management for Embedded Systems}
+
+%\author{
+%\alignauthor
+%Tiago Rogério Mück and Antônio Augusto Fröhlich\\
+%\affaddr{Software/Hardware Integration Lab}\\
+%\affaddr{Federal University of Santa Catarina}\\
+%\affaddr{Florianópolis, Brazil}\\ 
+%\email{\{tiago,guto\}@lisha.ufsc.br}
+%}
+
+\author{\IEEEauthorblockN{Tiago Rogério Mück and Antônio Augusto Fröhlich}
+\IEEEauthorblockA{Software/Hardware Integration Lab\\
+Federal University of Santa Catarina\\
+Florianópolis, Brazil\\
+\{tiago,guto\}@lisha.ufsc.br}
+}
+
+%\author{Authors omitted for blind review}
+
+%TODO passar corretor do WORD.
+
+\maketitle
+
+
+\begin{abstract}
+\textit{Scratch-pad memories} (SPM) are being increasingly used in embedded systems
+due to their higher energy and silicon area efficiency in comparison to ordinary caches. However, in order
+to exploit all of its advantages, efficient memory allocation mechanisms must be
+provided. In this work we propose a run-time memory management approach for SPMs
+at OS-level that can be combined with other compile-time approaches. The operating
+system memory manager takes annotations inserted into the code by the programmer as
+hints to choose the most appropriate memory (i.e. main memory or SPM) for each allocation.
+Experimental results confirm the approach's efficiency when compared to a similar
+compile-time technique.
+\end{abstract}
+
+
+\section{Introduction}
+
+Contemporary embedded system applications are requiring faster processors and
+larger memories. Previous studies have shown that the memory subsystem is responsible
+for 50\%--75\% of the total system power consumption and occupies significant chip
+area~\cite{Kandemir::2002}, thus becoming an important
+optimization point. Most systems rely on cache-based memory hierarchies due to the
+capacity of caches to exploit the spatial and temporal locality of memory access.
+However, caches require additional memory for tag and address comparison logic, which may
+significantly increase their power consumption and silicon area. These often render cache
+inappropriate for embedded applications~\cite{Verma::2006}. In addition,
+\textit{worst case execution time} (WCET) must be overestimated due to the lack
+of predictability in many cache implementations~\cite{Wehmeyer::2005}, which may forbid their use on
+real-time embedded systems.
+
+\emph{Software-controlled caches}, often called \textit{scratch-pad memories} (SPM), 
+are emerging as alternatives to traditional caches. SPMs do not need the extra logic
+to map data and instructions  because memory allocation 
+is controlled by software, which makes them more power and area efficient than
+ordinary caches~\cite{Verma::2006}. Also, considering that the contents of the SPM are
+known, tighter bounds on WCET prediction can be achieved~\cite{Wehmeyer::2005}.
+Nevertheless, to exploit all the advantages of SPMs, an efficient allocation
+mechanism must be provided in software. Several software allocation approaches that
+have been proposed rely on profiling information to define the instructions and
+data to be allocated to the SPM at compile-time. These approaches have a major drawback.
+The use of profiling limits the scope of the mapping techniques not only because of the
+difficulty in obtaining reasonable profiles but also due to high space and time requirements
+for their generation~\cite{Shrivastava::2009}. This is especially true for dynamic
+applications in which the memory access patterns depend on the input data~\cite{Cho::2009}.
+
+%These compile-based approaches
+%have two major drawbacks. First, the use of profiling limits the scope of the
+%apping techniques not only because of the difficulty in obtaining reasonable
+%profiles but also due to high space and time requirements to generate a
+%profile~\cite{Shrivastava::2009}. This is especially true for dynamic
+%applications were the memory access patterns depend on the application input data~\cite{Cho::2009}.
+%Second, this kind of allocation scheme leads
+%to a more complicated software development and reduced portability because it
+%requires very specific toolchains with modified compilers.
+
+In this work we propose a run-time memory management approach for SPMs
+at OS-level which does not rely on compiler support, profiling or hardware support. We provide
+a framework that abstracts the SPM and parts of the main memory 
+as operating system heaps. When the application dynamically allocates data, 
+the operating system uses annotations, inserted into the code by the programmer, 
+as hints to choose the most appropriate level in the memory hierarchy to allocate 
+the data (i.e. the main memory heap or the SPM heap). If an allocation request
+on the preferred memory component fails, the operating system attempts to allocate
+on a less optimal one, thus handling exhaustion of a particular memory component. 
+With this approach, the OS can take advantage of the developer's knowledge about
+the application to provide an efficient data allocation.
+
+The remaining of this paper is organized as follows: section \ref{RELATED_WORK} presents
+a discussion about related work; section \ref{PROPOSAL} presents our proposal;
+and sections \ref{EVALUATION} and \ref{CONCLUSION} show our experimental
+results and conclusions.
+
+
+\section{Related work}
+\label{RELATED_WORK}
+
+%In the few last years, several SPM management approaches have been proposed.
+%We have separated these approaches in the different categories shown in figure
+%\ref{fig_spm_state_of_art_small}. The \emph{static} 
+%approaches~\cite{Avissar::2002, Angiolini::2004, Hiser::2004} are those in
+%which the contents of the SPM are fixed at compile-time and never change.
+%In the \emph{dynamic} approaches, the SPM contents change during the program
+%execution. If the code and/or data sets that will be moved to/from the SPM
+%are defined at compile-time, we call it a 
+%\emph{compile-time} approach~\cite{Verma::2006, Udayakumaran::2006, Ozturk::2007}.
+%If this sets can change or are defied during the program execution, we call it a 
+%\emph{run-time} approach~\cite{Cho::2009, Shrivastava::2009, Milidonis::2009, Dominguez::2005, McIlroy::2008, Nguyen::2007, Huneycutt::2002}.
+%The run-time approaches generally fallow one or more of the following three
+%basic methodologies: it is \emph{compiler-assisted}
+%if actions are taken by the compiler to define the allocation; \emph{hardware-assisted} if it relies on special
+%hardware support; and also there are the approaches which require
+%\emph{run-time software support} provided by a standalone library or by
+%an operating system.
+
+%\fig{.40}{fig_spm_state_of_art_small}{Classification of SPM allocation approaches}
+
+In the few last years, several SPM management approaches have been proposed.
+We have separated these approaches in the different categories shown bellow.%in 
+%figure \ref{fig_spm_state_of_art_small2}.
+
+%\fig{.35}{fig_spm_state_of_art_small2}{Classification of SPM allocation approaches}
+
+\textbf{Static approaches} are those in which the contents of the SPM are fixed prior to
+system deployment and never change. They can also be subdivided into two categories.
+In \textbf{compile-time techniques}, the allocation is defined during the compilation process
+~\cite{Avissar::2002}\cite{Hiser::2004}. In \textbf{post-compile techniques},
+algorithms are applied at the final binary code to change the memory
+allocation~\cite{Angiolini::2004}. These static allocation approaches either use
+greedy strategies to find an efficient solution, or model the problem as a
+\emph{knapsack} problem or an \textit{integer-linear programming} problem (ILP)
+to find an optimal solution. \textit{Avissar et al}~\cite{Avissar::2002} proposed
+a memory allocation strategy that is optimal in relation to the profiling provided.
+In \textit{Angiolini et al}~\cite{Angiolini::2004} another optimal solution was
+proposed. This technique is applied in the application binary code and is optimal
+in relation to a certain set of execution traces. Despite being optimal, all the
+static methods have the disadvantage of being dependent of an efficient application
+profile.
+
+\textbf{Dynamic approaches} are those in which the SPM contents change during the program
+execution. Dynamic methods based on \textbf{compile-time techniques} change the
+SPM allocation based only on compile time decisions and profile information
+\cite{Verma::2006}\cite{Udayakumaran::2006}\cite{Ozturk::2007}.
+\textit{Verma and Marwedel}~\cite{Verma::2006} proposed an overlay-based memory
+allocation approach for both code and data. It uses ILP to find the optimal memory
+allocation and overlay points that minimizes energy consumption for a given profile. 
+Compile-time dynamic methods are usually more efficient than static ones 
+in exploiting the benefits of SPMs, but they are still dependent on good application profiles.
+Another issue of these methods is that they do not provide an efficient allocation
+when the accessed memory regions are correlated to the application's input data~\cite{Milidonis::2009}.
+This issue is overcome by the \textbf{run-time techniques}. These approaches are generally composed by a 
+run-time software or operating system which determines the SPM contents based on information 
+inserted by the compiler and/or using hardware support.
+
+In \textit{Milidonis et al}~\cite{Milidonis::2009} the global data structures
+are sliced into \emph{tiles} which are allocated to the SPM by the compiler.
+A hardware component called \textit{Data Type Unit} (DTU) works like a special cache
+that keeps references to the most accessed tiles and sends commands to a DMA unit to
+move the data between the SPM and main memory when necessary. This approach solves the
+problem of dynamic access patterns, but it still require an initial profiling to determine
+the possible tiles, and a very specific hardware support that forbids it application to fixed
+hardware platforms.
+
+In \textit{Shrivastava et al}~\cite{Shrivastava::2009} is proposed an approach that
+does not require profiling or hardware support. They manage function stack frames,
+allocating them to the SPM when they are in use. They proposed a software library which
+provides functions to manage the stack. The calls to the library are
+inserted by the compiler before and after function calls, using information
+provided by \textit{Global Call Control Flow Graphs} (GCCFG).
+This approach have the advantage of not requiring profiling
+or hardware support, but it still require compiler modifications and focus
+on only one class of applications (multimedia applications).
+ 
+In \textit{Cho et al}~\cite{Cho::2009} was proposed an allocation scheme that
+integrates compiler, OS, and hardware, which is very similar to
+\textit{Milidonis et al}~\cite{Milidonis::2009}. First, through profiling, the
+most accessed data sets are defined. Based on a cost analysis, the compiler
+define the optimal points to insert the operating system calls the reallocate the SPM data.
+When reallocating, the operating system verifies a hardware structure which keeps information about the most
+accessed data sets. The OS uses this information to define the new memory allocation.
+Since the data addresses change during run-time, they added a simplified MMU for
+address translation. The authors show that the technique is very efficient for
+multimedia applications, but it requires compiler, OS, and
+hardware support, thus it comes up with all the drawbacks of the dynamic run-time
+techniques discussed earlier.
+
+%There are dynamic run-time techniques that require only run-time software support.
+%A common technique is \textbf{software caching}. This approach emulates a cache in
+%SRAM using software. The tag, data and valid bits are all managed by code inserted
+%at each memory access. Significant software overhead is incurred to manage these
+%fields, and all the improvements of the SPM in relation to caches disappear.
+%Another run-time-only technique that follows a different approach was proposed in
+%\textit{Nguyen et al}~\cite{Nguyen::2007}. In this approach the authors uses the
+%same ideas discussed in the hardware-based approaches to implement SPM management
+%for Java applications. The main difference is that the tracking of the accessed
+%data structures and allocation code are implemented at JVM level. This technique
+%does not require special compiler or hardware support, but the overhead of a JVM
+%may be unacceptable on an embedded system.
+
+All of the previous techniques handled only code and/or global/stack data. The
+only known technique that allocates heap data to the SPM was proposed in
+\textit{Dominguez et al}~\cite{Dominguez::2005}. The proposed technique divides
+the application code in regions in which the beginning and end of each region is
+defined by functions and loops bounds. A compile-time analysis
+is performed in these regions to define the heap variables that will be allocated to
+the SPM and where the code to make this allocation is to be inserted. Despite of being the
+first technique that allocates heap data to the SPM, it follows the
+\textbf{dynamic compile-time approach} discussed earlier, and suffers from the
+same problems. Another work that deals with the management of heap data was
+presented in \textit{McIlroy et al}~\cite{McIlroy::2008}. In this work, the authors
+just suppose a run-time system to manage SPMs as dynamic heaps, 
+and propose a heap memory allocation algorithm optimized for very small memories.
+
+
+\section{Run-time SPM management}
+\label{PROPOSAL}
+
+%In our approach we assume that embedded systems target specific hardware platforms
+%and specific applications, thus allowing the designer to provide an embedded operating system 
+%with information about the underlying memory hierarchy and the kind of access to 
+%the application data. The operating system can use this information to perform a more
+%efficient memory allocation. 
+
+We have implemented a framework for the C++ language which provides annotated
+versions of the \emph{new} and \emph{delete} operators, allowing the programmer
+to easily insert allocation hints into the program. The framework was implemented on the
+\textit{Embedded Parallel Operating System} (EPOS)~\cite{EPOS::2011:Online}.
+EPOS relies on the \textit{Application-Driven Embedded System Design}
+(ADESD)~\cite{Frohlich::2001} methodology to design and implement both software and hardware components
+that can be automatically adapted to fulfill the requirements of particular applications.
+High reusability and low overhead are achieved by a careful implementation that makes use of
+object-oriented programming and \emph{generative programming}~\cite{Czarnecki::2000} techniques,
+including \emph{static metaprogramming}. A detailed description of the memory management
+framework and its implementation on EPOS is presented bellow.
+
+\subsection{Placement \emph{new} and \emph{delete} operators}
+
+The annotated versions of the \emph{new} and \emph{delete} operators were implemented
+using \emph{placement new expressions}, which are part of the ISO C++ standard and are supported by any 
+standard C++ compiler. \emph{Placement new and delete expressions} provide a way to implement
+custom allocation strategies. Figure \ref{fig_placement_new} shows the syntax of
+these expressions. Invocations of the type \emph{new ( expression-list ) type\_name} 
+will require its respective overloaded version of the \emph{operator new} function.
+The ISO C++ standard already defines a default implementation for the type \emph{void*}.
+Pointer placement new is necessary for hardware that expects a certain object
+at a specific hardware address~\cite{Stroustrup::1995}.
+
+\begin{figure}[htbp]
+\small
+\scriptsize
+\begin{Verbatim}[frame=single,framerule=0.2pt,framesep=1pt]
+(a)  new type_name (initializer-list);
+(b)  void * operator new (size_t);
+
+(c)  new ( expression-list ) type_name (initializer-list);
+(d)  void * operator new (size_t, expression-list);
+
+(e)  new ((void*)ADDRESS) type_name;
+(f)  void * operator new (size_t, void *);
+\end{Verbatim}
+  \normalsize
+  \caption{Default syntax (a) and function (b) of the \emph{new} operator. 
+           Bellow, the generic syntax (c) and function (d) of the \emph{placement new}
+           is shown with an example of the default implementation (e) (f).}
+  \label{fig_placement_new}
+\end{figure}
+
+\subsection{Memory management on EPOS}
+
+%EPOS can be configured using three different architectures: \emph{kernel}, \emph{built-in}, and
+%\emph{library}. In the two former architectures, EPOS support multiple applications and 
+%virtual memory, while in the latter one, EPOS supports a single application and is linked
+%with it as a library at compile-time. Since most embedded system are designed to run a 
+%single application, in this work we have focused on the \emph{library} configuration. 
+
+The memory mapping in EPOS is shown in figure \ref{fig_epos_mem_framework}. The allocation
+of code and global data is defined at compile-time for both operating system and application.
+During system initialization, the initial stack used by operating system is allocated in
+the \emph{system stack} region. All of the remaining free memory is distributed between the
+\emph{system and application heaps}. These regions are used for dynamic memory allocation, 
+and each one is managed by an instance of the \emph{Heap} C++ class.
+The system heap (\emph{System::heap}) is used to allocate the stacks for the application's and
+system's threads, while the application heap (\emph{Application::heap}) is used by the C++ \emph{new}
+and \emph{delete} operators, which are used by the application programmer to
+dynamic allocate memory.
+
+%\fig{.39}{fig_epos_mem_framework}{EPOS memory mapping.}
+
+%\fig{.39}{fig_epos_mem_framework_spm}{EPOS memory mapping when using the new framework.}
+
+\multfigtwov{.35}{fig_epos_mem_framework}{fig_epos_mem_framework_spm}
+{fig_epos_mem_framework_all}
+{EPOS memory mapping before (a) and after (b) using the new framework.}
+
+%\fig{.39}{fig_spm_epos_heap}
+%{C++ class responsible for managing dynamic memory allocation requests.}
+
+\subsection{The allocation framework}
+
+Figure \ref{fig_epos_mem_framework_spm} shows the modified memory mapping when using
+our SPM management approach. A new \emph{Heap} instance is created to manage
+the SPM, which is memory-mapped. We overloaded the implementation of the \emph{new}
+and \emph{delete} operators to include a decision algorithm
+which decides if the data should be allocated using the \emph{main\_heap}
+or the \emph{spm\_heap}, based on annotations given by the programmer.  
+
+Three different types of annotations are supported: \textbf{ALLOC\_HIGH}, \textbf{ALLOC\_LOW},
+and \textbf{ALLOC\_NORMAL}. When the \emph{ALLOC\_HIGH} annotation is used, it means that particular object
+has a high memory access priority (i.e. performance/power consumption of read/write
+operations on it have a major impact over the system efficiency) and should be allocated
+on the more efficient level of the memory hierarchy (e.g. a SPM). The
+\emph{ALLOC\_LOW} have the inverse meaning. It means that the object has a low
+memory access priority and it can be allocated on the less efficient level of the
+memory hierarchy without a significant impact on the system efficiency. Finally,
+the \emph{ALLOC\_NORMAL} annotation is used when the programmer does not 
+know or does not care about the physical location of the data. In this case, the OS 
+decides the best place to allocate the object.
+
+Figure \ref{fig_spm_code_alloc} shows how these annotations are used with
+the \emph{new} operators. The annotations are defined as \emph{enum constants}
+and a new \emph{operator new} implementation is defined using the \emph{placement new}
+syntax. In this example, four arrays of type \emph{int}
+are allocated with and without annotations. When annotations
+are not used, the OS assumes \emph{ALLOC\_NORMAL}. The usage of the \emph{delete}
+operator doesn't change.  
+
+\begin{figure}[ht]
+\small
+\scriptsize
+\begin{Verbatim}[frame=single,framerule=0.2pt,framesep=5pt]
+//Placement type definitions
+typedef enum {
+    ALLOC_HIGH,
+    ALLOC_LOW,
+    ALLOC_NORMAL,
+} alloc_priority;
+
+//Annotations implementation using placement new
+void * operator new(size_t bytes, alloc_priority p){
+    ...
+    //do memory allocation    
+    ...
+}
+
+//Anotated memory allocation examples
+int *at_spm = new (ALLOC_HIGH) int[10];
+int *at_main_mem = new (ALLOC_LOW) int[10];
+int *somewhere = new (ALLOC_NORMAL) int[10];
+int *somewhere_else = new int[10];/*equivalent to the
+                                   statement above/*
+
+delete[] at_spm;
+delete[] at_main_mem;
+delete[] somewhere;
+delete[] somewhere_else;
+\end{Verbatim}
+  \normalsize
+  \caption{Memory allocation request and implementation using annotations.}
+  \label{fig_spm_code_alloc}
+\end{figure}
+ 
+The pseudo-code in figure \ref{fig_spm_code_alloc_algo} describes the decision
+algorithm used to define where the data will be allocated. If an allocation
+request can't be accomplished on the preferred memory component, the operating system
+attempts to allocate on a less optimal memory component. If it is left to the
+operating system to decide where to allocate, it attempts to allocate on the heap
+with the highest percentage of free space, thus handling exhaustion of a
+particular memory component. The implementation of the memory deallocation is
+straightforward. The OS just checks the pointer address to decide if the memory
+is to be deallocated on the main memory or on the SPM.
+
+\begin{figure}[ht]
+\scriptsize
+\centering
+\begin{Verbatim}[frame=single,framerule=0.2pt,framesep=5pt]
+do memory allocation (size, annotation)
+    case: annotation = ALLOC_HIGH 
+        if fits on spm (size)
+            allocate on spm
+        else
+            allocate on main mem
+    case: annotation = ALLOC_LOW
+        if fits on main mem (size)
+            allocate on main mem
+        else
+            allocate on spm
+    case: annotation = ALLOC_NORMAL
+        if spm free percentage > 
+                  main mem free percentage
+            if fits on spm (size)
+                allocate on spm
+            else
+                allocate on main mem
+        else
+            if fits on main mem (size)
+                allocate on main mem
+            else
+                allocate on spm
+\end{Verbatim}
+  \normalsize
+  \caption{Algorithm which defines where the allocation will be done.}
+  \label{fig_spm_code_alloc_algo}
+\end{figure}
+
+
+\section{Evaluation}
+\label{EVALUATION}
+
+We have used the \textit{Xilinx ML605 Evaluation Board} to build a platform for our
+evaluation. The platform is based on open source hardware IP-cores from 
+\textit{OpenCores}~\cite{OpenCores::2011:Online}. We have used the \emph{aeMB} processor
+which is connected to a memory and several peripherals using a \emph{Wishbone} bus. 
+Figure \ref{fig_eval_plaftform_no_cache} shows a block diagram of our platform 
+(for simplicity, it shows only memory-related blocks). It features a 
+cache for instructions. The 512 Mb DDR3 SDRAM available in the ML605
+board is used as the main memory; while a 16 Kb SPM is created using the FPGA's
+internal RAM blocks. We have implemented a \emph{bus sniffer}, which is 
+connected to both instruction (\emph{IWB}) and data (\emph{DWB}) sides of the
+Wishbone bus. This block contains performance counters, which are used to
+collect statistics about memory operations. The final system
+is generated using ISE 13.1 (for hardware synthesis) and GCC 4.1.1 (for software
+compilation), both provided by Xilinx.
+
+\fig{.35}{fig_eval_plaftform_no_cache}
+{Block diagram of the evaluation platform. Only memory-related components are shown.} 
+
+\subsection{Benchmarks}
+
+In order to evaluate our approach, we have selected the following set of benchmarks from
+\emph{MiBench}~\cite{MiBench::2011:Online}:
+
+\textbf{Dijkstra: } calculates the shortest path between nodes using Dijkstra's algorithm.
+%\item[Blowfish] a symmetric block cipher with a variable length key.
+%\item[Rijndael] implements the AES's block cipher.
+
+\textbf{SHA: } a secure hash algorithm.
+%\item[JPEG] algorithm for image compression and decompression.
+
+\textbf{Susan: } implements a set of image recognition algorithms. 
+In the following evaluation, \emph{S-Smoothing} stands for the image
+smoothing algorithm, and \emph{S-Corners} stands for the corner detection
+algorithm.
+
+\textbf{FFT: } Fast Fourier Transform on an array of data. 
+\newline
+
+These benchmarks were modified in
+order to be correctly compiled as EPOS C++ applications. The main modifications
+consisted of: replacing \emph{malloc} and \emph{free} C function calls by C++
+\emph{new} and \emph{delete} operators, and changing the way the benchmark
+reads the input data; instead of reading from a file, it now reads from a FLASH
+memory (a file system is not available in the evaluation platform). Table
+\ref{tab_mibench_mem2} shows the resulting memory footprint of the benchmarks.
+
+In our approach, only data which is dynamic allocated at run-time can be
+handed out to the SPM. However, this limitation can be softened by declaring
+global and stack data as heap data. The last two columns of table \ref{tab_mibench_mem2}
+(\emph{Modified benchmarks} columns) show the footprint of the benchmarks
+when they are modified with this optimization. We have modified the benchmarks
+by redefining \emph{only arrays} which were declared as global and stack data to heap data.
+Former global data are allocated before the application executes (e.g. at the 
+beginning of \emph{main} function). Former stack data are allocated and deallocated
+at the beginning and the end of functions. The \emph{Susan} benchmarks did not require
+any modification since they originally relied on dynamic allocation.
+
+\tabTC{tab_mibench_mem2}
+{Benchmarks memory footprint (all values in bytes). Stack depth and Heap depth
+represents the maximum amount of data allocated in the stack and the heap,
+respectively.}
+
+\subsection{Results}
+
+We evaluated both the original and the modified (global/stack arrays as heap arrays) 
+benchmarks on three different configurations of our evaluation
+platform:
+
+\textbf{No SPM:} our allocation framework is not used and all heap data is
+allocated in the external SDRAM.
+%\item[Cache:] our allocation framework is not used and everything is
+%allocated in the external SDRAM. All memory access are cached.
+
+\textbf{SPM:} our framework is enabled but no annotations are given.
+SPM allocation is fully handled by the operating system.
+%\item[SPM:] the data cache is removed and we use our framework to
+%dynamic allocate data to the SPM. No annotations are given, thus
+%the SPM allocation is fully handled by the operating system.
+
+\textbf{SPM-A:} the \textbf{SPM} configuration with \emph{ALLOC\_HIGH} and
+\emph{ALLOC\_LOW} annotations added to \emph{new} invocations. Since one 
+of the main ideas of this work is to avoid profiling, the annotations where 
+intuitively added based only on the authors knowledge about the benchmarks.
+\newline
+
+Figures \ref{fig_plot_time_orig} and \ref{fig_plot_time_mod} 
+show the execution time of the original and the modified
+benchmarks, respectively. On the original benchmarks 
+an average improvement of $5\%$ is achieved when the
+SPM is fully managed by the operating system. Some benchmarks
+didn't show any significant improvement. This can be explained
+by the data access patterns shown in figure \ref{fig_plot_mem_access}.
+Benchmarks on which most of the memory accesses were performed on
+global and stack data didn't benefit from our approach. By adding
+annotations we have improved the execution time in $7\%$ (average), since 
+\emph{ALLOC\_HIGH} annotations forced additional data to the
+SPM. The modified benchmarks showed an average improvement of $4\%$
+and $13\%$ for the \emph{SPM} and the \emph{SPM-A} configurations,
+respectively. Some benchmarks have had a significant improvement when more data
+is allocated using our framework.
+
+%\fig{.73}{fig_plot_time_orig}
+%{Benchmarks execution time comparison between the system with no 
+%SPM management, with automatic SPM management, and with annotated SPM management.} 
+
+%\fig{.73}{fig_plot_time_mod}
+%{Modified benchmarks execution time comparison between a system with cache, 
+%with automatic SPM management, and with annotated SPM management.}
+
+\multfigtwoh{.65}{fig_plot_time_orig}{fig_plot_time_mod}
+{fig_plot_time_all}
+{Original (a) and modified (b) benchmarks execution time comparison.}
+
+\figTC{.65}{fig_plot_mem_access}
+{Distribution of memory operations on the different data types. Each bar represents
+a different benchmark configuration, from left to right: \emph{SPM (original benchmark)}, 
+\emph{SPM-A (original benchmark)}, \emph{SPM (modified benchmark)}, and \emph{SPM-A (modified benchmark)}.}
+
+The evaluation of energy consumption was performed using 
+memory models generated by CACTI~\cite{CACTI::2011:Online}. The models
+for the cache and the SPM were generated for a $40 nm$ technology, in
+order to match the one used on the Virtex 6 fabrication. For the external
+SDRAM, we extracted the parameters from
+the datasheet of the \emph{Micron 512 MB MT4JSF6464HY-1G1} memory
+module used in the evaluation platform. Figure \ref{fig_plot_energy_mod} shows the energy consumption of the
+memory hierarchy during the execution of the modified benchmarks.
+Average improvements of $20\%$ (SPM) $34\%$ (SPM-A) were achieved due
+to the power efficiency of the SPM when compared with the external SRAM
+memory.
+
+%Table \ref{tab_mem_energy}
+%summarizes the power and energy consumption data of the memory components.
+
+%\tab{tab_mem_energy}
+%{Static and dynamic energy consumption (for a single read/write operation) of the memory components.}
+
+\fig{.65}{fig_plot_energy_mod}
+{Modified benchmarks energy consumption comparison
+of the memory hierarchy.} 
+
+We also compare our framework with 
+\textit{Dominguez et al}~\cite{Dominguez::2005}, in which the authors 
+propose a compile-time approach for handling heap data. In this work,
+the authors provide results showing the improvements of using their method for SPM placement
+versus placing data in DRAM. They report an average reduction of  $39.9\%$ in
+energy consumption. The comparison in figure \ref{fig_plot_energy_comp} shows that our
+leveraging of the SPM benefits is comparable to a dynamic compile-time approach,
+but without the requirement of special compiler support and compile-time analysis (like
+the one proposed in \textit{Dominguez et al}). 
+
+\fig{.65}{fig_plot_energy_comp}
+{Average energy reduction. Comparison between our approach and \textit{Dominguez et al}.}
+
+
+
+
+\section{Conclusions}
+\label{CONCLUSION}
+We have proposed a runtime operating system management approach for SPMs which
+do not require compiler support, profiling or hardware support. On the proposed
+approach, annotations, inserted into the code by the programmer, are used 
+by the operating system to allocate the data in the most appropriate level
+of the memory hierarchy. The results have shown that, even by only handling user declared
+heap variables, we were able to improve the execution time and significantly decrease the
+total energy consumption. Yet simple, our solution yielded results comparable to a 
+dynamic compile-time approach.
+
+We also have shown how some kinds of global and stack variables allocated at compile-time can be easily converted
+to heap variables. However, this conversion was done by hand, and, depending on the application,
+it may not be feasible or natural. Nevertheless, our flexible software solution is clearly
+orthogonal to existing approaches, thus it can be easily used to handle heap data,
+while a different compile-time solution can be used handle instructions, global, and stack data.
+The efficient allocation of all instruction and data types in a heterogeneous memory hierarchy
+is a topic which will be covered in future works.
+
+\section*{Acknowledgments}
+The authors deeply acknowledge the anonymous reviewers for their valuable comments 
+and suggestions to improve the quality of the paper.
+This work was partially supported by the 
+\emph{Coordination for Improvement of Higher Level Personnel}~(CAPES) grant,
+projects RH-TVD 006/2008 and 240/2008.
+
+\bibliographystyle{abbrv}
+\bibliography{references_spm.bib}
+
+\end{document}

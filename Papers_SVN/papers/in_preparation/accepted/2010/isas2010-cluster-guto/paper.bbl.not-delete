@@ -1,0 +1,63 @@
+\begin{thebibliography}{10}
+
+\bibitem{Froehlich:hpcn:2000}
+G. Tientcheu, A. Fröhlich, and W. Preikschat.
+\newblock {EPOS and Myrinet: Effective Communication Support for Parallel
+  Applications Running on Clusters of Commodity Workstations}.
+\newblock In {\em HPCN 2000}, Amsterdam, The Netherlands, May 2000.
+
+\bibitem{Bhoedjang:1998}
+R. Bhoedjang, T. Rühl, and H. Bal.
+\newblock {User-level Network Interface Protocols}.
+\newblock {\em IEEE Computer}, 31(11):53--60, November 1998.
+
+\bibitem{Boden:1995}
+N. Boden, D. Cohen, R. Felderman, A. Kulawik, C.
+  Seitz, J. Seizovic, and W. Su.
+\newblock {Myrinet: A Gigabit-per-Second Local-Area Network}.
+\newblock {\em IEEE Micro}, 15(1):29--36, February 1995.
+
+\bibitem{Czarnecki:2000}
+K. Czarnecki and U. Eisenecker.
+\newblock {\em Generative Programming: Methods, Tools, and Applications}.
+\newblock Addison-Wesley, 2000.
+
+\bibitem{Froehlich:2001}
+A. Fröhlich.
+\newblock {\em {Application-Oriented Operating Systems}}.
+\newblock GMD - Forschungszentrum Informationstechnik, Sankt Augustin, 2001.
+
+\bibitem{Froehlich:euromicro:1998}
+A. Fröhlich and W. Preikschat.
+\newblock {SMP PCs: A Case Study on Cluster Computing}.
+\newblock In {\em First Euromicro Workshop on Network Computing}, pages
+  953--960, Västeras, Sweden, August 1998.
+
+\bibitem{Lumetta:1997}
+S. Lumetta, A. Mainwaring, and D. Culler.
+\newblock {Multi-Protocol Active Messages on a Cluster of SMP's}.
+\newblock In {\em Proceedings of Supercomputing'97}, Sao Jose, USA, November
+  1997.
+
+\bibitem{Pakin:1997}
+S. Pakin, V. Karamcheti, and A. Chien.
+\newblock {Fast Messages: Efficient, Portable Communication for Workstation
+  Clusters and Massively-Parallel Processors}.
+\newblock {\em IEEE Concurrency}, 5(2), June 1997.
+
+\bibitem{Prylli:1998}
+L. Prylli and B. Tourancheau.
+\newblock {BIP: a New Protocol Designed for High Performance Networking on
+  Myrinet}.
+\newblock In {\em Proceedings of the International Workshop on Personal
+  Computer based Networks of Workstations}, Orlando, USA, April 1998.
+
+\bibitem{Tezuka:1997}
+H. Tezuka, A. Hori, Y. Ishikawa, and M. Sato.
+\newblock {PM: An Operating System Coordinated High Performance Communication
+  Library}.
+\newblock In {\em HPCN 1997}, volume 1225 of
+  {\em Lecture Notes in Computer Science}, pages 708--717. April
+  1997.
+
+\end{thebibliography}

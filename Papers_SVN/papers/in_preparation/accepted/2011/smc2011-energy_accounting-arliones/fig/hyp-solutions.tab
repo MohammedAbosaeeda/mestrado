@@ -1,0 +1,12 @@
+\begin{tabular}{c|c|c|c}
+\textbf{Frequency}    & \textbf{Period}   & \textbf{Best-effort}  & \textbf{Remaining} \\
+\textbf{(Phenotype)}  & \textbf{(s)}      & \textbf{rate}         & \textbf{Charge}    \\
+\hline
+$11.790$ Hz           & $0.085$           & $60.794\%$            & $0.114$\promille         \\
+$11.793$ Hz           & $0.085$           & $60.761\%$            & $0.014$\promille         \\
+$13.089$ Hz           & $0.076$           & $60.728\%$            & $0.001$\promille         \\
+$13.161$ Hz           & $0.076$           & $60.717\%$            & $0.001$\promille         \\
+$14.468$ Hz           & $0.069$           & $60.828\%$            & $0.139$\promille         \\
+$15.812$ Hz           & $0.063$           & $60.772\%$            & $0.039$\promille         \\
+$16.455$ Hz           & $0.061$           & $60.733\%$            & $0.007$\promille         \\
+\end{tabular}

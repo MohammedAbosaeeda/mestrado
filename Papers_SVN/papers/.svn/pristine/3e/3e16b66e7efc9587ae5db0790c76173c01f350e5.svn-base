@@ -1,0 +1,47 @@
+
+\newcommand{\fig}[4][htbp]{
+  \begin{figure}[#1] {\centering\scalebox{#2}{\includegraphics{fig/#3}}\par}
+    \caption{#4\label{#3}}
+  \end{figure}
+}
+
+\newcommand{\figR}[5][htbp]{
+  \begin{figure}[#1]{\centering\scalebox{#2}{\includegraphics[angle=#5]{fig/#3}}\par}
+    \caption{#4\label{#3}}
+  \end{figure}
+}
+
+\newcommand{\figTC}[4][htbp]{
+  \begin{figure*}[#1] {\centering\scalebox{#2}{\includegraphics{fig/#3}}\par}
+    \caption{#4\label{#3}}
+  \end{figure*}
+}
+
+\newcommand{\figEMPTY}[5][htbp]{
+  \begin{figure}[#1]
+    \fbox{\begin{minipage}{#2}\hfill\vspace{#3}\end{minipage}}
+    \centering
+     \label{#4}
+    \caption{#5}
+  \end{figure}
+}
+
+\newcommand{\tab}[3][ht]{
+  \begin{table}
+    \footnotesize
+    \caption{#3}
+    \label{#2}
+    \centering
+    \include{tab/#2}
+  \end{table}
+}
+
+\newcommand{\tabTC}[3][ht]{
+  \begin{table*}
+    \footnotesize
+    \caption{#3}
+    \label{#2}
+    \centering
+    \include{tab/#2}
+  \end{table*}
+}

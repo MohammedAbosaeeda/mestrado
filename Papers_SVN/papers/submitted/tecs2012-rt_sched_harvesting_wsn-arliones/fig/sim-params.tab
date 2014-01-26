@@ -1,0 +1,25 @@
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\multicolumn{7}{|c|}{\textit{\textbf{Common parameters}}} \\
+\hline
+\multicolumn{4}{|c|}{\textit{Parameter}} & \multicolumn{3}{|c|}{\textit{Value}} \\
+\hline
+\multicolumn{4}{|c|}{Simulation Length} & \multicolumn{3}{|c|}{$360~days$} \\
+\hline
+\multicolumn{4}{|c|}{Collector Period} & \multicolumn{3}{|c|}{$5~miliseconds$} \\
+\hline
+\multicolumn{4}{|c|}{Reserve Length} & \multicolumn{3}{|c|}{$30~days$} \\
+\hline
+\hline
+\multicolumn{7}{|c|}{\textit{\textbf{Specific parameters}}} \\
+\hline
+\textit{Parameter} & \textit{None} & \textit{Reserve} & \textit{BGR} & \textit{BWR} & \textit{BWAR} & \textit{BWDR} \\
+\hline
+Battery size & $850~mAh$ & $850~mAh$ & $850~mAh$ & $12600~mAh$ & $4200~mAh$ & $4200~mAh$ \\
+\hline
+Window Length (seconds) & -- & -- & -- & 60 & 60 & -- \\
+\hline
+Lookback Length (hours) & -- & -- & -- & -- & 24 & -- \\
+\hline
+\multicolumn{7}{l}{-- : parameter not affecting the heuristic.}
+\end{tabular}

@@ -1,0 +1,36 @@
+\begin{center}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+Mote Type           &   Renee       &   Mica        &   Mica2       &   Mica2Dot \\
+\hline
+\hline
+\multicolumn{5}{|l|}{Microcontroller} \\
+\hline
+Type                &   Atmega163   &   Atmega128   &   Atmega128   &   Atmega128 \\
+\hline
+CPU Clock (Mhz)     &   4           &   4           &   8           &   4 \\
+\hline
+Program Memory (KB) &   16          &   128         &   128         &   128 \\
+\hline
+RAM (KB)            &   1           &   4           &   4           &   4 \\
+\hline
+\hline
+\multicolumn{5}{|l|}{Non-volatile Storage} \\
+\hline
+Size (KB)          &   \multicolumn{1}{|c|}{32}   &   \multicolumn{3}{|c|}{512} \\
+\hline
+\hline
+\multicolumn{5}{|l|}{Radio Communication} \\
+\hline
+Radio          &   \multicolumn{2}{|c|}{RFM TR1000}   &   \multicolumn{2}{|c|}{Chipcom CC1000} \\
+\hline
+Frequency      &   \multicolumn{2}{|c|}{916}   &   \multicolumn{2}{|c|}{916 / 433} \\
+\hline
+Transmit Power Control & \multicolumn{2}{|p{4.5cm}|}{Programmable resistor potentiometer.}   &   \multicolumn{2}{|p{4.5cm}|}{Programmable via CC1000 registers.} \\
+\hline
+Encoding       &   \multicolumn{2}{|c|}{SecDed (Software)}   &   \multicolumn{2}{|c|}{Manchester (Hardware)} \\
+\hline
+\end{tabular}
+\caption{Componentes dos Mica Motes}
+\label{mica-motes}
+\end{center}

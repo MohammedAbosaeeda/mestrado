@@ -1,0 +1,45 @@
+This is BibTeX, Version 0.99c (Web2C 7.3)
+The top-level auxiliary file: ecoop-ooosws-sample.aux
+The style file: alpha.bst
+Database file #1: ecoop-ooosws-sample.bib
+You've used 3 entries,
+            2543 wiz_defined-function locations,
+            570 strings with 4942 characters,
+and the built_in function-call counts, 1036 in all, are:
+= -- 91
+> -- 57
+< -- 0
++ -- 21
+- -- 21
+* -- 69
+:= -- 175
+add.period$ -- 8
+call.type$ -- 3
+change.case$ -- 19
+chr.to.int$ -- 3
+cite$ -- 3
+duplicate$ -- 42
+empty$ -- 84
+format.name$ -- 23
+if$ -- 210
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 3
+newline$ -- 17
+num.names$ -- 6
+pop$ -- 30
+preamble$ -- 1
+purify$ -- 23
+quote$ -- 0
+skip$ -- 34
+stack$ -- 0
+substring$ -- 21
+swap$ -- 4
+text.length$ -- 0
+text.prefix$ -- 1
+top$ -- 0
+type$ -- 20
+warning$ -- 0
+while$ -- 6
+width$ -- 5
+write$ -- 35

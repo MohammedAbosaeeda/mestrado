@@ -1,0 +1,24 @@
+\section{Introdução}
+
+Reconfiguração Dinâmica de Software (RDS) é uma característica presente na grande maioria dos sistemas atuais, desde ambientes de computação convencionais (e.g. computadores pessoais) até sistemas embarcados (e.g. sensores sem fio). Com a finalidade de corrigir bugs, adicionar e/ou remover funcionalidades e adaptar o sistema às variabilidades dos ambientes de execução, esta característica permite que o software do sistema seja atualizado em tempo de execução.
+
+Redes de Sensores Sem Fio (RSSF), por exemplo, podem ser formadas por um grande número de sensores espalhados em um ambiente de monitoração. Geralmente, estes sensores possuem poucos kilobytes de memória e poder de processamento~\cite{asada98wireless}. Frequentemente, coletar todos os sensores para reprogramação é impraticável devido à grande quantidade ou ao difícil acesso às áreas de monitoração. Para estes casos, um mecanismo eficiente de RDS poderia reprogramar todos os nodos da rede remotamente. Além disso, o mecanismo de RDS também deve ser adaptável a grande variabilidade de plataformas de sistemas embarcados existentes em termos de recursos de memória, interconexões (e.g. RS-485, CAN, ZigBee) e poder de processamento.
+
+Não obstante, a infra-estrutura de reconfiguração dinâmica de software para sistemas embarcados compartilha recursos com as aplicações do sistema e não deve influenciar sua operação~\cite{update}. Mecanismos para RDS em sistemas embarcados podem ser divididos em três categorias: (i) atualização de código binário~\cite{reijers03efficient, flexcup, update}; (ii) máquinas virtuais~\cite{mate, Koshy2005, Xie2006}; e (iii) sistemas operacionais~\cite{dunkels04contiki, sos, Cha2007, Bagchi2008}. Na primeira, um bootloader ou ligador é responsável por receber e atualizar a nova imagem do sistema. Na segunda, a reconfiguração é realizada através da atualização do script da aplicação que é interpretado pela máquina virtual. Finalmente, sistemas operacionais são projetados para abstrair uma atualização de software. Tais SOs são organizados em módulos reconfiguráveis e criam um nível de indireção entre a aplicação que utiliza o módulo e o módulo propriamente dito através de ponteiros e/ou tabelas. A reconfiguração neste caso ocorre mudando o endereço desses módulos dentro das tabelas/ponteiros.
+
+Este artigo apresenta o \elus{} (\ELUS{}), uma infra-estrutura de SO para sistemas embarcados com recursos limitados. O \ELUS{} é construído dentro do framework de componentes do \EPOS{} (\epos{}), em torno do programa de aspecto de invocação remota de métodos~\cite{Froehlich:2001}. As principais características que tornam o \ELUS{} diferente das infra-estruturas de SO existes são:
+
+\begin{itemize}
+ \item \textbf{Configurabilidade:} componentes do sistema\footnote{Componentes no \epos{} são encapsulados em classes C++ com interface e comportamento bem definidos.} podem ser marcados como reconfiguráveis ou não em tempo de compilação. Para todos os componentes não-reconfiguráveis, nenhum sobrecusto em termos de processamento e memória é adicionado ao sistema.
+
+ \item \textbf{Baixo Consumo de Memória:} ao marcar um componente como reconfigurável, são adicionados cerca de 1.6KB de memória e 26 bytes de dados por componente, o que presenta um baixo consumo comparado com os trabalhos relacionados.
+
+ \item \textbf{Transparência e Simplicidade:} uma reconfiguração é realizada através de um simples protocolo, o \etp{} (\ETP{}). Além disso, tanto a infra-estrutura de reconfiguração como a reconfiguração de software são totalmente transparentes para as aplicações.
+
+ \item \textbf{Estrutura de Mensagens:} através do uso da estrutura do framework do \epos{}, a passagem de argumentos e valor de retorno entre os componentes do sistema é realizada eficientemente, cerca de 5 vezes mais rápida do que os trabalhos anteriores.
+
+ \item \textbf{Reconfiguração:} \ELUS{} permite que o desenvolvedor atualize ambos componentes do SO e aplicações. Em alguns SOs, como Contiki~\cite{dunkels04contiki} por exemplo, somente aplicações ou partes do SO são reconfiguráveis.
+\end{itemize}
+
+O restante deste artigo está organizado da seguinte maneira: a seção~\ref{sec:epos} apresenta o framework metaprogramado do \epos{}. A seção~\ref{sec:elus} explica o projeto e a implementação do \ELUS{}. A avaliação experimental é relatada na seção~\ref{sec:evaluation}. A seção~\ref{sec:rel} apresenta os trabalhos relacionados.
+A seção~\ref{sec:analysis} compara os trabalhos relacionados com o \ELUS{}. Finalmente, a seção~\ref{sec:conc} conclui o artigo.

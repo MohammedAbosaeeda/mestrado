@@ -1,0 +1,55 @@
+\documentclass[conference]{IEEEtran}
+
+\usepackage[latin1]{inputenc}	% for Latin languages
+\usepackage[T1]{fontenc}	% for ISO and UTF characters
+\usepackage[english]{babel}	% for multilingual support
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{url}
+\usepackage{fancyvrb}
+\usepackage{verbatim}
+\usepackage{pdfpages}
+
+\newcommand{\fig}[4][htbp]{
+  \begin{figure}[#1] {\centering\scalebox{#2}{\includegraphics{fig/#3}}\par}
+    \caption{#4\label{#3}}
+  \end{figure}
+}
+
+\begin{document}
+
+\title{Title}
+
+\author{
+\IEEEauthorblockN{
+Rodrigo Vieira Steiner and Antônio Augusto Fröhlich
+}
+\IEEEauthorblockA{
+Software/Hardware Integration Lab\\
+Federal University of Santa Catarina\\
+PO Box 476, 88040-900 - Florianópolis, SC, Brazil \\
+\{rodrigo,guto\}@lisha.ufsc.br
+}
+\and
+\IEEEauthorblockN{
+Mohammad Reza Akhavan and A. Hamid Aghvami
+}
+\IEEEauthorblockA{
+Centre for Telecommunications Research\\
+King's College London\\
+Strand London, WC2R 2LS, UK\\
+\{reza.akhavan,hamid.aghvami\}@kcl.ac.uk
+}
+}
+
+\maketitle
+
+\begin{abstract}
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+
+Energy, delay, and reliable data delivery have been considered as the most challenging issues for most applications of Wireless Sensor Networks (WSNs). In the majority of applications, sensor nodes generate low data traffic and the communication channel is idle most of the time. Significant energy savings can be achieved by keeping sensor nodes in sleep mode for longer durations as idle listening is the main source of energy dissipation in WSNs. However, this reduces the availability of the nodes for communication. Therefore, a mechanism is required to wake up the nodes whenever a packet needs to be forwarded. Preamble-Sampling MAC (PS-MAC) protocols [1] have been designed to tackle idle listening and support sleep/wakeup mode without synchronization overheads.
+
+Reliable data delivery is equally important in low power and lossy WSNs. As stated by the IETF

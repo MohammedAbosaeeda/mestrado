@@ -1,0 +1,440 @@
+\documentclass{ufscThesis}
+\usepackage{graphicx}
+\usepackage[labelsep=endash]{caption} % O separador de legenda é um -
+\usepackage{color,graphicx}
+\usepackage[lined,ruled,linesnumbered,portuguese]{algorithm2e}
+\usepackage{listings}
+
+\lstloadlanguages{C,HTML}
+\lstdefinestyle{prg}{basicstyle=\small\sffamily, lineskip=-0.2ex, showspaces=false}
+
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+\SetKwInput{KwData}{Dados}
+\SetKwInput{KwResult}{Resultado}
+\SetKwInput{KwIn}{Entrada}
+\SetKwInput{KwOut}{Sa\'{i}da}
+\SetKw{KwTo}{para}
+\SetKw{KwRet}{retorne}
+\SetKw{Return}{retorne}
+\SetKwBlock{Begin}{in\'{i}cio}{fim}
+\SetKwComment{tcc}{/*}{*/}
+\SetKwComment{tcp}{//}{}
+\SetKwIF{If}{ElseIf}{Else}{se}{ent\~{a}o}{sen\~{a} se}{sen\~{a}o}{fim}
+\SetKwSwitch{Switch}{Case}{Other}{comute}{faça}{caso}{caso contr\'{a}rio}{fim da comutaç\~{a}o}
+\SetKwFor{For}{para}{fa\c{c}a}{fim}
+\SetKwFor{While}{enquanto}{fa\c{c}a}{fim}
+\SetKwFor{ForEach}{para cada}{fa\c{c}a}{fim}
+\SetKwRepeat{Repeat}{repita}{at\'{e}}
+
+
+\titulo{Automação de teste de software para sistemas embarcados} % Titulo do trabalho
+\autor{Rita de Cássia Cazu Soldi}           % Nome do autor
+\data{28}{fevereiro}{2014}                           % Data da publicação do trabalho
+
+\orientador{Prof. Dr. Antônio Augusto Medeiros Fröhlich}                    % Nome do orientador e (opcional) 
+%\departamento[a]{Faculdade de Ciências do Mar}
+%\curso[a]{Atividade de Extensão em Corte e Costura}
+
+\newcommand{\fig}[4][h]{
+  \begin{figure}[#1] {\centering{\includegraphics[#4]{fig/#2}}\par}
+    \caption{#3\label{fig:#2}}
+  \end{figure}
+}
+
+\newcommand{\progcpp}[3][ht]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=C,style=prg]{fig/#2.h}
+   \caption{#3\label{progcpp:#2}}
+ \end{figure}
+}
+
+\newcommand{\progxml}[3][ht]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=XML,style=prg]{fig/#2.xml}
+   \caption{#3\label{progxml:#2}}
+ \end{figure}
+}
+
+%%% Sobre a Banca
+\numerodemembrosnabanca{3} % Isso decide se haverá uma folha adicional
+\orientadornabanca{sim} % Se faz parte da banca definir como sim
+\bancaMembroA{Prof. Presidente da banca} %Nome do presidente da banca
+\bancaMembroB{Prof. segundo membro}      % Nome do membro da Banca
+\bancaMembroC{Prof. terceiro membro}     % Nome do membro da Banca
+
+\dedicatoria{A quem o trabalho é dedicado, se é que o é (opcional)}
+
+\agradecimento{Agradecimentos opcionais, caso existam pessoas ou entidades a quem se deve apoio ou suporte ao trabalho ora apresentado.}
+
+\epigrafe{How often have I said to you that when you have eliminated the impossible, whatever remains, however improbable, must be the truth?}{ Sherlock Holmes}
+
+\textoResumo {Aqui é redigido o resumo do documento...  blabla blablablabla blabla ipsum loren e a sophia também blab ablablabl ablbalbalblab lablablbalb lab lab lab labl a blab lablablab la blab alballbalba lba lba }
+
+\palavrasChave {chave 1. chave 2. ... chave n.}
+
+\textAbstract {Here is written the abstract of the document}
+
+\keywords {key 1. key 2. ... key n.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Início do documento                                
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%--------------------------------------------------------
+% Elementos pré-textuais
+\capa  
+%\folhaderosto[comficha] % Se nao quiser imprimir a ficha, é só não usar o parâmetro
+%\folhaaprovacao
+%\paginadedicatoria
+%\paginaagradecimento
+%\paginaepigrafe
+%\paginaresumo
+%\paginaabstract
+%\listadefiguras
+%\listadetabelas 
+%\listadeabreviaturas
+%\listadesimbolos
+\sumario
+
+\chapter{Introdução}
+\label{cap:introducao}
+Sistemas embarcados podem ser apresentados como uma combinação entre \textit{hardware} e \textit{software} concebida para realizar uma tarefa específica. Estes sistemas estão amplamente acoplados a inúmeros dispositivos eletrônicos e suas atividades se tornaram muito populares e estão cada vez mais presentes no dia-a-dia das pessoas~\cite{carro2003sistemas}. Controle de bordo automotivos, análise/monitoramento ambiental, eletrodomésticos, celulares e equipamentos de rede são apenas uma amostra de soluções proporcionadas através de sistemas embarcados.
+
+Estas soluções baseam-se na premissa de que cada componente está efetuando corretamente as suas atividades e que a integração entre os mesmos não se desvia do comportamento esperado. Caso contrário, as consequências podem ser custosas como, por exemplo, falhas em sistemas financeiros, diminuição de uma determinada quota de mercado, perda/corrupção de informações importantes de clientes, etc~\cite{tassey2002economic}.
+
+Para garantir que as componentes vão agir de acordo com o requisitado, uma boa prática é testar de maneira pragmática cada detalhe do software. Sendo que pelo menos uma parte destes testes seja automatizada, de maneira que sirvam como um contrato de funcionamento do sistema. 
+
+Entretanto, o teste não é um comportamento do \textit{software} e nunca deve interferir no fluxo de atividades que está sendo testado. Na maior parte dos sistemas isto é possível sem demandar muito esforço, mas sistemas embarcados costumam ser mais restritos em termos de: memória, capacidade processamento, tempo de bateria, prazos para executar uma determinada atividade, entre outros.
+
+Além da dificuldade da própria atividade de teste, os desenvolvedores ainda precisam se adaptar a uma grande variedade de plataformas, sistemas operacionais, arquitetura, fornecedores, ferramenta de depuração, etc~\cite{schneider2004ten}. 
+
+Existem diversas ferramentas de apoio ao desenvolvimento de \textit{software} embarcado que tentam minimizar o impacto destas variações. A escolha e integração destas ferramentas é uma etapa importante no construção de sistemas embarcados e deve ser feita de maneira criteriosa, uma vez que pode simplificar todo o processo de desenvolvimento.
+
+\section{Motivação}
+Atualmente interagimos com mais de um sistema embarcado por dia e o número destes sistemas já superam o número de habitantes do nosso planeta, ainda, este número continua crescendo em ritmo acelerado~\cite{Marcondes:MSC:2009}. 
+
+Além da quantidade, a complexidade dos sistemas embarcados é um fator que nunca para de crescer. O projeto de \textit{hardware} e \textit{software} está cada vez mais sofisticado e com requisitos mais rígidos. Para atender a esta demanda o \textit{software} embarcado deixou de ser composto por um conjunto limitado de instuções \textit{assembly} e deu espaço a uma gama de possibilidades oferecidas pelas linguagens de alto nível. 
+
+Mesmo com este acúmulo de atividades, o \textit{software} embarcado ainda representa uma parcela minoritária do sistema, cerca de 20\%, então grande parte das ferramentas de auxílio ao desenvolvimento ainda possuem poucas funcionalidades de validação e verificação. Ainda, constatou-se que as ferramentas disponíveis para automação de teste não são de fácil compreensão/execução e não possuem resposta satisfatória para os casos de falhas do caso de teste. Um ponto de melhoria seria pausar a execução no exato momento em que o \textit{software} apresentar o comportamento inesperado e fornecer um relatório com os testes já realizados e oferecer dicas para que se possa detectar o \textit{bug}.
+
+Trabalhos recentes apontam que mais de 80\% dos erros de um sistema embarcado provém do \textit{software}, não do \textit{hardware}, e que tanto o teste quanto a depuração são de suma importância para a qualidade do projeto embarcado. Desta forma, a motivação deste trabalho está em diminuir a dificuldade para realizar a verificação de sistemas embarcados, para que seja possível aproveitar melhor as oportunidades que são oferecidas pela indústria e tecnologia.
+
+\section{Objetivo}
+\subsection{Objetivo Geral}
+O principal objetivo deste trabalho é identificar o estado da arte do processo de teste de \textit{software} de sistemas embarcados. A partir deste estudo será proposta uma ferramenta para execução automatizada de testes de \textit{software}. Além disso, esta ferramenta deve integrar-se automaticamente com um sistema de depuração de maneira simples e produzir informações que auxiliem na manutenção da qualidade do \textit{software}.
+
+\subsection{Objetivos Específicos}
+Para atender o objetivo geral, os seguintes objetivos específicos devem ser concluídos:
+\begin{itemize}
+	\item Planejar e executar uma revisão sistemática dos trabalhos relacionados, formando uma base de conhecimento sólida da área de teste de sistemas embarcados.
+	\item Especificação de uma arquitetura que realize a automação de testes de maneira simples, sem que seja necessário configurar cada teste a ser executado.
+	\item Especificação de um ambiente capaz de integrar a execução automática dos testes e a depuração de um \textit{software}.
+	\item Avaliação qualitativa e quantitativa da arquitetura proposta
+	\item Apresentar o presente trabalho em forma de artigo científico em conferências e periódicos, para que especialistas da área de sistemas embarcados possam corroborar os resultados obtidos e a contribuição científica.
+\end{itemize}
+
+\subsection{Delimitações}
+O presente trabalho não tem como objetivo a geração de casos de teste para um determinado \textit{software}, limitando-se apenas em executá-los de maneira automatizada. Sendo assim, qualquer erro presente nos testes recebidos pelo protótipo para execução automática serão considerados como erro do próprio \textit{software}.
+
+\chapter{Conceitos básicos}
+\section{Teste de sistemas computacionais}
+Teste de \textit{software} é uma área de pesquisa relativamente recente e teve sua primeira conferência formal foi organizada em junho de 1972~\cite{Gelperin:1988}. Desde então há um esforço para definir melhor os conceitos relacionados à área e também para chegar a um consenso sobre como documentação de testes deve ser feita. 
+
+A definição com maior aceitação é a padronizada pela IEEE, na qual um o teste de \textit{software} é o processo de análise de um item de \textit{software} para detectar as diferenças entre as condições existentes e exigidas (ou seja, erros) e avaliar as características do item de software~\cite{ieee87}. É importante ressaltar que o teste de \textit{software} visa ressaltar a presença dos erros e não sua ausência, ou seja, o 
+sucesso do teste mostra que o \textit{software} analisado possui um desvio do comportamento previsto, mas  quando o teste não encontra erros (inconclusivo) não se sabe se há ou não desvio no comportamento do \textit{software} analisado.
+
+Testar um \textit{software} é essencial para revelar o número máximo de erros a partir do menor de esforço e esta atividade deve começar logo no início do projeto, com a definição dos requisitos a serem testados, da abordagem utilizada, da política de testes, critérios para a conclusão do teste, entre outros. Para que o processo de teste alcance seu objetivo é necessária uma estratégia de testes, suficientemente flexível para modelar-se às peculiaridades do \textit{software} e rígida o bastante para um acompanhamento satisfatório do projeto.
+
+Segundo Pressman~\cite{pressman}, muitas estratégias de testes já foram propostas na literatura e todas fornecem um modelo para o teste com as seguintes características genéricas:
+\begin{itemize}
+	\item Para executar um teste eficaz, proceder as revisões ténicas eficazes. Fazendo isso, muitos erros serão eliminados antes do começo do teste.
+	\item O teste começa no nível de componente e progride em direção à integração do sistema computacional como um todo.
+	\item Diferentes técnicas de teste são apropriadas para diferentes abordagens de engenharia de \textit{software} e em diferentes pontos no tempo.
+	\item O teste é feito pelo desenvolvedor do \textit{software} e (para grandes projetos) por um grupo independente de teste.
+	\item O teste e a depuração são atividades diferentes, mas depuração deve ser associada com alguma estratégia de teste.
+\end{itemize}
+
+As características gerais enumeradas por Pressman se referem a uma abordagem estratégica para teste de \textit{software}. Para sistemas embarcados o teste também tem como objetivo aumentar a confiabilidade do sistema, pois sistemas embarcados estão intríscincos no dia-a-dia das pessoas e um erro neste tipo de sistema  pode ser fatal. Então é desejável que a estratégia de teste de um sistema embarcado englobe:
+\begin{itemize}
+	\item Teste de baixo nível - para verificar se os requisitos de \textit{software} de baixo nível estão sendo atendidos e apontar se um pequeno segmento de código fonte foi implementado corretamente.
+	\item Teste de integração de \textit{software} - para verificar se o funcionamento do \textit{software} está de acordo com os requisitos e analisar o relacionamento/comportamento entre os próprios componentes do \textit{software} e dos componentes em relação à arquitetura do \textit{software}.
+	\item Teste de integração \textit{software}/\textit{hardware} - para verificar se a execução do \textit{software} no \textit{hardware} alvo ocorre corretamente e conforme o especificado.
+\end{itemize}
+
+Sendo assim, espera-se que os testes do sistema embarcado seja mais completos e robustos, a fim de descobrir os erros antecipadamente e, desta forma, garantir maior segurança ao \textit{software} final.
+
+\section{Depuração de sistemas computacionais}
+A depuração é a arte de diagnosticar erros em sistemas e determinar a melhor forma de corrigi-los. Devido esta atividade partir de um sistema com algum tipo de problema, é muito comum que a depuração ocorra como consequência de um teste bem sucedido.
+
+Como o erro pode ser encontrado por qualquer pessoa e em qualquer etapa do ciclo de vida do \textit{software}, tanto o formato do relatório de um resultado inesperado quanto as características do próprio erro podem variar de acordo com o conhecimento do autor do relato. Sendo assim, para realizar uma depuração eficaz deve-se ser capaz de identificar a técnica apropriada para analisar diferentes tipos de relatórios e obter as informações necessárias para eliminar o problema.
+
+A depuração é uma tarefa complexa, cuja dificuldade varia de acordo com o ambiente de desenvolvimento, linguagem de programação, tamanho do sistema e disponibilidade de ferramentas disponíveis para auxiliar o processo. 
+
+Depuradores são ferramentas que permitem monitorar a execução de um programa, como opções como executar o programa passo a passo, pausar/reiniciar a execução e, em alguns casos, até voltar no tempo e desfazer a execução de uma determinada instrução.
+
+A conexão entre o programa e o depurador pode ocorrer localmente ou remotamente. Ambas possuem vantagens e pontos de melhoria que devem ser consideradas para construir um ambiente de depuração estável.
+
+O método local é quando o programa é executado na mesma máquina que o depurador, de modo que o processo tem uma latência mais baixa e há grande influência entre ambos. Por exemplo, se um processo provoca um \textit{crash}, o depurador só poderia formar a hipótese de \textit{crash} porque ele mesmo realizou um comportamento inesperado (travar ou reiniciar). 
+
+Já na depuração remota não ocorre este tipo de interferência, uma vez que aplicação e execução do depurador encontram-se em máquinas separadas.Do ponto de vista do ambiente de depuração, a depuração remota é semelhante à uma depuração local com duas telas conectadas em um único sistema.
+
+Além da interferência e da latência, também deve-se utilizar de ferramentas aliadas para delimitar outros importantes conceitos envolvidos na depuração, tais como, a forma de configurar o modo de execução do código, como observar as saídas da aplicação, como verificar uma determinada variável de ambiente, como visualizar o \textit{log} das tarefas realizadas, entre outros.
+
+\section{Projeto de sistemas orientado à aplicação}
+A metodologia de projeto de sistemas orientado à aplicação (***AOSD - acrônimo para \textit{Application-Oriented System Design}) tem como objetivo principal a produção de sistemas para aplicações de computação dedicada e adaptados para atender exigências específicas da aplicação que irá utilizá-lo~\cite{Froehlich:2001}. 
+
+Esta metodologia permite manter o foco nas aplicações que utilizarão o sistema que desde o início do projeto, então tanto a arquitetura quanto os componentes podem ser definidos a fim de maximizar a reutilização e a configurabilidade do sistema de acordo com as peculiaridades da sua aplicação. Os principais conceitos envolvidos em sua utilização são:
+\begin{description}
+	\item[Familias de abstrações independentes de cenário]  \hfill \\
+	Durante a decomposição de domínio as abstrações identificadas são agrupadas em familias de abstrações e modeladas como membros desta familia. As abstrações devem ser modeladas de forma totalmente independente de cenários, garantindo que sejam genéricas o suficiente para que sejam reutilizadas para compor qualquer sistema. Dependências ambientais observadas durante a decomposição de domínio devem ser separadamente modeladas como aspectos de cenário.
+	\item[Características Configuráveis]  \hfill \\
+	Utilizadas quando uma determinada característica pode ser aplicada a todos os membros de uma familia, mas com valores diferentes. Então ao invés de aumentar a familia modelando novos membros, esta característica compartilhada é modelada como uma configurável. Desta forma é possível definir o comportamento desejado e aplicá-lo às abstrações de forma semelhante aos aspectos de cenário.
+	\item[Adaptadores de cenário]  \hfill \\
+	Utilizados para aplicar os aspectos de forma transparente às abstrações do sistema. Eles funcionam como uma membrana, que envolve uma determinada abstração e se torna um intermediário na comunicação dessa abstração, inserindo as adaptações necessárias para cada requisição que seja dependente de um cenário.
+	\item[Interfaces infladas]  \hfill \\
+	Resumem as características de todos os membros da familia em um único componente de interface, permitindo que a implementação dos componentes de \textit{software} considere sempre uma interface bem abrangente e, desta forma, postergando a decisão sobre qual membro da familia utilizar. Esta decisão pode ser automatizada através de ferramentas que identificam quais características da familia foram utilizadas e selecionam o membro dessa familia que implementa o subconjunto da interface inflada.
+\end{description}
+
+\fig{aosd}{Visão geral da metodologia de projeto de sistemas orientado à aplicação~\cite{Froehlich:2001}}{scale=.5}
+
+A Figura\ref{fig:aosd} mostra uma visão geral da ***AOSD, metodologia na qual é possível visualizar a decomposição do domínio em famílias de abstrações independentes de cenários e das dependências ambientais - separadamente modeladas como aspectos de cenário. A arquitetura do sistema é capturada pelos \textit{frameworks} dos componentes modelados a partir do domínio. Somente estes componentes serão reunidos para formar o sistema, pois somente eles são necessários para fornecer suporte à aplicação.
+
+\section{Programação genérica}
+A programação genérica pode ser abordada de vários pontos de vista. Para entender os conceitos básicos utilizados neste presente trabalho será utilizada a visão de Musser e Stepanov:
+\begin{quotation}
+"By generic programming, we mean the definition of algorithms and data structures at an abstract or generic level, thereby accomplishing many related programming tasks simultaneously. The central notion is that of generic algorithms, which are parameterized procedural schemata that are completely independent of the underlying data representation and are derived from concrete efficient algorithms" \cite{musser1989generic}.
+\end{quotation}
+
+Esta noção de programação genérica foi a que motivou o projeto da ***STL e defende um paradigma de programação para a concepção e desenvolvimento de estruturas reutilizáveis e algoritmos eficientes.
+
+Os algoritmos podem ser vistos como procedimentos parametrizados completamente independentes da representação de dados e são suficientemente genéricos para manter a mesma semântica e eficiência do algoritmo original, mesmo quando instanciado e assumindo tarefas simultâneas.
+
+\subsection{Utilização em C++: \textit{templates}}
+Mecanismos de \textit{templates} providos pelo C++ são uma maneira de adicionar à classes e funções conceitos genéricos, isto é, permitem criar um código reutilizável onde os tipos sejam passados como parâmetro. 
+
+No \textit{template} ficam descritas classes/funções genéricas que podem variar sua declaração de acordo com um determinado argumento fornecido como parâmetro para o modelo. 
+
+É função do compilador gera as novas classes/funções quando houver os argumentos necessários para selecionar o parâmetro correto para instanciar o \textit{template}. As classes/funções geradas a partir de um \textit{template} são especializações deste modelo.
+
+Um exemplo de implementação de classe genérica utilizando \textit{templates} pode ser observado na Figura~\ref{progcpp:vector}, onde letra \texttt{T} representa o parâmetro genérico que será trocado pelo compilador quando o \textit{template} for instanciado.
+
+\progcpp{vector}{Classe \texttt{Vector} generalizada \cite{Stroustrup:c++}}
+
+Supondo que o programa apresente posteriormente a seguinte declaração:
+\lstset{language=C++}
+\begin{lstlisting}
+	Vector<int> vector_i;
+	Vector<MyClass> vector_my_class;
+\end{lstlisting}
+
+O Resultado seria a instanciação de duas classes diferentes de acordo com o argumento, como apresentado na Figura~\ref{progcpp:especializacao_i} e Figura~\ref{progcpp:especializacao_my_class}: 
+\progcpp{especializacao_i}{Classe \texttt{Vector} instanciada com 'int'.}
+\progcpp{especializacao_my_class}{Classe \texttt{Vector} instanciada com 'MyClass'.}
+
+Por padrão, as classes \textit{template} possuem uma única implementação para qualquer argumento recebido e quando deseja-se dar um tratamento mais refinado para atribuir uma determinada característica é necessário realizar descrições alternativas do \textit{template}. Estas descrições, também conhecidas como especializações, são escolhidas pelo compilador com base nos argumentos fornecidos para o \texttt{template}.
+
+\chapter{Trabalhos relacionados}
+A área de automação de testes possui uma vasta literatura de apoio, sendo a maioria relacionada a sistemas de propósito geral.
+
+\section{Justitia}
+Justitia~\cite{seo} é uma  ferramenta de testes automatizados capaz de detectar automaticamente erros na interface, gerar casos de testes completos (entradas, estados internos, valores de variáveis, saídas) e emular a execução do \textit{software} na arquitetura alvo.
+
+Ela surgiu como um estudo de caso para demonstrar a automação de testes para \textit{software} embarcado, em que os autores propuseram em esquema de teste automatizado para as interfaces das camadas do sistema embarcado baseado em sua emulação na arquitetura alvo. 
+
+Para defender que a interface é um critério essencial para um teste de \textit{software} embarcado, a base de Justitia consiste na união de duas técnicas:
+\begin{description}
+	\item[Técnica de teste de interface] é reponsável por gerar casos de teste através da análise do arquivo (imagem) executável do sistema. Como o próprio nome sugere, a técnica foca nas interfaces do sistema embarcado, em especial as referentes às camadas do sistema operacional e às camadas do \textit{hardware}.
+	\item[Técnica de emulação dos casos de teste] é uma combinação entre o monitoramenmento e a depuração do sistema. A ideia é definir \textit{breakpoints} para os casos de teste da interface e monitorar a tabela de simbolos para definir o sucesso ou falha do teste.
+\end{description}
+
+Os resultados foram analisados através de experimentos sob três pontos de vista: a densidade da interface, a complexidade do \textit{software} e a relação interface \textit{versus} erros. 
+
+A primeira questão a ser investigada foi a da densidade da interface, pois que apesar de estar estritamente ligada ao grau de acoplamento do \textit{software} embarcado, não há uma relação definida entre o grau de acoplamento \textit{software} e sua testabilidade. A partir da primeira questão houve a necessidade de estabelecer uma outra relação entre a densidade e a complexidade de um \textit{software}, que atualmente é uma das principais métricas para a previsão de falhas.
+
+O primeiro protótipo apresentou resultados satisfatórios para as questões acima e chegou-se a conclusão de que a interface deve ser utilizada como um \textit{checkpoint} para encontrar e corrigir erros. A técnica foi novamente corroborada por uma nova versão de Justitia~\cite{KiSCL08}, agora aplicada ao teste  de um \textit{driver} de um dispositivo embarcado e com a capacidade de suportar um número ainda maior de testes.
+
+\section{Automatic testing environment for multi-core embedded software (ATEMES)}
+\texttt{ATEMES}~\cite{atemes} é uma ferramenta para automação de teste para sistemas embarcados de multiplos núcleos. Dentre os tipos de teste suportados estão os aleatórios, de unidade, cobertura, desempenho e condições de corrida. A ferramenta também prevê instrumentação do código, geração de casos de uso e de dados de entrada para sistemas de múltiplos núcleos. 
+
+Para desempenhar todas estas funções \texttt{ATEMES} conta com os seguintes componentes:
+\begin{description}
+	\item[PRPM] é módulo que realiza o de pré-processamento. Dentre suas atribuições estão a análise de código fonte, geração automatica de casos de teste, geração automática dos dados de entrada de teste e instrumentação do código fonte. Suas funções são automáticas, mas também é possível intervir manualmente nos testes através de uma interface.
+	
+	\item[HSATM] é uma das partes do módulo de teste automático, a que pertence ao lado anfitrião. Responsável por gerar automaticamente uma base para os testes baseados em uma biblioteca pré-definida, compilar o código fonte para uma determinada arquitetura de \textit{hardware} e enviar a imagem executável para a plataforma alvo.
+	
+	\item[TSATM] também compõe o módulo de teste automático, mas com a foco voltado à plataforma de \textit{hardware} alvo. Sua principal função é executar a imagem recebida do \texttt{HSATM}, monitorar o andamento dos testes e enviar os dados desta execução. 
+	
+	\item[POPM] é módulo de pós-processamento, o qual analisa todos os resultados e dados coletados durante o teste.
+\end{description}
+
+A partir destes componentes é possivel executar os testes em uma plataforma alvo a partir de uma estação de trabalho remota, o que diminui a quantidade de restrições de recursos dos sistemas embarcados. Para tanto, o \textit{software} é sofre uma compilação cruzada no lado anfitrião (estação de trabalho) e é enviado automaticamente para a plataforma alvo, onde é que o executado. 
+
+As atividades são gravadas em um \textit{log}, dentre estas estão os dados de execução do sistema, o tempo de utilização de cada núcleo da CPU durante a execução dos testes, o resultado de saída, entre outros. O \textit{log} pode ser passado para o lado anfitrião em tempo de execução, onde pode ser armazenado, processado e até apresentado de maneira visual através de uma interface.
+
+% universal:2013
+\section{Statistical Debugging}
+Trabalhos com \textit{statistical debugging} se utilizam dados estatísticos relacionados a várias execuções do sistema para isolar um \textit{bug}. Esta análise reduz o espaço de busca utilizando-se de recursos estatisticamente relacionados ao fracasso, limitando assim o conjunto de dados até chegar a uma seleção em que o erro se faz presente. 
+
+Apesar do espaço de busca minimizado, a técnica retorna alguns locais espalhados no código, o que não facilita o trabalho do desenvolvedor. Para tentar suprir a necessidade de mais informações, foram sugeridas as extrações de algumas métricas destes dados estatísticos. Um exemplo seria o \textit{ranking} de desconfiança, que é uma relação entre uma determinada característica versus seu o número de execuções com falha, classificados em ordem decrescente.
+
+Como a análise é realizada a partir de uma depuração estática, estes modelos expõem as relações entre comportamentos do \textit{software} e seu eventual sucesso/fracasso de uma maneira estática. Então é possível fornecer uma identifiçao aproximada de qual parte do sistema gerou o erro. 
+
+Devido ao grande volume de dados necessários para guardar todas as execuções e realizar toda esta análise, esta técnica é difícil de ser implementada em um sistema embarcado real. 
+
+\subsection{Statistical Debugging of Sampled Programs}
+Esta abordagem propõe recolher os dados estatísticos através de declarações inseridas no código e  que podem coletar dicas, em tempo de execução, sobre os dados que não estão relacionados com as falhas~\cite{zheng2003statistical}.
+
+Um dos desafios desta proposta é coletar os dados necessários sem penalizar a execução do \textit{software} e garantindo a melhor utilização de todos os recursos do sistema. A solução encontrada foi inserir um evento aleatório junto às declarações inseridas no \textit{software}, possibilitando que apenas uma pequena parte delas seja executada para cada nova execução do sistema.
+
+A partir desta probalidade foi possível reduzir tempo gasto para coletar os dados, já que não é obrigatório executar todas as declarações em todas as execuções do sistema. Além disso, as amostras recebidas são agregadas sem a informação de cronologia e considerando apenas a quantidade de vezes em que o resultado das declarações permaneceu o mesmo, o que minimiza o espaço necessário para armazenar os dados.
+
+\subsection{Statistical debugging: simultaneous identification of multiple bugs}
+Este modelo de \textit{statistical debugging}  tem o propósito de identificar a origem dos erros em um \textit{software} com uma modelagem probabilística de predicados, considerando inclusive que o \textit{software} pode conter mais de um erro simultaneamente~\cite{zheng2006statistical}. 
+
+Os modelos baseados em \textit{statistical debugging} têm como características possuir dos dados esparsos como amostragem e uma grande variedade de predicados para manipular. Por isso a manipulação destes predicados nem sempre é um trabalho trivial, o que faz com que muitos modelos não consigam selecionar padrões de erros úteis. Para mitigar este problema foram utilizadas técnicas semelhantes às dos algoritmos \textit{bi-clusters}, que permite a extração de dados bidirecional simultâneamente.
+
+A implementação da extração de dados bidirecional executa um processo de votação coletiva iterativo, no qual todos os predicados tem um número que define a qualidade de representação, que pode ser modificado durante a execução do algoritmo através da distribuição de votos. Cada execução em que ocorre um erro tem direito a um voto para selecionar o predicado que melhor se encaixa na situação.
+
+Esta solução é interessante porque reduz o problema de redundancia, pois o processo de votação só acaba quando hover convergência e quanto maior o número de predicados competindo pelo votos, menor é a quantidade de votos que cada um deles pode ter. 
+
+Depois de cada execução um predicado pode receber tanto um voto completo quando uma parcela do voto. No final, os predicados são classificados e selecionados considerando o número de votos que receberam.
+
+%\subsection{Capturing propagation of infected program states}
+%\cite{zhang2009capturing}
+
+\subsection{Statistical debugging using a hierarchical model of correlated predicates}
+\cite{parsa2011statistical}
+
+\section{Program Slicing}
+Em técnicas que utilizam \textit{program slicing} a ideia principal é a partição do código e a remoção de estados ou caminhos que são irrelevantes para alcançar o objetivo selecionado, o que no caso da verificação e validação de um \textit{software} é encontrar um erro. Esta técnica possui duas abordagens principais: estática e dinâmica. 
+
+A partição estática é o tipo mais rápido e aponta apenas uma aproximação do conjunto final de caminhos que podem levar ao erro. Isto ocorre porque o foco é simplificar ao máximo o \textit{software} em questão, reduzindo-o ao ponto de conter todos os estados que poderiam afetar o valor final, mas sem considerar o valor de entrada do \textit{software}. Este tipo de partição é mais utilizada para \textit{software} de pequeno porte e de pouca complexidade, em que o tamanho da partição permanece compatível com a sua simplicidade.
+
+Já na partição dinâmica, as informações do critério de corte tradicional não são suficientes, sendo necessária uma informação adicional sobre os valores de entrada do \textit{software}. A partição será realizada a partir destes dados e sequência de valores de entrada no qual o \textit{software} foi executado é determinante para o conjunto de saída. Esta partição é mais utilizada para \textit{software}s complexos e de alto grau de acoplamento.
+
+Independente da abordagem selecionada, a partição do código é uma técnica interessante porque necessita apenas de uma execução com falhas para ser capaz de simplificar o grupo de entradas a serem examinadas.
+
+\subsection{\cite{sasirekha2011program}}
+\subsection{\cite{Xu:2005:BSP:1050849.1050865}}
+\subsection{\cite{artho2011iterative}}
+
+\section{Capture and Replay}
+Em trabalhos que utilizam \textit{capture and replay} a ideia é capturar toda a execução do programa até o final e armazenar as operações envolvidas em um \textit{log}. Este tipo de sistema permite que o desenvolvedor controle a nova execução do \textit{software} com execução de passos a frente, voltando passos na execução (contra o fluxo), examinando o contexto de alguma variável, verificando um determinado controle de fluxo, analisando fluxos alternativos, entre outras possibilidades.
+
+\subsection{Pinpointing interrupts in embedded real-time systems using context checksums}
+Um grande desafio nesta técnica é como se adaptar a interrupções, pois toda a estrutura de reprodução do \textit{software} se baseia no fluxo de controle e uma interrupção tem a capacidade de romper esta sequência.  Uma interrupção pode ocorrer a qualquer momento e provocar uma ruptura no fluxo de controle, então a execução do programa para na instrução atual, e continua a rotina de tratamento de interrupção. 
+
+Neste aspecto, a solução de tirar um \textit{snapshot} do contexto de execução quando ocorre uma interrupção~\cite{Sundmark} se mostra uma boa alternativa para que o desenvolvedor possa analisar erros oriundos de interrupções.
+
+\subsection{Replaying and isolating failing multi-object interactions}
+Burger e Zeller~\cite{burger2008replaying} se destacaram por desenvolver uma ferramenta \texttt{JINSI} que consegue capturar e reproduzir as interações intercomponentes e intracomponentes. Assim, todas as operações relevantes são observadas e executadas passo a passo, considerando-se todas as comunicações entre dois componentes até encontrar o \textit{bug}.
+
+\subsection{\cite{qi2011locating}}
+\subsection{\cite{orso2005selective}}
+
+
+\chapter{O ambiente Compartilhado de Teste e Depuração}
+Este capítulo apresenta instruções de como integrar a execução de testes com os possíveis ambientes de 
+depuração, gerando o ambiente compartilhado de desenvolvimento.
+
+O ambiente utilizado pelo \textit{script} de troca de parâmetros conta com um emulador para simular a execução da aplicação e rodar os testes. No caso de sucesso em um teste, automaticamente uma ferramenta de depuração é iniciada e o resultado de todas as operações é repassada para o usuário.
+
+As ferramentas utilizadas neste ambiente podem ser substituídas por qualquer outra equivalente. A configuração será apresentada apenas para que o experimento possa ser reproduzido. Nele foi utilizado o QEMU para emular a máquina com a aplicação alvo a partir de outra máquina, usando tradução dinâmica. 
+
+Desta forma torna-se possível utilizar um computador pessoal para testar aplicações compiladas para algum outro sistema embarcado. Para dar suporte também à depuração, foi necessário procurar um aliado para ver quais os passos do programa foi executado um momento antes de um \textit{crash}. O GBD - o GNU Project Debugger se encaixou no papel, pois nele é possível especificar qualquer regra que possa afetar seu comportamento de maneira estática.
+
+A integração de ambos é particular para cada máquina anfitriã e alvo, portanto, talvez alguns passos aqui apresentados devam ser adaptados dependendo de sua arquitetura alvo. A Figura~\ref{fig:emulator_debugger_gray} apresenta as atividades necessárias para executar a depuração remota em conjunto com a simulação dos testes.
+
+\fig{emulator_debugger_gray}{Atividades de integração entre emulador e depurador}{scale=.25}
+
+Uma explicação adicional das técnicas e ferramentas utilizadas neste processo estão listados abaixo:
+
+\begin{itemize}
+	\item Compilar com informações de depuração é o primeiro passo. Como entrada é necessário o código-fonte do aplicativo e como saída esperada encontra-se o código compilado com informações de depuração. Quem utilizar o gcc (GNU project C and C ++ compiler) pode realizar esta atividade simplesmente usando opção \texttt{-g} para compilar. 
+	
+	\item Emular com o QEMU é um passo necessário para executar a aplicação na arquitetura alvo correta. Para executar este passo, o desenvolvedor deve iniciar QEMU com \texttt{-s -S}. A primeira opção ativa o stub do GDB, a fim de abrir a comunicação entre o QEMU e GDB. A opção \texttt{-S} é utilizada para forçar o QEMU esperar GDB para conectar antes da inicialização do sistema.
+Por exemplo, se uma aplicação compilada com informações de depuração (app.img) e imprime algo na tela (stdio), chamada QEMU deve ser semelhante à: \texttt{qemu -fda app.img -serial stdio -s -S}
+	
+	\item Conectar-se com o GDB começa com uma sessão GDB que deve ser inicializada em uma janela separada. Então, para se conectar GDB no QEMU o desenvolvedor deve explicitar que o alvo a ser examinado é remoto e informar o endereço da máquina alvo e porta em que se encontra o alvo a ser examinado (neste caso, o QEMU). Nesta tela deve-se inserir o comando: \texttt{target remote [endereço\_alvo]:[porta\_alvo]} 
+
+	\item Recuperar as informações de debug é um passo importante para ajudar os desenvolvedores a encontrar erros, pois este aquivo contém todas as informações que podem ser retiradas da compilação, como por exemplo o endereço de uma variável, ou os nomes contidos na tabela de símbolos. O arquivo usado para manter as informações de depuração deverá ser informado para o GDB usando o comando: \texttt{file [caminho\_do\_arquivo]}
+	
+	\item Encontrar erros é uma atividade que depende do programa a ser depurado. A partir desta etapa, o desenvolvedor pode definir \textit{breakpoints}, \textit{watchpoints}, controlar a execução do programa e até mesmo permitir \textit{logs}.
+\end{itemize}
+
+\chapter{A arquitetura de Automação de Testes}
+\label{sec:tap}
+
+A ideia de desenvolver a troca de parâmetros surgiu extrapolando-se conceitos da metodologia de projeto orientado aplicação (AOSD - \textit{Application-Oriented System Design}) e do uso de programação genérica para a área de testes. O projeto orientado à aplicação fornece um sistema embarcado desenvolvido a partir de componentes especificamente adaptados e configurados de acordo com os requisitos da aplicação alvo. O fato de existir uma aplicação que fornece a certeza de que tudo que a compõe é essencial para seu funcionamento pode tornar o teste dos requisitos mais assertivo. Ainda, a programação genérica fornece uma maior adaptação do sistema às várias implementações de uma especificação. 
+
+No desenvolvimento para sistemas embarcados é frequente que uma única especificação seja reimplementada para atender a variabilidade de um componente de \textit{software} ou \textit{hardware}. Para cada uma destas implementações, um novo conjunto de testes é realizado. A vantagem de unir a AOSD com programação genérica ao desenvolvimento e teste de sistemas embarcados está em poder fazer uma única aplicação e um único teste para todas as implementações que seguem a mesma especificação, modificando apenas a configuração desejada.
+
+O algoritmo de \texttt{TAP} (Troca Automática de Parâmetros de Software) é independente do sistema operacional e plataforma. No entanto, trabalhamos com a premissa de que este sistema seja orientado a aplicação, com modelagem baseada em \textit{features} e parametrização. Também é desejável que cada abstração do sistema seja configurada conforme necessário através de \textit{traits} de um modelo de templates, como o definido por Stroustrup \cite{Stroustrup:c++}. 
+
+No algoritmo~\ref{algoritmo_AEP} são apresentados os passos a realizar a partir do momento em que se tem uma aplicação alvo até o retorno do relatório para o desenvolvedor. A entrada do algoritmo é o arquivo de configuração que possui o caminho da aplicação sob teste e de seus \textit{traits}. A partir destas informações o algoritmo flui no sentido de tentar encontrar a característica desejada, trocá-la por uma valor predeterminado, executar a nova aplicação e recolher o retorno da aplicação.
+
+
+\begin{algorithm}
+\caption{Algoritmo de Troca dos Parâmetros de Configuração}\label{algoritmo_AEP}
+\KwIn{arquivo \# Arquivo de configura\c{c}\~{a}o do teste  }
+\KwOut{relat\'{o}rio \# Relat\'{o}rio de tentativas }
+propriedades $\Leftarrow$ GetTraitFile(arquivo)\;
+\eIf{ o arquivo possui valor de configura\c{c}\~{a}o }{
+  \ForEach{configura\c{c}\~{a}o no arquivo}{
+     	linha $\Leftarrow$ GetTheConfiguration(configura\c{c}\~{a}o, propriedades)\;
+\ForEach{valor entre os da configura\c{c}\~{a}o}{
+        novoPropriedade$\Leftarrow$ ExchangeValue(linha, propriedades) \;
+        novaApp$\Leftarrow$ Compile(aplica\c{c}\~{a}o, novoPropriedade) \;
+        relat\'{o}rio$\Leftarrow$ relat\'{o}rio + Emulate(novaApp) \;
+     	}
+}
+}{ 
+\eIf{ o arquivo possui n$\circ$ m\'{a}ximo de tentativas}{
+        numMaxTentativas$\Leftarrow$ GetMaxSize(arquivo)\;
+}{
+        numMaxTentativas$\Leftarrow$ GetRandomNumber()\;
+  }
+\While{tentativas $<$ numMaxTentativas}{
+    linha$\Leftarrow$ GetRandomNumber()\;
+novoPropriedade$\Leftarrow$ ExchangeValue(linha, propriedades)\;
+    novaApp$\Leftarrow$ Compile(aplica\c{c}\~{a}o, novoPropriedade)\;
+    relat\'{o}rio$\Leftarrow$ relat\'{o}rio + Emulate(novaApp)\;
+  }
+}
+\Return relat\'{o}rio;
+\end{algorithm}
+
+A implementação atual utiliza o sistema operacional (\texttt{EPOS})~\cite{Froehlich:2001}, uma vez que adiciona uma grande capacidade de configuração do sistema, o que é muito adequado para avaliar o \textit{script}. Para um melhor entendimento da implementação do algoritmo de \texttt{TAP} será necessária uma breve explicação de como configurar as abstrações no EPOS.
+
+\section{Abstrações no \texttt{EPOS}}
+\texttt{EPOS} é um \textit{framework} baseado em componentes que fornece todas as abstrações tradicionais de sistemas operacionais e serviços como: gerenciamento de memória, comunicação e gestão do tempo. Além disso, possui vários projetos industriais e pesquisas acadêmicas que o utilizam como base \footnote{http://www.lisha.ufsc.br/pub/index.php?key=EPOS}.
+
+Este sistema operacional é instanciado apenas com o suporte básico para sua aplicação dedicada. É importante salientar que todas as características dos componentes também são características da aplicação, desta maneira, a escolha dos valores destas propriedades tem influência direta no comportamento final da aplicação. Neste contexto, a troca automatizada destes parâmetros pode ser utilizada tanto para a descoberta de um \textit{bug} no programa quanto para melhorar o desempenho para a aplicação através da seleção de uma melhor configuração.
+
+Cada aplicação tem seu próprio arquivo de configuração de abstrações para definir o seu comportamento. A Figura~\ref{progcpp:traitbuild} mostra um trecho desta configuração para uma aplicação que simula um componente de estimativa de movimento para codificação H.264, o \texttt{DMEC}. Este trecho mostra como construir a aplicação, que neste caso foi configurada para executar no modo biblioteca para a arquitetura \texttt{IA-32} (\textit{Intel Architecture, 32-bit}), através de um \texttt{PC} (\textit{Personal Computer}).
+
+\progcpp{traitbuild}{Trecho do \textit{trait} da aplicação o componente DMEC.}
+
+\section{Configuração do Teste/Depuração}
+Para melhorar a usabilidade do \textit{script}, é possível definir um arquivo de configuração com as informações necessárias para executar os testes unitários e de tipagem. Nós escolhemos XML para definir as configurações de teste, pois pode definir todas as regras necessárias para executar o \textit{script} de forma legível e, além disso, também é facilmente interpretado pelo computador.
+
+A Figura~\ref{progxml:philosopherxml} traz um exemplo do arquivo de configuração de \texttt{TAP} para a aplicação \texttt{DMEC}.
+
+\progxml{philosopherxml}{Exemplo do arquivo de configuração do teste para a \texttt{TAP}.}
+
+O arquivo do configuração é responsável pelo teste, então seu conteúdo deve estar sempre atualizado e em concordância com os requisitos da aplicação. O ajuste inicial é manual e simples, uma vez que este arquivo pode ser lido quase como um texto: há um teste para a aplicação (\textit{philosopher\_dinner\_app}), dentro dela deseja-se especificar duas propriedades. A primeira é a propriedade identificada como \textit{ARCH} que pode assumir os valores \textit{IA32} ou \textit{AVR8}. A segunda está relacionada à depuração, é um arquivo que contém \textit{breakpoints} que está no seguinte caminho: "\textit{/home/breakpoints.txt}".
+
+Cada configuração do teste interfere diretamente com o tempo e eficácia do \textit{script}. Prevendo este comportamento, \texttt{TAP} oferece três granularidades de configuração para o teste: determinada, parcialmente aleatória e aleatória. Elas devem ser escolhidas de acordo com a finalidade do usuário ao executar o \textit{script} de troca de parâmetros, do tipo de teste e das características de aplicação.
+
+Quando se deseja testar uma especificação bem definida, é possível determinar qual valor uma propriedade deve atingir. Toda a especificação pode ser traduzida no arquivo de configuração e \texttt{TAP} só considerará sucesso no teste as execuções que seguirem fielmente o descrito. O modo determinado também é interessante quando se deseja otimizar uma configuração, pois uma vez que o comportamento da aplicação e todas suas configurações sejam conhecidas, a única variável do sistema afetará o resultado final.
+
+Testes parcialmente aleatórios são usados para verificar as configurações do sistema que não possuem um valor determinado, ou seja, mais de um valor pode ser considerado correto. Neste caso, a informação faltante na configuração será atribuída pelo \textit{script} no momento do teste. Sem nenhuma informação prévia, o algoritmo não garante que os valores gerados serão válidos e distintos uns dos outros, desta forma pode ser que o teste seja repetido e gere resultados com falsos negativos.
+
+Teste aleatório foi desenvolvido como o pior caso. Ele só deve ser usado quando deseja-se testar valores fora do convencional para verificar a robustez da aplicação. Também é útil caso a aplicação falhe ao passar nos testes e não se tenha dica alguma sobre onde poderia estar o erro no momento de iniciar a depuração. Através dele pode-se encontrar valores errados de configuração e ajudar os desenvolvedores menos experientes a depurar pequenas aplicações.
+
+\bibliographystyle{ufscThesis/ufsc-alf}
+\bibliography{bibliografia}
+\end{document}

@@ -1,0 +1,43 @@
+%-------------------------------------------------------------------------------
+% BIBLIOGRAFIA
+%-------------------------------------------------------------------------------
+\begin {thebibliography} {WWWW 4em}
+
+\bibitem[ACC 86] {acc86} \hspace*{-2.5em}
+ACCETTA, M. et al., {\em Mach: a New Kernel Foundation for UNIX Development}, Pittsburgh: Proccedings of the Summer 1986 USENIX conference, p. 93-112, julho de 1986.
+
+\bibitem[BAC 87] {bac87} \hspace*{-2.5em}
+BACH, M., {\em The Design of the UNIX Operating System}, Englewood Cliffs: Prentice-Hall, 1987.
+
+\bibitem[COR 93] {cor93} \hspace*{-2.5em}
+CORSO, T., {\em Ambiente para Programação Paralela em Multicomputador}, Florianópolis: UFSC/CTC/INE, 1993 (Relatório Técnico).
+
+\bibitem[FRO 93] {fro93} \hspace*{-2.5em}
+FROHLICH, A., {\em Um Sistema de Arquivos Experimental.}, Florianópolis:  UFSC, 1993 (Trabalho Individual).
+
+\bibitem[HOA 85] {hoa85} \hspace*{-2.5em}
+HOARE, C., {\em Communicating Sequential Processes}, Englewood Cliffs: Prentice-Hall, 1985.
+
+\bibitem[IEE 88] {iee88} \hspace*{-2.5em}
+INSTITUTE OF ELETRICAL AND ELECTRONICS ENGINEER, {\em POSIX - Portable Operating System Interface for Computing Environments}, IEEE Computing Society, 1988.
+
+\bibitem [MUL 90] {mul90} \hspace*{-2.5em}
+MULLENDER, S. J. et al., {\em Amoeba: a Distributed System for the 1990s}, IEEE Computer, p. 44-53, maio de 1990. 
+
+\bibitem[POS 87] {pos87} \hspace*{-2.5em}
+POSTEL, J. \& REYNOLDS, J., {\em Official Internet Protocols}, Marina del Rey, USC, 1987 (RFC1011).
+
+\bibitem[RES] {res} \hspace*{-2.5em}
+RESESSE, R. \& TANENBAUM, A. \& WILSCHUT, A., {\em The Design of a High-Performance File Server}, p. 72-82.
+
+\bibitem[SAT 89] {sat89} \hspace*{-2.5em}
+SATYANARAYANAN, M., {\em A Survey of Distributed File Systems}, Annual Review of Computer Science, v.4, 1989.
+
+\bibitem[SUN 92] {sun92} \hspace*{-2.5em}
+SUN MICROSYSTEMS, {\em Network Interfaces Programmer's Guide}, Mountain View: Sun Microsystems, 1992.
+
+\bibitem[TAN 92] {tan92} \hspace*{-2.5em}
+TANEMBAUM, A., {\em Modern Operating Systems}, Englewood Cliffs: Prentice-Hall, 1992.
+
+\end{thebibliography}
+

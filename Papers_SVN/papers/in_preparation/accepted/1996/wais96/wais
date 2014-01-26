@@ -1,0 +1,16 @@
+#!/bin/csh
+acsun < wais96.txt >wais96.tex
+
+platex wais96.tex
+rm -f wais96.tex
+#dvips -D 1270 -c 1 -t a4 -F -U -o se.ps se.dvi
+if ($1) then
+  if ($2) then
+    dvips -D 1270 -c 1 -t a4 -F -U -p $1 -n $2 -o wais96.ps wais96.dvi
+  else
+    dvips -D 1270 -c 1 -t a4 -F -U -p $1 -o wais96.ps wais96.dvi
+  endif
+else
+  dvips -D 1270 -c 1 -t a4 -F -U -o wais96.ps wais96.dvi
+endif
+

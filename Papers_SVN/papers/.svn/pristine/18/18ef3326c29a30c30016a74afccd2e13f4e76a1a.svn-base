@@ -1,0 +1,53 @@
+% Hardware --------------------------------------------------------------------
+@misc{ml310-site,
+    title = {Xilinx ML310 Documentation and Tutorials},
+    url = {http://www.xilinx.com/products/boards/ml310/current/index.html},
+    urlaccessdate = {Mar 19, 2010},
+    note = {[Online; accessed March 19, 2010]}
+}
+
+@misc{ml403-site,
+    title = {Virtex-4 ML403 Embedded Platform},
+    url = {http://www.xilinx.com/products/devkits/HW-V4-ML403-UNI-G.htm},
+    urlaccessdate = {Mar 19, 2010},
+    note = {[Online; accessed March 19, 2010]}
+}
+
+
+% MPSoc and H.264
+@inproceedings{Javaid:2010:OSL:1878961.1878978,
+ author = {Javaid, Haris and He, Xin and Ignjatovic, Aleksander and Parameswaran, Sri},
+ title = {Optimal synthesis of latency and throughput constrained pipelined MPSoCs targeting streaming applications},
+ booktitle = {Proceedings of the eighth IEEE/ACM/IFIP international conference on Hardware/software codesign and system synthesis},
+ series = {CODES/ISSS '10},
+ year = {2010},
+ isbn = {978-1-60558-905-3},
+ location = {Scottsdale, Arizona, USA},
+ pages = {75--84},
+ numpages = {10},
+ url = {http://doi.acm.org/10.1145/1878961.1878978},
+ doi = {http://doi.acm.org/10.1145/1878961.1878978},
+ acmid = {1878978},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {design space exploration, integer linear programming},
+} 
+
+@inproceedings{Popovici:2009:FAC:1509633.1509681,
+ author = {Popovici, Katalin and Jerraya, Ahmed},
+ title = {Flexible and abstract communication and interconnect modeling for MPSoC},
+ booktitle = {Proceedings of the 2009 Asia and South Pacific Design Automation Conference},
+ series = {ASP-DAC '09},
+ year = {2009},
+ isbn = {978-1-4244-2748-2},
+ location = {Yokohama, Japan},
+ pages = {143--148},
+ numpages = {6},
+ url = {http://portal.acm.org/citation.cfm?id=1509633.1509681},
+ acmid = {1509681},
+ publisher = {IEEE Press},
+ address = {Piscataway, NJ, USA},
+}
+
+% -----------------------------------------------------------------------------
+

@@ -1,0 +1,687 @@
+@book{Froehlich:2001,
+    author = {Antônio Augusto Fröhlich},
+    title = {{Application-Oriented Operating Systems}},
+    publisher = {GMD - Forschungszentrum Informationstechnik},
+    year = 2001,
+    pages = 200,
+    number = 17,
+    series = {GMD Research Series},
+    address = {Sankt Augustin, Germany},
+    month = AUG
+}
+
+@book{Czarnecki:2000,
+ author = {Krzysztof Czarnecki and Ulrich W. Eisenecker},
+ title = {{Generative programming: methods, tools, and applications}},
+ year = {2000},
+ OPTisbn = {0-201-30977-7},
+ publisher = {ACM Press/Addison-Wesley Publishing Co.},
+ address = {New York, USA},
+} 
+
+
+@inproceedings{Marcondes:2009,
+author = {Hugo Marcondes and Antônio Augusto Fröhlich},
+title = {{A Hybrid Hardware and Software Component Architecture for Embedded System Design}},
+booktitle = {Proc. of the International Embedded Systems Symposium},
+OPTseries = {IESS '09},
+pages = {259-270},
+year = {2009},
+address = {Langenargen, Germany},
+}
+
+@inproceedings{Spinczyk:2002,
+ author = {Olaf Spinczyk and Andreas Gal and Wolfgang Schr\"{o}der-Preikschat},
+ title = {{AspectC++: an aspect-oriented extension to the C++ programming language}},
+ booktitle = {Proc. of the Fortieth International Conference on Tools Pacific: Objects for internet, mobile and embedded applications},
+ OPTseries = {CRPIT '02},
+ year = {2002},
+ address = {Sydney, Australia},
+ pages = {53--60},
+ keywords = {C++, aspect-oriented programming},
+} 
+
+@inproceedings{Panda:2001,
+ author = {Preeti Ranjan Panda},
+ title = {{SystemC: a modeling platform supporting multiple design abstractions}},
+ booktitle = {Proc. of the 14th international symposium on Systems synthesis},
+ OPTseries = {ISSS '01},
+ year = {2001},
+ address = {Montr\&\#233;al, Canada},
+ pages = {75--80},
+ keywords = {C/C++ based design, SystemC, hardware description language, system level design},
+} 
+
+@inproceedings{Cai:2003,
+ author = {Lukai Cai and Daniel Gajski},
+ title = {{Transaction level modeling: an overview}},
+ booktitle = {Proc. of the 1st IEEE/ACM/IFIP international conference on Hardware/software codesign and system synthesis},
+ OPTseries = {CODES+ISSS '03},
+ year = {2003},
+ address = {Newport Beach, USA},
+ pages = {19--24},
+ keywords = {exploration, modeling, refinement, synthesis, transaction level model, validation},
+} 
+
+
+@inproceedings{Marcondes:2009:2,
+ author = {Hugo Marcondes and Rafael Cancian and Marcelo Stemmer and Antônio Augusto Fröhlich},
+ title = {{On the Design of Flexible Real-Time Schedulers for Embedded Systems}},
+ booktitle = {Proc. of the 2009 International Conference on Computational Science and Engineering - Volume 02},
+ OPTseries = {CSE '09},
+ year = {2009},
+ pages = {382--387},
+ address = {Washington, USA},
+ keywords = {real-time, scheduler, embedded systems},
+} 
+
+
+@inproceedings{Froehlich:2000,
+ author = {Antônio Augusto Fröhlich and Wolfgang Schröder-Preikschat},
+ title = {{Scenario Adapters: Efficiently Adapting Components}},
+ booktitle = {Proc. of the 4th World Multiconference on Systemics, Cybernetics and Informatics},
+ year = {2000},
+ address = {Orlando, USA},
+}
+
+@inproceedings{Damasevicius:2003,
+ author = {Robertas Dama\v{s}evi\v{c}ius and Giedrius Majauskas and Vytautas \v{S}tuikys},
+ title = {{Application of design patterns for hardware design}},
+ booktitle = {Proc. of the 40th annual Design Automation Conference},
+ OPTseries = {DAC '03},
+ year = {2003},
+ address = {Anaheim, USA},
+ pages = {48--53},
+ keywords = {UML, design patterns, metaprogramming, system-level design processes, wrapping},
+} 
+
+@inproceedings{Vachharajani:2004,
+ author = {Manish Vachharajani and Neil Vachharajani and David I. August},
+ title = {{The liberty structural specification language: a high-level modeling language for component reuse}},
+ booktitle = {Proc. of the ACM SIGPLAN 2004 conference on Programming language design and implementation},
+ OPTseries = {PLDI '04},
+ year = {2004},
+ address = {Washington DC, USA},
+ pages = {195--206},
+ keywords = {Liberty Simulation Environment (LSE), Liberty Structural Specification (LSS), component reuse, simulator construction, structural modeling, type inference, use-based specialization},
+} 
+
+@inproceedings{Deharbe:2006,
+ author = {David D\'{e}harbe and Sergio Medeiros},
+ title = {{Aspect-oriented design in systemC: implementation and applications}},
+ booktitle = {Proc. of the 19th annual symposium on Integrated circuits and systems design},
+ OPTseries = {SBCCI '06},
+ year = {2006},
+ address = {Ouro Preto, Brazil},
+ pages = {119--124},
+ keywords = {aspect-oriented programming, hardware description languages, systemC},
+} 
+
+@inproceedings{Engel:2008,
+ author = {Michael Engel and Olaf Spinczyk},
+ title = {{Aspects in hardware: what do they look like?}},
+ booktitle = {Proc. of the 2008 AOSD workshop on Aspects, components, and patterns for infrastructure software},
+ OPTseries = {ACP4IS '08},
+ year = {2008},
+ address = {Brussels, Belgium},
+ pages = {5:1--5:6},
+} 
+
+@inproceedings{Endoh:2008,
+ author = {Yusuke Endoh and Takeo Imai and Mikito Iwamasa and Yoshio Kataoka},
+ title = {{A pointcut-based assertion for high-level hardware design}},
+ booktitle = {Proc. of the 2008 AOSD workshop on Aspects, components, and patterns for infrastructure software},
+ OPTseries = {ACP4IS '08},
+ year = {2008},
+ address = {Brussels, Belgium},
+ pages = {4:1--4:6},
+}
+
+@inproceedings{Endoh:2011,
+ author = {Yusuke Endoh},
+ title = {{ASystemC: an AOP extension for hardware description language}},
+ booktitle = {Proc. of the tenth international conference on Aspect-oriented software development companion},
+ OPTseries = {AOSD '11},
+ year = {2011},
+ address = {Porto de Galinhas, Brazil},
+ pages = {19--28},
+ keywords = {hardware description language, systemc},
+}
+
+@Manual{VHDL:2000,
+ title = {{Std 1076-2000: IEEE Standard VHDL Language Reference Manual}},
+ author = {IEEE},
+ year = {2000},
+}
+
+@Manual{Verilog:2001,
+ title = {{Std 1364-2001: IEEE Standard Verilog Hardware Description Language}},
+ author = {IEEE},
+ year = {2001},
+}
+
+@inproceedings{Kiczales:2001,
+ author = {Gregor Kiczales and Erik Hilsdale and Jim Hugunin and Mik Kersten and Jeffrey Palm and William G. Griswold},
+ title = {{An Overview of AspectJ}},
+ booktitle = {Proc. of the 15th European Conference on Object-Oriented Programming},
+ OPTseries = {ECOOP '01},
+ year = {2001},
+ pages = {327--353},
+ address = {London, UK},
+} 
+
+
+@inproceedings{Vax:2007,
+ author = {Matan Vax},
+ title = {{Conservative aspect-orientated programming with the e language}},
+ booktitle = {Proc. of the 6th international conference on Aspect-oriented software development},
+ OPTseries = {AOSD '07},
+ year = {2007},
+ address = {Vancouver, Canada},
+ pages = {149--160},
+ keywords = {aspects, class extension, functional verification, modules},
+} 
+
+@inproceedings{Liu:2010,
+ author = {Feng Liu and Qingping Tan and Xiaoyu Song and Naeem Abbasi},
+ title = {{AOP-based high-level power estimation in SystemC}},
+ booktitle = {Proc. of the 20th symposium on Great lakes symposium on VLSI},
+ OPTseries = {GLSVLSI '10},
+ year = {2010},
+ address = {Providence, USA},
+ pages = {353--356},
+ keywords = {aspectc++, power estimation, systemc},
+} 
+
+@inproceedings{FengLiu:2009,
+ author = {Feng Liu and Otmane Ait Mohamed and Xiaoyu Song and Qingping Tan},
+ title = {{A case study on system-level modeling by aspect-oriented programming}},
+ booktitle = {Proc. of the 2009 10th International Symposium on Quality of Electronic Design},
+ year = {2009},
+ pages = {345--349},
+ address = {Washington, USA},
+} 
+
+@inproceedings{Kallel:2010,
+author={Meriam Kallel and Younes Lahbib and Rached Tourki and Adel Baganne},
+booktitle={Design and Technology of Integrated Systems in Nanoscale Era (DTIS), 2010 5th International Conference on}, 
+title={{Verification of SystemC transaction level models using an aspect-oriented and generic approach}},
+year={2010},
+month=march,
+volume={},
+number={},
+pages={1 -6}
+}
+
+@inproceedings{Bainbridge-Smith:2005,
+author={Andrew Bainbridge-Smith and Su-Hyun Park},
+booktitle={Proc. of the IEEE International Conference on Field-Programmable Technology}, 
+title={{ADH: an aspect described hardware programming language}},
+year={2005},
+month=dec.,
+volume={},
+number={},
+pages={ 283 - 284}
+}
+
+@inproceedings{Burapathana:2005,
+ author = {Petcharat Burapathana and Proadpran Pitsatorn and Boonchai Sowanwanichkul},
+ title = {{An Applying Aspect-Oriented Concept to Sequential Logic Design}},
+ booktitle = {Proc. of the International Conference on Information Technology},
+ OPTseries = {ITCC '05},
+ year = {2005},
+ pages = {819--820},
+ address = {Washington, USA},
+ keywords = {Aspect-oriented concept, Crosscutting, Reusability, Hardware design and Sequential logic},
+}
+
+@inproceedings{Afonso:2007,
+ author = {Francisco Afonso and Carlos Silva and Sergio Montenegro and Adriano Tavares},
+ title = {{Applying aspects to a real-time embedded operating system}},
+ booktitle = {Proc. of the 6th workshop on Aspects, components, and patterns for infrastructure software},
+ OPTseries = {ACP4IS '07},
+ year = {2007},
+ address = {Vancouver, Canada},
+ keywords = {aspect oriented programming, customization, modularization},
+}
+
+@inproceedings{Jun:2009,
+author={Ye Jun and Li Tun and Tan Qingping},
+booktitle={Specification Design Languages, 2009. FDL 2009. Forum on}, 
+title={{The application of Aspectual Feature Module in the development and verification of SystemC models}},
+year={2009},
+month=sept.,
+pages={1 -6}
+}
+
+@article{Apel:2008,
+ author = {Sven Apel and Thomas Leich and Gunter Saake},
+ title = {{Aspectual Feature Modules}},
+ journal = {IEEE Trans. Softw. Eng.},
+ volume = {34},
+ issue = {2},
+ month = {March},
+ year = {2008},
+ pages = {162--180},
+ address = {Piscataway, USA},
+ keywords = {Design Tools and Techniques, Design, Language Constructs and Features},
+} 
+
+
+@inproceedings{Kiczales:1997,
+  author = {Gregor Kiczales and John Lamping and Anurag Mendhekar and Chris Maeda and Cristina Videira Lopes and Jean-Marc Loingtier and John Irwin},
+  title = {{Aspect-Oriented Programming}},
+  booktitle = {Proc. of the European Conference on Object-oriented Programming},
+  address = {Jyväskylä, Finland},
+  volume = 1241,
+  pages = {220--242},
+  month = jun,
+  year = 1997,
+}
+
+@online{systemc_subset,
+author = {{OSCI}},
+title={{SystemC Synthesizable Subset Draft 1.3}},
+url={http://www.systemc.org/},
+year = 2010,
+}
+
+@article{Coplien:1995,
+ author = {James O. Coplien},
+ title = {Curiously recurring template patterns},
+ journal = {C++ Rep.},
+ volume = {7},
+ issue = {2},
+ month = {February},
+ year = {1995},
+ pages = {24--27},
+ address = {New York, USA},
+} 
+
+@article{Williams:1983,
+  title={{Design for testability--A survey}},
+  author={Williams, T.W. and Parker, K.P.},
+  journal={Proc. of the IEEE},
+  volume={71},
+  number={1},
+  pages={98--112},
+  year={1983}
+}
+
+@Misc{ITUT:ADPCM,
+author = {{ITU-T}},
+title={{ITU-T Recommendation G.726: 40, 32, 24, 16 kbit/s Adaptive Differential Pulse Code Modulation (ADPCM)}},
+url={http://www.itu.int}
+}
+
+@Misc{Calypto:Catapult,
+ author = {{Calypto Design Systems}},
+ title = {{CatapultC Synthesis}},
+ note = {http://www.calypto.com/},
+}
+
+@Misc{Forte:Cynthesizer,
+ author = {{Forte Design Systems}},
+ title = {{Cynthesizer}},
+ note = {http://www.forteds.com},
+}
+
+@Misc{NEC:CyberWorkBench,
+ author = {{NEC System Technologies, Ltd}},
+ title = {{CyberWorkBench}},
+ note = {http://www.cyberworkbench.com},
+}
+
+@Misc{Synopsys:Synphony,
+ author = {{Synopsys}},
+ title = {{Synphony C Compiler}},
+ note = {http://www.synopsys.com},
+}
+
+@Misc{Cadence:CtoSilicon,
+ author = {{Cadence Design Systems}},
+ title = {{C-to-Silicon Compiler}},
+ note = {http://www.cadence.com},
+}
+
+
+
+@inproceedings{Davare:2007,
+    author = {Abhijit Davare and Douglas Densmore and Trevor Meyerowitz and Alessandro Pinto and Alberto Sangiovanni-Vincentelli and Guang Yang and Haibo Zeng and Qi Zhu},
+    title = {{A Next-Generation Design Framework for Platform-based Design}},
+    booktitle = {Proc. of the Design \& Verification Conference \& Exhibition},
+    OPTseries = {DVCon 2007},
+    month = {February},
+    year = {2007},
+}
+
+@inproceedings{Grimpe:2003,
+ author = {Eike Grimpe and Frank Oppenheimer},
+ title = {{Extending the SystemC synthesis subset by object-oriented features}},
+ booktitle = {Proc. of the 1st IEEE/ACM/IFIP international conference on Hardware/software codesign and system synthesis},
+ OPTseries = {CODES+ISSS '03},
+ year = {2003},
+ address = {Newport Beach, USA},
+ pages = {25--30},
+ keywords = {C/C++ based design, SystemC, hardware description language, hardware synthesis, high-level synthesis, object-orientation, system level design},
+} 
+
+@inproceedings{Destro:2007,
+ author = {Paolo Destro and Franco Fummi and Graziano Pravadelli},
+ title = {{A smooth refinement flow for co-designing HW and SW threads}},
+ booktitle = {Proc. of the conference on Design, automation and test in Europe},
+ OPTseries = {DATE '07},
+ year = {2007},
+ address = {Nice, France},
+ pages = {105--110},
+} 
+
+@inproceedings{Vincentelli:2004,
+    Author = {Alberto Sangiovanni-Vincentelli and Luca Carloni and Fernando De Bernardinis and Marco Sgroi},
+    Booktitle = {Proc. of the 41st Annual Conference on Design Automation},
+    OPTseries = {DAC '04},
+    address = {San Diego, USA},
+    Pages = {409--414},
+    Title = {{Benefits and challenges for platform-based design}},
+    Year = {2004},
+}
+
+@article{Vincentelli:2001,
+    Author = {Alberto Sangiovanni-Vincentelli and Grant Martin},
+    Journal = {IEEE Design {\&} Test of Computers},
+    Pages = {23-33},
+    Title = {{Platform-Based Design and Software Design Methodology for Embedded Systems}},
+    Volume = {18},
+    Year = {2001},
+}
+
+@article{Balarin:2003,
+    Author = {Balarin, F. and Watanabe, Y. and Hsieh, H. and Lavagno, L. and Passerone, C. and Sangiovanni-Vincentelli, A.},
+    Journal = {Computer},
+    Keywords = { electronic design automation, embedded systems Metropolis, embedded software design, formal analysis, formal semantics, integrated electronic system design environment, metamodel, programmable platforms, simulation, synthesis},
+    Month = {April},
+    Pages = { 45-52},
+    Title = {{Metropolis: an integrated electronic system design environment}},
+    Volume = {36},
+    Year = {2003},
+}
+
+@INPROCEEDINGS{Eker:2003,
+    author = {Johan Eker and Jörn W. Janneck and Edward A. Lee and Jie Liu and Xiaojun Liu and Jozsef Ludvig and Stephen Neuendorffer and Sonia Sachs and Yuhong Xiong},
+    title = {{Taming Heterogeneity - The Ptolemy Approach}},
+    booktitle = {Proc. of the IEEE},
+    year = {2003},
+    pages = {127--144}
+}
+
+@article{Ha:2008,
+ author = {Soonhoi Ha and Sungchan Kim and Choonseung Lee and Youngmin Yi and Seongnam Kwon and Young-Pyo Joo},
+ title = {{PeaCE: A hardware-software codesign environment for multimedia embedded systems}},
+ journal = {ACM Trans. Des. Autom. Electron. Syst.},
+ volume = {12},
+ issue = {3},
+ month = {May},
+ year = {2008},
+ pages = {24:1--24:25},
+ address = {New York, USA},
+ keywords = {Hardware-software codesign, design-space exploration, embedded systems, hardware-software cosimulation, model-based design},
+} 
+
+@ARTICLE{Cesario:2002,
+  author = {Cesario, W.O. and Lyonnard, D. and Nicolescu, G. and Paviot, Y. and Yoo, Sungjoo and Jerraya, A.A. and Gauthier, L. and Diaz-Nava, M.},
+  title = {{Multiprocessor SoC platforms: a component-based design approach}},
+  journal = {Design \& Test of Computers, IEEE},
+  year = {2002},
+  volume = {19},
+  pages = {52--63},
+  number = {6},
+}
+
+@inproceedings{Dziri:2004,
+    Author = {Dziri, M.-A. and Cesario, W. and Wagner, F.R. and Jerraya, A.A.},
+    Booktitle = {Proc. of the Design, Automation and Test in Europe Conference and Exhibition},
+    Pages = {1132--1137 Vol.2},
+    Title = {{Unified component integration flow for multi-processor SoC design  and validation}},
+    Volume = {2},
+    Year = {2004},
+}
+
+@inproceedings{Santambrogio:2007,
+ author = {Marco D. Santambrogio and Seda Ogrenci Memik and Vincenzo Rana and Umut A. Acar and Donatella Sciuto},
+ title = {{A novel SoC design methodology combining adaptive software and reconfigurable hardware}},
+ booktitle = {Proc. of the 2007 IEEE/ACM international conference on Computer-aided design},
+ OPTseries = {ICCAD '07},
+ year = {2007},
+ address = {San Jose, California},
+ pages = {303--308},
+}
+
+@article{Hollstein:2007,
+title = {{Advanced hardware/software co-design on reconfigurable network-on-chip based hyper-platforms}},
+journal = {Computers \& Electrical Engineering},
+volume = {33},
+number = {4},
+pages = {310 - 319},
+year = {2007},
+author = {Thomas Hollstein and Manfred Glesner},
+}
+
+@inproceedings{Mueller:2010,
+ author = {Wolfgang Mueller and Da He and Fabian Mischkalla and Arthur Wegele and Paul Whiston and Pablo Penil and Eugenio Villar and Nikolaos Mitas and Dimitrios Kritharidis and Florent Azcarate and Manuel Carballeda},
+ title = {{The SATURN Approach to SysML-Based HW/SW Codesign}},
+ booktitle = {Proc. of the 2010 IEEE Annual Symposium on VLSI},
+ OPTseries = {ISVLSI '10},
+ year = {2010},
+ pages = {506--511},
+ address = {Washington, USA},
+ keywords = {UML, SysML, SystemC, HW/SW co-design},
+}
+
+@article{Domer:2008,
+ author = {Rainer D\"{o}mer and Andreas Gerstlauer and Junyu Peng and Dongwan Shin and Lukai Cai and Haobo Yu and Samar Abdi and Daniel D. Gajski},
+ title = {{System-on-chip environment: a SpecC-based framework for heterogeneous MPSoC design}},
+ journal = {EURASIP J. Embedded Syst.},
+ issue_date = {January 2008},
+ volume = {2008},
+ month = {January},
+ year = {2008},
+ pages = {5:1--5:13},
+ address = {New York, United States},
+} 
+
+@article{Ouadjaout:2006,
+ author = {Salim Ouadjaout and Dominique Houzet},
+ title = {{Generation of embedded hardware/software from SystemC}},
+ journal = {EURASIP J. Embedded Syst.},
+ issue_date = {January 2006},
+ volume = {2006},
+ issue = {1},
+ month = {January},
+ year = {2006},
+ pages = {19--19},
+ address = {New York, United States},
+}
+
+@inproceedings{Haubelt:2008,
+ author = {Christian Haubelt and Thomas Schlichter and Joachim Keinert and Mike Meredith},
+ title = {{SystemCoDesigner: automatic design space exploration and rapid prototyping from behavioral models}},
+ booktitle = {Proc. of the 45th annual Design Automation Conference},
+ OPTseries = {DAC '08},
+ year = {2008},
+ address = {Anaheim, California},
+ pages = {580--585},
+ keywords = {ESL design, design space exploration, rapid prototyping},
+} 
+
+@book{Fingeroff:2010,
+  title={{High-Level Synthesis Blue Book}},
+  author={Michael Fingeroff},
+  OPTisbn={9781453584682},
+  year={2010},
+  publisher={Xlibris Corporation}
+}
+
+@inproceedings{Gruttner:2008,
+ author = {Kim Gr\"{u}ttner and Frank Oppenheimer and Wolfgang Nebel and Fabien Colas-Bigey and Anne-Marie Fouilliart},
+ title = {{SystemC-based modelling, seamless refinement, and synthesis of a JPEG 2000 decoder}},
+ booktitle = {Proc. of the conference on Design, automation and test in Europe},
+ OPTseries = {DATE '08},
+ year = {2008},
+ address = {Munich, Germany},
+ pages = {128--133},
+} 
+
+@article{Keinert:2009,
+ author = {Joachim Keinert and Martin Streubühr and Thomas Schlichter and Joachim Falk and Jens Gladigau and Christian Haubelt and Jürgen Teich and Michael Meredith},
+ title = {{SystemCoDesigner---an automatic ESL synthesis approach by design space exploration and behavioral synthesis for streaming applications}},
+ journal = {ACM Trans. Des. Autom. Electron. Syst.},
+ volume = {14},
+ issue = {1},
+ month = {January},
+ year = {2009},
+ pages = {1:1--1:23},
+ articleno = {1},
+ address = {New York, USA},
+ keywords = {System design, hardware/software codesign},
+}
+
+@inproceedings{Schirner:2010,
+ author = {Gunar Schirner and Andreas Gerstlauer and Rainer D\"{o}mer},
+ title = {{System-level development of embedded software}},
+ booktitle = {Proc. of the 2010 Asia and South Pacific Design Automation Conference},
+ OPTseries = {ASPDAC '10},
+ year = {2010},
+ address = {Taipei, Taiwan},
+ pages = {903--909},
+} 
+
+@INPROCEEDINGS{Anderson:2007,
+author={Anderson, E. and Peck, W. and Stevens, J. and Agron, J. and Baijot, F. and Warn, S. and Andrews, D.},
+booktitle={Proc. of the International Conference on Field Programmable Logic and Applications.},
+title={{Supporting High Level Language Semantics within Hardware Resident Threads}},
+OPTseries = {FPL '07},
+year={2007},
+month={Aug.},
+pages={98 -103}
+}
+
+@inproceedings{Schallenberg:2009,
+ author = {Andreas Schallenberg and Wolfgang Nebel and Andreas Herrholz and Philipp A. Hartmann and Frank Oppenheimer},
+ title = {{OSSS+R: a framework for application level modelling and synthesis of reconfigurable systems}},
+ booktitle = {Proc. of the Conference on Design, Automation and Test in Europe},
+ OPTseries = {DATE '09},
+ year = {2009},
+ address = {Nice, France},
+ pages = {970--975},
+} 
+
+@inproceedings{Mischkalla:2010,
+ author = {Fabian Mischkalla and Da He and Wolfgang Mueller},
+ title = {{Closing the gap between UML-based modeling, simulation and synthesis of combined HW/SW systems}},
+ booktitle = {Proc. of the Conference on Design, Automation and Test in Europe},
+ OPTseries = {DATE '10},
+ year = {2010},
+ address = {Dresden, Germany},
+ pages = {1201--1206},
+} 
+
+@inproceedings{Anderson:2006,
+    Author = {Anderson, E. and Agron, J. and Peck, W. and Stevens, J. and Baijot,  F. and Komp, E. and Sass, R. and Andrews, D.},
+    Booktitle = {Proc. of the 14th  Annual IEEE Symposium on Field-Programmable Custom Computing Machines},
+    Pages = {89--98},
+    OPTseries = {FCCM '06},
+    Title = {{Enabling a Uniform Programming Model Across the Software/Hardware  Boundary}},
+    Year = {2006}}
+
+@INPROCEEDINGS{Lubbers:2008, 
+author={Lubbers, E. and Platzner, M.}, 
+booktitle={Field Programmable Logic and Applications, 2008. FPL 2008. International Conference on}, 
+title={{A portable abstraction layer for hardware threads}}, 
+year={2008}, 
+month={sept.}, 
+volume={}, 
+number={}, 
+pages={17 -22}
+}
+
+@article{So:2008,
+ author = {So, Hayden Kwok-Hay and Brodersen, Robert},
+ title = {{A unified hardware/software runtime environment for FPGA-based reconfigurable computers using BORPH}},
+ journal = {ACM Trans. Embed. Comput. Syst.},
+ volume = {7},
+ issue = {2},
+ month = {January},
+ year = {2008},
+ issn = {1539-9087},
+ pages = {14:1--14:28},
+ articleno = {14},
+ address = {New York, USA},
+ keywords = {BORPH, FPGA, hardware process, reconfigurable computers},
+}
+
+@article{Rainer:2008,
+  title={{System-on-chip environment: a SpecC-based framework for heterogeneous MPSoC design}},
+  author={Rainer, D. and Andreas, G. and Junyu, P. and Dongwan, S. and Lukai, C. and Haobo, Y. and Samar, A. and Daniel, D. and others},
+  journal={EURASIP Journal on Embedded Systems},
+  volume={2008},
+  year={2008}
+}
+
+@inproceedings{Falk:2006,
+    author = {Joachim Falk and Christian Haubelt and Jürgen Teich},
+    title = {{Efficient Representation and Simulation of Model-Based Designs in SystemC}},
+    booktitle = {Proc. of the Forum on Design Languages},
+    year = {2006},
+    pages = {129--134}
+}
+
+@inproceedings{Rincon:2007,
+author={Fernando Rincón and Jesüs Barba and Francisco Moya and Fùlix J Villanueva and David Villa and Julio Dondo and Juan Carlos López},
+booktitle={Proc. of the 18th IEEE/IFIP International Workshop on Rapid System Prototyping},
+OPTseries = {RSP '07},
+title={{Unified Inter-Communication Architecture for Systems-on-Chip}},
+year={2007},
+month={May},
+pages={17 -26}
+}
+
+@incollection {Rincon:2009,
+   author = {Fernando Rincón and Jesüs Barba and Francisco Moya and Fùlix J Villanueva and David Villa and Julio Dondo and Juan Carlos López},
+   affiliation = {University of Castilla-La Mancha, Ciudad Real Spain},
+   title = {{Transparent IP Cores Integration Based on the Distributed Object Paradigm}},
+   booktitle = {Intelligent Technical Systems},
+   series = {Lecture Notes in Electrical Engineering},
+   keyword = {Engineering},
+   pages = {131-144},
+   volume = {38},
+   year = {2009}
+}
+
+@inproceedings{Abel:2010, 
+author={Abel, N.}, 
+booktitle={Proc. of the International Conference on Field Programmable Logic and Applications}, 
+OPTseries = {FPL '10},
+title={{Design and Implementation of an Object-Oriented Framework for Dynamic Partial Reconfiguration}}, 
+year={2010}, 
+month={September}, 
+pages={240 -243}
+}
+
+@inproceedings{Pizani:2011,
+ author = {João Paulo Pizani Flor and Tiago Rogério Mück and Antônio Augusto Fröhlich},
+ title = {{High-level Design and Synthesis of a Resource Scheduler}},
+ booktitle = {Proc. of the 18th IEEE International Conference on Electronics, Circuits, and Systems},
+ OPTseries = {ICECS '11},
+ year = {2011},
+ address = {Beirut, Lebanon},
+ pages = {},
+ note = {to appear}
+}
+
+@PhdThesis{Berejuck:2011,
+ author = {Marcelo Daniel Berejuck},
+ title = {{Dynamic Reconfiguration Support for FPGA-based Real-time Systems}},
+ school = {Federal University of Santa Catarina},
+ address = {Florianópolis, Brazil},
+ year = {2011},
+}

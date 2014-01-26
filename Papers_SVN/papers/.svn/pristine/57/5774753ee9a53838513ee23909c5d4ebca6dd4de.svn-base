@@ -1,0 +1,16 @@
+
+\begin{tabular}{|l|rrr|rrr|rrr|}
+\cline{2-10}
+\multicolumn{1}{c}{}  & \multicolumn{3}{|c|}{Scheduler} & \multicolumn{3}{|c|}{ADPCM}     & \multicolumn{3}{|c|}{DTMF}     \\
+\multicolumn{1}{c|}{} & HW-only & Unified & Diff. (\%)  & HW-only & Unified & Diff. (\%)  & HW-only & Unified & Diff. (\%)  \\
+\cline{1-1}
+x-input LUTs          & 407     &  807    &  98.28      &  40     &   36    &  -10.00     &  262    &  196    &      -25.19  \\s
+Flip-flops            & 123     &  149    &  21.13      &  6      &   5     &  -16.66     &  194    &  204    &      05.15\\
+xx Mem. blocks        & 161     & 179     &  11.18      &  5643   &   5635  &  -0.14      &  105    &  93     &      -11.42\\
+DSP blocks            & 161     & 179     &  11.18      &  5643   &   5635  &  -0.14      &  105    &  93     &      -11.42\\
+\hline
+Average resource use  & 161\%   & 179\%   &  11.18      &  5643\% &   5635\%&  -0.14      &  105\%  &  93\%   &      -11.42\\
+\hline
+\end{tabular}
+
+

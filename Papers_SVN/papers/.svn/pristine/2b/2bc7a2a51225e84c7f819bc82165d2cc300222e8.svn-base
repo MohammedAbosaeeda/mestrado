@@ -1,0 +1,41 @@
+\section{Integração com o Sistema Operacional}
+% Problemas
+% EPOS
+% Solução: ELUS, Configurabilidade do protocolo, ETP
+
+\epos{} é um sistema operacional multi-plataforma baseado em componentes, onde serviços tradicionais do SO são implementados através de componentes do sistema independentes de plataforma~\cite{frohlich:2001}. O suporte a serviços específicos de plataforma é realizado através de mediadores de hardware~\cite{Polpeta2004}. Mediadores são funcionalidades equivalentes a drivers de dispositivos em plataformas UNIX, mas não são camadas de abstração de hardware tradicionais. Ao contrário, os mediadores fazem uso de interfaces independentes de plataforma para sustentar suas interfaces de contrato entre componentes de hardware. Devido ao uso de metaprogramação estática em C++ e funções \textit{inlining}, o código do mediador é dissolvido nos componentes em tempo de compilação.
+
+Reprogramação no \epos{} é suportada através do \elus{} (\ELUS{})~\cite{gracioli:2009}. O \ELUS{} modificou o framework de componentes do \epos{}, mais especificamente, o aspecto de invocação remota~\cite{frohlich:2001} para suportar também reconfiguração do software. A Figura~\ref{fig:framework-reconf.pdf} demonstra a nova estrutura do framework. Ao invés dos elementos \proxy{} e \agent{} estarem em diferentes espaços de endereçamento (e.g. diferentes nodos), ambos estão presentes no mesmo nodo. Desta forma, somente o \agent{} tem conhecimento sobre a posição de memória de um componente, podendo assim atualizar o código e dados deste componente. A Figura também mostra como o processo de reconfiguração é habilitado ou não para um componente. Isso é realizado através da classe \textit{Trait} do componente. Habilitando a opção de reconfiguração (\textit{reconfiguration}) irá adicionar ao sistema em tempo de compilação o suporte à reprogramação ao componente. Somente os componentes habilitados suportam reprogramação. O elemento \adapter{} é usado para adaptar o componente aos diferentes cenários de execuções, aplicando os correspondentes aspectos suportados pelo \scenario{} antes e depois da chamada real do método do componente~\cite{Froehlich:sci:2000}.
+
+As invocações dos métodos entre o \proxy{} e o \agent{} acontece através de uma função que possui uma tabela de métodos, chamada de \componente{Dispatcher}, que contém os endereços dos métodos do \agent{}. Essa função garante que não aconteça chamadas ao componente enquanto este estiver sendo atualizado utilizando um Semáforo. O \agent{} armazena os objetos do componente em uma tabela hash, e usa a tabela de métodos virtuais do objeto para fazer a chamada ao método real. Ao se atualizar métodos de um componente, basta atualizar os métodos dentro da tabela virtual.
+
+\fig{framework-reconf.pdf}{Framework do \epos{} modificado para reprogramação de software.}{scale=.65}
+
+O \ELUS{} recebe requisições de reprogramação de um componente através de um protocolo, chamado de \etp{} (\ETP{}). A Figura~\ref{fig:etp} apresenta as mensagens disponíveis pelo \ETP{}. Os 4 bits menos significativos do campo de controle definem o tipo da mensagem e os 4 bits mais significativos definem a quantidade de campos que a mensagem contém, pois isso varia de acordo com o tipo de mensagem. Uma \textit{Thread} criada na inicialização do sistema, chamada de \textsc{Reconfigurator}, cria uma instância do protocolo de disseminação e após o recebimento dos dados, inicia uma reprogramação. A escrita dos dados na memória de programa é abstraída por um gerenciador de código (\textit{Code Manager}).
+
+\begin{figure}
+\centering
+\begin{tabular}{cc}
+\includegraphics[scale=0.5]{fig/msg_add} & \\
+(a) & \\
+\includegraphics[scale=0.5]{fig/msg_rem} &
+\includegraphics[scale=0.5]{fig/msg_atr} \\
+(b) & (f)\\
+\includegraphics[scale=0.5]{fig/msg_upd} & \\
+(c) & \\
+\includegraphics[scale=0.5]{fig/msg_end} & \\
+(d) & \\
+\includegraphics[scale=0.5]{fig/msg_app} & \\
+(e) & \\
+\end{tabular}
+\caption{Mensagens de reprogramação do \ETP{}. (a) Adição de método (b) Remoção de método (c) Atualização do componente (d) Atualização de endereço (e) Atualização da aplicação (f) Adição de atributos.}
+\label{fig:etp}
+\end{figure}
+
+A mensagem (a) informa uma adição de método a um componente. A mensagem (b) informa que um método está sendo removido de um componente. A mensagem (c) requisita a atualização de todos os métodos do componente. Para isso, além do novo tamanho do código, são informados o tamanho antigo, o novo código e o novo tamanho dos métodos do componente. Todas essas informações são utilizadas pelo \agent{} para decidir se há necessidade de alocar novo espaço de memória ou se o novo código cabe no espaço antigo. O \ETP{} ainda permite atualizar um endereço específico (d). Várias mensagens podem ser concatenadas, e o número de mensagens é controlado pelo campo de controle. A mensagem (e) informa a atualização de uma aplicação e a mensagem (f) requisita a adição de atributos, enviando para o \agent{} o tamanho do objeto que deve ser criado somando os tamanhos dos atributos antigos com os novos. O \agent{} irá alocar espaço para o novo objeto contando com os novos atributos, transferir o estado (dados) do objeto antigo para o novo e apagar o objeto antigo. Os atributos só podem ser acessados através dos métodos \componente{set} e \componente{get}, por isso uma mensagem de adição de atributos também deve ser seguida por uma mensagem de adição de métodos.
+
+A estrutura de mensagens criada pelo \ELUS{} permite que um protocolo de disseminação de dados seja facilmente integrado ao sistema operacional. O protocolo de disseminação deve, portanto, criar mensagens no formato \ETP{} e realizar uma chamada ao \agent{} informando uma atualização. Essa simples estrutura é um diferencial não encontrado nos trabalhos relacionados, o que torna o processo de atualização simples e abstrai do desenvolvedor detalhes de como a reprogramação acontece efetivamente. Além disso, não é necessário reinicializar o sistema, evitando perda de dados, diferentemente dos protocolos de disseminação apresentados nos trabalhos relacionados.
+
+A Figura~\ref{fig:sequence_reprog.pdf} apresenta o diagrama de sequência do processo de atualização, demonstrando como é realizada a integração entre o protocolo de disseminação de dados e a estrutura do ELUS. O \textsc{Reconfigurator} inicia o protocolo através da chamada ao método \textit{run}. Este método fica bloqueado até que uma atualização (nova versão) requisitada pelo nodo seja recebida. Após o recebimento dos novos dados, o \textsc{Reconfigurator} cria uma mensagem no formato \ETP{} e passa os dados para o \agent{} através da chamada ao \textit{trapAgent}. Por fim, o \agent{} realiza a escrita dos dados na memória de código.
+ 
+\fig{sequence_reprog.pdf}{Integração do protocolo de disseminação com a estrutura do ELUS.}{scale=.7}

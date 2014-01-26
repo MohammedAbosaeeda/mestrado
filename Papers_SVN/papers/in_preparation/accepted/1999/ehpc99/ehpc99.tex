@@ -1,0 +1,213 @@
+\documentclass[oribibl]{llncs} 
+\usepackage{epsf}
+
+\newcommand{\tild}{\raisebox{-.75ex}{\~{}}}
+\newcommand{\putfig}[5]{
+  \begin{figure}
+  \centerline{\epsfxsize=#2\epsfysize=#3\epsfbox{#1}}
+  \caption{\label{#4}#5}
+  \end{figure}
+}
+
+\begin{document}
+\pagestyle{empty}
+
+\mainmatter 
+
+\title{Tailor-made Operating Systems for\\Embedded Parallel Applications\thanks{Work partially supported by Federal University of Santa Catarina, by Funda\c{c}\~ao Coordena\c{c}\~ao de Aperfeicoamento de Pessoal de N\'ivel Superior and by Deutsche Forschungsgemeinschaft grant no. SCHR 603/1-1.}}
+
+\author{Ant\^onio Augusto Fr\"ohlich\inst{1} \and Wolfgang Schr\"oder-Preikschat\inst{2}}
+
+\institute{
+GMD FIRST\\
+Rudower Chaussee 5\\
+D-12489 Berlin, Germany\\
+\email{guto@first.gmd.de\\http://www.first.gmd.de/\tild guto}
+\and
+University of Magdeburg\\
+Universit\"atsplatz 2\\
+D-39106 Magdeburg, Germany\\
+\email{wosch@cs.uni-magdeburg.de\\http://ivs.cs.uni-magdeburg.de/\tild wosch}
+}
+
+\maketitle
+
+\raisebox{9cm}[0cm][0cm]{\makebox[\textwidth][r]{\copyright ~Springer-Verlag}}
+
+\begin{abstract}
+
+This paper presents the {\sc Pure}/{\sc Epos} approach to deal with the high complexity of adaptable operating systems and also to diminish the distance between application and operating system. A system designed according to the proposed methodology may be automatically tailored to satisfy an specific application. In order to enable this, the application must be written referring to the {\em inflated interfaces} that export the system object repository and then be submitted to an analyzer that will proceed syntactical and data flow analysis to extract a blueprint for the operating system to be generated. This blueprint is then refined by dependency analysis against information about the execution scenario acquired from the user via visual tools. The outcome of this process is a configuration file consisting of {\em selective realize} keys that will support the compilation of the tailored operating system.
+
+\end{abstract}
+
+
+\section{Introduction}
+
+The boom of embedded systems in the recent years projects a near future replete of complex embedded applications, including navigation, computer vision and particularly automotive systems. Some currently available limousines benefit from over 60 networked processors ($\mu$-controllers) and can be considered parallel systems on wheels. Moreover, many of these new embedded applications will demand performance levels that can only be achieved by parallelization and thus new operating systems and tools are to be conceived.
+
+	Our experiences developing run time support systems for ordinary, i.e., non-embedded, parallel applications~\cite{Preikschat:94,Froehlich:96b} convinced us that adjectives such as ``all purpose", ``global'' and ``generic'' do not fit together with ``high performance'' and ``deeply embedded'', whereas different parallel applications have quite different requirements regarding operating systems. Even apparently flexible designs like $\mu$-kernel based operating systems may imply in waste of resources that, otherwise, could be used by applications. The reality for embedded parallel applications, that usually have to operate under extreme resource constrains, not only in terms of processor cycles, but also of memory consumption, can not be different and therefore we should give each application its own operating system.
+
+	This paper presents a proposal to automate the process of generating a tailored operating system for a given (embedded) application. This proposal is presented in the realm of {\sc Epos}, an operating system designed to support (high performance) parallel computing on distributed memory architectures. {\sc Epos} is actually an extension of {\sc Pure}~\cite{Schoen:98}, that aims to provide a portable, universal runtime executive for resource-sparing (real-time) applications. The following sections describe the {\sc Epos}/{\sc Pure} design approach, a case study to demonstrate the necessity for automated tailored operating systems and a new strategy to achieve them.
+
+
+\section{The Design of PURE}
+
+{\sc Epos} basic approach to give each application an operating system that closely fulfils its requirements is to analyze the application looking for hints about the nature of the operating system services requested. After collecting information, a custom {\sc Epos} will be generated using the building blocks supplied by {\sc Pure}. In this way, {\sc Epos} becomes an extension of {\sc Pure}, to whom it owes most of its design. Thus, describing {\sc Epos} design implies in describing {\sc Pure}.
+
+The approach followed by {\sc Pure} is to understand an operating system as a {\em program family}~\cite{Parnas:79} and to use {\em object orientation}~\cite{Wegner:86} as the fundamental implementation discipline. The former concept,  program families, helps to prevent the design of a monolithic system organization, while object orientation enables the efficient implementation of a highly modular system architecture.
+
+
+\subsection{Incremental System Design}
+
+The program family concept does not dictate any particular implementation technique. A so called ``minimal subset of system functions'' defines a platform of fundamental abstractions serving to implement ``minimal system extensions''. These extensions are, then,  made on the basis of an {\em incremental system design}~\cite{Habermann:76}, with each new level being a new minimal basis, i.e., an {\em abstract machine}, for additional higher-level system extensions. A true application-oriented system evolves, since extensions are only made on demand, when the implementation of a new system feature that supports a specific application is required. Design decisions are postponed as long as possible. In this process, system construction takes place bottom-up but is controlled in a top-down (application-driven) fashion. In its last consequence, applications become the final system extensions and the traditional boundary between application and operating system disappears. In other words, the operating system extends into the application and vice versa.
+
+Inheritance is the appropriate technique to either introduce new system extensions or replace existing ones by alternate implementations. Either case, the system extensions are customized with respect to specific user demands and will be present at runtime only in coexistence with the corresponding application. Thus, applications are not forced to pay for (operating system) resources that will never be used.
+
+
+\subsection{Revival of Program Families}
+
+Applying the family concept in the software design process leads to a highly modular structure. New system features are added to a given subset of system functions. Because of the strong analogy between the notions of ``program family'' and ``object orientation'', it is almost natural to construct program families by using an object-oriented framework~\cite{Cordsen:91}. Both approaches are, in a certain sense, reciprocal to each other. The minimal subset of system functions in the program family concept has its counterpart in the superclass of the object-oriented approach. Minimal system extensions are thus introduced by means of subclassing. Inheritance and polymorphism are the proper mechanisms to allow different implementations of the same interface to coexist. In the realm of embedded distributed/parallel systems, inheritance must be applicable even in the case of crossing address space, node, and network boundaries~\cite{Nolte:98}. With this design strategy, reusability is significantly enhanced, increasing the commonalties of different family members.
+
+
+\section{The Design of EPOS}
+
+Although a tailored {\sc Epos} will be comprised of {\sc Pure} building blocks\footnote{New building blocks to support parallel computing are being conceived according to the {\sc Pure} design approach.}, {\sc Epos} extends {\sc Pure}, towards applications, in order to cope with two growing problems: the system configuration complexity and the distance between application and system software.
+
+
+\subsection{System Object Adapters}
+
+The growth in configuration complexity arises from the fact that, as an adaptable operating system, {\sc Pure} is designed to yield a large number of building blocks, or system objects, which are, in turn, to be put together to compose the tailor-made operating system. To achieve high performance, these system objects must be fine tuned to each of the execution scenarios aimed and therefore a reasonable building block repository will comprise a very large number of elements. This turns system configuration into a nightmare. {\sc Epos} approach to the matter is to make system objects adaptable to execution scenarios.
+
+By carefully analyzing the system objects repository, one will promptly realize that those abstractions designed to present the same functionality in different execution scenarios are indeed quite similar. Besides, abstractions conceived to support the same scenario often differ from each other following a pattern. In this way, we propose system abstractions to be implemented as independent from the execution scenario as possible. They would then be put together with the aid of some sort of ``glue'' specific to each scenario. We named these ``glue'' {\em scenario adapters}, since they will adapt an existing system abstraction to a certain execution scenario.
+
+In order to exemplify the use of scenario adapters and also to demonstrate the basis for our assertion that system abstractions implementation follow a pattern along scenarios, we could consider the ``semaphore'' abstraction for three multi-threaded scenarios: single-task, multi-task-single-processor and multi-task-multi-processor (SMP). For all three execution scenarios, a semaphore abstraction (i.e., the semaphore system object) will involve a counter and a thread queue. Aspects such as crossing the application/operating system boundary in the second and third scenarios or such as synchronizing concurrent invocation of semaphore methods in the third scenario are not intrinsic to the semaphore abstraction, but to the execution scenario. Therefore, such kind of aspects would be better implemented as scenario adapters than as different types of semaphore. Similarly, a ``thread'' abstraction conceived for the same three scenarios, would show a repetition of code when compared to the semaphore abstraction: crossing system boundary and supporting concurrent execution are intrinsic to the scenarios and not to the abstraction. It is also worth to say that scenario adapters are implemented in a way not to insert overhead on the path from applications to system objects, i. e., when an existing system object fulfils the requirements of a scenario, the scenario adapter simply vanishes.
+
+The approach of writing pieces of software that are independent from certain aspects and later adapting them to a given scenario has been referred to as ``Aspect Oriented Programming''~\cite{Kiczales:97}. However, there are significant differences in our proposal to make system abstractions adaptable. We are not proposing a language to describe aspects neither tools ({\em weavers}) to automatically combine aspects and aspect-independent components. The problem we want to tackle is the complexity inherent to adaptable operating systems and we are doing this by reducing the number of system abstractions in detriment to the growth of the number of scenario adapters. We believe this will reduce system complexity because dealing with aspects isolated in scenario adapters is much simpler than dealing with them spread along the system abstraction implementation; and also because new scenario adapters can be derived, automatically or not, from other existing adapters.
+
+
+\subsection{Inflated Class Interfaces}
+
+The second goal on {\sc Epos} extension of {\sc Pure} is to diminish the gap between operating system and applications. This gap originates mainly from the fact that the operating system building blocks offered to applications are usually conceived considering the optimization of resource utilization in a bottom-up fashion and not the applications expectances. {\sc Epos} adopt {\em abstract data type declarations} in the form of {\em inflated class interfaces} as a mechanism to advertise the system abstractions repository to applications and to automate the selection of the proper building blocks when tailoring an operating system.
+
+	These inflated class interfaces shall enable the application programmer to express his expectations regarding the operating system simply by writing down well-known system object invocations (system calls in non object oriented systems) while coding the application. By well-know system object invocations we mean that the operating system services will be made available to applications via abstractions commonly accepted by the parallel systems community, such as ``threads'', ``tasks'', ``address spaces'', ``channels'', ``ports'', etc. These interfaces are to be defined according to the fundamental law of object orientation that says~\cite{booch:94}: look at the real world while looking for objects. The question of where in the real world one can find a ``thread'' can be easily answered when we realize that threads, just like numbers, are human conventions and that a couple of classical computer science books should comprise most widely accepted conventions.  Nevertheless, our users, i.e., embedded parallel application programmers, are welcome to suggest modification or extensions for these interfaces at any time.
+
+With these interfaces in hand, it should no longer be a problem for a skilled parallel application programmer to select how he wants to express process communication, thread synchronization or any other operating system service. It is important to notice that these inflated interfaces will never be implemented as a single class, but as a (possibly huge) set of classes specific to certain scenarios. They are only a mechanism to help programmers to design and implement their applications. An automatic tool shall bind (reduce) the inflated interfaces to specific implementations.
+
+To support system design based on inflated interfaces, we propose two new object-oriented design notations: {\em partial realize} and {\em selective realize}. Both relationships take place between an inflated interface and a class that realizes this interface. However, as the name suggest, a class participating in a partial realization implements only a specific subset of the corresponding inflated interface. In this scope, selective realization means that only one of several possible realizations will be connected to the inflated interface at a time. To support selective realization, each class joining the relation is tagged with a key. By changing the value of this key one can select a specific, usually partial, realization for an interface. These two design elements are depicted in figure \ref{realize}.
+
+\putfig{col_fig/realize.eps}{0mm}{62mm}{realize}{Partial realize (a) and selective realize (b) relationships.}
+
+As important as design elements, partial and selective realization have their counterparts for system implementation so that tailoring an operating system  can be done simply by defining values for selective realize keys. These keys are defined in a single configuration file and dispense the use of both, conditional compilation and ``makefile'' customization. Furthermore, the implementation of these relationships may be used to bind non object oriented inflated interfaces to object oriented implementations. This is useful, for instance, to bind an application written in Fortran or C to {\sc Epos}.
+
+
+\section{Automatically Tailoring an Operating System}
+
+	With the design and implementation mechanism described so far, we can now consider the automatic generation of an operating system to closely fulfil an embedded parallel application. Our strategy begins top-down at the application, with the programmer specifying the application requirements regarding the operating system by designing/coding the application while referring to the set of inflated interfaces that export the system abstractions repository.  An application designed and implemented in this fashion can now be submitted to an analyzer (figure \ref{analyzer}) that will conduct syntactical and data flow investigations to determine which system abstractions are really necessary to support the application and how they are invoked. This tool shall generate an operating system blueprint that will, for instance, define the use of multi-tasking instead of single-tasking, of multi-threading instead of single-threading, of insolated protected address spaces instead of a single unprotected address space and so on.
+
+\putfig{col_fig/analyzer.eps}{0mm}{76mm}{analyzer}{Extracting an operating system blueprint from the application.}
+
+	Our primary operating system blueprint is, unfortunately, not complete. We got good hints about how the ideal operating system for a given application should look like, but there are aspects that can not be deduced by analyzing the application. As an example, we could consider the decision of generating an operating system that supports multiple processes with protected address spaces based on a micro-kernel or an operating system for a single, possibly multi-threaded, process to be embedded into (linked to) the application. The fact that the application does not show any evidence that multiple processes may need to run concurrently in a single processor, does not necessarily mean that this situation will not happen. The multi-task support may be required because the application may need to span more processes than the available number of processors, and this will not be perceivable until the user tell us something about the intended execution scenario. Other factors such as target architecture, number of processors available, network architecture and topology are fundamental to tailor a good operating system, but are usually not expressed inside the application. Therefore, we still need user intervention to describe the application's execution scenario, however, the description of the available resources will be due to the operating system developers and the interaction with the user will be done via visual tools. 
+
+	Refining the blueprint obtained when analyzing the application with the context information acquired via this visual tool will render a much more precise description of how the ideal operating system for a given application should look like. This refined blueprint is the result of a dependency analysis and is expressed via a configuration file consisting of selective realization key values. With the definition of these keys, the inflated interfaces referred by the application programmer are bound to scenario specific implementations. For example, the inflated thread interface from the first step may have included remote invocation and migration, but reached the final step as a simple single-task, priority scheduled thread for a certain $\mu$-controller. A representation of an application tailored operating system generated according to this model is depicted in the figure \ref{epos_application}.
+
+\putfig{col_fig/epos_application.eps}{0mm}{49mm}{epos_application}{An operating system tailored to an application.}
+
+	 It is important to understand that, at the early stages of the operating system development, very often a required building block will not yet be available. Even then, the proposed strategy is of great value, since the operating system developers get a precise description for the missing building blocks. In many cases, a missing building block will be quickly (automatically) adapted from another scenario using the scenario adapters described earlier.
+
+	Only if the operating system developers are not able to deliver the requested building blocks in a time considered acceptable by the user, either because a building block with that functionality have not yet been implemented for any scenario or because the requested scenario is radically different from the currently supported scenarios, we will shock the user asking him to select the best option from the available set of system abstractions (scenario adapters) and to adapt his program. In this way, our strategy ends where most tailorable operating systems start. Moreover, after some development effort, the combination of scenario adapters and system abstractions shall satisfy the big majority of parallel embedded applications.
+	
+
+\section{A Case Study on Configuration}
+
+A good example of how tailoring an operating system to a specific application may improve performance can be observed when selecting the proper member of {\sc Pure} nucleus family. {\sc Pure} is made of a nucleus and nucleus extensions. The nucleus implements a {\em concurrent runtime executive} ({\sc Core}) for passive and active objects. By means of minimal {\em nucleus extensions} ({\sc Next}) features such as application-oriented process and address space models, blocking (thread) synchronization, and problem-oriented (remote) message passing are added to the system. These extensions are present only if demanded by the application. They transform the nucleus into a distributed abstract thread processor. The coarse structure of {\sc Pure} is depicted in Figure~\ref{fig:nsa}. 
+
+\putfig{col_fig/pure-nucleus0.eps}{0mm}{38mm}{fig:nsa}{{\sc Pure} architecture.}
+
+Depending on the actual application requirements, the nucleus components appear in different configurations. Each of these configurations represent a member of the nucleus family. {\sc Pure}'s current implementation includes six family members, each of which implementing a specific operating mode. Each member is built by one or more function blocks and described by a functional hierarchy of these blocks. The function blocks can be reused in various configurations. In order not to restrict the family, design decisions have been postponed as far as possible and encapsulated by higher-level abstractions. As a consequence, {\sc Pure} can be customized, for example,  with respect to the following scenarios:
+
+\begin{enumerate}
+\item \label{interruptedly} One way of operating the CPU is to let {\sc Pure} run  {\em interruptedly}. This family member merely supports low-level trap/interrupt handling. The nucleus is free of any thread abstraction. It only provides means for attaching/de\-taching exception handlers to/from CPU exception vectors ({\em interruption}).
+\item \label{reconcile} In order to {\em reconcile} the asynchronously initiated actions of an {\em interrupt service routine} (ISR) with the synchronous execution of the interrupted program, a minimal extension to \ref{interruptedly}. was made. The originating family member ensures a synchronous operation of event handlers ({\em driving})  in an interrupt-transparent manner ({\em serialization}).
+\item \label{exclusive} The second basic mode of operating the CPU means {\em exclusive} execution of a single active object. In this situation, the nucleus provides only means for {\em objectification} of a single thread. The entire system is under application control, whereby the application is assumed to appear as a specialized active object. There is only a single active object run by the system.
+\item \label{cooperative} A minimal extension to \ref{exclusive}. leads to {\em cooperative} thread scheduling. No other design decisions are made except that threads are implemented as active objects and scheduled entirely on behalf of the application ({\em threading}). There may be many active objects run by the system.
+\item \label{non-preemptive} Adding support for the serialized execution of thread scheduling functions ({\em locking}) enables the {\em non-preemptive} processing of active objects in an in\-ter\-rupt-dri\-ven context. Thread scheduling till happens cooperatively, however the nucleus is prepared to schedule threads on behalf of application-level interrupt handlers. Actions of global significance, and enabled by interrupt handlers, are assumed to be synchronized properly ({\em serialization}).
+\item \label{preemptive} Multiplexing the CPU between threads in an interrupt-driven manner establishes the autonomous, {\em preemptive} execution of active objects. In this case, the nucleus is extended by a device driver module ({\em multiplexing}) taking care of timed thread scheduling.
+\end{enumerate}
+
+Referring to figure \ref{fig:nsa}, {\sc Core} takes care of interruption, serialization, locking, threading and objectification, while {\sc Next} covers (device) driving and (CPU) multiplexing.
+
+
+\subsection{Functionality vs. Complexity vs. Performance}
+
+The {\sc Pure} system is implemented in C++ and runs (as guest level and in native mode) on i80x86-, i860-, sparc-, and ppc60x-based platforms. A port to C\,167-based, ``CANned'' $\mu$-controllers is in progress. At the time being, the nucleus consists of over 100 classes exporting over 600 methods. Every class implements an abstract data type. Inheritance is employed extensively to build complex abstract data types. For example, the thread control block is made of about 45 classes arranged in a 14-level class hierarchy. 
+
+As table~\ref{pure_size} shows, the highly modular nucleus structure still results in a small and compact implementation. The numbers were produced using GNU {\tt g++} 2.7.2.3 for the i586 running Linux Red Hat 5.0.
+
+\begin{table}
+\begin{center}
+\caption{\label{pure_size}{\sc Pure} memory consumption.}
+\begin{tabular}{lrrrr}
+\hline\noalign{\smallskip}
+& \multicolumn{4}{c}{{\bf size} (in bytes)} \\
+\cline{2-5}
+{\raisebox{1.5ex}[-1.5ex]{\bf family member}}\,\, &
+{\em text} & {\em data} & {\em bss} & total \\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+interruptedly & 812 & 64 & 392 & 1268 \\
+reconcile & 1882 & 8 & 416 & 2306 \\
+exclusive & 434 & 0 & 0 & 434 \\
+cooperative & 1620 & 0 & 28 & 1648 \\
+non-preemptive & 1671 & 0 & 28 & 1699 \\
+preemptive & 3642 & 8 & 428 & 4062 \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Table~\ref{pure_latency} shows the number of (i586) CPU clock cycles spent during thread scheduling, i.e., the overhead imposed on applications at run-time due to thread scheduling. The clock frequency in this experiment was 166\,MHz and the measurement was made reading the i586 (on-chip) counter register. Again, the above-mentioned C++ compiler was used.
+
+\begin{table}
+\begin{center}
+\caption{\label{pure_latency}{\sc Pure} scheduler latency.}
+\begin{tabular}{lr}
+\hline\noalign{\smallskip}
+{\bf family member}\,\, & {\bf CPU cicles} \\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+interruptedly & no scheduler \\
+reconcile & no scheduler \\
+exclusive & no scheduler \\
+cooperative & 49 \\
+non-preemptive & 57 \\
+preemptive & 300 \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+At first sight, these numbers may seem insignificant, but when we realize that some deeply embedded applications (e.g. car engines) require the scheduler to be invoked once every 10 $\mu$s, assigning the {\em preemptive} family member to an application that could run with the {\em exclusive} family member will imply in a slow down of 15$\%$. We still do not have performance measurements for the family members implemented to support parallel computing, but previous experiments with the {\sc Peace} family based operating system~\cite{Preikschat:94} showed that applications can improve performance in up to 74$\%$ just by being assigned to run with the proper operating system (e.g., a single-task, stand-alone environment supported by a library vs. a multi-task, distributed environment supported by a $\mu$-kernel). 
+
+ All these performance figures demonstrate the still ``featherweight'' structure of {\sc Pure}, although quite a large amount of abstractions (classes, modules, functions) are involved in all the occurrences: ``{\em It is the system design which is hierarchical, not its implementation}''~\cite{Habermann:76}. Besides, these figures demonstrate the necessity to give each application its own operating system. 
+
+
+\section{Further Work}
+
+The strategy to automatically adapt an operating system to a given (embedded) parallel application proposed by {\sc Pure} and {\sc Epos} can drastically improve application performance, since the application will get only the operating system components it really needs. Besides, these components are fine tuned to the execution scenario aimed. However, our strategy is not able to deliver an {\em optimal} operating system. Consider, for instance, the decision for a thread scheduling policy: several thread implementations, with different scheduling policies, may fit into the blueprint extracted by our tools, as long as they match the selected interfaces (selectively realize the requested interfaces) and satisfy the dependencies. Nevertheless, it is unnecessary to say that there is an optimal scheduling policy for a given set of threads running in a given scenario.
+
+The decision of which variant of a system abstraction to select when several ones accomplish the application's requirements is, in the current system, arbitrary. Further development of our tools shall include {\em profiling} primitives to collect run-time statistics for the application. These statistics will then drive operating system reconfigurations towards the optimal. To grant that we can generate an {\em optimal} system, however, would imply in formal specification and validation of our system objects, what is not in the scope of {\sc Epos}, but of the {\sc Wabe} project. {\sc Wabe} aims to implement a workbench for the construction of optimal operating systems. It is now being developed under a DFG project at the Universities of Magdeburg and Potsdam.
+
+\section{Conclusion}
+
+In this paper we presented the {\sc Pure}/{\sc Epos} approach to deal with the high complexity of adaptable systems, to diminish the distance between application and operating system and to automate the generation of application tailored operating systems. The complexity problem is tackled with the adoption of {\em scenario adapters}: software structures that support the adaptation of aspect independent system abstractions to specific execution scenarios; and by {\em inflated class interfaces}: a mechanism to advertise the system abstraction repository with a (very) reduced number of well-known components. Inflated interfaces are also an effective way to diminish the distance between applications and operating systems, since the application programmer is no longer requested to deal with the complex collection of basic system objects directly. 
+
+A system designed according to the methodology proposed in this paper can be automatically tailored to satisfy an specific application. In order to enable this, the application must be written referring to the inflated interfaces that export the system abstractions repository and then be submitted to an analyzer. This analyzer will proceed syntactical and data flow analysis to extract a blueprint for the operating system to be generated. The blueprint is then refined by dependency analysis against information about the execution scenario acquired from the user via visual tools. The outcome of this process is a configuration file comprised of {\em selective realize} keys that will support the compilation of the tailored operating system. These tools are now under development at GDM-FIRST Institute and at the University of Magdeburg.
+
+
+\bibliographystyle{plain}
+\bibliography{operating_systems,software_engineering,guto}
+ 
+\end{document}
+
+
+
+
+

@@ -1,0 +1,84 @@
+\begin{thebibliography}{10}
+
+\bibitem{Bacon:1996:Fast}
+David~F. Bacon and Peter~F. Sweeney.
+\newblock Fast static analysis of c++ virtual function calls.
+\newblock In {\em OOPSLA '96: Proceedings of the 11th ACM SIGPLAN conference on
+  Object-oriented programming, systems, languages, and applications}, pages
+  324--341, New York, NY, USA, 1996. ACM Press.
+
+\bibitem{Deursen:2003:Aspect}
+Arie~Van Deursen, Leon Moonen, and Marius Marin.
+\newblock Aspect mining and refactoring, November~05 2003.
+
+\bibitem{Driesen:1996:The}
+Karel Driesen and Urs Hölzle.
+\newblock The direct cost of virtual function calls in c++.
+\newblock In {\em OOPSLA '96: Proceedings of the 11th ACM SIGPLAN conference on
+  Object-oriented programming, systems, languages, and applications}, pages
+  306--323, New York, NY, USA, 1996. ACM Press.
+
+\bibitem{Frohlich:2001}
+Ant\^onio Augusto~Medeiros Froehlich.
+\newblock {\em Application-Oriented Operating Systems}.
+\newblock GMD - Forschungszentrum Informationstechnik, 1 edition, 2001.
+
+\bibitem{griswold00aspectbrowser}
+W.~G. Griswold, Y.~Kato, and J.~J. Yuan.
+\newblock Aspectbrowser: Tool support for managing dispersed aspects.
+\newblock Technical Report CS1999-0640, 3, 2000.
+
+\bibitem{Gurtovoy:2005:Boost}
+Aleksey Gurtovoy and David Abrahams.
+\newblock {The Boost C++ Metaprogramming Library}.
+\newblock Technical report, 2005.
+
+\bibitem{hanenberg03refactoring}
+S.~Hanenberg, C.~Oberschulte, and R.~Unland.
+\newblock Refactoring of aspect-oriented software, 2003.
+
+\bibitem{Hannemann:2005:aosd05}
+Jan Hannemann, Gail Murphy, and Gregor Kiczales.
+\newblock Role-based refactoring of crosscutting concerns.
+\newblock In Peri Tarr, editor, {\em Proc. 4rd Int' Conf. on Aspect-Oriented
+  Software Development {({AOSD}-2005)}}, pages 135--146. ACM Press, March 2005.
+
+\bibitem{janzem03navigating}
+Doug Janzen and Kris~De Volder.
+\newblock Navigating and querying code without getting lost.
+\newblock In {\em AOSD '03: Proceedings of the 2nd international conference on
+  Aspect-oriented software development}, pages 178--187, New York, NY, USA,
+  2003. ACM Press.
+
+\bibitem{fauze:2005}
+Fauze~Valerio Polpeta and Ant\^onio~Augusto Fröhlich.
+\newblock On the automatic generation of soc-based embedded systems.
+\newblock In {\em In: Proceedings of the 10th IEEE International Conference on
+  Emerging Technologies and Factory Automation}, 2005.
+
+\bibitem{robson:99:stl}
+Robert Robson.
+\newblock {\em Using the Stl - The C++ Standard Template Library}.
+\newblock Springer-Verlag, 2 edition, 1999.
+
+\bibitem{tourwe04codemining}
+Tom Tourwe and Kim Mens.
+\newblock Mining aspectual views using formal concept analysis.
+\newblock In {\em SCAM '04: Proceedings of the Source Code Analysis and
+  Manipulation, Fourth IEEE International Workshop on (SCAM'04)}, pages
+  97--106, Washington, DC, USA, 2004. IEEE Computer Society.
+
+\bibitem{Deursen:2005:A}
+Arie van Deursen, Marius Marin, and Leon Moonen.
+\newblock A systematic aspect-oriented refactoring and testing strategy, and
+  its application to {JH}otdraw, March~05 2005.
+\newblock Comment: 25 pages.
+
+\bibitem{wille81restructuring}
+Rudolf Wille.
+\newblock Restructuring lattice theory: An approach based on hierarchies of
+  concepts.
+\newblock {\em Ordered Sets, Ivan Rival Ed., NATO Advanced Study Institute},
+  83:445--470, September 1981.
+
+\end{thebibliography}

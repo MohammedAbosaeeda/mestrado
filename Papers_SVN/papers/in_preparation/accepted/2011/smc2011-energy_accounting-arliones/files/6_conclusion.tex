@@ -1,0 +1,28 @@
+\section{Conclusion}
+\label{sec:concl}
+
+We presented a software implementation of an energy consumption accounter for
+battery-operated embedded systems. We modeled the accounter and implemented it
+in a simulation environment and in a real platform
+(\epos~\cite{Project:EPOS:2010}), altought the implementation details in the
+real platform have been kept out due to the page limit. In order to lower the
+processing overhead imposed by our approach we extracted runtime parameters of
+energy consumption and execution time of a given application and submitted it to
+a meta-heuristic optimizer (\nsga). The objective is to look for good solutions
+for the period at which battery-related information should be updated in order
+to maximize system utilization while minimizing residual energy and guaranteeing
+a pre-defined system lifetime (mission duration). A case study on an IP-based
+network running over IEEE 802.15.4 sensing nodes showed promising results. It
+showed that the approach was able to control energy consumption on the network
+in a way that none of the nodes ran out of battery before the pre-defined
+mission duration has elapsed.
+
+On going studies are extending the work in this paper by deploying fairer
+scheduling mechanisms to reduce the impact on system quality. This effort rely
+on flexible task scheduling schemes
+% , such as \textit{(m,k)-firm}~\cite{Ramanathan:1997} or the elastic
+% model~\cite{Buttazzo:1998},
+to be put in place of the current egoist approach of preventing tasks'
+execution and using network-wide battery charge information provided by the
+accounter described herein as parameter for \adhop's pheromone generation
+function.

@@ -1,0 +1,91 @@
+Hi again,
+
+Please find enclosed a  review for your paper which was missing in my
+previous message.
+
+Sincerely,
+
+Christine Morin.
+****************************
+Reviewer 4
+**********
+COSET-1 REVIEW FORM
+===================
+
+Paper title:  An application-oriented parallel-programming system for
+dedicated
+              cluster computing
+
+Authors:  Thiago Robert C. Santos, Antonio Augusto Frohlich
+
+Reviewer confidence level (1-4): 4
+1=not my area
+2=general area knowledge
+3=close to my area of expertise
+4=my area of expertise
+
+
+Summary of the paper:
+
+This paper describes EPOS, the Embedded Parallel Operating System.  The
+paper describes
+the motivation for EPOS, provides an overview of the communication
+system, and briefly
+describes future work.
+
+
+Strengths of the paper:
+
+This paper touches on many important issues with operating systems and
+communication
+systems for HPC.
+
+
+Weaknesses of the Paper:
+
+Several of the arguments made in the paper are not substantiated with
+empirical data.
+The paper does not go into sufficient level of detail to understand
+what's new and/or
+different about EPOS.  The detailed description of Myrinet is
+superfluous and could
+have simply been referenced.  The paper has no related work section that
+describes
+how this work compliments, extends, or differs from other operating
+system research
+and development.
+
+
+Interest for COSET-1:
+
+The topics discussed in the paper are relevant to the workshop.
+
+For the next four queries, please rate the paper on a scale of 1-4,
+where
+the quality increases as the number increases.
+
+Originality: 2
+
+Technical merit: 2
+
+Readability: 3
+
+Overall rating:  WEAK ACCEPT (3)
+
+Detailed comments for the authors:
+
+
+
+
+
+--
+****************************************************************
+Christine MORIN    tel: +33 2 99 84 72 90
+Projet Paris                            fax: +33 2 99 84 25 28
+IRISA/INRIA     email: cmorin@irisa.fr
+
+Campus universitaire de Beaulieu,
+35 042 Rennes cedex (FRANCE)
+
+http://www.irisa.fr/paris/
+****************************************************************

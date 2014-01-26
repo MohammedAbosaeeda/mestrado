@@ -1,0 +1,81 @@
+% ------------------------------------------------------------------------------
+\section{DERCS} \label{dercs}
+% + Intro
+Our method uses an intermediate representation to describe hardware mediators and
+FFI aspects.
+This section describes the meta-model we have used and
+Section \ref{sec:proposal} describes the method we have proposed.
+
+% NOTE: Maybe move
+% + Why we have used DERCS
+% and
+% + How we have used DERCS
+% To here.
+
+% + DERCS def
+Model-Driven Engineering (MDE) proposes the development of complete
+computational systems from high level specifications which are transformed,
+in one of more phases, in order to generate the final system. % cite MDE
+In such context, the Distributed Embedded Real-Time Compact Specification
+(DERCS) is a specification/meta-model used to represent platform independent
+models.
+Such models, according to the
+Aspect-oriented Model-Driven Engineering for Real-Time systems (AMoDE-RT)
+methodology, are used together with the description of the target platform and
+mapping rules to generate the final system, which encompass software and hardware
+elements \cite{Wehrmeister:2009}.
+
+% + DERCS and AMoDE-RT
+According to the AMoDE-RT methodology,
+a DERCS model is generated from UML's class and sequence diagrams, and
+from diagrams that specify non-functional elements as aspects.
+Therefore, the DERCS meta-model defines
+structural elements, behavioral elements, and aspect-oriented elements,
+encompassing distinct visions into a single model.
+
+% + DERCS's Structural and Behavioral Elements
+% Figures \ref{fig:structural_elements} and \ref{fig:behavioral_elements}
+% show, respectively, the structural and behavioral elements defined by DERCS.
+Among the structural elements of DERCS are classes, attributes,
+methods, and parameters.
+The behavioral elements determine the behavior of a method, detailing which
+messages such method can send to objects, which are its
+local variables, actions, etc.
+The structural and behavioral elements of DERCS have semantics similar to the
+semantics of object-oriented programming languages.
+Details concerning structural and behavioral elements of DERCS can be found at
+\cite{Wehrmeister:2009}.
+
+% \figtwocolumn{1}{structural_elements}{DERCS structural elements. Adapted from \cite{Wehrmeister:2009}.}
+
+% \figtwocolumn{1}{behavioral_elements}{DERCS behavioral elements. Adapted from \cite{Wehrmeister:2009}.}
+
+% + Aspect-Oriented Elements
+Figure \ref{fig:ao_elements} shows the aspect-oriented elements
+defined by DERCS.
+Among the aspect-oriented elements are aspects, pointcuts,
+structural adaptations, and behavioral adaptations.
+Those elements correspond to the concepts of Aspect-Oriented Programming (AOP),
+as defined by \cite{Kiczales:1997} whereas
+aspect adaptations (\emph{AspectAdaptation})
+represent the concept of \emph{advices}.
+An aspect adaptation can be structural (\emph{StructuralAdaptation}) or
+behavioral (\emph{BehavioralAdaptation}).
+Structural adaptations modify the structure of the elements of the model, for
+example, adding methods to a class or parameters to a method.
+On the other hand, behavioral adaptations modify the behavior of the elements of
+the model, for example, executing tasks before or after the execution of a
+method behavior, or completely changing a method's behavior.
+
+\figtwocolumn{1}{ao_elements}{DERCS aspect-oriented elements. Adapted from \cite{Wehrmeister:2009}.}
+
+% + For what DERCS was used
+The aspect-oriented elements of DERCS meta-model can be used to modify the
+interface of a component in order to adapt such component according to what is
+required by its client.
+As next section shows, we have explored this feature of DERCS in order to
+adapt a hardware mediator interface for what is expected by a specify FFI.
+
+% \clearpage
+
+% ------------------------------------------------------------------------------

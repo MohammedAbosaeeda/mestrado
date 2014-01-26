@@ -1,0 +1,11 @@
+# basic bar graph example from Derek Bruening's PhD defense
+=sortbmarks
+=patterns
+font=Helvetica
+xlabel=System
+ylabel=Requests per second
+#extraops=set logscale y
+extraops=set size .5,1.2
+
+POP-C\+\+          6875 
+Native          7046

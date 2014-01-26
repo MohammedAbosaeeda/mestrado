@@ -1,0 +1,165 @@
+\section{Case studies}
+\label{CASE_STUDY}
+We have analysed the basic blocks of a \textit{Private Automatic Branch Exchange
+System-on-Chip}~(PABX SoC) and designed some of its components using the proposed design artifacts.
+Figure \ref{fig_pabx_soc} shows the PABX SoC. The \emph{RTSNoC}~\cite{RTSNoC} is used to
+interconnect the components, and the the software which implements the PABX application runs on the
+EPOS operating system in a MIPS core. From the basic components required to implement this SoC, we
+have selected the following: a \textit{Dual-Tone Multi-Frequency}~(DTMF) detector, a \textit{finite
+impulse response}~(FIR) filter, and the EPOS's scheduler. The use of the EPOS's scheduler as a case
+study is motivated by its complex behavior. A scheduler may perform operations both synchronously
+(upon request by another component) or asynchronously (by preempting the execution of another
+component). Furthermore, our hardware-implemented scheduler has deterministic execution time,
+eliminating jitter and improving the support of real-time applications. The design of the choosen
+components are described bellow.
+
+\fig{.55}{fig_pabx_soc}
+{Block diagram of the PABX SoC.}
+
+\subsection{Resource scheduler}
+%-Describe the case study: the OS Scheduler\cite{Marcondes:2009:2}
+%*Talk about the separation between the scheduling mechanism and the scheduling criteria. Figure
+%\ref{fig_scheduler_model}.
+%\figEMPTY{3in}{4in}{fig_scheduler_model}{Simplified version of the task scheduler model}
+The design of the resource scheduler follows the design implemented in
+EPOS~\cite{Marcondes:2009:2}. Figure \ref{fig_schduler_model_uml} shows a simplified view of the
+task scheduling model. In this design, the task is represented by the class \emph{Thread} and
+implements common operations (e.g. suspend and resume operations) for controlling the execution
+flow of tasks. The classes \emph{Scheduler} and \emph{SchedulingCriteria} define the structure that
+realizes the task scheduling. Traditional design and implementations of scheduling algorithms are
+usually done by a hierarchyof specialized classes of an abstract scheduler class, which can be
+further specialized to bring new scheduling policies to the system. In order to reduce the
+complexity of code maintenance (generally present in such hierarchy of specialized classes), as well
+as to promote its reuse, the design detaches the scheduling policy (criteria) from its mechanisms 
+(lists implementations) and also detaches the scheduling criteria from the thread it represents. 
+This is achieved by the isolation of the element's comparison algorithm of the scheduler in the
+criteria.
+% 
+\fig{.55}{fig_schduler_model_uml}
+{Simplified UML view of the task scheduling model}
+
+The separation of the mechanism from the scheduling policy was fundamental for the construction of
+the scheduler in hardware. The hardware scheduler component implements only the mechanisms that
+realize the ordering of the tasks, based on the selected policy. In this sense, the same hardware 
+component can realize distinct policies. Figure \ref{fig_schduler_hw_uml} provides an overview od
+its implementation (for simplicity, some details such as SC\_CTHREADs are ommited; these details
+are implemented following the guidelines described in section \ref{PROPOSAL}). The class
+\emph{Scheduler} implements the input/output protocol which triggers the operations listed in
+figure \ref{fig_schduler_model_uml}. To increase reusability, the implementation of storage and
+FIFO control is implemented separately in the \emph{Priority\_Linked\_List} class. This
+implementation, realizes the insertion of its elements already in order, that is, the queue is
+always maintained ordered, following the information that the \emph{SchedulingCriteria} provides.
+
+\fig{.55}{fig_schduler_hw_uml}
+{Overview of the scheduler implementation}
+
+\subsection{FIR filter}
+FIR filters are one of the most well known components in digital hardware design and digital signal
+processing. The main aspect of our design is the support to both complex and real arithmetic by
+using configurable features. Figure \ref{fig_fir_uml} shows this design. The data
+input/output ports are defined in the \emph{FIR\_Complex\_Interface} class for complex samples and
+in the \emph{FIR\_Real\_Interface} class for real samples. The classes implementing the interfaces
+also define methods for reading/writing from/to the ports. The \emph{FIR\_Core} class implements
+the FIR algorithm and the common handshaking protocol. These classes are bounded together by the
+\emph{FIR} class, which inherits from \emph{FIR\_Core} and from one of the interfaces, according to
+the value set in the configurable feature. Notice that the we have used the same handshaking
+protocol described in Figure \ref{fig_scenario_adapters_uml_detail} (\emph{Aspect\_Common} class),
+since the FIR performs a single operation (\emph{FIR\_Core::do\_fir()}).
+
+\fig{.55}{fig_fir_uml}
+{Overview of the FIR filter implementation}
+
+\subsection{DTMF detector}
+Figure \ref{fig_dtmf_uml} shows an overview of the DTMF detector interface. Its interface is similar
+to one of the FIR filter and it uses the same input/output protocol. However, the DTMF detector has
+fixed data interface for inputs (a fixed-point numerical type) and outputs (DTMF tones), instead of
+a cofigurable one. This is a design choice motivated by the fact that the DTMF detector and
+its requirements are stronglly related with our particular application domain (PABX applications).
+The FIR filter, on the other hand, is the basic building block of most digital signal processing
+applications, thus offering a much higher reuse potential, which motivates a more carefull and
+flexible design.
+
+\fig{.55}{fig_dtmf_uml}
+{Overview of the DTMF detector interface}
+
+\subsection{Scenario aspects}
+We have identified two different execution scenarios in our application domain. A \emph{debugged}
+scenario, in which on-chip debugging is required, and a \emph{compressed} scenario, in which
+compression and decompression of audio data is required. Figure \ref{fig_all_aspects_uml_lite}
+shows the aspects implemented for each scenario and their interface. The aspects inherit the basic
+handshaking protocol from \emph{Aspect\_Common} (section \ref{PROPOSAL:SCENARIO_ADAPTER}) and
+implement only their specific interface and operations. More details about the scenarios and its
+aspects are given bellow.
+
+\figTC{.55}{fig_all_aspects_uml_lite}
+{The debug and compression scenarios implemented}
+
+\subsubsection{Debugged scenario}
+The upper part of figure \ref{fig_all_aspects_uml_lite} shows the aspects that can be part of a
+debugged scenario. Unlike previous works, which focused mostly on simulation-time tracing and
+logging, we have focused on \emph{design for testability}~\cite{Williams:1983} and implemented
+aspects for on-chip debugging using a JTAG scan chain. The aspects implemented define the following
+debugging functionalities: \emph{Watched} causes the state of a component to be dumped every time it
+is modified; \emph{Traced} causes every operation execution to be signalized; and \emph{Profiled}
+counts the number of clock cycles used by the component for each operation.
+% \fig{.55}{fig_debug_aspects_uml}
+% {The debugged family of hardware aspects}
+
+%\subsubsection{Atomic scenario}
+%Currently, the atomic scenario is a way too simple
+%\subsubsection{Atomic scenario}
+%\begin{itemize}
+%    \item Coarse atomic aspect
+%\end{itemize}
+
+\subsubsection{Compressed scenario}
+The lower part of figure \ref{fig_all_aspects_uml_lite} shows the aspects that can be part of a
+compressed scenario. These aspects provide means to compress digital signals, thus reducing the
+number bits required to represent them. The \emph{Dynamic\_Range\_Compression} aspect provides
+operations to compress or expand the dynamic range of a signal (i.e. the largest and smallest
+possible values of a signal) using a linear transformation. The \emph{ADPCM\_Encoder/Decoder}
+aspects implement the same operations using an \emph{adaptative differential pulse-code
+modulation}~(ADPCM) algorithm~\cite{adpcm} to convert 16-bit samples to 4-bit samples.
+
+\section{Experimental results}
+\label{RESULTS}
+In this section we describe the experimental results for the evaluation of our approach. First,
+three scenario adapters are defined as final case studies considering the components and
+aspects described in section \ref{CASE_STUDY}. Then, we provide a evalution of the designs,
+considering both hardware synthesis results and code quality metrics.
+
+\subsection{Scenario adapters implementation}
+%TODO maybe include EPOS-framework-like picture explaining the compilation flow and talk about the
+%framework
+\figTC{.55}{fig_case_study_all}
+{Overview of the aspect-oriented design. The highlighted components are the scenario adapters
+implemented as case studies.}
+
+Figure \ref{fig_case_study_all} shows how we have applied the aspects using scenario adapters (for
+simplicity, some details such as methods, ports, and hierarchies are omitted). The highlighted
+components are the scenarios adapters, which applies the scenario aspects to the components, as
+described in sections \ref{PROPOSAL} and \ref{CASE_STUDY}. The \emph{Debugged\_Scenario} class
+incorporates the aspects \emph{Profiled}, \emph{Traced}, and \emph{Watched}. The
+\emph{Compressed\_Scenario} class incorporates the aspects \emph{Dynamic\_Range\_Compression},
+\emph{ADPCM\_Encoder}, and \emph{ADPCM\_Decoder}. In our application domain, the compression
+aspects may not be used together. For this reason, the aspects which are part of the
+\emph{Compressed\_Scenario} are defined as configurable features. When \emph{ADPCM} is enable, the
+scenario includes ADPCM enconding/decoding; when \emph{Dynamic Range} is enabled, the scenarios
+includes dynamic range compression.
+
+\subsubsection{Case 1 - Debugged scheduler}
+The \emph{Scheduler\_Adapter} class implements the scenario adapter for our scheduler. It inherits
+from the \emph{Scheduler} and \emph{Debugged\_Scenario} classes, adding support for on-chip
+debugging.
+
+\subsubsection{Case 2 - Debugged FIR filer with dynamic range compression}
+The \emph{FIR\_Adapter} class inherits from \emph{Debugged\_Scenario} and
+\emph{Compressed\_Scenario}, thus adapting \emph{FIR} for both scenarios. In this case study the
+configurable feature \emph{ADPCM} is disabled, while \emph{Dynamic range} is enabled. The final
+implementation compress the samples before the filter, and expand them afterwards, thus trading-off
+precision for resource consumption.
+
+\subsubsection{Case 3 - Debugged DTMF detector with ADPCM}
+The \emph{DTMF\_Detector\_Adapter} follows the same approach of \emph{FIR\_Adapter}. However, in
+this case study, the configurable feature \emph{ADPCM} is enabled. The final implementation can now
+be used in a scenario in which the samples are ADPCM-encoded.

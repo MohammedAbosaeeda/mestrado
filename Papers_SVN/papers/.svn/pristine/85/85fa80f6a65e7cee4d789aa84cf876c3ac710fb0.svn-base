@@ -1,0 +1,108 @@
+\section{Evaluation}
+\label{sec:case}
+
+% The proposed approach was implemented as an extension to the power management
+% mechanism of \epos~\cite{Frohlich:2011}. \epos~is a component-based operating
+% system for embedded applications. The approach was modeled as an scenario
+% adapter~\cite{ScnAdpt}, thus being implemented in a way that is not intrusive to
+% system components. Also, we ran this implementation in the
+% \emote~platform~\cite{emote}. \emote~is a module for the development of
+% low-power wireless sensor network applications. Due to space limitations, we
+% recommend reading the cited references in order to go deeper in the
+% implementation details.
+
+In this section we present the deployment of the approach described in this
+paper in a mobility-enabled wireless sensor network running the Ant-based
+Dynamic Hop Optimization Protocol (\adhop) over an IP network using IEEE
+802.15.4. \adhop~is a self-configuring, reactive routing protocol inspired by
+the HOPNET protocol for \emph{Mobile Ad Hoc Networks}~(MANETs) and designed with
+the typical limitations of sensor nodes in mind, energy in
+particular~\cite{Okazaki:2011}. \adhop's reactive component relies on an
+\emph{Ant Colony Optimization} algorithm to discover and maintain routes. Ants
+are sent out to track routes, leaving a trail of pheromone on their way back.
+Routes with a higher pheromone deposit are preferred for data exchange.
+
+\tab{adzrp-taskset}{\adhop~case-study tasks'
+parameters\protect\footnotemark[3].}
+
+\footnotetext[3]{T: task; P: period in $ms$; WCET: worst-case execution time in
+$ms$; WCEC: worst-case energy consumption in $\eta Ah$; 25-days: energy
+consumption for the targeted lifetime (25 days) in $mAh$.}
+\footnotetext[4]{This is a worst-case scenario as values of ``P'' and, as
+consequence, ``25-days'', are to be defined by the optimization.}  
+\footnotetext[5]{``Route'' is an sporadic task. Once it is a best-effort task in
+the system, we consider a hypothetic frequency of $2$ Hz (period of 500 $ms$) to
+show the impact of routing in the node energy consumption.}
+
+With the purpose of corroborating the approach presented in this paper we
+modified \adhop~in order to make it energy-aware. We classified \adhop's tasks
+as mandatory (hard real-time) or optional (best-effort). The main idea behind
+this setup was to homogenize the battery discharge for every node in the network
+to enhance the lifetime of the network as a whole. Considering the radio the
+most energy-hungry component in a wireless sensing node, we toke the design
+decision of modeling the routing activity of \adhop~as best-effort tasks, as
+shown by the task set at Tab.~\ref{tab:adzrp-taskset}. The basic node
+functionality of sensing a value (task $Sense$) and forwarding it through the
+radio to the next node (task $Transmit$) where modeled as hard real-time tasks.
+The functionality of forwarding other nodes' packets (and ants) when acting as a
+``router'' was modeled as two best-effort tasks, one for monitoring the channel
+for arriving messages ($LPL$ - Low Power Listen), and another to effectively
+receive the message and route it to another node ($Route$).
+
+We set the lifetime objective for this system to 25 days. By analyzing the task
+set it is possible to compute the total energy consumption of hard real-time
+tasks for the desired lifetime to be of $601.88 mAh$, thus, the initial battery
+charge for the system has to be greater than that. We then defined the system
+battery as an of-the-shelf CR-2/$3V$ battery with a total capacity of $850 mAh$.
+
+We simulated several network scenarios (with up to 200 nodes) using the
+\emph{Global Mobile Information System Simulator} (\glmsim). In this setup,
+nodes were programmed to communicate intensively and move randomly within a grid
+of 700 x 400 meters for 25 days, thus stimulating both the routing protocol and
+the power management mechanisms. \glmsim~was integrated to the same
+\nsga~optimizer described in Section~\ref{sec:frequency}, and the optimization
+process ran with the same parameters.
+The results of this optimization are shown in
+%Fig.~\ref{fig:adzrp-solutions} (simulated solutions),
+Tab.~\ref{tab:adzrp-solutions}.
+% , and Fig.~\ref{fig:adzrp-bet_freq} and Fig.~\ref{fig:adzrp-batt_freq}
+% (observed parameters plotted against the collector task's frequency).
+
+% \fig{adzrp-solutions}{All solutions for the \adhop~case-study.}{width=\columnwidth}
+
+\tab{adzrp-solutions}{Solutions for the frequency of the collector task for
+the \adhop~case-study.}
+
+% \figtwo{adzrp-bet_freq}{Execution rate of best-effort tasks.}
+% {adzrp-batt_freq}{Residual energy after projected lifetime.}
+% {Optimization objectives plotted against variations on the frequency of the
+% collector task for the \adhop~case-study.}
+
+Also, we analyze the impact on the network performance by comparing the
+obtained results with the data originally published by
+Okazaki~\cite{Okazaki:2011}.
+Fig.~\ref{figtwo:adzrp-avg_node_energy-adzrp-avg_node_lifetime} (above) shows a
+reduction on the average energy consumed by each node on the network while
+Fig.~\ref{figtwo:adzrp-avg_node_energy-adzrp-avg_node_lifetime} (bellow) shows
+the expected enhancement on the average battery lifetime of nodes. It is
+important to note that all nodes in the network lived for, at least, 25 days as
+expected, being that the reason why the average lifetime stayed well above it,
+around 30.
+
+\figtwo{adzrp-avg_node_energy}{}{adzrp-avg_node_lifetime}{}{Average
+energy-related parameters for the simulated \adhop~setup.}
+
+Besides the good results from the energy consumption perspective, we observed an
+important decrease on the overall network quality, as shown in
+Fig.~\ref{figtwo:adzrp-network_original-adzrp-network_ea} for the ``Broken
+routes'' and ``Delivery ratio'' parameters. These contrast, however, with the
+obtained results on ``Link failures'', indicating that \adhop~deals well with
+the broken routes, allowing undelivered packets to be re-routed and finally
+delivered.
+% Future work on
+% energy-aware scheduling, which were not focus of the present work, will rely on
+% the presently proposed accounting mechanism to enable fairer scheduling of such
+% tasks and handle the impact on network performance.
+
+\figtwo{adzrp-network_original}{}{adzrp-network_ea}{}{Impact on network quality
+for the \adhop~case-study.}

@@ -1,0 +1,24 @@
+\begin{tabular}{clrr}
+\toprule
+\multicolumn{2}{c}{\multirow{2}{*}{Component}}             & \multicolumn{2}{c}{Execution time ($\mu$s)} \\
+\cmidrule(l){3-4}
+                              &           & SW-only & Unified \\
+
+\midrule
+\multirow{5}{*}{Scheduler}    & insert    & ~~~6.0  & ~~~6.0 \\
+                              & remove    & ~~~2.9  & ~~~3.3 \\
+                              & suspend   & ~~~3.0  & ~~~3.1 \\
+                              & resume    & ~~~6.0  & ~~~6.0 \\
+                              & choose    & ~~~8.4  & ~~~8.5 \\
+\midrule
+\multirow{2}{*}{ADPCM}        & encode    & ~~~4.2  & ~~~4.2 \\                            
+                              & decode    & ~~~3.4  & ~~~3.6 \\                            
+\midrule
+DTMF                          & do\_dtmf  & 5878.3  & 6182.9 \\
+\bottomrule
+\end{tabular}
+
+%SW AVGs
+%Memory footprint = 4.19 %
+%Exec. time = 5.15 %
+

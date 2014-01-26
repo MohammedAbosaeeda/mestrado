@@ -1,0 +1,110 @@
+\section{Data Dissemination Protocol}
+\label{sec:ddp}
+% Processo de reprogramação
+% Propriedades de um protocolo
+% quais foram escolhidas e porque
+% feature diagram
+
+%Em geral o processo de reprogramação em rede é dividido em três etapas, como ilustrado na Figura \ref{fig:programming_proc_br}. A primeira é responsável pela preparação dos dados a serem disseminados. A segunda etapa engloba todo o processo de disseminação, onde os dados são enviados e armazenados pelos nodos pertencentes à rede. Por fim, o mecanismo de reconfiguração do SO interpreta os dados recebidos e os utiliza para atualizar a memória de programa.
+In general the network reprogramming process is divided in three steps, as shown in Figure~\ref{fig:programming_proc}.
+The first step is responsible for preparing the data to be disseminated.
+The second step encompasses the whole dissemination process. %, where data is sent and stored by the nodes within the network.
+Finally, the OS reconfiguration mechanism interprets the received data and uses it to update the program memory.
+
+\fig{programming_proc}{Network reprogramming process.}{scale=.45}
+
+%Protocolos de disseminação de dados são utilizados para propagar dados pela rede utilizando seus próprios nodos para isso. Em especial, um protocolo utilizado por um mecanismo de reprogramação em rede deve ser confiável, ou seja, garantir a entrega correta de todos os dados a todos os nodos. Abaixo, as propriedades que devem ser levadas em conta ao se projetar um protocolo de disseminação \cite{Lanigan:2005}:
+Data dissemination protocols are used to spread data over the network using its own nodes.
+%In particular, a protocol used by a network reprogramming mechanism must be reliable, that is, ensure accurate delivery of all data to all nodes.
+In particular, these protocols must ensure accurate delivery of all data to all nodes.
+When designing a dissemination protocol some properties must be taken into account: low latency, low memory consumption, reliability, energy efficiency, tolerance to nodes insertion/removal, and uniformity~\cite{Lanigan:2005}.
+
+%Bellow, the properties that must be taken into account when designing a dissemination protocol~\cite{Lanigan:2005}:
+%\begin{itemize}
+% \item[Baixa Latência:] como a atualização é um serviço secundário o protocolo não deve interromper a aplicação principal por muito tempo.
+% \item[Baixo Consumo de Memória:] os dados necessários para a atualização devem ser armazenados até que a transmissão termine, entretanto o protocolo deve requisitar pouco espaço de armazenamento de forma a não restringir a quantidade de memória disponível para a aplicação principal.
+% \item[Confiabilidade:] ao contrário de algumas aplicações tradicionais onde a perda de um pacote é tolerável devido ao fato de que os dados são redundantes e correlacionados, na reprogramação cada pacote é crucial e todos devem ser recebidos para que a atualização possa ocorrer. Sendo assim o protocolo deve possuir uma política de retransmissão permitindo a recuperação de pacotes perdidos.
+% \item[Eficiência Energética:] o protocolo deve minimizar seu consumo de energia de forma a não diminuir severamente o tempo de vida do nodo.
+% \item[Tolerância a Inclusão/Remoção de nodos:] é possível que um nodo falhe durante um período de tempo e depois volte a funcionar, ou até mesmo que novos nodos sejam incluídos na rede. Desta forma a disseminação não deve ser severamente afetada pela inclusão ou remoção de nodos.
+% \item[Uniformidade:] para garantir que a rede inteira seja atualizada, todos os dados devem ser entregues a todos os nodos da rede. Nodos incluídos na rede durante ou depois de uma atualização também devem ser capazes de receber os dados da atualização.
+
+% \item Low Latency: as the update is a secondary service the protocol should not interrupt the main application for a long period.
+% \item Low Memory Consumption: all data necessary for the upgrade should be stored until the transmission ends, however the protocol should use little storage space in order to not restrict the amount of memory available to the main application.
+% \item Reliability: unlike some traditional applications where a packet loss is acceptable due to the fact that data is redundant and correlated, in the reprogramming process all packets are crucial and all should be received for the update to occur. Thus the protocol must have a retransmission policy to allow the retransmission of lost packets.
+% \item Energy Efficiency: the protocol must minimize its energy consumption in order to not severely reduce the lifetime of a node.
+% \item Tolerance to nodes insertion/removal: it is possible that a node fails during a period of time and then return to work, or even that new nodes are inserted in the network. Thus, the dissemination should not be severely affected by the insertion or removal of nodes.
+% \item Uniformity: to ensure that the entire network is updated, all data must be delivered to all network nodes. Nodes inserted in the network during or after an upgrade should also be able to receive the update data.
+%\end{itemize}
+
+%As propriedades de \textbf{confiabilidade} e \textbf{uniformidade} são obrigatórias, uma vez que garantem o funcionamento correto do protocolo. Já as propriedades de baixa latência, baixo consumo de memória, eficiência energética e tolerância a inclusão ou remoção de nodos são apenas desejáveis, pois não garantem corretude. Entretanto um protocolo que as ignore seria de pouca utilidade na prática \cite{moap}.
+\textbf{Reliability} and \textbf{uniformity} are mandatory properties, as they guarantee the correct functioning of the protocol.
+All other properties are only desirable. %, since they do not guarantee correctness.
+%However, a protocol that ignores low latency, low memory consumption, energy efficiency, and tolerance to nodes insertion/removal would be of little use~\cite{moap}.
+However, a protocol that ignores them would be of little use~\cite{moap}.
+
+%\subsection{Protocol Characteristics}
+
+%A Figura \ref{fig:prot_features} apresenta o diagrama de características de um protocolo de disseminação de dados.  Este tipo de diagrama possibilita caracterizar as propriedades de um determinado conceito, apresentando seus pontos de variação \cite{Czarnecki:2000}.  As características são representadas como nodos de uma árvore, cuja raiz é o conceito, e só estão presentes se seu nodo pai está presente.  Características obrigatórias e opcionais são representadas por um círculo no final de suas arestas, preenchido e vazio respectivamente.  Características alternativas são conjuntos do qual apenas uma característica pode estar presente e são representadas por um arco ligando suas arestas.
+%Through an extensive domain analysis we were able to identify the main features of data dissemination protocols, mapping common and variable characteristics present in different protocols~\cite{moap}~\cite{deluge}~\cite{mnp}~\cite{infuse}.
+%Figure~\ref{fig:prot_features} shows the feature diagram which resulted from our analysis.
+%This kind of diagram enables the features characterization of a particular concept, presenting its variation points~\cite{Czarnecki:2000}.
+%Features are represented as nodes of a tree whose root is the concept. Each feature is only present if its parent node is present.
+%Mandatory and optional features are represented by a circle at the end of its edges, filled and empty respectively.
+%Alternative features form a set of which only one feature may be present at a time, and are represented by an arc connecting its edges.
+%Bellow we describe the features present in the diagram:
+
+%\figdc{prot_features}{Data dissemination protocol feature diagram.}{scale=.22}
+%\fig{prot_features}{Data dissemination protocol feature diagram.}{scale=.2}
+
+%\begin{itemize}
+% \item Dissemination: the way in which data is disseminated through the network.
+% \item Incremental: a protocol with this feature sends only the differences between new and old data.
+% \item Periodic Advertisement: a protocol with this feature requires that all nodes periodically advertise their versions, allowing nodes that lost the update operation to receive the data necessary for reprogramming.
+% \item Pipelining: this allows data to be transmitted in parallel across the network, since it does not require that the nodes receive all the data to become a sender. 
+% \item Retransmission Policy: the way in which requests for lost packets and retransmissions are made.
+% \item Segments Management: mechanism used to detect packet loss.
+% \item Sender Selection: deciding which nodes becomes a transmitter has impacts both in the total number of collisions as in the number of transmitted messages.
+%\end{itemize}
+
+\subsection{Design Choices}
+As some desirable properties come into conflict with others, existing protocols make design choices giving preference to some over others.
+The choices made in the protocol developed in this work are:
+\begin{itemize}
+  \item Energy efficiency was the non-mandatory property considered most important, since all operation require energy, and in many embedded systems there is only a finite amount available.
+  \item Memory consumption was considered the second most important property, since the dissemination protocol is not the main purpose of the node, but only a service offered by the OS. Thus, one should not limit the amount of memory available for applications.
+  \item Finally, the latency. In order to optimize energy and memory consumption some characteristics that would decrease latency were not used (e.g. pipelining).
+\end{itemize}
+%Como algumas propriedades desejáveis entram em conflito com outras, os protocolos existentes realizam escolhas de projetos dando preferência a umas em detrimento de outras. 
+%Quanto as escolhas realizadas no protocolo desenvolvido neste trabalho:
+%\begin{enumerate}
+ %\item A propriedade não obrigatória considerada mais importante foi a de eficiência energética, uma vez que todas as operações realizadas necessitam de energia e, em muitos sistemas embarcados, há apenas uma quantidade finita disponível.
+ %\item Consumo de memória foi a segunda propriedade considerada mais importante, visto que o protocolo de disseminação não é a aplicação principal do nodo, mas apenas um serviço oferecido pelo sistema operacional. Desta forma, não se deve limitar a quantidade de memória disponível para as aplicações.
+ %\item Por fim, a latência. Para poder otimizar o consumo de energia e memória algumas propriedades que diminuiriam a latência não foram utilizadas (e.g. multiplexação espacial).
+%\end{enumerate}
+
+\subsection{Implementation}
+%A Figura \ref{fig:protocol_br} apresenta a máquina de estados do protocolo desenvolvido. Ele distribui os dados de vizinhança em vizinhança, utiliza um mecanismo de seleção de emissores baseado no MNP (divulga / inscreve), responsabiliza os receptores por detectar perdas, realiza requisições \textit{unicast} e retransmissões \textit{broadcast} e utiliza o mecanismo de janelas deslizantes para gerência de segmentos.
+Figure~\ref{fig:protocol} shows the state machine of the developed protocol.
+%It disseminates data in a neighborhood-by-neighborhood fashion, uses a sender selection mechanism based on MNP~\cite{mnp} (publish/subscribe), uses receptors for packet loss detection, performs unicast requests and broadcast retransmissions, and uses the sliding window mechanism for segments management.
+It disseminates data in a neighborhood-by-neighborhood fashion, uses a sender selection mechanism based on publish/subscribe, use receptors for packet loss detection, performs unicast requests, broadcast retransmissions, and uses the sliding window mechanism for segments management.
+
+\fig{protocol}{Developed protocol state machine.}{scale=.24}
+
+Nodes publish their versions periodically, and all interested parties request it. 
+A potential sender maintains a variable \emph{ReqCtr}, initialized to zero, and increments it for each new received request (intended for him) coming from a node not yet computed.
+Publish messages have two functions: to announce a new version, and prevent nodes with fewer requests of becoming senders.
+Publish messages have the version number, the nodes \textit{id} and its \emph{ReqCtr}.
+When a node receives a publish message that contains a new version, it will send a request message containing both the sender and its own \textit{id}, and the value of \emph{ReqCtr} received.
+As both publish and subscribe messages are broadcasted other nodes that are in contention to become a sender will also receive it.
+If a node receives a message and it has a lower \emph{ReqCtr} it will go to sleep.
+The nodes \textit{id} is used as a tie-breaker.
+%Nodos divulgam suas versões, periodicamente, e todos os interessados a requisitam. Um potencial emissor mantêm uma variável \emph{ReqCtr}, inicializada com zero, e a incrementa para cada nova requisição recebida, destinada a ele, vinda de um nodo ainda não computado. As mensagens de divulgação tem duas funções: anunciar uma nova versão e prevenir que nodos com menos requisições virem emissores; elas possuem o número da versão, o \textit{id} do emissor e sua variável \emph{ReqCtr}. Quando um nodo recebe uma mensagem de divulgação que contenha uma nova versão, ele irá enviar uma requisição \textit{broadcast} contendo seu \textit{id}, o do transmissor e o valor da \emph{ReqCtr} recebida. Como as divulgações e requisições são \textit{broadcasts} outros nodos que estão na disputa para se tornarem emissores também as recebem e caso possuam um \emph{ReqCtr} menor vão para o estado \textit{sleep}. Como critério de desempate é utilizado o \textit{id} dos nodos.
+
+When a node becomes a sender it sends a \textit{``StartDownload''} message and starts to send the data, packet by packet.
+Receivers define this node as its `parent' and only accept packets from him.
+Each packet has a sequential unique identifier, and receivers maintain the number of the last received packet.
+Thus, upon receiving a new packet it checks if there is a gap between those numbers.
+When a loss is detected the receiver sends a unicast retransmission request to the sender.
+Requests for retransmission have a higher priority than normal packets, then a sender will first respond to all requests before continuing with the transmission.
+
+%Ao virar emissor um nodo transmite uma mensagem \textit{broadcast} \textit{``StartDownload''} e passa a enviar os dados, pacote por pacote. Os receptores definem este nodo como seu ``pai'' e só aceitam pacotes vindo dele. Cada pacote possui um identificador único sequencial e os receptores mantêm o número do último pacote recebido. Assim, ao receber um novo pacote é verificado se há uma lacuna entre estes dois números e os pacotes intermediários são considerados perdidos. Ao detectar uma perda, o receptor envia um pedido de retransmissão para o emissor, utilizando um pacote \textit{unicast}. Os pedidos de retransmissão possuem uma prioridade maior que pacotes normais, então um emissor irá primeiro responder a todas as requisições antes de continuar com a transmissão.

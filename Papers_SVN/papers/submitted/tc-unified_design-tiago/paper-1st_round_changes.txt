@@ -1,0 +1,44 @@
+
+------------------------------------------------------
+------------------------------------------------------
+Section 3
+-Added explanation of basic OOP concepts
+-Added more text for ADESD and AOP
+-Link to unified design in a subsection
+------------------------------------------------------
+------------------------------------------------------
+Section 4
+-------
+-Alleviated the TLM vs OOP. More focus on the fact that OOP will require our metaprogrammed 'proxy/agents'
+- In section 4.2
+	+ Put more enfasis in the fact that components be designed to accept future adaptations by a aspect. 
+	  Scheduler used to illustrate such design
+	+ All discussion related to HLS limitations move to subsection '4.2.1 - Other considerations'
+		- Added discussion about bit-accurate data types
+- Section 4.2.2 is now 4.3
+	+ Mentioned STL and why its allocators are not used
+	+ Dispatcher can be specialized
+	+ Added more code to explain the definition of the scenarios and the scenario adapter
+- Created section '4.4 	- Summary
+	+ TODO Highlight the steps to obtain an unified description
+	+ TODO Add the remaining discussions suggested by reviewer 3   
+- Former sections '4.2.3 - Wrapping communication' and '4.3 - Implementations flow summary' moved 
+  to new section '5 - Deployment of unified components'
+    + Additional details requested by reviewer 2 about proxys/agents.
+
+------------------------------------------------------
+------------------------------------------------------
+Section 6 (former section 5 --- the case study section)
+
+TODO 
+ -Make the section more compact if the paper happen to be more then 14 pages.
+ -Everything related to the implementation of proxys/agents should go to section 5
+
+------------------------------------------------------
+------------------------------------------------------
+Appendix (or annex ?) A
+- Review of UML and the notations used in the paper
+
+Appendix B
+- Review of C++ features for OOP (inheritance, polymorphism)
+- Review of C++ templates

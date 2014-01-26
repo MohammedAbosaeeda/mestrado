@@ -1,0 +1,72 @@
+% ------------------------------------------------------------------------------
+\subsection{Cell BE}
+% ++ Cell BE
+% Describes how data transference is implemented: DMA between PPE and SPEs.
+% Describes how synchronization is implemented: Barriers like mechanisms using
+% Cell MailBox
+
+% = What are our goals in evaluating this hardware implementation.
+The Cell BE is a processor architecture developed by IBM,
+Sony, and Toshiba, targeting applications with high thread-level parallelism \cite{Gschwind:2006}.
+Our goal on implementing DMEC at Cell BE is evaluating ME in a high performance
+and distributed architecture.
+
+% = Target architecture
+Cell BE is an example of a
+``Multi-computer-on-a-Chip'' architecture because it is composed by distinct
+processor units, each one having its own memory address space.
+The Cell BE architecture incorporates in the same chip nine independent cores:
+a Power Processor Element (PPE) and eight
+Synergistic Processor Elements (SPEs).
+% 
+The PPE is the main processing unit, responsible for managing all chip resources.
+The SPEs are dedicated processing units supporting vectorized
+floating point code execution.
+Each SPE has its own local memory, called Local Storage (LC).
+Hence, all communication between cores is performed explicitly though the
+Element Interconnect BUS (EIB), a high performance bus.
+
+% \fig{.4}{cell}{Cell BE architecture}
+
+% = Memory model / Data transference
+As Cell BE uses memory blocks in distinct address spaces,
+we have mapped the operations of \emph{TransferenceManager} to
+DMA requests using the EIB.
+Using DMA requests, each \emph{Worker} module of DMEC obtain the samples
+it needs to perform the ME and deliver back the computed ME results 
+to the \emph{Coordinator} module.
+% 
+The local memory of SPEs is limited to 256KB, including data and code.
+This imposed several limitations. For instance, using a partition mode with
+six partitions of 640x544 each at a 1080p resolution requires 680KB for data storage.
+Thus, only the samples that are currently been used
+by ME computation (or samples that are going to be used in a near future) are
+kept inside the SPEs local memory.
+The samples transferences are hidden from the ME algorithm by the implementation of
+the \emph{Picture} interface. The \emph{Picture}, in this case, has a local buffer
+used as a cache and obtains sample as needed through the \emph{TransferenceManager}.
+% Avaliamos mecanismos de \emph{double buffer} afim de esconder a latência das 
+% transferências de memória via DMA entre a memória principal e a memória local 
+% das SPEs.
+
+Similarly, the implementation of \emph{PictureMotionCounterpart} for Cell BE
+also uses DMA requests through \emph{TransferenceManager}, in order to
+deliver the ME results to the main memory.
+% TODO maybe move this to DMEC Section.
+During the ME computation, previously calculated motion vectors can be used to
+improve the ME for the current blocks.
+Such motion vectors are called \emph{motion predictors}.
+The implementation of \emph{PictureMotionCounterpart} for Cell BE contains an
+internal buffer to keep motion predictors inside the local memory of
+the \emph{Worker} module, avoiding unnecessary DMA transferences between
+the \emph{Worker} and the \emph{Coordinator} modules.
+
+% = Synchronization
+The \emph{SynchronizationManager} interface, which specifies barrier-like
+mechanisms, is implemented in Cell BE using the \emph{MailBox}, a
+hardware resource present on each SPE.
+By using specific MailBox messages, it is possible to specify when the
+\emph{Worker} has completed the ME computation as well when there are new 
+pictures to be processed.
+
+% ------------------------------------------------------------------------------

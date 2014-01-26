@@ -1,0 +1,170 @@
+\documentclass[english]{letter}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{babel}
+\usepackage[top=.5in,bottom=1in,left=1in,right=1in,noheadfoot]{geometry}
+\usepackage{graphicx}
+
+\address{\sffamily
+  \begin{tabular}{rr}
+    Prof.~Dr.~Antônio Augusto Fröhlich & \raisebox{-0.9cm}[0pt][0pt]{\resizebox*{!}{1.2cm}{\includegraphics{/home/guto/etc/logos/lisha}}}\\
+    Federal University of Santa Catarina &\\
+    Software/Hardware Integration Laboratory &\\
+    \multicolumn{2}{r}{PO Box 476, 88040-900 Florianópolis, SC, Brazil}\\
+    \multicolumn{2}{r}{Phone: +55 48 3721-9516}\\
+    \multicolumn{2}{r}{E-Mail: guto@lisha.ufsc.br}\\
+    \multicolumn{2}{r}{WWW: http://lisha.ufsc.br/$\sim$guto}\\
+    \\
+    \multicolumn{2}{r}{\today}
+  \end{tabular}
+}
+
+\date{}
+
+\signature{
+  \begin{center}
+   \raisebox{-2em}[0pt][0pt]{\includegraphics[scale=.75]{/home/guto/personal/signature}}\\
+   \hrulefill\\
+    Antônio Augusto Fröhlich
+  \end{center}
+}
+
+
+\begin{document}
+
+\begin{letter}{International Journal of Distributed Sensor Networks\\
+	Editor\\
+    Prof. Cem Ersoy
+}
+\opening{Dear Prof. Ersoy,}
+\setlength{\parskip}{1.5ex}
+
+A new revised version of the manuscript "A Comprehensive Approach to Power
+Management in Embedded Systems", initially submitted to the International
+Journal of Distributed Sensor Networks on September 2010 and ressubmited on
+January 2011, has just been uploaded through Hindawi manuscript system. Bellow
+you can find replies to each individual reviewer.
+
+\textbf{\large Reviewer 4}
+
+\textbf{Remarks}
+
+The author added experimental results of the C-MAC and the AD-ZRP for showing
+idea related to WSNs. They show interesting results, but the author just
+explains these schemes. How to be integrated these schemes to EPOS? How to be
+related with API for saving energy?
+
+\textbf{Reply}
+
+Thank you for your constructive suggestions. Both paragraphs, the one about
+C-MAC and the one about AD-ZRP, were rephrased to include explicit references to
+the PM strategies discussed along the paper.
+
+
+\textbf{\large Reviewer 2}
+
+\textbf{Remarks}
+
+The paper was extended by two additional examples showing the suitablility of
+the approach for sensor networks. Although the paper is still not FOCUSED on
+sensor networks, it shows that the technique may be used within sensor networks.
+Unfortunately, the abstract and the conclusions are identical to the original
+submission. Both sections should be adjusted according to the additional
+examples. Additionally, the reference mentioned by the second reviewer was not
+correctly embedded: The approach presented by the authors does not deal with
+PCs. As I understood, the approach focuses on embedded soft real-time systems.
+The issue that you call "developer knowledge" (i.e. the schedule of several
+tasks) is tried to be identified automaically by the approach mentioned in [19].
+Hence, you should have a deeper look into that paper and compare it directly to
+your approach (they focus only on soft real-time, so there is an obvious
+difference but they do not need any additional developers knowledge).
+
+\textbf{Reply}
+
+Thank you for your constructive suggestions. The decision not to narrow the
+paper's scope to focus only on WSN was explained in the previous reply,
+however, I must apology for not having adjusted abstract and conclusion
+accordingly. This new version addresses these two points explicitly.
+
+In respect to the approach presented in [19], I believe that, just like the
+proposals in Grace-OS, ECOS, and Niu's (m,k)-scheduler, it can be deployed
+together with the mechanisms presented here straightforwardly. In the revised
+version, I stress I/O as the critical component that is missing in many other
+related works. DVS-based approaches assume regular (or somehow predictable)
+execution patterns and assume also that CPU time can be directly correlated to
+energy consumption. From WSN, for example, we know that channel contention may
+lead to energetically expensive cycles that cannot be accounted from their
+execution time. Application's exception handling (like the trigger thread in the
+paper) is also usually hard to account from CPU usage. This is explained across
+section IV: initially in the second paragraph, then on the third topic of the
+subsequent bullet list and finally through related works. Explicitly discussing
+the autocorrelation clustering DVS technique proposed in [19] would fit better
+in a paper about DVS-based scheduling. Here we sustain that both aspects of
+power management are needed and must be deployed together (e.g., in the top
+paragraph, page 10, second column).
+
+
+\textbf{\large Reviewer 1}
+
+I apology for mistyping Petri Nets. It has been fixed.
+
+Sincerely,
+
+\closing{~}
+
+\end{letter}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,308 @@
+BEGMF 'xfig-fig001116';
+mfversion 1;
+mfdesc 'Converted from /tmp/xfig-fig001116 using fig2dev -Lcgm';
+mfelemlist 'DRAWINGPLUS';
+vdctype integer;
+fontlist 'Hardware',
+  'Times New Roman', 'Times New Roman Bold', 'Times New Roman Italic',
+  'Helvetica', 'Courier',
+  'Times-Roman', 'Times-Italic',
+  'Times-Bold', 'Times-BoldItalic',
+  'AvantGarde-Book', 'AvantGarde-BookOblique',
+  'AvantGarde-Demi', 'AvantGarde-DemiOblique',
+  'Bookman-light', 'Bookman-lightItalic',
+  'Bookman-Demi', 'Bookman-DemiItalic',
+  'Courier', 'Courier-Oblique',
+  'Courier-Bold', 'Courier-BoldOblique',
+  'Helvetica', 'Helvetica-Oblique',
+  'Helvetica-Bold', 'Helvetica-BoldOblique',
+  'Helvetica-Narrow', 'Helvetica-Narrow-Oblique',
+  'Helvetica-Narrow-Bold', 'Helvetica-Narrow-BoldOblique',
+  'NewCenturySchlbk-Roman', 'NewCenturySchlbk-Italic',
+  'NewCenturySchlbk-Bold', 'NewCenturySchlbk-BoldItalic',
+  'Palatino-Roman', 'Palatino-Italic',
+  'Palatino-Bold', 'Palatino-BoldItalic',
+  'Symbol', 'ZapfChancery-MediumItalic', 'ZapfDingbats';
+BEGMFDEFAULTS;
+  vdcext (0,0) (8270,3474);
+  clip off;
+  colrmode indexed;
+  colrtable 1
+    0 0 0
+    0 0 255
+    0 255 0
+    0 255 255
+    255 0 0
+    255 0 255
+    255 255 0
+    255 255 255
+    0 0 142
+    0 0 175
+    0 0 209
+    135 206 255
+    0 142 0
+    0 175 0
+    0 209 0
+    0 142 142
+    0 175 175
+    0 209 209
+    142 0 0
+    175 0 0
+    209 0 0
+    142 0 142
+    175 0 175
+    209 0 209
+    127 48 0
+    160 63 0
+    191 96 0
+    255 127 127
+    255 160 160
+    255 191 191
+    255 224 224
+    255 214 0
+    247 243 247
+    231 227 231
+    215 211 215
+    199 195 199
+    182 178 182
+    166 162 166
+    150 146 150
+    134 130 134
+    113 113 113
+    97 97 97
+    81 81 81
+    65 65 65
+    48 48 48
+    32 32 32
+    16 16 16
+    0 0 0
+    247 243 247
+    231 227 231
+    215 211 215
+    199 195 199
+    182 178 182
+    166 162 166
+    150 146 150
+    134 130 134
+    113 113 113
+    97 97 97
+    81 81 81
+    65 65 65
+    48 48 48
+    32 32 32
+    16 16 16
+    247 243 247
+    231 227 231
+    215 211 215
+    199 195 199
+    182 178 182
+    166 162 166
+    150 146 150
+    134 130 134
+    113 113 113
+    97 97 97
+    81 81 81
+    65 65 65
+    48 48 48
+    32 32 32
+    16 16 16
+    247 243 247
+    231 227 231
+    215 211 215
+    199 195 199
+    182 178 182
+    166 162 166
+    150 146 150
+    134 130 134
+    113 113 113
+    97 97 97
+    81 81 81
+    65 65 65
+    48 48 48
+    32 32 32
+    16 16 16;
+  linewidthmode abs;
+  edgewidthmode abs;
+  backcolr 255 255 255;
+  textprec stroke;
+  transparency ON;
+ENDMFDEFAULTS;
+BEGPIC 'xfig-fig001116';
+BEGPICBODY;
+% Box %
+intstyle EMPTY;
+edgevis ON;
+edgetype 1;
+edgewidth 15;
+edgecolr 1;
+rect (1808,1662) (2408,1362);
+% Text %
+textfontindex 23;
+textalign ctr base 0.0 0.0;
+textcolr 1;
+charheight 100;
+charori (0,1200) (1200,0);
+text (2108,1452) final 'AM';
+% Box %
+rect (1658,3462) (2558,3162);
+% Text %
+textfontindex 24;
+text (2107,3252) final 'Network';
+% Text %
+textfontindex 23;
+text (2107,2496) final 'Basic';
+% Text %
+text (2107,2360) final 'Network';
+% Box %
+rect (1583,2712) (2633,2262);
+% Polyline %
+linetype 1;
+linewidth 15;
+linecolr 1;
+line (2633,2487) (2746,2537) (2858,2487) (2746,2437) (2633,2487);
+% Box %
+rect (1133,1662) (1733,1362);
+% Text %
+text (1432,1452) final 'stream';
+% Box %
+rect (458,1662) (1058,1362);
+% Text %
+text (757,1467) final 'dgram';
+% Box %
+rect (2483,1662) (3083,1362);
+% Text %
+text (2783,1452) final 'ARC';
+% Box %
+rect (3158,1662) (3758,1362);
+% Text %
+text (3458,1452) final 'DSM';
+% Box %
+rect (5333,3462) (6533,3162);
+% Text %
+textfontindex 24;
+text (5932,3252) final 'Communicator';
+% Text %
+textfontindex 23;
+text (5932,2496) final 'Basic';
+% Text %
+text (5932,2360) final 'Communicator';
+% Box %
+rect (5333,2712) (6533,2262);
+% Text %
+text (6308,1512) final 'AM';
+% Text %
+text (6308,1395) final 'handle';
+% Box %
+rect (5333,1662) (5933,1362);
+% Text %
+text (5632,1452) final 'mailbox';
+% Box %
+rect (4808,1662) (5258,1362);
+% Text %
+text (5033,1467) final 'port';
+% Box %
+rect (4058,1662) (4733,1362);
+% Text %
+text (4395,1452) final 'connect.';
+% Text %
+text (7058,1512) final 'ARC';
+% Text %
+text (7058,1395) final 'segment';
+% Text %
+text (7883,1512) final 'DSM';
+% Text %
+text (7883,1395) final 'segment';
+% Ellipse %
+ellipse (458,2112) (908,2112) (458,1962);
+% Text %
+text (459,2067) final 'shared';
+% Ellipse %
+ellipse (458,2487) (908,2487) (458,2337);
+% Text %
+text (458,2427) final 'reliable';
+% Ellipse %
+ellipse (458,2862) (908,2862) (458,2712);
+% Text %
+text (458,2825) final 'protected';
+% Ellipse %
+ellipse (7658,2487) (8108,2487) (7658,2337);
+% Text %
+text (7658,2427) final 'm-task';
+% Ellipse %
+ellipse (7658,2112) (8108,2112) (7658,1962);
+% Text %
+text (7658,2052) final 'm-thread';
+% Ellipse %
+ellipse (7658,2862) (8108,2862) (7658,2712);
+% Text %
+text (7657,2817) final 'protected';
+% Polyline %
+line (2858,2487) (5318,2487);
+line (5228,2532)(5318,2487)(5228,2442);
+% Polyline %
+line (2108,1662) (2108,2172);
+intstyle SOLID;
+fillcolr 8;
+polygon (2063,2157)(2108,2247)(2153,2157);
+% Polyline %
+line (1433,1662) (1899,2194);
+polygon (1855,2213)(1948,2251)(1923,2154);
+% Polyline %
+line (758,1662) (1656,2215);
+polygon (1620,2245)(1720,2254)(1667,2169);
+% Polyline %
+line (2783,1662) (2317,2194);
+polygon (2293,2154)(2268,2251)(2361,2213);
+% Polyline %
+line (3458,1662) (2560,2215);
+polygon (2549,2169)(2496,2254)(2596,2245);
+% Polyline %
+line (1583,2487) (908,2112);
+% Polyline %
+line (1583,2487) (908,2862);
+% Polyline %
+line (1583,2487) (908,2487);
+% Polyline %
+line (6533,2487) (7208,2862);
+% Polyline %
+line (6533,2487) (7208,2487);
+% Polyline %
+line (4358,1662) (5478,2222);
+polygon (5444,2255)(5545,2255)(5485,2175);
+% Polyline %
+line (5033,1662) (5641,2202);
+polygon (5600,2226)(5697,2252)(5660,2159);
+% Polyline %
+line (5633,1662) (5826,2178);
+polygon (5779,2180)(5853,2248)(5864,2148);
+% Polyline %
+line (6308,1662) (6048,2182);
+polygon (6015,2148)(6015,2249)(6095,2189);
+% Polyline %
+line (7058,1662) (6233,2212);
+polygon (6220,2167)(6170,2254)(6270,2242);
+% Polyline %
+line (7883,1662) (6392,2230);
+polygon (6390,2183)(6322,2257)(6422,2267);
+% Polyline %
+line (6533,2487) (7208,2112);
+% Polyline %
+linetype 2;
+line (2108,2712) (2108,3072);
+polygon (2063,3057)(2108,3147)(2153,3057);
+% Polyline %
+line (5933,2712) (5933,3072);
+polygon (5888,3057)(5933,3147)(5978,3057);
+% Polyline %
+linetype 1;
+line (1658,12)(1658,12);
+% Box %
+intstyle EMPTY;
+rect (6008,1662) (6608,1362);
+% Box %
+rect (6683,1662) (7433,1362);
+% Box %
+rect (7508,1662) (8258,1362);
+% End of Picture %
+ENDPIC;
+ENDMF;

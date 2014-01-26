@@ -1,0 +1,16 @@
+
+\begin{tabular}{|l|ccc|ccc|ccc|}
+\hline
+            &   \multicolumn{3}{|c|}{FPGA resources (LUTs/FFs)} &   \multicolumn{3}{|c|}{Clock cycles p/operation (min/max)}  &   \multicolumn{3}{|c|}{Maximum frequency (MHz)}\\
+            &    HC RTL    &  Unified    &    Diff. (\%)        &    HC RTL     &     Unified     &     Diff. (\%)            &     HC RTL      &    Unified     &      Diff. (\%)  \\
+Scheduler   &   875/665    &  2883/1772  &  229.4/166.4         &  2/40         &      2/36       &  00.00/-10.00             &    262          &   196          &      -25.19  \\
+ADPCM       & 457/124      &  471/208    &   03.06/67.74        &  2/6          &     5/5         &  150.0/-16.66             &    194          &   204          &      05.15\\
+DTMF        & 443/257      & 458/300     &     03.38/16.77      &  5643         &   5635          &  -0.14                    &    105          &   93           &      -11.42\\
+\hline
+\end{tabular}
+
+%HW AVGs (Normal / sem pts discrepantes)
+%FPGA res = 81.12 % / 51.47 %
+%Clock cycles = 24.64 % / -6.7 %
+%Freq = -10.48 % / -10.48 %
+

@@ -1,0 +1,234 @@
+%-------------------------------------------------------------------------------
+% aPyxis para ISAS95
+%-------------------------------------------------------------------------------
+\documentstyle[letter,times,psfig]{article}
+
+%-------------------------------------------------------------------------------
+% NOVOS COMANDOS
+%-------------------------------------------------------------------------------
+\newcommand {\putpict} [5] {
+  \begin {figure} [htb]
+  \centerline {
+    \psfig{figure={#1},width=#2cm,height=#3cm}
+  }
+  \caption{#4}
+  \label{#5}
+  \end{figure}
+}
+
+%-------------------------------------------------------------------------------
+% MACROS
+%-------------------------------------------------------------------------------
+\def\sw{\it software}
+\def\Sw{\it Software}
+\def\pyx{\sc Pyxis}
+\def\apyx{$\alpha$\pyx}
+\def\bpyx{$\beta$\pyx}
+\def\gpyx{$\gamma$\pyx}
+\def\unix{\sc Unix}
+\def\posix{\sc Posix}
+
+%-------------------------------------------------------------------------------
+% DEFINIÇÃO DAS MÁRGENS
+%-------------------------------------------------------------------------------
+% Papel tamanho A4
+% Margem superior de 3cm sem cabeçalho
+% Margens laterais de 3cm
+% Margem inferior de 3cm com numeração no meio
+% Meia linha entre parágrafos e identação de 
+\settopmargin		{1in}
+\setbottommargin	{1.25in}
+\setleftmargin		{1in}
+\setrightmargin		{1in}
+\setlength{\headheight}	{0cm}
+\setlength{\headsep}	{0cm}
+\setlength{\footskip}	{0.5in}
+\setlength{\parindent}	{0in}
+\setlength{\parskip}	{0.5em}
+
+%-------------------------------------------------------------------------------
+% CAPA
+%-------------------------------------------------------------------------------
+\begin{document}
+
+\title{\bf $\alpha$PYXIS: A Name Server for \\ Distributed Environments}
+
+\author{A.A. Fröhlich, L.F. Fausto \& T.B. Corso}
+
+\date{}
+
+\maketitle
+
+\vspace{-3em}
+\begin{center}
+  {\normalsize{Universidade Federal de Santa Catarina \\ Florianópolis, Santa Catarina, BRASIL}}
+\end{center}
+
+%-------------------------------------------------------------------------------
+% RESUMO
+%-------------------------------------------------------------------------------
+\begin{abstract}
+
+	This paper describes the {\apyx}, a versatile name server for distributed environments, which maps object names into ids (independently of their location). This server dynamically supports global or local name spaces, according to system requirements. The server incorporates an authentication engine that, after checking a request, supplies the client with an authentication key. Such a key can be adopted by other servers as a security criterion for further communications with clients.
+
+	At this time, an operating version of {\apyx} is available. This version acts as the file name server for the {\pyx} distributed file system (Fröhlich, 1994), which uses the server authentication capability to validate requests to all other component servers. In that environment, the name server is in charge of supporting a distributed hierarchic naming space visible to the users as a directory tree.
+
+\vspace{1em}
+{\bf Keywords:} name server, message authentication, distributed operating system, distributed file system.
+
+\end{abstract}
+
+%-------------------------------------------------------------------------------
+% INTRODUCTION
+%-------------------------------------------------------------------------------
+\section{Introduction}
+
+	The growth of parallelism and distribution in the computing systems has motivated the appearance of several new ideas in the Operating Systems field. Among them is the specialization of services. Although perfectly tuned to Distributed Systems, this idea is still few explored. Joining related tasks in autonomous functional modules results in servers that will probably take better advantage of the hardware parallelism. With such an organization, the Operating System has become a collection of independent servers (each one responsible for a class of services) that cooperate to achieve the desired system's functionality.
+
+	A usual specialization is the name server, which maps object names into ids. A generic naming service is capable of mapping any sort of name into any sort of id is desirable, so the service could be used by both: the operating systems and the applications. Frequently, name servers are used to map file names in file systems or host names in domains, but many other uses are there, for instance, phone directories.
+
+	This paper describes the {\apyx}, emphasizing its innovative characteristics, which include the capability of managing name spaces privately to each host or global to the whole domain, and the authentication engine that allows secure communication among clients and servers. It also describes a prototype, implemented to act as the file name server in the {\pyx} distributed file system (Fröhlich, 1994).
+
+
+%-------------------------------------------------------------------------------
+% PROJECT GOALS
+%-------------------------------------------------------------------------------
+\section{Project Goals}
+
+	The name server has been designed so that the following goals are to be meet:
+
+\begin{itemize}
+
+\item Distributed name space: the server shall be able to refer to remote objects through local names. This ability makes object's location transparent to users.
+
+\item Generality: the server must not impose any format on the names it maps, or on the ids that names are mapped to. Doing so, the server can be used by any process that wishes to map names into ids. Both elements (names and ids) are meaningful only to the application that has defined them.
+
+\item Stateless: the server shall be stateless due to two main reasons: fault tolerance and design simplicity. Each client must keep all the control information it needs to request service. It is easier to restart the server after a crash in the scheme.
+
+\item Message authentication: We decided the name server should include an authentication engine, because it is with the name  server that the user's first contact with the object occurs. If the authentication process took place later on, it would be impossible to ensure that the object id had not been misused. So the name server shall implement an authentication engine to generate (after checking permission) an authentication key that may be used for further secure communication between clients and servers.
+
+\end{itemize}
+
+%-------------------------------------------------------------------------------
+% DESCRIÇÃO DO MODELO
+%-------------------------------------------------------------------------------
+\section{Name Space}
+
+	An object name is usually a string that identifies a single object in a set of objects. A name must not be ambiguous, i.e., it must refer to only one object. Nevertheless an object name does not need to be unique, i.e., more than one name (synonyms) can refer the same object. The main purpose for giving an object a name is to make it known and accessible in some universe. An object can be anything on a universe, since it has a name.
+
+	In order to name a set of objects in non-ambiguous way, it is common to arrange the names in a hierarchic scheme. A hierarchic name space, besides being  easier to maintain, it is closely related to the way objects are organized in reality.
+
+	A hierarchic name space can be represented as tables with lines and columns. Each line designates an object and each column stands for a different attribute. Any accessible object must be referred to by at least one table. Each table has at least one column: the object name. However many other information can be associated with each object, therefore, a name space is the set of all names that are known for that domain. We can manipulate the domain's amplitude to change the scope of a name space. For example, we could restrict the scope of a name space to a single host (private name space) or we could extend the scope to a set of hosts (global name space).
+
+	When a global name space is set, remote objects are referred to as being local to the whole set of hosts sharing the name space. In this way, an object always has the same name, regardless of how the host is physically placed. Figure \ref{global} shows a global name space where "Y" is a table from host "1" which refers to objects  "Z" and "d" from host "2".
+
+\putpict{global.ps}{10}{6}{A global name space}{global}
+
+%-------------------------------------------------------------------------------
+% SYSTEM SECURITY
+%-------------------------------------------------------------------------------
+\section{System Security}
+
+	The information stored in a system as well the system's components must be guarded against undesirable access. According to Garfinkel and Spafford (1993), a secure system is one whose components are used in a predictable manner, regardless of the circumstances. In practice, total security is seldom feasible. Nevertheless, efforts must be made so that security violation becomes the exception, not the rule.
+
+	System security violations can be classified as intentional or accidental. It is easier to prevent undesirable accidental access than intentional access. There are three main forms of undesirable access to an object: read, modify and destroy.
+
+	All objects managed by a system present private characteristics that must be respected by anyone wishing to gain access to them. We expected an object to be handled only through its class methods. Furthermore, not everybody has the same access permission over an object. The system must enforce some scheme to ensure these restraints. 
+
+	One of the bases for system protection is the ability to identify processes and objects (and their owners) in order to make validations possible. It is easy for centralized systems to guarantee the authenticity of such information, because they are handled internally by the operating systems. However, such information is transmitted among hosts in a distributed system, making the authentication processes much more complex.
+
+
+%-------------------------------------------------------------------------------
+% AUTHENTICATION IN DISTRIBUTED SYSTEMS
+%-------------------------------------------------------------------------------
+\subsection{Authentication in distributed systems}
+
+	In a distributed system, several items of control information (user ids, process ids, object ids, etc) are exchanged without protection between hosts in the clear. Thus, a special mechanism to ensure the authenticity of such information is required. One approach to the problem is to set reliable processes (or even hosts) to authenticate the information.
+
+	The authentication process begins when the user logs into the system. The most common way to do it is to request the user to give a password, which will be compared to the one stored (encrypted) in the system. After the log in, the user is considered to be who he claims to be.
+
+	Processes and objects are handled by the system, thus, we can consider their ids to be authentic. The problem now is to ensure that this information is not misused or altered when transmitted from one host to another. For example, suppose a user in host "A" wishes access an object in host "B", which is outside of his authorized domain. If the user knows the id of a user to whom access to the object is granted, then he could fake its id and gain access to the object. The system must prevent this from happening.
+
+	The {\apyx} approach is to include  an authorization key in the messages exchanged between clients and servers to request/reply services. Each time a client requests a service, it includes the key that will be checked by the server. A key grants the access of a single user to a single object. Thus messages regarding different objects carry differents keys.
+
+	In order to be effective, the authentication process must occur in the first step of gaining access to an object. In {\pyx}, as in many others systems, the first contact between a client and an object happens when a client tries to obtain the object id from the name server. That is the way we decided to include the authentication engine in the name server: when a client obtains an id, it gets an authentication key, as well.
+
+	Note that {\apyx} only returns a valid pair (id, key) to requests made by users with authorization to access the object. To achieve this, instead of storing permission with the object's primary information, {\apyx} contacts the server associated with the object, requesting access validation for the user. If the server validates the access, then {\apyx} returns a valid pair (id, key), otherwise it returns an error. With a valid pair (id, key), a client can now contact the object's server and request specific services. The key can be used by this server to authenticate requests.
+
+
+%-------------------------------------------------------------------------------
+% KEY GENERATION
+%-------------------------------------------------------------------------------
+\subsection{Key generation}
+
+	In the last section we defined an authentication scheme based on a key. Such a key can guarantee the authenticity of several items of information used to validate access to objects. Now we must guarantee the authenticity of the authentication key, or at least make it hard to be faked.
+ 
+	The authentication key generated by {\apyx} is a function of three elements: the object id, the object creation time and the user id. Object ids are held by {\apyx} itself, the object creation time is obtained from the server associated with the object, and the user id is included (by the system kernel) in all messages. Figure \ref{chave} shows the key generation process.
+
+\putpict{key.ps}{10}{3}{Authentication key generation}{chave}
+
+	The object id was included in the function to ensure that a key obtained for one object will not be used for access to another one. The object's creation time was included to allow for the id's reutilization (necessary, once ids are not infinite). For instance, suppose a client has  got a pair (id, key). As {\apyx} is stateless, it does not know to whom keys  have been given. Another authorized client can destroy the object while the first client still holding a valid pair. It is not mathematically impossible for this situation to remain long enough for the former id to be given another object. If we had not included the object creation time in the key generation, the former key would still be valid.
+
+	The user's id was included in the key generation function to avoid key exchange by users. Doing so, an authorized user that obtained a valid pair (id, key) can not pass the pair on to another user. In {\apyx}, permission is not transferable. Many systems rely on the user's ability to judge its neighbors and decide which of them are trustworthy. {\apyx} acts differently if access to a new user should be granted, then the object's creator (owner) must explicitly say so (authorize it).
+
+	The key generation function is obviously a system secret. What can be said is that the function counter domain is large enough that few synonymous are generated and the function has no reverse (necessary because all the involved elements are handled by users). All servers expected to validate the key must know the generation function, so they can recompute it and compare it to the one provided by the client (Evans et al, 1974).
+ 
+ 
+%-------------------------------------------------------------------------------
+% THE IMPLEMENTATION OF aPyxis
+%-------------------------------------------------------------------------------
+\section{The Implementation of {\apyx}}
+
+	At the present time, there is an operating version of {\apyx}. Such version has been used as the file name server for the {\pyx} distributed file system. {\pyx} is a new approach to file systems, where the file functionality results from the combination of several parallel servers. Different aspects of the file system are treated by different autonomous servers: a name server ({\apyx}), a file server ({\bpyx}), a cache server ({\gpyx}) and specific servers for each class of devices supported by the system.
+
+	This version of {\apyx} supports the mapping of file names into ids and also the generation of authentication keys as described earlier. To validate file access, {\apyx} communicates with {\bpyx} (the file server) in order to check whether the user has permission to do what he wants to. This decision was taken to keep {\apyx} generic, and thus, usable for other purposes than file name mapping. If access is denied to the user, {\apyx} simply returns an error code, i.e., neither id nor key is returned.
+
+	{\apyx} is a stateless server, i.e., it does not keep any contextual information about its clients. Each service request made by a client must include all information needed to carry out the service. The main reason why we decided to make {\apyx} stateless is to simplify server's recovery after a crash. Since the server keeps no information about its clients, the restart procedure equals its initialization.
+
+	At interface level, {\apyx} looks like an {\unix} library. More specifically, {\apyx} is {\posix} (IEEE, 1988) compliant. This compatibility is important to allow {\posix} applications to run over {\pyx} without changes. {\apyx} interface includes the following services:
+
+\begin{itemize}
+
+\item {\tt translate}: {\apyx} main service, {\tt translate} takes an object name and returns an object id. Before returning the object id, {\tt translate} checks user permission over the object and generates an authentication key. Although {\apyx} is main service, it is seldom used on the application level. It usually appears embedded in library functions (stubs).
+
+\item {\tt opendir / closedir}: allows access to a table (directory).
+
+\item {\tt chdir}: changes the local working directory of a process.
+
+\item {\tt readdir}: gets a table's entry.
+
+\end{itemize}
+
+	At initialization, {\apyx} waits for an object id that will be used as the root table for the name space. If there is only one instance of {\apyx} running in the whole domain or if all instances are initialized with the same root table, then a global name space is set. On the other hand, if any instance of {\apyx} gets initialized with distinct root tables, then several name spaces are possible. The sharing of sub-spaces is supported by {\apyx}, thus, distinct servers, with distinct root tables, can share parts of their name spaces. The decision of which kind of name space to use is up to the users.
+
+	{\apyx} tables are implemented over {\bpyx} files, which can be remotely linked. Using this ability (remote links), {\apyx} can add remote object names to local tables. Moreover, it can link a remote table to the local one. One drawback of using remote links is the degradation of the name space hierarchy  from a tree to a (possibly cyclic) graph. This could cause trouble to applications that recursively cross the name space, like "tar" and "find". Such applications could loop forever if they are not aware of remote links. To avoid this problem, {\apyx} makes public the information that the object is or is not remote. Applications can check such information to avoid infinity loops.
+
+
+%-------------------------------------------------------------------------------
+% CONCLUSIONS
+%-------------------------------------------------------------------------------
+\section{Conclusions}
+
+	This paper has presented {\apyx}, a name server for distributed environments. {\apyx} characteristics include the ability to name objects independently of their locations, the ability to generate authentication keys and the {\posix} conformance. The version implemented to act as the file name server for {\pyx} has proved the server's functionality. The obtained results are very satisfactory and have determined the continuity of the project. Among the forthcoming developments, {\apyx} will be used for applications to map names of general objects.
+
+	A more precise evaluation of {\apyx} performance depends on {\pyx} migration to a new parallel platform: a dynamic interconnection network multicomputer, today under development in our department (Corso, 1993).
+
+%-------------------------------------------------------------------------------
+% REFERÊNCIAS BIBLIOGRÁFICAS
+%-------------------------------------------------------------------------------
+{\vspace{2em}\Large{\bf References}}
+
+Corso, T. (1993); Ambiente para Programação Paralela em Multicomputador; Florianópolis: UFSC/CTC/INE (technical report).
+
+Evans, A., Kantrowitz W. and E. Weiss (1974); A User Authentication Scheme not Requiring Security in the Computer; Communications of ACM, Vol. 17.
+
+Fröhlich, A. (1994); PYXIS: Um Sistema de Arquivos Distríbuido; Florianópolis: UFSC/CPGCC (master degree dissertation).
+
+Garfinkel, S. and G. Spafford (1993); Practical Unix Security; O'Reilly \& Associates.
+
+Institute of Eletrical and Electronics Engineer (1988); POSIX - Portable Operating System Interface for Computing Environments; IEEE Computing Society.
+
+Tanenbaum, A. (1992); Using Sparse Capabilities in a Distributed Operating System; Vrije Universiteit (technical report).
+
+\end{document}
+

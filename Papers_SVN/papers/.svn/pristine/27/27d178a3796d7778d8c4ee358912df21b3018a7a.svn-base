@@ -1,0 +1,53 @@
+\relax 
+\@writefile{toc}{\contentsline {chapter}{Integrating Wireless Sensor Networks and the Grid through POP-C++}{1}}
+\@writefile{toc}{{\noindent\tocauthorfont \relax Augusto B. de Oliveira, Lucas F. Wanner, Pierre Kuonen and Ant\unhbox \voidb@x \bgroup \let \unhbox \voidb@x \setbox \@tempboxa \hbox {o\global \mathchardef \accent@spacefactor \spacefactor }\accent 94 o\egroup \spacefactor \accent@spacefactor nio A. Fr\unhbox \voidb@x \bgroup \let \unhbox \voidb@x \setbox \@tempboxa \hbox {o\global \mathchardef \accent@spacefactor \spacefactor }\accent 127 o\egroup \spacefactor \accent@spacefactor hlich}}
+\@writefile{toc}{\contentsline {section}{\numberline {1\relax }Introduction}{1}}
+\citation{Kuonen}
+\@writefile{toc}{\contentsline {section}{\numberline {2\relax }POP-C++}{2}}
+\@writefile{toc}{\contentsline {section}{\numberline {3\relax }Extending POP-C++ into WSNs}{3}}
+\citation{1182810}
+\@writefile{lol}{\contentsline {lstlisting}{fig/code/sensor.h}{4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1\relax }{\ignorespaces Basic SensorNode POP-C++ Class}}{4}}
+\newlabel{fig:sensorcode}{{1\relax }{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Compromises}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Addressing}{5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}The Proxy Broker}{5}}
+\@writefile{toc}{\contentsline {section}{\numberline {4\relax }Evaluation of POP-C++ over WSNs}{5}}
+\citation{Froehlich:OOOSWS:1999}
+\@writefile{lof}{\contentsline {figure}{\numberline {2\relax }{\ignorespaces Proxy Brokers integrating the wired Grid and the WSN nodes}}{6}}
+\newlabel{fig:pop-c_grid}{{2\relax }{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Hardware testbed}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Runtime support}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3\relax }{\ignorespaces Packet Size Comparison}}{7}}
+\newlabel{fig:packet}{{3\relax }{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Benchmarks}{7}}
+\@writefile{toc}{\contentsline {section}{\numberline {5\relax }Design Challenges}{7}}
+\citation{1102235}
+\citation{1142709}
+\citation{1163682}
+\@writefile{lof}{\contentsline {figure}{\numberline {4\relax }{\ignorespaces Requests-per-Second Comparison}}{8}}
+\newlabel{fig:requests}{{4\relax }{8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Network Load}{8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Scalability}{8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Security/QoS}{8}}
+\citation{872817}
+\citation{601861}
+\citation{844142}
+\citation{746944}
+\citation{1018125}
+\@writefile{toc}{\contentsline {section}{\numberline {6\relax }Related Work}{9}}
+\@writefile{toc}{\contentsline {section}{\numberline {7\relax }Conclusion}{9}}
+\bibstyle{apalike}
+\bibdata{meusbib}
+\bibcite{1142709}{Banerjee and Mukhopadhyay, 2006}
+\bibcite{746944}{Bonnet et\nobreakspace  {}al., 2001}
+\bibcite{1102235}{Deng et\nobreakspace  {}al., 2005}
+\bibcite{1182810}{Dunkels et\nobreakspace  {}al., 2006}
+\bibcite{Froehlich:OOOSWS:1999}{Fr\"ohlich and Schr\"oder-Preikschat, 1999}
+\bibcite{1018125}{Gaynor et\nobreakspace  {}al., 2004}
+\bibcite{844142}{Madden et\nobreakspace  {}al., 2002}
+\bibcite{872817}{Madden et\nobreakspace  {}al., 2003}
+\bibcite{Kuonen}{Nguyen and Kuonen, 2007}
+\bibcite{1163682}{Ouferhat and Mellouck, 2006}
+\bibcite{601861}{Yao and Gehrke, 2002}
+\@writefile{toc}{\contentsline {section}{\cnumberline {}References}{10}}

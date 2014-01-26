@@ -1,0 +1,13 @@
+Processador possui a capacidade definida como 1, ou seja, 100%
+P - Período
+D - Deadline, prazo máximo para a conclusão da tarefa
+C - Tempo máximo de execução da tarefa - pico
+U - Utilização da CPU
+U = C / P
+ n
+ E ( Ci / Pi )  <=  1     <=>  Tarefas são escalonáveis
+i=1
+
+ n
+ E ( Ci / Pi )  >  1      <=>  Tarefas não são escalonáveis,
+ i=1                            processador sobrecarregado

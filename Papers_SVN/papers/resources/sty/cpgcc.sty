@@ -1,0 +1,328 @@
+%    cpgcc.sty -- 7abr92
+%
+%    Style options para dissertacao de mestrado,
+%    trabalho individual e relatorios de atividades do CPGCC-UFRGS
+%    Modified from german.sty, rep12.sty, doublespace.sty, latex.tex by
+%       Benhur Stein
+%       Marcos Luz
+%	Paulo Fernandes
+%
+% Uso:
+%     \documentstyle[cpgcc]{report}
+%     \title{O Despertar das Mongas}
+%     \author{Jorge da}{Silva}
+%     \advisor{Pedro}{Almondegar}
+%     \coadvisor{Maria da Gra\c cas}{Souza}
+%     \date{dezembro}{1993}
+%     \areas{Banco de Dados, Despertares}
+%     \keywords{Orienta\c c\~ao a objetos, Mongas}
+%     \ti{numero}{ordem, em romano}
+%     \relativ{mes}{ano}
+%     \begin{document}
+%     \maketitle
+%     \agradecimento{Agradecimento}
+%     Agrade\c co a todos os que tornaram ..
+%     \begin{singlespace}
+%     \tableofcontents
+%     \listoffigures
+%     \listoftables
+%     \resumo{Lista de Abreviaturas}
+%     ....
+%     \end{singlespace}
+%     \resumo{Resumo}
+%     Este trabalho ...
+%     \abstract{Titulo em ingles}
+%     This work ...
+%     \chapter{Introdu\c{c}\~{a}o}            
+%     ......
+%     \appendix
+%     \chapter{...}
+%     ...
+%     \chapter{...} % este e o apendice A-2
+%     ...
+%     \begin{thebibliography}{WWW99m}
+%     \bibitem[ACA90]{aca} ACADAR, Jorge C.
+%              {\bf Interesting things about E Model.} 
+%              Pergamon Press, 1990.
+%     ...
+%     \end{thebibliography}
+%     \end{document}
+%
+% O comando coadvisor e' opcional.
+% Os comandos areas, keywords, alem de agradecimento e
+%     oferecimento sao exclusivos de dissertacoes.
+% O comando ti e' para trabalhos individuais somente.
+% O comando relativ serve para relatorios de atividades e seus
+%     parametros sao mes e ano de inicio das atividades.
+%
+% Esta e uma versao inicial, certamente incompleta.
+% Qualquer coisa que nao funcione, a culpa e' nossa.
+% Sugestoes, reclamacoes, etc sao bem vindas.
+%
+
+\message{Document Style Option `CPGCC'  Version 0.67 (7 abr 1992)}
+
+% letras sao 12 pt
+\input rep12.sty
+
+% \today em portugues
+\def\@month{\ifcase\month\or
+  janeiro\or fevereiro\or mar\c{c}o\or abril\or maio\or junho\or
+  julho\or agosto\or setembro\or outubro\or novembro\or dezembro\fi}
+\def\@year{\number\year}
+\def\today{\number\day\space de \@month
+  \space de \number\year%
+}
+
+% Nome das 'captions'
+\def\refname{Refer\^encias}%
+\def\abstractname{Resumo}%
+\def\bibname{BIBLIOGRAFIA}%
+\def\chaptername{Cap\'{\i}tulo}%
+\def\appendixname{ANEXO}%
+\def\contentsname{SUM\'ARIO}%
+\def\listfigurename{LISTA DE FIGURAS}%
+\def\listtablename{LISTA DE TABELAS}%
+\def\indexname{\'Indice}%
+\def\figurename{Figura}%
+\def\tablename{Tabela}%
+\def\partname{Parte}%
+\def\enclname{encl}%
+\def\ccname{C\'opia para}%
+\def\headtoname{Para}%
+\def\pagename{P\'agina}
+
+% Formato A4; pagina a 2cm do topo; texto a 4cm do topo
+% margens laterais de 3cm; margem inferior de 2,5cm
+\oddsidemargin 4.6mm \evensidemargin 4.6mm
+\topmargin -1.54cm \headheight 1cm \headsep 2cm \footskip 30pt 
+\textheight = 232mm \textwidth 150mm
+
+% espaco para entradas no sumario
+\newlength{\tabcap}
+\newlength{\tabsec}
+\newlength{\tabsub}
+\newlength{\tabsubsub} 
+\newlength{\tabfig}
+\newlength{\tabtab}
+\addtocontents{toc}{
+ \settowidth\tabcap{\bf 9\rm 99}
+ \settowidth\tabsec{\bf 9.9\rm 99}
+ \settowidth\tabsub{9.9.999}}
+ \settowidth\tabsubsub{9.9.9.999}
+\addtocontents{lof}{\settowidth\tabfig{\figurename~9.999}}
+\addtocontents{lot}{\settowidth\tabtab{\tablename~9.999}}
+\def\@pnumwidth{1.9em} % espaco para o numero da pagina
+
+% subsubsecoes devem aparecer
+\setcounter{secnumdepth}{3}% numeradas no texto
+\setcounter{tocdepth}{3}% no sumario
+
+% impressao de capitulos no texto -- com numero (\chapter)
+\def\@makechapterhead#1{{\parindent 0pt \singlespace \raggedright \Large \bf \@hangfrom {\uppercase{\@anexo \thechapter~~~~}}\uppercase {#1}\par 
+ \nobreak \vskip \baselineskip} }
+ 
+% impressao de capitulos no texto -- sem numero (\chapter*)
+\def\@makeschapterhead#1{ { \parindent 0pt \centerline
+ {\Large \uppercase{\bf #1}}\par
+ \nobreak \vskip \baselineskip} }
+
+% definicao de secao, subsecao, subsubsecao
+\def\section{\@startsection{section}{1}{\z@}{3ex}{2ex}{\Large\raggedright\singlespace\bf}}
+\def\subsection{\@startsection{subsection}{2}{\z@}{3ex}{2ex}{\large\raggedright\singlespace}}
+\def\subsubsection{\@startsection{subsubsection}{3}{\z@}{3ex}{2ex}{\raggedright\singlespace}}
+
+% definicao de capitulo
+\def\chapter{\clearpage \global\@topnum\z@
+%\@startsection{chapter}{0}{\z@}{3ex}{2ex}{\Large\bf \singlespace\uppercase}}
+\secdef\@chapter\@schapter} 
+\def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
+ \refstepcounter{chapter}
+\addcontentsline{toc}{chapter}{\vskip 1.0em plus 1pt\protect\@dottedtocline{1}{0em}{\tabcap}{\uppercase{{\bf \numberline{\@anexo\thechapter}#1}}}}\else
+ \addcontentsline{toc}{chapter}{#1}\fi
+ \chaptermark{#1}
+\if@twocolumn
+\@topnewpage[\@makechapterhead{#2}] 
+ \else \@makechapterhead{#2}
+ \@afterheading \fi} 
+
+% definicao de chapter*
+\def\@schapter#1{\if@twocolumn \@topnewpage[\@makeschapterhead{#1}]
+ \else \@makeschapterhead{#1} 
+ \@afterheading\fi}
+
+\def\resumo#1{\clearpage \global\@topnum\z@ \@makeschapterhead{#1} \addcontentsline{toc}{chapter}{\protect\@dottedtocline{1}{0em}{0em}{\uppercase{{\bf #1}}}} \@afterheading}
+
+\def\abstract#1   {\clearpage \noindent {\bf TITLE:}  {\uppercase {``#1''}} \\ \\ \\ \global\@topnum\z@ \@makeschapterhead{Abstract} \addcontentsline{toc}{chapter}{\protect\@dottedtocline{1}{0em}{0em}{\uppercase{{\bf Abstract}}}} \@afterheading}
+
+
+\def\agradecimento#1{\clearpage \global\@topnum\z@ \@makeschapterhead{#1} \@afterheading}
+
+\def\thebibliography#1{\chapter*{\uppercase{\bibname}\@mkboth
+ {\uppercase{\bibname}}{\uppercase{\bibname}}}\list
+ {[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth \advance\leftmargin\labelsep \advance\leftmargin 2em \advance\labelsep 2em 
+ \usecounter{enumi}}
+ \def\newblock{\hskip .11em plus .33em minus .07em}
+ \sloppy\clubpenalty4000\widowpenalty4000
+ \sfcode`\.=1000\relax\addcontentsline{toc}{chapter}{\protect\@dottedtocline{1}{0em}{0em}{\uppercase{{\bf\bibname}}}}}
+\let\endthebibliography=\endlist
+\def\@lbibitem[#1]#2{\item[\@biblabel{#1}]\hspace*{-2em}\if@filesw 
+      { \def\protect##1{\string ##1\space}\immediate
+        \write\@auxout{\string\bibcite{#2}{#1}}}\fi\ignorespaces}
+
+\def\@anexo{}
+
+% inicio de anexos -- seta as dimensoes do sumario para conter 'A-'
+\def\appendix{\par
+ \setcounter{chapter}{0}
+ \setcounter{section}{0}
+ \def\@chapapp{\appendixname}
+ \addtocontents{toc}{
+  \settowidth\tabcap{\uppercase{\bf\appendixname~A-9\rm 99}}
+  \settowidth\tabsec{\bf A-9.9\rm 99}
+  \settowidth\tabsub{A-9.9.999}
+  \settowidth\tabsubsub{A-9.9.9.999}}
+ \addtocontents{lof}{\settowidth\tabfig{\figurename~A-9.999}}
+ \addtocontents{lot}{\settowidth\tabtab{\tablename~A-9.999}}
+ \def\@anexo{\appendixname~}
+ \def\thechapter{\mbox{A-\arabic{chapter}}}}
+
+\def\ps@headings{\let\@mkboth\markboth
+ \def\@oddfoot{}\def\@evenfoot{}\def\@oddhead{\hfill \rm\normalsize\thepage\hfill}\def\chaptermark##1{\markright {\uppercase{\ifnum \c@secnumdepth
+ >\m@ne
+ \@chapapp\ \thechapter. \ \fi ##1}}}}
+
+% captions
+\long\def\@caption#1[#2]#3{\par\addcontentsline{\csname
+  ext@#1\endcsname}{#1}{\protect\numberline{\csname #1name\endcsname~\csname 
+  the#1\endcsname}{\ignorespaces #2}}\begingroup
+    \@parboxrestore
+    \normalsize
+    \@makecaption{\csname fnum@#1\endcsname}{\ignorespaces #3}\par
+  \endgroup}
+
+% escreve captions
+\long\def\@makecaption#1#2{
+ \vskip 10pt 
+ \setbox\@tempboxa\hbox{#1: #2}
+ \ifdim \wd\@tempboxa >\hsize \@hangfrom{#1: }#2\par \else \hbox
+to\hsize{\hfil\box\@tempboxa\hfil} 
+ \fi}
+
+% entradas de capitulo, secao, subsecao e subsubsecao no sumario
+\def\l@chapter#1#2{#1{{\bf #2}}}
+\def\l@section#1{\@dottedtocline{1}{0em}{\tabsec}{{\bf #1}}}
+\def\l@subsection{\@dottedtocline{1}{0em}{\tabsub}}
+\def\l@subsubsection{\@dottedtocline{1}{0em}{\tabsubsub}}
+% entradas na lista de figuras e lista de tabelas
+\def\l@figure#1{\@dottedtocline{1}{0em}{\tabfig}{#1}}
+\def\l@table#1{\@dottedtocline{1}{0em}{\tabtab}{#1}}
+
+% sumario, lista de figuras, lista de tabelas
+\def\tableofcontents{\chapter*{\contentsname}\@starttoc{toc}}
+\def\listoffigures{\chapter*{\listfigurename}\addcontentsline{toc}{chapter}{\protect\@dottedtocline{1}{0em}{0em}{\uppercase{{\bf\listfigurename}}}}\@starttoc{lof}}
+\def\listoftables{\chapter*{\listtablename}\addcontentsline{toc}{chapter}{\protect\@dottedtocline{1}{0em}{0em}{\uppercase{{\bf\listtablename}}}}\@starttoc{lot}}
+
+\def\fnum@figure{\figurename~\thefigure}
+\def\fnum@table{\tablename~\thetable}
+
+% definicoes para capa e quadradinho na fonte
+\gdef\@advisorf{}
+\gdef\@advisorl{}
+\def\advisor#1#2{\gdef\@advisorf{#1}\gdef\@advisorl{#2}}
+\def\coadvisor#1#2{\gdef\@coadvisorf{#1}\gdef\@coadvisorl{#2}}
+
+\gdef\@authorf{}
+\gdef\@authorl{}
+\def\author#1#2{\gdef\@authorf{#1}\gdef\@authorl{#2}}
+
+\gdef\@areas{}
+\def\areas#1{\gdef\@areas{#1}}
+\gdef\@keywords{}
+\def\keywords#1{\gdef\@keywords{#1}}
+\def\ti#1#2{\gdef\@numeroti{#1}\gdef\@ordemti{#2}} % Trabalho Individual
+\def\relativ#1#2{\gdef\@relativ{}\gdef\@inmonth{#1}\gdef\@inyear{#2}} % Data Inicial para o Relatorio de Atividades
+
+\def\date#1#2{\gdef\@month{#1}\gdef\@year{#2}}
+
+% faz capa e quadradinho na fonte
+\def\maketitle{\begin{titlepage}
+\setstretch{1}
+\let\footnotesize\small \let\footnoterule\relax \setcounter{page}{1}
+\thispagestyle{empty}
+\vskip 60pt
+\begin{center}
+{\normalsize UNIVERSIDADE FEDERAL DO RIO GRANDE DO SUL\\\vskip -3mm
+INSTITUTO DE INFORM\'ATICA\\\vskip -3mm
+CURSO DE P\'OS-GRADUA\c C\~AO EM CI\^ENCIA DA COMPUTA\c C\~AO}
+\vskip 3cm
+{\setlength{\unitlength}{1cm}
+\makebox(9,6.5){\parbox[c]{9cm}{\setlength{\parskip}{0.8cm}\center\vskip -1.2cm\Large{\bf\@title}\par  \normalsize por\par  \large \@authorf\ \@authorl\par}}}
+\@ifundefined{@coadvisorf}{\vskip 2.6cm}{\vskip 1.8cm}
+\@ifundefined{@numeroti}{
+\@ifundefined{@relativ}{
+\begin{singlespace}
+{\normalsize Disserta\c c\~ao submetida como requisito parcial\\para a obten\c c\~ao do grau de\\
+Mestre em Ci\^encia da Computa\c c\~ao\par}
+\end{singlespace}}%
+{Relat\'orio de Atividades\\[1cm] Per\'\i odo: \@inmonth\ de \@inyear\ at\'e \@month\ de \@year .}}%
+{T.I. n$^{\mbox\scriptsize\b o}$ \@numeroti~~CPGCC--UFRGS~~\@month\ \@year\par Trabalho Individual \@ordemti\par}
+\vskip 2cm
+{Prof. \@advisorf\ \@advisorl\\\vskip -3mm
+Orientador\par}
+\@ifundefined{@coadvisorf}{}{Prof. \@coadvisorf\ \@coadvisorl\\\vskip -3mm
+Co-orientador\par}
+\vfil
+{Porto Alegre, \@month\ de \@year . \par}
+\end{center}
+\end{titlepage}
+%
+% Catalogacao na Fonte
+%
+\@ifundefined{@numeroti}{
+\@ifundefined{@relativ}{
+\begin{titlepage}
+\setcounter{page}{2}
+\thispagestyle{headings}
+\vfill
+\begin{center}
+\begin{singlespace}
+{\bf CIP - CATALOGA\c C\~AO NA PUBLICA\c C\~AO}\vskip 1cm
+\framebox[12cm]{
+\parbox{11cm}{\vskip 4mm
+\setlength{\parskip}{2ex}
+\@authorl, \@authorf\par
+\setlength{\parindent}{1.5em}
+\@title\ / \@authorf\ \@authorl.---Porto Alegre: CPGCC da UFRGS, \@year.\\\hspace*{0.5cm} 
+\pageref{ult-pag} p.: il.\par
+Disserta\c c\~ao (mestrado)---Universidade Federal do Rio Grande do Sul, Curso de P\'os-Gradua\c c\~ao em Ci\^encia da Computa\c c\~ao, Porto Alegre, \@year. Orientador: \@advisorl, \@advisorf\@ifundefined{@coadvisorf}{}{; Co-orientador: \@coadvisorl, \@coadvisorf}\par
+\setlength{\parindent}{0pt}
+Disserta\c c\~ao: \@areas\\\@keywords\par\vskip 4mm
+}}
+\end{singlespace}
+\end{center}
+\vfill
+\end{titlepage}}{}}{}
+\setcounter{footnote}{0} \let\thanks\relax
+\gdef\@thanks{}\gdef\@author{}\gdef\@title{}\gdef\@supervisor{}\let\maketitle\relax}
+
+%varias definicoes para espaco duplo
+\input doublespace.sty
+
+% seta espaco 1.5, separacao maior entre paragrafos,
+% indentacao de +-10 espacos, numero da pagina no topo
+\setstretch{1.5}
+\setlength{\parskip}{2ex}
+\setlength{\parindent}{5.5em}
+\pagestyle{headings}
+\clubpenalty10000\widowpenalty10000
+
+\setlength{\leftmargini}{\parindent}%ver \@listi
+\setlength{\partopsep}{0pt}
+
+\let\fim@doc\enddocument
+\def\enddocument{\label{ult-pag}\fim@doc}
+
+% This is the end of 'cpgcc.sty'.
+\endinput
+

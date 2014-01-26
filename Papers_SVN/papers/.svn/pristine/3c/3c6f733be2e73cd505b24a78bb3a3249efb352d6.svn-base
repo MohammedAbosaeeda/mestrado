@@ -1,0 +1,49 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx,url}
+\usepackage[english]{babel}   
+\usepackage[latin1]{inputenc}
+\usepackage{listings}
+\usepackage{subfigure}
+\usepackage{multirow}
+\usepackage{pictexwd}
+\usepackage[absolute]{textpos}
+\usepackage{subfigure}
+\usepackage{fullpage}
+\usepackage{rotating}
+
+\begin{document}
+
+\title{\textbf{Periodic Timers Revisited: the Real-time Embedded System Perspective}}
+\author{Ant\^{o}nio Augusto Fr\"{o}hlich, Giovani Gracioli, and Jo\~{a}o Felipe Santos\\
+\small Software/Hardware Integratio Lab\\[-0.8ex]
+\small Federal University of Santa Catarina\\[-0.8ex]
+\small 88040-900, Florian\'{o}polis, Brazil\\
+\small \texttt{\{guto,giovani,jfsantos\}@lisha.ufsc.br}
+}
+
+\maketitle
+
+\section*{Research Highlights}
+
+\begin{itemize}
+\item A properly configured periodic timer in combination with a smart
+  designed event queue can match the single-shot approach in terms of
+  performance and interference.
+
+\item The overhead of reprogramming the hardware timer in a single-shot
+  interrupt event handler is 5 times higher than a single event handler
+  in the periodic approach.
+
+\item A periodic timer can outperform an equivalent single-shot
+  mechanism when the requested period exceeds the maximum hardware
+  period and the single-shot timer falls back to software tick counting.
+
+\item In a multi-threaded environment, the periodic interrupt handler
+  presented better execution time (up to 5 threads) in comparison to the
+  single-shot interrupt handler using an 8-bit microcontroller.
+
+\item Periodic timer mechanisms proved to be a concrete alternative for
+  real-time embedded systems, which are essentially periodic.
+\end{itemize}
+
+\end{document}

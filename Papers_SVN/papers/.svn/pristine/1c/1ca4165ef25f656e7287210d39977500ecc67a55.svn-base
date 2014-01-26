@@ -1,0 +1,42 @@
+% ------------------------------------------------------------------------------
+\subsection{Multicore IA32}
+% ++ Multicore IA32
+% Describes how data transference is implemented: direct access though pointers.
+% Describes how synchronization is implemented: Barriers like mechanisms using
+% pthreads / EPOS semaphores
+
+% = What are our goals in evaluating this hardware implementation.
+Our goal on implementing DMEC on a Multicore Intel IA32 
+architecture is evaluating ME for a high performance and Symmetric Multiprocessor (SPM).
+% 
+% = Target architecture
+For our experiments we have used an Intel Core2 Quad, with four symmetric
+cores.
+% chroma.lisha.ufsc.br
+% TODO add mais info aqui.
+% \cite{IA32, ou Intel Core, 
+
+% = Memory model / Data transference
+% Each core on an Intel Core microarchitecture
+At the main memory level,
+all cores on a Multicore IA32 processor 
+share the same memory address space.
+Thus, for the Multicore IA32 architecture implementation,
+the operations of the \emph{TransferenceManager} are mapped to direct memory access
+through pointers.
+The implementation of \emph{Picture} interface, in this case,
+is straightforward. It contains the whole picture partition that is going to
+be used by the \emph{Worker} module.
+
+Similarly, the implementation of \emph{PictureMotionCounterpart} for
+Multicore IA32  also uses the operations of \emph{TransferenceManager}.
+As there is no practical memory limitation the implementation of 
+\emph{PictureMotionCounterpart} for Multicore IA32, it contains all the
+motion predictors necessary by the \emph{Worker} modules.
+
+% = Synchronization
+The \emph{SynchronizationManager} interface, which specifies barrier-like
+mechanisms, is implemented using \emph{pthreads} semaphores of the
+POSIX thread library.
+
+% ------------------------------------------------------------------------------

@@ -1,0 +1,52 @@
+%-----------------------------------------------------------------------------------------------
+% Definicoes de desenhos das juntas prismatica, rotativa e esferica
+% Autor:  Carlos R Rocha (cticarlo@gmail.com)
+% Verso: 100225
+%-----------------------------------------------------------------------------------------------
+% Dependencias: amsmath, amssymb, pgf, tikz, 3dplot
+%               Usa tikzlibrary arrows,positioning,calc
+%               Usa a definicao vetorial: \newcommand{\vetorial}[1]{\boldsymbol{\mathrm{#1}}}
+%-----------------------------------------------------------------------------------------------
+
+\tikzstyle{junta}=[ultra thick]
+
+%--------------------------------------------------------------
+% Desenha uma junta prismatica
+% Parametros: {<tamanho>}{<escala>}{<rotacao>}{<deslocamento>}
+%--------------------------------------------------------------
+\newcommand\juntaP[4]{
+    \begin{scope}[scale=#2, shift={#4}, rotate=#3, transform shape]
+    \fill   [white] (0,-#1) rectangle (#1,#1);
+    \draw [junta] (#1,-#1) -- (0,-#1) -- (0,#1) -- (#1,#1);
+    \draw [junta] (#1/2,#1*0.8) -- (#1/2,-#1*0.8);
+    \draw [junta] (#1/2,0) -- (#1,0);
+    \end{scope}
+}
+
+%--------------------------------------------------------------
+% Desenha uma junta rotativa
+% Parametros: {<tamanho>}{<escala>}{<deslocamento>}
+%--------------------------------------------------------------
+\newcommand\juntaR[3]{
+    \begin{scope}[scale=#2, shift={#3}, transform shape]
+    \filldraw [fill=white] circle (#1);
+    \fill circle (#1*0.65);
+    \end{scope}
+}
+
+%--------------------------------------------------------------
+% Desenha uma junta esferica
+% Parametros: {<tamanho>}{<escala>}{<deslocamento>}
+%--------------------------------------------------------------
+\newcommand\juntaS [3]{
+ \begin{scope}[scale=#2,shift={#3}]
+ \pgfdeclareradialshading{esferica}{\pgfpoint{#1}{#1}}
+ {rgb(0)=(0.85,0.85,0.85);
+  rgb(#1*0.9)=(0.65,0.65,0.65);
+  rgb(#1*1.5)=(0.35,0.35,0.35);
+  rgb(#1*2)=(1,1,1)}
+
+ \draw (0,0) node {\pgfuseshading{esferica}};
+
+ \end{scope}
+}

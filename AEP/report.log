@@ -1,0 +1,334 @@
+--------TEST REPORT--------
+APPLICATION = dmec_app
+ORIGINAL TRAITS LINE = 
+MODIFYED TRAITS LINE = 118 
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = {
+MODIFYED TRAITS LINE = 54 {
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const bool echo_reply = true; 
+MODIFYED TRAITS LINE = 148     static const bool echo_reply = false; 
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = };
+MODIFYED TRAITS LINE = 59 };
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const bool rts_cts        = false;
+MODIFYED TRAITS LINE = 160     static const bool rts_cts        = false;
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const unsigned char DEF_TTL  = 0x40; // time-to-live
+MODIFYED TRAITS LINE = 132     static const unsigned char DEF_TTL  = 0x40; // time-to-live
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = {
+MODIFYED TRAITS LINE = 39 {
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = {
+MODIFYED TRAITS LINE = 50 {
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = template <> struct Traits<Serial_Display>: public Traits<void>
+MODIFYED TRAITS LINE = 63 template <> struct Traits<Serial_Display>: public Traits<void>
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = #endif
+MODIFYED TRAITS LINE = 184 #endif
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const bool trace   = false;
+MODIFYED TRAITS LINE = 25     static const bool trace   = false;
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const unsigned int QUANTUM = 10000; // us
+MODIFYED TRAITS LINE = 94     static const unsigned int QUANTUM = 10000; // us
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = };
+MODIFYED TRAITS LINE = 100 };
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const bool error   = true;
+MODIFYED TRAITS LINE = 22     static const bool error   = false;
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = };
+MODIFYED TRAITS LINE = 31 };
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const bool trace   = false;
+MODIFYED TRAITS LINE = 25     static const bool trace   = false;
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = template <> struct Traits<Synchronizer>: public Traits<void>
+MODIFYED TRAITS LINE = 102 template <> struct Traits<Synchronizer>: public Traits<void>
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const bool info    = false;
+MODIFYED TRAITS LINE = 24     static const bool info    = false;
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = // System parts
+MODIFYED TRAITS LINE = 44 // System parts
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const bool coordinator    = false;
+MODIFYED TRAITS LINE = 157     static const bool coordinator    = false;
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = 
+MODIFYED TRAITS LINE = 52 
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const unsigned int  OPT_SIZE = 0; // options size in 32-bit words
+MODIFYED TRAITS LINE = 131     static const unsigned int  OPT_SIZE = 0; // options size in 32-bit words
+------------------ COMPILING ERRORS 
+--------TEST REPORT--------
+APPLICATION = dmec_app
+ORIGINAL TRAITS LINE = template <> struct Traits<Heap>: public Traits<void>
+MODIFYED TRAITS LINE = 38 template <> struct Traits<Heap>: public Traits<void>
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = };
+MODIFYED TRAITS LINE = 55 };
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = 
+MODIFYED TRAITS LINE = 140 
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = template <> struct Traits<Spin>: public Traits<void>
+MODIFYED TRAITS LINE = 33 template <> struct Traits<Spin>: public Traits<void>
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = // System parts
+MODIFYED TRAITS LINE = 44 // System parts
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = };
+MODIFYED TRAITS LINE = 55 };
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     enum {
+MODIFYED TRAITS LINE = 124     enum {
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = 
+MODIFYED TRAITS LINE = 48 
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = template <> struct Traits<Alarm>: public Traits<void>
+MODIFYED TRAITS LINE = 97 template <> struct Traits<Alarm>: public Traits<void>
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const unsigned char DEF_TTL  = 0x40; // time-to-live
+MODIFYED TRAITS LINE = 132     static const unsigned char DEF_TTL  = 0x40; // time-to-live
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     enum {
+MODIFYED TRAITS LINE = 78     enum {
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const unsigned int  MTU             = 118; 
+MODIFYED TRAITS LINE = 166     static const unsigned int  MTU             = 118; 
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = template <> struct Traits<Thread>: public Traits<void>
+MODIFYED TRAITS LINE = 89 template <> struct Traits<Thread>: public Traits<void>
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const bool smp = false;
+MODIFYED TRAITS LINE = 92     static const bool smp = false;
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     };
+MODIFYED TRAITS LINE = 82     };
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = };
+MODIFYED TRAITS LINE = 167 };
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = {
+MODIFYED TRAITS LINE = 46 {
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = };
+MODIFYED TRAITS LINE = 95 };
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = template <> struct Traits<Thread>: public Traits<void>
+MODIFYED TRAITS LINE = 89 template <> struct Traits<Thread>: public Traits<void>
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = 
+MODIFYED TRAITS LINE = 122 
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = 
+MODIFYED TRAITS LINE = 172 
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = };
+MODIFYED TRAITS LINE = 100 };
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const bool trace   = false;
+MODIFYED TRAITS LINE = 25     static const bool trace   = false;
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = 
+MODIFYED TRAITS LINE = 87 
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = 
+MODIFYED TRAITS LINE = 155 
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const bool csma           = true;
+MODIFYED TRAITS LINE = 159     static const bool csma           = false;
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = };
+MODIFYED TRAITS LINE = 104 };
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = template <> struct Traits<Thread>: public Traits<void>
+MODIFYED TRAITS LINE = 89 template <> struct Traits<Thread>: public Traits<void>
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = };
+MODIFYED TRAITS LINE = 174 };
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const unsigned long BROADCAST = 0x0a0002ff;   // 10.0.2.255
+MODIFYED TRAITS LINE = 117     static const unsigned long BROADCAST = 0x0a0002ff;   // 10.0.2.255
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     enum {
+MODIFYED TRAITS LINE = 124     enum {
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const int LINES = 24;
+MODIFYED TRAITS LINE = 67     static const int LINES = 24;
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = {
+MODIFYED TRAITS LINE = 34 {
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = #ifdef __ARCH_TRAITS_H
+MODIFYED TRAITS LINE = 178 #ifdef __ARCH_TRAITS_H
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = {
+MODIFYED TRAITS LINE = 58 {
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = // Abstractions
+MODIFYED TRAITS LINE = 88 // Abstractions
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = 
+MODIFYED TRAITS LINE = 48 
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = {
+MODIFYED TRAITS LINE = 74 {
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = #endif
+MODIFYED TRAITS LINE = 186 #endif
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = 
+MODIFYED TRAITS LINE = 145 
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = {
+MODIFYED TRAITS LINE = 46 {
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = 
+MODIFYED TRAITS LINE = 172 
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const bool ack            = false;
+MODIFYED TRAITS LINE = 158     static const bool ack            = false;
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = };
+MODIFYED TRAITS LINE = 51 };
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = {
+MODIFYED TRAITS LINE = 90 {
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = 
+MODIFYED TRAITS LINE = 112 
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = template <> struct Traits<Spin>: public Traits<void>
+MODIFYED TRAITS LINE = 33 template <> struct Traits<Spin>: public Traits<void>
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = 
+MODIFYED TRAITS LINE = 61 
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = template <> struct Traits<Services>: public Traits<void>
+MODIFYED TRAITS LINE = 73 template <> struct Traits<Services>: public Traits<void>
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     };
+MODIFYED TRAITS LINE = 128     };
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const bool trace   = false;
+MODIFYED TRAITS LINE = 25     static const bool trace   = false;
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const bool csma           = true;
+MODIFYED TRAITS LINE = 159     static const bool csma           = false;
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = 
+MODIFYED TRAITS LINE = 43 
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const bool warning = true;
+MODIFYED TRAITS LINE = 23     static const bool warning = false;
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const bool warning = true;
+MODIFYED TRAITS LINE = 23     static const bool warning = false;
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const bool enabled = true;
+MODIFYED TRAITS LINE = 65     static const bool enabled = false;
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = template <> struct Traits<Debug>
+MODIFYED TRAITS LINE = 20 template <> struct Traits<Debug>
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = {
+MODIFYED TRAITS LINE = 98 {
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const bool trace_idle = false;
+MODIFYED TRAITS LINE = 93     static const bool trace_idle = false;
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =         ADHOP,
+MODIFYED TRAITS LINE = 80         ADHOP,
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = #endif
+MODIFYED TRAITS LINE = 188 #endif
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = {
+MODIFYED TRAITS LINE = 50 {
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = };
+MODIFYED TRAITS LINE = 100 };
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = {
+MODIFYED TRAITS LINE = 39 {
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = #endif
+MODIFYED TRAITS LINE = 188 #endif
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const bool coordinator    = false;
+MODIFYED TRAITS LINE = 157     static const bool coordinator    = false;
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = 
+MODIFYED TRAITS LINE = 96 
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = #endif
+MODIFYED TRAITS LINE = 186 #endif
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const bool idle_waiting = true;
+MODIFYED TRAITS LINE = 99     static const bool idle_waiting = false;
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = };
+MODIFYED TRAITS LINE = 174 };
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const unsigned long ADDRESS   = 0x0a00020f;   // 10.0.2.15
+MODIFYED TRAITS LINE = 115     static const unsigned long ADDRESS   = 0x0a00020f;   // 10.0.2.15
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = __END_SYS
+MODIFYED TRAITS LINE = 176 __END_SYS
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const bool echo_reply = true; 
+MODIFYED TRAITS LINE = 148     static const bool echo_reply = false; 
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = 
+MODIFYED TRAITS LINE = 101 
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const bool csma           = true;
+MODIFYED TRAITS LINE = 159     static const bool csma           = false;
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = {
+MODIFYED TRAITS LINE = 90 {
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = };
+MODIFYED TRAITS LINE = 149 };
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = };
+MODIFYED TRAITS LINE = 144 };
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = #endif
+MODIFYED TRAITS LINE = 187 #endif
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     };
+MODIFYED TRAITS LINE = 82     };
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = template <> struct Traits<System>: public Traits<void>
+MODIFYED TRAITS LINE = 57 template <> struct Traits<System>: public Traits<void>
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = };
+MODIFYED TRAITS LINE = 85 };
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = template <> struct Traits<Debug>
+MODIFYED TRAITS LINE = 20 template <> struct Traits<Debug>
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = 
+MODIFYED TRAITS LINE = 155 
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = template <> struct Traits<Network>: public Traits<Services>
+MODIFYED TRAITS LINE = 106 template <> struct Traits<Network>: public Traits<Services>
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = };
+MODIFYED TRAITS LINE = 59 };
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE = 
+MODIFYED TRAITS LINE = 135 
+------------------ COMPILING ERRORS 
+ORIGINAL TRAITS LINE =     static const unsigned int   ARP_TRIES = 3;
+MODIFYED TRAITS LINE = 109     static const unsigned int   ARP_TRIES = 3;
+------------------ COMPILING ERRORS 

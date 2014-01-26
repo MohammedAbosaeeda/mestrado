@@ -1,0 +1,202 @@
+Dear Dr. Mück,
+
+We have completed the review process of the above referenced paper for the IEEE Transactions on Computers and recommend that your paper undergo a Major Revision.
+
+Your reviews are enclosed. We would suggest that you revise your paper according to the reviewers' comments and resubmit the paper for a second round of reviews. If you wish to revise the paper, please do so by 08-Dec-2012.
+
+If you do not intend to submit a revised version of your paper, please let us know so that we can formally close your file.
+
+To revise your manuscript, log into https://mc.manuscriptcentral.com/tc-cs and enter your Author Center, where you will find your manuscript title listed under "Manuscripts with Decisions." Under "Actions," click on "Create a Revision." Your manuscript number has been appended to denote a revision.
+
+Once the revised manuscript is prepared, you can upload it and submit it through your Author Center.
+
+When submitting your revised manuscript, you will be able to respond to the comments made by the reviewer(s) in the space provided. You can use this space to document any changes you make to the original manuscript. In order to expedite the processing of the revised manuscript, please be as specific as possible in your response to the reviewer(s)'questions and comments. You may also upload your responses as separate files for review along with your revision. If you choose to do this, please choose "Summary of Changes" as the file designation.
+
+Please also identify a teaser image from your manuscript that may be used in the abstract book as part of the OnlinePlus program and upload this image file with your revision & summary of changes. Name the file "Teaser" and select "Image" as the file designation on the File Upload screen. Note that failure to include this information will cause delay in posting/processing your manuscript, if it is accepted for publication.
+
+IMPORTANT: Your original files are available to you when you upload your revised manuscript. Please delete any redundant files before completing the submission.
+
+When the submission process is complete, you will receive an automated confirmation email immediately. If you did not receive that email, your submission is not yet complete.
+
+The Administrator will contact you should we have any concerns or questions regarding your revision. Otherwise, your revision will be forwarded to the assigned Associate Editor with a request for a final decision.
+
+Please be mindful when making your revisions that you still need to maintain the size limitations for papers submitted to TC. TC manuscript types and submission length guidelines (including the main text, the abstract, index terms, illustrations, references, and author biographies/photos) are found at,
+
+http://www.computer.org/portal/web/peerreviewjournals/author#manuscript
+
+Please note that double column will translate more readily into the final publication format. Our peer review double column templates can be found at,
+
+http://www.computer.org/portal/web/peerreviewjournals/author#templates
+
+Text in any color other than black is not acceptable. Your revised paper must include the following:
+
+-abstract
+-index terms
+-author affiliation information
+-main text
+-references
+-figure captions
+-table titles
+-*brief biography of each author*
+(biographies are not required for brief contributions or comments papers)
+
+NOTE: All materials must fit within the paging guidelines. Papers that exceed the page limit will be returned for further editing.
+
+Please do not hesitate in contacting me if you should have any questions about our process or are experiencing technical difficulties. You can reach the administrator, Carrie James , at tc@computer.org
+
+Thank you for your contribution to TC, and we look forward to receiving your revised manuscript.
+
+Sincerely,
+
+Albert Zomaya, EIC,
+Transactions on Computers
+tc@computer.org
+
+***********
+
+Editor Comments
+
+Editor
+Comments to the Author:
+I concur with the first two reviews. The paper is weak because it fails to provide general principles and methodologies required for addressing the problem stated.
+However, the paper has interesting ideas and addresses also an important problem.
+
+The authors are asked to revise the paper throughly based on the three reviews received.
+
+**********
+Reviewers' Comments
+
+Please note that some reviewers may have included additional comments in a separate file. If a review contains the note "see the attached file" under Section III A - Public Comments, you will need to log on to ScholarOne Manuscripts to view the file. After logging in, select the Author Center, click on the "Manuscripts with Decisions" queue and then clicking on the "view decision letter" link for this manuscript. You must scroll down to the very bottom of the letter to see the file(s), if any. This will open the file that the reviewer(s) or the Associate Editor included for you along with their review.
+
+Reviewer: 1
+
+Recommendation: Revise and Resubmit as "new"
+
+Comments:
+The authors show how to use aspect-oriented programming and object-oriented programming in order to describe hardware and software components in a unified way using C++. In particular, they discuss how to handle dynamic data structures and dispatching in hardware as well as method invocation across hardware/software boundaries. A business telephone system is used as case study to evaluate the proposed approach. The results show that only a small overhead in terms of performance and resources (memory, FPGA) is introduced by the unified descriptions while mixed hardware/software implementations can be generated more easily.
+The paper is well structured and written. The abstract and introduction provide a clear problem statement and motivate that the authors are considering an important problem. Related work is extensively discussed and clearly shows the novelty of the proposed approach. An interesting discussion about differences in object-oriented programming and transaction-level modeling further helps to comprehend the proposed solution. Illustrative examples are used to explain the key contributions of the paper, which are in my opinion the usage of safe pointers and static polymorphism in high-level synthesis as well as dispatching of hardware functions. The method calls across hardware/software boundaries are straightforward using proxies and agents. The case study clearly shows the benefits of the proposed approach. The results are very well discussed.
+In my opinion, the main weakness of the paper lies in the presentation of proposed solution in section 4. Instead of giving general guidelines, the authors only present sample code snippets, which provide solutions for their running example. Often, the code snippets are even not discussed at all, which makes it difficult to even comprehend this particular solution. Especially, I do have problems understanding the Traits example on page six in the right column. Furthermore, no alternative solutions are discussed. This would have been interesting especially for the static allocation and dispatching aspects. In particular, the proposed dispatching strategy is very specific for the CatapultC high-level synthesis. Nearly all other HLS tools do not use a single function signature for describing hardware components. They typically require to present hardware components as SystemC modules having signal ports or transaction sockets. In this case, the proposed solution could not be applied directly. Moreover, why do the authors define their own allocation class while the standard template library is already providing a ready to use implementation? In summary, by only providing some examples, it is not clear what exact solution is proposed. Hence, the applicability of the solution and its limitations remain unclear.
+Although the paper addresses an important topic and the results clearly show the benefits of the proposed approach, the presentation of the key contributions is in my opinion too weak to accept the paper for publication. As only some illustrative examples are given without providing more general guidelines, the paper looks more like a case study presentation than a research paper.
+
+Minor comments:
+- Page 6, left column, line 28: to use to use => to use
+
+
+Additional Questions:
+1. Which category describes this manuscript?: Practice / Application / Case Study / Experience Report
+
+How relevant is this manuscript to the readers? Explain under Public Comments: Interesting - but not very relevant
+
+1. Please explain how this manuscript advances this field of research and/or contributes something new to the literature. : The key contributions of the paper are in my opinion the usage of safe pointers and static polymorphism in high-level synthesis as well as dispatching of hardware functions using aspect-oriented programming.
+
+2. Is the manuscript technically sound? Please explain your answer under Public Comments below.: Yes
+
+1. Are the title, abstract, and keywords appropriate? Please explain under Public Comments below.: Yes
+
+2. Does the manuscript contain sufficient and appropriate references? Please explain under Public Comments below.: References are sufficient and appropriate
+
+3. Does the introduction state the objectives of the manuscript in terms that encourage the reader to read on? Please explain your answer under Public Comments below.: Yes
+
+4. How would you rate the organization of the manuscript? Is it focused? Is the length appropriate for the topic? Please explain under Public Comments below.: Satisfactory
+
+5. Please rate the readability of the manuscript. Explain your rating under Public Comments below.: Easy to read
+
+6. Should the supplemental material be included? (Click on the Supplementary Files icon to view files): Does not apply, no supplementary files included
+
+7. If yes to 6, should it be accepted:
+
+Please rate the manuscript. Explain your choice.: Fair
+
+
+Reviewer: 2
+
+Recommendation: Author Should Prepare A Major Revision For A Second Review
+
+Comments:
+The manuscript addresses an interesting and important aspect in system-level design. Through the provision of a unified design concept for hardware and software different target platforms can be used for system implementation. Moreover, it is an important prerequisite for exploration of different implementation alternatives at system-level.
+
+Regrettably, the manuscript is only partially technically sound. Without reading the previous work of the authors it is very hard to get a deeper understanding of the technical concept and soundness of the approach. Section 3 should better aim on giving an introduction to the general concepts of aspects and aspect weaving. Currently section 3 points to previous work and gives only little high-level/abstract information.
+
+In Section 4.1 the comparison of TLM-based communication and communication in object-oriented modes seems to be a little strange. Without giving further details on the methodology behind the presented approach (incl. different models for the application, execution platform and the mapping of application elements to component of the execution platform) this comparison is dangerous. Communication in object-oriented application models describe application specific communication, while TLM models describe how communication is realized in the execution platform through physical channels.
+I.e. object-oriented communication at application layer can be mapped to platform communication resources that implement this communication.
+
+Section 4.2 aims at defining C++ unified description. This section appears to focus only on some specific issues like the use of pointers, static polymorphism, allocation, and dispatching. These issues are indeed important but the overall description of the unified description is missing. The presented techniques from template meta programming are interesting, but the description is not sufficient for understanding how these techniques are applied in a systematic way in an overall unified description.
+
+A very crucial issue in embedded HW/SW systems is HW/SW communication. Section 4.2.3 presents the idea of a Remote Method invocation with marshaling and unmarshaling services. It remains unclear how these techniques are supported by the presented methodology. Nothing about interrupt handling for software calls is mentioned. A Trait is a very generic template meta programming technique. It remains unclear how this technique solves the problem of HW/SW communication.
+
+In the case-study error bars should be added to measured execution times.
+
+The main focus of the case-study is on the comparison of component implementations using C++ with the presented unified C++ approach. The evaluation is quite extensive and could be reduced. In the last part a hybrid partitioning is presented that sound very interesting. The results presented in Table 5 are hard to understand.
+
+
+Additional Questions:
+1. Which category describes this manuscript?: Practice / Application / Case Study / Experience Report
+
+How relevant is this manuscript to the readers? Explain under Public Comments: Relevant
+
+1. Please explain how this manuscript advances this field of research and/or contributes something new to the literature. : This manuscript aims to use a combination of aspect-oriented and object-oriented programming techniques to provide a unified C++ description for Hardware and Software components of an embedded system.
+
+2. Is the manuscript technically sound? Please explain your answer under Public Comments below.: Partially
+
+1. Are the title, abstract, and keywords appropriate? Please explain under Public Comments below.: Yes
+
+2. Does the manuscript contain sufficient and appropriate references? Please explain under Public Comments below.: References are sufficient and appropriate
+
+3. Does the introduction state the objectives of the manuscript in terms that encourage the reader to read on? Please explain your answer under Public Comments below.: Yes
+
+4. How would you rate the organization of the manuscript? Is it focused? Is the length appropriate for the topic? Please explain under Public Comments below.: Could be improved
+
+5. Please rate the readability of the manuscript. Explain your rating under Public Comments below.: Difficult to read and understand
+
+6. Should the supplemental material be included? (Click on the Supplementary Files icon to view files): Does not apply, no supplementary files included
+
+7. If yes to 6, should it be accepted:
+
+Please rate the manuscript. Explain your choice.: Good
+
+
+Reviewer: 3
+
+Recommendation: Author Should Prepare A Minor Revision
+
+Comments:
+This paper presents a method to describe hardware and software behavior in a unified manner, so that the implementation of each component can be moved flexibly between hardware and software for design space exploration. In the proposed method, differences between hardware and software, including storage allocaiton and communicaiton, are observed; and for these differences, both hardware and software implementations are specified. Abstraction is provided using a template-based C++ coding style (static metaprogramming), to provide an automatic mechanism to select implementations depending on the hardware/software partition. This allows the use of standard C++ (with a special coding style) as a practical input language for the design of embedded systems. Overall, the approach looks sound, and the paper is well organized, and the ideas are clearly communicated.
+
+I think the manuscript could be improved by addressing the following issues.
+
+1. On the general approachability of the text. The authors seem to assume that readers understand many concepts like "aspect-oriented programming", and do not really explain these concepts in the paper. Unfortunately, I am not among these readers, and I had a hard time reading the first several sections.
+
+Fortunately, as a C++ programmer, I find the concepts of "object-oriented programming" and "static metaprogramming" quite understandable, and the UML diagrams and code segments helped me understand the approach. Yet, for someone who does not have prior knowledge of C++ template and UML (Many embedded designers use languages like C instead of C++), these will only create confusion.
+
+More explanations on the concepts of OOP/UML and C++ template will be helpful. I understand that many basic concepts take much space to explain. Yet the author should at least say something like "we assume that the readers are comfortable with C++ templates and UML diagrams in the reset of this paper. For information on these, please see [xx] and [yy] for more explanation."
+
+2. While the proposed method could work well for the purpose of describing hardware and software in a unified way, comparison with other methods for the same purpose is missing. For example, it is possible to use C (with extensions/pragmas) to describe both hardware and software (I know people in the industry doing so), and I believe what static metaprogramming offers can also be achieved using C language constructs, like macros and #ifdef blocks. Discussion on the advantage of the proposed approach should be elaborated, with comparison to possible alternatives (not necessarily experiemtal comparison). For example, one of the advantages I can see is that the proposed approach is more systematic and thus can potentially offer better checking at the syntax level; i.e., a domain-specific compiler may easily inform the designer about missing constructs. Yet, a disadvantage could be that a coding style using static-metaprogramming can be difficult to debug. Comparisons like this could help the reader better understand the proposed method and appreciate its unique advantages.
+
+3. There are more differences in hardware design and software design that may need attention. For example, for high-level synthesis, bit-accurate data types are very useful. By using only enough bit widths for operators, storage elements and interconnects, significant saving in resource/power can be achieved. On the other hand, software compilers usually only use 8/16/32/64 bit for integers. The tool used in your experiments, Catapult-C, supports the ac_int/ac_fixed datatypes in C++. I wonder if bit-accurate datatypes are used in your experimental evaluation? How do you unify the hardware/software description if bit-accurate datatypes are needed? My personal experience is that there can be subtle issues when overflow occurs.
+
+4. The approach, as a coding style, can be applied to a more general class of "module selection" problem. The scenarios considered do not have to be limited to either "software" or "hardware". In high-level synthesis, the design space can be explored by using different pragmas (like loop unrolling/pipeling), and each implementation could be a scenario. Some of the techniques described in this paper can actually encode multiple sets of implementation options in a unified description.
+
+Additional Questions:
+1. Which category describes this manuscript?: Research
+
+How relevant is this manuscript to the readers? Explain under Public Comments: Very Relevant
+
+1. Please explain how this manuscript advances this field of research and/or contributes something new to the literature. : This paper presents a method to describe hardware and software behavior in a unified manner, so that the implementation of each component can be moved flexibly between hardware and software for design space exploration. In the proposed method, differences between hardware and software, including storage allocaiton and communicaiton, are observed; and for these differences, both hardware and software implementations are specified. Abstraction is provided using a template-based C++ coding style (static metaprogramming), to provide an automatic mechanism to select implementations depending on the hardware/software partition. This allows the use of standard C++ (with a special coding style) as a practical input language for the design of embedded systems.
+
+2. Is the manuscript technically sound? Please explain your answer under Public Comments below.: Yes
+
+1. Are the title, abstract, and keywords appropriate? Please explain under Public Comments below.: Yes
+
+2. Does the manuscript contain sufficient and appropriate references? Please explain under Public Comments below.: Important references are missing; more references are needed
+
+3. Does the introduction state the objectives of the manuscript in terms that encourage the reader to read on? Please explain your answer under Public Comments below.: Could be improved
+
+4. How would you rate the organization of the manuscript? Is it focused? Is the length appropriate for the topic? Please explain under Public Comments below.: Satisfactory
+
+5. Please rate the readability of the manuscript. Explain your rating under Public Comments below.: Difficult to read and understand
+
+6. Should the supplemental material be included? (Click on the Supplementary Files icon to view files): Yes, as part of the digital library for this submission if accepted
+
+7. If yes to 6, should it be accepted: After revisions. Please include explanation under Public Comments below.
+
+Please rate the manuscript. Explain your choice.: Excellent 

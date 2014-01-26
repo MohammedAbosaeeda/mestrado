@@ -1,0 +1,59 @@
+@INPROCEEDINGS{pipeAES,
+author={Hodjat, A. and Verbauwhede, I.},
+booktitle={Field-Programmable Custom Computing Machines, 2004. FCCM 2004. 12th Annual IEEE Symposium on}, title={A 21.54 Gbits/s fully pipelined AES processor on FPGA},
+year={April},
+pages={308-309},
+keywords={cryptography;field programmable gate arrays;pipeline processing;random-access storage;21.54 Gbit/s;VirtexII-Pro FPGA;advanced encryption standard processor;fully pipelined processor;inner round pipelining techniques;loop unrolling;outer round pipelining techniques;random access storage;substitution phase;Application specific integrated circuits;Arithmetic;Cryptography;Delay;Field programmable gate arrays;Hardware;Logic;Pipeline processing;Table lookup;Throughput},
+doi={10.1109/FCCM.2004.1},}
+
+@INPROCEEDINGS{embeddedAESapp,
+author={Rouvroy, G. and Standaert, F. -X and Quisquater, J.-J. and Legat, J.},
+booktitle={Information Technology: Coding and Computing, 2004. Proceedings. ITCC 2004. International Conference on}, title={Compact and efficient encryption/decryption module for FPGA implementation of the AES Rijndael very well suited for small embedded applications},
+year={April},
+volume={2},
+pages={583-587 Vol.2},
+abstract={Hardware implementations of the advanced encryption standard (AES) Rijndael algorithm have recently been the object of an intensive evaluation. Several papers describe efficient architectures for ASICs and FPGAs. In this context, the highest effort was devoted to high throughput (up to 20 Gbps) encryption-only designs, fewer works studied low area encryption-only architectures and only a few papers have investigated low area encryption/decryption structures. However, in practice, only a few applications need throughput up to 20 Gbps while flexible and low cost encryption/decryption solutions are needed to protect sensible data, especially for embedded hardware applications. We purpose an efficient solution to combine Rijndael encryption and decryption in one FPGA design, with a strong focus on low area constraints. The proposed design fits into the smallest Xilinx FPGAs, deals with data streams of 208 Mbps, uses 163 slices and 3 RAM blocks and improves by 68% the best-known similar designs in terms of ratio Throughput/Area. We also propose implementations in other FPGA Families (Xilinx Virtex-II) and comparisons with similar DES, triple-DES and AES implementations.},
+keywords={cryptography;embedded systems;field programmable gate arrays;RAM blocks;advanced encryption standard Rijndael algorithm;embedded applications;encryption-decryption module;field programmable gate arrays;hardware implementations;Application specific integrated circuits;Computer architecture;Costs;Cryptography;Field programmable gate arrays;Hardware;Iterative algorithms;NIST;Protection;Throughput},
+doi={10.1109/ITCC.2004.1286716},}
+
+@ARTICLE{regularAES,
+author={Mangard, S. and Aigner, M. and Dominikus, S.},
+journal={Computers, IEEE Transactions on}, title={A highly regular and scalable AES hardware architecture},
+year={April},
+volume={52},
+number={4},
+pages={483-491},
+keywords={CMOS integrated circuits;VLSI;cryptography;CMOS process;advanced encryption standard hardware architecture;combinational paths;decryption;encryption;semicustom design flows;CMOS process;Cryptography;Energy consumption;Hardware;Registers;Scalability;Smart cards;Throughput;Very large scale integration;Web server},
+doi={10.1109/TC.2003.1190589},
+ISSN={0018-9340},}
+
+@INPROCEEDINGS{lowAreaAES,
+author={Junfeng Chu and Benaissa, M.},
+booktitle={Field Programmable Logic and Applications (FPL), 2012 22nd International Conference on}, title={Low area memory-free FPGA implementation of the AES algorithm},
+year={Aug.},
+pages={623-626},
+keywords={cryptography;field programmable gate arrays;AES algorithm;Spartan 6 device;XC3S50 device;XC6SLX4 device;Xilinx Spartan 3 device;advanced encryption standard;byte rate 36.5 MByte/s;byte rate 58.13 MByte/s;low area memory-free FPGA implementation;shifting operations;word length 8 bit;Clocks;Computer architecture;Encryption;Field programmable gate arrays;Hardware;Shift registers;Throughput},
+doi={10.1109/FPL.2012.6339250},}
+
+@ARTICLE{AESfromC,
+author={Ahuja, S. and Gurumani, S.T. and Spackman, C. and Shukla, S.K.},
+journal={Design Test of Computers, IEEE}, title={Hardware Coprocessor Synthesis from an ANSI C Specification},
+year={July-Aug.},
+volume={26},
+number={4},
+pages={58-67},
+keywords={ANSI standards;coprocessors;cryptography;program compilers;ANSI C specification;C2R compiler;advanced encryption standard Rijindael algorithm;algorithmic specification;design space exploration;hardware coprocessor synthesis;hardware implementation;high-level synthesis;Computer architecture;Concurrent computing;Coprocessors;Cryptography;Delay;Hardware design languages;High level synthesis;Moore's Law;Software algorithms;Space exploration;ANSI C;ASIC;C2R methodology;ESL;FPGA;Verilog;design and test;high-level synthesis;power reduction;verification},
+doi={10.1109/MDT.2009.81},
+ISSN={0740-7475},}
+
+@INPROCEEDINGS{unified,
+author={Muck, Tiago Rogerio and Frohlich, Antonio Augusto},
+booktitle={Electronics, Circuits and Systems (ICECS), 2012 19th IEEE International Conference on}, title={On AOP techniques for C++-based HW/SW component implementation},
+year={Dec.},
+pages={536-539},
+keywords={Aspect-oriented system design;HW/SW co-design;High-level synthesis;System-level design},
+doi={10.1109/ICECS.2012.6463690},}
+
+@MISC{CatapultC,
+note = "Calypto Design Systems, CatapultC Synthesis, http://www.calypto.com/."
+}

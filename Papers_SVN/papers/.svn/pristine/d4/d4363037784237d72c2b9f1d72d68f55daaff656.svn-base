@@ -1,0 +1,78 @@
+\section{Reprogramação em Rede}
+% Processo de reprogramação
+% Propriedades de um protocolo
+% quais foram escolhidas e porque
+% feature diagram
+
+Em geral o processo de reprogramação em rede é dividido em três etapas, como ilustrado na Figura \ref{fig:programming_proc_br}. A primeira é responsável pela preparação dos dados a serem disseminados. A segunda etapa engloba todo o processo de disseminação, onde os dados são enviados e armazenados pelos nodos pertencentes à rede. Por fim, o mecanismo de reconfiguração do SO interpreta os dados recebidos e os utiliza para atualizar a memória de programa.
+
+\fig{programming_proc_br}{Processo de programação em rede.}{scale=.7}
+
+\subsection{Protocolo de Disseminação}
+Protocolos de disseminação de dados são utilizados para propagar dados pela rede utilizando seus próprios nodos para isso. Em especial, um protocolo utilizado por um mecanismo de reprogramação em rede deve ser confiável, ou seja, garantir a entrega correta de todos os dados a todos os nodos. Abaixo, as propriedades que devem ser levadas em conta ao se projetar um protocolo de disseminação \cite{Lanigan:2005}:
+
+\begin{description}
+ \item[Baixa Latência:] como a atualização é um serviço secundário o protocolo não deve interromper a aplicação principal por muito tempo.
+ \item[Baixo Consumo de Memória:] os dados necessários para a atualização devem ser armazenados até que a transmissão termine, entretanto o protocolo deve requisitar pouco espaço de armazenamento de forma a não restringir a quantidade de memória disponível para a aplicação principal.
+ \item[Confiabilidade:] ao contrário de algumas aplicações tradicionais onde a perda de um pacote é tolerável devido ao fato de que os dados são redundantes e correlacionados, na reprogramação cada pacote é crucial e todos devem ser recebidos para que a atualização possa ocorrer. Sendo assim o protocolo deve possuir uma política de retransmissão permitindo a recuperação de pacotes perdidos.
+ \item[Eficiência Energética:] o protocolo deve minimizar seu consumo de energia de forma a não diminuir severamente o tempo de vida do nodo.
+ \item[Tolerância a Inclusão/Remoção de nodos:] é possível que um nodo falhe durante um período de tempo e depois volte a funcionar, ou até mesmo que novos nodos sejam incluídos na rede. Desta forma a disseminação não deve ser severamente afetada pela inclusão ou remoção de nodos.
+ \item[Uniformidade:] para garantir que a rede inteira seja atualizada, todos os dados devem ser entregues a todos os nodos da rede. Nodos incluídos na rede durante ou depois de uma atualização também devem ser capazes de receber os dados da atualização.
+ \end{description}
+
+As propriedades de \textbf{confiabilidade} e \textbf{uniformidade} são obrigatórias, uma vez que garantem o funcionamento correto do protocolo. Já as propriedades de baixa latência, baixo consumo de memória, eficiência energética e tolerância a inclusão ou remoção de nodos são apenas desejáveis, pois não garantem corretude. Entretanto um protocolo que as ignore seria de pouca utilidade na prática \cite{moap}.
+
+\subsubsection{Características de um Protocolo}
+A Figura \ref{fig:prot_features} apresenta o diagrama de características de um protocolo de disseminação de dados. Este tipo de diagrama possibilita caracterizar as propriedades de um determinado conceito, apresentando seus pontos de variação \cite{Czarnecki:2000}. As características são representadas como nodos de uma árvore, cuja raiz é o conceito, e só estão presentes se seu nodo pai está presente. Características obrigatórias e opcionais são representadas por um círculo no final de suas arestas, preenchido e vazio respectivamente. Características alternativas são conjuntos do qual apenas uma característica pode estar presente e são representadas por um arco ligando suas arestas.
+
+\fig{prot_features}{Diagrama de características.}{scale=.27}
+
+\begin{description}
+ \item[Incremental:] um protocolo com esta característica envia somente as diferenças entre os novos dados e os antigos. Desta forma diminui-se a quantidade total de dados a serem transmitidos, consequentemente diminuindo o consumo de energia.
+ % opcional
+ \item[Disseminação:] a forma pela qual os dados são propagados pela rede.
+ % vizinhança em vizinhança
+ % predecessor/sucessor
+ % ponto a ponto
+ % pai/filhos
+ \item[Gerência de Segmentos:] mecanismo utilizado para detectar perdas de pacotes.
+ % janelas deslizantes
+ % mapa de bits
+ % lista 
+ % detecção de perda
+ %% emissor
+ %% receptor
+ \item[Seleção de emissor:] a forma como o protocolo decide quais nodos se tornarão emissores pode diminuir tanto o número total de colisões quanto o de mensagens transmitidas.
+ % divulga/inscreve
+ % faixas de tempo TDMA
+ % RTS/CTS
+ % CDS
+ \item[Política de Retransmissão:] a forma em que são feitas as requisições por pacotes perdidos e retransmissões.
+ % unicast
+ %% ACK
+ %% NACK
+ % broadcast
+ %% ACK
+ %% NACK
+ \item[Divulgação Periódica:] um protocolo com esta característica requer que todos os nodos divulguem suas versões periodicamente, possibilitando a nodos que de alguma forma perderam a operação de disseminação receberem os dados necessários para a reprogramação.
+ % opcional
+ \item[Multiplexação Espacial:] um protocolo com esta característica não exige que os nodos recebam todos os dados para tornarem-se emissores, desta forma possibilitando que os dados sejam transmitidos em paralelo por toda a rede.
+ % opcional 
+\end{description}
+
+\subsubsection{Escolhas de Projeto}
+Como algumas propriedades desejáveis entram em conflito com outras, os protocolos existentes realizam escolhas de projetos dando preferência a umas em detrimento de outras. Quanto as escolhas realizadas no protocolo desenvolvido neste trabalho:
+\begin{enumerate}
+ \item A propriedade não obrigatória considerada mais importante foi a de eficiência energética, uma vez que todas as operações realizadas necessitam de energia e, em muitos sistemas embarcados, há apenas uma quantidade finita disponível.
+ \item Consumo de memória foi a segunda propriedade considerada mais importante, visto que o protocolo de disseminação não é a aplicação principal do nodo, mas apenas um serviço oferecido pelo sistema operacional. Desta forma, não se deve limitar a quantidade de memória disponível para as aplicações.
+ \item Por fim, a latência. Para poder otimizar o consumo de energia e memória algumas propriedades que diminuiriam a latência não foram utilizadas (e.g. multiplexação espacial).
+\end{enumerate}
+
+\subsubsection{Implementação}
+A Figura \ref{fig:protocol_br} apresenta a máquina de estados do protocolo desenvolvido. Ele distribui os dados de vizinhança em vizinhança, utiliza um mecanismo de seleção de emissores baseado no MNP (divulga / inscreve), responsabiliza os receptores por detectar perdas, realiza requisições \textit{unicast} e retransmissões \textit{broadcast} e utiliza o mecanismo de janelas deslizantes para gerência de segmentos.
+
+\fig{protocol_br}{Máquina de estados do protocolo desenvolvido.}{scale=.35}
+
+Nodos divulgam suas versões, periodicamente, e todos os interessados a requisitam. Um potencial emissor mantêm uma variável \emph{ReqCtr}, inicializada com zero, e a incrementa para cada nova requisição recebida, destinada a ele, vinda de um nodo ainda não computado. As mensagens de divulgação tem duas funções: anunciar uma nova versão e prevenir que nodos com menos requisições virem emissores; elas possuem o número da versão, o \textit{id} do emissor e sua variável \emph{ReqCtr}. Quando um nodo recebe uma mensagem de divulgação que contenha uma nova versão, ele irá enviar uma requisição \textit{broadcast} contendo seu \textit{id}, o do transmissor e o valor da \emph{ReqCtr} recebida. Como as divulgações e requisições são \textit{broadcasts} outros nodos que estão na disputa para se tornarem emissores também as recebem e caso possuam um \emph{ReqCtr} menor vão para o estado \textit{sleep}. Como critério de desempate é utilizado o \textit{id} dos nodos.
+
+Ao virar emissor um nodo transmite uma mensagem \textit{broadcast} \textit{``StartDownload''} e passa a enviar os dados, pacote por pacote. Os receptores definem este nodo como seu ``pai'' e só aceitam pacotes vindo dele. Cada pacote possui um identificador único sequencial e os receptores mantêm o número do último pacote recebido. Assim, ao receber um novo pacote é verificado se há uma lacuna entre estes dois números e os pacotes intermediários são considerados perdidos. Ao detectar uma perda, o receptor envia um pedido de retransmissão para o emissor, utilizando um pacote \textit{unicast}. Os pedidos de retransmissão possuem uma prioridade maior que pacotes normais, então um emissor irá primeiro responder a todas as requisições antes de continuar com a transmissão.

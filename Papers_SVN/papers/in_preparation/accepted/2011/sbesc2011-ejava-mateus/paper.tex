@@ -1,0 +1,226 @@
+\documentclass[12pt]{article} % SBESC 2011
+\usepackage{sbc-template} % SBESC 2011
+
+% \usepackage[latin1]{inputenc}	% for Latin languages
+% \usepackage[T1]{fontenc}	% for ISO and UTF characters
+\usepackage[brazil]{babel}	% for multilingual support
+
+\usepackage[utf8]{inputenc} % for use utf8
+% \usepackage{graphicx}
+\usepackage{graphicx,url} % SBESC 2011
+
+% -----------------------------------------------------------------------------
+
+% Command to use code as figure -----------------------------------------------
+\usepackage{listings}
+\lstset{keywordstyle=\bfseries, flexiblecolumns=true}
+\lstloadlanguages{[ANSI]C++,HTML}
+\lstdefinestyle{prg} {basicstyle=\small\sffamily, lineskip=-0.2ex, showspaces=false}
+
+\newcommand{\prgcpp}[3][tbp]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=C++,style=prg]{fig/#2.cc}
+   \caption{#3\label{prg:#2}}
+ \end{figure}
+}
+
+\newcommand{\prgjava}[3][tbp]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=Java,style=prg]{fig/#2.java}
+   \caption{#3\label{prgjava:#2}}
+ \end{figure}
+}
+
+\newcommand{\prgkcl}[3][tbp]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=C++,style=prg]{fig/#2.kcl}
+   \caption{#3\label{prgkcl:#2}}
+ \end{figure}
+}
+
+\newcommand{\oclspec}[3][tbp]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=C++,style=prg]{fig/#2.ocl}
+   \caption{#3\label{oclspec:#2}}
+ \end{figure}
+}
+
+
+%------------------------------------------------------------------------------
+
+% Commands to insert figures --------------------------------------------------
+\newcommand{\figu}[4][ht]{
+  \begin{figure}[#1] {\centering\scalebox{#2}{\includegraphics{fig/#3}}\par}
+    \caption{#4\label{fig:#3}}
+  \end{figure}
+}
+
+\newcommand{\fig}[4][ht]{
+  \begin{figure}[#1] {\centering\scalebox{#2}{\includegraphics{fig/#3}}\par}
+    \caption{#4\label{fig:#3}}
+  \end{figure}
+}
+% fig usage:
+% \fig{<scale>}{<file>}{<caption>}
+% e.g.: \fig{.4}{uml/uml_comportamental_dia}{Diagramas comportamentais da UML}
+% The figure label will be "fig:" plus <file>.
+% The figure file must lie in the "fig" directory.
+
+\newcommand{\figtwocolumn}[4][ht]{
+  \begin{figure*}[#1] {\centering\scalebox{#2}{\includegraphics{fig/#3}}\par}
+    \caption{#4\label{fig:#3}}
+  \end{figure*}
+}
+
+\newcommand{\figb}[4][hb]{
+  \begin{figure}[#1] {\centering\scalebox{#2}{\includegraphics{fig/#3}}\par}
+    \caption{#4\label{fig:#3}}
+  \end{figure}
+}
+
+%------------------------------------------------------------------------------
+\sloppy
+
+% \title{Abstracting Hardware Devices to Embedded Java Applications}
+% \title{Um método para abstração de dispositivos de hardware para aplicações Java embarcadas}
+\title{Abstraindo dispositivos de hardware para aplicações Java embarcadas}
+%\title{Abstraindo dispositivos de hardware para Java embarcado}
+
+
+\author{Mateus Krepsky Ludwich\inst{1}, Antônio Augusto Fröhlich\inst{1}}
+
+%\address{Laboratory for Software and Hardware Integration -- LISHA\\ 
+%Federal University of Santa Catarina -- UFSC\\ 
+%P.O.Box 476, 880400900 - Florianópolis - SC - Brazil\\
+%\email{\{mateus,guto\}@lisha.ufsc.br}
+%}
+
+\address{Laboratório de Integração de Software e Hardware (LISHA)\\ 
+Universidade Federal de Santa Catarina (UFSC)\\ 
+Caixa postal 476, 880400900 - Florianópolis - SC - Brasil\\
+\email{\{mateus,guto\}@lisha.ufsc.br}
+}
+
+
+\begin{document}
+
+\maketitle
+
+% NOTA geral: ler o paper todo depois e ver se a palavra adaptador é uma 
+% tradução adequada para binding/wrapper de interface nativa.
+% Na dissertação de mestrado estou usando o termo interface e código de interface.
+%
+% NOTA "nova": decidi usar o tempo adaptador de código nativo, para designar
+% o código de binding.
+
+\begin{abstract}
+Access to hardware devices is an important requirement to be fulfilled by Java
+implementations targeting embedded systems because the interaction between the
+embedded system and the environment where it is inserted on is performed by 
+these devices.
+In this paper we introduce a method for abstracting hardware devices to 
+embedded Java applications. 
+We have evaluated our method in terms of performance,
+memory footprint, and portability. 
+The applicability of our method was tested for abstracting simple hardware
+devices for serial communication and for abstracting more complex components
+such as a motion estimator for H.264 video coding. 
+\end{abstract}
+
+\begin{resumo} % Reduzir para 10 linhas.
+O acesso a dispositivos de hardware é
+um importante requisito a ser atendido por implementações Java para
+sistemas embarcados pois, a interação entre o sistema embarcado e o ambiente 
+no qual ele esta inserido é realizada por meio destes dispositivos.
+Neste artigo nós apresentamos um método de como abstrair dispositivos de 
+hardware para aplicações Java embarcadas. 
+Nós avaliamos nosso método em termos de desempenho, consumo de memória e 
+portabilidade. 
+A aplicabilidade do nosso método foi testada na 
+abstração de dispositivos de hardware simples para comunicação
+serial e em componentes mais complexos como um estimador de movimento  
+para codificação de vídeo H.264.
+
+% NOTA: texto alternativo
+% Interface de função estrangeira é o mecanismo utilizado por linguagens de 
+% altíssimo nível, como Java, na abstração de dispositivos de hardware para serem
+% utilizados pelo desenvolvedor do software embarcado. Entretanto o mecanismo de
+% interface por si só não especifica como esta abstração deve ser feita.
+% Neste artigo nós apresentamos um método de como abstrair
+% dispositivos de hardware para aplicações Java embarcadas. Nós avaliamos nosso 
+% método em termos de desempenho, consumo de memória e portabilidade. 
+% A aplicabilidade do nosso método foi testada na 
+% abstração de dispositivos de hardware simples para comunicação
+% serial e em componentes mais complexos como um estimador de movimento  
+% em codificação de vídeo H.264.
+
+% NOTA: se não houvesse limite de 10 linhas eu iria usar este resumo aqui:
+% Acesso a dispositivos de hardware é um importante requisito para sistemas 
+% embarcados uma vez que tais dispositivos são utilizados para realizar a 
+% interação entre o sistema embarcado e o ambiente no qual ele esta inserido.
+% Paralelamente a isto, o uso de linguagens de altíssimo nível, como Java, 
+% facilita o desenvolvimento de sistemas embarcados porque elas proveem 
+% funcionalidades como orientação a objetos, gerenciamento automático de memória e
+% proteção de memória.
+% Neste artigo nós apresentamos um método de como abstrair
+% dispositivos de hardware para aplicações Java embarcadas. Nós avaliamos nosso 
+% método em termos de desempenho, consumo de memória e portabilidade. Além disso, 
+% nós desenvolvemos adaptadores Java para um componente que realiza estimativa de 
+% movimento em codificação de vídeo H.264, demonstrando a aplicabilidade da nossa
+% abordagem em um cenário real.
+
+\end{resumo}
+
+% \category{D.3.3}{Programming Languages}{Language Constructs and Features}[Classes and objects]
+% \category{D.3.4}{Programming Languages}{Processors}[Run-time environments]
+% \category{D.4.4}{Operating Systems}{Communications Management}[Input/output]
+% \category{D.4.7}{Operating Systems}{Organization and Design}[Real-time systems and embedded systems]
+%
+% \terms
+% Design, Languages, Reliability
+% 
+% \keywords
+% Java, Embedded Systems, Foreign Function Interface
+
+%------------------------------------------------------------------------------
+% Section <Introduction>
+\input{tex/intro}
+
+% -----------------------------------------------------------------------------
+% Section <Java requirements for embedded systems>
+% \label{sec:related_work}
+\input{tex/relat}
+
+% -----------------------------------------------------------------------------
+% Section <KESO>
+%\input{tex/keso}
+
+% -----------------------------------------------------------------------------
+% Section <proposal>
+%\input{tex/proposal}
+\input{tex/fusion_keso_proposal}
+
+% -----------------------------------------------------------------------------
+% Section <Evaluation>
+\input{tex/eval}
+
+% -----------------------------------------------------------------------------
+% Section <Real-word application>
+\input{tex/app}
+
+% -----------------------------------------------------------------------------
+% Section <Discussion>
+\input{tex/conclusions}
+
+% -----------------------------------------------------------------------------
+% References
+\bibliographystyle{sbc}
+\bibliography{hw,os,pl-pt-BR,mm}
+
+
+\end{document}
+
+%------------------------------------------------------------------------------
+
+
+

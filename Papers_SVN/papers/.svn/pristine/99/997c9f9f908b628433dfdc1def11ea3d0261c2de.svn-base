@@ -1,0 +1,210 @@
+\documentclass[USletter]{article} % [ICME 2011]
+\special{papersize=8.5in,11in} % [ICME 2011]
+
+\usepackage{spconf,amsmath,epsfig} % [ICME 2011]
+
+\usepackage[textwidth=7in, textheight=9in]{geometry} % [ICME 2011]
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}	% for multilingual support
+
+\usepackage{graphicx}
+
+\newcommand{\fig}[4][ht]{
+  \begin{figure}[#1] {\centering\scalebox{#2}{\includegraphics{fig/#3}}\par}
+    \caption{#4\label{fig:#3}}
+  \end{figure}
+}
+% Current \fig{.5}{subsampling}{Illustration of 4:1 subsampling.}
+
+\newcommand{\wfig}[4][ht]{
+  \begin{figure*}[#1] {\centering\scalebox{#2}{\includegraphics{fig/#3}}\par}
+    \caption{#4\label{fig:#3}}
+  \end{figure*}
+}
+
+
+\def\ICMEPaperID{***} % *** Enter the ICME Paper ID here % [ICME 2011]
+
+\pagestyle{empty} % [ICME 2011]
+
+\begin{document}\sloppy % [ICME 2011]
+
+\title{Optimizing Motion Estimation for H.264 Encoding}
+
+
+% Author for article style
+%\author{
+%{Mateus Krepsky Ludwich and Antônio Augusto Fröhlich} \\
+%Federal University of Santa Catarina -- UFSC\\
+%Laboratory for Software and Hardware Integration -- LISHA\\
+%PO Box 476 - 88049-900 - Florianópolis, SC, Brazil\\
+%Email: \{mateus,guto\}@lisha.ufsc.br
+%}
+
+% [ICME 2011] % [Formated for blind review]
+%
+% Single address.
+% ---------------
+\name{Anonymous ICME submission}
+\address{Paper ID \ICMEPaperID}
+
+\maketitle
+
+
+%
+\begin{abstract}
+Around 90\% of the total encoding time of raw video into H.264 is spent in
+block-matching, a stage of Motion Estimation. In this paper we introduce
+two block-matching optimizations that yield significant performance
+improvements on Motion Estimation: truncation of the two less
+significant bits per sample and 4:1 subsampling by macroblock. When
+applied to the JM Reference Encoder, our strategy showed an average
+speedup of 2.64 times in total encoding time with a small loss of
+quality (less than 0.5 dB).
+\end{abstract}
+%
+\begin{keywords}
+Video encoding, Motion Estimation, H.264
+\end{keywords}
+% -----------------------------------------------------------------------------
+\section{Introduction}\label{sec:intro}
+
+Motion Estimation (ME) is a technique used to explore temporal redundancy in video sequences during compression, which has been successfully used by standards like the ISO MPEG series and the ITU-T H26x to improve compression ratios in output video streams~\cite{citeulike:1269699}.
+It is known that around 90\% of the total encoding time in a H.264 encoder is spent in the ME stage \cite{XiangLi:2004} and consequently its optimization is a relevant issue for H.264 and video encoding in general. 
+
+Since the appearance of ME, many strategies were proposed for its optimization, each one with its advantages and drawbacks.
+Block-Matching Algorithms using \emph{fast-search} improve time performance of ME, but they can find suboptimal motion vectors because they do not search in all positions of the search window. \emph{Multi-resolution} ME works with different resolutions of one frame, successively refining the found motion vectors. This increases the ME time if the search is performed sequentially or demands for replicated hardware functional units if it is performed in parallel. Similarly, parallel and hardware implementations come at the cost of replicated or dedicated functional units.
+
+The search for new methods to optimize motion estimation is an important issue to enable the construction of real-time H.264 encoders and the implementations of encoders in devices with less computational resources, since those optimizations aim to reduce ME complexity. Two other strategies used to reduce ME complexity are macroblock subsampling and sample truncation during the block-matching. These are based on the elimination of some samples of a macroblock and representing a sample only by its most significant bits.
+
+In this paper we have proposed and evaluated the combination of macroblock subsampling and sample truncation in order to speed up motion estimation, keeping a good video quality - which is measured by the Peak Signal to Noise Ratio (PSNR). We aimed to evaluate these two strategies in an optimal algorithm (i.e. which always finds the best motion vectors), therefore we have used a full-search algorithm instead of a fast-search one. However these strategies can also be applied in fast-search algorithms since they are orthogonal to the block-matching algorithm used.
+
+The next sections of this article are organized as follows: section~\ref{sec:related} makes an overview of issues and strategies for ME optimization; section~\ref{sec:proposal} presents the proposed ME optimizations; 
+section~\ref{sec:eval} discuss the results obtained from the proposal's evaluation using the JM encoder.
+The final considerations are presented in section~\ref{sec:conclusion}.
+
+% -----------------------------------------------------------------------------
+\section{Strategies for ME optimization}\label{sec:related}
+There are many strategies to optimize the time performance of motion estimation: fast-search algorithms, macroblock subsampling, sample truncation, multi-resolution ME, subsampled motion-field estimation, and parallel and hardware implementations of algorithms.
+
+\emph{Fast-search algorithms} are block-matching algorithms that look only in specific positions of the search window, during block-matching.
+% \cite{SunNingning:TSS:2009}, \cite{LaiManPo:4SS:1996}, \cite{ShipingZhu:DS:2009}, \cite{Tourapis:PMVFAST:2001}, \cite{HoiMingWong:EPMVFAST:2005}, \cite{LiangGeeChen:TDL:1991}.
+Search window is the region of the reference frame where a macroblock partition similar to the current block is searched. The motion vectors correspondent to the match with the lower \emph{motion cost} are chosen. The main drawback of this approach is that, since some positions of search window are discarded, it is possible to find suboptimal motion vectors.
+
+Two other strategies to optimize ME during block-matching are macroblock subsampling and sample truncation. Macroblock subsampling means taking into consideration only some samples of a macroblock, or macroblock partition, while the matching for a specific position of the search window is been made. Sample truncation is performed by ignoring the least significant bits of a sample. These strategies have been used separately in \cite{liu:sub:1993} (subsampling) and in \cite{DBLP:journals/tcsv/HeTCL00}, and \cite{ChiaChunLin:PMRME:2007} (truncation). In this work we have combined these strategies to optimize ME. Section \ref{sec:proposal} explains these strategies in detail.
+
+\emph{Multi-resolution motion estimation} is the strategy where the motion vectors are computed for distinct resolutions of one same frame. Motion vectors computed in a more coarse level can be successively refined until the finest level (higher resolution). If the search is performed sequentially as in \cite{ChiaChunLin:FastAlgPlusArch:2006}, the time of ME can be increased due to the dependencies between distinct levels. On the other hand, if the search is executed in parallel for each resolution level, as in \cite{ChiaChunLin:PMRME:2007}, hardware functional units need to be replicated. 
+A similar technique is \emph{subsampled motion-field estimation} \cite{liu:sub:1993}. This technique is based on the assumption that motion vectors of neighboring blocks are intent to be similar thus, for each block, only a set of motion vectors (motion-field) is computed and the others are interpolated.
+
+Other strategies for optimizing motion estimation are based on finding parallelism in ME stages, especially in the block-matching algorithms, in order to execute them simultaneously. These parallel strategies commonly have hardware implementations. The Sum of Absolute Differences (SAD) is a metric of error used in the block-matching algorithms, that is frequently parallelized using functional units in hardware \cite{ChiaChunLin:PMRME:2007}, and \cite{HoyoungChang:HW:2009}. Hardware implementations of shared buffers for reference picture data is also common \cite{HoyoungChang:HW:2009}, \cite{HaibingYin:HW:2010}. Although these solutions can achieve the best time performance, they come at the cost of using replicated or dedicated functional units.
+
+% -----------------------------------------------------------------------------
+\section{Proposed Optimizations} \label{sec:proposal}
+
+We envisioned two major opportunities to optimize matching operations within block-based Motion Estimation algorithms: macroblock subsampling and sample truncation. Both were applied in the block-matching algorithm to speedup the whole process of motion estimation. More specifically they are applied in the SAD computation, which is the error metric used to compute the distortion term in the Lagrangian cost function used in H.264 \cite{1101854}.
+
+Equation \ref{eq:sad} shows the bi-dimensional SAD used for block-matching algorithms in video coding. \textit{C} represents the current \textit{NxN} block that is being searched in the reference frame and \textit{R} is the \textit{NxN} block of the reference where the BMA is looked into.
+
+\begin{equation} \label{eq:sad}
+SAD = \sum_{i = 0}^{N - 1} \sum_{j = 0}^{N - 1} \left | C_{ij} - R_{ij} \right |
+\end{equation}
+
+The Lagrangian cost function used in H.264 motion estimation is shown in \ref{eq:lagrangian}. For simplicity details of the equations are omitted, but they can be seen in \cite{1101854}. The \textit{Rate} term of the equation is the number of bits necessary to encode the motion vectors and the reference frame identification. The distortion term (\textit{SAD}) is computed as shown in \ref{eq:sad}.
+
+\begin{equation} \label{eq:lagrangian}
+Motion Cost = Rate + SAD
+\end{equation}
+
+\subsection{Subsampling}
+
+Subsampling aims at reducing the time needed to compute a matching
+criterion, like SAD, by applying the corresponding operation only to a
+subset of the pixels in a macroblock. The optimization relies on the
+assumption that neighboring pixels in a macroblock should have similar
+values (spatial redundancy) and thus computing the matching criterion from a 
+regular subset should yield comparable results. This assumption is confirmed by the
+experiments presented in section~\ref{sec:eval}. Figure
+\ref{fig:subsampling} illustrates the process of 4:1 subsampling in a 16x16
+macroblock. The dark pixels are the pixels taken into
+consideration. Instead of comparing 256 pixels (16x16), the algorithm
+compares only 64 pixels (8x8), speeding up the process.
+
+\fig{.5}{subsampling}{Illustration of 4:1 subsampling.}
+
+\subsection{Truncation}
+
+Similarly to subsampling, truncation also aims at reducing the computational cost of block matching by eliminating redundant data. As basis for this optimization we took the assumption that the main information of a sample is stored in its most significant bits (MSB) thus ignoring the least significant bits (LSB) should generate a small noise in the encoded video sequence. The main information of a pixel in YCbCr format means the light variation in the luminance channel (Y) and color variation in the chrominance channels (Cb and Cr).
+
+Our experiments with the JM H.264 Reference Encoder demonstrate that truncation can also improve software-implemented algorithms, because the Full-Search block-matching algorithm in JM features an early termination mechanism. The motion cost in H.264 is calculated using the Lagrangian rate-distortion cost function shown in \ref{eq:lagrangian}. The Full-Search block-matching algorithm in JM first computes the rate component of the motion cost for a specific position in the search window. If the rate component value is greater than or equal to the previous minimum motion cost (cost of a previous compared block), the distortion component of motion cost (given by the SAD function) is not computed, and the motion cost computation is abbreviated for that block. When bits are truncated, numbers that once were slightly different from each other become equal. Consequently, the number of occurrences in which the previous minimum cost and the rate component of the current cost are equal increases and the SAD does not need to be computed. The speedup is then caused by the reduction in the frequency of calls to the SAD function.
+
+%-----------------------------------------------------------------------------
+\section{Evaluation}\label{sec:eval}
+
+We implemented the optimizations described in the previous section in the JM H.264 Reference Encoder~\cite{site:jm} to assess their impact on the final video quality. 
+Our experiments were carried out with JM version 14.2 and consisted of encoding a set of reference video sequences with the
+original encoder and subsequently with the modified one, therefore enabling us to measure variations in the Peak Signal to Noise Ratio (PSNR) and the encoding time. 
+The video sequences chosen for the experiments encompass different resolutions and frame rates: Foreman QCIF, Foreman CIF, Mobile \& Calendar CIF, City 4CIF, Stockholm 720p, Sunflower 1080p, and Crown Run 1080p.
+
+Modifications to JM were implemented so that subsampling and
+truncation could be evaluated both in separation and together, thus
+rendering more detailed results.
+We tested 2:1, 4:1, and 8:1 subsampling. And we tested truncation on 8-bit 
+samples varying from 1 to 7 LSB. We took the cases which had generated a small
+noise (0.5 dB) and tested their combinations.
+
+Our results show that subsampling and LSB truncation both improve video
+encoding performance while degrading quality, either deployed separately
+or in combination. Both parameters: performance and quality vary
+proportionally to the extending of the applied optimizations as can be seen
+in figures~\ref{fig:jm_sub_perf}
+to~\ref{fig:jm_tru_qual}. Figure~\ref{fig:jm_sub_perf} shows the
+performance improvement for the chosen video sequences as a function of
+a growing subsampling factor, while Figure~\ref{fig:jm_sub_qual} shows
+the corresponding quality loss measured as a decrease in
+PSNR. Figures~\ref{fig:jm_tru_perf} and~\ref{fig:jm_tru_qual}
+illustrate the facts for truncation.
+
+\fig{0.6}{jm_sub_perf}{Impact of subsampling on encoding performance.}
+\fig{0.6}{jm_sub_qual}{Impact of subsampling on encoding quality.}
+\fig{0.6}{jm_tru_perf}{Impact of truncation on encoding performance.}
+\fig{0.6}{jm_tru_qual}{Impact of truncation on encoding quality.}
+
+From the obtained data, we noticed that a combination of 4:1 subsampling
+and 2 LSB truncation would result in the bigger speedup while keeping 
+relatively small quality loss. Indeed, we looked into the obtained data
+for a combination that would cause no more than 0.5dB decrease in PSNR
+and has the highest speedup.  
+
+Truncation of 2 LSB incurs in an average PSNR reduction of less than 0.1dB, while 4:1
+subsampling has a higher toll on quality, about 0.31db. Together, 
+subsampling and truncation present an average impact on PSNR of less than
+0.5db. 
+Subsampling,
+however, is the major speedup source for JM, since $3/4$ of the data in
+each macroblock is simply ignored (as explained in
+section~\ref{sec:proposal}, speedups from truncation on software ME
+implementations arise from early termination mechanisms). This leads to
+speedups of up to 3.18 times (for the Stockholm sequence).
+The average speedup for the combined approach
+was of 2.64 times.
+
+The quality loss (0.5dB) is small when compared to the speedup (2.64) mainly because of the spatial redundancy of photographic video sequences. For the case of subsampling one would think that decreasing the number of samples taken into consideration in the block matching, would let escape similar samples, worsening ME precision and increasing the generated noise. However because of the spatial redundancy this increase of noise remains small. The truncation is applied to all samples of the video sequence, thus it does not affect the quality aspect of the matching algorithm. The noise generated by truncation is homogeneous and does not influence in ME.
+
+
+% -----------------------------------------------------------------------------
+\section{Conclusions}\label{sec:conclusion}
+
+In this article, we introduce two complementary optimizations for block-based Motion Estimation in video encoding: macroblock subsampling and truncation of the two least significant bits per sample. The proposed optimizations were developed around the Full-Search block-matching algorithm and the SAD matching criterion, yielding a block-matching engine that was implemented in the JM Reference Encoder. 
+The evaluation of the proposed optimizations assess ME quality and good performance gains. It also demonstrates the best combination between subsampling and truncation. The combination of 4:1 subsampling and 2 LSB truncation presents a quality loss of less than 0.5dB for all considered sequences and an average speedup of 2.64.
+
+% -----------------------------------------------------------------------------
+% \section{Acknowledgments} % [Removed for blind review]
+% We would like to thank Ronaldo Husemann and Valter Roesler for the early idea of using subsampling and truncation applied to MPEG-2 video coding. 
+
+\bibliographystyle{IEEEbib}
+% \nocite{*}
+\bibliography{mm}
+
+\end{document}
+

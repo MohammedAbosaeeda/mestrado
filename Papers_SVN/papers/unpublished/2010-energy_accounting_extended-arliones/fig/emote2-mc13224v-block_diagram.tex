@@ -1,0 +1,88 @@
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage{amsmath,bm,times}
+\usepackage{verbatim}
+\usepackage{caption}
+
+% Run pdflatex to compile, pdfcrop to extract only the image from the
+% a4 page and convert -density 300 -scale 40% to generate the png image
+
+\begin{document}
+\pagestyle{empty}
+
+% We need layers to draw the block diagram
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+% Define a few styles and constants
+\tikzstyle{mc}=[draw, fill=blue!20, text width=5em, 
+	text centered, minimum height=2.5em]
+\tikzstyle{procmod}=[draw, fill=red!20, text width=5em, 
+	text centered, minimum height=2.5em]
+\tikzstyle{sensmod}=[draw, fill=green!20, text width=5em, 
+	text centered, minimum height=2.5em]
+\tikzstyle{powmod}=[draw, fill=green!20, text width=5em, 
+	text centered, minimum height=2.5em]
+
+\begin{tikzpicture}
+	% Power module nodes
+	\node (src1) at (-4,1.1) [powmod] {Energy Source 1};
+	\node (src2) at (-4,0) [powmod] {Energy Source 2};
+	\node (powmod) [below of=src2] {Power Module};
+
+	% Processing module nodes	
+	\node (arm) at (0,1.1) [mc] {ARM7 TDMI-S};
+	\node (radio) at (0,0) [mc] {Radio};
+	\node (oscillator) at (3.7,1.1) [procmod] {Oscillator};
+	\node (antenna) at (3.7,0) [procmod] {Antenna};
+	\node (mc) [below of=radio] {MC13224V};
+	\node (procmod) at (3,-1.1) {Processing Module};
+
+	% Sensors module nodes
+	\node (temp) at (8.5,1.1) [sensmod] {Temperature Sensor};
+	\node (humid) at (8.5,0) [sensmod] {Humidity Sensor};
+	\node (sensmod) [below of=humid] {Sensors Module};
+	
+	\path (arm.west)+(-0.5,-1.05) node (a) {};
+	\path (src1.east)+(0.3,-1.05) node (b) {};
+	\draw [<->] (a) -- node[anchor=south] {I2C} (b);
+	
+	\draw [<->] (radio) -- node[anchor=south] {RX/TX} (antenna);
+
+	\path (oscillator.east)+(0.3,0) node (a) {};
+	\path (temp.west)+(-0.5,0) node (b) {};
+	\draw [<->] (a) -- node[anchor=south] {SPI} (b);
+	\path (oscillator.east)+(0.3,-1.05) node (a) {};
+	\path (temp.west)+(-0.5,-1.05) node (b) {};
+	\draw [<->] (a) -- node[anchor=south] {UART} (b);
+	\path (oscillator.east)+(0.3,-2.1) node (a) {};
+	\path (temp.west)+(-0.5,-2.1) node (b) {};
+	\draw [<->] (a) -- node[anchor=south] {ADC} (b);
+
+	\begin{pgfonlayer}{background}
+		\path (src1.west |- oscillator.north)+(-0.5,0.3) node (a) {};
+		\path (procmod.south -| src2.east)+(0.3,-0.2) node (b) {};
+		\path[fill=yellow!20,rounded corners, draw=black!50, dashed]
+			(a) rectangle (b);
+
+		\path (arm.west |- oscillator.north)+(-0.5,0.3) node (a) {};
+		\path (procmod.south -| antenna.east)+(+0.3,-0.2) node (b) {};
+		\path[fill=yellow!20,rounded corners, draw=black!50, dashed]
+			(a) rectangle (b);
+
+		\path (arm.north west)+(-0.2,0.2) node (a) {};
+		\path (mc.south -| arm.east)+(+0.2,-0.2) node (b) {};
+		\path[fill=blue!10,rounded corners, draw=black!50, dashed]
+			(a) rectangle (b);
+
+		\path (temp.west |- oscillator.north)+(-0.5,0.3) node (a) {};
+		\path (procmod.south -| humid.east)+(0.3,-0.2) node (b) {};
+		\path[fill=yellow!20,rounded corners, draw=black!50, dashed]
+			(a) rectangle (b);
+	\end{pgfonlayer}
+\end{tikzpicture}
+
+\end{document}

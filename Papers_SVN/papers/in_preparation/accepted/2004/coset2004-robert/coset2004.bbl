@@ -1,0 +1,112 @@
+\begin{thebibliography}{10}
+
+\bibitem{Bershad:1991}
+Brian~N. Bershad, Thomas~E. Anderson, Edward~D. Lazowska, and Henry~M. Levy.
+\newblock {User-level Interprocess Communication for Shared Memory
+  Multiprocessors}.
+\newblock {\em ACM Transactions on Computer Systems}, 9(2):175--198, May 1991.
+
+\bibitem{bhoedjang98niprotocols}
+Raoul A.~F. Bhoedjang, Tim Ruhl, and Henri~E. Bal.
+\newblock {User-level Network Interface Protocols}.
+\newblock {\em IEEE Computer}, 31(11):53--60, November 1998.
+
+\bibitem{Burns:1994}
+Greg Burns, Raja Daoud, and James Vaigl.
+\newblock {LAM: An Open Cluster Environment for MPI}.
+\newblock In {\em Proceedings of the Supercomputing Symposium}, pages 379--386,
+  1994.
+
+\bibitem{Campbell:1992}
+Roy~H. Campbell, Nayeem Islam, and Peter Madany.
+\newblock {Choices, Frameworks and Refinement}.
+\newblock {\em Computing Systems}, 5(3):217--257, 1992.
+
+\bibitem{Cordsen:1996}
+Jörg Cordsen.
+\newblock {\em {Virtuell Gemeinsamer Speicher},}.
+\newblock PhD thesis, Technical University of Berlin, Berlin, Germany, 1996.
+
+\bibitem{frohlich-eposmyrinet}
+Antonio~Augusto Frohlich, Gilles~Pokam Tientcheu, and Wolfgang
+  Schroder-Preikschat.
+\newblock {EPOS and Myrinet: Effective Communication Support for Parallel
+  Applications Running on Clusters of Commodity Workstations}.
+\newblock In {\em Proceedings of 8th International Conference on High
+  Performance Computing and Networking}, pages 417--426, Amsterdam, The
+  Netherlands, May 2000.
+
+\bibitem{Froehlich:2001}
+Antônio~Augusto Fröhlich.
+\newblock {\em Application-Oriented Operating Systems}.
+\newblock Number~17 in GMD Research Series. GMD - Forschungszentrum
+  Informationstechnik, Sankt Augustin, August 2001.
+
+\bibitem{Froehlich:gbwit:2000}
+Antônio~Augusto Fröhlich, Philippe Olivier~Alexander Navaux, Sérgio~Takeo
+  Kofuji, and Wolfgang Schröder-Preikschat.
+\newblock Snow: a parallel programming environment for clusters of
+  workstations.
+\newblock In {\em Proceedings of the 7th German-Brazilian Workshop on
+  Information Technology}, Maria Farinha, Brazil, September 2000.
+
+\bibitem{Froehlich:sbac:1999}
+Antônio~Augusto Fröhlich and Wolfgang Schröder-Preikschat.
+\newblock {High Performance Application-oriented Operating Systems -- the EPOS
+  Aproach}.
+\newblock In {\em Proceedings of the 11th Symposium on Computer Architecture
+  and High Performance Computing}, pages 3--9, Natal, Brazil, September 1999.
+
+\bibitem{Froehlich:ccgrid:2001}
+Antônio~Augusto Fröhlich and Wolfgang Schröder-Preikschat.
+\newblock {On Component-Based Communication Systems for Clusters of
+  Workstations}.
+\newblock In {\em Proceedings of the First IEEE/ACM International Symposium on
+  Cluster Computing and the Grid (CCGRID 2001)}, pages 640--645, Brisbane,
+  Australia, May 2001.
+
+\bibitem{Gropp:1996}
+W.~Gropp, E.~Lusk, N.~Doss, and A.~Skjellum.
+\newblock A high-performance, portable implementation of the {MPI} message
+  passing interface standard.
+\newblock {\em Parallel Computing}, 22(6):789--828, September 1996.
+
+\bibitem{Hellwagner:1995}
+H.~Hellwagner, W.~Karl, M.~Leberecht, and H.~Richter.
+\newblock {SCI-Based Local-Area Shared-Memory Multiprocessor}.
+\newblock In {\em Proceedings of the International Workshop on Advanced
+  Parallel Processing Technologies - APPT'95}, Beijing, China, September 1995.
+
+\bibitem{ccwp}
+IEEE Task Force on Cluster Computing.
+\newblock {\em Cluster Computing White Paper}, {M}ark {B}aker, editor, online
+  edition, December 2000.
+\newblock [http://www.dcs.port.ac.uk/\~{}mab/tfcc/WhitePaper].
+
+\bibitem{Lumetta:1997}
+Steven~S. Lumetta, Alan~M. Mainwaring, and David~E. Culler.
+\newblock {Multi-Protocol Active Messages on a Cluster of SMP's}.
+\newblock In {\em Proceedings of Supercomputing'97}, Sao Jose, USA, November
+  1997.
+
+\bibitem{Prylli:1998}
+Loic Prylli and Bernard Tourancheau.
+\newblock {BIP: a New Protocol Designed for High Performance Networking on
+  Myrinet}.
+\newblock In {\em Proceedings of the International Workshop on Personal
+  Computer based Networks of Workstations}, Orlando, USA, April 1998.
+
+\bibitem{Preikschat:1994}
+Wolfgang Schröder-Preikschat.
+\newblock {\em {The Logical Design of Parallel Operating Systems}}.
+\newblock Prentice-Hall, Englewood Cliffs, U.S.A., 1994.
+
+\bibitem{Tezuka:1997}
+Hiroshi Tezuka, Atsushi Hori, Yutaka Ishikawa, and Mitsuhisa Sato.
+\newblock {PM: An Operating System Coordinated High Performance Communication
+  Library}.
+\newblock In {\em High-Performance Computing and Networking}, volume 1225 of
+  {\em Lecture Notes in Computer Science}, pages 708--717. Springer, April
+  1997.
+
+\end{thebibliography}

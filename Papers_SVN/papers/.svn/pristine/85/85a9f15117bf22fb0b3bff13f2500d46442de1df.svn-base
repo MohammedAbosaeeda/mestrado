@@ -1,0 +1,17 @@
+#!/bin/csh
+acsun < ../txt/sbac.txt		>sbac.tex
+acsun < ../txt/introduction.txt	>introduction.tex
+acsun < ../txt/goals.txt	>goals.tex
+acsun < ../txt/model.txt	>model.tex
+acsun < ../txt/ids.txt		>ids.tex
+acsun < ../txt/location.txt	>location.tex
+acsun < ../txt/distribution.txt	>distribution.tex
+acsun < ../txt/tree.txt		>tree.tex
+acsun < ../txt/auth.txt		>auth.tex
+acsun < ../txt/conclusion.txt	>conclusion.tex
+acsun < ~/ti/txt/bib.txt	>bib.tex
+
+platex sbac.tex
+#xdvi sbac.dvi& 
+rm -f *.tex
+dvips sbac.dvi -o

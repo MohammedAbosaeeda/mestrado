@@ -1,0 +1,47 @@
+@techreport{Keppel:91b,
+ author = {David Keppel},
+ title  = "{Register Windows and User-Space Threads on the SPARC}",
+ number = {UWCSE 91-08-01},
+ institution = {University of Washington Department of Computer
+                 Science and Engineering},
+ month  = {August},
+ year   = {1991}
+}
+
+@inproceedings{Ravindran:2003,
+  author    = {Rajiv A. Ravindran and Robert M. Senger and Eric D. Marsman and 
+               Ganesh S. Dasika and Matthew R. Guthaus and Scott A. Mahlke and 
+               Richard B. Brown},
+  title     = "{Increasing the number of effective registers in a low-power 
+               processor using a windowed register file}",
+  booktitle = {CASES '03: Proceedings of the 2003 International Conference on Compilers, architecture and synthesis for embedded systems},
+  year      = {2003},
+  isbn      = {1-58113-676-5},
+  pages     = {125--136},
+  location  = {San Jose, California, USA},
+  doi       = {http://doi.acm.org/10.1145/951710.951729},
+  publisher = {ACM Press},
+  address   = {New York, NY, USA}
+}
+
+@Manual{SPARCV8,
+  title        = "{The SPARC Architecture Manual}",
+  organization = {SPARC Internation Inc.},
+  edition      = {SAV080SI9308},
+  year	       = {1992},
+}
+
+
+@article{Spivey:2004,
+  author    = {J. M. Spivey},
+  title     = "{Fast, accurate call graph profiling}",
+  journal   = {Softw. Pract. Exper.},
+  volume    = {34},
+  number    = {3},
+  year      = {2004},
+  issn      = {0038-0644},
+  pages     = {249--264},
+  doi       = {http://dx.doi.org/10.1002/spe.562},
+  publisher = {John Wiley \& Sons, Inc.},
+  address   = {New York, NY, USA},
+}

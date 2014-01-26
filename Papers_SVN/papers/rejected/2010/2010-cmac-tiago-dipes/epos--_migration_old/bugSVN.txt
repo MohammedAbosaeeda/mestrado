@@ -1,0 +1,16 @@
+If you are running Ubuntu 8.04 and you install Eclipse 3.4 with subclipse 1.4, you will probably get the "unable to load default svn client" error when trying to add a repository.
+
+Here it is how I solved this problem. I assume that you have the 'subversion' and 'libsvn-java' packages already installed (if not, please do install them, and then follow the instructions).
+
+1) Go to System --> Administration --> Software Sources
+and under the "Updates" tab, check the hardy-backports updates. Close the window and update the package lists.
+2) Run the update manager and update all packages (subversion will be updated from version 1.4 to version 1.5)
+3) Edit the eclipse.ini file (it is located into the directory where you installed eclipse) by adding the following two lines, immediately after the "-vmargs" line
+Code:
+-Djava.library.path=/usr/share/java/
+-Djava.library.path=/usr/lib/jni/
+This should do the job, next time you start eclipse, it should correctly add your existing repository.
+
+Please post comments if you have any trouble.
+
+Cheers!

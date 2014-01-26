@@ -1,0 +1,548 @@
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=pdflatex 2006.12.25)  16 MAY 2007 00:09
+entering extended mode
+**tools2007.tex
+(./tools2007.tex
+LaTeX2e <2003/12/01>
+Babel <v3.8d> and hyphenation patterns for american, french, german, ngerman, b
+ahasa, basque, bulgarian, catalan, croatian, czech, danish, dutch, esperanto, e
+stonian, finnish, greek, icelandic, irish, italian, latin, magyar, norsk, polis
+h, portuges, romanian, russian, serbian, slovak, slovene, spanish, swedish, tur
+kish, ukrainian, nohyphenation, loaded.
+(./jotarticle.cls
+Document Class: jotarticle 2003/01/21 1.2 (SU)
+(c) 2002 Susanne Cech, ETH Zurich, Switzerland
+ 
+(/usr/share/texmf-tetex/tex/latex/base/article.cls
+Document Class: article 2004/02/16 v1.4f Standard LaTeX document class
+(/usr/share/texmf-tetex/tex/latex/base/size12.clo
+File: size12.clo 2004/02/16 v1.4f Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texmf-tetex/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-tetex/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texmf-tetex/tex/latex/graphics/graphics.sty
+Package: graphics 2001/07/07 v1.0n Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-tetex/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/share/texmf-tetex/tex/latex/graphics/graphics.cfg
+File: graphics.cfg 2005/02/03 v1.3 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: dvipdf.def on input line 80.
+
+(/usr/share/texmf-tetex/tex/latex/graphics/dvipdf.def
+File: dvipdf.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+(/usr/share/texmf-tetex/tex/latex/graphics/color.sty
+Package: color 1999/02/16 v1.0i Standard LaTeX Color (DPC)
+
+(/usr/share/texmf-tetex/tex/latex/graphics/color.cfg
+File: color.cfg 2005/02/03 v1.3 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 125.
+
+(/usr/share/texmf-tetex/tex/latex/graphics/pdftex.def
+File: pdftex.def 2002/06/19 v0.03k graphics/color for pdftex
+\Gread@gobject=\count87
+))
+(/usr/share/texmf-tetex/tex/latex/base/alltt.sty
+Package: alltt 1997/06/16 v2.0g defines alltt environment
+)
+(/usr/share/texmf-tetex/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/share/texmf-tetex/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2003/11/30 v6.74m Hypertext links for LaTeX
+\@linkdim=\dimen105
+\Hy@linkcounter=\count88
+\Hy@pagecounter=\count89
+
+(/usr/share/texmf-tetex/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2003/11/30 v6.74m Hyperref: PDFDocEncoding definition (HO)
+)
+(/usr/share/texmf-tetex/tex/latex/hyperref/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive and teTeX
+)
+Package hyperref Info: Option `bookmarks' set `false' on input line 1830.
+Package hyperref Info: Option `colorlinks' set `true' on input line 1830.
+Package hyperref Info: Hyper figures OFF on input line 1880.
+Package hyperref Info: Link nesting OFF on input line 1885.
+Package hyperref Info: Hyper index ON on input line 1888.
+Package hyperref Info: Plain pages ON on input line 1893.
+Package hyperref Info: Backreferencing OFF on input line 1900.
+
+Implicit mode ON; LaTeX internals redefined
+Package hyperref Info: Bookmarks OFF on input line 2010.
+(/usr/share/texmf-tetex/tex/latex/url/url.sty
+\Urlmuskip=\muskip10
+Package: url 2004/03/15  ver 3.1  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 2143.
+\Fld@menulength=\count90
+\Field@Width=\dimen106
+\Fld@charsize=\dimen107
+\Choice@toks=\toks15
+\Field@toks=\toks16
+Package hyperref Info: Hyper figures OFF on input line 2618.
+Package hyperref Info: Link nesting OFF on input line 2623.
+Package hyperref Info: Hyper index ON on input line 2626.
+Package hyperref Info: backreferencing OFF on input line 2633.
+Package hyperref Info: Link coloring ON on input line 2636.
+\c@Item=\count91
+\c@Hfootnote=\count92
+)
+*hyperref using default driver hpdftex*
+(/usr/share/texmf-tetex/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2003/11/30 v6.74m Hyperref driver for pdfTeX
+
+(/usr/share/texmf-tetex/tex/latex/psnfss/pifont.sty
+Package: pifont 2004/09/15 PSNFSS-v9.2 Pi font support (SPQR) 
+LaTeX Font Info:    Try loading font information for U+pzd on input line 63.
+
+(/usr/share/texmf-tetex/tex/latex/psnfss/upzd.fd
+File: upzd.fd 2001/06/04 font definitions for U/pzd.
+)
+LaTeX Font Info:    Try loading font information for U+psy on input line 64.
+
+(/usr/share/texmf-tetex/tex/latex/psnfss/upsy.fd
+File: upsy.fd 2001/06/04 font definitions for U/psy.
+))
+\Fld@listcount=\count93
+\@outlinefile=\write3
+)
+\jotpagewidth=\skip43
+) (./tools2007.aux)
+\openout1 = `tools2007.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+
+(/usr/share/texmf-tetex/tex/context/base/supp-pdf.tex
+(/usr/share/texmf-tetex/tex/context/base/supp-mis.tex
+loading : Context Support Macros / Miscellaneous (2004.10.26)
+\protectiondepth=\count94
+\scratchcounter=\count95
+\scratchtoks=\toks17
+\scratchdimen=\dimen108
+\scratchskip=\skip44
+\scratchmuskip=\muskip11
+\scratchbox=\box26
+\scratchread=\read1
+\scratchwrite=\write4
+\zeropoint=\dimen109
+\onepoint=\dimen110
+\onebasepoint=\dimen111
+\minusone=\count96
+\thousandpoint=\dimen112
+\onerealpoint=\dimen113
+\emptytoks=\toks18
+\nextbox=\box27
+\nextdepth=\dimen114
+\everyline=\toks19
+\!!counta=\count97
+\!!countb=\count98
+\recursecounter=\count99
+)
+loading : Context Support Macros / PDF (2004.03.26)
+\nofMPsegments=\count100
+\nofMParguments=\count101
+\MPscratchCnt=\count102
+\MPscratchDim=\dimen115
+\MPnumerator=\count103
+\everyMPtoPDFconversion=\toks20
+)
+Package hyperref Info: Link coloring ON on input line 130.
+ (/usr/share/texmf-tetex/tex/latex/hyperref/nameref.sty
+Package: nameref 2003/12/03 v2.21 Cross-referencing by name of section
+\c@section@level=\count104
+)
+LaTeX Info: Redefining \ref on input line 130.
+LaTeX Info: Redefining \pageref on input line 130.
+
+<bigjot.png, id=7, 188.20313pt x 188.20313pt>
+File: bigjot.png Graphic file (type png)
+ <use bigjot.png>
+<title.png, id=8, 1811.76875pt x 198.7425pt>
+File: title.png Graphic file (type png)
+ <use title.png>
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 130.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 130.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 130.
+
+Overfull \hbox (3.04716pt too wide) in paragraph at lines 130--130
+[] []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 130--130
+
+ []
+
+
+Overfull \hbox (6.96376pt too wide) in paragraph at lines 130--132
+[] $[]$    
+ []
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 152.
+
+Overfull \hbox (4.98799pt too wide) has occurred while \output is active
+   [] 
+ []
+
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./bigjot.png> <./title.png
+>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+<jotleft.png, id=34, 112.92188pt x 112.92188pt>
+File: jotleft.png Graphic file (type png)
+ <use jotleft.png>
+Overfull \vbox (11.3292pt too high) has occurred while \output is active []
+
+
+[2 <./jotleft.png>]
+Overfull \hbox (14.60825pt too wide) in paragraph at lines 173--174
+[]\OT1/cmr/m/n/12 In this work we present an ap-proach to the con-fig-u-ra-tion
+ man-age-ment of component-
+ []
+
+<jotright.png, id=49, 112.92188pt x 112.92188pt>
+File: jotright.png Graphic file (type png)
+ <use jotright.png>
+Underfull \hbox (badness 10000) has occurred while \output is active
+[] [] []
+ []
+
+
+Overfull \vbox (3.05556pt too high) has occurred while \output is active []
+
+
+[3 <./jotright.png>]
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ú in font cmr12!
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ù in font cmr12!
+File: jotleft.png Graphic file (type png)
+ <use jotleft.png>
+Overfull \vbox (11.3292pt too high) has occurred while \output is active []
+
+
+[4] <fig/overview5.png, id=74, 797.68013pt x 476.07863pt>
+File: fig/overview5.png Graphic file (type png)
+
+<use fig/overview5.png>
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+File: jotright.png Graphic file (type png)
+
+<use jotright.png>
+Underfull \hbox (badness 10000) has occurred while \output is active
+[] [] []
+ []
+
+
+Overfull \vbox (3.05556pt too high) has occurred while \output is active []
+
+
+[5]
+Overfull \hbox (18.54799pt too wide) in paragraph at lines 288--289
+[]\OT1/cmr/m/n/12 The \OT1/cmtt/m/n/12 Configurator \OT1/cmr/m/n/12 mod-ule is 
+log-i-cally di-vided in a \OT1/cmtt/m/n/12 Validator \OT1/cmr/m/n/12 and a \OT1
+/cmtt/m/n/12 Configuration\OT1/cmr/m/n/12 .
+ []
+
+
+Overfull \hbox (11.1222pt too wide) in paragraph at lines 288--289
+\OT1/cmr/m/n/12 The com-po-nents cho-sen with the help of the \OT1/cmtt/m/n/12 
+Analyzer \OT1/cmr/m/n/12 are added to the \OT1/cmtt/m/n/12 Configuration
+ []
+
+
+Overfull \hbox (0.41748pt too wide) in paragraph at lines 288--289
+\OT1/cmr/m/n/12 and used by the \OT1/cmtt/m/n/12 Validator \OT1/cmr/m/n/12 to b
+uild a de-pen-dency tree. By do-ing this, the \OT1/cmtt/m/n/12 Validator
+ []
+
+
+Overfull \hbox (4.32285pt too wide) in paragraph at lines 292--293
+[]\OT1/cmr/m/n/12 The last step in the sys-tem de-vel-op-ment pro-cess is ac-co
+m-plished by the \OT1/cmtt/m/n/12 Generator
+ []
+
+
+Underfull \vbox (badness 3792) has occurred while \output is active []
+
+File: jotleft.png Graphic file (type png)
+
+<use jotleft.png>
+Overfull \vbox (11.3292pt too high) has occurred while \output is active []
+
+
+[6 <./fig/overview5.png>]
+Overfull \hbox (4.32285pt too wide) in paragraph at lines 294--295
+[]\OT1/cmr/m/n/12 The last step in the sys-tem de-vel-op-ment pro-cess is ac-co
+m-plished by the \OT1/cmtt/m/n/12 Generator
+ []
+
+
+Overfull \hbox (10.65472pt too wide) in paragraph at lines 298--299
+[]\OT1/cmr/m/n/12 The \OT1/cmtt/m/n/12 Generator \OT1/cmr/m/n/12 mod-ule trans-
+lates the keys into pa-ram-e-ters for a stat-i-cally metapro-
+ []
+
+File: jotright.png Graphic file (type png)
+<use jotright.png>
+Underfull \hbox (badness 10000) has occurred while \output is active
+[] [] []
+ []
+
+
+Overfull \vbox (3.05556pt too high) has occurred while \output is active []
+
+
+[7] <fig/analyzer.png, id=99, 953.5625pt x 651.43375pt>
+File: fig/analyzer.png Graphic file (type png)
+ <use fig/analyzer.png>
+File: jotleft.png Graphic file (type png)
+
+<use jotleft.png>
+Overfull \vbox (11.3292pt too high) has occurred while \output is active []
+
+
+[8 <./fig/analyzer.png>]
+File: jotright.png Graphic file (type png)
+ <use jotright.png>
+Underfull \hbox (badness 10000) has occurred while \output is active
+[] [] []
+ []
+
+
+Overfull \vbox (3.05556pt too high) has occurred while \output is active []
+
+
+[9] <fig/configurator.png, id=118, 973.6375pt x 732.7375pt>
+File: fig/configurator.png Graphic file (type png)
+
+<use fig/configurator.png>
+File: jotleft.png Graphic file (type png)
+ <use jotleft.png>
+Overfull \vbox (11.3292pt too high) has occurred while \output is active []
+
+
+[10 <./fig/configurator.png>]
+<fig/generator.png, id=126, 848.16875pt x 571.13374pt>
+File: fig/generator.png Graphic file (type png)
+ <use fig/generator.png>
+File: jotright.png Graphic file (type png)
+
+<use jotright.png>
+Underfull \hbox (badness 10000) has occurred while \output is active
+[] [] []
+ []
+
+
+Overfull \vbox (3.05556pt too high) has occurred while \output is active []
+
+
+[11 <./fig/generator.png>]
+Overfull \hbox (0.19879pt too wide) in paragraph at lines 389--390
+\OT1/cmtt/m/n/12 Bit[]Depth bit[]depth, Sound[]Mode mode) \OT1/cmr/m/n/12 metho
+d from the \OT1/cmtt/m/n/12 PCM[]Audio[]Player \OT1/cmr/m/n/12 ab-
+ []
+
+
+Overfull \hbox (9.96465pt too wide) in paragraph at lines 407--407
+ []    \OT1/cmtt/m/n/8 audio_player.play(0x40080000, 3, Audio_Player::S44100, A
+udio_Player::B16, Audio_Player::STEREO);[] 
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 416.
+
+(/usr/share/texmf-tetex/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 416.
+File: jotleft.png Graphic file (type png)
+ <use jotleft.png>
+Overfull \vbox (11.3292pt too high) has occurred while \output is active []
+
+
+[12] <fig/casestudy.png, id=149, 714.67pt x 595.22375pt>
+File: fig/casestudy.png Graphic file (type png)
+
+<use fig/casestudy.png>
+File: jotright.png Graphic file (type png)
+ <use jotright.png>
+Underfull \hbox (badness 10000) has occurred while \output is active
+[] [] []
+ []
+
+
+Overfull \vbox (3.05556pt too high) has occurred while \output is active []
+
+
+[13]
+File: jotleft.png Graphic file (type png)
+ <use jotleft.png>
+Overfull \vbox (11.3292pt too high) has occurred while \output is active []
+
+
+[14 <./fig/casestudy.png>]
+Overfull \hbox (1.21814pt too wide) in paragraph at lines 466--467
+[]\OT1/cmr/m/n/12 Finally, the re-sults ob-tained with Application-Oriented Sys
+-tem De-sign, the EPOS
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+File: jotright.png Graphic file (type png)
+
+<use jotright.png>
+Underfull \hbox (badness 10000) has occurred while \output is active
+[] [] []
+ []
+
+
+Overfull \vbox (3.05556pt too high) has occurred while \output is active []
+
+
+[15] (./tools2007.bbl
+Underfull \hbox (badness 1286) in paragraph at lines 26--30
+[]\OT1/cmr/m/n/12 Ant^onio Au-gusto Fr^^?ohlich and Wolf-gang Schr^^?oder-Preik
+schat.  Sce-nario
+ []
+
+File: jotleft.png Graphic file (type png)
+<use jotleft.png>
+Overfull \vbox (11.3292pt too high) has occurred while \output is active []
+
+
+[16]) <alexandre.png, id=175, 100.375pt x 100.375pt>
+File: alexandre.png Graphic file (type png)
+ <use alexandre.png>
+Overfull \hbox (7.11826pt too wide) in paragraph at lines 489--490
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 489--490
+
+ []
+
+<cancian.png, id=176, 100.375pt x 100.375pt>
+File: cancian.png Graphic file (type png)
+ <use cancian.png>
+Overfull \hbox (7.11826pt too wide) in paragraph at lines 493--494
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 493--494
+
+ []
+
+<marcelo.png, id=177, 100.375pt x 100.375pt>
+File: marcelo.png Graphic file (type png)
+ <use marcelo.png>
+Overfull \hbox (7.11826pt too wide) in paragraph at lines 502--503
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 502--503
+
+ []
+
+File: jotright.png Graphic file (type png)
+<use jotright.png>
+Underfull \hbox (badness 10000) has occurred while \output is active
+[] [] []
+ []
+
+
+Overfull \vbox (3.05556pt too high) has occurred while \output is active []
+
+
+[17 <./alexandre.png> <./cancian.png> <./marcelo.png>]
+<guto.png, id=189, 120.45pt x 120.45pt>
+File: guto.png Graphic file (type png)
+ <use guto.png>
+Overfull \hbox (7.1158pt too wide) in paragraph at lines 508--509
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 508--509
+
+ []
+
+File: jotleft.png Graphic file (type png)
+<use jotleft.png>
+Overfull \vbox (11.3292pt too high) has occurred while \output is active []
+
+
+[18 <./guto.png>] (./tools2007.aux) ) 
+Here is how much of TeX's memory you used:
+ 2903 strings out of 94500
+ 39178 string characters out of 1175787
+ 93369 words of memory out of 1000000
+ 5998 multiletter control sequences out of 10000+50000
+ 12299 words of font info for 43 fonts, out of 500000 for 2000
+ 580 hyphenation exceptions out of 8191
+ 34i,11n,27p,1875b,369s stack positions out of 1500i,500n,5000p,200000b,5000s
+PDF statistics:
+ 195 PDF objects out of 300000
+ 46 named destinations out of 131072
+ 82 words of extra memory for PDF output out of 65536
+</usr/share/texmf-tetex/fonts/type1/bluesk
+y/cm/cmsy10.pfb></usr/share/texmf-tetex/fonts/type1/bluesky/cm/cmtt8.pfb></usr/
+share/texmf-tetex/fonts/type1/bluesky/cm/cmti12.pfb></usr/share/texmf-tetex/fon
+ts/type1/bluesky/cm/cmtt12.pfb></usr/share/texmf-tetex/fonts/type1/bluesky/cm/c
+mbx12.pfb></usr/share/texmf-tetex/fonts/type1/bluesky/cm/cmr12.pfb></usr/share/
+texmf-tetex/fonts/type1/bluesky/cm/cmss10.pfb></usr/share/texmf-tetex/fonts/typ
+e1/bluesky/cm/cmss12.pfb></usr/share/texmf-tetex/fonts/type1/bluesky/cm/cmssbx1
+0.pfb></usr/share/texmf-tetex/fonts/type1/bluesky/cm/cmss17.pfb></usr/share/tex
+mf-tetex/fonts/type1/bluesky/cm/cmss8.pfb>
+Output written on tools2007.pdf (18 pages, 437962 bytes).

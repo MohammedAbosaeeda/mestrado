@@ -1,0 +1,55 @@
+\section{Conclusion}\label{sec:conclusion}
+
+In this article, power management in embedded systems was addressed from
+energy-aware design to energy-efficient implementation, aiming at
+introducing a set of mechanisms specifically conceived for this
+scenario. A power management API defined at the level of user-visible
+system components was proposed and compared with traditional APIs. Its
+implementation was discussed in the context of the necessary
+infrastructure, including battery monitoring, accounting, auto-suspend,
+and auto-resume. An energy-event propagation mechanism based on
+\emph{Petry Nets} was proposed and its implementation using
+\emph{Aspect-Oriented Programming} techniques was depicted. The use of
+the proposed infrastructure by an autonomous power manager integrated
+into a real-time scheduler was also discussed, thus covering the main
+components of a modern power management system for embedded systems.
+
+% The proposed strategy was illustrated and evaluated through a didactic,
+% yet realistic, example embedded system targeted at environment
+% temperature monitoring. The example was described from early design
+% stages down to a real implementation for the \textsc{Epos} system on the
+% Mica2 Mote, a well-known platform that helps to put the proposal into
+% perspective.  Experiments with this implementation showed that power
+% management is an expensive service for simple embedded systems,
+% specially when provided in the context of hard real-time applications
+% and with limited hardware support.
+
+The proposed strategy was illustrated and evaluated through a didactic,
+yet realistic, example embedded system targeted at environment
+temperature monitoring. The example was described from early design
+stages down to a real implementation for the EPOS system on the Mica2
+Mote, a well-known platform that helps to put the proposal into
+perspective. Experiments with this implementation showed that
+integrating the proposed power management mechanisms into a hard-real
+time run-time support system comes at a high cost in terms of program
+memory, specially in platforms with limited hardware support.
+Nonetheless, they also showed a relatively small impact on performance,
+slightly adding to the latency of scheduling and I/O operations. This
+can be explained mainly by the sporadic nature of power management
+operations.
+
+The experiments carried out also made evident the benefits of the
+proposed mechanisms in terms of energy efficiency and system utility as
+they confirmed the strategy's ability to sustain a given lifetime for
+the system without affecting the deadlines of hard real-time tasks at
+the same time it enables the safe usage of the remaining energy by
+best-effort tasks. These benefits arise from proposed strategy itself
+and are not dependent from \textsc{Epos} or Mica2. Therefore, the
+intended contribution for this article is not ``yet another power
+manager for embedded systems'', but the introduction of a broader and
+systematic way to deal with power management issues in embedded systems.
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "pm"
+%%% End:

@@ -1,0 +1,22 @@
+\relax 
+\bibstyle{alpha}
+\citation{engler95:_exoker}
+\citation{gamma95:_patterns}
+\citation{offppw3site}
+\bibdata{ecoop-ooosws-sample}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Pictures and Code Scraps}{1}}
+\newlabel{section1}{{2}{1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}A Subsection}{1}}
+\bibcite{engler95:_exoker}{EKO95}
+\bibcite{gamma95:_patterns}{GHJV95}
+\bibcite{offppw3site}{off}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces A Sample postscript figure}}{2}}
+\newlabel{fig:sample-pic}{{1}{2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces  Sample piece of code; the formatting is important, the code is not.}}{2}}
+\newlabel{fig:osample-code}{{2}{2}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Conclusions}{2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Sample postscript figure included via epsfig package and scaled}}{3}}
+\newlabel{fig:sample-pic2}{{3}{3}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces  example table}}{3}}
+\newlabel{extable}{{1}{3}}

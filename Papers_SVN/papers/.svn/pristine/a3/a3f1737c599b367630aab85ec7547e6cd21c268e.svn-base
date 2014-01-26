@@ -1,0 +1,918 @@
+From MAILER-DAEMON Fri Dec  5 14:26:08 2003
+Date: 05 Dec 2003 14:26:08 -0200
+From: Mail System Internal Data <MAILER-DAEMON@sv1.lisha.ufsc.br>
+Subject: DON'T DELETE THIS MESSAGE -- FOLDER INTERNAL DATA
+X-IMAP: 1070641568 0000000000
+Status: RO
+
+This text is part of the internal format of your mail folder, and is not
+a real message.  It is created automatically by the mail system software.
+If deleted, important folder data will be lost, and it will be re-created
+with the data reset to initial values.
+
+From papavassiliou@adm.njit.edu  Fri Dec  5 14:03:00 2003
+Return-Path: <papavassiliou@adm.njit.edu>
+Received: from cs.columbia.edu (cs.columbia.edu [128.59.16.20])
+	by sv1.lisha.ufsc.br (8.12.8/8.12.8) with ESMTP id hB5G2vIG010106
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <guto@lisha.ufsc.br>; Fri, 5 Dec 2003 14:02:59 -0200
+Received: from pennstation.cs.columbia.edu (pennstation.cs.columbia.edu [128.59.19.197])
+	by cs.columbia.edu (8.12.10/8.12.10) with ESMTP id hB5G2siE025197
+	for <guto@lisha.ufsc.br>; Fri, 5 Dec 2003 11:02:55 -0500 (EST)
+Received: (from nobody@localhost)
+	by pennstation.cs.columbia.edu (8.11.6/8.9.3) id hB5G2qp19057;
+	Fri, 5 Dec 2003 11:02:52 -0500
+Date: Fri, 5 Dec 2003 11:02:52 -0500
+Message-Id: <200312051602.hB5G2qp19057@pennstation.cs.columbia.edu>
+X-Authentication-Warning: pennstation.cs.columbia.edu: nobody set sender to papavassiliou@adm.njit.edu using -f
+From: The Ninth IEEE Symposium on Computers and Communications <papavassiliou@adm.njit.edu>
+To: guto@lisha.ufsc.br
+Subject: The Ninth IEEE Symposium on Computers and Communications paper 1568926733 registered
+X-Spam-Status: No, hits=-0.2 required=5.0
+	tests=DEAR_SOMEBODY,REG_THANKS,SPAM_PHRASE_03_05,X_AUTH_WARNING
+	version=2.44
+X-Spam-Level: 
+Status: RO
+X-Status: 
+X-Keywords:                 
+
+Dear Dr. Antônio Augusto Fröhlich:
+
+Thank you for registering your paper 1568926733 ('On Component
+Frameworks for Embedded Systems') to The Ninth IEEE Symposium on
+Computers and Communications. You still have to upload your manuscript,
+using either web upload, ftp or email.
+
+- Via web form upload: http://edas.info/PU.cgi?m=1568926733
+
+- Via ftp:  You can upload the paper to
+ftp://ftp.cs.columbia.edu/incoming, using the file name 909750592.
+
+- Via email:  You can send the paper as an email attachment to
+edas@edas.info, using the subject line "Paper 909750592".
+
+You can see all your submissions and their status at
+
+http://edas.info/home.cgi?c=4145
+
+Once you upload your manuscript, you will receive another email
+confirmation.  Confirmations for ftp submissions may take up to one hour
+since the ftp directory is swept only periodically.
+
+Best Regards,
+Antonio Puliafito and Symeon Papvassiliou,
+Technical Co-chairs of ISCC2004
+
+From papavassiliou@adm.njit.edu  Fri Dec  5 14:04:51 2003
+Return-Path: <papavassiliou@adm.njit.edu>
+Received: from cs.columbia.edu (cs.columbia.edu [128.59.16.20])
+	by sv1.lisha.ufsc.br (8.12.8/8.12.8) with ESMTP id hB5G4mIG010125
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <guto@lisha.ufsc.br>; Fri, 5 Dec 2003 14:04:50 -0200
+Received: from pennstation.cs.columbia.edu (pennstation.cs.columbia.edu [128.59.19.197])
+	by cs.columbia.edu (8.12.10/8.12.10) with ESMTP id hB5G4kiE025334
+	for <guto@lisha.ufsc.br>; Fri, 5 Dec 2003 11:04:46 -0500 (EST)
+Received: (from nobody@localhost)
+	by pennstation.cs.columbia.edu (8.11.6/8.9.3) id hB5G4iv19073;
+	Fri, 5 Dec 2003 11:04:44 -0500
+Date: Fri, 5 Dec 2003 11:04:44 -0500
+Message-Id: <200312051604.hB5G4iv19073@pennstation.cs.columbia.edu>
+X-Authentication-Warning: pennstation.cs.columbia.edu: nobody set sender to papavassiliou@adm.njit.edu using -f
+From: The Ninth IEEE Symposium on Computers and Communications <papavassiliou@adm.njit.edu>
+To: guto@lisha.ufsc.br
+Subject: The Ninth IEEE Symposium on Computers and Communications paper 1568926733 submitted by web
+X-Spam-Status: No, hits=0.1 required=5.0
+	tests=AWL,DEAR_SOMEBODY,SPAM_PHRASE_01_02,X_AUTH_WARNING
+	version=2.44
+X-Spam-Level: 
+Status: RO
+X-Status: 
+X-Keywords:                 
+
+Dear Dr. Antônio Augusto Fröhlich:
+
+Thank you for uploading your paper 1568926733 ('On Component Frameworks
+for Embedded Systems') to The Ninth IEEE Symposium on Computers and
+Communications.  The paper is of type pdf and has a length of 72585
+bytes.
+
+pdf file 1568926733 uploaded (72585 bytes).
+
+You can modify your paper at
+
+http://edas.info/Paper.cgi?m=1568926733
+
+and see all your submissions at
+
+http://edas.info/home.cgi?c=4145
+
+Best Regards,
+Antonio Puliafito and Symeon Papvassiliou,
+Technical Co-chairs of ISCC2004
+
+From papavassiliou@adm.njit.edu  Fri Dec  5 14:16:19 2003
+Return-Path: <papavassiliou@adm.njit.edu>
+Received: from cs.columbia.edu (cs.columbia.edu [128.59.16.20])
+	by sv1.lisha.ufsc.br (8.12.8/8.12.8) with ESMTP id hB5GGHIG010198
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <guto@lisha.ufsc.br>; Fri, 5 Dec 2003 14:16:19 -0200
+Received: from pennstation.cs.columbia.edu (pennstation.cs.columbia.edu [128.59.19.197])
+	by cs.columbia.edu (8.12.10/8.12.10) with ESMTP id hB5GGFiE026562
+	for <guto@lisha.ufsc.br>; Fri, 5 Dec 2003 11:16:15 -0500 (EST)
+Received: (from nobody@localhost)
+	by pennstation.cs.columbia.edu (8.11.6/8.9.3) id hB5GGCX19340;
+	Fri, 5 Dec 2003 11:16:12 -0500
+Date: Fri, 5 Dec 2003 11:16:12 -0500
+Message-Id: <200312051616.hB5GGCX19340@pennstation.cs.columbia.edu>
+X-Authentication-Warning: pennstation.cs.columbia.edu: nobody set sender to papavassiliou@adm.njit.edu using -f
+From: The Ninth IEEE Symposium on Computers and Communications <papavassiliou@adm.njit.edu>
+To: guto@lisha.ufsc.br
+Subject: The Ninth IEEE Symposium on Computers and Communications paper 1568926733 submitted by web
+X-Spam-Status: No, hits=0.2 required=5.0
+	tests=AWL,DEAR_SOMEBODY,SPAM_PHRASE_01_02,X_AUTH_WARNING
+	version=2.44
+X-Spam-Level: 
+Status: RO
+X-Status: 
+X-Keywords:                 
+
+Dear Dr. Antônio Augusto Fröhlich:
+
+Thank you for uploading your paper 1568926733 ('On Component Frameworks
+for Embedded Systems') to The Ninth IEEE Symposium on Computers and
+Communications.  The paper is of type pdf and has a length of 75464
+bytes.
+
+pdf file 1568926733 uploaded (75464 bytes).
+
+You can modify your paper at
+
+http://edas.info/Paper.cgi?m=1568926733
+
+and see all your submissions at
+
+http://edas.info/home.cgi?c=4145
+
+Best Regards,
+Antonio Puliafito and Symeon Papvassiliou,
+Technical Co-chairs of ISCC2004
+
+From sbc-l-bounces@inf.ufrgs.br  Wed Nov 26 02:08:35 2003
+Return-Path: <sbc-l-bounces@inf.ufrgs.br>
+Received: from terra.inf.ufsc.br (terra.inf.ufsc.br [150.162.60.10])
+	by sv1.lisha.ufsc.br (8.12.8/8.12.8) with ESMTP id hAQ48ZIF020059
+	for <guto@lisha.ufsc.br>; Wed, 26 Nov 2003 02:08:35 -0200
+Received: by terra.inf.ufsc.br (Departamento de Informatica e Estatistica (INE/CTC/UFSC))
+	id 41E6E1A93A; Wed, 26 Nov 2003 02:16:07 -0200 (EDT)
+Delivered-To: guto@inf.ufsc.br
+Received: from localhost (netuno.inf.ufsc.br [150.162.60.11])
+	by terra.inf.ufsc.br (Departamento de Informatica e Estatistica (INE/CTC/UFSC)) with ESMTP
+	id DBB171A8F7; Wed, 26 Nov 2003 02:16:06 -0200 (EDT)
+Received: from netuno.inf.ufsc.br ([127.0.0.1])
+ by localhost (netuno [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
+ id 14174-07; Wed, 26 Nov 2003 02:08:30 -0200 (EDT)
+Received: from inf.ufrgs.br (puma.inf.ufrgs.br [143.54.11.5])
+	(using TLSv1 with cipher EDH-RSA-DES-CBC3-SHA (168/168 bits))
+	(No client certificate requested)
+	by netuno.inf.ufsc.br (Departamento de Informatica e Estatistica (INE/CTC/UFSC)) with ESMTP
+	id D0B9CC05C; Wed, 26 Nov 2003 02:08:29 -0200 (EDT)
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by inf.ufrgs.br (8.12.8/8.12.8) with ESMTP id hAQ40Ihp006520;
+	Wed, 26 Nov 2003 02:00:18 -0200
+Received: from inf.ufrgs.br ([127.0.0.1])
+ by localhost (puma [127.0.0.1]) (amavisd-new, port 10024) with LMTP
+ id 05403-04-2; Wed, 26 Nov 2003 02:00:17 -0200 (EDT)
+Received: from puma.inf.ufrgs.br (localhost.localdomain [127.0.0.1])
+	by inf.ufrgs.br (8.12.8/8.12.8) with ESMTP id hAQ3tqYm005225;
+	Wed, 26 Nov 2003 01:58:59 -0200
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by inf.ufrgs.br (8.12.8/8.12.8) with ESMTP id hAQ3tohp005208
+	for <sbc-l@sbc.org.br>; Wed, 26 Nov 2003 01:55:50 -0200
+Received: from inf.ufrgs.br ([127.0.0.1])
+	by localhost (puma [127.0.0.1]) (amavisd-new, port 10024) with LMTP
+	id 03609-09 for <sbc-l@sbc.org.br>;
+	Wed, 26 Nov 2003 01:55:48 -0200 (EDT)
+Received: from lrg.ufsc.br (orion.lrg.ufsc.br [150.162.63.1])
+	by inf.ufrgs.br (8.12.8/8.12.8) with ESMTP id hAQ3tkYh005187
+	for <sbc-l@sbc.org.br>; Wed, 26 Nov 2003 01:55:46 -0200
+Received: from localhost (westphal@localhost)
+	by  (8.9.3+Sun/8.9.3) with ESMTP id BAA02102
+Date: Wed, 26 Nov 2003 01:56:00 -0400 (WST)
+From: Carlos Becker Westphall <westphal@orion.lrg.ufsc.br>
+To: sbc-l@sbc.org.br
+Message-ID: <Pine.GSO.4.10.10311260155460.1988-100000@orion.lrg.ufsc.br>
+MIME-Version: 1.0
+Content-Type: TEXT/PLAIN; charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
+X-MIME-Autoconverted: from QUOTED-PRINTABLE to 8bit by inf.ufrgs.br id
+	hAQ3tohp005208
+Cc: 
+Subject: [Sbc-l] [ieee-cnom] [ISCC'04] IEEE ISCC'04 --- Deadline Extension
+	(fwd)
+X-BeenThere: sbc-l@inf.ufrgs.br
+X-Mailman-Version: 2.1.3
+Precedence: list
+List-Id: Lista da Sociedade Brasileira de Computacao <sbc-l.inf.ufrgs.br>
+List-Unsubscribe: <https://listas.inf.ufrgs.br/mailman/listinfo/sbc-l>,
+	<mailto:sbc-l-request@inf.ufrgs.br?subject=unsubscribe>
+List-Archive: <https://listas.inf.ufrgs.br/mailman/private/sbc-l>
+List-Post: <mailto:sbc-l@inf.ufrgs.br>
+List-Help: <mailto:sbc-l-request@inf.ufrgs.br?subject=help>
+List-Subscribe: <https://listas.inf.ufrgs.br/mailman/listinfo/sbc-l>,
+	<mailto:sbc-l-request@inf.ufrgs.br?subject=subscribe>
+Sender: sbc-l-bounces@inf.ufrgs.br
+Errors-To: sbc-l-bounces@inf.ufrgs.br
+X-Virus-Scanned: by amavisd-new at inf.ufsc.br
+X-Spam-Status: No, hits=0.6 required=5.0
+	tests=AWL,MAILTO_TO_SPAM_ADDR,SPAM_PHRASE_01_02,USER_AGENT_PINE
+	version=2.44
+X-Spam-Level: 
+Status: RO
+X-Status: 
+X-Keywords:                 
+
+
+
+---------- Forwarded message ----------
+Date: Mon, 24 Nov 2003 10:27:34 +0100
+From: Paolo Bellavista <pbellavista@deis.unibo.it>
+To: ISCC2004@mail.ing.unibo.it
+Subject: [ieee-cnom] [ISCC'04] IEEE ISCC'04 --- Deadline Extension
+
+Please apologize if you received multiple copies of this communication & 
+Call-for-Papers
+_________________________________________________________________________
+
+In response to several authors' requests,
+we have decided to extend the paper submission for IEEE ISCC'04.
+
+NEW SUBMISSION DEADLINE: December 5th, 2003
+_________________________________________________________________________
+
+Call for Papers
+
+The Ninth IEEE Symposium on Computers and Communications
+
+ISCC 2004
+
+Alexandria, Egypt
+29 June - 1 July, 2004
+
+(       Web site for ISCC series: http://www.comsoc.org/iscc/
+         pdf version of the ISCC'04 cfp: 
+http://www.comsoc.org/iscc/cfp_2004.pdf )
+
+Continuing the tradition of this series of symposia, ISCC'2004 will provide 
+an international technical forum for experts
+from industry and academia to exchange ideas and present results of ongoing 
+research in the areas listed below.
+This year, special focus will be on the challenging issues related to the 
+creation, management, dissemination, and
+communication of information. You are invited to submit a full paper, or a 
+proposal for a panel, invited session, or tutorial,
+related to the following topics:
+
+- Access Networks
+- Agent and Knowledge Base Technology
+- Control and Optimization of Communication Systems
+- Data Mining and Database Applications
+- Distributed Systems Architecture and Management
+- Electronic  Commerce and E-Services
+- Grid and Cluster Computing
+- High Performance Networking and Protocols
+- Internet Services and Applications
+- Real-time Communications Services (VoIP, Gaming, video)
+- Mobile Ad-hoc and Sensor Networks
+- Modeling and Simulation
+- Multimedia Information Management and Exchange
+- Network Design, Operation, and Management
+- Network Reliability and Quality of Service
+- Optical Networking
+- Overlay and Programmable Networks
+- Security and Cryptography
+- Signal Processing in Communications and Networking
+- Software Design, Testing, and Reliability
+- Survivable networks
+- Wireless, Cellular and Mobile Communications
+- Ultra-wide Band Communications
+
+To submit a paper, please follow the submission guidelines at 
+http://www.comsoc.org/iscc/2004.
+A modified version of best papers selected will be considered for 
+publication in the Computer Communications Journal.
+
+For additional information contact the Technical Program Co-Chairs:
+
+Symeon Papavassiliou
+New Jersey Institute of Technology,
+Dept of Electrical & Computer Eng, University Heights
+Newark, NJ 07102, USA
+Tel:    +1 973 642 7817
+Fax:    +1 973 596 5680
+Papavassiliou@adm.njit.edu
+
+Antonio Puliafito
+Dept. of Mathematics, University of Messina
+98166 Messina, ITALY
+Tel:    +39 090 393229
+Fax:    +39 090 393502
+apulia@ingegneria.unime.it
+________________________________________________________________
+
+Important Dates:
+December 5, 2003                NEW paper submission deadline
+February 23, 2004                       Notification of acceptance mailed 
+to authors
+April 13, 2004                          Final camera-ready manuscripts due
+
+
+Ing. Paolo Bellavista, Ph. D.
+Research Associate in Computer Science Engineering
+DEIS-LIA - Università degli Studi di Bologna
+Viale Risorgimento, 2 - 40136 Bologna (ITALY)
+Tel# +39-051-2093866; Fax# +39-051-2093073
+Email: pbellavista@deis.unibo.it
+Web: http://lia.deis.unibo.it/Staff/PaoloBellavista/  
+
+
+_______________________________________________
+ISCC2004 mailing list
+ISCC2004@mail.ing.unibo.it
+http://calvin.ing.unibo.it/mailman/listinfo/iscc2004
+_______________________________________________
+Cnom mailing list
+Cnom@orion.lrg.ufsc.br
+http://orion.lrg.ufsc.br/mailman/listinfo/cnom
+
+
+_______________________________________________
+Sbc-l mailing list
+Sbc-l@inf.ufrgs.br
+https://listas.inf.ufrgs.br/mailman/listinfo/sbc-l
+
+From guto@sv1.lisha.ufsc.br Tue Dec 30 18:55:39 2003 -0200
+Return-Path: <apulia@ingegneria.unime.it>
+Received: from cs.columbia.edu (cs.columbia.edu [128.59.16.20])
+	by sv1.lisha.ufsc.br (8.12.8/8.12.8) with ESMTP id hBMCYikd030798
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <guto@lisha.ufsc.br>; Mon, 22 Dec 2003 10:34:47 -0200
+Received: from pennstation.cs.columbia.edu (IDENT:root@pennstation.cs.columbia.edu [128.59.19.197])
+	by cs.columbia.edu (8.12.10/8.12.10) with ESMTP id hBMCYEiE024194;
+	Mon, 22 Dec 2003 07:34:14 -0500 (EST)
+Received: (from nobody@localhost)
+	by pennstation.cs.columbia.edu (8.11.6/8.9.3) id hBMCYAO05995;
+	Mon, 22 Dec 2003 07:34:10 -0500
+Date: Mon, 22 Dec 2003 07:34:10 -0500
+Message-Id: <200312221234.hBMCYAO05995@pennstation.cs.columbia.edu>
+X-Authentication-Warning: pennstation.cs.columbia.edu: nobody set sender to apulia@ingegneria.unime.it using -f
+From: Antonio Puliafito <apulia@ingegneria.unime.it>
+To: guto@lisha.ufsc.br
+Subject: ISCC 2004: Review request (1568926526)
+Cc: Antonio Puliafito <apulia@ingegneria.unime.it>
+Reply-To: apulia@ingegneria.unime.it
+X-Spam-Status: No, hits=1.6 required=5.0
+	tests=CLICK_BELOW,DEAR_SOMEBODY,SPAM_PHRASE_08_13,X_AUTH_WARNING
+	version=2.44
+X-Spam-Level: *
+X-KMail-EncryptionState:  
+X-KMail-SignatureState:  
+Status: RO
+X-Status: A
+X-Keywords:                
+
+Dear Dr. Antônio Augusto Fröhlich,
+
+The paper "Software Application Design Based on Architecture,
+Reliability and Cost" has been submitted to The Ninth IEEE Symposium on
+Computers and Communications.  It has the following abstract:
+
+In this paper we present an optimization framework based on an
+evolutionary algorithm to design a modular software application taking
+into account its architecture, reliability and cost. The specific design
+problem that we address is the reliability maximization of a software
+application subject to a specified cost constraint. Evolutionary
+algorithm (EA) is used as an optimization technique because of the
+discontinuous search space, usually nonlinear but monotonic relation
+between cost and reliability of individual modules comprising the
+software application and complex software architectures giving rise to
+nonlinear dependencies between individual module reliabilities and the
+overall application reliability. We demonstrate how the EA can be
+effectively and efficiently to design a software application using three
+case studies.
+
+We believe that this paper falls within your area of expertise and would
+appreciate if you could review the paper. If you agree to review the
+paper by the deadline January 30, 2004, please click on the URL below:
+
+http://edas.info/Ry.cgi?r=92845&user=105728
+
+You will receive detailed review instructions by email.
+
+The paper review is requested by Antonio Puliafito.
+
+The review is due by January 30, 2004.  It is very important that both
+the reviews that you are handling on this paper be turned in before this
+deadline.
+
+If you cannot handle the paper, please click on the URL below:
+
+http://edas.info/Rn.cgi?r=92845&user=105728
+
+In this case, we would appreciate if you can use the web form above to
+provide the name and email address of a colleague (or graduate student
+of yours) who might be able to review the paper.
+
+In fairness to the authors and in order not to delay the review process,
+please indicate your choice as soon as possible, but no later than TWO
+days after receiving this message.
+
+You can find all your review assignments at
+http://edas.info/home.cgi?c=4145&user=105728
+
+Thanks again for your help.
+
+Antonio Puliafito
+apulia@ingegneria.unime.it
+
+
+From edas-help@edas.info  Tue Jan  6 14:49:17 2004
+Return-Path: <edas-help@edas.info>
+Received: from cs.columbia.edu (cs.columbia.edu [128.59.16.20])
+	by sv1.lisha.ufsc.br (8.12.8/8.12.8) with ESMTP id i06GnFkd010544
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <guto@lisha.ufsc.br>; Tue, 6 Jan 2004 14:49:16 -0200
+Received: from pennstation.cs.columbia.edu (IDENT:root@pennstation.cs.columbia.edu [128.59.19.197])
+	by cs.columbia.edu (8.12.10/8.12.10) with ESMTP id i06Gn4BF009594
+	for <guto@lisha.ufsc.br>; Tue, 6 Jan 2004 11:49:12 -0500 (EST)
+Received: (from nobody@localhost)
+	by pennstation.cs.columbia.edu (8.11.6/8.9.3) id i06GmoT22916;
+	Tue, 6 Jan 2004 11:48:50 -0500
+Date: Tue, 6 Jan 2004 11:48:50 -0500
+Message-Id: <200401061648.i06GmoT22916@pennstation.cs.columbia.edu>
+X-Authentication-Warning: pennstation.cs.columbia.edu: nobody set sender to edas-help@edas.info using -f
+From: EDAS Administrator <edas-help@edas.info>
+To: guto@lisha.ufsc.br
+Subject: Your EDAS password for a conference or journal
+X-Spam-Status: No, hits=0.7 required=5.0
+	tests=AWL,DEAR_SOMEBODY,SPAM_PHRASE_00_01,X_AUTH_WARNING
+	version=2.44
+X-Spam-Level: 
+Status: RO
+X-Status: 
+X-Keywords:                 
+
+Dear Antônio Augusto Fröhlich,
+
+An EDAS publication management account has been created for you, for one
+of the following reasons:
+- you are a co-author of a paper for a conference or journal,
+- you are technical program committee member for a conference or journal,
+- you will be asked to review a paper for a conference or journal,
+- you will be asked to chair a session for a conference or journal.
+
+Your EDAS user name is guto@lisha.ufsc.br, your ID number 105728, your
+password is
+
+kate.buoy.dub
+
+You can log in at
+ http://edas.info/index.cgi?user=105728&pw=kate.buoy.dub
+
+Your EDAS account can be used for all EDAS-managed conferences and
+journals. You should not create a new account for each conference.
+
+From guto@sv1.lisha.ufsc.br Tue Dec 30 18:55:39 2003 -0200
+Return-Path: <apulia@ingegneria.unime.it>
+Received: from cs.columbia.edu (cs.columbia.edu [128.59.16.20])
+	by sv1.lisha.ufsc.br (8.12.8/8.12.8) with ESMTP id hBMCYikd030798
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <guto@lisha.ufsc.br>; Mon, 22 Dec 2003 10:34:47 -0200
+Received: from pennstation.cs.columbia.edu (IDENT:root@pennstation.cs.columbia.edu [128.59.19.197])
+	by cs.columbia.edu (8.12.10/8.12.10) with ESMTP id hBMCYEiE024194;
+	Mon, 22 Dec 2003 07:34:14 -0500 (EST)
+Received: (from nobody@localhost)
+	by pennstation.cs.columbia.edu (8.11.6/8.9.3) id hBMCYAO05995;
+	Mon, 22 Dec 2003 07:34:10 -0500
+Date: Mon, 22 Dec 2003 07:34:10 -0500
+Message-Id: <200312221234.hBMCYAO05995@pennstation.cs.columbia.edu>
+X-Authentication-Warning: pennstation.cs.columbia.edu: nobody set sender to apulia@ingegneria.unime.it using -f
+From: Antonio Puliafito <apulia@ingegneria.unime.it>
+To: guto@lisha.ufsc.br
+Subject: ISCC 2004: Review request (1568926526)
+Cc: Antonio Puliafito <apulia@ingegneria.unime.it>
+Reply-To: apulia@ingegneria.unime.it
+X-Spam-Status: No, hits=1.6 required=5.0
+	tests=CLICK_BELOW,DEAR_SOMEBODY,SPAM_PHRASE_08_13,X_AUTH_WARNING
+	version=2.44
+X-Spam-Level: *
+X-KMail-EncryptionState:  
+X-KMail-SignatureState:  
+Status: RO
+X-Status: A
+X-Keywords:                
+
+Dear Dr. Antônio Augusto Fröhlich,
+
+The paper "Software Application Design Based on Architecture,
+Reliability and Cost" has been submitted to The Ninth IEEE Symposium on
+Computers and Communications.  It has the following abstract:
+
+In this paper we present an optimization framework based on an
+evolutionary algorithm to design a modular software application taking
+into account its architecture, reliability and cost. The specific design
+problem that we address is the reliability maximization of a software
+application subject to a specified cost constraint. Evolutionary
+algorithm (EA) is used as an optimization technique because of the
+discontinuous search space, usually nonlinear but monotonic relation
+between cost and reliability of individual modules comprising the
+software application and complex software architectures giving rise to
+nonlinear dependencies between individual module reliabilities and the
+overall application reliability. We demonstrate how the EA can be
+effectively and efficiently to design a software application using three
+case studies.
+
+We believe that this paper falls within your area of expertise and would
+appreciate if you could review the paper. If you agree to review the
+paper by the deadline January 30, 2004, please click on the URL below:
+
+http://edas.info/Ry.cgi?r=92845&user=105728
+
+You will receive detailed review instructions by email.
+
+The paper review is requested by Antonio Puliafito.
+
+The review is due by January 30, 2004.  It is very important that both
+the reviews that you are handling on this paper be turned in before this
+deadline.
+
+If you cannot handle the paper, please click on the URL below:
+
+http://edas.info/Rn.cgi?r=92845&user=105728
+
+In this case, we would appreciate if you can use the web form above to
+provide the name and email address of a colleague (or graduate student
+of yours) who might be able to review the paper.
+
+In fairness to the authors and in order not to delay the review process,
+please indicate your choice as soon as possible, but no later than TWO
+days after receiving this message.
+
+You can find all your review assignments at
+http://edas.info/home.cgi?c=4145&user=105728
+
+Thanks again for your help.
+
+Antonio Puliafito
+apulia@ingegneria.unime.it
+
+
+From edas-help@edas.info  Tue Jan  6 14:49:17 2004
+Return-Path: <edas-help@edas.info>
+Received: from cs.columbia.edu (cs.columbia.edu [128.59.16.20])
+	by sv1.lisha.ufsc.br (8.12.8/8.12.8) with ESMTP id i06GnFkd010544
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <guto@lisha.ufsc.br>; Tue, 6 Jan 2004 14:49:16 -0200
+Received: from pennstation.cs.columbia.edu (IDENT:root@pennstation.cs.columbia.edu [128.59.19.197])
+	by cs.columbia.edu (8.12.10/8.12.10) with ESMTP id i06Gn4BF009594
+	for <guto@lisha.ufsc.br>; Tue, 6 Jan 2004 11:49:12 -0500 (EST)
+Received: (from nobody@localhost)
+	by pennstation.cs.columbia.edu (8.11.6/8.9.3) id i06GmoT22916;
+	Tue, 6 Jan 2004 11:48:50 -0500
+Date: Tue, 6 Jan 2004 11:48:50 -0500
+Message-Id: <200401061648.i06GmoT22916@pennstation.cs.columbia.edu>
+X-Authentication-Warning: pennstation.cs.columbia.edu: nobody set sender to edas-help@edas.info using -f
+From: EDAS Administrator <edas-help@edas.info>
+To: guto@lisha.ufsc.br
+Subject: Your EDAS password for a conference or journal
+X-Spam-Status: No, hits=0.7 required=5.0
+	tests=AWL,DEAR_SOMEBODY,SPAM_PHRASE_00_01,X_AUTH_WARNING
+	version=2.44
+X-Spam-Level: 
+Status: RO
+X-Status: 
+X-Keywords:                 
+
+Dear Antônio Augusto Fröhlich,
+
+An EDAS publication management account has been created for you, for one
+of the following reasons:
+- you are a co-author of a paper for a conference or journal,
+- you are technical program committee member for a conference or journal,
+- you will be asked to review a paper for a conference or journal,
+- you will be asked to chair a session for a conference or journal.
+
+Your EDAS user name is guto@lisha.ufsc.br, your ID number 105728, your
+password is
+
+kate.buoy.dub
+
+You can log in at
+ http://edas.info/index.cgi?user=105728&pw=kate.buoy.dub
+
+Your EDAS account can be used for all EDAS-managed conferences and
+journals. You should not create a new account for each conference.
+
+From papavassiliou@adm.njit.edu  Wed Feb 11 10:11:11 2004
+Return-Path: <papavassiliou@adm.njit.edu>
+Received: from cs.columbia.edu (cs.columbia.edu [128.59.16.20])
+	by sv1.lisha.ufsc.br (8.12.8/8.12.8) with ESMTP id i1BCB7hn000345
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <guto@lisha.ufsc.br>; Wed, 11 Feb 2004 10:11:10 -0200
+Received: from pennstation.cs.columbia.edu (IDENT:root@pennstation.cs.columbia.edu [128.59.19.197])
+	by cs.columbia.edu (8.12.10/8.12.10) with ESMTP id i1BCAcwn025446;
+	Wed, 11 Feb 2004 07:10:38 -0500 (EST)
+Received: (from nobody@localhost)
+	by pennstation.cs.columbia.edu (8.11.6/8.9.3) id i1BCAcc30418;
+	Wed, 11 Feb 2004 07:10:38 -0500
+Date: Wed, 11 Feb 2004 07:10:38 -0500
+Message-Id: <200402111210.i1BCAcc30418@pennstation.cs.columbia.edu>
+X-Authentication-Warning: pennstation.cs.columbia.edu: nobody set sender to papavassiliou@adm.njit.edu using -f
+From: The Ninth IEEE Symposium on Computers and Communications <papavassiliou@adm.njit.edu>
+To: guto@lisha.ufsc.br
+Subject: The Ninth IEEE Symposium on Computers and Communications review for paper #1568926435 completed
+Cc: Antonio Puliafito <apulia@ingegneria.unime.it>
+X-Spam-Status: No, hits=1.1 required=5.0
+	tests=AWL,DEAR_SOMEBODY,SPAM_PHRASE_03_05,X_AUTH_WARNING
+	version=2.44
+X-Spam-Level: *
+Status: RO
+X-Status: 
+X-Keywords:                 
+
+Dear Dr. Antônio Augusto Fröhlich,
+
+Thank you for completing the review of the paper #1568926435 ('IP
+Address Lokup Using A Dynamic Hash Function') for The Ninth IEEE
+Symposium on Computers and Communications.  Below is a copy of your
+review.
+
+You can modify the report by going to
+http://edas.info/R.cgi?r=92960&user=105728 up to the due date of
+2004-02-11.
+
+Best Regards,
+Antonio Puliafito and Symeon Papavassiliou,
+Technical Co-chairs of ISCC2004
+
+---
+
+
+
+*** 1:  (3)
+
+*** 2:  (2)
+
+*** 3:  (4)
+
+*** 4:  (2)
+
+*** 5:  (3)
+
+*** 6:  (3)
+
+*** 7:  No (0)
+
+*** 1. Detailed Comments: The paper is well written, but the proposed
+strategy for IP address lookup is rather simple. The idea of narrowing
+the search group by deploying hierarchical data structures is as old as
+computer science. The data structures used are also straightforward.
+Nevertheless, I have to admit that you approached the subject
+comprehensively and pointed out results that, although easily
+predictable, confirm your proposal.  In my opinion, the text fits better
+a industry technical report than a conference paper.
+
+*** 2.Confidential Comments for Committee: The paper is well organized
+and written, the ideas are explained in full and also clearly referenced
+and evaluated, but the proposed strategy for IP address lookup is rather
+simple. In my opinion, the text fits better a industry technical report
+than a conference paper.
+
+From papavassiliou@adm.njit.edu  Sat Feb 21 17:48:23 2004
+Return-Path: <papavassiliou@adm.njit.edu>
+Received: from cs.columbia.edu (cs.columbia.edu [128.59.16.20])
+	by sv1.lisha.ufsc.br (8.12.8/8.12.8) with ESMTP id i1LKmLw3010933
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <guto@lisha.ufsc.br>; Sat, 21 Feb 2004 17:48:23 -0300
+Received: from pennstation.cs.columbia.edu (IDENT:root@pennstation.cs.columbia.edu [128.59.19.197])
+	by cs.columbia.edu (8.12.10/8.12.10) with ESMTP id i1LKmHmR001434
+	for <guto@lisha.ufsc.br>; Sat, 21 Feb 2004 15:48:17 -0500 (EST)
+Received: (from nobody@localhost)
+	by pennstation.cs.columbia.edu (8.11.6/8.9.3) id i1LKm5507867;
+	Sat, 21 Feb 2004 15:48:05 -0500
+Date: Sat, 21 Feb 2004 15:48:05 -0500
+Message-Id: <200402212048.i1LKm5507867@pennstation.cs.columbia.edu>
+X-Authentication-Warning: pennstation.cs.columbia.edu: nobody set sender to papavassiliou@adm.njit.edu using -f
+From: <papavassiliou@adm.njit.edu>
+To: guto@lisha.ufsc.br
+Subject: ISCC 2004: ISCC 2004, New Author Notification Due Date: March 1, 2004
+X-Spam-Status: No, hits=1.3 required=5.0
+	tests=AWL,DEAR_SOMEBODY,NO_REAL_NAME,SPAM_PHRASE_03_05,
+	      SUBJECT_MONTH,SUBJECT_MONTH_2,X_AUTH_WARNING
+	version=2.44
+X-Spam-Level: *
+Status: RO
+X-Status: 
+X-Keywords:                 
+
+Dear Author:
+
+We would like to inform you that the paper acceptance notification due
+date for your paper(s) submitted to the Ninth IEEE Symposium on
+Computers and Communications(ISCC 2004), has changed to: March 1, 2004.
+We received a very large number of very good papers this year and we are
+currently in the process of completing the reviews and making final
+decisions. We would very much appreciate your understanding and
+cooperation during this time.
+
+Once again thank you very much for submitting your paper(s) to IEEE ISCC
+2004.
+
+Best Regards,
+
+Symeon Papavassiliou and Antonio Puliafito, ISCC 2004 Technical Program
+Co-Chairs
+
+From papavassiliou@adm.njit.edu  Sat Feb 28 02:56:36 2004
+Return-Path: <papavassiliou@adm.njit.edu>
+Received: from cs.columbia.edu (cs.columbia.edu [128.59.16.20])
+	by sv1.lisha.ufsc.br (8.12.8/8.12.8) with ESMTP id i1S5uYw3015232
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <guto@lisha.ufsc.br>; Sat, 28 Feb 2004 02:56:36 -0300
+Received: from pennstation.cs.columbia.edu (IDENT:root@pennstation.cs.columbia.edu [128.59.19.197])
+	by cs.columbia.edu (8.12.10/8.12.10) with ESMTP id i1S5uNmR008801
+	for <guto@lisha.ufsc.br>; Sat, 28 Feb 2004 00:56:28 -0500 (EST)
+Received: (from nobody@localhost)
+	by pennstation.cs.columbia.edu (8.11.6/8.9.3) id i1S5u9108125;
+	Sat, 28 Feb 2004 00:56:09 -0500
+Date: Sat, 28 Feb 2004 00:56:09 -0500
+Message-Id: <200402280556.i1S5u9108125@pennstation.cs.columbia.edu>
+X-Authentication-Warning: pennstation.cs.columbia.edu: nobody set sender to papavassiliou@adm.njit.edu using -f
+From: The Ninth IEEE Symposium on Computers and Communications <papavassiliou@adm.njit.edu>
+To: guto@lisha.ufsc.br
+Subject: Your The Ninth IEEE Symposium on Computers and Communications paper 1568926733
+Reply-To: papavassiliou@adm.njit.edu
+X-Spam-Status: No, hits=1.5 required=5.0
+	tests=AWL,DEAR_SOMEBODY,SPAM_PHRASE_02_03,SUBJ_HAS_UNIQ_ID,
+	      X_AUTH_WARNING
+	version=2.44
+X-Spam-Level: *
+Status: RO
+X-Status: 
+X-Keywords:                 
+
+Dear Dr. Antônio Augusto Fröhlich:
+
+On behalf of the Technical Program Committee, we regret to inform you
+that your paper #1568926733 ('On Component Frameworks for Embedded
+Systems') cannot be included in the technical program. As the conference
+received a large number of papers this year, a significant number of
+high-quality papers could not be accommodated.
+
+The reviews are below or can be found at
+http://edas.info/PaperShow.cgi?m=1568926733:
+
+
+
+
+===== Review =====
+
+
+
+*** 3 (Technical Correctness): 1 2 3 4
+
+Evaluation= (3)
+
+*** 4 (Technical Depth:): 1 2 3 4
+
+Evaluation= (3)
+
+*** 5 (Presentation of the Paper): 1 2 3 4
+
+Evaluation= (3)
+
+*** 1. Detailed Comments (Please supply detailed comments to back up
+your rankings. These comments will be forwarded to the authors of the
+paper. The comments will help the committee decide the outcome of the
+paper, and will help justify this decision for the authors. Moreover, if
+the paper is accepted, the comments should guide the authors in making
+revisions for a final manuscript. Hence, the more detailed you make your
+comments; the more useful your review will be - both for the committee
+and for the authors.): The paper presents an interesting concept of
+adapting the operating system to the requirements of the application,
+rather than the traditional approach of adapting the application to what
+is offered by the operating system. A component framework where
+operating system services could be built by customizing reusable
+components is presented.
+
+While the description of the component framework is definitely
+interesting, the usefulness of the framework should be backed up with a
+case study.
+
+
+===== Review =====
+
+
+
+*** 3 (Technical Correctness): 1 2 3 4
+
+Evaluation= (1)
+
+*** 4 (Technical Depth:): 1 2 3 4
+
+Evaluation= (2)
+
+*** 5 (Presentation of the Paper): 1 2 3 4
+
+Evaluation= (2)
+
+*** 1. Detailed Comments (Please supply detailed comments to back up
+your rankings. These comments will be forwarded to the authors of the
+paper. The comments will help the committee decide the outcome of the
+paper, and will help justify this decision for the authors. Moreover, if
+the paper is accepted, the comments should guide the authors in making
+revisions for a final manuscript. Hence, the more detailed you make your
+comments; the more useful your review will be - both for the committee
+and for the authors.): ------Brief description : The main point of the
+paper is  to present a strategy for developing component frameworks that
+could be used to instantiate specific operating systems for embedded
+applications.
+
+The problem is well identified in Introduction  when a programmer has to
+develop  an embedded application, he must, at most, to select certain
+characteristics of operating systems, for instance device drivers. He
+rarely has the chance of choosing an infrastructure of objects which
+provides an adequate runtime environment , with minimum overhead for the
+application.
+
+Hence, the possible solution is to build the operating system  as an
+aggregate of reusable software components that can be chosen so as to be
+an adequate infrastructure to certain embedded applications. The
+components are chosen regarding the application  requirements. A
+framework of components that provides the components and their
+relationships could be useful for that purpose, such a framework  is the
+result reported in the paper
+
+--------- Comments :
+
+- At the end of the Introduction section, a paragraph showing the
+outline of the paper should be written.
+
+- The paper lacks a section presenting related works, specially
+regarding frameworks. One of the most important authors is Fayad.
+FAYAD,M.E.; SCHMIDT, D.C.  Object-oriented application frameworks.
+Communic. Of the ACM. V.40, n.10, 1997 FAYAD,M.E.; SCHMIDT, D.C.;
+JOHNSON.R.   Building application frameworks: Object-oriented
+foundations of framework design  John Wiley & Sons, 1999.
+
+- I suppose because of the lack of the related works, certain well 
+known terms are presented in paper in other words  such as, on page 1,
+´configurable features´ are usually named as ´hot spots´ of frameworks.
+Besides the classical references, it should be very interesting to
+mention more recent works related to component frameworks, although we
+know there is no  consensus yet.
+
+- Another consequence of the lack of related works is the impossibility
+of the proposed idea being compared to other approaches. The comparison
+would be interesting to situate in the context of the other researches
+and to show the contributions. In the current paper, the readers cannot
+see the relevance or the actual contribution of the proposed idea.
+
+- In the Abstract and the Conclusion sections, the author says that the
+main contribution is the strategy of developing component frameworks ,
+BUT the strategy is distributed throughout the paper and it should be
+presented in a more formal way. After the strategy has be described in
+the sections Domain Engineering and Component Frameworks, we can see a
+case study which had lead the author to develop the strategy. The
+readers expect the strategy be well defined, maybe by means of its
+steps, activities and intermediate artifacts.
+
+- The Figure 2 shows schematically the framework , but it is not clear
+what is a component and a family (concepts that have being used since
+the beginning of the paper).
+
+- The strategy has two phases, basically: identifying families of
+scenario-independent abstractions, and identifying scenario aspects.
+Although concepts of Aspects-oriented Programming are mentioned,
+scenario aspects are loosely presented; it would be interesting to show
+how the concepts of Aspects-oriented Programming are applied and which
+Programming language was adopted. Figure 3 could be used to explain the
+scenario aspects in mode detail.
+
+- At the final part of section 2, the term ´application-oriented system
+design´ is used. However, the process of developing a framework starts
+with Domain Engineering , trying to identify usual abstractions in a
+domain and the idea is not to identify specific abstractions of
+applicationsFinally, a better term could be ´ domain-oriented system
+design´ , couldnt?
+----------------------------------------^^^---------------------
+
+Thank you again for your interest in The Ninth IEEE Symposium on
+Computers and Communications. It is hoped that you will still plan to
+attend the conference and contribute to stimulating discussions around
+an exciting technical program in a unique environment.
+
+
+Best Regards,
+Antonio Puliafito and Symeon Papavassiliou,
+Technical Co-chairs of ISCC2004
+

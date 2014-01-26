@@ -1,0 +1,41 @@
+\begin{thebibliography}{1}
+
+\bibitem{MPI_1_1}
+M.~P.~I. Forum.
+\newblock {\em MPI: A Message-Passing Interface Standard}, 1995.
+\newblock version 1.1.
+
+\bibitem{Frohlich:2001}
+A.~A.~M. Fröhlich.
+\newblock {\em Application-Oriented Operating Systems}.
+\newblock PhD thesis, GMD-FIRST, June 2001.
+
+\bibitem{Gropp:1996:HPI}
+W.~Gropp, E.~Lusk, N.~Doss, and A.~Skjellum.
+\newblock A high-performance, portable implementation of the {MPI} message
+  passing interface standard.
+\newblock {\em Parallel Computing}, 22(6):789--828, Sept. 1996.
+
+\bibitem{GM}
+I.~Myricom.
+\newblock The gm message passing system, 1999.
+
+\bibitem{Carrol:1998}
+F.~O'Carroll, H.~Tezuka, A.~Hori, and Y.~Ishikawa.
+\newblock The design and implementation of zero copy mpi using commodity
+  hardware with a high performance network.
+\newblock In {\em Proceedings of the 12th international conference on
+  Supercomputing}, pages 243--250. ACM Press, 1998.
+
+\bibitem{Parnas:1976}
+D.~L. Parnas.
+\newblock {On the Design and Development of Program Families}.
+\newblock {\em IEEE Transactions on Software Engineering}, SE-2(1):1--9, Mar.
+  1976.
+
+\bibitem{Stroustrup:1997}
+B.~Stroustrup.
+\newblock {\em The C++ Programming Language}.
+\newblock Addison-Wesley, 3 edition, June 1997.
+
+\end{thebibliography}

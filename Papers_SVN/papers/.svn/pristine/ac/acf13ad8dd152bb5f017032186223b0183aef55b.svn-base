@@ -1,0 +1,16 @@
+\begin{tabular}{c|c|c|c|c}
+\textbf{T}      & \textbf{P}      & \textbf{WCET}   & \textbf{WCEC}        & \textbf{30-days} \\
+                & \textbf{($ms$)} & \textbf{($ms$)} & \textbf{($\eta Ah$)} & \textbf{($mAh$)} \\
+\hline
+$Sense$            & $1,000$                & $2$                     & $10.58$                  & $27.43$                       \\
+\hline
+$Send$          & $1,000$                & $50$                    & $268.06$                 & $694.8$                       \\
+\hline
+$Collector$      & $5$                    & $45.3 \times 10^{-6}$ & $4.16 \times 10^{-6}$    & $2.15 \times 10^{-3}$      \\
+\hline
+$LPL$ & $5$                    & $0.25$                  & $1.11 \times 10^{-6}$    & $0.58 \times 10^{-3}$\\
+\hline
+$Route$            & $50$             & $100$                   & $490.278$                 & $25.42 \times 10^{+3}$\\
+\hline
+\multicolumn{4}{c|}{\textbf{Energy consumption of hard real-time tasks}}                               & $722.24$                      \\
+\end{tabular}

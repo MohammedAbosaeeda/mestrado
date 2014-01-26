@@ -1,0 +1,115 @@
+\begin{thebibliography}{}
+
+\bibitem[Flinn and Satyanarayanan 1999]{Flinn:1999}
+Flinn, J. and Satyanarayanan, M. (1999).
+\newblock Energy-aware adaptation for mobile applications.
+\newblock In {\em SOSP '99: Proceedings of the seventeenth ACM symposium on
+  Operating systems principles}, pages 48--63, New York, NY, USA. ACM Press.
+
+\bibitem[Harada et~al. 2006]{Harada:2006}
+Harada, F., Ushio, T., and Nakamoto, Y. (2006).
+\newblock Power-aware resource allocation with fair qos guarantee.
+\newblock In {\em RTCSA '06: Proceedings of the 12th IEEE International
+  Conference on Embedded and Real-Time Computing Systems and Applications},
+  pages 287--293, Washington, DC, USA. IEEE Computer Society.
+
+\bibitem[Helmbold et~al. 1996]{Helmbold:1996}
+Helmbold, D.~P., Long, D. D.~E., and Sherrod, B. (1996).
+\newblock A dynamic disk spin-down technique for mobile computing.
+\newblock In {\em MobiCom '96: Proceedings of the 2nd annual international
+  conference on Mobile computing and networking}, pages 130--142, New York, NY,
+  USA. ACM Press.
+
+\bibitem[Hoeller et~al. 2006]{Hoeller:DIPES:2006}
+Hoeller, A. S.~J., Wanner, L.~F., and Fr\"{o}hlich, A.~A. (2006).
+\newblock {A Hierarchical Approach For Power Management on Mobile Embedded
+  Systems}.
+\newblock In {\em 5th IFIP Working Conference on Distributed and Parallel
+  Embedded Systems}, pages 265--274, Braga, Portugal.
+
+\bibitem[Kravets and Krishnan 1998]{Kravets:1998}
+Kravets, R. and Krishnan, P. (1998).
+\newblock Power management techniques for mobile communication.
+\newblock In {\em MobiCom '98: Proceedings of the 4th annual ACM/IEEE
+  international conference on Mobile computing and networking}, pages 157--168,
+  New York, NY, USA. ACM Press.
+
+\bibitem[Lin et~al. 1987a]{Lin:1987a}
+Lin, K.~J., Natarajan, S., and Liu, J. W.~S. (1987a).
+\newblock Imprecise results: Utilizing partial computations in real-time
+  systems.
+\newblock In {\em Proc. IEEE Real-Time System Symp.}
+
+\bibitem[Lin et~al. 1987b]{Lin:1987b}
+Lin, K.~J., Natarajan, S., and Liu, J. W.~S. (1987b).
+\newblock Scheduling real-time, periodic jobs using imprecise results.
+\newblock In {\em Proc. IEEE Real-Time System Symp.}
+
+\bibitem[Liu and Layland 1973]{Liu:1973}
+Liu, C.~L. and Layland, J.~W. (1973).
+\newblock Scheduling algorithms for multiprogramming in a hard-real-time
+  environment.
+\newblock {\em J. ACM}, 20(1):46--61.
+
+\bibitem[Liu et~al. 1994]{Liu:1994}
+Liu, J.~W., Shih, W.-K., Lin, K.-J., Bettati, R., and Chung, J.-Y. (1994).
+\newblock Imprecise computations.
+\newblock {\em Proceedings of the IEEE}, 82(1):83--94.
+
+\bibitem[Marcondes et~al. 2006]{Marcondes:ETFA:2006}
+Marcondes, H., Junior, A. S.~H., Wanner, L.~F., and Fr\"{o}hlich, A.~A. (2006).
+\newblock {Operating Systems Portability: 8 bits and beyond}.
+\newblock In {\em 11th IEEE International Conference on Emerging Technologies
+  and Factory Automation}, pages 124--130, Prague, Czech Republic.
+
+\bibitem[Niu and Quan 2005]{Niu:2005}
+Niu, L. and Quan, G. (2005).
+\newblock A hybrid static/dynamic dvs scheduling for real-time systems with (m,
+  k)-guarantee.
+\newblock {\em rtss}, 0:356--365.
+
+\bibitem[Pouwelse et~al. 2001]{Pouwelse:2001}
+Pouwelse, J., Langendoen, K., and Sips, H. (2001).
+\newblock Dynamic voltage scaling on a low-power microprocessor.
+\newblock In {\em MobiCom '01: Proceedings of the 7th annual international
+  conference on Mobile computing and networking}, pages 251--259, New York, NY,
+  USA. ACM Press.
+
+\bibitem[Scordino and Lipari 2004]{Scordino:2004}
+Scordino, C. and Lipari, G. (2004).
+\newblock Using resource reservation techniques for power-aware scheduling.
+\newblock In {\em EMSOFT '04: Proceedings of the 4th ACM international
+  conference on Embedded software}, pages 16--25, New York, NY, USA. ACM Press.
+
+\bibitem[Weiser et~al. 1994]{Weiser:1994}
+Weiser, M., Welch, B., Demers, A.~J., and Shenker, S. (1994).
+\newblock Scheduling for reduced {CPU} energy.
+\newblock In {\em OSDI}, pages 13--23.
+
+\bibitem[Wiedenhoft et~al. 2007a]{Wiedenhoft:ETFA:2007}
+Wiedenhoft, G.~R., Junior, A. S.~H., and Fr\"{o}hlich, A.~A. (2007a).
+\newblock {A Power Manager for Deeply Embedded Systems}.
+\newblock In {\em 12th IEEE International Conference on Emerging Technologies
+  and Factory Automation}, pages 748--751, Patras, Greece.
+
+\bibitem[Wiedenhoft et~al. 2007b]{Wiedenhoft:WTR:2007}
+Wiedenhoft, G.~R., Junior, A. S.~H., and Fr\"{o}hlich, A.~A. (2007b).
+\newblock {Quality-Of-Service: the Role of Energy}.
+\newblock In {\em 9th Workshop on Real-Time Systems}, pages 107--110, Belem,
+  Brazil.
+
+\bibitem[Yuan 2004]{Yuan:2004}
+Yuan, W. (2004).
+\newblock {\em Grace-OS: An energy-efficient mobile multimedia operating
+  system}.
+\newblock PhD thesis, University of Illinois at Urbana-Champaign.
+
+\bibitem[Zeng et~al. 2002]{Zeng:2002}
+Zeng, H., Ellis, C.~S., Lebeck, A.~R., and Vahdat, A. (2002).
+\newblock Ecosystem: managing energy as a first class operating system
+  resource.
+\newblock In {\em ASPLOS-X: Proceedings of the 10th international conference on
+  Architectural support for programming languages and operating systems}, pages
+  123--132, New York, NY, USA. ACM Press.
+
+\end{thebibliography}

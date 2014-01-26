@@ -1,0 +1,191 @@
+% ------------------------------------------------------------------------------
+\section{Proposal} \label{proposal}
+% + Proposal Verify correctness of embedded systems components at the
+% System Level Design.
+% 
+% Chosen language: C++, since it is a wide used object-oriented language to
+% program embedded system software plus High-Level Synthesis allows for
+% "writing" hardware in C++
+% 
+% Approach: Write the contract of the component to be verified, instrument the
+% component with this contract, and execute a Software Model Checking:
+% CBMC (C Bounded Model Checking) to verify whether the component implementation
+% fulfill its contract.
+% 
+% Show we have use scenario adapters to instrument a component with its contract,
+% in an Aspect-Oriented fashion.
+% 
+% Dizer aqui, ou em uma seção de discussão, que
+% A instrumentação via adaptadores de cenário permite que o código do contrato
+% seja "automaticamente" removido, para que a versão a ser executada não possua
+% este código a mais, poupando memória, tempo e energia.
+% Porém, é possível deixar este código durante a execução do programa para
+% propósitos de testes em tempo de execução.
+% Ou dizer apenas que, é possível aproveitar os mesmos contratos para realização
+% propositos de testes em tempo de execução.
+%
+% outra parada ao invés de "automaticamente removível" é
+% "plugável" - contratos podem ser habilitados / plugados...
+% ou dizer que é um cenário, onde o componente pode entrar e sair...
+%
+%
+% + Verification at System Level Design: regardless whether a component is gone
+% to be implemented in SW or HW.
+% Chosen language: C++. Because HLS allows for ``writing'' HW in C++.
+As pointed out in Section \ref{sota}, recent progress in High-Level Synthesis
+tools and techniques are enabling the generation of hardware components from
+C++ descriptions.
+Furthermore, C++ has been used as a mainstream language for developing embedded
+software. % CITE.
+Therefore, we have chosen the C++ language to describe embedded system
+components which are going to be subject of formal verification.
+However, as we explain in Section \ref{concl}, the general ideas of our approach
+can be applied to other SLDLs, such as SystemC and SpecC.
+% This section presents our proposal for formal verification of properties
+% of embedded systems components described in C++, at the system level.
+
+% + What we verify: contracts + safety properties
+% e.g. of safety properties the absence of buffer overflows (array bounds), and pointer safety (dereferencing null pointer)
+% Our proposal covers the formal verification of two types of properties:
+% functional correctness properties and safety properties.
+% To verify functional correctness properties means to check if a given component
+% implementation follows its contract.
+% To verify safety properties means to check if there is a path of execution which
+% leads the component to an error state.
+% An error state can be caused, for example, by buffer overflows
+% (e.g. while array bounds are trespassed), and by violating pointer safety
+% (e.g. while dereferencing a null pointer).
+
+% (3) + Approach
+% * Write the contract of the program/design to be verified
+% * Instrument the program with this contract
+% * Execute CBMC over the program to verify whether it follows its contract
+Our proposed approach for formal verification of embedded systems components
+can be divided in three main stages:
+first one writes the contract of the component to be verified, then
+one instruments the component implementation with such contract, finally one
+executes software bounded model checking to verify if the component
+implementation respects its contract.
+The next paragraphs detail the process.
+
+% (4) + Writing the contract (e.g. of how it likes using our approach)
+According to our approach, the component contract is written in C++ using
+assertions (\emph{assert} expressions).
+A contract is composed by the invariants of the class that defines the component,
+and by a set of preconditions and postconditions (one for each public method).
+Class invariants are defined as a set of assertions that are always true
+for all instances of a class.
+The preconditions of a method are defined as a set of assertions that need to be true in
+order to the method execute.
+Similarly, the postconditions of a method are defined as a set of assertions that need to
+be true in case the method terminates normally.
+The assertions of the preconditions and postconditions can reason about the method's
+parameter, return value, and object state.
+Figure \ref{progcpp:contract_example} shows an example of contract for the
+\emph{insert} method of a queue class.
+The \emph{invariants} method implements the class invariants,
+which, in the example, states that such queue is never empty.
+
+% (5) + How we instrument a component with its contract (scenario adapters / verified scenario)
+The main disadvantage of writing contracts directly on the component class,
+as represented by Figure \ref{progcpp:contract_example}, is the additional code that
+the contract adds in to the component.
+While such code is needed during the verification phase, its presence might be
+undesired while the component is been used in a running system, since
+such additional code means
+a higher resource usage (such as memory and energy), maybe demanding more that
+the original embedded system was projected for.
+While the assertion expressions can be disabled if implemented using macros
+from the C preprocessor, as is the case of the standard C library (assert.h file
+for C or cassert file for C++), some other more complex contracts cannot.
+That is the case, for example, of the expression
+\begin{verbatim}
+assert(size() == size_at_pre + 1);
+\end{verbatim}
+of Figure \ref{progcpp:contract_example}, since it depends on the definition of
+a new variable (\emph{size\_at\_pre}) not present in the original method, but needed
+to express the method's contract.
+
+\progcpp{contract_example}{Example of contract}
+
+As an alternative for writing contracts directly on the component class, one can
+face the instrumentation of a component for verification by placing such
+component in a scenario for verification, which we named the
+\emph{Verified Scenario}, shown by Figure \ref{fig:verified_scenario}.
+Verified Scenario is implemented using the \emph{Scenario Adapter} pattern
+\cite{Froehlich:scenario:2000}.
+The client (\emph{Client}) class of a component access its methods though the 
+scenario adapter (\emph{ScenarioAdapter}), which extends the desired 
+implementation of a certain component.
+For each public method of the component, the \emph{ScenarioAdapter}, applies the
+pattern shown at the implementation of the method \emph{operation}.
+It calls the preconditions of such method before calling the actual method,
+and calls postconditions after the actual method is called.
+The actual method is called through delegation
+(\emph{ComponentImp::operation()}).
+It also calls the \emph{invariants} just before and just after calling the actual
+method, in order to guarantee that the method's implementation does not violate
+the class invariants.
+The \emph{VerifiedScenario},
+which is composed together with the \emph{ScenarioAdapter} through inheritance,
+is the one that contains all methods preconditions and postconditions and the
+class invariants.
+Such preconditions, postconditions and invariants can be faced as \emph{aspects}
+that change the behavior of a method making it ``verifiable''.
+The \emph{VerifiedScenario} groups such \emph{contract aspects} together also
+using inheritance.
+
+% \figtwocolumn{.4}{verified_scenario_h}{Verified Scenario}
+\fig{.4}{verified_scenario}{Verified Scenario}
+
+% (6) + Advantages of using Scenario Adapters
+The main advantage of using the scenario adapter pattern to instrument a
+component with its contract is the possibility of enabling and disabling
+such instrumentation easily.
+In order to enable the instrumentation all it is necessary to do is to create
+a type alias.
+\begin{verbatim}
+typedef ScenarioAdapter<ComponentImp>
+ComponentImp;
+\end{verbatim}
+As the scenario adapter implements the public interface of the \emph{Component}
+interface, the client class accesses the verified version of the component as
+usually.
+
+The verification proposed in this work is made in an off-line form (i.e. before
+the component is on a running system) by performing software model checking on
+the C++ code.
+Therefore, the running version of the component does not need its contract
+anymore
+(since it was already proved on the verification phase that the component follows its contract).
+However, one can choose to keep the instrumented version of the component at
+run-time to reuse its contract, for example, for monitoring proposes or for
+unit testing.
+This is feasible as long the additional code generated by the component's
+contract is taken into consideration while designing the embedded system.
+
+% (7) + How we verify: SW model-checking
+% "Execute CBMC over the program to verify whether it follows its contract"
+The tool we have chosen to perform software model checking on embedded system
+components was the \emph{C Bounded Model Checker} (CBMC)
+which handles C++ as input and has the source code available
+\cite{Kroehning:CBMC}.
+The component implementation, already instrumented with its contract, is
+translated by CBMC into a logical formula by a process called
+\emph{symbolic simulation}. % CITE
+While performing this translation, CBMC also performs static analysis on the
+source code generating properties to be checked.
+Among these properties, one can find the user defined assertions which, in our case,
+compose the component's contract and safety properties such as array bound
+check and pointer safety check.
+Then, the logical formula representing the component is combined to the
+properties generated by CBMC, generating VCCs.
+Finally, CBMC invokes an SAT solver which determines if the component properties
+are true (i.e. if they \emph{hold}).
+In the case a property does not hold, is generated a counter-example showing
+the execution path where the property is false.
+If all properties are proven true, the verification ends successfully proving
+that the component fulfills its contract and is free of safety properties
+violations.
+
+% ------------------------------------------------------------------------------

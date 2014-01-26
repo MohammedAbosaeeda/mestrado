@@ -1,0 +1,63 @@
+Paper: "Unified design and implementation of hybrid components" 
+===============================================================
+
+
+Introdução
+==========
+* Por quê componentes híbridos, por quê HW/SW co-design (buscar referencias MARCONDES)
+* Por quê um escalonador?
+Um escalonador de recursos é um componente bastante complexo, com comportamento assíncrono e
+autônomo . Além disso, um escalonador implementado em hardware traria a vantagem de fornecer tempo de execução
+totalmente determinístico para aplicações hard real-time (mencionar MUX?).
+
+
+Trabalhos correlatos (com esse nome? aqui?)
+===========================================
+* MARCONDES - componentes híbridos - Sustentar/justificar com a referência a escolha do escalonador
+* ADESD, AOOS, etc. Design do EPOS permitindo independência do cenário de execução
+
+
+(Section about ADESD) - "Application-driven HW/SW co-design of embedded systems"
+================================================================================
+
+
+Desenvolvimento
+===============
+* Mostrar o design do ESCALONADOR, separação do critério, Alarm, gerenciamento de contexto, etc.
+(seguir uma linha de argumentação semelhante
+* Mostrar os templates desenvolvidos para adaptar o escalonador COPIADO da versão em software
+à implementação em hardware.
+* Ressaltar que a entrada pro processo de síntese/compilação é EXATAMENTE O MESMO CÓDIGO (descrição
+* comportamental) e que a performance desse código ambivalente é mostrada na seção de resultados (ter uma
+figura mostrando o fluxo de compilação/síntese do escalonador).
+* Comentar brevemente a possível generalização para encapsular outros algoritmos/componentes (alocação
+estática, dispatch de chamadas em hardware, etc.)
+
+
+Resultados
+==========
+* Principal resultado: mostrar que o mesmo código de alto nível pode ser compilado para SW ou sintetizado
+para HW e executar com eficiência próxima.
+* O uso de HLS com a nossa modelagem permitiu a geração de várias microarquiteturas de hardware a partir
+do EXATO mesmo código fonte que executa em software
+* Fazer a comparação entre o código-objeto "antigo" (exclusivo SW) e o código com as poucas adaptações
+necessárias para também executar em hardware (gráficos, tabelas).
+* Fazer a comparação dos cenários de HW gerados (microarquiteturas) e compará-los entre si e com o
+RTL de referência (MARCONDES).
+* Ressaltar cenários extremos mais interessantes: o cenário mais serial possível se aproxima
+BASTANTE (+30%) em termos de área do RTL manual. O cenário totalmente paralelo oferece determinismo total para
+todas as operações.
+
+
+Conclusões
+==========
+* Alegar que o fator decisivo na facilidade de compilação/síntese unificado foi a modelagem às luzes de
+ADESD, e que as adaptações exclusivas à implementação em hardware seguem a mesma metodologia. 
+* As modificações (mônada Maybe<T>) e adições necessárias ao código C++ para adaptá-lo ao cenário de HW
+PARECEM se encaixar no conceito de aspectos. 
+* O nosso design facilita a exploração do espaço de projeto, na medida em que posterga as decisões de projeto
+relativas à ao dispositivo computacional em que o algoritmo executará. 
+
+
+
+

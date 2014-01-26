@@ -1,0 +1,22 @@
+\section{Introduction}
+\label{sec:introduction}
+
+\paragraph{Theme}
+Routing in mobile wireless sensor networks.
+
+\paragraph{Scope}
+Heuristics for energy-aware routing.
+
+ACO (\emph{Ant Colony Optimization}) is a metaheuristic approach inspired by the behavior of ant colonies to solve combinatorial optimization problems.
+
+
+%- Paper structure.
+% The paper is organized as follows.
+% Section~\ref{sec:related_work} presents the related work.
+% Section~\ref{sec:adhop} presents the ADHOP approach for routing packets in WSNs.
+% Section~\ref{sec:energy_aware_adhop} shows the extensions to the ADHOP to make it energy-aware.
+% Section~\ref{sec:evaluation_and_results} show simulation results to validate the proposed energy-aware ADHOP.
+% Section~\ref{sec:conclusion} makes some final remarks.
+
+% section introduction (end)
+

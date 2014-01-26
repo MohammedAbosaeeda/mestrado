@@ -1,0 +1,70 @@
+%-------------------------------------------------------------------------------
+% BIBLIOGRAFIA
+%-------------------------------------------------------------------------------
+\begin {thebibliography} {WWW 99m}
+
+\bibitem[ACC 86] {acc86} \hspace*{-1.25em}
+ACCETTA, M. et al., {\em Mach: a new kernel foundation for Unix development}, Proccedings of the Summer 1986 USENIX conference, Pittsburgh, p. 93-112, julho de 1986.
+
+\bibitem[BAC 87] {bac87} \hspace*{-1.25em}
+BACH, M. J., {\em The design of the Unix operating system}, Englewood Cliffs: Prentice-Hall, 1987.
+
+\bibitem[BOO 91] {boo91} \hspace*{-1.25em}
+BOOCH, G., {\em Object oriented design wich applications}, Redwood City: Benjamin Cummigs, 1991.
+
+\bibitem[BRO 85] {bro85} \hspace*{-1.25em}
+BROWN, M. \& KOLLING, K. \& TAFT, E., {\em The Alpine file system}, ACM Transactions on Computer Systems, v. 3, n. 4, novembro de 1985.
+
+\bibitem[CAS 90] {cas90} \hspace*{-1.25em}
+CASTRO, A. L. P., {\em Um servidor de arquivos paralelo para o Minix}, Porto Alegre: UFRGS, 1990 (Trabalho de Diplomação).
+
+\bibitem[FRO 92] {fro92} \hspace*{-1.25em}
+FROHLICH, A. A. M., {\em Um sistema de arquivos para o S.O.S.}, Porto Alegre:  UFRGS, 1992 (Trabalho de Diplomação).
+
+\bibitem[IEEE 88] {ieee88} \hspace*{-1.25em}
+INSTITUTE OF ELETRICAL AND ELECTRONICS ENGINEER, {\em POSIX - Portable Operating System Interface for Computing Environments}, IEEE Computing Society, 1988.
+
+\bibitem [MUL 84a] {mul84a} \hspace*{-1.25em}
+MULLENDER, S. J. \& TANEMBAUM, A. S., {\em Immediate files}, Software - Practice and Experience, v. 14, n. 4, p. 368-368, abril de 1984.
+
+\bibitem [MUL 84b] {mul84b} \hspace*{-1.25em}
+MULLENDER, S. J. \& TANENBAUM, A. S., {\em Protection and resource control in distributed operating systems}, Computer Networks, v. 8, p. 412-432, novembro de 1984.
+
+\bibitem [MUL 90] {mul90} \hspace*{-1.25em}
+MULLENDER, S. J. et al., {\em Amoeba: a distributed system for the 1990s}, IEEE Computer, p. 44-53, maio de 1990. 
+
+\bibitem[RES] {res} \hspace*{-1.25em}
+RESESSE, R. \& TANENBAUM, A. S. \& WILSCHUT, A., {\em The design of a high-performance file server}, p. 72-82.
+
+\bibitem[RFC 819] {rfc819} \hspace*{-1.25em}
+SU, Z. \& POSTEL, J, {\em The domain naming convention for internet user applications}, Menlo Park: Network Information Center, 1982.
+
+\bibitem[RFC 1034] {rfc1034} \hspace*{-1.25em}
+MOCKAPETRIS, P., {\em Domain names - concept and facilities}, Menlo Park: Network Information Center, 1987.
+
+\bibitem[RFC 1035] {rfc1035} \hspace*{-1.25em}
+MOCKAPETRIS, P., {\em Domain names - implementation and specification}, Menlo Park: Network Information Center, 1987.
+
+\bibitem[SAT 89] {sat89} \hspace*{-1.25em}
+SATYANARAYANAN, M., {\em A survey of distributed file systems}, Annual Review of Computer Science, v.4, 1989.
+
+\bibitem[SIL 90] {sil90} \hspace*{-1.25em}
+SILBERSCHATZ, A. \& PETERSON, J. L. \& GALVIN, P., {\em Operating systems concepts}, 3ª ed., Reading: Addison-Wesley, 1990.
+
+\bibitem[STE 92] {ste92} \hspace*{-1.25em}
+STEIN, B. O., {\em Projeto do núcleo de um sistema operacional distribuído}, Porto Alegre: UFRGS, 1992 (Dissertação de Mestrado).
+
+\bibitem[TAN 87a] {tan87a} \hspace*{-1.25em}
+TANEMBAUM, A. S., {\em A Unix clone with source code for operating systems courses}, Operating Systems Review, v. 21, n. 1, p. 20-29, janeiro de 1987.
+
+\bibitem[TAN 87b] {tan87b} \hspace*{-1.25em}
+TANEMBAUM, A. S., {\em Operating systems: design and implementation}, Englewood Cliffs: Prentice-Hall, 1987.
+
+\bibitem[TAN 89] {tan89} \hspace*{-1.25em}
+TANEMBAUM, A. S., {\em Computer networks}, Englewood Cliffs: Prentice-Hall, 1989.
+
+\bibitem[TAN 92] {tan92} \hspace*{-1.25em}
+TANEMBAUM, A. S., {\em Modern operating systems}, Englewood Cliffs: Prentice-Hall, 1992.
+
+\end{thebibliography}
+

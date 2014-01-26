@@ -1,0 +1,38 @@
+\section{Debbuging with QEMU and GDB}
+\label{sec:simulationEnv}
+%contain the main concepts involved in an automation of exchange application's parameters and details  the experiment.
+This section presents details of debugging, simulation and how to integrate both in order to create a better environment to develop embedded applications.
+
+Regardless of the technique to be used, debugging can be performed locally or remotely. Local debug is when the application runs in the same machine as debugger, so the process has lower latency, but big influence between both, for example, if a process causes a crash, debugger can only discovery what happened by halting or restarting.
+
+This influence does not happen in remote debug, once application and debugger run in separate machines and the process occurs on an isolated box over a network connection. Despite of having some latency problem, from the debugging environment point of view, its like a local debug with two screens connected into only one system.
+
+In order to provide the most number of possibilities to the developer, the emulator used to debug applications must provide both ways to perform this activity. QEMU is a generic and open source machine emulator and virtualizer \cite{qemu}. When used as a machine emulator its possible to run applications made for one machine to another by using dynamic translation. The decision of use QEMU emulator was based on its active community, support of Linux as host machine, a native set of target machines and the possibility to integrate a new machine.
+
+Thus, besides having QEMU to emulate applications, to perform a really useful debug, developer must think about others concepts involved in debugging, such as, how to configure the execution mode of the code, observe the outputs of the application, watch some environment's variables, log the tasks performed and others. This requires a good ally to see what steps the program was executing an moment before a crash or to specify anything that might affect its behavior. When debugging an application with GBD - \textit{the GNU Project Debugger} it is possible to see inside the application while it executes \cite{gdb}. 
+
+One important characteristic of GBD is to enable remote debug because this way we can run the program on a given embedded platform and same time debug it with GDB. In remote debugging, GDB connects to a remote system over a network and then can control the execution of the program and retrieve information about its state.
+
+The integration of both is particular for each machine host and target, therefore, maybe some steps presented here must be tailored depending on your target architecture. Figure~\ref{fig:qemu_gdb_gray} presents the activities required to perform remote debugging using IA-32 architecture and these steps and additional explanation of what techniques and tools used in this process are listed bellow:
+
+\fig{qemu_gdb_gray}{Steps to integrate QEMU and GDB}{scale=.25}
+
+\begin{enumerate}
+ \item \textbf{Compile with debug information} is the first and the most important step. As input is necessary the source code and the compiled 						application that has debug information its the expected output. The one who is using gcc (\textit{GNU project C and C++ compiler}) can perform this activity simply by using \textit{-g} option to compile.\\
+ 
+\item \textbf{Emulate with QEMU} is a necessary step to execute the application in the correct target architecture. To perform this step, developer must initiate QEMU with \textit{-s -S} options. The first option enables the GDB stub, in order to open communication between QEMU and GDB. The \textit{-S} option its used to force QEMU to wait GDB to connect after the system restart.
+
+Fox example, if the one has compiled an application with debug information (\textit{app.img}), that prints something in screen (\textit{stdio}), QEMU call should look like 
+
+\texttt{qemu -fda app.img -serial stdio -s -S}\\
+
+\item \textbf{Connect with GDB} starts with a GDB session, that must be initialized in an separate window. Then, to connect GDB in QEMU the developer must explicitate that the target to be examined is remote and inform the host address and port of this target (in this case, QEMU). When host is in the same machine as GDB, its possible inform only the port, but the complete line must be something like 
+
+\texttt{target remote [host]:[port]}\\
+
+\item \textbf{Recovery debug information} is an important step to help developers to find errors, once its possible to use autocomplete to recovery the all name contained in the symbols table. The file used to keep debug information (as the path) must be informed to GDB using the command 
+
+\texttt{file [path\_to\_the\_file]}\\
+  
+\item \textbf{Finding errors} is an activity that depends on the program to be debugged. From this step, the developer can set breakpoints, watchpoints, control the execution of the program and even enable logs. More information about command set can be found in GDB's page \cite{gdb}.
+\end{enumerate}

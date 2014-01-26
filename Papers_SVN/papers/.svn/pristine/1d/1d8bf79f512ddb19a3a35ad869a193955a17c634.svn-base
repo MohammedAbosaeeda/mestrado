@@ -1,0 +1,17 @@
+\begin{tabular}{c|c|c|c|c}
+\textbf{Task}      & \textbf{Period ($ms$)} & \textbf{WCET ($ms$)}    & \textbf{WCEC ($\eta Ah$)} & \textbf{25-days energy ($mAh$)} \\
+\hline
+$Sense$            & $1,000$                & $2$                     & $10.584$                  & $441.50$                       \\
+\hline
+$Forward$          & $1,000$                & $50$                    & $268.056$                 & $378.43$                       \\
+\hline
+$Collector$        & to be defined          & $0.0453 \times 10^{-3}$ & $41.56 \times 10^{-6}$    & will depend on the period      \\
+                   & (worst-case: $5$)      &                         &                           & (worst-case: $17.954 \times 10^{-3}$)     \\
+\hline
+$Low Power Listen$ & $5$                    & $0.25$                  & $1.111 \times 10^{-6}$    & $0.48 \times 10^{-3}$\\
+\hline
+$Route$            & $Sporadic$             & $100$                   & $490.278$                 & will depend o the activation rate\\
+                   & (Pretending $2$ Hz)    &                         &                           & (would be: $2,118$)     \\
+\hline
+\multicolumn{4}{c|}{\textbf{Energy consumption of mandatory tasks}}                               & $601.88$                      \\
+\end{tabular}

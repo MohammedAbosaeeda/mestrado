@@ -1,0 +1,1642 @@
+% Name: Antônio Augusto Fröhlich
+% Title: Software Engineering Bibliography
+% URL: http://www.inf.ufsc.br/guto
+% Email: guto%inf.ufsc.br
+
+@Book{Austern:1999,
+  author =	 "Matthew H. Austern",
+  title =	 "{Generic Programming and the STL}",
+  publisher =	 "Addison-Wesley",
+  year =	 1999,
+  abstract =	 "The STL is an example of the generic programming
+                  paradigm. It is a collection of predefined class and
+                  function templates, but it is also a collection of
+                  'concepts' that specify how the STL components
+                  collaborate and how the STL can be extended. Generic
+                  Programming and the STL is unique because of the
+                  approach it takes in describing the STL in terms of
+                  'concepts.' The plain use of STL containers and
+                  algorithms is described elsewhere; all STL books
+                  published so far explain what the predefined STL
+                  components have to offer. None of them provides much
+                  information about the systematic specification of type
+                  requirements behind the STL. This book takes the
+                  reader one step further. It describes all predefined
+                  components in the STL, but it explains them as
+                  manifestations of the abstract concepts. If you just
+                  want to use the predefined STL components, this is not
+                  the optimal book for you. If you strive for a thorough
+                  understanding of the STL and want to use it
+                  intensively and intend to extend it, you?ll find all
+                  necessary information here."
+}
+
+
+@Article{Batory:1992,
+  author =	 "Don Batory and Sean O'Malley",
+  title =	 "{The Design and Implementation of Hierarchical
+                  Software Systems with Reusable Components}",
+  journal =	 "ACM Transactions on Software Engineering and
+                  Methodology",
+  volume =	 1,
+  number =	 4,
+  pages =	 "355--398",
+  month =	 oct,
+  year =	 1992,
+  url =          "http://www.acm.org/pubs/articles/journals/tosem/1992-1-4/p355-batory/p355-batory.pdf",
+  abstract =	 "We present a domain-independent model of hierarchical
+                  software system design and construction that is based
+                  on interchangeable software components and large-scale
+                  reuse. The model unifies the conceptualizations of two
+                  independent projects, Genesis and Avoca, that are
+                  successful examples of software
+                  component/building-block technologies and domain
+                  modeling. Building-block technologies exploit
+                  large-scale reuse, rely on open architecture software,
+                  and elevate the granularity of programming to the
+                  subsystem level. Domain modeling formalizes the
+                  similarities and differences among systems of a
+                  domain. We believe our model is a blueprint for
+                  achieving software component technologies in many
+                  domains."
+}
+
+@Article{Beck:1989,
+  author =	 "Kent Beck and Ward Cunningham",
+  title =	 "{A Laboratory for Teaching Object-Oriented Thinking}",
+  journal =	 "ACM SIGPLAN Notices",
+  volume =	 24,
+  number =	 10,
+  pages =	 "1--6",
+  month =	 oct,
+  year =	 1989,
+  url =		 "http://portal.acm.org/citation.cfm?id=74879&coll=portal&dl=ACM&CFID=1687605&CFTOKEN=53315458#FullText",
+  abstract =	 "It is difficult to introduce both novice and
+                  experienced procedural programmers to the
+                  anthropomorphic perspective necessary for
+                  object-oriented design. We introduce CRC cards, which
+                  characterize objects by class name, responsibilities,
+                  and collaborators, as a way of giving learners a
+                  direct experience of objects. We have found this
+                  approach successful in teaching novice programmers the
+                  concepts of objects, and in introducing experienced
+                  programmers to complicated existing designs."
+}
+
+@InProceedings{Beck:1998,
+  author =	 "Kent Beck",
+  title =	 "{Extreme Programming: A Humanistic Discipline of
+                  Software Develpoment}",
+  booktitle =	 "Proceedings of the First International Conference on
+                  Fundamental Approaches to Software Engineering",
+  pages =	 "1--6",
+  year =	 1998,
+  volume =	 1382,
+  series =	 "Lecture Notes in Computer Science",
+  address =	 "Lisbon, Portugal",
+  month =	 mar,
+  publisher =	 "Springer",
+  url =          "http://link.springer.de/link/service/series/0558/papers/1382/13820001.pdf",
+  abstract =	 "Once a farmer and his friend were sitting at a
+                  battered kitchen table. The farmer said, ``It's time
+                  for the mule's lesson.'' Out they went into the
+                  yard. The farmer picked up a thick tree branch lying
+                  on the ground. He walked up to the mule and hit it
+                  over the head so hard the branch shattered. The mule
+                  staggered. His friend's jaw dropped. The friend said,
+                  ``You can't teach a mule a lesson like that.'' ``That
+                  wasn't the lesson,'' replied the farmer, ``that was
+                  just to get his attention.''"
+}
+
+@Book{Beck:1999,
+  author =	 "Kent Beck",
+  title =	 "{Extreme Programming Explained: Embrace Change}",
+  publisher =	 "Addison-Wesley",
+  year =	 1999
+}
+
+@Article{Biggerstaff:1998,
+  author =	 "Ted J. Biggerstaff",
+  title =	 "{A Perspective of Generative Reuse}",
+  journal =	 "Annals of Software Engineering",
+  volume =	 5,
+  pages =	 "169--226",
+  year =	 1998,
+  url =
+                  "http://www.baltzer.nl/ansoft/articles/1998/5/ase054.pdf",
+  abstract =	 "The paper presents a perspective of generative reuse
+                  technologies as they have evolved over the last 15
+                  years (1983-98) and a discussion of how generative
+                  reuse addresses some key reuse problems. Over that
+                  time period, a number of different reuse strategies
+                  have been tried, ranging from pure component reuse to
+                  pure generation. The record of success is mixed and
+                  the evidence is sketchy. Nevertheless, the paper uses
+                  some known metric evidence plus anecdotal evidence,
+                  personal experience, and suggestive evidence to define
+                  some of the boundaries of the success
+                  envelope. Fundamentally, the paper argues that the
+                  first order term in the success equation of reuse is
+                  the amount of domain-specific content and the second
+                  order term is the specific technology chosen in which
+                  to express that content. The overall payoff of any
+                  reuse system correlates well with the amount of
+                  content expressed in the domain specific
+                  elements. While not a silver bullet, technology is not
+                  without its contribution and the degree of payoff for
+                  any specific technology is sensitive to many
+                  factors. The paper argues that the generative factors
+                  predominate over other technology factors. By looking
+                  closely at several successful generation systems that
+                  are exemplars for classes of related systems, the
+                  paper examines how those classes have solved problems
+                  associated with the more convention reuse of concrete
+                  components expressed in conventional programming
+                  languages. This analysis distills the key elements of
+                  generative success and provides an opinion of
+                  approximately where each class of generative system
+                  fits in the overall picture. The result is a guide to
+                  the generative reuse technologies that appear to work
+                  best today."
+}
+
+@Book{Booch:1987,
+  author =	 "Grady Booch",
+  title =	 "{Software Components with Ada: Structures, Tools, and
+                  Subsystems}",
+  publisher =	 "Benjaming-Cummings",
+  year =	 1987
+}
+
+@Book{Booch:1994,
+  author =	 "Grady Booch",
+  title =	 "{Object-Oriented Analysis and Design with
+                  Applications}",
+  edition =	 2,
+  publisher =	 "Addison-Wesley",
+  year =	 1994
+}
+
+@Book{Booch:1999,
+  author =	 "Grady Booch and James Rumbaugh and Ivar Jacobson",
+  title =	 "{The Unified Modeling Language User Guide}",
+  publisher =	 "Addison Wesley Longman",
+  year =	 1999
+}
+
+@InProceedings{Burgess:1995,
+  author =	 "Colin J. Burgess",
+  title =	 "{Software Quality Issues when choosing a Programming
+                  Language}",
+  booktitle =	 "Proceedings of the Third International Conference on
+                  Software Quality Management",
+  pages =	 "25--31",
+  year =	 1995,
+  volume =	 2,
+  series =	 "Software Quality Management III",
+  address =	 "Seville, Spain",
+  month =	 apr,
+  url =          "http://www.cs.bris.ac.uk/Tools/Reports/Ps/1995-burgess-0.ps.gz",
+  abstract =	 "For high quality software, an important part of the
+                  project is the choice of the programming language and
+                  compiler to be used. This paper examines some of the
+                  issues affecting software quality that should be
+                  considered when making this choice, including the
+                  extent to which the programming language encourages
+                  the writing of good quality programs; the degree to
+                  which the precise effect of the programs written in
+                  the language have been formally defined; and the
+                  degree of confidence that can be placed in the
+                  compiler implementation. As an important part of this,
+                  the paper will include reference to the role of formal
+                  definitions of programming languages, programming
+                  language standards and compiler validation
+                  techniques."
+}
+
+@Misc{CACM:oct:2000,
+  key =		 "Lar00",
+  title =	 "{Special Section on Component-Based Enterprise
+                  Frameworks}",
+  howpublished = "In Grant Larsen, editor, \emph{Communications of the ACM},
+                  43(10):24--66",
+  month =	 oct,
+  year =	 2000,
+  url =          "http://www.acm.org/pubs/contents/journals/cacm/2000-43/#10"
+}
+
+@Article{CACM:oct:2000a,
+  title =	 "{Special Section on Component-Based Enterprise
+                  Frameworks}",
+  key =		 "CACM",
+  editor =	 "Grant Larsen",
+  journal =	 "Communications of the ACM",
+  year =	 2000,
+  volume =	 43,
+  number =	 10,
+  pages =	 "24--66",
+  month =	 oct,
+  url =
+                  "http://www.acm.org/pubs/contents/journals/cacm/2000-43/#10"
+}
+
+@article{Card:1990,
+  author =	 "David Card",
+  title =	 "{Software Quality Engeneering}",
+  journal =	 "Information and Software Technology",
+  volume =	 32,
+  number =	 1,
+  pages =	 "3--10",
+  month =	 jan,
+  year =	 1990
+}
+
+@InProceedings{Coady:2001,
+  author =	 "Yvonne Coady and Gregor Kiczales and Mike Feeley and
+                  Greg Smolyn",
+  title =	 "Using AspectC to Improve the Modularity of
+                  Path-Specific Customization in Operating System Code",
+  booktitle =	 "International Symposium on Foundations of Software
+                  Engineering",
+  pages =	 "88--98",
+  year =	 2001,
+  address =	 "Vienna, Austria",
+  month =	 sep,
+  publisher =	 "ACM SIGSOFT",
+  url =          "http://www.cs.ubc.ca/labs/spl/papers/2001/coady-psc.pdf",
+  abstract =	 "Layered architecture in operating system code is often
+                  compromised by execution path-specific customizations
+                  such as prefetching, page replacement and scheduling
+                  strategies. Path-specific customizations are difficult
+                  to modularize in a layered architecture because they
+                  involve dynamic context passing and layer
+                  violations. Effectively they are vertically integrated
+                  slices through the layers. An initial experiment using
+                  an aspect-oriented programming language to refactor
+                  prefetching in the FreeBSD operating system kernel
+                  shows significant benefits, including easy
+                  (un)pluggability of prefetching modes, independent
+                  development of prefetching modes, and overall improved
+                  comprehensibility. "
+}
+
+@Article{Collins:1994,
+  author =	 "W. Robert Collins and Keith W. Miller and Bethany
+                  J. Spielman and Phillip Wherry",
+  title =	 "{How Good Is Good Enough?: an Ethical Analysis of
+                  Software Construction and Use}",
+  journal =	 "Communications of the ACM",
+  volume =	 37,
+  number =	 1,
+  pages =	 "81--91",
+  month =	 jan,
+  year =	 1994,
+  url =
+                  "http://www.acm.org/pubs/articles/journals/cacm/1994-37-1/p81-collins/p81-collins.pdf"
+}
+
+@Article{Constantinides:2000,
+  author =	 "Constantinos A. Constantinides and Atef Bader and
+                  Tzilla H. Elrad and P. Netinant and Mohamed E. Fayad",
+  title =	 "{Designing an Aspect-Oriented Framework in an
+                  Object-Oriented Environment}",
+  journal =	 "ACM Computing Surveys",
+  year =	 2000,
+  volume =	 32,
+  number =	 1,
+  pages =        "",
+  month =	 mar,
+  url =          "http://www.acm.org/pubs/articles/journals/surveys/2000-32-1es/a41-constantinides/a41-constantinides.pdf"
+}
+
+@Book{Coplien:1998,
+  author =	 "James O. Coplien",
+  title =	 "{Multi-Paradigm Design for C++}",
+  publisher =	 "Addison-Wesley",
+  year =	 1998
+}
+
+@Article{Coplien:1998a,
+  author =	 "James Coplien and Daniel Hoffman and David Weiss",
+  title =	 "{Commonality and Variability in Software Engineering}",
+  journal =	 "IEEE Software",
+  year =	 1998,
+  volume =	 15,
+  number =	 6,
+  pages =	 "37--45",
+  month =	 nov,
+  url =          "http://dlib.computer.org/so/books/so1998/pdf/s6037.pdf",
+  abstract =	 "The article describes how to perform domain
+                  engineering by identifying the commonalities and
+                  variabilities within a family of products. Through
+                  interesting examples dealing with reuse libraries,
+                  design patterns, and programming language design, the
+                  authors suggest a systematic Scope, Commonalities, and
+                  Variabilities approach to formal analysis. Their SCV
+                  analysis has been an integral part of the FAST
+                  (Family-oriented Abstraction, Specification, and
+                  Translation) technology applied to over 25 domains at
+                  Lucent Technologies."
+}
+
+@InProceedings{Czarnecki:1998,
+  author =	 "Krzysztof Czarnecki and Ulrich Eisenecker and Robert
+                  Glück and David Vandevoorde and Todd Veldhuizen",
+  title =	 "{Generative Programming and Active Libraries}",
+  booktitle =	 "Report of the Dagstuhl Seminar on Generic Programming",
+  address =	 "Schloß Dagstuhl, Germany",
+  month =	 apr,
+  year =	 1998,
+  abstract =	 "We describe generative programming, an approach to
+                  generating customized programming components or
+                  systems, and active libraries, which are based on this
+                  approach. In contrast to conventional libraries,
+                  active libraries may contain metaprograms implementing
+                  domain-specific code generation, optimizations,
+                  debugging, profiling and testing. Several working
+                  examples (Blitz++, GMCL, Xroma) are presented to
+                  illustrate the potential of active libraries. We
+                  discuss relevant implementation technologies."
+}
+
+@PhdThesis{Czarnecki:1998a,
+  author =	 "Krysztof Czarnecki",
+  title =	 "{Generative Programming: Principles and Techniques of
+                  Software Engineering Based on Automated Configuration
+                  and Fragment-Based Component Models}",
+  school =	 "Technical University of Ilmenau",
+  year =	 1998,
+  address =	 "Ilmenau, Germany"
+}
+
+@InProceedings{Czarnecki:1999,
+  author =	 "Krzysztof Czarnecki and Ulrich Eisenecker",
+  title =	 "{Components and Generative Programming}",
+  booktitle =	 "Proceedings of the Joint European Software Engineering
+                  Conference and ACM SIGSOFT International Symposium on
+                  the Foundations of Software Engineering",
+  pages =	 "2--19",
+  year =	 1999,
+  volume =	 1687,
+  series =	 "Lecture Notes in Computer Science",
+  month =	 sep,
+  url =          "http://www.prakinf.tu-ilmenau.de/~czarn/esec99/esec99.pdf",
+  abstract =	 "This paper is about a paradigm shift from the current
+                  practice of manually searching for and adapting
+                  components and their manual assembly to Generative
+                  Programming, which is the automatic selection and
+                  assembly of components on demand. First, we argue that
+                  the current OO technology does not support reuse and
+                  configurability in an effective way. Then we show how
+                  a system family approach can aid in defining reusable
+                  components. Finally, we describe how to automate the
+                  assembly of components based on configuration
+                  knowledge. We compare this paradigm shift to the
+                  introduction of interchangeable parts and automated
+                  assembly lines in the automobile industry. We also
+                  illustrate the steps necessary to develop a product
+                  line using a simple example of a car product line. We
+                  present the feature model of the product line, develop
+                  a layered architecture for it, and automate the
+                  assembly of the components using a generator. We also
+                  discuss some design issues, applicability of the
+                  approach, and future development."
+}
+
+@Book{Czarnecki:2000,
+  author =	 "Krysztof Czarnecki and Ulrich Eisenecker",
+  title =	 "Generative Programming: Methods, Tools, and
+                  Applications",
+  publisher =	 "Addison-Wesley",
+  year =	 2000
+}
+
+@InCollection{Deutsch:1989,
+  author =	 "L. Petter Deutsch",
+  title =	 "{Design Reuse and Frameworks in the Smalltalk-80
+                  System}",
+  booktitle =	 "Software Reusability",
+  volume =	 2,
+  editor =	 "Ted J. Biggerstaff and A. J. Perlis",
+  publisher =	 "ACM Press",
+  address =	 "New York",
+  year =	 1989
+}
+
+@InCollection{Dijkstra:1969,
+  author =	 "Edsger Wybe Dijkstra",
+  title =	 "{Notes on Structured Programming}",
+  booktitle =	 "Structured Programming",
+  publisher =	 "Academic Press",
+  address =	 "London, U.K.",
+  year =	 1969
+}
+
+@Book{Dijkstra:1976,
+  author =	 "Edsger Wybe Dijkstra",
+  title =	 "{A Discipline of Programming}",
+  publisher =	 "Prentice-Hall",
+  year =	 1976
+}
+
+@Article{Frick:2000,
+  author =	 "Arne Frick and Gerhard Goos and Rainer Neumann and
+                  Wolf Zimmermann",
+  title =	 "Construction of Robust class Hierarchies",
+  journal =	 "Software - Practice and Experience",
+  year =	 2000,
+  volume =	 30,
+  number =	 5,
+  pages =	 "481--543"
+}
+
+@InProceedings{Gal:2001,
+  author =	 "Andreas Gal and Wolfgan Schröder-Preikschat and Olaf
+                  Spinczyk",
+  title =	 "{AspectC++: Language Proposal and Prototype
+                  Implementation}",
+  booktitle =	 "Proceeding of the OOPSLA 2001 Workshop on Advanced
+                  Separation of Concerns in Object-Oriented Systems",
+  year =	 2001,
+  address =	 "Tampa, U.S.A.",
+  month =	 oct,
+  url =		 "http://fusion.cs.uni-magdeburg.de/pubs/acpp.pdf",
+  abstract =	 "The success of aspect-oriented programming (AOP)
+                  raises and falls with user-friendly tool support. With
+                  AspectJ1 the rst complete and powerful language
+                  extension for AOP has been created. With this paper we
+                  intend to extend the AspectJ approach to C/C++. We
+                  will present and discuss a proposal for a set of
+                  language extensions we call AspectC++ to facilitate
+                  aspect-oriented programming with C/C++ and we will
+                  illustrate our prototype implementation of a compiler
+                  for this new language."
+}
+
+@Book{Gamma:1995,
+  author =	 "Erich Gamma and Richard Helm and Ralph Johnson and
+                  John Vlissides",
+  title =	 "{Design Patterns: Elements of Reusable Object-Oriented
+                  Software}",
+  publisher =	 "Addison-Wesley",
+  year =	 1995
+}
+
+@Article{Glueck:1997,
+  author =	 "Robert Glück and Jesper Jørgensen",
+  title =	 "{An Automatic Program Generator for Multi-Level
+                  Specialization}",
+  journal =	 "Lisp and Symbolic Computation",
+  year =	 1997,
+  volume =	 10,
+  number =	 2,
+  pages =	 "113--158",
+  month =	 jul,
+  url =		 "ftp.diku.dk/diku/semantics/papers/D-363.ps.gz"
+}
+
+@Article{Goguen:1984,
+  author =	 "Joseph A. Goguen",
+  title =	 "{Parameterized Programming}",
+  journal =	 "IEEE Transactions on Software Engineering",
+  year =	 1984,
+  volume =	 10,
+  number =	 5,
+  pages =	 "528--544",
+  month =	 jan
+}
+
+@InProceedings{Goguen:1996,
+  author =	 "Joseph A. Goguen",
+  title =	 "{Parameterized Programming and Software Architecture}",
+  booktitle =	 "Proceedings of the Fourth International Conference on
+                  Software Reuse",
+  year =	 1996,
+  pages =	 "2--11",
+  address =	 "Orlando, U.S.A.",
+  month =	 apr,
+  url =          "http://www-cse.ucsd.edu/users/goguen/ps/orlando96.ps.gz"
+}
+
+@Article{Graham:1992,
+  author =	 "D. Graham",
+  title =	 "{Testing and Quality Assurance --- The Future}",
+  journal =	 "Information and Software Technology",
+  volume =	 34,
+  number =	 10,
+  pages =	 "694--697",
+  month =	 oct,
+  year =	 1992
+}
+
+@InProceedings{Guttag:1976,
+  author =	 "John V. Guttag",
+  title =	 "{Abstract Data Types and the Development of Data
+                  Structures}",
+  booktitle =	 "Proceedings of the SIGPLAN '76 Conference on Data:
+                  Abstraction, Definition and Structure",
+  pages =	 72,
+  year =	 1976,
+  address =	 "Salt Lake City, U.S.A.",
+  month =	 mar,
+  abstract =	 "Abstract data types can play a significant role in the
+                  development of software that is reliable, efficient,
+                  and flexible. This paper presents and discusses the
+                  application of an algebraic technique for the
+                  specification of abstract data types. Among the
+                  examples presented is a top-down development of a
+                  symbol table for a block structured language; a
+                  discussion of the proof of its correctness is
+                  given. The paper also contains a brief discussion of
+                  the problems involved in constructing algebraic
+                  specifications that are both consistent and complete."
+}
+
+@Article{Hailpern:1986,
+  author =	 "Brent Hailpern",
+  title =	 "{Multiparadigm Languages and Environments}",
+  journal =	 "IEEE Software",
+  year =	 1986,
+  volume =	 3,
+  number =	 1,
+  pages =	 "6--9",
+  month =	 jan
+}
+
+@InProceedings{Harrison:1993,
+  author =	 "William H. Harrison and Harold Ossher",
+  title =	 "{Subject-oriented Programming (a Critique of Pure
+                  Objects)}",
+  booktitle =	 "In Proceedings of the 8th Conference on
+                  Object-oriented Programming Systems, Languages and
+                  Applications",
+  address =	 "Washington, U.S.A.",
+  pages =	 "411--428",
+  month =	 sep,
+  year =	 1993,
+  url =
+                  "http://www.acm.org/pubs/articles/proceedings/oops/165854/p411-harrison/p411-harrison.pdf",
+  abstract =	 "Object-oriented technology is often described in terms
+                  of an interwoven troika of themes: encapsulation,
+                  polymorphism and inheritance. But these themes are
+                  firmly ties with the concept of identity. If
+                  object-oriented technology is to be successfully
+                  scaled down the development of independent
+                  applications to development of integrated suites of
+                  applications, it must relax its emphasis on the
+                  object. The technology must recognize more directly
+                  that a multiplicity of subjective views delocalizes
+                  the concept of object, and must emphasize more the
+                  binding concept of identity to tie them together. This
+                  paper explores this shift to a style of
+                  object-oriented technology that emphasizes the
+                  subjective views: Subject-Oriented programming."
+}
+
+@Article{Helm:1990,
+  author =	 "Richard Helm and Ian M. Holland and Dipayan
+                  Gangopadhyay",
+  title =	 "{Contracts: Specifying Behavioral Compositions in
+                  Object-oriented Systems}",
+  journal =	 "ACM SIGPLAN Notices",
+  volume =	 25,
+  number =	 10,
+  pages =	 "169-180",
+  month =	 oct,
+  year =	 1990,
+  url =		 "http://www.acm.org/dl/gifs/formats/pdf.gif",
+  abstract =	 "Behavioral compositions, groups of interdependent
+                  objects cooperating to accomplish tasks, are an
+                  important feature of object-oriented systems. This
+                  paper introduces Contracts, a new technique for
+                  specifying behavioral compositions and the obligations
+                  on participating objects. Refinement and composition
+                  of contracts allows for the creation of large grain
+                  abstractions based on behavior, orthogonal to those
+                  provided by existing class constructs. Using contracts
+                  thus provides a basis and vocabulary for
+                  Interaction-Oriented design which greatly facilitates
+                  the early identification, abstraction and reuse of
+                  patterns of behavior in programs. Contracts differ
+                  from previous work in that they capture explicitly and
+                  abstractly the behavioral dependencies amongst
+                  cooperating objects. By explicitly stating these
+                  dependencies, contract also provide an effective aid
+                  for program understanding and reuse."
+}
+
+@Book{Hoare:1985,
+  author =	 "Charles Anthony Richard Hoare",
+  title =	 "{Communicating Sequential Processes}",
+  publisher =	 "Prentice-Hall",
+  year =	 1985
+}
+
+@InProceedings{Holland:1992,
+  author =	 "Ian M. Holland",
+  title =	 "{Specifying Reusable Components Using Contracts}",
+  booktitle =	 "Proceedings of the European Conference on
+                  Object-oriented Programming",
+  address =	 "Utrecht, The Netherlands",
+  series =	 "Lecture Notes in Computer Science",
+  volume =	 615,
+  pages =	 "287-308",
+  publisher =	 "Springer",
+  month =	 jun,
+  year =	 1992,
+  url =
+                  "ftp://ftp.ccs.neu.edu/pub/research/demeter/documents/papers/Hol91-Specify-Reuse-Components-Contracts.ps",
+  abstract =	 "Contracts were introduced by Helm et al. as a high
+                  level construct for explicitly specifying interactions
+                  among groups of objects. This paper describes further
+                  developments and application of the Contract
+                  construct. We show how Contracts can be used to
+                  represent classic algorithms as large grained reusable
+                  object oriented abstractions, how these algorithms can
+                  be customized through Contract refinement and how they
+                  are reused through Contract conformance. The example
+                  algorithm used throughout is the classic graph depth
+                  first traversal algorithm. This algorithm is
+                  represented as a Contract which is then refined to
+                  specify algorithms which number connected regions of
+                  graphs and which check graphs for cycles. Changes to
+                  the Contract language are introduced and we discuss
+                  some new problems...",
+}
+
+@PhdThesis{Holland:1993,
+  author =	 "Ian M. Holland",
+  title =	 "{The Design and Representation of Object-oriented
+                  Components}",
+  school =	 "Northeastern University",
+  address =	 "Boston, U.S.A.",
+  year =	 1993
+}
+
+@Book{Jacobson:1993,
+  author =	 "Ivar Jacobson and Magnus Christerson and Patrik
+                  Jonsson and Gunnar Oevergaard",
+  title =	 "{Object-oriented Software Engineering: a Use Case
+                  Driven Approach}",
+  publisher =	 "Addison-Wesley",
+  year =	 1993
+}
+
+@Book{Jacobson:1999,
+  author =       "Ivar Jacobson and Grady Booch and James Rumbaugh",
+  title =        "{The Unified Software Development Process}",
+  publisher =    "Addison-Wesley",
+  year =         1999,
+}
+
+@Book{Jain:1991,
+  author =	 "Raj Jain",
+  title =	 "{The Art of Computer Performance Analysis}",
+  publisher =	 "John Wiley \& Sons",
+  year =	 1991
+}
+
+@InProceedings{Jazayeri:1998,
+  author =	 "Mehdi Jazayeri and Rüdiger Loos and David Musser and
+                  Alexander Stepanov",
+  title =	 "{Generic Programming}",
+  booktitle =	 "Report of the Dagstuhl Seminar on Generic Programming",
+  year =	 1998,
+  address =	 "Schloß Dagstuhl, Germany",
+  month =	 apr,
+  url =		 "ftp://ftp.dagstuhl.de/pub/Reports/98/98171.ps.gz",
+  abstract =	 "Generic programming is a sub-discipline of computer
+                  science that deals with finding abstract
+                  representations of efficient algorithms, data
+                  structures, and other software concepts, and with
+                  their systematic organization. The goal of generic
+                  programming is to express algorithms and data
+                  structures in a broadly adaptable, interoperable form
+                  that allows their direct use in software
+                  construction. Key ideas include: Expressing algorithms
+                  with minimal assumptions about data abstractions, and
+                  vice versa, thus making them as interoperable as
+                  possible. Lifting of a concrete algorithm to as
+                  general a level as possible without losing efficiency;
+                  i.e., the most abstract form such that when
+                  specialized back to the concrete case the result is
+                  just as efficient as the original algorithm. When the
+                  result of lifting is not general enough to cover all
+                  uses of an algorithm, additionally providing a more
+                  general form, but ensuring that the most efficient
+                  specialized form is automatically chosen when
+                  applicable. Providing more than one generic algorithm
+                  for the same purpose and at the same level of
+                  abstraction, when none dominates the others in
+                  efficiency for all inputs. This introduces the
+                  necessity to provide sufficiently precise
+                  characterizations of the domain for which each
+                  algorithm is the most efficient. "
+}
+
+@Article{Johnson:1988,
+  author =	 "Ralph E. Johnson and Brian Foote",
+  title =	 "{Designing Reusable Classes}",
+  journal =	 "Journal of Object-Oriented Programming",
+  volume =	 1,
+  number =	 2,
+  pages =	 "22--35",
+  month =	 jun,
+  year =	 1988,
+  url =		 "http://www.laputan.org/drc/drc.html",
+  abstract =	 "Object-oriented programming is as much a different way
+                  of designing programs as it is a different way of
+                  designing programming languages. This paper describes
+                  what it is like to design systems in Smalltalk. In
+                  particular, since a major motivation for
+                  object-oriented programming is software reuse, this
+                  paper describes how classes are developed so that they
+                  will be reusable. "
+}
+
+@Article{Johnson:1992,
+  author =	 "Ralph E. Johnson",
+  title =	 "{Documenting Frameworks using Patterns}",
+  journal =	 "ACM SIGPLAN Notices",
+  volume =	 27,
+  number =	 10,
+  pages =	 "63--76",
+  month =	 oct,
+  year =	 1992,
+  url =		 "http://www.acm.org/dl/gifs/formats/pdf.gif"
+}
+
+@Article{Johnson:1997,
+  author =	 "Ralph E. Johnson",
+  title =	 "{Frameworks = (Components + Patterns)}",
+  journal =	 "Communications of the ACM",
+  year =	 1997,
+  volume =	 40,
+  number =	 10,
+  pages =	 "39--42",
+  month =	 oct,
+  url =          "http://www.acm.org/pubs/articles/journals/cacm/1997-40-10/p39-johnson/p39-johnson.pdf",
+  abstract =	 "Frameworks are an object-oriented reuse
+                  technique. They share many characteris-tics with reuse
+                  techniques in general [8], and object-oriented reuse
+                  techniques in particular. Although they have been used
+                  successfully for some time, and are an impor-tant part
+                  of the culture of long-time object-oriented
+                  developers, they are not well under-stood outside the
+                  object-oriented community and are often
+                  misused. Moreover, there is confusion about whether
+                  frameworks are large-scale patterns, or whether they
+                  are just another kind of component."
+}
+
+@techreport{Kang:1990,
+  author =	 "K. Kang and S.Cohen and J.Hess and W.Novak and
+                  S.Peterson",
+  title =	 "{Feature-Oriented Domain Analysis (FODA) Feasibility Study}",
+  institution =	 "Software Engineering Institute",
+  year =	 1990,
+  number =	 "CMU/SEI-90-TR-21",
+  address =	 "Pittsburgh, U.S.A.",
+  month =	 nov
+}
+
+@Book{Kernighan:1984,
+  author =	 "Brian W. Kernighan and Dennis M. Ritchie",
+  title =	 "{The C Programming Language}",
+  publisher =	 "Prentice-Hall",
+  year =	 1984
+}
+
+@Book{Kiczales:1991,
+  author =	 "Gregor Kiczales and Jim des Rivières and Daniel
+                  G. Bobrow",
+  title =	 "{The Art of the Metaobject Protocol}",
+  publisher =	 "MIT Press",
+  year =	 1991
+}
+
+@InProceedings{Kiczales:1997,
+  author =	 "Gregor Kiczales and John Lamping and Anurag Mendhekar
+                  and Chris Maeda and Cristina Videira Lopes and
+                  Jean-Marc Loingtier and John Irwin",
+  title =	 "{Aspect-Oriented Programming}",
+  booktitle =	 "Proceedings of the European Conference on
+                  Object-oriented Programming'97",
+  address =	 "Jyväskylä, Finland",
+  series =	 "Lecture Notes in Computer Science",
+  volume =	 1241,
+  pages =	 "220--242",
+  publisher =	 "Springer",
+  month =	 jun,
+  year =	 1997,
+  url =
+                  "http://www.parc.xerox.com/csl/groups/sda/publications/papers/Kiczales-ECOOP97/for-web.pdf",
+  abstract =	 "We have found many programming problems for which
+                  neither procedural nor object-oriented programming
+                  techniques are sufficient to clearly capture some of
+                  the important design decisions the program must
+                  implement. This forces the implementation of those
+                  design decisions to be scattered through-out the code,
+                  resulting in 'tangled' code that is excessively
+                  difficult to develop and maintain. We present an
+                  analysis of why certain design decisions have been so
+                  difficult to clearly capture in actual code. We call
+                  the properties these decisions address aspects, and
+                  show that the reason they have been hard to capture is
+                  that they cross-cut the system's basic
+                  functionality. We present the basis for a new
+                  programming technique, called aspect-oriented
+                  programming, that makes it possible to clearly express
+                  programs involving such aspects, including appropriate
+                  isolation, composition and re-use of the aspect
+                  code. The discussion is rooted in systems we have
+                  built using aspect-oriented programming."
+}
+
+@Book{Knuth:1998,
+  author =	 "Donald Ervin Knuth",
+  title =	 "{The Art of Computer Programming}",
+  publisher =	 "Addison-Wesley",
+  year =	 1998
+}
+
+@Article{Levitin:1993,
+  author =	 "A. Levitin and T. Redman",
+  title =	 "{A Model of the Data (Life) Cycles with Application to
+                  Quality}",
+  journal =	 "Information and Software Technology",
+  volume =	 35,
+  number =	 4,
+  pages =	 "217--223",
+  month =	 apr,
+  year =	 1993
+}
+
+@Article{Liskov:1974,
+  author =	 "Barbara Liskov and Stephen Zilles",
+  title =	 "{Programming with Abstract Data Types}",
+  journal =	 "ACM SIGPLAN Notices",
+  volume =	 9,
+  number =	 4,
+  pages =	 "50--59",
+  month =	 apr,
+  year =	 1974
+}
+
+@InProceedings{Mens:1997,
+  author =	 "Kim Mens and Cristina Videira Lopes and Bedir
+                  Tekinerdogan and Gregor Kiczales",
+  title =	 "{Aspect-Oriented Programming Workshop Report}",
+  booktitle =	 "Workshopes of the European Conference on
+                  Object-oriented Programming'97",
+  address =	 "Jyväskylä, Finland",
+  pages =	 "483--496",
+  month =	 jun,
+  year =	 1997,
+  url =		 ""
+}
+
+@Book{Meyer:1988,
+  author =	 "Bertrand Meyer",
+  title =	 "{Object-Oriented Software Construction}",
+  publisher =	 "Prentice Hall",
+  year =	 1988
+}
+
+@InProceedings{Mezini:1998,
+  author =	 "Mira Mezini and Karl Lieberherr",
+  title =	 "{Adaptive Plug-and-play Components for Evolutionary
+                  Software Developmen}",
+  booktitle =	 "Conference on Object Oriented Programming Systems
+                  Languages and Aplications",
+  pages =	 "97--116",
+  address =	 "Vancouver, Canada",
+  month =	 oct,
+  year =	 1998,
+  url =          "http://www.acm.org/pubs/articles/proceedings/oops/286936/p97-mezini/p97-mezini.pdf"
+}
+
+@InProceedings{Mikhajlov:1998,
+  author =	 "Leonid Mikhajlov and Emil Sekerinski",
+  title =	 "{A Study of the Fragile Base Class Problem}",
+  booktitle =	 "Proceedings of the 12th European Conference on
+                  Object-Oriented Programming",
+  pages =	 "355--382",
+  year =	 1998,
+  volume =	 1445,
+  series =	 "Lecture Notes in Computer Science",
+  address =	 "Brussels, Belgium",
+  month =	 jul,
+  publisher =	 "Springer",
+  url =
+                  "http://link.springer.de/link/service/series/0558/bibs/1445/14450355.htm",
+  abstract =	 "In this paper we study the fragile base class
+                  problem. This problem occurs in open object-oriented
+                  systems employing code inheritance as an
+                  implementation reuse mechanism. System developers
+                  unaware of extensions to the system developed by its
+                  users may produce a seemingly acceptable revision of a
+                  base class which may damage its extensions. The
+                  fragile base class problem becomes apparent during
+                  maintenance of open object-oriented systems, but
+                  requires consideration during design. We express the
+                  fragile base class problem in terms of a flexibility
+                  property. By means of five orthogonal examples,
+                  violating the flexibility property, we demonstrate
+                  different aspects of the problem. We formulate
+                  requirements for disciplining inheritance, and extend
+                  the refinement calculus to accommodate for classes,
+                  objects, class-based inheritance, and class
+                  refinement. We formulate and formally prove a
+                  flexibility theorem demonstrating that the
+                  restrictions we impose on inheritance are sufficient
+                  to permit safe substitution of a base class with its
+                  revision in presence of extension classes."
+}
+
+@Article{Moessenboeck:1991,
+  author =	 "Hanspeter Mössenböck and Niklaus Wirth",
+  title =	 "{The Programming Language Oberon-2}",
+  journal =	 "Structured Programming",
+  volume =	 12,
+  number =	 4,
+  pages =	 "179--195",
+  month =	 apr,
+  year =	 1991,
+  url =          "ftp://ftp.ssw.uni-linz.ac.at/pub/Papers/Moe91a.ps",
+  abstract =	 "Oberon-2 is a general-purpose programming language in
+                  the tradition of Pascal and Modula-2. Its most
+                  important features are block structure, modularity,
+                  separate compilation, static typing with strong type
+                  checking (also across module boundaries), and type
+                  extension with type-bound procedures. Type extension
+                  makes Oberon-2 an object-oriented language. An object
+                  is a variable of an abstract data type consisting of
+                  private data (its state) and procedures that operate
+                  on this data. Abstract data types are declared as
+                  extensible records. Oberon-2 covers most terms of
+                  object-oriented languages by the established
+                  vocabulary of imperative languages in order to
+                  minimize the number of notions for similar
+                  concepts. This report is not intended as a
+                  programmer's tutorial. It is intentionally kept
+                  concise. Its function is to serve as a reference for
+                  programmers, implementors, and manual writers. What
+                  remains unsaid is mostly left so intentionally, either
+                  because it can be derived from stated rules of the
+                  language, or because it would require to commit the
+                  definition when a general commitment appears as
+                  unwise. Appendix A defines some terms that are used to
+                  express the type checking rules of Oberon-2. Where
+                  they appear in the text, they are written in italics
+                  to indicate their special meaning (e.g. the same
+                  type)."
+}
+
+@InProceedings{Murphy:2001,
+  author =	 "Gail Murphy and Rob Walker and Elisa Baniassad and
+                  Martin Robillard and Albert Lai and Mik Kersten",
+  title =	 "{An Overview of AspectJ}",
+  booktitle =	 "Proceedings of European Conference for Object-Oriented
+                  Programming",
+  pages =	 "327--353",
+  year =	 2001,
+  address =	 "Budapest, Hungary",
+  month =	 jun,
+  url =
+                  "http://www.kerstens.org/mik/publications/aspectj-ecoop2002.pdf",
+  abstract =	 "AspectJ is a simple and practical aspect-oriented
+                  extension to Java. With just a few new constructs,
+                  AspectJ provides support for modular implementation of
+                  a range of crosscutting concerns. In AspectJ s dynamic
+                  join point model, join points are well-defined points
+                  in the execution of the program; pointcuts are
+                  collections of join points; advice are special
+                  method-like constructs that can be attached to
+                  pointcuts; and aspects are modular units of
+                  crosscutting implementation, comprising pointcuts,
+                  advice, and ordinary Java member declarations. AspectJ
+                  code is compiled into standard Java bytecode. Simple
+                  extensions to existing Java development environments
+                  make it possible to browse the crosscutting structure
+                  of aspects in the same kind of way as one browses the
+                  inheritance structure of classes. Several examples
+                  show that AspectJ is powerful, and that programs
+                  written using it are easy to understand."
+}
+
+@InProceedings{Musser:1989,
+  author =	 "David R. Musser and Alexander A. Stepanov",
+  title =	 "{Generic Programming}",
+  booktitle =	 "Proceedings of the First International Joint
+                  Conference of ISSAC and AAECC",
+  pages =	 "13--25",
+  year =	 1989,
+  number =	 358,
+  series =	 "Lecture Notes in Computer Science",
+  address =	 "Rome, Italy",
+  month =	 jul,
+  publisher =	 "Springer"
+}
+
+@InProceedings{Netinant:2000,
+  author =	 "Paniti Netinant and Constantinos A. Constantinides and
+                  Tzilla Elrad and Mohamed Fayad and A. Bader",
+  title =	 "{Supporting the Design of System Software Using
+                  Aspect-Oriented Frameworks}",
+  booktitle =	 "Proceedings of the 2000 International Conference on
+                  Parallel and Distributed Processing Techniques and
+                  Applications",
+  year =	 2000,
+  month =	 jun,
+  address =	 "Las Vegas, U.S.A.",
+  url =
+                  "http://www.eclipse.net/~tomo/pisa/oopsla2000/p_netinant.html",
+  abstract =	 "Supporting separation of concerns in the design of
+                  system software can provide a number of benefits such
+                  as comprehension, reusability, extensibility and
+                  reconfigurability in both implementation and
+                  design. However, in order to maximize these benefits,
+                  such a support is difficult to accomplish. Some
+                  aspects, such as synchronization, scheduling,
+                  performance and fault tolerance, in the design of
+                  system software cut across the basic functionalities
+                  of the system. By separating the different aspects of
+                  the system software in the design, we can provide a
+                  better generic design model of system
+                  software. Aspect-Oriented Programming is a paradigm
+                  proposal that aims at separating components and
+                  aspects from the early stages of the software life
+                  cycle, and combining them together at the
+                  implementation phase. Treating aspects, components,
+                  and layers in a two dimensional model is not
+                  adequate. Two-dimensional models lead to
+                  inflexibility, limit the possibilities for reuse, and
+                  make it hard to understand and evolve. In this paper
+                  we discuss an Aspect-Oriented Framework that can
+                  simplify system design by expressing it at a higher
+                  level of abstraction. Our work concentrates on how to
+                  maximize separation of aspects, components, and layers
+                  from each other. Our goal is to achieve a better
+                  design model for system software in terms of
+                  flexibility, reuse and adaptability."
+}
+
+@Article{Ossher:1995,
+  author =	 "Harold Ossher and Matthew Kaplan and William
+                  H. Harrison and Alexander Katz and Vincent J. Kruskal",
+  title =	 "{Subject-Oriented Composition Rules}",
+  journal =	 "ACM SIGPLAN Notices",
+  year =	 1995,
+  volume =	 30,
+  number =	 10,
+  pages =	 "235-250",
+  month =	 oct,
+  url =
+                  "http://www.research.ibm.com/sop/abstracts/oopslarules.htm",
+  abstract =	 "Subject-oriented programming supports composition of
+                  object-oriented programs or program fragments called
+                  subjects. This paper presents an approach to the
+                  composition rules used to specify composition
+                  details. Rules can be generic, allowing different
+                  subrules to be ``plugged into'' higher-level rules,
+                  and they include a means of specifying exceptions to
+                  general rules. We give definitions of a number of
+                  useful, generic rules, including merge and override,
+                  as a first step towards a generally-useful composition
+                  rule library. We also outline an object-oriented
+                  framework for implementing rules, which we are
+                  currently building as part of our support for
+                  subject-oriented programming in C++. "
+}
+
+@Article{Ossher:1996,
+  author =	 "Harold Ossher and Matthew Kaplan and Alexander Katz
+                  and William H. Harrison and Vincent J. Kruskal",
+  title =	 "{Specifying Subject-Oriented Composition}",
+  journal =	 "Theory and Practice of Object Systems",
+  year =	 1996,
+  volume =	 2,
+  number =	 3,
+  pages =	 "179-202",
+  url =
+                  "http://www.research.ibm.com/sop/abstracts/taposrules.htm",
+  abstract =	 "Subject-oriented programming supports composition of
+                  object-oriented programs or program fragments called
+                  subjects. This paper presents an approach to
+                  specifying desired compositions in a convenient and
+                  concise manner. We motivate the need for subject
+                  composition, and illustrate the key issues. We define
+                  a low-level model in which composition is controlled
+                  by detailed attributes. We then describe higher-level
+                  composition rules as collections of attributes that,
+                  together, provide some desired aspect of composition
+                  functionality. Compositions are specified by means of
+                  composition expressions written as collections of
+                  rules, typically a general rule along with rules
+                  specifying exceptions. A rule library is thus an
+                  open-ended collection of useful abstractions in terms
+                  of which to define compositions. We give definitions
+                  of a few common rules, including merge and override,
+                  as a first step towards a generally-useful composition
+                  rule library. We also outline an object-oriented
+                  framework for implementing our composition approach,
+                  which we are currently building as part of our support
+                  for subject-oriented programming in C++"
+}
+
+@Article{Parnas:1976,
+  author =	 "David Lorge Parnas",
+  title =	 "{On the Design and Development of Program Families}",
+  journal =	 "IEEE Transactions on Software Engineering",
+  volume =	 "SE-2",
+  number =	 "1",
+  pages =	 "1--9",
+  month =	 mar,
+  year =	 1976
+}
+
+@Article{Parnas:1976a,
+  author =	 "David Lorge Parnas and Georg Handzel and Harald Würges",
+  title =	 "{Design and Specification of the Minimal Subset of an
+                  Operating System Family}",
+  journal =	 "IEEE Transactions on Software Engineering",
+  volume =	 "SE-2",
+  number =	 "4",
+  pages =	 "301--307",
+  year =	 1976
+}
+
+@Article{Parnas:1979,
+  author =	 "David Lorge Parnas",
+  title =	 "{Designing Software for Ease of Extension and
+                  Contraction}",
+  journal =	 "IEEE Transaction on Software Engineering",
+  volume =	 "SE-5",
+  number =	 2,
+  pages =	 "128--138",
+  month =	 mar,
+  year =	 1979
+}
+
+@Article{Pescio:1997,
+  author =	 "Carlo Pescio",
+  title =	 "{Template Metaprogramming: Make Parameterized Integers
+                  Portable with this Novel Technique}",
+  journal =	 "C++ Report",
+  volume =	 9,
+  number =	 7,
+  pages =	 "23--26",
+  year =	 1997,
+  url =
+                  "http://www.eptacom.net/pubblicazioni/pub_eng/paramint.html"
+}
+
+@Article{Plauger:1995,
+  author =	 "P. J. Plauger",
+  title =	 "{The Standard Template Library}",
+  journal =	 "C/C++ Users Journal",
+  volume =	 13,
+  number =	 12,
+  pages =	 "20--24",
+  month =	 dec,
+  year =	 1995
+}
+
+@Article{Reenskaug:1992,
+  author =	 "Trygve Reenskaug and Egil P. Andersen and Arne Jorgen
+                  Berre and Anne Hurlen and Anton Landmark and Odd Arild
+                  Lehne and Else Nordhagen and Eirik Nêss-Ulseth and Gro
+                  Oftedal and Anne Lise Skaar and Pâl Stenslet",
+  title =	 "{OORASS: Seamless Support for the Creation and
+                  Maintenance of Object-oriented Systems}",
+  journal =	 "Journal of Object-oriented Programming",
+  volume =	 5,
+  number =	 6,
+  pages =	 "27--41",
+  month =	 oct,
+  year =	 1992
+}
+
+@Book{Rumbaugh:1991,
+  author =	 "James Rumbaugh and Michael Blaha and William Lorenson
+                  and William Premerlani",
+  title =	 "{Object-Oriented Modeling and Design}",
+  publisher =	 "Prentice Hall",
+  year =	 1991
+}
+
+@Book{Sametinger:1997,
+  author =	 "Johannes Sametinger",
+  title =	 "{Software Engineering with Reusable Components}",
+  publisher =	 "Springer",
+  year =	 1997
+}
+
+@article{Shepperd:1992,
+  author =	 "M. Shepperd",
+  title =	 "{Products, Processes and Metrics}",
+  journal =	 "Information and Software Technology",
+  volume =	 34,
+  number =	 10,
+  pages =	 "674--680",
+  month =	 oct,
+  year =	 1992
+}
+
+@InProceedings{Smaragdakis:1998,
+  author =	 "Yannis Smaragdakis and Don Batory",
+  title =	 "{Implementing Reusable Object-Oriented Components}",
+  booktitle =	 "Proceedings of the Fifth International Conference on
+                  Software Reuse",
+  address =	 "Victoria, Canada",
+  month =	 jun,
+  year =	 1998,
+  url =		 "ftp://ftp.cs.utexas.edu/pub/predator/icsrtemp.ps",
+  abstract =	 "Object-Oriented (OO) classes are generally not
+                  reusable because they are not meaningful in isolation;
+                  most classes only have meaning as members of
+                  cooperating suites of classes (e.g., design
+                  patterns). These suites usually arise in designs, but
+                  rarely exist as encapsulated entities in OO
+                  implementations. In this paper we present a method for
+                  directly mapping cooperating suites of classes into
+                  encapsulated C++ implementations. Our method is an
+                  improvement over the VanHilst and Notkin approach for
+                  implementing collaboration-based designs and
+                  constitutes a step towards more reusable
+                  (object-oriented) components."
+}
+
+@PhdThesis{Smaragdakis:1999,
+  author =	 "Yannis Smaragdakis",
+  title =	 "{Implementing Large-scale Object-oriented Components}",
+  school =	 "University of Texas",
+  address =	 "Austin, U.S.A.",
+  month =	 dec,
+  year =	 1999,
+  url =
+                  "ftp://ftp.cs.utexas.edu/pub/predator/yannis-thesis.pdf"
+}
+
+@Article{Stroustrup:1986,
+  author =	 "Bjarne Stroustrup",
+  title =	 "{C++ Programming Language}",
+  journal =	 "IEEE Software (special issue on Multiparadigm
+                  Languages and Environments)",
+  year =	 1986,
+  volume =	 3,
+  number =	 1,
+  pages =	 "71--72",
+  month =	 jan
+}
+
+@Book{Stroustrup:1994,
+  author =	 "Bjarne Stroustrup",
+  title =	 "{The Design and Evolution of C++}",
+  publisher =	 "Addison-Wesley",
+  year =	 1994
+}
+
+@Book{Stroustrup:1997,
+  author =	 "Bjarne Stroustrup",
+  title =	 "{The C++ Programming Language}",
+  edition =	 3,
+  publisher =	 "Addison-Wesley",
+  year =	 1997
+}
+
+@Article{Stroustrup:2000,
+  author =	 "Bjarne Stroustrup",
+  title =	 "{Wrapping C++ Member Function Calls}",
+  journal =	 "The C++ Report",
+  year =	 2000,
+  volume =	 12,
+  number =	 6,
+  pages =        "",
+  url =		 "http://www.research.att.com/~bs/wrapper.pdf",
+  abstract =	 "This paper presents a simple, general, and efficient
+                  solution to the old problem of ''wrapping'' calls to
+                  an object in pairs of prefix and suffix code. The
+                  solution is also non-intrusive, applies to existing
+                  classes, allows the use of several prefix/suffix
+                  pairs, and can be implemented in 15 simple lines of
+                  Standard C++. A robust version of the wrapper is also
+                  presented. The claim of efficiency is backed by
+                  measurement. The paper is organized around a series of
+                  examples evolving the basic idea into a final robust
+                  template class."
+}
+
+@Book{Szyperski:1997,
+  author =	 "Clemens Szyperski",
+  title =	 "{Component Software: Beyond Object-orineted
+                  Programming}",
+  publisher =	 "Addison-Wesley",
+  year =	 1997
+}
+
+@InProceedings{Szyperski:1998,
+  author =	 "Clemens Szyperski and Rudi Vernik",
+  title =	 "{Establishing System-Wide Properties of
+                  Component-Based Systems: A Case for Tiered Component
+                  Frameworks}",
+  booktitle =	 "In Proceedings of the Workshop on Compositional
+                  Software Architectures",
+  address =	 "Monterey, U.S.A.",
+  month =	 jan,
+  year =	 1998,
+  url =
+                  "http://www.objs.com/workshops/ws9801/papers/paper039.txt"
+}
+
+@InProceedings{Tiemann:1988,
+  author =	 "Michael Tiemann",
+  title =	 "{Wrappers: Solving the RPC problem in GNU C++}",
+  booktitle =	 "Proceedings of the C++ Conference",
+  pages =	 "343--361",
+  year =	 1988,
+  address =	 "Denver, U.S.A",
+  month =	 oct
+}
+
+@Article{VanHilst:1996,
+  author =	 "Michael VanHilst and David Notkin",
+  title =	 "{Using Role Components to Implement
+                  Collaboration-based Designs}",
+  journal =	 "ACM SIGPLAN Notices",
+  volume =	 31,
+  number =	 10,
+  pages =	 "359--369",
+  month =	 oct,
+  year =	 1996,
+  url =
+                  "http://www.cs.washington.edu/homes/vanhilst/oopslabl.ps.gz",
+  abstract =	 "In this paper we present a method of code
+                  implementation that works in conjunction with
+                  collaboration and responsibility based analysis
+                  modeling techniques to achieve better code reuse and
+                  resilience to change. Our approach maintains a closer
+                  mapping from responsibilities in the analysis model to
+                  entities in the implementation. In so doing, it
+                  leverages the features of flexible design and design
+                  reuse found in collaboration-based design models to
+                  provide similar adaptability and reuse in the
+                  implementation. Our approach requires no special
+                  development tools and uses only standard features
+                  available in the C++ language. In an earlier paper we
+                  described the basic mechanisms used by our approach
+                  and discussed its advantages in comparison to the
+                  framework approach. In this paper we show how our
+                  approach combines code and design reuse, describing
+                  specific techniques that can be used in the
+                  development of larger applications."
+}
+
+@InProceedings{VanHilst:1996a,
+  author =	 "Michael VanHilst and David Notkin",
+  title =	 "{Using C++ Templates to Implement Role-Based Designs}",
+  booktitle =	 "Proceedings of the Second International Symposium on
+                  Object Technologies for Advanced Software",
+  series =	 "Lecture Notes in Computer Science",
+  volume =	 1049,
+  pages =	 "22--37",
+  address =	 "Kanazawa, Japan",
+  month =	 mar,
+  year =	 1996,
+  url =
+                  "http://www.cs.washington.edu/homes/vanhilst/isotA.ps.gz",
+  abstrac =	 "Within the object-oriented technology community, much
+                  recent work on design reuse has focused on role-based
+                  collaborations distributed across multiple
+                  objects. Many benefits can be derived by mapping
+                  role-based designs directly into implementations,
+                  including greater ease in maintaining the connection
+                  between designs and implementations under change, and
+                  the opportunity for code reuse along with design
+                  reuse. Current efforts in role-based designs do not
+                  generally provide these benefits. We provide a method
+                  for mapping role-based designs into implementation,
+                  preserving the design without unnecessary constraints
+                  on the design structures. Roles are represented as
+                  parameterized classes, where the parameters represent
+                  the types of the participants in the
+                  collaboration. Composition of roles is implicit in the
+                  binding of parameters to classes in the
+                  implementation. The bindings are created at compile
+                  time by class definitions that are separate from the
+                  role implementations. In this paper we focus on the
+                  use of templates in the C++ language as the supporting
+                  mechanism."
+}
+
+@Article{VanHilst:1996b,
+  author =	 "Michael VanHilst and David Notkin",
+  title =	 "{Decoupling Change from Design}",
+  journal =	 "ACM SIGSOFT Software Engineering Notes",
+  volume =	 21,
+  number =	 6,
+  pages =	 "58--69",
+  month =	 nov,
+  year =	 1996,
+  url =
+                  "http://www.acm.org/pubs/citations/proceedings/soft/239098/p58-vanhilst",
+  abstract =	 "Parnas' seminal 1972 paper, ``On the Criteria To Be
+                  Used in Decomposing Systems into Modules'', identified
+                  simplifying change as a critical criterion for
+                  modularizing software. Successful designs are those in
+                  which a change can be accommodated by modifying a
+                  single module. There is a tacit assumption in most of
+                  the literature that once a change has been limited to
+                  a single module, the cost of making the change is
+                  essentially inconsequential. But modules have
+                  complexity of their own and are frequently
+                  large. Thus, making a change can be expensive, even if
+                  limited to a single module. We present a method of
+                  decomposing modules into smaller components for the
+                  purpose of supporting change. Although similar to the
+                  approach of modularizing programs described by Parnas,
+                  our approach is specific to decomposing modules. It is
+                  not intended to replace traditional high level
+                  modularization but rather to augment it with a second
+                  level of modularization where the standard of
+                  information hiding can be relaxed. The goal of the
+                  method is to make modules easier to change by
+                  decomposing them around smaller design
+                  decisions---ideally encoding only one design choice
+                  per submodule component. In this paper we show how
+                  submodule components can be used to address the issue
+                  of change. We also demonstrate how the ability to
+                  address change with submodule components is, to a
+                  large extent, independent of the design level
+                  modularization. Moreover, we show that, at least in
+                  some cases, by using submodule components the choice
+                  of high level modularization can itself be changed
+                  without having to rewrite large amounts of code. A
+                  method of implementation is presented using
+                  inheritance, parameterization, and static binding in a
+                  way that minimizes implementation dependencies between
+                  components. The method supports fine grained
+                  decomposition with flexible composability and almost
+                  no runtime overhead."
+}
+
+@PhdThesis{VanHilst:1997,
+  author =	 "Michael VanHilst",
+  title =	 "{Role-oriented Programming for Software Evolution}",
+  school =	 "University of Washington",
+  address =	 "Seattle, U.S.A.",
+  month =	 sep,
+  year =	 1997
+}
+
+@Article{Veldhuizen:1995,
+  author =	 "Todd L. Veldhuizen",
+  title =	 "{Using C++ Template Metaprograms}",
+  journal =	 "C++ Report",
+  volume =	 7,
+  number =	 4,
+  pages =	 "36--43",
+  month =	 may,
+  year =	 1995,
+  url =
+                  "http://extreme.indiana.edu/~tveldhui/papers/Template-Metaprograms/meta-art.html",
+  abstract =	 "Template metaprograms can generate useful code when
+                  interpreted by the compiler, which results in large
+                  speed increases for many applications. A simple
+                  example that generates factorials at compile time is
+                  presented. Although this technique might seem like
+                  just a cute C++ trick, it becomes powerful when
+                  combined with normal C++ code. In this hybrid
+                  approach, source code contains two programs: the
+                  normal C++ runtime program, and a template metaprogram
+                  that runs at compile time. Template metaprograms can
+                  generate useful code when interpreted by the compiler,
+                  such as a massively inlined algorithm-that is, an
+                  implementation of an algorithm that works for a
+                  specific input size, and has its loops unrolled. This
+                  results in large speed increases for many
+                  applications. The article presents a simple template
+                  metaprogram that generates a bubble sort algorithm and
+                  its performance is analysed."
+}
+
+@InProceedings{Veldhuizen:1998,
+  author =	 "Todd L. Veldhuizen and Dennis Gannon",
+  title =	 "{Active Libraries: Rethinking the Roles of Compilers
+                  and Libraries}",
+  booktitle =	 "Proceedings of the SIAM Workshop on Object Oriented
+                  Methods for Inter-operable Scientific and Engineering
+                  Computing",
+  address =	 "Yorktown Heights, New York",
+  month =	 oct,
+  year =	 1998,
+  url =
+                  "http://www.extreme.indiana.edu/~tveldhui/papers/oo98.ps",
+  abstract =	 "We describe Active Libraries, which take an active
+                  role in compilation. Unlike traditional libraries
+                  which are passive collections of functions and
+                  objects, Active Libraries may generate components,
+                  specialize algorithms, optimize code, configure and
+                  tune themselves for a target machine, and describe
+                  themselves to tools (such as profilers and debuggers)
+                  in an intelligible way. Several such libraries are
+                  described, as are implementation technologies."
+}
+
+@Article{Wegner:1986,
+  author =	 "Peter Wegner",
+  title =	 "{Classification in Object-oriented Systems}",
+  journal =	 "ACM SIGPLAN Notices",
+  volume =	 21,
+  number =	 10,
+  pages =	 "173--182",
+  month =	 oct,
+  year =	 1986,
+  url = "http://doi.acm.org/10.1145/323779.323757"
+}
+
+@InProceedings{Weiss:1995,
+  author =	 "David M. Weiss",
+  title =	 "{Software Synthesis: The FAST Process}",
+  booktitle =	 "Proceedings of the International Conference on
+                  Computing in High Energy Physics",
+  address =      "Rio de Janeiro, Brazil",
+  month =	 sep,
+  year =	 1995,
+  abstract =	 "A current trend in manufacturing is to design the
+                  manufacturing process and the product
+                  concurrently. The goal is to make the product easy to
+                  produce by the manufacturing process. Although
+                  software is not manufactured, the techniques needed to
+                  achieve the goal of easily producible software
+                  exist. Just as with manufacturing, the problem is how
+                  to organize the software production process and the
+                  products to eliminate rework. One solution lies in
+                  viewing system production as creating different
+                  members of a family, rather than creating a new system
+                  each time requirements change. Key to the process is
+                  finding the appropriate abstractions for the family,
+                  creating a language for describing them, and the
+                  translating descriptions of family members into
+                  deliverable software. The family-oriented,
+                  abstraction, specification, and translation (FAST)
+                  process is a systematic process for doing so. The goal
+                  is to create processes for rapidly creating different
+                  members of a program family."
+}
+
+@Book{Weiss:1999,
+  author =	 "David M. Weiss and Chi Tau Robert Lai",
+  title =	 "{Software Product-line Engineering: A Family-Based
+                  Software Development Process}",
+  publisher =	 "Addison-Wesley",
+  year =	 1999
+}
+
+@Article{Wirth:1971,
+  author =	 "Niklaus Wirth",
+  title =	 "{Program Development with Stepwise Refinement}",
+  journal =	 "Communications of the ACM",
+  year =	 1971,
+  volume =	 14,
+  number =	 4,
+  pages =	 "221--227",
+  url =
+                  "http://www.acm.org/pubs/articles/journals/cacm/1971-14-4/p221-wirth/p221-wirth.pdf"
+}
+
+@Manual{corba,
+  key =		 "OMG",
+  title =	 "{Common Object Request Broker Architecture}",
+  organization = "Object Management Group",
+  edition =	 "Online",
+  month =        jan,
+  year =         2001,
+  note =	 "[http://www.corba.org/]",
+  url =		 "http://www.corba.org/",
+  abstract =
+                  "http://www.omg.org/gettingstarted/corbafaq.htm#HowWork"
+}
+
+@Manual{java,
+  title =	 "{The Source for Java Technology}",
+  organization = "SUN Microsystems",
+  edition =	 "Online",
+  month =        jan,
+  year =         2001,
+  note =	 "[http://java.sun.com/]",
+  abstract =	 "http://java/sun.com/"
+}
+
+@Manual{sop,
+  title =	 "{Subject-Oriented Programming}",
+  organization = "IBM Research",
+  edition =	 "Online",
+  month =        may,
+  year =         2001,
+  note =	 "[http://www.research.ibm.com/sop/]",
+  url =		 "http://www.research.ibm.com/sop/",
+  abstract =     "http://www.research.ibm.com/sop/sopoverv.htm"
+}

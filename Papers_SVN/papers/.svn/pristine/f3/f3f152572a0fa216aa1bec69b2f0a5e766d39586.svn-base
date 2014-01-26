@@ -1,0 +1,576 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Power Manager by Geovani Ricardo Wiedenhoft
+% Email: grw at lisha.ufsc.br
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% Manuais
+
+@MANUAL{ACPI:2004,
+  TITLE = {Advanced Configuration and Power Interface
+                  Specification},
+  AUTHOR = {Hewlett-Packard Corporation and Intel Corporation and
+                  Microsoft Corporation and Phoenix Technologies
+                  Ltd. and Toshiba Corporation},
+  EDITION = {3.0},
+  MONTH = {Sep},
+  URL = {http://www.acpi.info},
+  YEAR = {2004},
+  PDF = {../cache/Power_Management/ACPI-2004.pdf},
+}
+
+@MANUAL{APM:1996,
+  TITLE = {Advanced Power Management (APM) BIOS Interface
+                  Specification},
+  AUTHOR = {Intel Corporation and Microsoft Corporation},
+  EDITION = {1.2},
+  MONTH = {Feb},
+  YEAR = {1996},
+  PDF = {../cache/Power_Management/APM-1996.rtf},
+}
+
+@MANUAL{Atmel:2003,
+  author = {Atmel~Corporation},
+  YEAR = {2003},
+  TITLE = {AT86RF401 Datasheet},
+  address = {San Jose, CA},
+  month = DEC
+}
+
+@MANUAL{ATMega16:2004,
+  TITLE = {ATMega16L Datasheet},
+  AUTHOR = {Atmel~Corporation},
+  ADDRESS = {San Jose, CA},
+  EDITION = {2466J},
+  MONTH = {Oct},
+  YEAR = {2004},
+  PDF = {../cache/Hardware/atmega16.pdf}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Frank Bellosa
+
+@inproceedings{Bellosa:2000,
+ author = {Frank Bellosa},
+ title = {The benefits of event: driven energy accounting in power-sensitive systems},
+ booktitle = {EW 9: Proceedings of the 9th workshop on ACM SIGOPS European workshop},
+ year = {2000},
+ isbn = {1-23456-789-0},
+ pages = {37--42},
+ location = {Kolding, Denmark},
+ doi = {http://doi.acm.org/10.1145/566726.566736},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+ PDF = {../cache/Power_Management/Bellosa-2000.pdf}
+}
+
+
+@TECHREPORT{Bellosa:2001,
+  AUTHOR = {F. Bellosa},
+  TITLE = {The Case for Event-Driven Energy Accounting},
+  INSTITUTION = {University of Erlangen, Department of Computer
+                  Science},
+  YEAR = 2001,
+  NUMBER = {TR-I4-01-07},
+  MONTH = {June},
+  URL = {http://www4.informatik.uni-erlangen.de/TR/pdf/TR-I4-01-07.pdf},
+  CATEGORY = {accounting},
+  PDF = {../cache/Power_Management/Bellosa-2001.pdf},
+}
+
+
+
+@INPROCEEDINGS{Bellosa:2003,
+  AUTHOR = {Frank Bellosa and Andreas Weissel and Martin Waitz and
+                  Simon Kellner},
+  TITLE = {Event-Driven Energy Accounting for Dynamic Thermal
+                  Management},
+  BOOKTITLE = {Proceedings of the Workshop on Compilers and Operating
+                  Systems for Low Power},
+  PAGES = {04-1 -- 04-10},
+  YEAR = {2003},
+  ADDRESS = {New Orleans, USA},
+  MONTH = {Sep},
+  PDF = {../cache/Power_Management/Bellosa-2003.pdf}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Andreas Weissel
+
+
+@inproceedings{Weissel:2002a,
+ author = {Andreas Weissel and Frank Bellosa},
+ title = {Process cruise control: event-driven clock scaling for dynamic power management},
+ booktitle = {CASES '02: Proceedings of the 2002 international conference on Compilers, architecture, and synthesis for embedded systems},
+ year = {2002},
+ isbn = {1-58113-575-0},
+ pages = {238--246},
+ location = {Grenoble, France},
+ doi = {http://doi.acm.org/10.1145/581630.581668},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+ PDF = {../cache/Power_Management/Weissel-2002a.pdf}
+}
+
+
+
+@InProceedings{Weissel:2002b,
+  title =   "Cooperative {I}/{O}: {A} Novel {I}/{O} Semantics for
+         Energy-Aware Applications",
+  author =  "Andreas Weissel and Bj{\'o}rn Beutel and Frank
+         Bellosa",
+  year =    "2002",
+  bibdate = "2003-05-27",
+  bibsource =   "DBLP,
+         http://dblp.uni-trier.de/db/conf/osdi/osdi2002.html%WeisselBB02",
+  booktitle =   "OSDI",
+  URL =     "http://www.usenix.org/events/osdi02/tech/weissel.html",
+  PDF = {../cache/Power_Management/Weissel-2002b.pdf}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Manish Anand
+
+%(Awarded Best Paper!)
+
+@InProceedings{Anand:2004,
+  author =  "Manish Anand and Edmund B. Nightingale and Jason
+         Flinn",
+  title =   "Ghosts in the Machine: Interfaces for Better Power
+         Management",
+  booktitle =   "Proceedings of the Second International Conference on
+         Mobile Systems, Applications, and Services
+         (MOBISYS'04)",
+  year =    "2004",
+  month =   jun,
+  URL =     "http://www.eecs.umich.edu/~anandm/mobisys.pdf",
+  category =    "application",
+  PDF = {../cache/Power_Management/Anand-2004.pdf}
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Vasanth Venkatachalan
+
+@Article{Venkatachalam:2005,
+ author = {Vasanth Venkatachalam and Michael Franz},
+ title = {Power reduction techniques for microprocessor systems},
+ journal = {ACM Comput. Surv.},
+ volume = {37},
+ number = {3},
+ year = {2005},
+ issn = {0360-0300},
+ pages = {195--237},
+ doi = {http://doi.acm.org/10.1145/1108956.1108957},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+ PDF = {../cache/Power_Management/Venkatachalam-2005.pdf}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Heng Zeng
+
+@INPROCEEDINGS{Zeng:2002,
+  AUTHOR = {Heng Zeng and Carla S. Ellis and Alvin R. Lebeck and
+                  Amin Vahdat},
+  TITLE = {ECOSystem: managing energy as a first class operating
+                  system resource},
+  BOOKTITLE = {ASPLOS-X: Proceedings of the 10th international
+                  conference on Architectural support for programming
+                  languages and operating systems},
+  YEAR = {2002},
+  ISBN = {1-58113-574-2},
+  PAGES = {123--132},
+  LOCATION = {San Jose, California},
+  DOI = {http://doi.acm.org/10.1145/605397.605411},
+  PUBLISHER = {ACM Press},
+  ADDRESS = {New York, NY, USA},
+  PDF = {../cache/Power_Management/Zeng-2002.pdf}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Luca Benini
+
+@INPROCEEDINGS{Benini:1998,
+ author = {Luca Benini and Alessandro Bogliolo and Giovanni De Micheli},
+ title = {Dynamic power management of electronic systems},
+ booktitle = {ICCAD '98: Proceedings of the 1998 IEEE/ACM international conference on Computer-aided design},
+ year = {1998},
+ isbn = {1-58113-008-2},
+ pages = {696--702},
+ location = {San Jose, California, United States},
+ doi = {http://doi.acm.org/10.1145/288548.289120},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+ PDF = {../cache/Power_Management/Benini-1998.pdf}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Claudio Scordino
+
+@INPROCEEDINGS{Scordino:2004,
+  AUTHOR = {Claudio Scordino and Giuseppe Lipari},
+  TITLE = {Using resource reservation techniques for power-aware
+                  scheduling},
+  BOOKTITLE = {EMSOFT '04: Proceedings of the 4th ACM international
+                  conference on Embedded software},
+  YEAR = {2004},
+  ISBN = {1-58113-860-1},
+  PAGES = {16--25},
+  LOCATION = {Pisa, Italy},
+  DOI = {http://doi.acm.org/10.1145/1017753.1017761},
+  PUBLISHER = {ACM Press},
+  ADDRESS = {New York, NY, USA},
+  PDF = {../cache/Power_Management/Scordino-2004.pdf}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Wanghong Yuan
+
+@InProceedings{Yuan:2003,
+ author = {Wanghong Yuan and Klara Nahrstedt},
+ title = {Energy-efficient soft real-time {CPU} scheduling for mobile multimedia systems},
+ booktitle = {SOSP '03: Proceedings of the nineteenth ACM symposium on Operating systems principles},
+ year = {2003},
+ isbn = {1-58113-757-5},
+ pages = {149--163},
+ location = {Bolton Landing, NY, USA},
+ doi = {http://doi.acm.org/10.1145/945445.945460},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+ PDF = {../cache/Power_Management/Yuan-2003.pdf}
+}
+
+
+@PHDTHESIS{Yuan:2004,
+  AUTHOR = {Wanghong Yuan},
+  TITLE = {Grace-OS: An energy-efficient mobile multimedia
+                  operating system},
+  SCHOOL = {University of Illinois at Urbana-Champaign},
+  YEAR = {2004},
+  PDF = {../cache/Power_Management/Yuan-2004.pdf}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Jason Flinn (Display)
+
+%ODYSSEY
+@InProceedings{Flinn:1999,
+ author = {Jason Flinn and M. Satyanarayanan},
+ title = {Energy-aware adaptation for mobile applications},
+ booktitle = {SOSP '99: Proceedings of the seventeenth ACM symposium on Operating systems principles},
+ year = {1999},
+ isbn = {1-58113-140-2},
+ pages = {48--63},
+ location = {Charleston, South Carolina, United States},
+ doi = {http://doi.acm.org/10.1145/319151.319155},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+ PDF = {../cache/Power_Management/Flinn-1999.pdf}
+}
+
+@article{Flinn:1999b,
+  author = {Jason Flinn and M. Satyanarayanan},
+  title = {PowerScope: A Tool for Profiling the Energy Usage of Mobile Applications},
+  journal = {wmcsa},
+  volume = {00},
+  year = {1999},
+  isbn = {0-7695-0025-0},
+  pages = {2},
+  doi = {http://doi.ieeecomputersociety.org/10.1109/MCSA.1999.749272},
+  publisher = {IEEE Computer Society},
+  address = {Los Alamitos, CA, USA},
+  PDF = {../cache/Power_Management/Flinn-1999b.pdf}
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Kathleen Baynes
+
+@InProceedings{Baynes:2003a,
+ author = {Kathleen Baynes and Chris Collins and Eric Fiterman and Brinda Ganesh and Paul Kohout and Christine Smit and Tiebing Zhang and Bruce Jacob},
+ title = {The performance and energy consumption of three embedded real-time operating systems},
+ booktitle = {CASES '01: Proceedings of the 2001 international conference on Compilers, architecture, and synthesis for embedded systems},
+ year = {2001},
+ isbn = {1-58113-399-5},
+ pages = {203--210},
+ location = {Atlanta, Georgia, USA},
+ doi = {http://doi.acm.org/10.1145/502217.502253},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+ PDF = {../cache/Power_Management/Baynes-2003a.pdf}
+}
+
+
+
+@article{Baynes:2003b,
+  author = {Kathleen Baynes and Chris Collins and Eric Fiterman and Brinda Ganesh and Paul Kohout and Christine Smit and Tiebing Zhang and Bruce Jacob},
+  title = {The Performance and Energy Consumption of Embedded Real-Time Operating Systems},
+  journal = {IEEE Transactions on Computers},
+  volume = {52},
+  number = {11},
+  year = {2003},
+  issn = {0018-9340},
+  pages = {1454-1469},
+  doi = {http://doi.ieeecomputersociety.org/10.1109/TC.2003.1244943},
+  publisher = {IEEE Computer Society},
+  address = {Los Alamitos, CA, USA},
+  PDF = {../cache/Power_Management/Baynes-2003b.pdf}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bishop Brock
+
+@INPROCEEDINGS{Brock:2003,
+  AUTHOR = {Bishop Brock and Karthick Rajamani},
+  TITLE = {Dynamic Power Management for Embedded Systems},
+  BOOKTITLE = {Proceedings of the IEEE International SOC Conference},
+  YEAR = {2003},
+  MONTH = {sep},
+  ORGANIZATION = {IEEE},
+  PUBLISHER = {IEEE},
+  PDF = {../cache/Power_Management/Brock-2003.pdf}
+}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Padmanabhan Pillai
+
+@INPROCEEDINGS{Pillai:2001,
+  AUTHOR = {Padmanabhan Pillai and Kang G. Shin},
+  TITLE = {Real-time dynamic voltage scaling for low-power
+                  embedded operating systems},
+  BOOKTITLE = {SOSP '01: Proceedings of the eighteenth ACM symposium
+                  on Operating systems principles},
+  YEAR = {2001},
+  ISBN = {1-58113-389-8},
+  PAGES = {89--102},
+  LOCATION = {Banff, Alberta, Canada},
+  DOI = {http://doi.acm.org/10.1145/502034.502044},
+  PUBLISHER = {ACM Press},
+  ADDRESS = {New York, NY, USA},
+  PDF = {../cache/Power_Management/Pillai-2001.pdf}
+} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Linwei Niu
+
+@article{Niu:2005,
+  author = {Linwei Niu and Gang Quan},
+  title = {A Hybrid Static/Dynamic DVS Scheduling for Real-Time Systems with (m, k)-Guarantee},
+  journal = {rtss},
+  volume = {0},
+  year = {2005},
+  issn = {1052-8725},
+  pages = {356-365},
+  doi = {http://doi.ieeecomputersociety.org/10.1109/RTSS.2005.6},
+  publisher = {IEEE Computer Society},
+  address = {Los Alamitos, CA, USA},
+  PDF = {../cache/Power_Management/Niu-2005.pdf}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fumiko Harada
+
+@inproceedings{Harada:2006,
+ author = {Fumiko Harada and Toshimitsu Ushio and Yukikazu Nakamoto},
+ title = {Power-Aware Resource Allocation with Fair QoS Guarantee},
+ booktitle = {RTCSA '06: Proceedings of the 12th IEEE International Conference on Embedded and Real-Time Computing Systems and Applications},
+ year = {2006},
+ isbn = {0-7695-2676-4},
+ pages = {287--293},
+ doi = {http://dx.doi.org/10.1109/RTCSA.2006.50},
+ publisher = {IEEE Computer Society},
+ address = {Washington, DC, USA},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Simulations
+
+@inproceedings{Shnayder:2004,
+ author = {Victor Shnayder and Mark Hempstead and Bor-rong Chen and Geoff Werner Allen and Matt Welsh},
+ title = {Simulating the power consumption of large-scale sensor network applications},
+ booktitle = {SenSys '04: Proceedings of the 2nd international conference on Embedded networked sensor systems},
+ year = {2004},
+ isbn = {1-58113-879-2},
+ pages = {188--200},
+ location = {Baltimore, MD, USA},
+ doi = {http://doi.acm.org/10.1145/1031495.1031518},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+ PDF = {../cache/Power_Management/Shnayder-2004.pdf}
+}
+
+
+
+% Arrumar o bib, pois eu que fiz
+
+@InProceedings{Landsiedel:2005,
+  author =  {Olaf Landsiedel and Klaus Wehrle and Stefan Gotz},
+  title =   {Accurate prediction of power consumption in sensor networks},
+  booktitle =   {EmNetS-II: Proceedings of The Second IEEE Workshop on Embedded Networked Sensors},
+  publisher =   {IEEE},
+  year =    {2005},
+  month =   may,
+  PDF = {../cache/Power_Management/Landsiedel-2005.pdf}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Johan Pouwelse (DVS)
+
+@inproceedings{Pouwelse:2001,
+ author = {Johan Pouwelse and Koen Langendoen and Henk Sips},
+ title = {Dynamic voltage scaling on a low-power microprocessor},
+ booktitle = {MobiCom '01: Proceedings of the 7th annual international conference on Mobile computing and networking},
+ year = {2001},
+ isbn = {1-58113-422-3},
+ pages = {251--259},
+ location = {Rome, Italy},
+ doi = {http://doi.acm.org/10.1145/381677.381701},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+ PDF = {../cache/Power_Management/Pouwelse-2001.pdf}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Mark Weiser (DVS)
+
+@InProceedings{Weiser:1994,
+  title =   "Scheduling for Reduced {CPU} Energy",
+  author =  "Mark Weiser and Brent Welch and Alan J. Demers and
+         Scott Shenker",
+  year =    "1994",
+  bibdate = "2002-12-16",
+  bibsource =   "DBLP,
+         http://dblp.uni-trier.de/db/conf/osdi/osdi94.html%WeiserWDS94",
+  booktitle =   "OSDI",
+  pages =   "13--23",
+  PDF = {../cache/Power_Management/Weiser-1994.pdf}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fred Douglis (Disco)
+
+@InProceedings{Douglis:1995,
+  author =  "Fred Douglis and Padmanabhan Krishnan and Brian
+         Bershad",
+  title =   "Adaptive Disk Spin-down Policies for Mobile
+         Computers",
+  booktitle =   "Proc. 2nd USENIX Symp. on Mobile and
+         Location-Independent Computing",
+  year =    "1995",
+  PDF = {../cache/Power_Management/Douglis-1995.pdf}
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% David P. Helmbold (Disco)
+
+@inproceedings{Helmbold:1996,
+ author = {David P. Helmbold and Darrell D. E. Long and Bruce Sherrod},
+ title = {A dynamic disk spin-down technique for mobile computing},
+ booktitle = {MobiCom '96: Proceedings of the 2nd annual international conference on Mobile computing and networking},
+ year = {1996},
+ isbn = {0-89791-872-X},
+ pages = {130--142},
+ location = {Rye, New York, United States},
+ doi = {http://doi.acm.org/10.1145/236387.236423},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+ PDF = {../cache/Power_Management/Helmbold-1996.pdf}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Robin Kravets (Rede)
+
+@inproceedings{Kravets:1998,
+ author = {Robin Kravets and P. Krishnan},
+ title = {Power management techniques for mobile communication},
+ booktitle = {MobiCom '98: Proceedings of the 4th annual ACM/IEEE international conference on Mobile computing and networking},
+ year = {1998},
+ isbn = {1-58113-035-X},
+ pages = {157--168},
+ location = {Dallas, Texas, United States},
+ doi = {http://doi.acm.org/10.1145/288235.288276},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+ PDF = {../cache/Power_Management/Kravets-1998.pdf}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Mark Stemm (Rede)
+
+@Article{Stemm:1997,
+  author =  "Mark Stemm and Randy H. Katz",
+  title =   "Measuring and Reducing Energy Consumption of Network
+         Interfaces in Hand-Held Devices",
+  journal = "IEICE Transactions on Communications",
+  volume =  "E80-B",
+  number =  "8",
+  pages =   "1125--31",
+  year =    "1997",
+  URL =     "http://citeseer.nj.nec.com/stemm97measuring.html",
+  category =    "wireless",
+  PDF = {../cache/Power_Management/Stemm-1997.pdf}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Cristiano Pereira
+
+
+@InProceedings{Pereira:2002,
+  author =	"Cristiano Pereira and Rajesh Gupta and Mani
+		 Srivastava",
+  title =	"{PASA}: {A} Software Architecture for Building Power
+		 Aware Embedded Systems",
+  booktitle =	"Proceedings of the IEEE CAS Workshop on Wireless
+		 Communications and Networking - Power efficient
+		 wireless ad hoc networks",
+  month =	sep,
+  year = 	"2002",
+  URL =  	"http://www.cs.ucsd.edu/%7Ecpereira/papers/cas2002.pdf.gz",
+  category =	"application,real-time",
+  PDF = {../cache/Power_Management/Pereira-2002.pdf}
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Shivajit Mohapatra
+
+% Forge
+
+@InProceedings{Mohapatra-2003.pdf,
+  author =	"Shivajit Mohapatra and Radu Cornea and Nikil Dutt and
+		 Alex Nicolau and Nalini Venkatasubramanian",
+  title =	"Integrated power management for video streaming to
+		 mobile handheld devices",
+  pages =	"582--591",
+  booktitle =	"Proceedings of the 11th {ACM} International Conference
+		 on Multimedia ({MM}-03)",
+  month =	nov # " ~4--6",
+  year = 	"2003",
+  PDF = {../cache/Power_Management/Mohapatra-2003.pdf}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+

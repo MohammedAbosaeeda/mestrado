@@ -1,0 +1,122 @@
+\documentclass[a4paper,10pt,english]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{babel}
+\usepackage{times}
+\usepackage[margin=3cm,noheadfoot]{geometry}
+   
+\title{Operating Systems: are we finally ready to move\\
+  forward after 30 years of stagnation?}
+
+\author{
+  \begin{tabular}[t]{c@{\extracolsep{2cm}}c}
+    Antônio Augusto Fröhlich & Wolfgang Schröder-Preikschat\\
+    \small{GMD-FIRST}&\small{University of Magdeburg}\\[-0.5ex]
+    \small{Kekuléstraße 7}&\small{Universitätsplatz 2}\\[-0.5ex]
+    \small{12489 Berlin, Germany}&\small{39106 Magdeburg, Germany}\\[-0.5ex]
+    \small\texttt{guto@first.gmd.de}&\small\texttt{wosch@ivs.cs.uni-magdeburg.de}
+  \end{tabular}
+} 
+
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+\section*{\protect\centering Abstract}
+
+If there are areas of computer science that were left behind by the
+market, operating systems is certainly one of them. The products
+currently available in the area, namely Microsoft \textsc{Windows} and
+\textsc{Unix}, owe their designs to projects such as
+\textsc{The}~\cite{Dijkstra:1968} and
+\textsc{Multics}~\cite{Organick:1972}, which are at least 30 years old.
+In the meanwhile, several new "hacks" have been proposed, but very few
+systems brought about revolutionary designs. The partitioning of the
+problem domain in abstractions like \texttt{process} and \texttt{file}
+is so old that some people regard it as a "canonical" one. The scene is
+even worse if one takes in consideration that only 2\% of the
+microprocessors produced in the year 2000 targeted the interactive
+market~\cite{Tennenhouse:2000}, for which those operating systems have
+been designed. The software industry spent 30 years saying that there
+are not many things to be improved in the operating system
+area~\cite{Pike:2000}, but left 98\% of market without a choice!
+
+Innumerable software engineering techniques have been proposed for the
+development of applicative software, many of them are now mature and
+widely used in production. Nevertheless, not many operating system
+developers have tried to deploy them, or to adapt them, to the
+development of their products. We believe that several of these
+techniques can be successfully deployed in the area of operating systems
+with minor adjusts, as long as we reformulate our view of the
+corresponding domain. Of course we are dealing with a very special
+field. A field where words such as asynchronism and determinism have
+very special meanings. A field pressed to squeeze the last bit of
+performance and to blow overhead away without relaxing on correctness.
+Anyway, by now we should be ready to make it up with software
+engineering and move forward with operating system design.
+
+We developed a novel operating system design method that addresses many
+of the questions raised above. Deeply influenced by
+\emph{object-oriented design}, but also by \emph{family-based design},
+\emph{collaboration-based design}, \emph{aspect-oriented programming}
+and \emph{generative programming}, our method enables the development of
+operating systems as an assemblage of reusable and adaptable components.
+Our method produces systems that can be tailored to fulfill the
+requirements of any particular application, without disregarding any of
+the quality metrics compulsory to the field. Indeed, applications play
+such a major role that we decided to name the method
+\emph{application-oriented system design}.
+
+In summary, our method conducts the partitioning of the problem domain
+in \emph{scenario-independent, appli\-ca\-tion-ready abstractions} that
+will shape the components of the resulting system. Because these
+abstractions know very little about the execution scenario they will
+join, they can be adapted to join several scenarios. When performing a
+scenario, abstractions are wrapped by \emph{scenario-adapters}, which
+know details of both scenario and abstractions. In order to avoid
+overloading users with system-level decisions, all implementations of an
+abstraction are made visible through the same \emph{inflated interface}.
+If the system is proper designed, tools can automatically select the
+best implementation via syntactical analysis of the application's source
+code.
+
+This combination of objects, collaborations, and aspects may sound
+low-performing. However, our method proposes abstractions to be arranged
+in a \emph{statically metaprogrammed component framework}, so that
+compositions are carried out during compilation, resulting in virtually
+no run-time overhead. Such frameworks define the relationships between
+abstractions in terms of scenario-adapters, hence capturing a reusable
+system architecture. If the target application does not need this or
+that abstraction, the corresponding scenario-adapters will contribute
+for a scenario free of them. In this way, each application gets exactly
+the operating system it needs. Yet, system developers do not need to
+redesign or reimplement the system several times, they can play with
+components, adapters and frameworks to deliver a vast range of
+application-oriented systems.
+ 
+We deployed this design method in the \textsc{Embedded Parallel
+  Operating System} (EPOS) project under development at
+GMD-FIRST~\cite{Froehlich:sbac:1999}. The current implementation targets
+parallel applications running in a cluster of PCs interconnected through
+a \textsc{Myrinet} high-speed network. Although the number of components
+in the repository is still small, and the tools are relatively
+primitive, EPOS first results are very encouraging, not only in terms of
+performance, but of quality in general. As far as we are concerned,
+application-to-application communication over \textsc{Myrinet} in EPOS
+has the best performance ever reported~\cite{Froehlich:hpcn:2000}.
+Besides continuing the development for the cluster domain, we will soon
+deploy application-oriented system design to the embedded systems
+domain.
+
+\bibliographystyle{plain}
+\bibliography{se,os,guto}
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

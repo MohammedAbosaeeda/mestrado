@@ -1,0 +1,91 @@
+\documentclass[12pt,a4]{article}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{pdfpages}
+\usepackage{multirow}
+\usepackage{cite}
+\usepackage{multicol}
+
+%\renewcommand*\thesection{\Roman{section}}
+
+\geometry{left=18mm,right=18mm,top=21mm,bottom=21mm}
+
+\pagestyle{plain} 
+\pagenumbering{arabic}
+
+
+\title{Telemetry and Network for Automation of Photovoltaic Boats using an Android Application with AI}
+\author{Renato Bock da Costa\\
+Software/Hardware Integration Lab - LISHA\\
+Federal University of Santa Catarina, Florian\'{o}polis, Brazil\\
+renato@lisha.ufsc.br}
+
+\date{}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+	In this paper, a Wireless Sensor Network (WSN) is used to implement a telemetry system with the equipments of a  photovoltaic boat. Using the EPOSMoteII as interface module of this network. The data will be sent to an Android tablet, where an application will be running. This application will have a Artificial Intelligence (AI) system implemented. With this AI, the boats pilot have a better knowledge of the vehicles situation. The results have shown a better efficiency as the pilot, with the data in his hands, knows better what to and not to do.
+
+\textbf{\textit{Keywords} -} WSN Android, Intra-Vehicle WSN, Android AI, Embedded WSN
+\end{abstract}
+
+	\section{Introduction}
+
+	Given Brazil’s geographical location, is being generated an increasing demand for photovoltaic systems. In this context, photovoltaic boats are used to reduce 	operational costs and the polluter impact that diesels engines creates. These boats use electric devices to implement four main subsystems: power generation and storage, propulsion, management and communication. With the limited power supply, the first step for the success of these boats is the internal integration of the subsystems, using an effective (boats functionality and power efficiency) control network.
+	
+	Sensors and switches are mostly connected via a wired harness, which increases the weight and therefore the efficiency of the boat. In this scenario, a Wireless Sensor Network (WSN) is ideal to replace this wired connections. All the acquired data will be displayed in an Android application to guarantee a better knowledge of the boat situation.
+	
+	The rest of this paper is organized as follow. Section~\ref{sec:back} exposes some terms and components of the experiment. Section~\ref{sec:dev} describes the approach to achieve the goals specified. Main findings are discussed in Section~\ref{sec:disc} and Section~\ref{sec:conc} concludes the paper.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section{Background and Related Work}
+	\label{sec:back}
+		\subsection{Wireless Sensor Networks}
+		\subsection{EPOS and EPOSMoteII}
+		\subsection{Artificial Intelligence on Android}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	\section{Development Description}
+	\label{sec:dev}
+
+	This section describes the steps of the development, also including their purposes and roles in the final work.
+	
+		% PCB schematic and Layout
+		\subsection{PCB Creation}
+		The first part of this experiment consisted in the creation of a Printed Circuit Board (PCB). It will be used as a interfacing module of the EPOSMoteII with RS232 (serial communication standard used in a large amount of peripherals and in the industry). This PCB would be responsible to do the communication between the charge controller of the boat and the EPOSMoteII.
+		
+		First, a schematic of the PCB was made (REFERENCIA FIGURA). The schematic consisted in two different parts; one part was responsible for the energy source of the PCB and the EPOSMoteII. The input voltage of 12 Volts has to be adjusted to 3.3 Volts (EPOSMoteIIs working-voltage). The second part of the schematic was the part responsible for the communication between the boats equipments and the EPOSMoteII (using RS232 standard).
+		
+		Once the schematic and the layout of the board were finished (REFERENCIA IMAGEM), the PCBs were actually manufactured (REFERENCIA IMAGEM).
+		
+		%Parsers Implementation
+		\subsection{Parsers Integration}
+		With the PCB done, next step we were to create two EPOSMoteII applications that integrate the parsers for the protocols of the boats equipment. These applications extract the relevant data to apply the telemetry. These data will then be sent to an base-station. 
+		
+		The first application implemented gathered the data of a battery monitor (BMV 600s of Victron Energy). The parser was made to work with any type of input data (negative, positive numbers and irrelevant inputs, witch is "---"). The messages sent by the battery monitor has the format show in (REFERENCIA FIGURA).
+		
+		Next step, the second application was implemented. This application used the Modbus communication standard to extract data from the charge controller (TriStar Solar Controller TS-60 of MorningStar Corporation). 
+		
+		Both applications created worked in the same way; first, all the data is received, then a buffer organizes them with the same format of the battery monitor messages. The data, once organized, is sent in one package in the WSN.
+		
+		% Android Layout
+		\subsection{Android Application}
+			\subsubsection{Application Layout}
+			... Layout proposed...\\
+			... Talk about usability and functionality ...
+			\subsubsection{Application AI}
+			... Usage of statistics to make decisions ...	\\		
+			... Pop-up (messages) in the screen alerting the pilot ...
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section{Discussion}
+	The experiment turned out to be an advantage to a better control of the boat. The integration of the EPOSMoteIIs with the Android application really made the function of the pilot easier. The layout with a good usability showed itself as a great co-pilot.
+	\label{sec:disc}
+	\section{Conclusion}
+	Putting the advantages of a WSN and the Android together, we came up with an integrated telemetry system that doesn't require a complex wire harness. The AI of the application also played a important role regarding safety and efficiency, as it warns the pilot if he is going against the tide or with it.
+	\label{sec:conc}
+	\bibliography{bib.bib}
+	
+\end{document}

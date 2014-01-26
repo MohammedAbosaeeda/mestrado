@@ -1,0 +1,13 @@
+\begin{tabular}{l|cc|cc|cc}
+\hline
+ & \multicolumn{2}{c|}{\textbf{TinyOS}} & \multicolumn{2}{c|}{\textbf{MANTIS OS}} & \multicolumn{2}{c}{\textbf{EPOS}} \\
+                     & Código  & Dados  & Código  & Dados  & Código  & Dados \\
+\hline
+\textbf{System}      & 10188   & 455    & 25500   & 596    & 7046    & 213   \\
+\textbf{AVR ADC}     & 550     & 4      & 538     & 9      & 64      & 3     \\
+\textbf{ADXL202}     & 722     & 4      & 936     & 10     & 266     & 9     \\
+\textbf{Thermistor}  & 1366    & 12     & 1050    & 11     & 1064    & 3     \\
+\textbf{Photocell}   & 1366    & 12     & 1050    & 11     & 1064    & 3     \\
+\textbf{HMC1002}     & 748     & 7      & 910     & 10     & 246     & 9     \\
+\hline
+\end{tabular}

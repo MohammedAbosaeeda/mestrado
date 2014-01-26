@@ -1,0 +1,42 @@
+\section{Trabalhos Relacionados}
+\label{sec:rel}
+
+\textsc{TinyOS} é considerado o SO mais popular para RSSF. É um SO orientado a eventos e originalmente não suporta reconfiguração de software~\cite{hill00system}. Entretanto, diversos trabalhos têm sido realizados com o intuito de suportar reconfiguração no \textsc{TinyOS}~\cite{mate, deluge, flexcup}. \textsc{MantisOS} é outro SO para RSSF muito conhecimento no ambiente acadêmico, mas não suporta reconfiguração~\cite{mantis}.
+
+\textsc{Nano-Kernel} permite RDS das aplicações e dos componentes do kernel através da separação dos dados e dos algoritmos lógicos do kernel~\cite{Bagchi2008}. É criado um nível de indireção entre as aplicações e os dispositvos do kernel (e.g. escalonador, gerenciador de memória, etc). O núcleo do \textsc{Nano-Kernel} e os dispositivos do kernel se comunicam através de interfaces específicas que devem ser iniciadas na inicialização do sistema.
+
+\textsc{RETOS} implementa RDS através de relocação dinâmica de memória e ligação em tempo de execução~\cite{Cha2007}. O processo de relocação extrai informações de variáveis e funções globais em tempo de compilação (meta-informações) que são colocadas em um arquivo no formato \textsc{RETOS}. Tais informações são utilizadas pelo kernel para substituir todo endereço acessível de um módulo quando o estiver carregando. O SO possui uma tabela com endereços para funções de outros módulos. Um módulo registra, desregistra e acessa funções através desta tabela.
+
+\textsc{Contiki} é um SO para RSSF que implementa processos especiais, chamados de \emph{serviços}, que provêem funcionalidades a outros processos~\cite{dunkels04contiki}. Serviços são substituídos em tempo de execução através de uma \emph{interface stub} responsável por redirecionar as chamadas das funções para uma \emph{interface de serviço}, que possui ponteiros para as implementações atuais das funções do serviço correspondente. \textsc{Contiki} somente permite a atualização de algumas partes do sistema.
+
+\textsc{SOS} é um SO para RSSF que permite RDS~\cite{sos}. O SO é construído em módulos que são inseridos, removidos ou substituídos em tempo de execução. Através do uso de chamadas relativas, o código em cada módulo torna-se independente de posição da memória. 
+
+\ELUS{} é conceitualmente similar aos trabalhos relacionados apresentados, porém a infra-estrutura do framework possui a vantagem de eliminar parte do sobrecusto associado às tabelas de indireção com o uso da metaprogramação estática. Tabela~\ref{tab:reconf2} revisa o processo de reconfiguração nos SO embarcados analisados.
+
+\begin{table}[ht]
+\centering
+\caption{Características do processo de reconfiguração nos SOs analisados.}
+\scriptsize{
+\begin{tabular}{{|c|p{5.8cm}|}}
+\hline
+\textbf{SO} & \multicolumn{1}{c|}{\textbf{Processo de Reconfiguração}} \cr\hline
+\textsc{TinyOS}      &  \multicolumn{1}{c|}{Sem suporte direto} \cr\hline
+\textsc{MantisOS}    & \multicolumn{1}{c|}{Não há suporte} \cr\hline
+\textsc{Nano-Kernel} & \multicolumn{1}{c|}{Módulos reconfiguráveis} \cr\hline
+\textsc{RETOS}       & \multicolumn{1}{c|}{Relocação dinâmica e ligação em tempo de execução} \cr\hline
+\textsc{Contiki}     & \multicolumn{1}{c|}{Módulos reconfiguráveis} \cr\hline
+\textsc{SOS}         & \multicolumn{1}{c|}{Módulos reconfiguráveis} \cr\hline
+\textsc{\textbf{EPOS/ELUS}} & \multicolumn{1}{c|}{\textbf{Componentes reconfiguráveis selecionados em tempo de compilação}} \cr\hline
+\end{tabular}
+}
+\label{tab:reconf2}
+\end{table}
+
+\section{Análise Comparativa}
+\label{sec:analysis}
+
+Esta seção discute os resultados do \ELUS{} comparando-os aos trabalhos relacionados. O \ELUS{} adiciona cerca de 1.6Kb de código e 26 bytes de dados por componente no sistema quando o suporte de reconfiguração está habilitado. \textsc{Contiki} necessita de 6Kb de código e 230 bytes de dados~\cite{dunkels04contiki}. \textsc{SOS} ocupa mais de 5Kb de código para o gerenciamento dos módulos e a tabela de módulos ocupa 230 bytes de dados. \ELUS{} apresenta bom desempenho devido a metaprogramação estática, na qual resolve as dependências entre o framework, componentes e aplicações em tempo de compilação. Além disso, \ELUS{} permite que o desenvolvedor escolha os componentes reconfiguráveis sem introduzir sobrecusto na imagem final do sistema, gerando somente código e dados que o sistema realmente precisa.
+
+A respeito do sobrecusto de invocação de métoso, \textsc{SOS} leva 21 ciclos para chamar uma função de um módulo reconfigurável e 12 para chamar uma função do kernel. Entretanto, a comunicação entre módulos (troca de dados) é realizada através do envio e recebimento de mensagens em um buffer, que leva cerca de 822 ciclos~\cite{sos}. \textsc{Contiki} tem um desempenho ainda pior, pois o \textit{stub} deve encontrar a interface de serviço antes de chamar a função do módulo reconfigurável. Isso é feito comparando uma cadeia de caracteres~\cite{dunkels04contiki}. Em uma comparação, \textsc{Contiki} foi cerca de 4 vezes mais lento que o \textsc{SOS}~\cite{Yi2008}. \ELUS{} tem a vantagem de usar a estrutura de mensagem presente no framework para passar e receber parâmetros e valor de retorno, na qual é 7 vezes mais rápida que o \textsc{SOS}.
+
+Em uma reconfiguração, o \textsc{SOS} remove o módulo antigo e registra o novo módulo e seu tratador de eventos. Tais tarefas demoram 612 cilcos, desconsiderando o tempo de receber os dados pela rede e escrevê-los na memória flash~\cite{Yi2008}. \textsc{Contiki} inicia uma reconfiguração enviando uma mensagem de remoção para a interface de serviço, que faz a transferência dos dados entre os módulos antigo e novo. Após, a nova interface é registrada no sistema. \textsc{RETOS} usa relocação dinâmica e ligação em tempo de execução através das meta-informações sobre os módulos. Essas informações extras também devem ser transmitidas juntamente com o novo código de um módulo, aumentando a quantidade de dados e o tempo de transmissão pela rede, o consumo de energia e o tempo de reconfiguração. O \ELUS{} não necessita registrar ou remover os componentes em tempo de execução. Uma reconfiguração demora cerca de 415 ciclos. Além disso, \ELUS{} utiliza o \ETP{} que diminui os dados enviados pela rede em um pedido de reconfiguração.

@@ -1,0 +1,375 @@
+make: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1'
+make APPLICATION=producer_consumer clean1 all1; make APPLICATION=philosophers_dinner clean1 all1;
+make[1]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1'
+(cd etc && make -i clean)
+make[2]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/etc'
+sed -e 's/^#define ARCH.*$/#define ARCH xxx/' -i /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include/system/config.h
+sed -e 's/^#define MACH.*$/#define MACH xxx/' -i /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include/system/config.h
+sed -e 's/^#define APP.*$/#define APPLICATION xxx/' -i /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include/system/config.h
+rm -f *.conf
+make[2]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/etc'
+(cd app && make -i clean)
+make[2]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/app'
+rm -f *.o producer_consumer
+make[2]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/app'
+(cd img && make -i clean)
+make[2]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/img'
+rm -f *_boot *_setup *_init *_system producer_consumer 
+make[2]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/img'
+(cd src && make -i clean)
+make[2]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src'
+make MAKE:="make -i clean" utility arch mach abstraction setup boot system init
+make[3]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src'
+(cd utility && make -i clean)
+make[4]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/utility'
+rm -f *.o *_test
+make[4]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/utility'
+(cd arch && make -i clean)
+make[4]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/arch'
+make MAKE:="make -i clean" ia32
+make[5]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/arch'
+(cd ia32 && make -i clean)
+make[6]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/arch/ia32'
+rm -f *.o *.s *_test
+make[6]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/arch/ia32'
+make[5]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/arch'
+make[4]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/arch'
+(cd mach && make -i clean)
+make[4]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/mach'
+make MAKE:="make -i clean" common pc
+make[5]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/mach'
+(cd common && make -i clean)
+make[6]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/mach/common'
+rm -f *.o
+make[6]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/mach/common'
+(cd pc && make -i clean)
+make[6]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/mach/pc'
+rm -f *.o *_test
+make[6]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/mach/pc'
+make[5]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/mach'
+make[4]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/mach'
+(cd abstraction && make -i clean)
+make[4]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/abstraction'
+rm -f *.o *_test
+make[4]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/abstraction'
+(cd setup && make -i clean)
+make[4]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/setup'
+rm -f *.o *_setup
+make[4]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/setup'
+(cd boot && make -i clean)
+make[4]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/boot'
+rm -f *.s *.o *_boot *.tmp
+make[4]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/boot'
+(cd system && make -i clean)
+make[4]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/system'
+rm -f *.o *_system
+make[4]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/system'
+(cd init && make -i clean)
+make[4]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/init'
+rm -f *.o *_init
+make[4]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/init'
+make[3]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src'
+make[2]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src'
+find /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib -maxdepth 1 -type f -exec rm -f {} \;
+(cd etc && make)
+make[2]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/etc'
+sed -e 's/^#define ARCH.*$/#define ARCH ia32/' -i /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include/system/config.h
+sed -e 's/^#define MACH.*$/#define MACH pc/' -i /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include/system/config.h
+sed -e 's/^#define APPLICATION.*$/#define APPLICATION producer_consumer/' -i /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include/system/config.h
+make[2]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/etc'
+(cd tools && make)
+make[2]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/tools'
+(cd eposcc && make)
+make[3]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/tools/eposcc'
+install -m 775 eposcc /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/bin
+sed -e 's/^EPOS=.*$/EPOS=\/home\/tinha\/Mestrado\/EPOS_Guto\/tags\/dos-1.1/' -i /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/bin/eposcc
+make[3]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/tools/eposcc'
+(cd eposmkbi && make)
+make[3]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/tools/eposmkbi'
+install -m 775 eposmkbi /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/bin
+make[3]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/tools/eposmkbi'
+make[2]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/tools'
+(cd src && make)
+make[2]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src'
+(cd utility && make)
+make[3]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/utility'
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include elf.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libutil_ia32.a elf.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include heap.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libutil_ia32.a heap.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include observer.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libutil_ia32.a observer.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include ostream.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libutil_ia32.a ostream.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include random.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libutil_ia32.a random.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include srec.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libutil_ia32.a srec.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include string.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libutil_ia32.a string.o
+make[3]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/utility'
+(cd arch && make)
+make[3]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/arch'
+(cd ia32 && make)
+make[4]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/arch/ia32'
+/usr/local/ia32/gcc-4.4.4/bin/ia32-gcc -E -Wa,--32 -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include ia32_crt1.S -o ia32_crt1.s
+/usr/local/ia32/gcc-4.4.4/bin/ia32-as --32 ia32_crt1.s -o ia32_crt1.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-gcc -E -Wa,--32 -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include ia32_crtbegin.S -o ia32_crtbegin.s
+/usr/local/ia32/gcc-4.4.4/bin/ia32-as --32 ia32_crtbegin.s -o ia32_crtbegin.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-gcc -E -Wa,--32 -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include ia32_crtend.S -o ia32_crtend.s
+/usr/local/ia32/gcc-4.4.4/bin/ia32-as --32 ia32_crtend.s -o ia32_crtend.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-gcc -E -Wa,--32 -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include ia32_crti.S -o ia32_crti.s
+/usr/local/ia32/gcc-4.4.4/bin/ia32-as --32 ia32_crti.s -o ia32_crti.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-gcc -E -Wa,--32 -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include ia32_crtn.S -o ia32_crtn.s
+/usr/local/ia32/gcc-4.4.4/bin/ia32-as --32 ia32_crtn.s -o ia32_crtn.o
+install ia32_crt1.o ia32_crtbegin.o ia32_crtend.o ia32_crti.o ia32_crtn.o /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include -fomit-frame-pointer cpu.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libarch_ia32.a cpu.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include mmu.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libarch_ia32.a mmu.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include cpu_init.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libinit_ia32.a cpu_init.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include mmu_init.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libinit_ia32.a mmu_init.o
+make[4]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/arch/ia32'
+make[3]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/arch'
+(cd mach && make)
+make[3]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/mach'
+(cd common && make)
+make[4]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/mach/common'
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include ethernet.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libmach_ia32.a ethernet.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include rtc_common.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libmach_ia32.a rtc_common.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include serial_display.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libmach_ia32.a serial_display.o
+make[4]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/mach/common'
+(cd pc && make)
+make[4]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/mach/pc'
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include device.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libmach_ia32.a device.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include display.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libmach_ia32.a display.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include e100.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libmach_ia32.a e100.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include ic.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libmach_ia32.a ic.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include machine.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libmach_ia32.a machine.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include pci.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libmach_ia32.a pci.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include -fomit-frame-pointer pc_interrupt.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libmach_ia32.a pc_interrupt.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include pcnet32.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libmach_ia32.a pcnet32.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include rtc.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libmach_ia32.a rtc.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include timer.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libmach_ia32.a timer.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include uart.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libmach_ia32.a uart.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include e100_init.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libinit_ia32.a e100_init.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include ethernet_init.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libinit_ia32.a ethernet_init.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include ic_init.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libinit_ia32.a ic_init.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include machine_init.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libinit_ia32.a machine_init.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include pci_init.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libinit_ia32.a pci_init.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include pcnet32_init.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libinit_ia32.a pcnet32_init.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include timer_init.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libinit_ia32.a timer_init.o
+make[4]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/mach/pc'
+make[3]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/mach'
+(cd abstraction && make)
+make[3]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/abstraction'
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include alarm.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libsystem_ia32.a alarm.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include condition.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libsystem_ia32.a condition.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include mutex.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libsystem_ia32.a mutex.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include semaphore.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libsystem_ia32.a semaphore.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include thread.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libsystem_ia32.a thread.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include alarm_init.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libinit_ia32.a alarm_init.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include system_init.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libinit_ia32.a system_init.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include thread_init.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ar rcs /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib/libinit_ia32.a thread_init.o
+make[3]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/abstraction'
+(cd setup && make)
+make[3]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/setup'
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include pc_setup.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-ld  -L/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib -Bstatic -L`/usr/local/ia32/gcc-4.4.4/bin/ia32-gcc -ansi -c  -Wa,--32 -print-file-name=` --omagic -Ttext=0x00100000 -o pc_setup pc_setup.o -linit_ia32 -lmach_ia32 -larch_ia32 -lutil_ia32 -lgcc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-strip -R .note -R .comment -o pc_setup.tmp pc_setup
+install pc_setup.tmp /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/img/pc_setup
+rm -f pc_setup.tmp
+make[3]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/setup'
+(cd boot && make)
+make[3]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/boot'
+/usr/local/ia32/gcc-4.4.4/bin/ia32-gcc -E -Wa,--32 -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include pc_boot.S -o pc_boot.s
+sed -e 's/^ELF_HDR_SIZE =.*$/ELF_HDR_SIZE = 0x00000060/' -i pc_boot.s
+as86 -0 -o pc_boot.o pc_boot.s
+ld86 -0 -s -T 0x00007c00 -o pc_boot pc_boot.o
+dd if=pc_boot of=pc_boot.tmp ibs=32 skip=1 obs=512 >& /dev/null
+install pc_boot.tmp /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/img/pc_boot
+rm -f pc_boot.tmp
+make[3]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/boot'
+(cd system && make)
+make[3]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/system'
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include application_scaffold.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include system_scaffold.cc
+install system_scaffold.o pc_system.o
+install application_scaffold.o pc_application.o
+install pc_system.o /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib
+install pc_application.o /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib
+make[3]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/system'
+(cd init && make)
+make[3]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/init'
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include init_application.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include init_first.cc
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include init_system.cc
+install init_first.o pc_init_first.o
+install init_system.o pc_init_system.o
+install init_application.o pc_init_application.o
+install pc_init_first.o /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib
+install pc_init_system.o /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib
+install pc_init_application.o /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib
+make[3]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/init'
+make[2]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src'
+(cd app && make)
+make[2]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/app'
+/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/bin/eposcc -Wa,--32 -c -ansi -O2  -o producer_consumer.o producer_consumer.cc
+/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/bin/eposcc --library  --gc-sections  -o producer_consumer producer_consumer.o
+/usr/local/ia32/gcc-4.4.4/bin/ia32-strip -R .note -R .comment -o producer_consumer.tmp producer_consumer
+install producer_consumer.tmp /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/img/producer_consumer
+rm -f producer_consumer.tmp
+make[2]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/app'
+(cd img && make)
+make[2]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/img'
+/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/bin/eposmkbi /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1 producer_consumer.img producer_consumer
+
+EPOS bootable image tool
+
+  EPOS mode: library
+  Machine: pc
+  Processor: ia32 (32 bits, little endian)
+  Memory: 2080768 KBytes
+  Boot Length: 128 - 512 (min - max) KBytes
+  Node id: will get from the network
+
+  Creating EPOS bootable image in "producer_consumer.img":
+    Adding boot strap "/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/img/pc_boot": done.
+    Adding setup "/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/img/pc_setup": done.
+    Adding application "producer_consumer": done.
+
+  Adding specific boot features of "pc": done.
+
+  Image successfully generated (37036 bytes)!
+
+make[2]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/img'
+make[1]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1'
+make[1]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1'
+(cd etc && make -i clean)
+make[2]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/etc'
+sed -e 's/^#define ARCH.*$/#define ARCH xxx/' -i /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include/system/config.h
+sed -e 's/^#define MACH.*$/#define MACH xxx/' -i /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include/system/config.h
+sed -e 's/^#define APP.*$/#define APPLICATION xxx/' -i /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include/system/config.h
+rm -f *.conf
+make[2]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/etc'
+(cd app && make -i clean)
+make[2]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/app'
+rm -f *.o philosophers_dinner
+make[2]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/app'
+(cd img && make -i clean)
+make[2]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/img'
+rm -f *_boot *_setup *_init *_system philosophers_dinner 
+make[2]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/img'
+(cd src && make -i clean)
+make[2]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src'
+make MAKE:="make -i clean" utility arch mach abstraction setup boot system init
+make[3]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src'
+(cd utility && make -i clean)
+make[4]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/utility'
+rm -f *.o *_test
+make[4]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/utility'
+(cd arch && make -i clean)
+make[4]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/arch'
+make MAKE:="make -i clean" ia32
+make[5]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/arch'
+(cd ia32 && make -i clean)
+make[6]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/arch/ia32'
+rm -f *.o *.s *_test
+make[6]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/arch/ia32'
+make[5]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/arch'
+make[4]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/arch'
+(cd mach && make -i clean)
+make[4]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/mach'
+make MAKE:="make -i clean" common pc
+make[5]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/mach'
+(cd common && make -i clean)
+make[6]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/mach/common'
+rm -f *.o
+make[6]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/mach/common'
+(cd pc && make -i clean)
+make[6]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/mach/pc'
+rm -f *.o *_test
+make[6]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/mach/pc'
+make[5]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/mach'
+make[4]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/mach'
+(cd abstraction && make -i clean)
+make[4]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/abstraction'
+rm -f *.o *_test
+make[4]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/abstraction'
+(cd setup && make -i clean)
+make[4]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/setup'
+rm -f *.o *_setup
+make[4]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/setup'
+(cd boot && make -i clean)
+make[4]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/boot'
+rm -f *.s *.o *_boot *.tmp
+make[4]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/boot'
+(cd system && make -i clean)
+make[4]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/system'
+rm -f *.o *_system
+make[4]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/system'
+(cd init && make -i clean)
+make[4]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/init'
+rm -f *.o *_init
+make[4]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/init'
+make[3]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src'
+make[2]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src'
+find /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/lib -maxdepth 1 -type f -exec rm -f {} \;
+(cd etc && make)
+make[2]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/etc'
+sed -e 's/^#define ARCH.*$/#define ARCH ia32/' -i /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include/system/config.h
+sed -e 's/^#define MACH.*$/#define MACH pc/' -i /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include/system/config.h
+sed -e 's/^#define APPLICATION.*$/#define APPLICATION philosophers_dinner/' -i /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include/system/config.h
+make[2]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/etc'
+(cd tools && make)
+make[2]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/tools'
+(cd eposcc && make)
+make[3]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/tools/eposcc'
+install -m 775 eposcc /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/bin
+sed -e 's/^EPOS=.*$/EPOS=\/home\/tinha\/Mestrado\/EPOS_Guto\/tags\/dos-1.1/' -i /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/bin/eposcc
+make[3]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/tools/eposcc'
+(cd eposmkbi && make)
+make[3]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/tools/eposmkbi'
+install -m 775 eposmkbi /home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/bin
+make[3]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/tools/eposmkbi'
+make[2]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/tools'
+(cd src && make)
+make[2]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src'
+(cd utility && make)
+make[3]: Entering directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/utility'
+/usr/local/ia32/gcc-4.4.4/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/include elf.cc
+make[3]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src/utility'
+make[2]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1/src'
+make[1]: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1'
+make: Leaving directory `/home/tinha/Mestrado/EPOS_Guto/tags/dos-1.1'

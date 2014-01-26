@@ -1,0 +1,14 @@
+\begin{tabular}{c|c|c|c|c}
+\textbf{Task}            & \textbf{Period ($ms$)}   & \textbf{WCET ($ms$)}    & \textbf{WCEC ($\eta Ah$)}  & \textbf{1-hour energy ($mAh$)} \\
+\hline
+$H_1$                    & $100$                    & $25$                    & $1.0$                      & $36 \times 10^{-3}$             \\
+\hline
+$H_2$                    & $150$                    & $25$                    & $1.4$                      & $33.6 \times 10^{-3}$           \\
+\hline
+$H_C$                    & to be defined            & $0.0453 \times 10^{-3}$ & $41.56 \times 10^{-6}$     & will depend on the period      \\
+                         & (worst-case: $50$)       &                         &                            & (worst-case: $2.99 \times 10^{-6}$)     \\
+\hline
+$B_1$                    & $200$                    & $50$                    & $2.0$                      & $36 \times 10^{-3}$             \\
+\hline
+\multicolumn{4}{c|}{\textbf{Energy consumption of mandatory tasks}}                                        & $69.603 \times 10^{-3}$         \\
+\end{tabular}

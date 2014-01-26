@@ -1,0 +1,151 @@
+\begin{thebibliography}{10}\setlength{\itemsep}{-1ex}\small
+
+\bibitem{AMBA}
+Advanced RISC Machines Limited - ARM.
+\newblock {\em {The de facto Standard for On-Chip Bus}}, online document
+  edition, 2003.
+\newblock http://www.arm.com/ products/ solutions/ AMBAHomePage.html.
+
+\bibitem{Bergamaschi:2001}
+R.~A. Bergamaschi, S.~Bhattacharya, R.~Wagner, C.~Fellenz, M.~Muhlada, W.~R.
+  Lee, F.~White, and J.-M. Daveau.
+\newblock {Automating the Design of SOCs Using Cores}.
+\newblock {\em IEEE Des. Test}, 18(5):32--45, 2001.
+
+\bibitem{Booch:1994}
+G.~Booch.
+\newblock {\em {Object-Oriented Analysis and Design with Applications}}.
+\newblock Addison-Wesley, 2 edition, 1994.
+
+\bibitem{Froehlich:2001}
+A.~A. Fr\"ohlich.
+\newblock {\em {Application-Oriented Operating Systems}}.
+\newblock Number~17 in GMD Research Series. GMD - Forschungszentrum
+  Informationstechnik, Sankt Augustin, Aug. 2001.
+
+\bibitem{Froehlich:sbac:1999}
+A.~A. Fr\"ohlich and W.~Schr\"oder-Preikschat.
+\newblock {High Performance Application-oriented Operating Systems -- The EPOS
+  Approach}.
+\newblock In {\em Proceedings of the 11th Symposium on Computer Architecture
+  and High Performance Computing}, pages 3--9, Natal, Brazil, Sep. 1999.
+
+\bibitem{Froehlich:sci:2000}
+A.~A. Fr\"ohlich and W.~Schr\"oder-Preikschat.
+\newblock {Scenario Adapters: Efficiently Adapting Components}.
+\newblock In {\em Proceedings of the 4th World Multiconference on Systemics,
+  Cybernetics and Informatics}, Orlando, U.S.A., July 2000.
+
+\bibitem{LEON2:2004}
+Gaisler Research Laboratory.
+\newblock {\em {LEON2 XST User's Manual}}, 1.0.22 edition, May 2004.
+
+\bibitem{Grunewald:2003}
+M.~Gr\"unewald, J.-C. Niemann, and U.~R\"uckert.
+\newblock {A performance evaluation method for optimizing embedded
+  applications}.
+\newblock In {\em IWSOC2003 The 3rd IEEE International Workshop on
+  System-on-Chip for Real-Time Applications}, Alberta, Canada, June 2003.
+
+\bibitem{Habermann:1976}
+A.~N. Habermann, L.~Flon, and L.~Cooprider.
+\newblock {Modularization and Hierarchy in a Family of Operating Systems}.
+\newblock {\em Commun. ACM}, 19(5):266--272, 1976.
+
+\bibitem{Jespersen:1995}
+H.~Jespersen.
+\newblock {POSIX Retrospective}.
+\newblock {\em StandardView}, 3(1):2--10, 1995.
+
+\bibitem{Kiczales:1997}
+G.~Kiczales, J.~Lamping, A.~Mendhekar, C.~Maeda, C.~V. Lopes, J.-M. Loingtier,
+  and J.~Irwin.
+\newblock {Aspect-Oriented Programming}.
+\newblock In {\em Proceedings of the European Conference on Object-oriented
+  Programming'97}, volume 1241 of {\em Lecture Notes in Computer Science},
+  pages 220--242, Jyv\"askyl\"a, Finland, June 1997. Springer.
+
+\bibitem{Massa:2002}
+A.~Massa.
+\newblock {\em {Embedded Software Development with eCos}}.
+\newblock Prentice Hall PTR, 1 edition, 2002.
+
+\bibitem{Mattsson:2004}
+D.~Mattsson and M.~Christensson.
+\newblock {Evaluation of synthesizable CPU cores}.
+\newblock Technical report, Chalmers University Of Technology, 2004.
+
+\bibitem{Mikhajlov:1998}
+L.~Mikhajlov and E.~Sekerinski.
+\newblock {A Study of the Fragile Base Class Problem}.
+\newblock In {\em Proceedings of the 12th European Conference on
+  Object-Oriented Programming}, pages 355--382. Springer-Verlag, 1998.
+
+\bibitem{Musser:1989}
+D.~R. Musser and A.~A. Stepanov.
+\newblock {Generic Programming}.
+\newblock In {\em Proceedings of the First International Joint` Conference of
+  ISSAC and AAECC}, number 358 in Lecture Notes in Computer Science, pages
+  13--25, Rome, Italy, July 1989. Springer.
+
+\bibitem{Neville:2003}
+G.~Neville-Neil and T.~Whitney.
+\newblock {SoC: Software, Hardware, Nightmare, Bliss}.
+\newblock {\em ACM Queue}, 1(2):24, 2003.
+
+\bibitem{Parnas:1976}
+D.~L. Parnas.
+\newblock {On the Design and Development of Program Families}.
+\newblock {\em IEEE Transactions on Software Engineering}, SE-2(1):1--9, Mar.
+  1976.
+
+\bibitem{Pelgrims:cpu:2003}
+P.~Pelgrims, T.~Tierens, and D.~Driessens.
+\newblock {Overview: Excalibur, LEON, Microblaze, Nios, OpenRisc, VirtexII
+  Pro}.
+\newblock Technical report, DE NAYER Instituut, 2003.
+
+\bibitem{Polpeta:euc:2004}
+F.~V. Polpeta and A.~A. Fr\"ohlich.
+\newblock {Hardware Mediators: a Portability Artifact for Component-Based
+  Systems}.
+\newblock In {\em Proceedings of the International Conference on Embedded and
+  Ubiquitous Computing}, volume 3207 of {\em LNCS}, pages 271--280, Aizu,Japan,
+  Aug. 2004. Springer.
+
+\bibitem{Rutenbar:2001}
+R.~A. Rutenbar, M.~Baron, T.~Daniel, R.~Jayaraman, Z.~Or-Bach, J.~Rose, and
+  C.~Sechen.
+\newblock {(When) Will FPGAs kill ASICs?}
+\newblock In {\em Proceedings of the 38th conference on Design automation},
+  pages 321--322. ACM Press, 2001.
+
+\bibitem{SPARCV8}
+SPARC Internation Inc.
+\newblock {\em {The SPARC Architecture Manual}}, sav080si9308 edition, 1992.
+
+\bibitem{Tondello:AICCSA:2005}
+G.~F. Tondello and A.~A. Fr\"ohlich.
+\newblock {On the Automatic Configuration of Application-Oriented Operating
+  Systems}.
+\newblock In {\em 3rd ACS/IEEE International Conference on Computer Systems and
+  Applications}, Cairo, Egypt, Jan. 2005.
+
+\bibitem{Viana:2003}
+P.~Viana, E.~Barros, R.~A. Sandro~Rigo, and G.~Araujo.
+\newblock {Exploring Memory Hierarchy with ArchC}.
+\newblock In {\em Proceedings of the 15th Symposium on Computer Architecture
+  and High Performance Computing}, S\~ao Paulo, Brazil, October 2003. IEEE CS.
+
+\bibitem{LeonuClinux:2003}
+M.~Wurm.
+\newblock {uClinux for Sparc-MMUless with Ethernet MAC}.
+\newblock Technical report, Graz University of Technology, 2003.
+\newblock http://www.sbox.tugraz.at/ home/ m/ miwu/ sparc/.
+
+\bibitem{XMB:2002}
+Xilinx~Inc.
+\newblock {\em {MicroBlaze and Multimedia Development Board User Guide}}, ug020
+  (v1.0) edition, 2002.
+
+\end{thebibliography}

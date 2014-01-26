@@ -1,0 +1,122 @@
+% ------------------------------------------------------------------------------
+\section{Case Study} \label{case}
+
+\subsection{\emote~Sensing Platform} \label{emote}
+
+Before discussing the experimental results, it is interesting to briefly describe the hardware for which both energy harvesting circuits were designed. 
+It is called \emote~platform, a module for the development of low-power wireless sensor network applications. 
+The Plataform-in-Package chosen for the \emote~board is the Freescale MC13224V. It is based in a 32-bit ARM7 core. Freescale MC13224V outstanding features include a built-in radio (2.4 GHz ISM band), output power from-30dBm to +4dBm and, typical transmit current of 29 mA and typical receive current of 22 mA, many different communication interfaces, all this in a $9.5 x 9.5~mm^2$ footprint. 
+Besides that, the \emote~is connected to a startup board, which is provided with a 3-axis accelerometer and a temperature sensor~\cite{Project:EPOS:2012}.
+
+Both proposed energy harvesting circuits were integrated to the power management mechanism of \epos~\cite{Frohlich:IJDSN:2011}.
+\epos~is a component-based operating system for embedded applications, which is provided with a task-scheduler.
+This task-scheduler receives information from the battery monitoring IC (present in both circuits). 
+The battery state information sent by the battery monitoring IC allows the task-scheduler to decide whether noncritical tasks should be enabled or not. 
+With all these information in mind the experimental results discussion can be started.   
+
+\subsection{Circuits' Results Comparison} \label{circ_comp}
+
+In order to adequately evaluate the proposed energy harvesting circuits designed to the \emote~sensing platform, two outdoor tests were performed.
+These tests were realized in order to evaluate the circuits under different environmental conditions.
+The first test was carried in cloudy days, while the second one, in sunny days. 
+For both tests the \emote~radio was configured to constantly transmit random data.
+This $100~\%$ duty cycle was used in order to test critical conditions and also to reduce tests' duration.
+By reducing the duty cycle, it would be necessary to extend the tests to several weeks to verify considerable battery discharge. 
+This occurs because the standby mode's current consumption is around only $5~\mu A$. 
+This current consumption is more than $5,000$ times smaller than the $29~mA$ that the PiP consumes when transmitting data at full power.
+
+The duration of the first test was 59~hours and 5 minutes.
+It started on December 13, 2012 at 4:10 pm and finished on December 16, 2012 at 3:15 am.
+The first issue to be analysed in this test is the battery current (figure~\ref{fig:bat_cur1}).
+Figure~\ref{fig:bat_cur1} shows the battery current sampled nearly every second.
+This current is the net sum of the incoming current from solar panel (positive values) and the current consumed by the system (negative values).
+Most of the values in this plot are negative because of the low solar irradiance level of the cloudy days. 
+It means that, for the most part of the test, the system current consumption was higher than the current coming from the solar panel.
+Figure~\ref{fig:bat_cur1} demonstrates that, at no time, the battery current of the MPPT circuit solar panel was higher than the battery current of the directly coupled one.  
+The second issue is the battery voltage. Figure~\ref{fig:bat_volt1} shows the battery voltage for both circuits. 
+This plot shows that the battery voltage of the MPPT circuit was higher than the battery voltage of the directly coupled circuit at the beginning of the test. 
+However, due to the less current input in the MPPT circuit's battery (figure~\ref{fig:bat_cur1}), the battery voltage became lower than the battery voltage of the directly coupled circuit.
+Looking at the figures~\ref{fig:bat_cur1} and~\ref{fig:bat_volt1} it can be inferred that the MPPT circuit has consumed more energy during the test. 
+
+\fig{0.21}{bat_cur1}{Battery current evolution for experiment 1}
+\fig{0.21}{bat_volt1}{Battery voltage evolution for experiment 1}
+
+However, a mathematical analysis is more precise for circuits' energy consumption evaluation. 
+In order to obtain the energy consumed by the system during the tests, the Riemann sum was used (equation~\ref{eq:Riemann}), where $f(t_i)$ is the discrete function to be summed, $n$ is the number of samples, and $\Delta_i$ is the interval between two consecutive samples. 
+In this case, the discrete function to be integrated, $f(t_i)$, is the power function, which is given by equation \ref{eq:P_net}. $P_{net}$ is the instantaneous net power, $V_{bat}$ is the instantaneous battery voltage and $I_{bat}$ is the instantaneous battery current. Equation~\ref{eq:E_net} gives the net energy consumed by the circuit during the test. It is a particularization of equation \ref{eq:Riemann}, for a constant sample period ($t_{sample}\simeq1s$). Normally, the amount of harvested energy would be greater than the consumed energy, however, due to the already mentioned sensor node $100~\%$ duty cycle, the energy consumption is higher than the extracted energy. 
+
+\begin{eqnarray}
+\displaystyle \sum\limits_{i=1}^{n} (f(t_i) \times \Delta_i) \label{eq:Riemann}\\
+f(t_i) = P_{net} = V_{bat} \times I_{bat} \label{eq:P_net}\\
+E_{net} = \displaystyle \sum\limits_{i=1}^{n} (V_{bat} \times I_{bat}) \times t_{sample} \label{eq:E_net}
+\end{eqnarray}
+
+The MPPT circuit has consumed $20.430kJ$ during the test, against $18.891kJ$ consumed by the directly coupled circuit.
+Finally, figure \ref{fig:irrad1} shows the solar irradiance acquired during the test by a pyranometer placed beside the solar panel, with $27~^\circ$ of inclination (since Florianópolis is located at $27.6~^\circ$ S, $48.5~^\circ$ W). Solar irradiance data are essential for a comparison with the second test carried in a sunny day, in order to understand the MPPT IC circuit behavior.
+
+\fig{0.21}{irrad1}{Irradiance level during experiment 1}
+
+The second test period was 37~hours and 45 minutes.
+It started on January 24, 2013 at 8:05 am and finished on January 25, 2013 at 10:50 pm.
+The only difference from the first test was the environmental condition.
+As shown in figure \ref{fig:irrad2}, the irradiance level was much higher during this test.
+Figure \ref{fig:bat_cur2} shows the battery current evolution for both circuits.
+Differently from the first test, figure \ref{fig:bat_cur2} shows a visible difference in the batteries' currents.
+The MPPT battery current was much less during high irradiance levels.
+The difference between the batteries' voltages was also higher in this test (\ref{fig:bat_volt2}).
+Equations \ref{eq:P_net} and \ref{eq:E_net} were also used in order to determine the net energy consumed by both circuits during the test. 
+The MPPT circuit has consumed $5.694kJ$ against $1.567kJ$ consumed by the directly coupled circuit.
+
+\fig{0.21}{irrad2}{Irradiance level during experiment 2}
+\fig{0.21}{bat_cur2}{Battery current evolution for experiment 2}
+\fig{0.21}{bat_volt2}{Battery voltage evolution for experiment 2}
+
+\subsection{MPPT Efficiency Problem} \label{mppt_eff}
+
+From the data presented in the previous section, one concludes that the directly coupled circuit is more efficient than the MPPT circuit.
+A closer look on the MPPT IC characteristics is necessary to understand this.
+As mentioned before, the SPV1040 is a dc/dc step up converter.
+This implies in the output voltage being higher than the input voltage.
+As for any other step up converter, its efficiency decreases if the difference between the input and the output voltage gets too small (in this case, lower than $1.2V$).
+In the first test, for low irradiance levels, the difference between the input and the output voltages remained higher than $1.2V$.
+In the second test, however, as $V_{MPP}$ increased due to higher irradiance levels, the difference between input and output voltage decreased, strongly affecting the SPV1040 efficiency.
+This explains the difference in the MPPT circuit efficiency between the first and the second test.
+
+%Therefore, there is still an intriguing question. 
+%Why has not the MPPT circuit presented higher efficiency than the directly coupled circuit on low irradiance levels?
+%In order to answer this question, another SPV1040 characteristic must be comprehended.
+%The SPV1040 datasheet~\cite{spv1040:2012} states that the MPPT functionality is not ensured for input voltages lower than $1.7V$.
+%As the irradiance level decreases and the $V_{MPP}$ goes lower than $1.7V$, the IC is still working but, may be not properly executing the MPPT.
+%Therefore, in this cases, the SPV1040 is also not working on its maximum efficiency operation point.
+%What would be the solution to operate the SPV1040 on its best performance case?
+%The answer is to have a higher output voltage (higher battery voltage).
+%This solution would improve the efficiency in two aspects: First, it would allow the usage of a solar panel with higher $V_{MPP}$. Second, it would keep the voltage's difference between input and output higher than $1.2V$. 
+%However, the idea of using a higher output voltage is discarded due to the \emote's supply voltage limitation.
+%As many other low power PiPs, the \emote's supply voltage ranges from $2.1V$ to $3.5V$.
+%One could think about using a step down regulator between the higher voltage battery and the \emote.
+%However, using a step up converter followed by a step down converter seems not to be the most efficient way to solve the problem.
+
+Therefore, there is still an intriguing question. 
+Why has not the MPPT circuit presented higher efficiency than the directly coupled circuit on low irradiance levels?
+In order to answer this question, another SPV1040 characteristic must be comprehended.
+The SPV1040 datasheet~\cite{spv1040:2012} shows the IC output range from $2V$ to $5.2V$ when $V_{MPP-SET} \geq 1.5V$.
+It does not mean that the MPPT functionality is not enabled for lower $V_{MPP-SET}$ voltages, since the datasheet also states that once output voltage is higher than $2V$ the IC is in MPPT mode. 
+However, the datasheet shows efficiency curves only for output voltages higher than $3V$, which indicates that for $V_{MPP-SET}$ voltages lower than $1.5V$ and output voltages lower than $3V$, the IC may not be working on its maximum efficiency.
+It is exactly what has been shown in the previous section.
+As the irradiance level decreases and $V_{MPP-SET}$  goes lower than $1.5V$, the IC is still on MPPT mode but, may not be as efficient as it could be, since the IC's output voltage is lower than $3V$ (figures~\ref{fig:bat_volt1} and \ref{fig:bat_volt2}).
+
+How could be the SPV1040 operated on its best performance case?
+The answer is to have a higher output voltage (higher battery voltage).
+This would improve the efficiency in two aspects: First, it would allow the usage of a solar panel with higher $V_{MPP}$ (SPV1040 working in a higher efficiency operation point). Second, it would keep the voltage's difference between input and output higher than $1.2V$ (Higher efficiency for the step up converter). 
+However, as many other low power PiPs, the \emote's supply voltage ranges from $2V$ to $3.6V$. This precludes the idea of using higher voltage batteries.
+
+Consequently, the solution is to design a MPPT circuit dedicated for low power PiPs.
+Some low power MPPT circuits have been proposed~\cite{Lapena:PandO, Dondi:2008, Lapena:PFM, Lapena:FOCV}. However, the MPPT methods are implemented in hardware ~\cite{Dondi:2008, Lapena:PFM, Lapena:FOCV} or in software ~\cite{Lapena:PandO}. A possible more suitable solution for \emote~would be the combination of low complexity \emph{Fractional Open Circuit Voltage} (FOCV) method implemented in hardware but with a software control. The analysis of all data shown in section~\ref{case} has led to this hybrid-circuit concept (Software/hardware integrated FOCV technique), which is already being developed. Since the \emote~is already receiving solar panel current information (through the DS2438, see section ~\ref{design}), it could change the FOCV duty cycle by software. Then, for periods of higher solar irradiance the duty cycle is increased, obtaining a better MPP tracking. For low irradiance levels, the FOCV duty cycle is reduced in order to save energy. Therefore, the system would be able to keep its energy-aware task-scheduler (which uses the DS2438 data) but it would also be energy efficient.      
+
+%One could think about using a step down regulator between the higher voltage battery and the \emote.
+%However, using a step up converter followed by a step down converter implies in two consecutive energy losses.
+%The solution would be to track the MPP through a dedicated step up converter and a low power consumption MPPT technique. 
+%reference here!!!!! 
+
+% ------------------------------------------------------------------------------
+

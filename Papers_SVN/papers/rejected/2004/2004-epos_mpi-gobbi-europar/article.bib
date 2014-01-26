@@ -1,0 +1,1016 @@
+
+@Proceedings{Gropp:1994,
+  title =	 "{Implementing MPI: the 1994 MPI Implementors'
+                  Workshop}",
+  year =	 1994,
+  editor =	 "Willian Gropp and Ewing Lusk",
+  address =	 "Argonne",
+  organization = "Argonne National Laboratory",
+  url =		 "http://www-unix.mcs.anl.gov/mpi/mpi-impl/paper.ps"
+}
+
+@Article{Gropp:1996:HPI,
+  author = "W. Gropp and E. Lusk and N. Doss and A. Skjellum",
+  title = "A high-performance, portable implementation of the {MPI} message passing interface standard",
+  journal = "Parallel Computing",
+  volume = "22",
+  number = "6",
+  pages = "789--828",
+  month = sep,
+  year = "1996",
+  abstract = "MPI (Message Passing Interface) is a specification for a
+		standard library for message passing that was defined by
+		the MPI Forum, a broadly based group of parallel computer
+		vendors, library writer, and application specialists.
+		Multiple implementations of MPI have been developed. In this
+		paper, we describe MPICH, unique among existing
+		implementations in its design goal of combining portability
+		with high performance. We document its portability and
+		performance and describe the architecture by which these
+		features are simultaneously achieved. We also discuss the set
+		of tools that accompany the free distribution of MPICH, which
+		constitute the beginnings of a portable parallel programming
+		environment. A project of this scope inevitably imparts
+		lessons about parallel computing, the specification being
+		followed, the current hardware and software environment for
+		parallel computing, and project management; we describe those
+		we have learned. Finally, we discuss future developments for
+		MPICH, including those necessary to accommodate extensions to
+		the MPI Standard now being comtemplated by the MPI Forum.",
+  comments =	"This document explain the desing principles and history of 
+		MPICH"
+}
+
+@Manual{mpich-user,
+  title =	{User's Guide for {\tt mpich}, a Portable Implementation of
+		{MPI}},
+  author =	{William D. Gropp and Ewing Lusk},
+  note =	"ANL-96/6",
+  organization = {Mathematics and Computer Science Division, Argonne
+		National Laboratory},
+  year =	1996
+}
+
+@Manual{MPI_1_1,
+  author =	{Message Passing Interface Forum},
+  title =	{MPI: A Message-Passing Interface Standard},
+  note =	{version 1.1},
+  year =	1995,
+  PS =		"mpi-11.ps"
+}
+
+@Manual{MPI_2,
+  author =	{Message Passing Interface Forum},
+  title =	{MPI-2: Extensions to the Message-Passing Interface},
+  note =	"",
+  year =	1997,
+  PS =		"mpi-20.ps",
+  abstract =	"This document describes the MPI-1.2 and MPI-2 standards. They
+		are both extensions to the MPI-1.1 standard. The MPI-1.2 part
+		of this document contains clarifications and corrections to
+		the MPI-1.1 standard and defines MPI-1.2. The MPI-2 part of
+		the document desceibes additions to the MPI-1 standard and
+		defines MPI-2. These include miscellaneous topics, process
+		creation and management, one-sided communications, extended
+		collective operations, external interfaces, I/O, and
+		additional language bindings."
+}
+
+@Article{Ogawa:1996,
+  author =	{Hirotaka Ogawa and Satoshi Matsuoka},
+  title =	{OMPI:optimizing MPI programs using partial evaluation},
+  journal =	{Conference on High Performance Networking and Computing 
+		Proceedings of the 1996 ACM/IEEE conference on Supercomputing (CDROM)},
+  year =	1996,
+  pages =	{1--18},
+  month =	nov,
+  PDF =		"OMPI.pdf",
+  abstract =	"MPI is gaining acceptance as a standard for message-passing
+		in high-performance computing, due to its powerful and
+		flexible support of various communication styles. However, the
+		complexity of its API poses significant software overhead, and
+		as a result, applicability of MPI has been restricted to
+		rather regular, coarse-grained computations. Our OMPI
+		(Optimizing MPI) system removes much of the excess overhead
+		by employing partial evaluation techniques, which exploit
+		static information of MPI calls. Because partial evaluation
+		alone is insufficient, we also utilize template functions for
+		further optimization. To validate the effectiveness for our
+		MPI system, we performed baseline as well as more extensive
+		benchmarks on a set of application cores with different
+		communication characteristics, on the 64-node Fujitsu AP1000
+		MPP. Benchmarks show that OMPI improves execution efficiency
+		by as much as factor of two for communication-intensive
+		application core with minimal code increase. It also performs
+		significantly better than previous dynamic optimization
+		technique.",
+  comments =	"This paper describes OMPI, a tool that evaluates static
+		information (like the host to which a message is sent, the
+		size of the message, etc) and optimizes compilation."
+}
+
+@InProceedings{Husbands:1998,
+  author =	{Parry Husbands and James C. Hoe},
+  title	=	{MPI-StarT: delivering network performance to numerical applications},
+  booktitle = {Proceedings of the 1998 ACM/IEEE conference on Supercomputing (CDROM)},
+  address = 	"San Jose, U.S.A.",
+  pages = 	"1--15",
+  year =	1998,
+  month =	nov,
+  PDF =		"StarT.pdf",  
+  abstract =	"We describe an MPI implementation for a cluster of SMP
+		interconnected by a high-performance interconnect. This work
+		is a collaboration between a numerical applications programmer
+		and a cluster interconnect architect. The collaboration
+		started with the modest goal of satisfying the communication
+		needs of a specific numerical application, MITMatlab. However,
+		by supporting the MPI standard MPI-StarT readily extends
+		support to a host of applications. MPI-StarT is derived from
+		MPICH by developing a custom implementation of the Channel
+		Interface. Some changes in MPICH's ADI and Protocol Layers
+		are also necessary for correct and optimal operation. MPI-StarT
+		relies on the host SMPs' shared memory mechanism for intra-SMP
+		communication. Inter-SMP communication is supported through
+		StarT-X. The StarT-X NIU allows a cluster of PCI-equipped host
+		plataforms to communicate over the Arctic Switch Fabric.
+		Currently, StarT-X is utilized by a cluster of SUN E5000 SMPs
+		as well as a cluster of Intel Pentium-II workstations. On a
+		SUN E5000 with StarT-X, a processor can send and receive
+		a 64-byte message in less than 0.4 and 3.5 usec respectively
+		and incur less than 5.6 usec user-to-user one-way latency.
+		StarT-X's remote memory-to-memory DMA mechanism can transfer
+		large data blocks at 60 MByte/sec between SUN E5000s. This
+		paper outlines our effort to preserve and deliver this level
+		of communication performance through MPI-StarT to user
+		applications. We have studied the requirements of MITMatlab
+		and the capabilities of StarT-X and have formulated an
+		implementation strategy for the Channel Interface. In this
+		paper, we discuss some performance and correctness issues and
+		their resolutions in MPI-StarT. The correctness issues range
+		from the handling of arbitrarily large message sizes to
+		deadlock-free support of nonblocking MPI operations.
+		Performance optimizations include a shared-memory-based
+		transport mechanism for intra-SMP communication and a broadcast
+		mechanism that is aware of the performance difference between
+		intra-SMP and the slower inter-SMP communication. We
+		characterize the performance of MPI-StarT on a cluster of
+		SUN EN5000s. On SUN E5000s, MPI processes within the same SMP
+		can communicate at over 150 MByte/sec using shared memory. When
+		communicating between SMPs over StarT-X, MPI-StarT has a peak
+		bandwidth of 56 MByte/sec. While fine-tuning of MPI-StarT is
+		ongoing, we demonstrate that MPI-StarT is effective in enabling
+		the speedup of MITMatlab on a cluster of SMPs by reporting on
+		the performance of some representative numerical operations.",
+  comments =	"This paper details the implementation of a channel for	MPICH
+		to a cluster on MIT to speed-up the execution of MITMatlab."
+}
+
+@InProceedings{Thakur:1998,
+  author =	{Rajeev Thakur and William Gropp and Ewing Lusk},
+  title	=	{A case for using MPI`s derived datatypes to improve I/O performance},
+  booktitle = {Proceedings of the 1998 ACM/IEEE conference on Supercomputing (CDROM)},
+  address = 	"San Jose, U.S.A.",
+  pages = 	"1--10",
+  year =	1998,
+  month =	nov,
+  HTML =	"ROMIO.html", 
+  abstract =	"MPI-IO, the I/O part of hte MPI-2 standard, is a promising
+		new interface for parallel I/O. A key feature of MPI-IO is that
+		it allows users to access several noncontiguous pieces of
+		data from a file with a single I/O function call by defining
+		file views with derived datatypes. We explain how critical
+		this features is for high performance, why users must create
+		and use derived datatypes whenever possible, and how it enable
+		implementations to perform optimizations. In particular, we
+		describe two optimizatios our MPI-IO implementation, ROMIO,
+		performs: data sieving and collective I/O. We demonstrate the
+		performance and portability of the approach with performance
+		results on five differente parallel machines: HP Exemplar,
+		IBM SP, Intel Paragon, NEC SX-4, and SGI Origin2000.",
+  comments =	"This paper explains the ROM-IO implementation of MPI-IO,
+		that is used by MPICH. It basically says: use
+		non-contiguous datatypes, and read them as contiguous in
+		a large buffer to improve performance."
+}
+
+@Manual{MPI_RT_1_1,
+  author =	{Real-Time Message Passing Interface (MPI/RT) Forum},
+  title =	{Document for the Real-Time Message Passing Interface (MPI/RT-1,1)},
+  note =	{version 1.1},
+  year =	2001,
+  PS =		"mpi-report-18dec01.pdf"
+}
+
+@InProceedings{Carpenter:2000,
+  author =	{Rossen Dimitrov and Anthony Skjellum},
+  title	=	{Impact of Latency on Applications' Performance},
+  booktitle = {Proceedings of MPIDC 2000},
+  year =	2000,
+  month =	mar,
+  PDF =		"mpidc00.pdf",  
+  abstract =	"This paper investigates the impact of point-to-point latency
+		on applications' performance on clusters of workstations
+		interconnected with high-speed networks. At present, clusters
+		are often evaluated through comparison of point-to-point latency
+		and bandwidth obtained by ping-pong tests. This paper shows that
+		this approach to performance evaluation of clusters has limited
+		validity and that latency has minimal impact on a large group of
+		applications that usse medium- to coarse-grained data-parallel
+		algorithms. Message-passing systems with low latency often use
+		polling for message completion, which leads to tight
+		synchronization between the communicating processes and high CPU
+		overhead. ystems with asynchronous message completion have
+		higher point-to-point latency for short messages but offer a
+		number of high-performance mechanisms such as overlapping of
+		computation and communication, independent message progress,
+		efficient collective algorithms, asynchronous processing of
+		communicating nodes, and exploitation of temporal locality.
+		These mechanisms can be effectively implemented on current
+		high-speed networks with intelligent interface controllers
+		capable of bus-master transfers on host peripheral busses.
+		Although message-passing systems that use asynchronous
+		completion notification have higher point-to-point latency than
+		systems with polling, they can offer opportunities for
+		performance gains with far greater overall impact.",
+  comments =	"This paper tries to prove that using polling to reduce latency
+		is not necessary, because it has only effect on very short
+		message, and don't improve performance in real applications.
+		It also says one should not measure the speed of a cluster
+		by ping-pong. Before reading this papers, I suggest reading
+		Golebiewski:1999. Those papers are related."
+}
+
+@Article{Golebiewski:1999,
+  author =	{Maciej Golebiewski and Markus Baum and Rolf Hempel},
+  title =	{High Performance Implementation of MPI for Myrinet},
+  journal =	{Lecture Notes in Computer Science},
+  year =	1999,
+  volume =	{1557},
+  number =	{},
+  pages =	{510--521},
+  month =	feb,
+  abstract =	"This paper presents a new implementation of MPI on a cluster
+		of Linux-based, dual-processor PCs interconnected by a Myricom
+		high speed network. A survey of existing software for this
+		hardware configuration resulted in the non-availability of a
+		fully functional, correct and complete MPI library exploiting
+		the full hardware potential. Our library uses MPICH for the
+		high level protocol and FM/HPVM for the basic communications
+		layer. It allows multiple processes and multiple users on the
+		same PC, and passes an extensive test suite, including all
+		test programs for the MPICH distribution, for both C and
+		Fortran. The presented benchmarks, both simple communications
+		kernel and full applications, show good performance. The result
+		is the first high-performance MPI interface which allows
+		regular multi-user service for applications on our PC cluster.",
+  comments =	"This paper shows an interesting comparison between a
+		single-thread and a multi-thread implemention of MPI.
+		By using MUTEX and conditional variables, the multi-threaded
+		version is much slower. The project was implemented in GMD."
+}
+
+@Article{EPOS_Myri,
+  author =	{AntÙnio Augusto Medeiros Frˆhlich and Gilles Pokam
+  Tientcheu and Wolfgang Schrˆder-Preikschat},
+  title =	{EPOS and Myrinet: Effective Communication Support for
+  Parallel Applications Running on Clusters of Commodity Workstations},
+  journal =	{Proceedings of the 8th International Conference on
+  High Performance Computing and Networking},
+  year =	2000,
+  pages =	{417-426},
+  month =	may,
+  abstract =	"This paper presents the EPOS approach to deliver
+  parallel applications a high performance communication system. EPOS
+  is not an operating system, but a collection of components that can
+  be arranged together to yield a variety of run-time systems,
+  including complete operating systems. This paper focuses on the
+  communication sysbsystems of EPOS, which is comprised by the network
+  adapter and communicator scenario-independent system
+  abstractions. Like other EPOS abstractions, they are adapted to
+  specific execution scenarios by means of scenario adapters and are
+  exported to application programmers via inflated interfaces. The
+  paper also covers the implementation of the network adapter system
+  faces. The paper also covers the implementation of the network
+  adapter system abstraction for the Myrinet high-speed network. This
+  implementation is based on a carefully designed communication
+  pipeline and achieved unprecedented performance.",
+  comments =     "This paper describes the communications system of
+  EPOS and it's use in very simple MPI programs."
+}
+
+@Article{Sce_adapt,
+  author =	{AntÙnio Augusto Medeiros Frˆhlich},
+  title =	{Scenario Adapters: Efficiently Adapting Components},
+  journal =	{Proceedings of the 4th World Multiconference on
+  Systemics, Cybernetics and Informatics},
+  year =	2000,
+  month =	jul,
+  abstract =	"In this paper we consider the utilization of
+  component-based software engineering for the development of
+  adaptable systems compromised with performance. The Scenario Adapter
+  construct is proposed as an effective means to achieve this goal. It
+  can be used to adapt scenario-independent abstractions to an
+  execution scenario known at compile-time. The efficiency of Scenario
+  Adapters has been demonstrated in the Project EPOS, which aims to
+  deliver, whenever possible automatically, a tailored run-time
+  support system for each application.",
+  comments =    "Only place which describes scenario adapters
+  implementations. Just read it!"
+}
+
+@inproceedings{Carrol:1998,
+	author = {Francis O'Carroll and Hiroshi Tezuka and Atsushi Hori and Yutaka Ishikawa},
+	title = {The design and implementation of zero copy MPI using commodity hardware with a high performance network},
+	booktitle = {Proceedings of the 12th international conference on Supercomputing},
+	year = {1998},
+	isbn = {0-89791-998-X},
+	pages = {243--250},
+	location = {Melbourne, Australia},
+	doi = {http://doi.acm.org/10.1145/277830.277883},
+	publisher = {ACM Press},
+  abstract =	"This paper designs an implementation of the MPI
+  message passing interface using a zero copy message transfer
+  primitive supported by a lower communication layer to realize a high
+  performance communication library. The zero copy message transfer
+  primitive requires a memory area pinned down to physical memory,
+  which is a restricted quantity resource under a paging memory
+  system. Allocation of pinned down memory by multiple simultaneous
+  requests for sending and receiving without any control can cause
+  deadlock. To avoid this deadlock, we have introduced: i) separate
+  control of send/receive pin-down memory areas to ensure that at
+  least one send and receive may be processed concurrently, and ii)
+  delayed queues to handle the postponed pasing operations which could
+  not be pinned-down.",
+  comments =    "This paper explain how to avoid memory copying, and
+  explains in detail the queues used to implement MPI."
+}
+
+@misc{Prylli:1997,
+	author = "L. Prylli and B. Tourancheau",
+	title = "Protocol design for high performance networking: a Myrinet experience",
+	text = "L. Prylli and B. Tourancheau. Protocol design for high performance networking: a Myrinet experience. Technical Report 97-22, LIP-ENS Lyon, 69364 Lyon, France, 1997.",
+	year = "1997",
+  abstract =	"High speed networks are now providing incredible
+  performance. Software evolution is slow and the old protocol stacks
+  are no longer adequate for these kind of communication speeds. When
+  bandwidth increases, the latency shoud decrease as much in order to
+  keep the system balance. With the current network technology, the
+  main bottleneck is most often the software that is the interface
+  between the hardware and the user. We designed and implemented new
+  transmission protocols, targeted to parallel computing, that squeeze
+  the most out of a high speed network (Myrinet in this paper) without
+  wasting time in system calls or memory copies, giving all the speed
+  to the applications. This design is presented here as well as
+  experimental results. We achieve Gigabit/s bandwidth and less than
+  5us latency on a cluster of PC workstations with inexpensive network
+  hardware. Moreover, our results compare favorably with the expensive
+  parallel computers or ATM LANs.",
+  comments =    "This paper explains how BIP was implemented and why
+  it is so fast."
+}
+
+@inproceedings{Tang:2001,
+	author = {Hong Tang and Tao Yang},
+	title = {Optimizing threaded MPI execution on SMP clusters},
+	booktitle = {Proceedings of the 15th international conference on Supercomputing},
+	year = {2001},
+	isbn = {1-58113-410-X},
+	pages = {381--392},
+	location = {Sorrento, Italy},
+	doi = {http://doi.acm.org/10.1145/377792.377895},
+	publisher = {ACM Press},
+	abstract =	"Our previous work has shown that using threads to
+  execute MPI programs can yield great performance gain on
+  multiprogrammed sahred-memory machines. This paper investigates the
+  design and implementation of a thread-based MPI system on SMP
+  clusters. Our study indicates that with a proper design for
+  threaded MPI execution, both point-to-point and collective
+  communication performance can be improved substancially, compared to
+  a process-based MPI implementation in a cluster environment. Our
+  contribution includes a hierarchy-aware and adptive communication
+  scheme for threaded MPI execution and a thread-safe network device
+  abstraction that uses event-driven synchronization and provides
+  separated collective and point-to-point communication channels. This
+  paper describes the implementation of our design and illustrates its
+  performance advantage on a Linux SMP cluster.",
+  comments =    "This paper explains how to optimize thread MPI
+  implementations on shared memory systems and how this approach can
+  improve collective operations performance with other nodes as well."
+}
+
+@Manual{ADI2,
+  title = 	 {MPICH Working Note: The Second-Generation ADI for
+  the MPICH Implementation of MPI},
+  author = 	 {William Gropp and Ewing Lusk},
+  organization = {Argone National Laboratory - Mathematics and
+  Computer Science Division},
+  abstract = "In this paper we describe an abstract device interface
+  (ADI) taht may be used to efficiently implement the Message Passing
+  Interface (MPI). After experience with a first-generation ADI that
+  made certain assumptions about the devices and tradeoffs in the
+  design, it has become clear that, particularly on systems with
+  low-latency communication, the first-generation ADI design imposes
+  too much additional latency. In addition, the first-generation
+  design is awkward for heterogeneous systems, complex for
+  noncontiguous messaging, and inadequate at error handling. The
+  design in this note describes a new ADI that provides lower latency
+  in common cases and is still easy to implement, while retaining many
+  opportunities for customization to any advanced capabilities that
+  the underlying hardware may support.",
+  comment = "This working note presentes the second generation of the
+  ADI of MPICH"
+}
+
+@Manual{ADI2_Impl,
+  title = 	 {MPICH Working Note: The implementation of the second
+  generation MPICH ADI},
+  author = 	 {William Gropp and Ewing Lusk},
+  organization = {Argone National Laboratory - Mathematics and
+  Computer Science Division},
+  abstract = "The MPICH implementation of the MPI standard is built on
+  a lower level communications layer called the abstract device
+  interface. The purpose of this interface is to make it easy to port
+  the MPICH implementation by separating into a separate module that
+  handles just the communication between two processes. This note
+  describes an implmenetaion for this interface that is flexible and
+  efficient. In addition, this implementation supports multiple
+  devices (e.g., TCP/IP and shared memory or TCP/IP and proprietary
+  interconnect) in a single MPI application.",
+  comment = "This working note shows a model implementation of the
+  second generation ADI of MPICH. It explains the protocols mostly
+  used (Shot, Eager, Rendezvous) and has a lot of useful hints."
+}
+
+@InProceedings{Humpreys:2000,
+  author = {Greg Humphreys and Ian Buck and Matthew Eldridge and Pat
+  Hanrahan},
+  title = {Distributed Rendering for Scalable Displays},
+  year = 2000,
+  booktitle = {In Proceedings of Supercomputing},
+  abstract  = "We describe a novel distributed graphics system that allows an
+    applicationto render to a large tiled display. Our system, calledWireGL,
+    uses a cluster of off-the-shelf PCs connected with a high speed network.
+    WireGL allows an unmodified existing application
+    to achieve scalable output resolution on such a display. This paper
+    presents an efficient sorting algorithm which minimizes the network
+    traffic for a scalable display. We will demonstrate that for most
+    applications, our system provides scalable output resolution with
+    minimal performance impact.",
+  comment = "In this paper, a distributed renderizer is proposed."
+}
+
+@phdthesis{Frohlich:2001,
+  author =      {AntÙnio Augusto Medeiros Frˆhlich},
+  title =       {Application-Oriented Operating Systems},
+  school =      {GMD-FIRST},
+  year =        2001,
+  month =       jun,
+  abstract =    "The majority of processors produced nowadays are targeted at
+                dedicated computing szstems that execute either a single
+                application or a small set of previously known applications.
+                In contrast to generic computing systems, these dedicated
+                systems have very specific run-time support requirements, which
+                are not properly fulfilled by general-purpose operating
+                systems. The impossibility to antecipate which applicatins will
+                be executed results in generic operating systems being forced
+                to provide an extensive set of services targeted at making all
+                resources available to all applications. The standardization of
+                such generic system services locked general-purpose operating
+                system inside a hard shell that prevents innovations from
+                reaching applications. With regard to dedicated computing,
+                these generic operating system provide uncountable services
+                that are not used by individual applications, and yet fail to
+                fulfill applications demands.
+                This dissertation proposes a novel strategy to systematically
+                construct application-oriented operating systems as
+                arrangements of adaptable software components. Instead of
+                standard compliance and hardware properties, the features
+                offered by such a system emanate directly from application 
+                requirements, thus enabling it to be customized according
+                to the needs of particular applications. Such
+                application-tailored system instances are produced by selecting,
+                configuring, and composing proper components. Even if
+                applications refrain from the new application-oriented services
+                in benefit of standard interfaces, most dedicated applications
+                require such a small subset of those interfaces that mapping
+                them to new system services - instead of porting their
+                traditional implementations - is usually possible.
+                The Application-Oriented System Design multiparadigm design
+                method proposed in this dissertation guides domain
+                decomposition towards families of scenario-independent system
+                abstractions that can be reused to build a variety of run-time
+                support systems. Environmental dependencies observed during
+                domain decomposition are separately modeled as scenario aspects,
+                which can be transparently applied to system abstractions with
+                the aid of scenario adapters. The assembling of such software
+                components to produce a functioning system is assisted by
+                component frameworks, which capture elements of reusable
+                software architecture identified in the course of domain
+                engineering. Usability is improved by inflated interfaces,
+                which export whole families of abstractions to users as
+                if they were single macrocomponents, passing the
+                responsability of selecting appropriate family members to
+                the system.
+                The concepts and techniques introduced by application-oriented
+                system design were verified during the development of EPOS
+                (Embedded Parallel Operating System), an application-oriented
+                operating system for the domain of high-performance dedicated
+                computing. The prototype of EPOS implemented for the SNOW
+                cluster of workstation consists of a repository of software
+                components that encapsulate system abstractions and scenario
+                aspects, a statically metaprogrammed component framework, and
+                a set of tools that is able to automatically select and
+                configure components in order to generate application-oriented
+                system instances.",
+  comment = "Guto's thesis. The philosophy and religion of his students."
+}
+
+@Article{Veldhuizen:1995,
+	author =       "Todd Veldhuizen",
+	title =        "Using {C++} template metaprograms",
+	journal =      "C++ Report",
+	volume =       "7",
+	number =       "4",
+	pages =        "36--43",
+	month =        may,
+	year =         "1995",
+	note = "Reprinted in C++ Gems, ed. Stanley Lippman",
+	coden =        "CRPTE7",
+	ISSN =         "1040-6042"
+}
+
+@InProceedings{Vadhiyar:2000,
+ author =       {Sathish S. Vadhiyar and Graham E. Fagg and Jack Dongarra},
+ title =        {Automatically tuned collective communications},
+ booktitle =    {Proceedings of the 2000 conference on Supercomputing},
+ year =         {2000},
+ isbn =         {0-7803-9802-5},
+ pages =        {3},
+ location =     {Dallas, Texas, United States},
+ publisher =    {IEEE Computer Society Press},
+ PDF =          "a3-vadhiyar.pdf",
+ abstract =     "The performance of the MPI's collective communications is
+                critical in most MPI-based applications. A general Algorithm 
+                for a given collective communication operation may not give
+                good performance on all systems due to the differences in
+                architectures, network parameters and the storage capacity of
+                the underlying MPI implementation. In this paper we discuss an
+                approach in which the collective communications are tuned for
+                a given system by conducting a series of experiments on the
+                system. We also discuss a dynamic topology method that uses 
+                the tuned static topology shape, but re-orders the logical
+                addresses to compensate for changing run time variations. A
+                series of experiments were conducted comparing our tuned
+                collective communication operations to various native vendor 
+                MPI implementations. The use of the tuned collective 
+                communications resulted in about 30 percent to 650 percent
+                improvement in performance over the native MPI
+                implementations",
+ comments =     "This very interesting paper shows a few simple algorithms for
+                collective communications and an automatic testing methodology
+                to evaluate which one is the best for the application and
+                plataform being used. Most of the content is only used to
+                reduce the overhead implied to simulate broadcast with point 
+                to point."
+}
+
+@phdthesis{Gerlach:2002,
+  author =      {Jens Gerlach},
+  title =       {Domains Engineering and Generic Programming for Parallel
+                Scientific Computing},
+  school =      "Technische Universitt Berlin",
+  year =        2002,
+  month =       mar,
+  abstract =    "Software development in the realm of scientific computing is
+		a complicated and expensive process. Efficiency is a major
+		quality aspect of scientific software. Traditionally, high
+		performance has been of such a paramount importance that modern
+		software engineering concepts such as object-orientation or
+		component-based software development have entered the field
+		only partially. This is true despite their high potential to
+		simplify multidisciplinary software development. The
+		development of dynamic or irregular scientific applications
+		poses particular problems on the issues of flexibility and
+		efficiency of high performance computing components.
+		This dissertation addresses these problems in the following
+		way. Firstly, it applies the ideas of domain engineering to
+		the field of data-parallel applications in order to design
+		reusable software products that accelerate the development
+		of specific applications in this domain. It starts with an
+		analysis of typical data-parallel applications and formulates
+		general requirements on the components that can be used in
+		this domain. Secondly, using the ideas of generic programming
+		the Janus software architecture is defined.
+		The resulting conceptual framework and C++ template library
+		Janus provides a flexible and extensible collection of efficient
+		data structures and algorithms for a broad class of
+		data-parallel applications. In particular, finite difference
+		methods, (adaptive) finite element methods, and data-parallel
+		graph algorithms are supported. An outstanding advantage of
+		providing a generic C++ framework is that it provides
+		application-oriented abstractions that achieve high performance
+		without relying on language extension or non-standard compiler
+		technology. The C++ template mechanism allows to plug
+		user-defined types into the Janus data structures and
+		algorithms. Moreover, Janus components can easily be combined
+		with standard software packages of this field.
+		A portable implementation of Janus for distributed-memory
+		architectures that utilizes the standard Message Passing
+		Interface (MPI) is described. The expressiveness of Janus
+		is proven by the implementation of several standard problems
+		from the realm of data-parallel scientific applications. The
+		performance of Janus is evaluated by comparing Janus
+		applications with those that use other state-of-the-art
+		components. The examination of scalability on a
+		high-performance Linux cluster system shows that Janus is on
+		par with current scientific software.",
+  comments =    "This dissertation made in FIRST describe Janus."
+}
+
+@InProceedings{SNOW_Paper,
+  author = 	 {AntÙnio Augusto Frˆhlich and Philippe Olivier
+  Alexandre Navaux and SÈrgio Takeo Kofugi and Wolfgang Schrˆder-Preikschat},
+  title = 	 {SNOW: a Parallel Programming Environment for
+  Clusters of Workstations},
+  booktitle = {Proceedins of the 7th German-Brazilian Workshop on
+  Information Technology},
+  year = 	 2000,
+  address = 	 {Maria Farinha, Brazil},
+  month = 	 sep,
+  abstract = "The parallel computing community has been using clusters
+  of commodity workstations as an alternative to expensive massively
+  parallel processors (MPP) for several years. While MPPs can rely on
+  custom hardware to achieve high performance, their development
+  follows a slow pace, mainly dueto the small production
+  scale. Clusters, in the other hand, benefit from the frenetic pace
+  with which the workstation market evolves. As a matter of fact, when
+  an MPP comes to the market, it is very likely that processor, memory
+  and interconnection systems with similar features will arealdy be
+  available at the commodity market. Therefore, it seems evident that
+  both technologies are going to converge into a single one.  However,
+  when we compare the performance of parallel applications running on
+  clusters and on MPPs, the figures show a quite different scenario:
+  clusters are still far behind theris expensive relatives. The
+  Numerical Aerospace Simulation Facility from NASA has carried out a
+  careful study on parallel computing performance. This study, better
+  known as the NAS Parallel Benchmark, corroborates the superiority of
+  MPPs.  Taking in consideration theses two observations, we concluded
+  that the gap between MPPs and clusters has its origin in the
+  parallel programming software environment normally used in
+  clusters. While MPPs rely on custom software specifically developed
+  to support parallel applications on a given parallel architecture,
+  clusters often apply the commodity principle also to the
+  software. Commodity workstation software, however, has not been
+  designed to support parallel computing.", 
+  comment = "This paper describes the promises of the SNOW project." 
+}
+
+
+@incollection{ kiczales97aspectoriented,
+    author = "Gregor Kiczales and John Lamping and Anurag Menhdhekar
+    and Chris Maeda and Cristina Lopes and Jean-Marc Loingtier and
+    John Irwin",
+    title = "Aspect-Oriented Programming",
+    booktitle = "Proceedings European Conference on Object-Oriented
+    Programming",
+    volume = "1241",
+    publisher = "Springer-Verlag",
+    address = "Berlin, Heidelberg, and New York",
+    editor = "Mehmet Ak\c{s}it and Satoshi Matsuoka",
+    pages = "220--242",
+    year = "1997",
+    url = "citeseer.nj.nec.com/kiczales97aspectoriented.html",
+		abstract = "We have found many programming problems
+		for which neither procedural nor object-oriented
+		programming techniques are sufficient to clearly
+		capture some of the important design decisions the
+		program must implement. This forces the implementation
+		of those design decisions to be scattered throughout
+		the code, resulting in tangled code that is
+		excessively difficult to develop and maintain. We
+		present an analysis of why certain design decisions
+		have been so difficult to clearly capture in actual
+		code. We call the properties these decisions address
+		aspects, and show that the reason they have been hard
+		to capture is that they cross-cut the system s basic
+		functionality. We present the basis for a new
+		programming technique, called aspectoriented
+		programming, that makes it possible to clearly express
+		programs involving such aspects, including appropriate
+		isolation, composition and reuse of the aspect
+		code. The discussion is rooted in systems we have
+		built using aspect-oriented programming.",
+		comment = "This paper presents aspect-oriented programming."
+}
+
+@article{ boden95myrinet,
+    author = "Nanette J. Boden and Danny Cohen and Robert E. Felderman and
+Alan E. Kulawik and Charles L. Seitz and Jakov N. Seizovic and Wen-King Su",
+    title = "Myrinet: A Gigabit-per-Second Local Area Network",
+    journal = "IEEE Micro",
+    volume = "15",
+    number = "1",
+    pages = "29-36",
+    year = "1995",
+    url = "citeseer.nj.nec.com/boden95myrinet.html",
+    abstract = "Myrinet is a new type of local area network (LAN)
+    based on technology used por packet communication and switching
+    whithin massively-parallel processors (MPPs). Think of Myrinet as
+    an MPP message-passing network that can span campus dimensions,
+    rather than as a wide-area telecomunications networks that is
+    operating in close quarters. The technical steps toward making
+    Myrinet a reality included the development of (1) robust, 25m
+    communication channels whith flow control, packet framing, and
+    error control; (2) self-initializing, low-latency, cut-through
+    switches; (3) host interfaces that can map the network, select
+    routes, and translate from network addresses to routes, as well as
+    handle packet trffic; and (4) streamlined host software that
+    allows direct communication betwwen user processes and the
+    network.",
+    comment = "This is the original paper that proposes Myrinet"
+}
+
+@ARTICLE{Parnas:1976,
+  AUTHOR = {David Lorge Parnas},
+  TITLE = {{On the Design and Development of Program Families}},
+  JOURNAL = {IEEE Transactions on Software Engineering},
+  VOLUME = {SE-2},
+  NUMBER = {1},
+  PAGES = {1--9},
+  MONTH = MAR,
+  YEAR = 1976,
+}
+
+@BOOK{Stroustrup:1997,
+  AUTHOR = {Bjarne Stroustrup},
+  TITLE = {The C++ Programming Language},
+  PUBLISHER = {Addison-Wesley},
+  YEAR = 1997,
+  EDITION = 3,
+  MONTH = JUN,
+  URL = {../cache/Programming_Languages/Stroustrap-1997/},
+	COMMENT = "My favorite book. All about C++ and generic programming."
+}
+
+@inproceedings{ beuche99pure,
+  author = "D. Beuche",
+  title = "The {PURE} Family of Object-Oriented Operating Systems for
+    Deeply Embedded Systems",
+  booktitle = "Proc. of ISORC'99, St Malo, France",
+  month = may,
+  year = "1999",
+  url = "citeseer.nj.nec.com/beuche99pure.html",
+  abstract = "Deeply embedded systems are forced to operate under
+extreme resource constraints in terms of memory, CPU, time, and power
+consumption.  Typical examples are automotive systems. Today's
+limousines can be considered (large scale) distributed systems on
+wheels. There are cars in daily operation consisting of over 60
+networked processors (i. e. Åµ-controllers). Reserved estimations say
+that in the near future every car will be equipped with about 20
+networked Åµ-controllers, on average. The complexity of these
+decentralized computer architectures can be managed no longer by the
+application alone. Dedicated embedded operating systems are required
+to ensure manageability, adaptability, portability, and yet efficiency
+of the software. Resource sparing operation under (hard) real-time
+constraints must be the maxim. This paper discusses the design and
+implementation of a portable, universal runtime executive, PURE, for
+these classes of deeply embedded systems.",
+   comment = "I didn't read it yet. But it is the paper that introduces PURE."
+ }
+
+@TechReport{Musser:93,
+	author = 	 {D. R. Musser and A. A. Stepanov},
+	title = 	 {Algorithm-Oriented Generic Libraries},
+	institution =  {Rensselaer Polytechnic Institute Computer Science Department},
+	year = 	 {1993},
+	month = {september},
+	comment = "Describes (and probably introduces) C++ iterators and generic algorithms. It will probably be used on the C++ course on GeNESS."
+}
+
+@TechReport{VanHilst:1995,
+  author = 	 {Michael VanHilst and David Notkin},
+  title = 	 {Using C++ Templates to Implement Role-Based Designs},
+  institution =  {University of Washington Departament of Computer Science and Engineering},
+  year = 	 {1995},
+  month = 	 {july},
+}
+
+@inproceedings{Harrison:1993,
+	author = {William Harrison and Harold Ossher},
+	title = {Subject-oriented programming: a critique of pure objects},
+	booktitle = {Proceedings of the eighth annual conference on Object-oriented programming systems, languages, and applications},
+	year = {1993},
+	isbn = {0-89791-587-9},
+	pages = {411--428},
+	location = {Washington, D.C., United States},
+	doi = {http://doi.acm.org/10.1145/165854.165932},
+	publisher = {ACM Press},
+	comment = "This paper proposes the Subjective Oriented Programming."
+}
+
+@article{Gamma:1993,
+	author = "Erich Gamma and Richard Helm and Ralph Johnson and John Vlissides",
+	title = "Design Patterns: Abstraction and Reuse of Object-Oriented Design",
+	journal = "Lecture Notes in Computer Science",
+	volume = "707",
+	pages = "406--431",
+	year = "1993",
+	url = "citeseer.nj.nec.com/gamma93design.html"
+}
+
+@BOOK{Gamma:1995,
+	AUTHOR = {Erich Gamma and Richard Helm and Ralph Johnson and John Vlissides},
+  TITLE = {{Design Patterns: Elements of Reusable Object-Oriented Software}},
+  PUBLISHER = {Addison-Wesley},
+	URL = {../cache/Software_Engineering/gamma/Design Patterns - Elements of Reusable Object-Oriented Software/index.htm},
+	YEAR = 1995
+}
+
+@InProceedings{Coady:2003,
+	author = {Yvonne Coady and Gregor Kiczales},
+	title  = {Back to the future: a retroactive study of aspect evolution in operating system code},
+	year = {2003},
+	pages = {50--59},
+	organization = {AOSD}
+}
+
+@misc{ kotsis-interconnection,
+	author = "Gabriele Kotsis",
+	title = "Interconnection Topologies and Routing for Parallel Processing Systems",
+	url = "citeseer.nj.nec.com/article/kotsis92interconnection.html"
+}
+
+@misc{ lez-executing,
+	author = "Antonio Gonz·lez and Miguel Valero-GarcÌa and Luis DÌaz de Cerio",
+	title = "Executing Algorithms with Hypercube Topology on Torus Multicomputers",
+	url = "citeseer.nj.nec.com/28393.html"
+}
+
+@Book{Foster:1995,
+	author = 	 {Ian Foster},
+	title = 	 {Designing and Building Parallel Programs},
+	publisher = 	 {Addison-Wesley Pub Co},
+	year = 	 {1995},
+	edition = 	 {1st},
+	month = 	 {feb},
+}
+
+@inproceedings{ huse99collective,
+	author = "Lars Paul Huse",
+	title = "Collective Communication on Dedicated Clusters of Workstations",
+	booktitle = "{PVM}/{MPI}",
+	pages = "469--476",
+	year = "1999",
+	url = "citeseer.nj.nec.com/huse99collective.html"
+}									
+@InProceedings{Baum:1999,
+  author =       "Lothar Baum",
+  title =        "{Towards Generating Customized Run-time Platforms from
+                  Generic Components}",
+  booktitle =    "Proceedings of the 11th Conference on Advanced Systems
+                  Engineering",
+  address =      "Heidelberg, Germany",
+  month =        jun,
+  year =         1999,
+  url =          "http://www.uni-kl.de/AG-Nehmer/Projekte/GeneSys/Papers/Caise99.ps"
+}
+
+@Article{Constantinides:2000,
+  author =       "Constantinos A. Constantinides and Atef Bader and
+                  Tzilla H. Elrad and P. Netinant and Mohamed E. Fayad",
+  title =        "{Designing an Aspect-Oriented Framework in an
+                  Object-Oriented Environment}",
+  journal =      "ACM Computing Surveys",
+  year =         2000,
+  volume =       32,
+  number =       1,
+  pages =        "",
+  month =        mar,
+  url =          "http://www.acm.org/pubs/articles/journals/surveys/2000-32-1es/a41-constantinides/a41-constantinides.pdf"
+}
+
+@Book{Booch:1994,
+  author =       "Grady Booch",
+  title =        "{Object-Oriented Analysis and Design with
+                  Applications}",
+  edition =      2,
+  publisher =    "Addison-Wesley",
+  year =         1994
+}
+
+@Book{Czarnecki:2000,
+  author =       "Krysztof Czarnecki and Ulrich Eisenecker",
+  title =        "Generative Programming: Methods, Tools, and
+                  Applications",
+  publisher =    "Addison-Wesley",
+  year =         2000
+}
+
+@InProceedings{Schoen:1998,
+  author =       "Friedrich Schˆn and Wolfgang Schrˆder-Preikschat and
+                  Olaf Spinczyk and Ute Spinczyk",
+  title =        "{Design Rationale of the PURE Object-Oriented Embedded
+                  Operating System}",
+  booktitle =    "Proceedings of the International IFIP WG 10.3/WG 10.5
+                  Workshop on Distributed and Parallel Embedded Systems",
+  pages =        "",
+  address =      "Paderborn, Germany",
+  month =        oct,
+  year =         1998,
+  url =          "http://www-ivs.cs.uni-magdeburg.de/bs/papers/dipes98/dipes98.ps"
+}
+
+@inproceedings{Wheat:1994,
+  author =       "S. Wheat and others",
+  title =        "{PUMA: An Operating System for Massively Parallel
+                  Systems}",
+  booktitle =    "Proceedings of the Twenty-Seventh Anual Hawaii
+                  International Conference on System Sciences",
+  pages =        "",
+  address =      "Maui, U.S.A.",
+  month =        jan,
+  year =         1994
+}
+
+@Article{Preikschat:1994a,
+  author =       "Wolfgang Schrˆder-Preikschat",
+  title =        "{PEACE - A Software Backplane for Parallel Computing}",   journal =      "Parallel Computing",
+  volume =       20,
+  number =       10,
+  pages =        "1471--1485",
+  year =         1994
+}
+
+@inproceedings{Lumetta:1997,
+  author =       "Steven S. Lumetta and Alan M. Mainwaring and David
+                  E. Culler",
+  title =        "{Multi-Protocol Active Messages on a Cluster of
+                  SMP's}",
+  booktitle =    "Proceedings of Supercomputing'97",
+  address =      "Sao Jose, USA",
+  month =        nov,
+  year =         1997,
+  url =          "http://now.cs.berkeley.edu/clumps/sc97.ps",
+}
+                                                                                
+@InProceedings{Tezuka:1997,
+  author =       "Hiroshi Tezuka and Atsushi Hori and Yutaka Ishikawa
+                  and Mitsuhisa Sato",
+  title =        "{PM: An Operating System Coordinated High Performance
+                  Communication Library}",
+  booktitle =    "High-Performance Computing and Networking",
+  pages =        "708--717",
+  year =         1997,
+  volume =       1225,
+  series =       "Lecture Notes in Computer Science",
+  month =        apr,
+  publisher =    "Springer"
+}
+
+@inproceedings{Prylli:1998,
+  author =       "Loic Prylli and Bernard Tourancheau",
+  title =        "{BIP: a New Protocol Designed for High Performance
+                  Networking on Myrinet}",
+  booktitle =    "Proceedings of the International Workshop on Personal
+                  Computer based Networks of Workstations",
+  address =      "Orlando, USA",
+  month =        apr,
+  year =         1998,
+  url =          "http://lhpca.univ-lyon1.fr/~btouranc/RHDAC-BIB/pcnow.ps.gz"
+}
+
+@Booklet{GM,
+  title = 	 {The GM Message Passing System},
+  author = 	 {Myricom, Inc.},
+  OPTmonth = 	 {april},
+  year = 	 {1999}
+}
+
+@InProceedings{burns94:_lam,
+  author       = {Greg Burns and Raja Daoud and James Vaigl},
+  title        = {{LAM}: {A}n {O}pen {C}luster {E}nvironment for {MPI}},
+  booktitle    = {Proceedings of Supercomputing Symposium},
+  pages        = {379--386},
+  year         = {1994},
+  url          = {{\tt http://www.lam-mpi.org/download/files/lam-papers.tar.gz}}
+}
+
+@InProceedings{squyres03:_compon_archit_lam_mpi,
+  author =       {Jeffrey M.\ Squyres and Andrew Lumsdaine},
+  title =        {{A Component Architecture for LAM/MPI}},
+  booktitle =    {Proceedings, 10th European PVM/MPI Users' Group Meeting},
+  year =         2003,
+  address =      {Venice, Italy},
+  publisher =    {Springer-Verlag},
+  series =       {Lecture Notes in Computer Science},
+  number =       {2840},
+  month =        {September / October}
+}
+
+@Book{PVM,
+  author = 	 {Al Geist and Adam Beguelin and Jack Dongarra 
+                  and Weicheng Jiang and Robert Manchek and Vaidy Sunderam},
+  title = 	 {PVM: Parallel Virtual Machine},
+  publisher = 	 {MIT Press},
+  year = 	 {1994},
+}

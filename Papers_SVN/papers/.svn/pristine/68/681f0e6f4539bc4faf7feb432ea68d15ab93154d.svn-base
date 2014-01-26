@@ -1,0 +1,509 @@
+=================================================================================
+=================================================================================
+REVIEWS SUMMARY
+=================================================================================
+=================================================================================
+
++ Resumão: 
+	- Não gostaram muito da forma como UML foi usado para mostrar as coisas. Pensar em outro jeito, principalmente para confs de HS.
+	- Não entenderam direito onde estão os pointcuts
+	- Algumas questões pontuais relativas ao SystemC não ficaram muito claras.
+	- Detalhar melhor o uso do cenário.
+	- Apresentar os resultados de outra forma para deixar menos feio.
+
+- Section 1: "HDLs are often used to create descriptions of electronic circuits". What else would they be used for?
+
+-I was looking for a join point model for RTL-design to define how RTL-designs can be influenced by aspects. I did not find it in the paper. The description of the use of AOP is centered
+around scenario adapaters which perform aspect weaving. It seems that the notion of pointcut is not used because in the context of hardware design it can be replaced by OO features like inheritance and generics.
+
+- It appears that for RTL-level descriptions the need only a very limited form of aspects. Unfortunately, their aspect model is not described abstractly making it hard to evaluate the paper from an AOP perspective.
+
+-The related work section lists quite a lot of previous work in this area. Most of the comparisons to the related work center around the evaluation of the approach, and not the design. But if it is only the evaluation that is the weakness, one could evaluate the existing approach. So it is not clear what is the need for a new design.
+
+
+
+-The examples should be illustrated by some actual code. The UML diagrams are good as high-level documentation, but to understand the differences between hand-coded and "scenario adapted" versions, a side-by-side comparison would be extremely helpful. Other comment: Section 3 has many references to the not very readable UML diagrams. It would be better to describe the approach at a more conceptual level. Overall, the main ideas of the approach are not completely clear.
+
+-In Sec. 3.1, how did the old scenario adapter look? (Again, the results should be comparable.)
+
+-The discussion on homogeneous / heterogeneous crosscutting in Sec. 3.3 should be extended. (If het.cc. could be "easily implemented with standard OOP", some volumes of AOSD proceedings would have been produced in vain. This point ought to be more clear.)
+
+-The artifacts described in the paper do not seem to be available from the authors' Web home pages. This hampers reproducibility; the results should be made available.
+
+- Sec 3: "has not yet been investigated". No one has investigated it, including you? No one has investigated it before, but you are going to investigate it now? Not clear.
+
+- Sec 3: "In the software domain ... all operations are naturally sequential". This seems quite strange, in the era of multicore computers.
+
+- Figure 1 is not particularly readable. When you refer to parts of it, it would be helpful to give some hint as to the position of the thing you are referring to, so the reader doesn't have to hunt for it.
+
+- "SystemC wait() statements must be used...". The connection of this sentence to what comes before is not clear. Point out that wait is used in the discussed code. Also: "Enter and leave are triggered using a simple handshaking protocol". This is not very clear. Simple is not very informative. "With this kind of handshaking protocol...2. The sentence is not clear.
+
+- "All aspects are triggered at the same time". So this means that the language has no pointcuts?. "if required by the scenario": Why would this be required by the scenario?
+
+- "This adaptation can be achieved through the separation of the component's input/output protocol from the implementation of its behavior". Why?
+
+- "Notice that, although scattered through a class hierarchy and different methods...". Not clear.
+
+- "wait statements are also used to schedule among the clock cycles, instead of defining explicit state machines". The equivalence between wait and state machines is not clear.
+
+- "several characteristics can be identified". By who?
+
+- "especially when it comes to the definition of the pointcut". It seems that ADESD has no means of defining pointcuts?
+
+- "For example, the aspects shown in Deharbe and Medeiros". The reader has no idea what this is talking about, without taking the time to read the referenced paper.
+
+- "thus allowing for the development of simulation-only models". Drop "for". But from what comes before, it seems that the models cannot be simulated? Or they can be simulated but not implemented in hardware?
+
+
+
+- Section 4: "The Compressed_Scenario class incorporates the aspects". The aspects should be listed in the order in which they appear in the figure.
+
+- "the compression aspects may not be used together". Why not? Can't at least the encoder and decoder aspects be used together?
+
+-The evaluation looks OK. Looking at the performance results, I had the impression that, after all, perhaps some effort should be made to provide dedicated weaving / optimisation support for synthesis. (As has been done for programming languages in the form of dedicated VMs, for instance.) The layout algorithms appear to produce somewhat erratic results.
+
+-In the abstract referencing the results: "at the cost of a small physical overhead" This is a bit hard to evaluate at this point in the paper. A small overhead at the hardware level could be worrisome, if it has an impact on every instruction.
+
+
+
+ENGLISH STUFF:
+
++ In Abstract: 
+
+- "the use of design artifacts which were previously exclusive" "which" should be "that". The problem recurs throughout the paper. Which gives more information about something. That is restrictive.
+
++ Section 1: 
+
+- "and on design at the register transfer level" Not clear what "on design" means. 
+
+- "In this level" -> "At this level"
+
+- "related to its overall functionality", "components in which its dependencies". Here and in a number of other places, it is not clear what "its" refers to.
+
+- "section 2 presents" -> "Section 2 presents"
+
+- "presents a discussion about" -> "presents"
+
++ Section 2 
+
+- "In Bainbridge-Smith and Park [2] the authors discussed" -> "Bainbridge-Smith and Park [2] discussed"
+
+- "concepts to sequential logic design" -> "concepts in sequential logic design"
+
+- "e is more focused in high-level specification" -> "e is more focused on high-level specification"
+
++ Section 3 
+
+- "The design artifacts proposed in ADESD were implemented". Implemented by who? Try to avoid the passive voice. It tends to suggest that someone else has done the work.
+
+- "with the application of proper aspects"
+
+- "aspects" doesn't need to be in italics again
+
+- "Whether such guidelines can also be defined": Now sure what "such guidelines" refers to.
+
+- "Scenario adapters were developed". Again, it is not clear who has done this. The sentence is also quite long.
+
+- "in order to setup": setup -> set up
+
+- "in a compressed scenario". What is a compressed scenario?
+
+- "figure 1" -> "Figure 1"
+
+- "basic input/outputs signals": outputs -> output
+
+- "Notice that aspects classes". aspects -> aspect. The sentence is hard to understand. What should one look at to notice this?
+
+- "and executes in parallel" -> "and execute in parallel"
+
+- "If the aspects execution order": aspects -> aspect
+
+- "shows how this features": features -> feature
+
+- "In the examples in figure 2". Not clear that the one figure contains more than one example. For each example, say explicitly what one should look at in the figure.
+
+- "for aspect implementation then ADESD": then -> than
+
++Section 4:
+
+- "an evaluation of the designs": designs -> design
+
+- "which applies the scenario aspects": applies -> apply
+
+- "in which the aspects behavior are": are -> is
+
+- "Debugged FIR filer": filer -> filter
+
+- "the same approach of": of -> as
+
+- "Interconnection are the lines of code": are -> is
+
+- "For modules which are implemented": which -> that
+
+- Table 2: Apapter -> Adapter
+
+- Figure 5: codes -> code
+
+=================================================================================
+=================================================================================
+FULL REVIEWS
+=================================================================================
+=================================================================================
+
+*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=
+
+Available choices for the reviewers:
+
+Choices for Classification:
+ - I will champion this paper at the PC meeting (Advocate/Accept).
+ - I can accept this paper, but I will not champion it (accept, but could
+    reject).
+ - This paper should be rejected, though I will not fight strongly against it
+    (reject, but could accept).
+ - Serious problems. I will argue to reject this paper (Detractor).
+
+Choices for Expertise:
+ - I am an expert in the subject area of this paper.
+ - I am knowledgeable in the subject areas of this paper, though not an expert.
+ - I am not an expert in the subject area of this paper. My evaluation is that
+    of an informed outsider.
+
+Choices for Relevance:
+ - Significantly relevant.
+ - Relevant.
+ - Marginally relevant.
+
+*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=
+
+First reviewer's review:
+         >>> Classification <<<
+I can accept this paper, but I will not champion it (accept, but could
+  reject).
+
+         >>> Expertise <<<
+I am knowledgeable in the subject areas of this paper, though not an expert.
+
+         >>> Relevance of the paper for this conference <<<
+Significantly relevant.
+
+         >>> Summary of the submission <<<
+
+The paper describes an approach for hardware design using MDSOC techniques
+without explicit MDSOC language mechanisms, but relying on existing language
+features. The approach allows not only for simulating, but also for
+synthesising hardware descriptions. It is described by means of some examples,
+which also serve as the basis for an evaluation in terms of code complexity and
+hardware characteristics.
+
+         >>> Evaluation <<<
+
+This is a nice paper with an important contribution, describing an approach
+that yields synthesisable hardware descriptions using MDSOC techniques. The
+contribution is clearly motivated, backed by an exhaustive discussion of
+related work. I am however unsure whether the paper warrants publication in its
+current shape: there are some things that should be added or elaborated on.
+
+In particular:
+
+* The examples should be illustrated by some actual code. The UML diagrams are
+good as high-level documentation, but to understand the differences between
+hand-coded and "scenario adapted" versions, a side-by-side comparison would be
+extremely helpful.
+
+* In Sec. 3.1, how did the old scenario adapter look? (Again, the results
+should be comparable.)
+
+* The discussion on homogeneous / heterogeneous crosscutting in Sec. 3.3 should
+be extended. (If het.cc. could be "easily implemented with standard OOP", some
+volumes of AOSD proceedings would have been produced in vain. This point ought
+to be more clear.)
+
+There is ample space available to address these issues.
+
+The artifacts described in the paper do not seem to be available from the
+authors' Web home pages. This hampers reproducibility; the results should be
+made available.
+
+The evaluation looks OK. Looking at the performance results, I had the
+impression that, after all, perhaps some effort should be made to provide
+dedicated weaving / optimisation support for synthesis. (As has been done for
+programming languages in the form of dedicated VMs, for instance.) The layout
+algorithms appear to produce somewhat erratic results.
+
+As a final remark, I would like to suggest the authors to have the paper
+proof-read by a native speaker; there are some lingual glitches.
+
+*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*
+
+Second reviewer's review:
+         >>> Classification <<<
+Serious problems. I will argue to reject this paper (Detractor).
+
+         >>> Expertise <<<
+I am not an expert in the subject areas of this paper. My evaluation is that of
+  an informed outsider.
+
+         >>> Relevance of the paper for this conference <<<
+Significantly relevant.
+
+         >>> Summary of the submission <<<
+
+The paper proposes to provide aspects for SystemC code. The aspects are
+restricted such that the resulting code is synthesizable. Everything can
+be implemented in C++. Several small case studies are discussed. The
+proposed approach appears to require writing quite a bit more lines of
+code than in the case of a hand-coded implementation, but the performance
+is comparable.
+
+         >>> Evaluation <<<
+
+The related work section lists quite a lot of previous work in this area.
+Most of the comparisons to the related work center around the evaluation of
+the approach, and not the design. But if it is only the evaluation that is
+the weakness, one could evaluate the existing approach. So it is not clear
+what is the need for a new design.
+
+Section 3, which presents the approach, is very much organized according to
+the implementation, with many references to the not very readable UML
+diagrams. It would be better to describe the approach at a more conceptual
+level. Overall, the main ideas of the approach are not completely clear.
+
+Overall, the idea of the paper may be a good one. In particular, the idea
+of adding only enough aspect functionality to be able to do useful things
+while not breaking desirable properties (ie synthesizability) is
+interesting. But in the current version of the paper is not well enough
+presented for the reader to be sure to understand what is being done.
+
+Detailed comments:
+
+Abstract:
+
+"the use of design artifacts which were previously exclusive"
+"which" should be "that". The problem recurs throughout the paper. Which
+gives more information about something. That is restrictive.
+
+"at the cost of a small physical overhead"
+This is a bit hard to evaluate at this point in the paper. A small
+overhead at the hardware level could be worrisome, if it has an impact on
+every instruction.
+
+Section 1:
+
+"HDLs are often used to create descriptions of electronic circuits"
+What else would they be used for?
+
+"and on design at the register transfer level"
+Not clear what "on design" means.
+
+"In this level" -> "At this level"
+
+"related to its overall functionality"
+"components in which its dependencies"
+Here and in a number of other places, it is not clear what "its" refers to.
+
+"section 2 presents" ->
+"Section 2 presents"
+
+"presents a discussion about" -> "presents"
+
+Section 2:
+
+"In Bainbridge-Smith and Park [2] the authors discussed" ->
+"Bainbridge-Smith and Park [2] discussed"
+
+"concepts to sequential logic design" -> "concepts in sequential logic
+design"
+
+"e is more focused in high-level specification" ->
+"e is more focused on high-level specification"
+
+Section 3:
+
+"with the application of proper aspects"
+"aspects" doesn't need to be in italics again.
+
+"The design artifacts proposed in ADESD were implemented"
+Implemented by who? Try to avoid the passive voice. It tends to suggest
+that someone else has done the work.
+
+"Whether such guidelines can also be defined"
+Now sure what "such guidelines" refers to.
+
+"has not yet been investigated"
+No one has investigated it, including you? No one has investigated it
+before, but you are going to investigate it now? Not clear.
+
+Section 3.1:
+
+"Scenario adapters were developed"
+Again, it is not clear who has done this. The sentence is also quite long.
+
+"in order to setup": setup -> set up
+
+"in a compressed scenario"
+What is a compressed scenario?
+
+"In the software domain ... all operations are naturally sequential"
+This seems quite strange, in the era of multicore computers.
+
+Figure 1 is not particularly readable. When you refer to parts of it, it
+would be helpful to give some hint as to the position of the thing you are
+referring to, so the reader doesn't have to hunt for it.
+
+"figure 1" -> "Figure 1"
+
+"SystemC wait() statements must be used..."
+The connection of this sentence to what comes before is not clear. Point
+out that wait is used in the discussed code.
+
+"Enter and leave are triggered using a simple handshaking protocol"
+This is not very clear. Simple is not very informative.
+
+"With this kind of handshaking protocol...2
+The sentence is not clear.
+
+"basic input/outputs signals": outputs -> output
+
+"Notice that aspects classes"
+aspects -> aspect. The sentence is hard to understand. What should one
+look at to notice this?
+
+"All aspects are triggered at the same time"
+So this means that the language has no pointcuts?
+
+"and executes in parallel" -> "and execute in parallel"
+
+"if required by the scenario"
+Why would this be required by the scenario?
+
+"If the aspects execution order": aspects -> aspect
+
+"This adaptation can be achieved through the separation of the component's
+input/output protocol from the implementation of its behavior"
+Why?
+
+"Notice that, although scattered through a class hierarchy and different
+methods..."
+Not clear.
+
+"wait statements are also used to schedule among the clock cycles, instead
+of defining explicit state machines"
+The equivalence between wait and state machines is not clear.
+
+Section 3.2:
+
+"several characteristics can be identified"
+By who?
+
+"shows how this features": features -> feature
+
+"In the examples in figure 2"
+Not clear that the one figure contains more than one example.
+For each example, say explicitly what one should look at in the figure.
+
+Section 3.3:
+
+"for aspect implementation then ADESD": then -> than
+
+"especially when it comes to the definition of the pointcut"
+It seems that ADESD has no means of defining pointcuts?
+
+"For example, the aspects shown in Deharbe and Medeiros"
+The reader has no idea what this is talking about, without taking the time
+to read the referenced paper.
+
+"thus allowing for the development of simulation-only models"
+Drop "for". But from what comes before, it seems that the models cannot be
+simulated? Or they can be simulated but not implemented in hardware?
+
+Section 4:
+
+"an evaluation of the designs": designs -> design
+
+"which applies the scenario aspects": applies -> apply
+
+"The Compressed_Scenario class incorporates the aspects"
+The aspects should be listed in the order in which they appear in the
+figure.
+
+"the compression aspects may not be used together"
+Why not? Can't at least the encoder and decoder aspects be used together?
+
+"in which the aspects behavior are": are -> is
+
+"Debugged FIR filer": filer -> filter
+
+"the same approach of": of -> as
+
+"Interconnection are the lines of code": are -> is
+
+"For modules which are implemented": which -> that
+
+Table 2: Apapter -> Adapter
+
+Figure 5: codes -> code
+
+*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*
+
+Third reviewer's review:
+         >>> Classification <<<
+This paper should be rejected, though I will not fight strongly against it
+  (reject, but could accept).
+
+         >>> Expertise <<<
+I am knowledgeable in the subject areas of this paper, though not an expert.
+
+         >>> Relevance of the paper for this conference <<<
+Relevant.
+
+         >>> Summary of the submission <<<
+
+The paper is about
+scenario adapters in SystemC for RTL-level hardware descriptions and how they
+influence longest path delay
+and area in a generated FPGA. The second author previously developed ADESD and
+scenario adapters.
+Scenario adapters are for specializing object-oriented components to execution
+scenarios and here they are used for
+describing synthesizable hardware descriptions at the RTL-level.
+
+         >>> Evaluation <<<
+
+I was looking for a join point model for RTL-design to define how RTL-designs
+can be influenced by aspects.
+I did not find it in the paper. The description of the use of AOP is centered
+around scenario adapaters
+which perform aspect weaving.
+
+The paper describes a number of techniques which are used to describe hardware:
+static metaprogramming, OO
+techniques (e.g., the curiously recurring template pattern). Each class
+defining an aspect must implement
+at least two methods: trigger-behavior and idle-behavior.
+
+ADESD focuses on synthesizable hardware descriptions and therefore it uses a
+restricted aspect model.
+The notion of pointcut is not used because in the context of hardware design it
+can be replaced by OO features like
+inheritance and generics.
+
+ADESD uses scenario adapters for homogeneous crosscutting and standard OOP for
+heterogeneous crosscutting.
+
+The experimental results and evaluation sections are interesting because the
+generated FPGA circuits are competitive with hand-coded designs. They achieve
+increased reusability with efficient synthesizability to FPGAs.
+
+I appreciate the work of the authors on lifting RTL-hardware description to a
+higher level of abstraction.
+I view their approach as a good use of oo techniques to describe RTL-level
+hardware descriptions.
+But it appears that for RTL-level descriptions the need only a very limited
+form of aspects.
+Unfortunately, their aspect model is not described abstractly making it hard to
+evaluate the paper
+from an AOP perspective. I think it fits better in hardware synthesis
+conference.
+
+
+*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*

@@ -1,0 +1,386 @@
+@inproceedings{ flexcup,
+  author = {Pedro Jos{�} Marr{�}n and Matthias Gauger and Andreas Lachenmann and Daniel Minder and Olga Saukh and Kurt Rothermel},
+  title = {FlexCup: A Flexible and Efficient Code Update Mechanism for Sensor Networks},
+  booktitle = {Proc. of the Third European Workshop on Wireless Sensor Networks},
+  year = {2006},
+  month = {February},
+  pages = {212--227},
+  location = {Zuerich, Switzerland}}
+
+@BOOK{Froehlich:2001,
+  AUTHOR = {Ant{\^{o}}nio A. Fr{\"{o}}hlich},
+  TITLE = {Application-Oriented Operating Systems},
+  PUBLISHER = {GMD - Forschungszentrum Informationstechnik},
+  YEAR = 2001,
+  NUMBER = 17,
+  SERIES = {GMD Research Series},
+  ADDRESS = {Sankt Augustin},
+  MONTH = AUG
+}
+
+@inproceedings{hjalmtysson98dynamic,
+   author = {Gilsi Hjalmtysson and Robert Gray},
+   title = {Dynamic {C++} Classes---{A} lightweight mechanism to update
+	code in a running program},
+   booktitle = {{USENIX} Annual Technical Conf.},
+   pages = {65--76},
+   month = jun,
+   year = {1998}
+}
+
+@techreport{stathopoulos03remote,	
+	address = {LA, CA, USA},
+	author = {Stathopoulos, T.  and Heidemann, J.  and Estrin, D. },
+	citeulike-article-id = {1288971},
+	keywords = {code, snms, update},
+	priority = {2},
+	school = {UCLA},
+	title = {A remote code update mechanism for wireless sensor networks},	
+	year = {2003}
+}
+
+@inproceedings{ mate,
+  author = "P. Levis and D. Culler",
+  title = "Mate: A tiny virtual machine for sensor networks",
+  booktitle = "International Conference on Architectural Support for Programming Languages
+    and Operating Systems, San Jose, CA, USA", 
+  month = "Oct.",
+  year = "2002"}
+
+@inproceedings{sensorware,
+ author = {Athanassios Boulis and Chih-Chieh Han and Mani B. Srivastava},
+ title = {Design and implementation of a framework for efficient and programmable sensor networks},
+ booktitle = {Proc. of the 1st int. conf. on Mobile systems, applications and services},
+ year = {2003},
+ pages = {187--200},
+ location = {San Francisco, California},
+ publisher = {ACM Press},
+ address = {NY, USA},
+ }
+
+@inproceedings{update,
+ author = {Meik Felser and R\"{u}diger Kapitza and J\"{o}rgen Klein\"{o}der and Wolfgang Schr\"{o}der-Preikschat},
+ title = {Dynamic Software Update of Resource-Constrained Distributed Embedded Systems},
+ booktitle = {International Embedded Systems Symposium}, 
+ year = {2007},
+ location = {Irvine, CA, USA},
+ }
+
+@inproceedings{reijers03efficient,
+ author = {Niels Reijers and Koen Langendoen},
+ title = {Efficient code distribution in wireless sensor networks},
+ booktitle = {Proc. of the 2nd ACM int. conf. on Wireless sensor networks and applications},
+ year = {2003},
+ isbn = {1-58113-764-8},
+ pages = {60--67},
+ location = {San Diego, CA, USA},
+ publisher = {ACM},
+ address = {NY, USA},
+ }
+
+@InProc.{marronewsn05,
+  author = {Pedro Jos{\'e} Marr{\'o}n and Andreas Lachenmann and Daniel Minder and J{\"o}rg H{\"a}hner and Robert Sauter and Kurt Rothermel},
+  title = {{T}iny{C}ubus: {A} Flexible and Adaptive Framework for Sensor Networks},
+  booktitle = {Proc. of the Second European Workshop on Wireless Sensor Networks},
+  year = {2005},
+  month = {Jan},
+  pages = {278--289},
+  location = {Istanbul, Turkey},
+}
+
+@inproceedings{ hill00system,
+    author = "Jason Hill and Robert Szewczyk and Alec Woo and Seth Hollar and David E. Culler and Kristofer S. J. Pister",
+    title = "System Architecture Directions for Networked Sensors",
+    booktitle = "Architectural Support for Programming Languages and Operating Systems",
+    pages = "93-104",
+    year = "2000" }
+
+@InProceedings{koshy,
+  author = {J. Koshy and R. Pandey},
+  title = {Remote incremental linking for energy-efficient reprogramming of sensor networks},
+  booktitle = {Proc. of the second European Workshop on Wireless Sensor Networks},
+  year = {2005},
+  month = {Jan},
+  pages = {354--365},
+  location = {Istanbul, Turkey},
+}
+
+@article{parnas,
+  author    = {David Lorge Parnas},
+  title     = {On the Design and Development of Program Families},
+  journal   = {IEEE Trans. Software Eng.},
+  volume    = {2},
+  number    = {1},
+  year      = {1976},
+  pages     = {1-9},
+  bibsource = {DBLP, http://dblp.uni-trier.de}
+}
+
+@BOOK{Gamma:1995,
+  AUTHOR = {Erich Gamma and Richard Helm and Ralph Johnson and John Vlissides},
+  TITLE = {{Design Patterns: Elements of Reusable Object-Oriented Software}},
+  PUBLISHER = {Addison-Wesley},
+  YEAR = 1995
+}
+
+@inproceedings{sos,
+ author = {Chih-Chieh Han and Ram Kumar and Roy Shea and Eddie Kohler and Mani Srivastava},
+ title = {A dynamic operating system for sensor nodes},
+ booktitle = {MobiSys '05: Proc. of the 3rd int. conf. on Mobile systems, applications, and services},
+ year = {2005},
+ isbn = {1-931971-31-5},
+ pages = {163--176},
+ location = {Seattle, Washington},
+ publisher = {ACM},
+ address = {NY, USA},
+ }
+
+
+@INPROCEEDINGS{Froehlich:sci:2000,
+  AUTHOR = {Ant{\^{o}}nio A. Fr{\"{o}}hlich and Wolfgang Schr\"{o}der-Preikschat},
+  TITLE = {{Scenario Adapters: Efficiently Adapting Components}},
+  BOOKTITLE = {Proc. of the 4th World Multiconference on Systemics, Cybernetics and Informatics},
+  PAGES = {},
+  ADDRESS = {Orlando, U.S.A.},
+  MONTH = JUL,
+  YEAR = 2000
+}
+
+@article{asada98wireless,
+ author = {G. J. Pottie and W. J. Kaiser},
+ title = {Wireless integrated network sensors},
+ journal = {Commun. ACM},
+ volume = {43},
+ number = {5},
+ year = {2000},
+ issn = {0001-0782},
+ pages = {51--58},
+ publisher = {ACM Press},
+ address = {NY, USA},
+ }
+
+@BOOK{Stroustrup:1997,
+  AUTHOR = {Bjarne Stroustrup},
+  TITLE = {{The C++ Programming Language}},
+  EDITION = 3,
+  PUBLISHER = {Addison-Wesley},
+  YEAR = 1997
+}
+
+@article{mica2,
+ author = {Jason Hill and Mike Horton and Ralph Kling and Lakshman Krishnamurthy},
+ title = {The platforms enabling wireless sensor networks},
+ journal = {Commun. ACM},
+ volume = {47},
+ number = {6},
+ year = {2004},
+ issn = {0001-0782},
+ pages = {41--46},
+ publisher = {ACM},
+ address = {NY, USA},
+ }
+
+@inproceedings{deluge,
+ author = {Jonathan W. Hui and David Culler},
+ title = {The dynamic behavior of a data dissemination protocol for network programming at scale},
+ booktitle = {Proc. of the 2nd int. conf. on Embedded networked sensor systems},
+ year = {2004},
+ isbn = {1-58113-879-2},
+ pages = {81--94},
+ location = {Baltimore, MD, USA},
+ publisher = {ACM},
+ address = {NY, USA},
+ }
+
+@TechReport{DC-2003,
+  author =       {Friedrich-Alexander-Universit�t Erlangen-N�rnberg},
+  title =        {Technologie Roadmap: Software-Verwaltung im Farzeug},
+  institution =  {DaimlerChrysler},
+  year =         {2003},
+  address =      {Erlangen, Germany},
+  month =        {Sep},
+}
+
+@inproceedings{multi-level,
+ author = {Rahul Balani and Chih-Chieh Han and Ram Kumar Rengaswamy and Ilias Tsigkogiannis and Mani Srivastava},
+ title = {Multi-level software reconfiguration for sensor networks},
+ booktitle = {Proc. of the 6th int. conf. on Embedded software},
+ year = {2006},
+ isbn = {1-59593-542-8},
+ pages = {112--121},
+ location = {Seoul, Korea},
+ publisher = {ACM},
+ address = {NY, USA},
+ }
+
+
+@inproceedings{k42,
+ author = {Andrew Baumann and Gernot Heiser and Jonathan Appavoo and Dilma Da Silva and Orran Krieger and Robert W. Wisniewski and Jeremy Kerr},
+ title = {Providing dynamic update in an operating system},
+ booktitle = {ATEC'05: Proc. of the annual conf. on USENIX Annual Technical Conference},
+ year = {2005},
+ pages = {32--32},
+ location = {Anaheim, CA},
+ publisher = {USENIX Association},
+ address = {Berkeley, CA, USA},
+ }
+
+
+@misc{ sprinkler,
+  author = "V. Naik and A. Arora and P. Sinha and H. Zhang",
+  title = "Sprinkler: A reliable and energy efficient data dissemination service for
+    wireless embedded devices",
+  text = "V. Naik, A. Arora, P. Sinha, and H. Zhang. Sprinkler: A reliable and energy
+    efficient data dissemination service for wireless embedded devices. Technical
+    Report ExScal-OSU-EN04-2005-05-11, The Ohio State University, 2005.",
+  year = "2005" }
+
+@article{sprinkler-2,
+ author = {Vinayak Naik and Anish Arora and Prasun Sinha and Hongwei Zhang},
+ title = {Sprinkler: A Reliable and Energy Efficient Data Dissemination Service for Extreme Scale Wireless Networks of Embedded Devices},
+ journal = {IEEE Transactions on Mobile Computing},
+ volume = {6},
+ number = {7},
+ year = {2007},
+ issn = {1536-1233},
+ pages = {777--789},
+ publisher = {IEEE Educational Activities Department},
+ address = {Piscataway, NJ, USA},
+ }
+
+
+@inproceedings{mnp,
+ author = {Limin Wang},
+ title = {MNP: multihop network reprogramming service for sensor networks},
+ booktitle = {Proc. of the 2nd int. conf. on Embedded networked sensor systems},
+ year = {2004},
+ isbn = {1-58113-879-2},
+ pages = {285--286},
+ location = {Baltimore, MD, USA},
+ }
+
+@inproceedings{infuse,
+ author = {Mahesh Arumugam},
+ title = {Infuse: a TDMA based reprogramming service for sensor networks},
+ booktitle = {Proc. of the 2nd int. conf. on Embedded networked sensor systems},
+ year = {2004},
+ isbn = {1-58113-879-2},
+ pages = {281--282},
+ location = {Baltimore, MD, USA},
+ publisher = {ACM},
+ address = {NY, USA},
+ }
+
+@inproceedings{openrec,
+ author = {Jamie Hillman and Ian Warren},
+ title = {An Open Framework for Dynamic Reconfiguration},
+ booktitle = {ICSE'04: Proc. of the 26th International Conference on Software Engineering},
+ year = {2004},
+ isbn = {0-7695-2163-0},
+ pages = {594--603},
+ publisher = {IEEE Computer Society},
+ address = {Washington, DC, USA},
+ }
+
+@inproceedings{software-evo,
+ author = {Peyman Oreizy and Nenad Medvidovic and Richard N. Taylor},
+ title = {Architecture-based runtime software evolution},
+ booktitle = {ICSE '98: Proc. of the 20th int. conf. on Software engineering},
+ year = {1998},
+ isbn = {0-8186-8368-6},
+ pages = {177--186},
+ location = {Kyoto, Japan},
+ publisher = {IEEE Computer Society},
+ address = {Washington, DC, USA},
+ }
+
+@article{product-line,
+ author = {Minseong Kim and Jaemin Jeong and Sooyong Park},
+ title = {From product lines to self-managed systems: an architecture-based runtime reconfiguration framework},
+ journal = {SIGSOFT Softw. Eng. Notes},
+ volume = {30},
+ number = {4},
+ year = {2005},
+ issn = {0163-5948},
+ pages = {1--7},
+ publisher = {ACM},
+ address = {NY, USA},
+ }
+
+@inproceedings{trickle,
+ author = {Philip Levis and Neil Patel and David Culler and Scott Shenker},
+ title = {Trickle: a self-regulating algorithm for code propagation and maintenance in wireless sensor networks},
+ booktitle = {Proc. of the 1st conf. on Symposium on Networked Systems Design and Implementation},
+ year = {2004},
+ pages = {2--2},
+ location = {San Francisco, California},
+ publisher = {USENIX Association},
+ address = {Berkeley, CA, USA},
+ }
+
+@INPROCEEDINGS{dunkels04contiki,
+  AUTHOR = {Adam Dunkels and Bj�rn Gr�nvall and Thiemo Voigt},
+  TITLE = {Contiki - a Lightweight and Flexible Operating
+                  System for Tiny Networked Sensors},
+  YEAR = 2004,
+  MONTH = Nov.,
+  BOOKTITLE = {Proc. of the First IEEE Workshop on Embedded Networked Sensors},
+  ADDRESS = {Tampa, USA},
+  ABSTRACT = {Wireless sensor networks are composed of large
+                  numbers of tiny networked devices that communicate
+                  untethered. For large scale networks it is important
+                  to be able to dynamically download code into the
+                  network. In this paper we present Contiki, a
+                  lightweight operating system with support for
+                  dynamic loading and replacement of individual
+                  programs and services. Contiki is built around an
+                  event-driven kernel but provides optional preemptive
+                  multithreading that can be applied to individual
+                  processes. We show that dynamic loading and
+                  unloading is feasible in a resource constrained
+                  environment, while keeping the base system
+                  lightweight and compact.},
+  PPT = {http://www.sics.se/~adam/slides/contiki-emnets.ppt}
+}
+
+@book{generative,
+ author = {Krzysztof Czarnecki and Ulrich W. Eisenecker},
+ title = {Generative programming: methods, tools, and applications},
+ year = {2000},
+ isbn = {0-201-30977-7},
+ publisher = {ACM Press/Addison-Wesley Publishing Co.},
+ address = {NY, USA},
+ }
+
+@inproceedings{cmac,
+ author = {Lucas F. Wanner and Augusto Born de Oliveira and Ant\^{o}nio A. Fr\"{o}hlich},
+ title = {Configurable Medium Access Control for Wireless Sensor Networks},
+ booktitle = {Proc. of the International Embedded System Symposium},
+ year = {2007},
+ pages = {401-410},
+ location = {Irvine, CA},
+ address = {Irvine, CA, USA},
+ }
+
+@inproceedings{mantis,
+ author = {H. Abrach and S. Bhatti and J. Carlson and H. Dai and J. Rose and A. Sheth and B. Shucker and J. Deng and R. Han},
+ title = {MANTIS: system support for multimodAl NeTworks of in-situ sensors},
+ booktitle = {Proc. of the 2nd ACM int. conf. on Wireless sensor networks and applications},
+ year = {2003},
+ isbn = {1-58113-764-8},
+ pages = {50--59},
+ location = {San Diego, CA, USA},
+ publisher = {ACM},
+ address = {NY, USA},
+ }
+
+@inproceedings{timer,
+ author = {Giovani Gracioli and Danillo Santos and Roberto de Matos and Lucas Wanner and Ant\^{o}nio A. Fr\"{o}hlich},
+ title = {One-shot Time Management Analysis in EPOS},
+ booktitle = {SCCC '08: Proc. of the XXVII International Conference of the Chilean Society of Computer Science},
+ year = {2008},
+ publisher = {IEEE},
+ address = {Punta Arenas, Chile},
+ note = {To appear},
+ }
+

@@ -1,0 +1,40 @@
+%-------------------------------------------------------------------------------
+% DISTRIBUIÇÃO DOS SERVIDORES
+%-------------------------------------------------------------------------------
+\section{Distribuição dos Servidores}
+
+O {\sdfs} foi desenhado de forma a possibilitar vários esquemas de distribuição, sem que se precise recompilar ou religar o sistema. Todas as alterações necessárias para reconfigurar o sistema se concentram no sistema de comunicações e não se propagam pelo resto do sistema. Existem três configurações de especial importância que serão discutidas a seguir: computadores isolados, multicomputadores e computadores conectados em rede.
+
+
+\subsection{Computadores Isolados}
+
+Apesar de ser um sistema de arquivos distribuído, nada impede que o {\sdfs} rode em um único computador isolado. Neste caso, o sistema não apresenta qualquer nível de distribuição, pois todos os arquivos e servidores acessíveis são locais. Esta configuração pode ser vista na figura \ref{alone}.
+
+\putpict {../fig/alone.ps} {7.2} {4.5} {O {\sdfs} em um computador isolado} {alone}
+
+
+\subsection{Multicomputadores}
+
+Para a análise da distribuição do {\sdfs} em um multicomputador, considerar-se-á que cada servidor executará em um processador distinto, o que pode ser visto na figura \ref{multi}. Um multicomputador é visto como um único {\host}, sendo que seus processadores compartilham um espaço comum de {\ports}. Desta forma, qualquer solicitação de serviço será local, porém, envolvendo a troca de mensagens entre os nodos processadores. A responsabilidade de associar um determinado {\port} a um nodo é responsabilidade do sistema de comunicações do multicomputador.
+
+\putpict {../fig/multi.ps} {11} {6} {O {\sdfs} em um multicomputador} {multi}
+
+Reconfigurações dinâmicas do multicomputador, como migrações de processos, podem ser feitas, no que diz respeito ao {\sdfs}, simplesmente redefinindo-se as tabelas de localização de servidores em cada um dos nodos ou no nodo de controle, dependendo da arquitetura da máquina.
+
+ 
+\subsection{Redes de Computadores}
+
+Um configuração comum para o sistema é distribuí-lo através de {\hosts} conectados por uma rede de computadores. Para tal, basta definir-se o estado inicial das tabelas de localização de servidores de acordo com a distribuição desejada. Duas configurações são de especial interesse: {\hosts} sem disco, que acessam exclusivamente arquivos remotos; {\hosts} com disco que compartilham arquivos com outros {\hosts}.
+
+\putpict {../fig/net.ps} {9} {8} {O {\sdfs} em uma rede de computadores} {net}
+
+A figura \ref{net} mostra o {\sdfs} configurado de forma a permitir o compartilhamento de arquivos entre dois {\hosts} de uma rede. Nesta primeira versão do {\sdfs}, um serviço sobre um arquivo remoto é encaminhado ao {\host} que contém o arquivo tão logo se conheça a sua localização. Por exemplo, um cliente no {\host} I solicita o serviço "open" para um arquivo localizado no {\host} II. A solicitação é enviada ao servidor de diretórios do {\host} I, que retornará o identificador do arquivo do {\host} II. Se o cliente solicitar agora o serviço "read" fornecendo o identificador previamente obtido, a mensagem será enviada diretamente para o servidor de arquivos do {\host} II. Isso acontece devido ao mecanismo de localização de servidores descrito anteriormente, que extrai do próprio identificador do arquivo a localização do respectivo servidor.
+
+Uma segunda técnica para manter o serviço no {\host} local até o nível físico poderia ser implementada dando-se preferência aos servidores locais. Desta forma, a cadeia de solicitações de serviço gerada por um cliente seria local até o nível dos servidores de dispositivo, implicando na buferização local de dados remotos e, conseqüentemente, aumentando o desempenho do sistema. Essa técnica não foi adotada pelo {\sdfs} por dois motivos: a complexidade do sistema aumentaria bastante, pois seria necessário a definição de um esquema para garantir a propagação de um bloco de dados alterado em um servidor de {\buffers} para os outros servidores de {\buffers} que mantivessem uma cópia do mesmo bloco; e o crescente aumento da velocidade de transmissão de dados em redes locais atenua e talvez até compense a perda de desempenho.
+
+\putpict {../fig/diskless.ps} {9} {7.5} {O {\sdfs} em uma rede de computadores com {\hosts} sem disco} {diskless}
+
+A figura \ref{diskless} mostra o {\sdfs} rodando uma rede com três {\hosts}, dois dos quais sem disco. A execução do servidor de diretórios em um {\host} sem disco é opcional, caso decida-se executá-lo, deve-se fornecer um identificador de arquivo remoto para ser o diretório raiz da árvore de diretórios. Esse identificador deve ser obtido a priori, pois o servidor ainda não está executando, sendo impossível a tradução de nomes de arquivos. A vantagem de se rodar o servidor de diretórios em um {\host} sem disco é a manutenção local de algumas estruturas, reduzindo um pouco o tráfego de mensagens entre os {\hosts}. De qualquer maneira, toda a manipulação de dados de usuário será solicitada ao {\host} que contém o disco. Outra opção é não se ter qualquer um dos servidores do {\sdfs} executando localmente, bastando definir-se uma tabela de localização de servidores adequada. O {\host} III da figura \ref{diskless} exemplifica esta situação.
+
+Executar os servidores de arquivos, de {\buffers} ou de dispositivos em um {\host} sem disco é absolutamente sem propósito. Nenhum identificador de arquivo fará referência a um {\host} sem disco, logo, os servidores nunca receberão solicitações de serviço.
+

@@ -1,0 +1,115 @@
+\documentclass[brasileiro,11pt]{letter}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{babel}
+\usepackage[top=.5in,bottom=.5in,left=1in,right=1in,noheadfoot]{geometry}
+\usepackage{graphicx}
+
+\address{\sffamily
+  \begin{tabular}{rr}
+    Prof.~Dr.~Antônio Augusto Fröhlich & \raisebox{-0.9cm}[0pt][0pt]{\resizebox*{!}{1.2cm}{\includegraphics{/home/guto/etc/logos/lisha}}}\\
+    Universidade Federal de Santa Catarina &\\
+    Laboratório de Integração de Software e Hardware  &\\
+    \multicolumn{2}{r}{CP 476, 88040-900 Florianópolis, SC}\\
+    \multicolumn{2}{r}{Phone: +48 3721-9516}\\
+    \multicolumn{2}{r}{E-Mail: guto@lisha.ufsc.br}\\
+    \multicolumn{2}{r}{WWW: http://lisha.ufsc.br/$\sim$guto}\\
+    \\
+    \multicolumn{2}{r}{\today}
+  \end{tabular}
+}
+
+\date{}
+
+\signature{
+  \begin{center}
+   \raisebox{-.9cm}[0pt][0pt]{\includegraphics[scale=1]{/home/guto/personal/signature}}\\
+    \hrulefill\\
+    Antônio Augusto Fröhlich
+  \end{center}
+}
+
+
+\begin{document}
+
+\begin{letter}{Revista de Ciência \& Tecnologia\\
+    Presidente da Comissão Científico-Editorial\
+    Prof.~Dr.~Valmir Eduardo Alcarde}
+\opening{Prezado Prof. Alcarde,}
+\setlength{\parskip}{1.5ex}
+
+Encaminhamos em anexo a versão revisada do artigo ``Interactive Digital
+TV for Developing Countries: a software/hardware perspective'', de
+autoria de Antônio Augusto Fröhlich e Valter Roesler. 
+
+Antes de comentarmos sobre os pareceres dos revisores, gostaríamos de
+agradecer a dedicação e o empenho dedicados ao artigo. As recomendações
+foram todas atendidas, conforme pode ser visto na versão com alterações
+destacadas. Em particular, o comentário do primeiro revisor sobre a
+forma empírica como as questões de desempenho da linguagem JAVA são
+tratados no artigo nos levou a incluir uma referência a um artigo que
+reporta análises detalhadas do desempenho desta em sistemas embarcados
+de tempo real. Já a sugestão do segundo revisor sobre o middleware GINGA
+foi abordada com a adição de informações sobre seus componentes e
+contexto de utilização.
+
+Atenciosamente,
+
+\closing{~}
+
+\end{letter}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

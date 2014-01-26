@@ -1,0 +1,158 @@
+\documentclass{ssi2001}
+
+\begin{document}
+
+\pagenumbering{}
+
+\title{\textbf{JAVA E SISTEMAS EMBUTIDOS}}%
+\author{{\bf Felipe Pompeo Pereira and Antônio Augusto Fröhlich} \\
+     Laboratório de Integração Software Hardware \\
+Universidade Federal de Santa Catarina \\ 
+CP 476 - 88049-900 Florianópolis - SC \\
+\em{\{pompeo,guto\}@lisha.ufsc.br}}
+
+\resumo{Dada as atuais limitações na reutilização de \textit{softwares} desenvolvidos para sistemas embutidos, Java surge como uma possível solução. No entanto, a principal qualidade de Java, o grande número de abstrações, gera diversas dificuldades  quando se pensa em sistemas com severas restrições de hardware. 
+Este artigo faz uma breve apresentação sobre as técnicas de execução utilizadas pelas máquinas virtuais até o presente momento, descreve alguns padrões de Java para sistema embutidos  e apresenta as limitações da KVM, máquina virtual da SUN voltada para este segmento. 
+}
+
+\abstract{FAZER DEPOIS DA REVISÃO DO GUTO}
+
+\maketitle
+
+\section{INTRODUÇÃO}
+
+Aproximadamente 98\% dos mais de 8 bilhões de processadores produzidos no ano 2000 foram utilizados em sistemas embutidos \cite{TEN00}. Se  um período mais amplo for observado é possível perceber um crescimento contínuo na produção e na utilização de processadores voltados para este segmento, pois eles, a cada dia, tornam-se parte integrante de aparelhos que vão desde \textit{set-top boxes}, cafeteiras e até pares de tênis. 
+ 
+ Os dispositivos que possuem processadores embutidos geralmente são produzidos em  famílias de produtos com características similares. Os \textit{softwares} são freqüentemente desenvolvidos especificamente para cada produto, o que, muitas vezes, impede o reuso entre os produtos da mesma família. Além disso a grande maioria  dos \textit{softwares} para sistemas embutidos é escrito em uma mistura de C com \textit{assembly} e o seu projeto, muitas vezes, reflete as entidades de hardware ao invés do domínio da aplicação, diminuindo o reuso, aumentando o custo de desenvolvimento e ampliando o tempo de lançamento de um produto no mercado\cite{SBC03}.
+  
+Java é uma ecolha natural para para o cenário acima citado, pois traz soluções para uma série de problemas recorrentes no desenvolvimento de software, tais como portabiliade, concorrência, sincronização, reuso e componentização. Ironicamente as vantagens de Java são geradoras dos principais obstáculos para sua utilização em sistemas embutidos\cite{KCS00}:  o consumo exagerado de recursos e a imprevisibilidade temporal. 
+
+%são resultantes do alto grau de abstrações de hardware oferecidos pela linguagem \cite{KCS00}. 
+ 
+ Este artigo apresenta, de maneira resumida, as técnicas de execução utilizadas até o momento pelas máquinas virtuais Java, os padrões de Java para sistemas embutidos, a máquina virtual da SUN com foco em sistemas com severas restrições de hardware e as limitações das atuais máquinas virtuas para sistemas embutidos.  
+
+ \section{TÉCNICAS DE EXECUÇÃO}
+
+  Em \cite{KCS00} existe uma descrição detalhada de cada técnica existente para a execução de programas escritos em Java. De maneira sintética é possível agrupar as técnicas nos seguintes grupos:
+  \begin{itemize}
+\item Processadores Java;
+\item Tradução para intruções de máquina equivalentes;
+\item Interpretação;
+\end{itemize}
+
+Apesar dos processadores Java proporcionarem ganhos significativos de performance, eles não possibilitam a execução de aplicativos escritos em outras linguagens, impossibilitando a reutilização dos diversos softwares já desenvolvidos. Essa característica dificulta a produção em massa dos processadores Java, diminuindo  sua competitividade em relação aos processadores genéricos.
+
+A tradução dos \textit{bytecodes} normalmente ocorre por compilação direta\footnote{Também conhecida como \textit{Ahead-of-time compiler}} ou por compilação em tempo de execução\footnote{Também conhecida como \textit{JIT} - Just-in-time compiler}. A compilação direta oferece um alto desempenho, mas impõe a perda da portabilidade e o comsumo exagerado de memória, como demonstrado em \cite{BCG03,Sec04}. Na tentativa de suprir essas deficiências a compilação em tempo de execução  provê um bom desempenho sem a perda de portabilidade, contudo exige uma grande quantidade de memória além de sua implementação ser mais complexa, dificultando o porte da MV\footnote{Máquina Virtual} para outras arquiteturas\cite{x}. Existe também o conceito de máquinas virtuais híbridas\cite{kak00}, que unem a compilação em tempo de execução e a interpretação, buscando um equilíbrio entre utilização de memória e desempenho.
+
+A interpretação é a maneira tradicional e mais simples para a execução dos \textit{bytecodes}. Esta técnica  possui diversas vantagens atrativas para SE\footnote{Sistemas Embutidos}, tais como o baixo comsumo de memória, simplicidade na implementação e consequentemente facilidade no porte para outras arquiteturas. Por essa razão é utilizada por MV voltadas para sistemas profundamente embutidos. 
+
+
+
+%\section{JAVA}
+
+% Java é uma escolha natural para o cenário acima citado, pois é uma linguagem orientada a objetos  projetada para ser independente de plataforma e é baseada em uma máquina virtual. Além disso, possui uma série de vantagens bem conhecidas, como o coletor de lixo, o tratamento de exceções e, por último, Java tem se tornado amplamente difundido e utilizado por desenvolvedores no mundo inteiro. 
+% No entanto, as vantagens de Java são geradoras dos principais obstáculos para sua utilização em sistemas embutidos. O baixo desempenho e o consumo exagerado de memória são resultantes do alto grau de abstrações de hardware oferecidos pela linguagem \cite{KCS00}.
+% As  seções a seguir descrevem as técnicas de execução de \textit{bytecodes} pela máquina virtual e os padrões de Java para o mundo de sistemas embutidos.
+
+%\subsection{TÉCNICAS DE EXECUÇÃO}
+%A interpretação é a maneira tradicional e mais simples para a execução dos \textit{bytecodes}. Ela simula o funcionamento de um processador de bytecodes, executando um programa, em um processador real. Esta técnica  possui diversas vantagens atrativas para o ambiente de sistemas embutidos\cite{bcg03}: 
+%\begin{itemize}
+%\item O baixo consumo de memória se comparados com compiladores em tempo de execução\footnote{ \textit{JIT} - Just-in-time compiler};
+%\item Simplicidade na implementação, manutenção e conseqüentemente no porte para outras arquiteturas;
+%\end{itemize}
+
+%A KVM, máquina virtual da SUN para dispositivos com severas restrições de hardware, utiliza a interpretação para a execução de %bytecodes. A principal desvantagem desta técnica é o baixo desempenho de execução.
+
+%Uma alternativa para a interpretação é a tradução dos \textit{bytecodes} para instruções de máquina equivalentes. Essa tradução normalmente ocorre de duas maneiras, por compilação direta\footnote{Também conhecida como \textit{Ahead-of-time compiler}} ou em tempo de execução, que daqui para frente serão referenciadas como AoT e JIT, respectivamente. 
+%A compilação direta traduz os bytecodes para instruções de uma máquina específica. Essas instruções são executadas diretamente pelo processador alvo, fato que melhora muito o desempenho, apesar de resultar em perda de portabilidade e na impossibilidade de carga dinâmica de classes. A compilação em tempo de execução ocorre logo após um método ser chamado, ao invés de executá-lo a máquina virtual traduz suas instruções para código nativo, que é executado no lugar do bytecode. Esta técnica caracteriza-se pelo  bom desempenho, sem a perda da portabilidade.  No entanto, exige uma grande quantidade de memória, algo que é muito precioso no mundo de sistemas embutidos. Existe também as máquinas virtuais híbridas\cite{kak00}, que unem JIT e interpretação, buscando um equilíbrio entre utilização de memória e desempenho.
+
+
+%Outra alternativa possível é o processador Java, que implementa uma máquina virtual diretamente em um \textit{chip} de silício. A velocidade de execução é comparável a qualquer outro processador, além disso o problema com o consumo excessivo de memória é solucionado, pois somente os bytecodes a serem executados serão guardados em memória. Atualmente existem diversos processadores Java disponíveis no mercado, alguns exemplos são: \textit{picoJava-2 }, \textit{SUN microJava 701}, \textit{Patriot PSC1000}\cite{KCS00}.   Apesar dos processadores Java proporcionarem ganhos significativos de performance eles não possibilitam a execução de aplicativos escritos em outras linguagens, impossibilitando a reutilização dos diversos softwares já desenvolvidos. Essa característica dificulta a produção em massa dos processador Java, fato que tornaria o seu custo mais competitivo em relação aos processadores genéricos. 
+
+
+\subsection{PADRÕES PARA SISTEMAS EMBUTIDOS}
+
+Tentando melhorar o foco de atuação da tecnologia Java a SUN, através do JCP, especificou diversos padrões que definem e facilitam a reusabilidade de Java em cada segmento do mercado.  Os padrões de Java relacionados a sistemas embutidos são:
+
+\begin{itemize}
+\item Cartão Java: é voltado para cartões inteligentes com processadores 8/16/32 bits com aproximadamente 1K de RAM, 8K de EEPROM e 16K de ROM. As bibliotecas utilizadas são específicas para o cartão Java e o bytecode  possui um formato especial. Não existe coletor de lixo, os objetos são alocados estaticamente; 
+\item J2ME/CLDC É desenhado para PDAs, celulares e  processadores com no mínimo 16 bits e 128 Kb de RAM\cite{KVM03}. Utiliza bibliotecas similares a J2SE, porém adaptadas para sistemas embutidos;
+\item J2ME/CDC É desenhada para sistemas com processadores de 32 bits e com no mínimo 2 MB de RAM. Utiliza as mesmas bibliotecas do J2SE.
+\item RTSJ\cite{RTS05} esta é a especificação de Java para sistemas de tempo real. Ela altera a linguagem Java incluindo características que possibilitam o escalonamento em tempo real, a preempção de threads e o acesso direto a memória física. Sistemas embutidos muitas vezes realizam tarefas de tempo real. 
+\end{itemize}
+
+
+ Na tentativa de fomentar a utilização de Java em sistemas embutidos  a SUN disponibiliza um pacote, contendo \textit{softwares} e documentações, que é a implementação de referência da especificação J2ME/CLDC. Neste pacote existe uma máquina virtual voltada para o segmento de sistemas embutidos com severas restrições de hardware, a KVM, que segundo a documentação, permitiria armazenar a máquina virtual, com o \textit{classpath}, em aproximadamente 128 KB. No entanto, como será visto a seguir, o tamanho mínimo da KVM é muito maior que os 128 Kb, fato já mencionado em \cite{BBM00}.  
+ 
+\section{KVM}\label{secao:kvm}
+
+A KVM\cite{KVM03} é uma máquina virtual projetada e construída buscando a baixa utilização de memória e portabilidade, 
+por esta razão utiliza a interpretação para a execução de bytecodes. Como toda máquina virtual ela precisa de um conjunto de classes Java que servirão de base para execução de qualquer aplicativo, esse conjunto é denominado de \textit{classpath}. O \textit{classpath} da KVM sofreu diversas alterações, se comparado ao da J2SE, buscando a melhoria de performance e a diminuição da utilização de memória. Além disso, o grande diferencial da KVM é a possibilidade de realizar a carga estática do \textit{classpath}. Isso é feito através de uma ferramenta, chamada JCC,  que transforma os \textit{bytecodes} em constantes do C, permitindo que o código C seja ligado diretamente à KVM em tempo de compilação. 
+
+Sistemas embutidos geralmente são projetados para executar uma tarefa específica e utilizam um hardware que oferece poucos recursos. Partindo deste princípio, uma máquina virtual que utiliza um \textit{classpath} padrão, sem nenhuma modificação, normalmente possui diversas classes que nunca serão executadas. Fato que é pouco inteligente em um mundo com tantas restrições. O ideal seria a criação de uma \textit{classpath} mínimo, específico para cada aplicação,  contendo somente as classes e os métodos utilizados.
+
+\section{CLASSPATH MÍNIMO}
+
+
+Esta seção descreve o experimento realizado na busca de um \textit{classpath} mínimo. O ambiente utilizado foi um \textit{AMD Athlon 64  3200+}, rodando \textit{Linux} e com o \textit{gcc 3.4.3} . 
+
+%O primeiro passo foi compilar a KVM e ligá-la estaticamente ao \textit{classpath} padrão\footnote{classpath padrão corresponde %a todas as classes disponibilizadas na implementação de referência da J2ME/CLDC}. O arquivo resultante ficou com tamanho de %241.116 \textit{bytes}.  A KVM, sem o \textit{classpath}, possui tamanho de 138.005 \textit{bytes}.
+
+
+A figura \ref{fig:classes} apresenta três aplicações. Elas foram escolhidas por serem simples e demonstrarem que diversas classes do \textit{classpath} nunca são utilizadas.
+
+
+\begin{figure}[hbttp]
+\begin{footnotesize}
+\lstset{language=Java,frame=lrtb}
+\lstset{basicstyle=\ttfamily}
+\lstset{commentstyle=\textit}
+\lstinputlisting{fig/classes.txt}
+\caption{Aplicações utilizadas no experimento.}
+\label{fig:classes}
+\end{footnotesize}
+\end{figure}
+
+
+A classe \textit{HelloWorld} implementa o método \textit{main} e escreve um texto na saída padrão, utilizando a classe \textit{System}.  A classe \textit{AddMain} também implementa o método \textit{main}, porém ela realiza somente uma adição, ou seja, não utiliza a classe \textit{System}. Por último, a classe \textit{Add} também faz uma adição, no entanto esta operação é implementada em um método comum. 
+
+Para determinar quais classes são invocadas por uma aplicação específica foi utilizado um aplicativo chamado ProGuard\cite{PRO05}. Este utilitário  analisa o \textit{bytecode} de uma classe e filtra o \textit{classpath}, deixando somente as classes e métodos utilizados.
+
+ Cada uma das classes descritas pela figura \ref{fig:classes} foi utilizada como ponto de partida para o ProGuard definir quais classes do \textit{classpath} eram realmente utilizadas pela aplicação. O resultado pode ser observado na tabela  \ref{tbl:tamanhoClasspath}
+
+
+\begin{table}[htb]
+\begin{center}
+\input{tbl/tamanhoClasspath.tbl}
+\end{center}
+\caption{Comparação entre os \textit{classpath}s}
+\label{tbl:tamanhoClasspath}
+\end{table}
+    
+
+Apesar das classes \textit{Add} e \textit{AddMain} implementarem a mesma operação existe uma diferença muito  grande no tamanho dos seus \textit{classpaths}. Esta diferença ocorre porque a classe \textit{AddMain} implementa o método \textit{main}, que  obrigatoriamente possui como argumento a classe \textit{String}, mesmo essa nunca sendo utilizada. Essa obrigatoriedade demonstra certa falta de flexibilidade, pois em ambientes com severas restrições de espaço não é possível utilizar inutilmente 3.401 \textit{bytes}. 
+
+Para a execução da aplicação \textit{HelloWorld}  é necessário toda a hierarquia de classes da classe \textit{System}, por essa razão o número de classes necessário para a execução dessa aplicação é bem maior se comparado à aplicação \textit{AddMain}.
+
+Não é possível executar nenhuma das três aplicações através da KVM utilizando o \textit{classpath} gerado pelo ProGuard. A KVM apresenta dependência de diversas classes não utilizadas pela aplicação. Um exemplo é a execução da classe \textit{AddMain}, que apesar de realizar apenas uma adição exige a inclusão da classe \textit{System} e toda a sua hierarquia de classes. 
+ 
+O tamanho do classpath mínimo atingido, suprindo as dependências da KVM, pode ser observado na figura \ref{tbl:tamanhoClasspath}. Unindo este classpath à máquina virtual, que no caso da KVM possui 138.005 \textit{bytes}, chega-se a tamanho proibitivo. Uma alternativa para diminuir o tamanho total\footnote{máquina virtual e \textit{classpath}} da KVM e melhorar sua performance é  utilizar o JCC como descrito na seção \ref{secao:kvm}. No entanto esse aplicativo apresenta dependências similares as acima descritas. A KVM compilada e ligada estaticamente ao \textit{classpath} padrão\footnote{classpath padrão corresponde a todas as classes disponibilizadas na implementação de referência da J2ME/CLDC} fica com tamanho de 241.116 \textit{bytes}.  
+
+ 
+\section{CONCLUSÃO}
+
+Java é uma tecnologia que apresenta grandes vantagens pois esconde a complexidade dos sistemas atrás de um grande conjunto de abstrações bem definidas\cite{KCS00}. Ambientes que dispõem de poder de processamento e grandes quantidades de memória conseguem lidar facilmente com essas abstrações, no entanto sistemas embutidos com severas restrições de hardware não conseguem executar aplicativos escritos em Java em sua plenitude, devido a uma falta de suporte adequado da máquina virtual, do sistema operacional e da própria linguagem Java.
+
+A especificação RTSJ tenta solucionar os problemas gerados pela especificação J2SE, oferecendo maior flexibilidade na alocação e mapeamento de memória, além de ter diversos avanços no escalonamento de \textit{threads} para tempo real.
+
+Uma máquina virtual voltada para sistemas embutidos com severas restrições deve suportar a RTSJ. Além disso, seu projeto deve evoluir de um bloco monolítico para algo que faça Java atender os requisitos específicos de sistemas embutidos. Uma alternativa seria uma máquina virtual orientada à aplicação, que tenha inteligência suficiente de possuir somente componentes realmente  utilizados. Essa MV\footnote{Máquina virtual} seria montada com base nos requisitos da aplicação, permitindo que o ambiente  de execução Java tivesse um tamanho reduzido e um melhor desempenho, sem afetar a sua funcionalidade.
+
+
+
+% ----------------------------------------------------------------
+%\input{../dissertacaoPompeo.bib}
+\bibliographystyle{ABNT-20020112}
+\bibliography{../dissertacaoPompeo}
+
+\end{document}
+% ----------------------------------------------------------------

@@ -1,0 +1,267 @@
+\documentclass[final,1p,times]{elsarticle}
+% \documentclass[final,3p,times,twocolumn]{elsarticle}
+
+\usepackage[english]{babel}	% for multilingual support
+
+\usepackage[utf8]{inputenc} % for use utf8
+\usepackage{graphicx}
+
+\usepackage[caption=false]{subfig} % Para usar duas ou mais figuras como uma só.
+
+\usepackage{algorithmic}
+\usepackage{algorithm}
+
+\usepackage{verbatim} % Para usar comentários em bloco.
+
+
+% ------------------------------------------------------------------------------
+
+% Command to use code as figure ------------------------------------------------
+\usepackage{listings}
+\lstset{keywordstyle=\bfseries, flexiblecolumns=true}
+\lstloadlanguages{[ANSI]C++,HTML}
+\lstdefinestyle{prg} {basicstyle=\small\sffamily, lineskip=-0.2ex, showspaces=false}
+
+% header C
+\newcommand{\headerc}[3][tbp]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=C,style=prg]{fig/#2.h}
+   \caption{#3\label{headerc:#2}}
+ \end{figure}
+}
+
+% C
+\newcommand{\progc}[3][tbp]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=C,style=prg]{fig/#2.c}
+   \caption{#3\label{progc:#2}}
+ \end{figure}
+}
+
+% header C++
+\newcommand{\headercpp}[3][tbp]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=C++,style=prg]{fig/#2.hh}
+   \caption{#3\label{headercpp:#2}}
+ \end{figure}
+}
+
+
+% C++
+\newcommand{\progcpp}[3][tbp]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=C++,style=prg]{fig/#2.cc}
+   \caption{#3\label{progcpp:#2}}
+ \end{figure}
+}
+
+% Java
+\newcommand{\progjava}[3][tbp]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=Java,style=prg]{fig/#2.java}
+   \caption{#3\label{progjava:#2}}
+ \end{figure}
+}
+
+
+% Para colocar 2 programas como um só - dispostos horizontalmente
+\newcommand{\multprogjavatwoh}[5][htbp]{
+\begin{figure*}[#1]
+  \centering
+
+\subfloat[]{\label{fig:#2}\lstinputlisting[language=Java,style=prg
+]{fig/#2.java}}
+
+\subfloat[]{\label{fig:#3}\lstinputlisting[language=Pascal,
+style=prg]{fig/#3.lua}}
+  \caption{#5}
+  \label{fig:#4}
+\end{figure*}
+}
+% e.g.
+%\multfigtwoh{fig_plot_time_orig}{fig_plot_time_mod}
+%{fig_plot_time_all}
+%{Original (a) and modified (b) benchmarks execution time comparison.}
+
+
+% Lua
+\newcommand{\proglua}[3][tbp]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=Pascal,style=prg]{fig/#2.lua}
+   \caption{#3\label{proglua:#2}}
+ \end{figure}
+}
+
+% KCL
+\newcommand{\progkcl}[3][tbp]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=C++,style=prg]{fig/#2.kcl}
+   \caption{#3\label{progkcl:#2}}
+ \end{figure}
+}
+
+% OCL
+\newcommand{\progocl}[3][tbp]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=C++,style=prg]{fig/#2.ocl}
+   \caption{#3\label{progocl:#2}}
+ \end{figure}
+}
+
+% OIL
+\newcommand{\progoil}[3][tbp]{
+ \begin{figure}[#1]
+     \lstinputlisting[language=C++,style=prg]{fig/#2.oil}
+   \caption{#3\label{progoil:#2}}
+ \end{figure}
+}
+
+% ------------------------------------------------------------------------------
+
+% Commands to insert figures ---------------------------------------------------
+\newcommand{\figu}[4][ht]{
+  \begin{figure}[#1] {\centering\scalebox{#2}{\includegraphics{fig/#3}}\par}
+    \caption{#4\label{fig:#3}}
+  \end{figure}
+}
+
+\newcommand{\fig}[4][ht]{
+  \begin{figure}[#1] {\centering\scalebox{#2}{\includegraphics{fig/#3}}\par}
+    \caption{#4\label{fig:#3}}
+  \end{figure}
+}
+% fig usage:
+% \fig{<scale>}{<file>}{<caption>}
+% e.g.: \fig{.4}{uml/uml_comportamental_dia}{Diagramas comportamentais da UML}
+% The figure label will be "fig:" plus <file>.
+% The figure file must lie in the "fig" directory.
+
+\newcommand{\figtwocolumn}[4][ht]{
+  \begin{figure*}[#1] {\centering\scalebox{#2}{\includegraphics{fig/#3}}\par}
+    \caption{#4\label{fig:#3}}
+  \end{figure*}
+}
+
+\newcommand{\figb}[4][hb]{
+  \begin{figure}[#1] {\centering\scalebox{#2}{\includegraphics{fig/#3}}\par}
+    \caption{#4\label{fig:#3}}
+  \end{figure}
+}
+
+% Para colocar 2 figuras como uma só - dispostas horizontalmente
+\newcommand{\multfigtwoh}[6][htbp]{
+\begin{figure*}[#1]
+  \centering
+  \subfloat[]{\label{fig:#3}\scalebox{#2}{\includegraphics{fig/#3}}}
+  \subfloat[]{\label{fig:#4}\scalebox{#2}{\includegraphics{fig/#4}}}
+  \caption{#6}
+  \label{fig:#5}
+\end{figure*}
+}
+% e.g.
+%\multfigtwoh{.65}{fig_plot_time_orig}{fig_plot_time_mod}
+%{fig_plot_time_all}
+%{Original (a) and modified (b) benchmarks execution time comparison.}
+
+% Para colocar 2 figuras como uma só - dispostas verticalmente
+\newcommand{\multfigtwov}[6][htbp]{
+\begin{figure}[#1]
+  \centering
+  \subfloat[]{\label{fig:#3}\scalebox{#2}{\includegraphics{fig/#3}}}\\
+  \subfloat[]{\label{fig:#4}\scalebox{#2}{\includegraphics{fig/#4}}}
+  \caption{#6}
+  \label{fig:#5}
+\end{figure}
+}
+% e.g.
+%\multfigtwov{.35}{fig_epos_mem_framework}{fig_epos_mem_framework_spm}
+%{fig_epos_mem_framework_all}
+%{EPOS memory mapping before (a) and after (b) using the new framework}
+
+
+% Alguns outros comandos:
+\newcommand{\lua}{\textsc{Lua}}
+\newcommand{\java}{\textsc{Java}}
+\newcommand{\python}{\textsc{Python}}
+\newcommand{\ruby}{\textsc{Ruby}}
+
+
+% ------------------------------------------------------------------------------
+\journal{Science of computer programming}
+
+\begin{document}
+
+\begin{frontmatter}
+
+% Títulos já usados em papers publicados sobre o mesmo tema
+% + Método para Abstração de Componentes de Hardware para Sistemas Embarcados (2012:Dissertação)
+% + Abstracting hardware devices to embedded Java applications (2011:IADIS)
+% + Abstraindo dispositivos de hardware para aplicações Java embarcadas (2011:SBESC)
+% título em inglês para o IEEE: Interfacing Hardware Devices to Embedded Java
+% + Interfacing Operating Systems Components with Embedded Java Applications (2009:I2TS)
+
+% \title{MPL binding generation as an AOP problem}
+% \title{Efficient generation of wrappers for hardware devices in the embedded
+% system scenario}
+% \title{MPL Binding Generation for Embedded Systems as Aspect Weaving}
+% \title{Managed Programming Languages Binding Generation for Embedded Systems Components}
+\title{Binding Embedded System Components in Managed Programming Languages}
+
+\author{Mateus Krepsky Ludwich and Antônio Augusto Fröhlich}
+
+\address{Laboratory for Software and Hardware Integration (LISHA)\\
+Federal University of Santa Catarina (UFSC)\\
+Florianópolis, Brazil\\
+\{mateus,guto\}@lisha.ufsc.br
+}
+
+
+\begin{abstract}
+\input{tex/abstract}
+\end{abstract}
+
+\begin{keyword}
+Binding Generation, Aspect-Oriented Programming, Embedded Systems, Foreign Function Interface
+
+\end{keyword}
+
+\end{frontmatter}
+
+
+%-------------------------------------------------------------------------------
+% Section <Introduction>
+\input{tex/intro}
+
+% ------------------------------------------------------------------------------
+% Section <SOTA>
+\input{tex/relat}
+
+% ------------------------------------------------------------------------------
+% Section <DERCS>
+\input{tex/dercs}
+
+% ------------------------------------------------------------------------------
+% Section <proposal>
+\input{tex/proposal}
+
+% ------------------------------------------------------------------------------
+% Section <Evaluation>
+\input{tex/eval}
+\input{tex/dmec_app}
+% \input{tex/uart_app}
+% \input{tex/temp_app}
+
+% ------------------------------------------------------------------------------
+% Section <Discussion>
+\input{tex/conclusions}
+
+% ------------------------------------------------------------------------------
+% References
+\bibliographystyle{elsarticle-num}
+\bibliography{hw,os,pl,mm,se}
+
+
+\end{document}
+
+%------------------------------------------------------------------------------
+

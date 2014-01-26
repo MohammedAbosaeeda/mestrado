@@ -1,0 +1,128 @@
+\section{Introduction}\label{sec:intro}
+
+% ES x PM 
+% - Motivation: prolong battery life and reduce heat dissipation
+Power management is a subject of great relevance for two large groups of
+embedded systems: those that operate disconnected from the power grid,
+taking their power supply from batteries, photovoltaic cells, or from a
+combination of technologies that yet impute limitations on energy
+consumption; and those that face heat dissipation limitations, either
+because they depend on high-performance computations or because they are
+embedded in restrictive environments such as the human body. Both
+classes of embedded systems can benefit from power management techniques
+at different levels, from energy-efficient peripherals (e.g. sensors and
+actuators), to adaptive digital systems, to power-aware software
+algorithms.
+
+% Current tools
+% - DVS
+% - Suspend/Resume
+Historically, power management techniques rely on the ability of certain
+components to be turned on and off dynamically, thus enabling the system
+as a whole to save energy when those components are not being
+used~\cite{Monteiro:1996}. Only more recently, techniques have been
+introduced to enable some components to operate at different energy
+levels along the time~\cite{Benini:1998}. Multiple operational modes and
+\emph{Dynamic Voltage Scaling}~(DVS) are examples of such techniques
+that are becoming commonplace for microprocessors.  Unfortunately,
+microprocessors are seldom the main energy drain in embedded
+systems---peripherals are---, so traditional on/off mechanisms are sill
+of great interest.
+
+% Current Status
+% - Established standards conceived for PCs and notebooks
+%   APM -> BIOS > obsolete
+%   ACPI -> OS -> heavy
+% - Ignore embedded system designer knowledge about PM
+% - EOS -> non-portable
+Even concerning microprocessors, which are the cores of the digital
+systems behind any embedded system, current power management standards,
+such as APM and ACPI, only define a software/hardware interface for
+power management, mostly disregarding management strategies and fully
+ignoring the designer knowledge about how energy is to be used---and
+therefore how it can be saved---in the system. Moreover, these standards
+evolved in the context of portable personal computers and usually do not
+fit in the limited-resource scenario typical of embedded systems.  Other
+initiatives in the scope of embedded operating systems, some of which
+will be discussed later in this article, introduce power management
+mechanisms at the level of hardware abstraction (viz. HAL), demanding
+programmers to go down to that level in order to manage energy. This
+compromises several aspects of software quality, portability and
+time-to-marketin particular. Yet, others assume that the operating
+system is capable to doing power management by itself, defining policies
+and implementing automatic mechanisms to enforce them.
+
+% Our Motivation
+% - Designers knowledge -> PM
+% - Dynamic PM from notebook -> all-purpose
+% - ES != all-purpose
+We believe that power management in embedded systems could be made far
+more effective if designers were provided with adequate means to express
+their knowledge about the power characteristics of the system directly
+to the power manager. In contrast to general-purpose systems, embedded
+systems result from a design process that is usually driven by the
+requirements of a single application. Assuming that the traditional
+autonomous power management mechanisms found in portable computers will
+ever be able to match the designers expertise about such tailor-made
+systems is unrealistic. Furthermore, power management for portable
+computers is mostly conceived around the idea of maximizing operating
+time for a given energy budget. We believe that many embedded systems
+would prefer to have it modeled to ensure a minimum \emph{system
+  lifetime}.
+
+% Goal
+% - PM API
+%   - At high-level components (e.g. file, socket)
+%   - Semantic energy modes + arbitrary energy modes
+%     DVS + Suspend/Resume
+% - PM Infrastructure
+%   - Accounting
+%   - Auto resume
+%   - Formalized through Petry Nets
+%   - Implemented AOP techniques
+% - PM Manager
+%   - Combine OS accounting with APP knowhow
+In this article, we introduce a set of mechanisms that enable designers
+to directly influence, or even control, the power management strategy
+for the system. These mechanisms have been modeled around typical
+embedded system requirements, including small footprint, little overhead
+and non-interference with real-time constraints. They are:
+
+\begin{itemize}
+\item A power management API defined at the level of user-visible system
+  components (e.g. files, sockets, and processes) that supports semantic
+  energy modes (i.e. \emph{off}, \emph{stand-by}, \emph{light}, and
+  \emph{full}), arbitrary energy modes (i.e. device-specific), and
+  dynamic voltage scaling.
+
+\item A power management infrastructure for system components, with
+  accounting, auto-suspend and auto-resume mechanisms, implemented
+  around \emph{Aspect-Oriented Programming}~(AOP) concepts and
+  formalized through \emph{Petry Nets}.
+
+\item An autonomous power manager, whose policies can be configured,
+  statically or dynamically, and whose decisions take in consideration
+  the interactions between applications and system done through the
+  management API, thus enabling applications to override specific
+  policies.
+\end{itemize}
+
+% Article organization
+% - API design
+% - PMI design
+% - APM design
+% - Implementation for EPOS
+% - Validation
+% - Related work
+% - Conclusion
+The reminder of this text discusses the design of these three
+mechanisms, their implementation in the \textsc{Epos} Project,
+experiments carried out to corroborate the proposal, a discussion about
+related work, and is closed with a reasoning about the proposed
+mechanisms.
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "pm"
+%%% End:

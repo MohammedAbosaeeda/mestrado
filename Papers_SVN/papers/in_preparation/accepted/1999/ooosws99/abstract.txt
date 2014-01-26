@@ -1,5 +1,0 @@
-EPOS: an Object-Oriented Operating System
-
-Antonio Augusto Froehlich and Wolfgang Schroeder-Preikschat
-
-This position paper reports the current development stage of project EPOS, which aims to deliver, whenever possible automatically, a customized runtime support system for each (high performance) parallel application. In order to achieve this, EPOS introduces the concepts of adaptable, scenario independent system abstractions, scenario adapters and inflated interfaces. An application designed and implemented following the guidelines behind these concepts can be submitted to a tool that will proceed syntactical and data flow analysis to extract an operating system blueprint. This blueprint is then submitted to another tool that will tailor an operating system for the given application.

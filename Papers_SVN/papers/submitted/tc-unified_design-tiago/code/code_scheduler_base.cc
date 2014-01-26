@@ -1,6 +1,0 @@
-template <typename T> class Scheduler {
-...
-  void insert(Element<T>* node);
-  T* remove(Element<T>* node);
-...
-};

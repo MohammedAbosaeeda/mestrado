@@ -1,0 +1,185 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{1.45.2.1 }
+
+\bibitem[ANSI/IEEE 1986]{ieee87}
+\abntrefinfo{ANSI/IEEE}{ANSI/IEEE}{1986}
+{ANSI/IEEE. \emph{{Std 1008-1987: IEEE Standard for Software Unit Testing}}.
+[S.l.], 1986.}
+
+\bibitem[Artho 2011]{artho2011iterative}
+\abntrefinfo{Artho}{ARTHO}{2011}
+{ARTHO, C. Iterative delta debugging.
+\emph{International Journal on Software Tools for Technology Transfer (STTT)},
+  Springer, v.~13, n.~3, p. 223--246, 2011.}
+
+\bibitem[Bertolino 2007]{bertolino:07}
+\abntrefinfo{Bertolino}{BERTOLINO}{2007}
+{BERTOLINO, A. Software testing research: Achievements, challenges, dreams. In:
+   \emph{Proceedings of the Future of Software Engineering at ICSE 2007}.
+  [S.l.]: IEEE-CS Press, 2007. p. 85--103.}
+
+\bibitem[Burger e Zeller 2008]{burger2008replaying}
+\abntrefinfo{Burger e Zeller}{BURGER; ZELLER}{2008}
+{BURGER, M.; ZELLER, A. Replaying and isolating failing multi-object
+  interactions. In:  ACM. \emph{Proceedings of the 2008 international workshop
+  on dynamic analysis: held in conjunction with the ISSTA 2008}. [S.l.], 2008.
+  p. 71--77.}
+
+\bibitem[Carro e Wagner 2003]{carro2003sistemas}
+\abntrefinfo{Carro e Wagner}{CARRO; WAGNER}{2003}
+{CARRO, L.; WAGNER, F.~R. Sistemas computacionais embarcados.
+\emph{Jornadas de atualiza{\c{c}}{\~a}o em inform{\'a}tica. Campinas: UNICAMP},
+  2003.}
+
+\bibitem[Chern e Volder 2007]{Chern:2007}
+\abntrefinfo{Chern e Volder}{CHERN; VOLDER}{2007}
+{CHERN, R.; VOLDER, K. D. Debugging with control-flow breakpoints. In:
+  \emph{Proceedings of the 6th International Conference on Aspect-oriented
+  Software Development}. New York, NY, USA: ACM, 2007.  (AOSD '07), p. 96--106.
+ISBN 1-59593-615-7. \ $<$http://doi.acm.org/10.1145/1218563.1218575$>$.}
+
+\bibitem[Fr{\"{o}}hlich 2001]{Froehlich:2001}
+\abntrefinfo{Fr{\"{o}}hlich}{FR{\"{O}}HLICH}{2001}
+{FR{\"{O}}HLICH, A.~A. \emph{Application-Oriented Operating Systems}. Sankt
+  Augustin: GMD - Forschungszentrum Informationstechnik, 2001.  (GMD Research
+  Series, 17).}
+
+\bibitem[Gelperin e Hetzel 1988]{Gelperin:1988}
+\abntrefinfo{Gelperin e Hetzel}{GELPERIN; HETZEL}{1988}
+{GELPERIN, D.; HETZEL, B. The growth of software testing.
+\emph{Commun. ACM}, ACM, New York, NY, USA, v.~31, n.~6, p. 687--695, jun.
+  1988.
+ISSN 0001-0782.
+\ $<$http://doi.acm.org/10.1145/62959.62965$>$.}
+
+\bibitem[Ki et al. 2008]{KiSCL08}
+\abntrefinfo{Ki et al.}{KI et al.}{2008}
+{KI, Y. et al. Tool support for new test criteria on embedded systems:
+  Justitia. In:  KIM, W.; CHOI, H.-J. (Ed.). \emph{Proceedings of the 2nd
+  International Conference on Ubiquitous Information Management and
+  Communication, ICUIMC 2008, Suwon, Korea, January 31 - February 01, 2008}.
+  [S.l.]: ACM, 2008. p. 365--369.
+ISBN 978-1-59593-993-7.}
+
+\bibitem[Koong et al. 2012]{atemes}
+\abntrefinfo{Koong et al.}{KOONG et al.}{2012}
+{KOONG, C.-S. et al. Automatic testing environment for multi-core embedded
+  software (atemes).
+\emph{J. Syst. Softw.}, Elsevier Science Inc., New York, NY, USA, v.~85, n.~1,
+  p. 43--60, jan. 2012.
+ISSN 0164-1212.
+\ $<$http://dx.doi.org/10.1016/j.jss.2011.08.030$>$.}
+
+\bibitem[Ludwich e Frohlich 2011]{DMEC}
+\abntrefinfo{Ludwich e Frohlich}{LUDWICH; FROHLICH}{2011}
+{LUDWICH, M.; FROHLICH, A. Interfacing hardware devices to embedded java. In:
+  \emph{Computing System Engineering (SBESC), 2011 Brazilian Symposium on}.
+  [S.l.: s.n.], 2011. p. 176 --181.}
+
+\bibitem[Marcondes 2009]{Marcondes:MSC:2009}
+\abntrefinfo{Marcondes}{MARCONDES}{2009}
+{MARCONDES, H.
+\emph{{Uma Arquitetura de Componentes H\'{i}bridos de Hardware e Software para
+  Sistemas Embarcados}}.
+92~p. Dissertação (Mestrado) --- Universidade Federal de Santa Catarina, 2009.}
+
+\bibitem[Musser e Stepanov 1989]{musser1989generic}
+\abntrefinfo{Musser e Stepanov}{MUSSER; STEPANOV}{1989}
+{MUSSER, D.~R.; STEPANOV, A.~A. Generic programming. In:  \emph{Symbolic and
+  Algebraic Computation}. [S.l.]: Springer, 1989. p. 13--25.}
+
+\bibitem[Orso e Kennedy 2005]{orso2005selective}
+\abntrefinfo{Orso e Kennedy}{ORSO; KENNEDY}{2005}
+{ORSO, A.; KENNEDY, B. Selective capture and replay of program executions. In:
+  ACM. \emph{ACM SIGSOFT Software Engineering Notes}. [S.l.], 2005. v.~30,
+  n.~4, p.~1--7.}
+
+\bibitem[Parsa, Asadi-Aghbolaghi e Vahidi-Asl 2011]{parsa2011statistical}
+\abntrefinfo{Parsa, Asadi-Aghbolaghi e Vahidi-Asl}{PARSA; ASADI-AGHBOLAGHI;
+  VAHIDI-ASL}{2011}
+{PARSA, S.; ASADI-AGHBOLAGHI, M.; VAHIDI-ASL, M. Statistical debugging using a
+  hierarchical model of correlated predicates.
+\emph{Artificial Intelligence and Computational Intelligence}, Springer, p.
+  251--256, 2011.}
+
+\bibitem[Pressman 2011]{pressman}
+\abntrefinfo{Pressman}{PRESSMAN}{2011}
+{PRESSMAN, R.~S. \emph{Engenharia de software : uma abordagem profissional}.
+  S\'etima edi{\c c}\~ao. [S.l.]: AMGH, 2011.
+ISBN 9788563308337.}
+
+\bibitem[Qi et al. 2011]{qi2011locating}
+\abntrefinfo{Qi et al.}{QI et al.}{2011}
+{QI, D. et al. Locating failure-inducing environment changes. In:  ACM.
+  \emph{Proceedings of the 10th ACM SIGPLAN-SIGSOFT workshop on Program
+  analysis for software tools}. [S.l.], 2011. p. 29--36.}
+
+\bibitem[Sasirekha, Robert e Hemalatha 2011]{sasirekha2011program}
+\abntrefinfo{Sasirekha, Robert e Hemalatha}{SASIREKHA; ROBERT; HEMALATHA}{2011}
+{SASIREKHA, N.; ROBERT, A.; HEMALATHA, D. Program slicing techniques and its
+  applications.
+\emph{Arxiv preprint arXiv:1108.1352}, 2011.}
+
+\bibitem[Schneider e Fraleigh 2004]{schneider2004ten}
+\abntrefinfo{Schneider e Fraleigh}{SCHNEIDER; FRALEIGH}{2004}
+{SCHNEIDER, S.; FRALEIGH, L. The ten secrets of embedded debugging.
+\emph{Embedded Systems Programming}, MILLER FREEMAN INC., v.~17, p. 21--32,
+  2004.}
+
+\bibitem[Seo et al. 2007]{seo}
+\abntrefinfo{Seo et al.}{SEO et al.}{2007}
+{SEO, J. et al. Automating embedded software testing on an emulated target
+  board. In:  ZHU, H.; WONG, W.~E.; PARADKAR, A.~M. (Ed.). \emph{AST}. [S.l.]:
+  IEEE, 2007. p. 44--50.
+ISBN 0-7695-2892-9.}
+
+\bibitem[Stroustrup 1994]{Stroustrup:c++}
+\abntrefinfo{Stroustrup}{STROUSTRUP}{1994}
+{STROUSTRUP, B. \emph{The design and evolution of C++}. New York, NY, USA: ACM
+  Press/Addison-Wesley Publishing Co., 1994.
+ISBN 0-201-54330-3.}
+
+\bibitem[Sundmark e Thane 2008]{Sundmark}
+\abntrefinfo{Sundmark e Thane}{SUNDMARK; THANE}{2008}
+{SUNDMARK, D.; THANE, H. Pinpointing interrupts in embedded real-time systems
+  using context checksums. In:  \emph{Emerging Technologies and Factory
+  Automation, 2008. ETFA 2008. IEEE International Conference on}. [S.l.: s.n.],
+  2008. p. 774--781.}
+
+\bibitem[Tassey 2002]{tassey2002economic}
+\abntrefinfo{Tassey}{TASSEY}{2002}
+{TASSEY, G. The economic impacts of inadequate infrastructure for software
+  testing.
+\emph{National Institute of Standards and Technology}, Citeseer, p. 02--3,
+  2002.}
+
+\bibitem[Xu et al. 2005]{Xu:2005:BSP:1050849.1050865}
+\abntrefinfo{Xu et al.}{XU et al.}{2005}
+{XU, B. et al. A brief survey of program slicing.
+\emph{SIGSOFT Softw. Eng. Notes}, ACM, New York, NY, USA, v.~30, n.~2, p.
+  1--36, mar. 2005.
+ISSN 0163-5948.
+\ $<$http://doi.acm.org/10.1145/1050849.1050865$>$.}
+
+\bibitem[Zhang et al. 2013]{JSWjsw0803603616}
+\abntrefinfo{Zhang et al.}{ZHANG et al.}{2013}
+{ZHANG, C. et al. Automated breakpoint generation for debugging.
+\emph{Journal of Software}, v.~8, n.~3, 2013.
+\ $<$https://66.147.242.186/~academz3/ojs/index.php/jsw/article/view/jsw0803603616$>$.}
+
+\bibitem[Zheng et al. 2003]{zheng2003statistical}
+\abntrefinfo{Zheng et al.}{ZHENG et al.}{2003}
+{ZHENG, A. et al. Statistical debugging of sampled programs.
+\emph{Advances in Neural Information Processing Systems}, v.~16, 2003.}
+
+\bibitem[Zheng et al. 2006]{zheng2006statistical}
+\abntrefinfo{Zheng et al.}{ZHENG et al.}{2006}
+{ZHENG, A. et al. Statistical debugging: simultaneous identification of
+  multiple bugs. In:  ACM. \emph{Proceedings of the 23rd international
+  conference on Machine learning}. [S.l.], 2006. p. 1105--1112.}
+
+\end{thebibliography}

@@ -1,8 +1,0 @@
-\begin{tabular}{p{4cm}ccc}
-\textbf{EPOS Configuration} & \textbf{Code} & \textbf{Data} & \textbf{Total} \\
-\hline
-No PM	 	& 19086	& 588	& 19674	\\
-With PM API 	& 29146	& 721	& 29867	\\
-+ Accounting	& 31914	& 791	& 32705	\\
-+ Autonomous PM	& 45262	& 816	& 46078	\\
-\end{tabular}

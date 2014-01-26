@@ -1,7 +1,0 @@
-make help
-	make dvi -> gera DVI
-	make bib -> gera os Bibtexs
-	make pdf -> gera PDF
-	make ps  -> gera PostScript
-	make visu -> gera dvi e visualiza
-	make clean -> limpa diretorio

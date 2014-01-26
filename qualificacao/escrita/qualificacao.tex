@@ -1,0 +1,155 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Universidade Federal de Santa Catarina             
+% Biblioteca Universitária                     
+%                                                           
+% (c)2010 Roberto Simoni (roberto.emc@gmail.com)
+%         Carlos R Rocha (cticarlo@gmail.com)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\PassOptionsToPackage{abnt-etal-cite=1, abnt-etal-list=0}{abntcite}
+\documentclass{ufscThesis}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pacotes usados especificamente para este documento
+% Definidos pelo criador do documento
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}
+\usepackage{CJK}
+\usepackage{pinyin}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pacote que permite o uso de múltiplas linhas em uma tabela
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{multirow}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pacote que permite a criação de algoritmos computacionais
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[lined,boxed]{algorithm2e}
+
+%\renewcommand{\theequation}{\arabic{equation}} %se desejar tirar o capitulo
+
+%\usepackage[labelsep=period]{caption} % O separador de legenda é um .
+\usepackage[labelsep=endash]{caption} % O separador de legenda é um -
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Identificadores do trabalho
+% Usados para preencher os elementos pré-textuais
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titulo{AEP: Uma ferramenta de automação de teste de software para sistemas embarcados} % Titulo do trabalho
+%\subtitulo{Estilo \LaTeX~ padrão}                % Subtitulo do trabalho (opcional)
+\autor{Rita de Cássia Cazu Soldi}           % Nome do autor
+\data{10}{Junho}{2013}                           % Data da publicação do trabalho
+
+\orientador{Prof. Dr. Antônio Augusto Fröhlich }                    % Nome do orientador e (opcional) seu título
+
+%%% Sobre a Banca
+\numerodemembrosnabanca{3} % Isso decide se haverá uma folha adicional
+\orientadornabanca{sim} % Se faz parte da banca definir como sim
+%\coorientadornabanca{sim} % Se faz parte da banca definir como sim
+\bancaMembroA{Prof. Dr Thiago Ramos dos Santos}     % Nome do membro da Banca
+\bancaMembroB{Prof. Dr. Rafael Luiz Cancian} %Nome do presidente da banca
+\bancaMembroC{Me. Giovani Gracioli}      % Nome do membro da Banca
+
+%\bancaMembroD{Prof. quarto membro}       % Nome do membro da Banca
+%\bancaMembroE{Prof. quinto membro}       % Nome do membro da Banca
+%\bancaMembroF{Prof. sexto membro}        % Nome do membro da Banca
+%\bancaMembroG{Prof. sétimo membro}       % Nome do membro da Banca
+
+%\dedicatoria{A quem o trabalho é dedicado, se é que o é (opcional)}
+
+%\agradecimento{Agradecimentos opcionais, caso existam pessoas ou entidades a quem se deve apoio ou suporte ao trabalho ora apresentado.}
+
+%\epigrafe{Um bonito pensamento ou citação, se for o caso}{autor do pensamento}
+
+%\textoResumo {Aqui é redigido o resumo do documento...  blabla blablablabla blabla ipsum loren e a sophia também blab ablablabl ablbalbalblab lablablbalb lab lab lab labl a blab lablablab la blab alballbalba lba lba }
+
+%\palavrasChave {chave 1. chave 2. ... chave n.}
+
+%\textAbstract {Here is written the abstract of the document}
+
+%\keywords {key 1. key 2. ... key n.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Início do documento                                
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%--------------------------------------------------------
+% Elementos pré-textuais
+\capa  
+%\folhaderosto[comficha] % Se nao quiser imprimir a ficha, é só não usar o parâmetro
+%\folhaaprovacao
+%\paginadedicatoria
+%\paginaagradecimento
+%\paginaepigrafe
+\paginaresumo
+\paginaabstract
+\listadefiguras
+\listadetabelas 
+%\listadeabreviaturas
+%\listadesimbolos
+\sumario
+
+%-------------------------------------------------------------------------------
+% Para listagens de algoritmos e de código, recomenda-se consultar os
+% pacotes algorithms e lstlistings, que são usados para definir esses
+% dois tipos de elementos de texto e possuem os comandos
+% \listofalgorithms e \lstlistoflistings, respectivamente.
+%-------------------------------------------------------------------------------
+
+%--------------------------------------------------------
+% Elementos textuais
+
+
+%\chapter{Introdução} 
+%\section{Contextualização e definição do problema} 
+ 
+\section{Planejamento}
+
+\subsection{Metodologia}
+
+Um importantíssimo passo para desenvolvimento e consolidação deste trabalho é um levantamento e entendimento do atual estado de evolução ou estado da arte da área de tolerância a faltas bizantinas, buscando embasamento para o desenvolvimento dos protocolo e serviços com menor custo, tanto computacional, quanto de desempenho.
+
+O primeiro passo é a definição dos protocolos e serviços, detalhando passos e algoritmos. Após isso, para demonstrar a utilidade prática do protocolo, seus algoritmos devem ser implementados e testados a partir de novos desenvolvimentos e utilização de ferramentas existentes. 
+
+A implementação em um ambiente real, tornará possí­vel o refinamento dos algoritmos na intenção de promoção de melhorias e adaptação dos modelos propostos. Os resultados significativos obtidos com este trabalho devem ser refletidos em publicações científicas de forma a aferir a qualidade do proposto.
+
+
+
+
+
+
+\subsection{Cronograma}
+
+A seguir são apresentadas as principais atividades previstas para o desenvolvimento deste trabalho, apresentadas relacionadas com o tempo na Tabela \ref{tab:cronograma}:
+
+\begin{enumerate}
+  \item Realização de pesquisa bibliográfica para levantamento do estado da arte da área de tolerância a faltas; \label{tarPes}
+  \item Detalhamento do protocolo Paxos bizantino em conjunto com registradores implementados à partir de mémória compartilhada distribuída; \label{tarDet}
+  \item Desenvolvimento e validação dos algoritmos propostos no protocolo;\label{tarDes}
+  \item Acoplamento do protocolo em um ambiente de espaço de tuplas aumentado;\label{tarAco} 
+  \item Desenvolvimento de uma aplicação que se utilize das técnicas propostas   para validar o protocolo; \label{tarDesApl}
+  \item Redação da dissertação e elaboração de artigos para publicação em  eventos e periódicos;\label{tarRed}
+  \item Defesa da dissertação.\label{tarDef}
+\end{enumerate}
+
+\begin{table}[h]
+\centering 
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\multirow{2}{*}{Etapas} & \multicolumn{7}{|c|}{2013} \\ \cline{2-7}
+	        & 06 & 07 & 08 & 09 & 10 & 11 & 12 \\ \hline
+\ref{tarPes} 	& X  & X  & X  & X  & X  & X  & X  \\ \hline
+\ref{tarDet} 	& X  & X  & X  &    &    &    &    \\ \hline
+\ref{tarDes} 	&    &    & X  & X  & X  &    &    \\ \hline
+\ref{tarAco} 	&    &    &    & X  & X  & X  &    \\ \hline
+\ref{tarDesApl} &    &    &    & X  & X  & X  & \\ \hline
+\ref{tarRed} 	& X  & X  & X  & X  & X  & X  & X  \\ \hline
+\ref{tarDef} 	&    &    &    &    &    &    &   \\ \hline
+\end{tabular}
+\caption{Cronograma de atividades previstas}
+\label{tab:cronograma}
+\end{table}
+\bibliographystyle{ufscThesis/ufsc-alf}
+\bibliography{bibliografia}
+
+\end{document}

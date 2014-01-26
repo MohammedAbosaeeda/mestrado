@@ -1,6 +1,0 @@
-\begin{tabular}{c|c|c}
-\textbf{Interrupt / Approach} & \textbf{Periodic} & \textbf{Single-Shot} \\
-\hline
-Counting ticks interrupt & 14~\us{} & - \\
-Alarm release interrupt  & 42~\us{} & 212~\us{} \\
-\end{tabular}

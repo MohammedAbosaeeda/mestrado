@@ -1,4 +1,0 @@
-- We describe an AOP-based method for designing synthesizable hardware components using SystemC;
-- Our mechanisms are based only on standard C++ features available on the SystemC synthesizable subset;
-- No external aspect weaving tool is required;
-- In a PABX case study, we have increased the code reuse by about 33% with a circuit area overhead of only 2%.

@@ -1,1 +1,0 @@
-avr-size -t src/mach/atmega1281/cmac.o src/mach/atmega1281/cmac_init.o src/mach/atmega1281/transceiver.o src/mach/atmega1281/transceiver_init.o src/mach/atmega1281/at86rf230_hal.o src/mach/atmega1281/nic_init.o src/mach/common/nic.o 

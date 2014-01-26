@@ -1,0 +1,521 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{1.45.2.1 }
+
+\bibitem[Aiyer et al. 2005]{aiyer2005bar}
+\abntrefinfo{Aiyer et al.}{AIYER et al.}{2005}
+{AIYER, A. et al. Bar fault tolerance for cooperative services.
+\emph{ACM SIGOPS Operating Systems Review}, v.~39, n.~5, p. 45--58, 2005.}
+
+\bibitem[Amir et al. 2006]{amir2006scaling}
+\abntrefinfo{Amir et al.}{AMIR et al.}{2006}
+{AMIR, Y. et al. Scaling byzantine fault-tolerant replication to wide area
+  networks. In:  IEEE. \emph{Dependable Systems and Networks, 2006. DSN 2006.
+  International Conference on}. [S.l.], 2006. p. 105--114.}
+
+\bibitem[Anderson 2006]{anderson2006automata}
+\abntrefinfo{Anderson}{ANDERSON}{2006}
+{ANDERSON, J. \emph{Automata theory with modern applications}. [S.l.]:
+  Cambridge University Press, 2006.}
+
+\bibitem[Attiya e Welch 2004]{attiya2004distributed}
+\abntrefinfo{Attiya e Welch}{ATTIYA; WELCH}{2004}
+{ATTIYA, H.; WELCH, J. \emph{Distributed computing: fundamentals, simulations,
+  and advanced topics}. [S.l.]: Wiley-Interscience, 2004.}
+
+\bibitem[Backe 2012]{backe2012zepto}
+\abntrefinfo{Backe}{BACKE}{2012}
+{BACKE, H. a zepto-second atomic clock for nuclear contact time measurements at
+  superheavy collision systems. In:  \emph{Exploring Fundamental Issues in
+  Nuclear Physics: Nuclear Clusters--Superheavy, Superneutronic, Superstrange,
+  of Anti-Matter}. [S.l.: s.n.], 2012. v.~1, p. 172--181.}
+
+\bibitem[Baldoni et al. 2003]{baldoni2003consensus}
+\abntrefinfo{Baldoni et al.}{BALDONI et al.}{2003}
+{BALDONI, R. et al. Consensus in byzantine asynchronous systems.
+\emph{Journal of Discrete Algorithms}, Elsevier, v.~1, n.~2, p. 185--210,
+  2003.}
+
+\bibitem[Barham et al. 2003]{barham2003xen}
+\abntrefinfo{Barham et al.}{BARHAM et al.}{2003}
+{BARHAM, P. et al. Xen and the art of virtualization. In:  ACM. \emph{ACM
+  SIGOPS Operating Systems Review}. [S.l.], 2003. v.~37, n.~5, p. 164--177.}
+
+\bibitem[Basu, Charron-Bost e Toueg 1996]{basu1996simulating}
+\abntrefinfo{Basu, Charron-Bost e Toueg}{BASU; CHARRON-BOST; TOUEG}{1996}
+{BASU, A.; CHARRON-BOST, B.; TOUEG, S. Simulating reliable links with
+  unreliable links in the presence of process crashes.
+\emph{Distributed algorithms}, Springer, p. 105--122, 1996.}
+
+\bibitem[Bessani et al. 2008]{bessani2008depspace}
+\abntrefinfo{Bessani et al.}{BESSANI et al.}{2008}
+{BESSANI, A. et al. Depspace: a byzantine fault-tolerant coordination service.
+  In:  ACM. \emph{ACM SIGOPS Operating Systems Review}. [S.l.], 2008. v.~42, p.
+  163 --176.}
+
+\bibitem[Bessani et al. 2009]{bessani2009sharing}
+\abntrefinfo{Bessani et al.}{BESSANI et al.}{2009}
+{BESSANI, A. et al. Sharing memory between byzantine processes using
+  policy-enforced tuple spaces.
+\emph{Parallel and Distributed Systems, IEEE Transactions on}, IEEE, v.~20,
+  n.~3, p. 419--432, 2009.}
+
+\bibitem[Castro e Liskov 1998]{castro1998practical}
+\abntrefinfo{Castro e Liskov}{CASTRO; LISKOV}{1998}
+{CASTRO, M.; LISKOV, B. Practical byzantine fault tolerance.
+\emph{Operating Systems Review}, ACM ASSOCIATION FOR COMPUTING MACHINERY,
+  v.~33, p. 173--186, 1998.}
+
+\bibitem[Castro e Liskov 2002]{castro2002practical}
+\abntrefinfo{Castro e Liskov}{CASTRO; LISKOV}{2002}
+{CASTRO, M.; LISKOV, B. Practical byzantine fault tolerance and proactive
+  recovery.
+\emph{ACM Transactions on Computer Systems (TOCS)}, ACM, v.~20, n.~4, p.
+  398--461, 2002.}
+
+\bibitem[Chandra e Toueg 1996]{chandra1996unreliable}
+\abntrefinfo{Chandra e Toueg}{CHANDRA; TOUEG}{1996}
+{CHANDRA, T.; TOUEG, S. Unreliable failure detectors for reliable distributed
+  systems.
+\emph{Journal of the ACM (JACM)}, ACM, v.~43, n.~2, p. 225--267, 1996.}
+
+\bibitem[Chandy e Lamport 1985]{chandy1985distributed}
+\abntrefinfo{Chandy e Lamport}{CHANDY; LAMPORT}{1985}
+{CHANDY, K.; LAMPORT, L. Distributed snapshots: determining global states of
+  distributed systems.
+\emph{ACM Transactions on Computer Systems (TOCS)}, ACM, v.~3, n.~1, p. 63--75,
+  1985.}
+
+\bibitem[Charron-Bost, D{\'e}fago e Schiper 2002]{charron2002broadcasting}
+\abntrefinfo{Charron-Bost, D{\'e}fago e Schiper}{CHARRON-BOST; D{\'E}FAGO;
+  SCHIPER}{2002}
+{CHARRON-BOST, B.; D{\'E}FAGO, X.; SCHIPER, A. Broadcasting messages in
+  fault-tolerant distributed systems: the benefit of handling input-triggered
+  and output-triggered suspicions differently. In:  IEEE. \emph{Reliable
+  Distributed Systems, 2002. Proceedings. 21st IEEE Symposium on}. [S.l.],
+  2002. p. 244--249.}
+
+\bibitem[Chun, Maniatis e Shenker 2008]{chun2008diverse}
+\abntrefinfo{Chun, Maniatis e Shenker}{CHUN; MANIATIS; SHENKER}{2008}
+{CHUN, B.; MANIATIS, P.; SHENKER, S. Diverse replication for single-machine
+  byzantine-fault tolerance. In:  \emph{USENIX Annual Technical Conference}.
+  [S.l.: s.n.], 2008. p. 287--292.}
+
+\bibitem[Chun et al. 2007]{chun2007attested}
+\abntrefinfo{Chun et al.}{CHUN et al.}{2007}
+{CHUN, B. et al. Attested append-only memory: Making adversaries stick to their
+  word. In:  ACM. \emph{ACM SIGOPS Operating Systems Review}. [S.l.], 2007.
+  v.~41, p. 189--204.}
+
+\bibitem[Clement et al. 2009]{clement2009upright}
+\abntrefinfo{Clement et al.}{CLEMENT et al.}{2009a}
+{CLEMENT, A. et al. Upright cluster services. In:  ACM. \emph{Proceedings of
+  the ACM SIGOPS 22nd symposium on Operating systems principles}. [S.l.], 2009.
+  p. 277--290.}
+
+\bibitem[Clement et al. 2009]{clement2009making}
+\abntrefinfo{Clement et al.}{CLEMENT et al.}{2009b}
+{CLEMENT, A. et al. Making byzantine fault tolerant systems tolerate byzantine
+  faults. In:  USENIX ASSOCIATION. \emph{Proceedings of the 6th USENIX
+  symposium on Networked systems design and implementation}. [S.l.], 2009. p.
+  153--168.}
+
+\bibitem[Correia et al. 2002]{correia2002efficient}
+\abntrefinfo{Correia et al.}{CORREIA et al.}{2002}
+{CORREIA, M. et al. Efficient byzantine-resilient reliable multicast on a
+  hybrid failure model. In:  IEEE. \emph{Reliable Distributed Systems, 2002.
+  Proceedings. 21st IEEE Symposium on}. [S.l.], 2002. p. 2--11.}
+
+\bibitem[Correia et al. 2005]{correia2005low}
+\abntrefinfo{Correia et al.}{CORREIA et al.}{2005}
+{CORREIA, M. et al. Low complexity byzantine-resilient consensus.
+\emph{Distributed Computing}, Springer, v.~17, n.~3, p. 237--249, 2005.}
+
+\bibitem[Correia, Neves e Verissimo 2004]{correia2004tolerate}
+\abntrefinfo{Correia, Neves e Verissimo}{CORREIA; NEVES; VERISSIMO}{2004}
+{CORREIA, M.; NEVES, N.; VERISSIMO, P. How to tolerate half less one byzantine
+  nodes in practical distributed systems. In:  IEEE. \emph{Reliable Distributed
+  Systems, 2004. Proceedings of the 23rd IEEE International Symposium on}.
+  [S.l.], 2004. p. 174--183.}
+
+\bibitem[Correia, Neves e Verissimo 2012]{correia2012bft}
+\abntrefinfo{Correia, Neves e Verissimo}{CORREIA; NEVES; VERISSIMO}{2012}
+{CORREIA, M.; NEVES, N.; VERISSIMO, P. Bft-to: Intrusion tolerance with less
+  replicas.
+\emph{The Computer Journal}, Br Computer Soc, 2012.}
+
+\bibitem[Correia, Verissimo e Neves 2002]{correia2002design}
+\abntrefinfo{Correia, Verissimo e Neves}{CORREIA; VERISSIMO; NEVES}{2002}
+{CORREIA, M.; VERISSIMO, P.; NEVES, N. The design of a cots real-time
+  distributed security kernel.
+\emph{Dependable Computing EDCC-4}, Springer, p. 634--638, 2002.}
+
+\bibitem[Coulouris, Dollimore e Kindberg 2005]{coulouris2005distributed}
+\abntrefinfo{Coulouris, Dollimore e Kindberg}{COULOURIS; DOLLIMORE;
+  KINDBERG}{2005}
+{COULOURIS, G.; DOLLIMORE, J.; KINDBERG, T. \emph{Distributed systems: concepts
+  and design}. [S.l.]: Addison-Wesley Longman, 2005.}
+
+\bibitem[Cristian 1989]{cristian1989probabilistic}
+\abntrefinfo{Cristian}{CRISTIAN}{1989}
+{CRISTIAN, F. Probabilistic clock synchronization.
+\emph{Distributed computing}, Springer, v.~3, n.~3, p. 146--158, 1989.}
+
+\bibitem[Cristian et al. 1995]{cristian1995atomic}
+\abntrefinfo{Cristian et al.}{CRISTIAN et al.}{1995}
+{CRISTIAN, F. et al. Atomic broadcast: From simple message diffusion to
+  byzantine agreement.
+\emph{Information and Computation}, Citeseer, v.~118, n.~1, p.~158, 1995.}
+
+\bibitem[Cristian e Fetzer 1999]{cristian1999timed}
+\abntrefinfo{Cristian e Fetzer}{CRISTIAN; FETZER}{1999}
+{CRISTIAN, F.; FETZER, C. The timed asynchronous distributed system model.
+\emph{Parallel and Distributed Systems, IEEE Transactions on}, IEEE, v.~10,
+  n.~6, p. 642--657, 1999.}
+
+\bibitem[Cully et al. 2008]{cully2008remus}
+\abntrefinfo{Cully et al.}{CULLY et al.}{2008}
+{CULLY, B. et al. Remus: High availability via asynchronous virtual machine
+  replication. In:  \emph{Proceedings of the 5th USENIX Symposium on Networked
+  Systems Design and Implementation}. [S.l.: s.n.], 2008. p. 161--174.}
+
+\bibitem[D{\'e}fago, Schiper e Urb{\'a}n 2003]{defago2003total}
+\abntrefinfo{D{\'e}fago, Schiper e Urb{\'a}n}{D{\'E}FAGO; SCHIPER;
+  URB{\'A}N}{2003}
+{D{\'E}FAGO, X.; SCHIPER, A.; URB{\'A}N, P. Total order broadcast and multicast
+  algorithms: Taxonomy and survey.
+????????????????????, 2003.}
+
+\bibitem[D{\'e}fago, Schiper e Urb{\'a}n 2004]{defago2004total}
+\abntrefinfo{D{\'e}fago, Schiper e Urb{\'a}n}{D{\'E}FAGO; SCHIPER;
+  URB{\'A}N}{2004}
+{D{\'E}FAGO, X.; SCHIPER, A.; URB{\'A}N, P. Total order broadcast and multicast
+  algorithms: Taxonomy and survey.
+\emph{ACM Computing Surveys (CSUR)}, ACM, v.~36, n.~4, p. 372--421, 2004.}
+
+\bibitem[Dolev e Strong 1983]{dolev1983authenticated}
+\abntrefinfo{Dolev e Strong}{DOLEV; STRONG}{1983}
+{DOLEV, D.; STRONG, H. Authenticated algorithms for byzantine agreement.
+\emph{SIAM J. Comput.}, v.~12, n.~4, p. 656--666, 1983.}
+
+\bibitem[Ferraz et al. 2004]{ferraz2004intrusiontolerant}
+\abntrefinfo{Ferraz et al.}{FERRAZ et al.}{2004}
+{FERRAZ, R. et al. An intrusiontolerant web server based on the distract
+  architecture. In:  CITESEER. \emph{In Proceedings of the Workshop on
+  Dependable Distributed Data Management}. [S.l.], 2004.}
+
+\bibitem[Fielding et al. 1999]{fielding1999hypertext}
+\abntrefinfo{Fielding et al.}{FIELDING et al.}{1999}
+{FIELDING, R. et al. \emph{Hypertext transfer protocol--HTTP/1.1}. [S.l.]: RFC
+  2616, June, 1999.}
+
+\bibitem[Fischer, Lynch e Paterson 1985]{fischer1985impossibility}
+\abntrefinfo{Fischer, Lynch e Paterson}{FISCHER; LYNCH; PATERSON}{1985}
+{FISCHER, M.; LYNCH, N.; PATERSON, M. Impossibility of distributed consensus
+  with one faulty process.
+\emph{Journal of the ACM (JACM)}, ACM, v.~32, n.~2, p. 374--382, 1985.}
+
+\bibitem[Garcia et al. 2011]{garcia2011diversity}
+\abntrefinfo{Garcia et al.}{GARCIA et al.}{2011}
+{GARCIA, M. et al. Os diversity for intrusion tolerance: Myth or reality? In:
+  IEEE. \emph{Dependable Systems \& Networks (DSN), 2011 IEEE/IFIP 41st
+  International Conference on}. [S.l.], 2011. p. 383--394.}
+
+\bibitem[Garcia, Rodrigues e Pregui{\c{c}}a 2011]{garcia2011efficient}
+\abntrefinfo{Garcia, Rodrigues e Pregui{\c{c}}a}{GARCIA; RODRIGUES;
+  PREGUI{\c{C}}A}{2011}
+{GARCIA, R.; RODRIGUES, R.; PREGUI{\c{C}}A, N. Efficient middleware for
+  byzantine fault tolerant database replication. In:  ACM. \emph{Proceedings of
+  the sixth conference on Computer systems}. [S.l.], 2011. p. 107--122.}
+
+\bibitem[Garfinkel, Rosenblum et al. 2003]{garfinkel2003virtual}
+\abntrefinfo{Garfinkel, Rosenblum et al.}{GARFINKEL; ROSENBLUM et al.}{2003}
+{GARFINKEL, T.; ROSENBLUM, M. et al. A virtual machine introspection based
+  architecture for intrusion detection. In:  \emph{Proc. Network and
+  Distributed Systems Security Symposium}. [S.l.: s.n.], 2003.}
+
+\bibitem[Goldberg 1974]{goldberg1974survey}
+\abntrefinfo{Goldberg}{GOLDBERG}{1974}
+{GOLDBERG, R. Survey of virtual machine research.
+\emph{IEEE Computer}, v.~7, n.~6, p. 34--45, 1974.}
+
+\bibitem[Guerraoui e Rodrigues 2006]{guerraoui2006introduction}
+\abntrefinfo{Guerraoui e Rodrigues}{GUERRAOUI; RODRIGUES}{2006a}
+{GUERRAOUI, R.; RODRIGUES, L. \emph{Introduction to reliable distributed
+  programming}. [S.l.]: Springer-Verlag New York Inc, 2006.}
+
+\bibitem[Guerraoui e Rodrigues 2006]{guerraoui2006reliable}
+\abntrefinfo{Guerraoui e Rodrigues}{GUERRAOUI; RODRIGUES}{2006b}
+{GUERRAOUI, R.; RODRIGUES, L. \emph{Reliable Distributed Programming}. [S.l.]:
+  Springer Verlag, Berlin, 2006.}
+
+\bibitem[Gusella e Zatti 1989]{gusella1989accuracy}
+\abntrefinfo{Gusella e Zatti}{GUSELLA; ZATTI}{1989}
+{GUSELLA, R.; ZATTI, S. The accuracy of the clock synchronization achieved by
+  tempo in berkeley unix 4.3 bsd.
+\emph{Software Engineering, IEEE Transactions on}, IEEE, v.~15, n.~7, p.
+  847--853, 1989.}
+
+\bibitem[Hadzilacos e Toueg 1994]{hadzilacos1994modular}
+\abntrefinfo{Hadzilacos e Toueg}{HADZILACOS; TOUEG}{1994}
+{HADZILACOS, V.; TOUEG, S. A modular approach to the specification and
+  implementation of fault-tolerant broadcasts.
+\emph{Dep. of Computer Science, Cornell Univ., New York, USA, Tech. Rep}, p.
+  94--1425, 1994.}
+
+\bibitem[J{\'u}nior et al.]{juniorsmit}
+\abntrefinfo{J{\'u}nior et al.}{J{\'U}NIOR et al.}{}
+{J{\'U}NIOR, V. et al. Smit: Uma arquitetura tolerante a intrusoes baseada em
+  virtualiza{\c{c}} ao.}
+
+\bibitem[Kapitza et al. 2012]{kapitza2012cheapbft}
+\abntrefinfo{Kapitza et al.}{KAPITZA et al.}{2012}
+{KAPITZA, R. et al. Cheapbft: resource-efficient byzantine fault tolerance. In:
+   ACM. \emph{Proceedings of the 7th ACM european conference on Computer
+  Systems}. [S.l.], 2012. p. 295--308.}
+
+\bibitem[Keahey, Doering e Foster 2004]{keahey2004sandbox}
+\abntrefinfo{Keahey, Doering e Foster}{KEAHEY; DOERING; FOSTER}{2004}
+{KEAHEY, K.; DOERING, K.; FOSTER, I. From sandbox to playground: Dynamic
+  virtual environments in the grid. In:  IEEE. \emph{Grid Computing, 2004.
+  Proceedings. Fifth IEEE/ACM International Workshop on}. [S.l.], 2004. p.
+  34--42.}
+
+\bibitem[King, Dunlap e Chen 2003]{king2003operating}
+\abntrefinfo{King, Dunlap e Chen}{KING; DUNLAP; CHEN}{2003}
+{KING, S.; DUNLAP, G.; CHEN, P. Operating system support for virtual machines.
+  In:  \emph{Proceedings of the 2003 Annual USENIX Technical Conference}.
+  [S.l.: s.n.], 2003. p. 71--84.}
+
+\bibitem[Kotla et al. 2008]{kotla2008zyzzyva}
+\abntrefinfo{Kotla et al.}{KOTLA et al.}{2008}
+{KOTLA, R. et al. Zyzzyva: speculative byzantine fault tolerance.
+\emph{Communications of the ACM}, ACM, v.~51, n.~11, p. 86--95, 2008.}
+
+\bibitem[Lamport 1978]{lamport1978time}
+\abntrefinfo{Lamport}{LAMPORT}{1978}
+{LAMPORT, L. Time, clocks, and the ordering of events in a distributed system.
+\emph{Communications of the ACM}, ACM, v.~21, n.~7, p. 558--565, 1978.}
+
+\bibitem[Lamport e Melliar-Smith 1985]{lamport1985synchronizing}
+\abntrefinfo{Lamport e Melliar-Smith}{LAMPORT; MELLIAR-SMITH}{1985}
+{LAMPORT, L.; MELLIAR-SMITH, P. Synchronizing clocks in the presence of faults.
+\emph{Journal of the ACM (JACM)}, ACM, v.~32, n.~1, p. 52--78, 1985.}
+
+\bibitem[Lamport, Shostak e Pease 1982]{lamport1982byzantine}
+\abntrefinfo{Lamport, Shostak e Pease}{LAMPORT; SHOSTAK; PEASE}{1982}
+{LAMPORT, L.; SHOSTAK, R.; PEASE, M. The byzantine generals problem.
+\emph{ACM Transactions on Programming Languages and Systems (TOPLAS)}, ACM,
+  v.~4, n.~3, p. 382--401, 1982.}
+
+\bibitem[Laureano, Maziero e Jamhour 2004]{laureano2004intrusion}
+\abntrefinfo{Laureano, Maziero e Jamhour}{LAUREANO; MAZIERO; JAMHOUR}{2004}
+{LAUREANO, M.; MAZIERO, C.; JAMHOUR, E. Intrusion detection in virtual machine
+  environments. In:  IEEE. \emph{Euromicro Conference, 2004. Proceedings.
+  30th}. [S.l.], 2004. p. 520--525.}
+
+\bibitem[Levin et al. 2009]{levin2009trinc}
+\abntrefinfo{Levin et al.}{LEVIN et al.}{2009}
+{LEVIN, D. et al. Trinc: Small trusted hardware for large distributed systems.
+  In:  \emph{Proceedings of the USENIX Symposium on Networked Systems Design
+  and Implementation (NSDI)}. [S.l.: s.n.], 2009.}
+
+\bibitem[Li, Li e Jiang 2010]{li2010survey}
+\abntrefinfo{Li, Li e Jiang}{LI; LI; JIANG}{2010}
+{LI, Y.; LI, W.; JIANG, C. A survey of virtual machine system: Current
+  technology and future trends. In:  IEEE. \emph{Electronic Commerce and
+  Security (ISECS), 2010 Third International Symposium on}. [S.l.], 2010. p.
+  332--336.}
+
+\bibitem[Lindholm e Yellin 1999]{lindholm1999java}
+\abntrefinfo{Lindholm e Yellin}{LINDHOLM; YELLIN}{1999}
+{LINDHOLM, T.; YELLIN, F. \emph{Java virtual machine specification}. [S.l.]:
+  Addison-Wesley Longman Publishing Co., Inc., 1999.}
+
+\bibitem[Luiz et al. 2008]{luiz2008repeats}
+\abntrefinfo{Luiz et al.}{LUIZ et al.}{2008}
+{LUIZ, A. et al. Repeats-uma arquitetura para replica{\c{c}} ao tolerante a
+  faltas bizantinas baseada em espa{\c{c}}o de tuplas.
+\emph{Anais do XXVI Simp{\'o}sio Brasileiro de Redes de Computadores e Sistemas
+  Distribu{\i}dos. SBC}, 2008.}
+
+\bibitem[Lynch 1996]{nancy1996distributed}
+\abntrefinfo{Lynch}{LYNCH}{1996}
+{LYNCH, N.~A. \emph{Distributed algorithms}. [S.l.]: Morgan Kaufmann, 1996.}
+
+\bibitem[Mills 1995]{mills1995improved}
+\abntrefinfo{Mills}{MILLS}{1995}
+{MILLS, D. Improved algorithms for synchronizing computer network clocks.
+\emph{Networking, IEEE/ACM Transactions on}, IEEE, v.~3, n.~3, p. 245--254,
+  1995.}
+
+\bibitem[Mockapetris 1987]{mockapetris1987domain}
+\abntrefinfo{Mockapetris}{MOCKAPETRIS}{1987}
+{MOCKAPETRIS, P. Domain names-concepts and facilities.
+1987.}
+
+\bibitem[Obelheiro, Bessani e Lung 2005]{obelheiro2005analisando}
+\abntrefinfo{Obelheiro, Bessani e Lung}{OBELHEIRO; BESSANI; LUNG}{2005}
+{OBELHEIRO, R.; BESSANI, A.; LUNG, L. Analisando a viabilidade da
+  implementa{\c{c}}ao pr{\'a}tica de sistemas tolerantes a intrusoes.
+\emph{Anais do V Simp{\'o}sio Brasileiro em Seguran{\c{c}}a da Informa{\c{c}}
+  ao e de Sistemas Computacionais-SBSeg 2005}, 2005.}
+
+\bibitem[Obelheiro et al. 2006]{obelheiro2006practical}
+\abntrefinfo{Obelheiro et al.}{OBELHEIRO et al.}{2006}
+{OBELHEIRO, R. et al. How practical are intrusion-tolerant distributed systems?
+Department of Informatics, University of Lisbon, 2006.}
+
+\bibitem[Padala et al. 2007]{padala2007performance}
+\abntrefinfo{Padala et al.}{PADALA et al.}{2007}
+{PADALA, P. et al. Performance evaluation of virtualization technologies for
+  server consolidation.
+\emph{HP Laboratories Technical Report}, Citeseer, 2007.}
+
+\bibitem[Parmelee et al. 1972]{parmelee1972virtual}
+\abntrefinfo{Parmelee et al.}{PARMELEE et al.}{1972}
+{PARMELEE, R. et al. Virtual storage and virtual machine concepts.
+\emph{IBM Systems Journal}, IBM, v.~11, n.~2, p. 99--130, 1972.}
+
+\bibitem[Pease, Shostak e Lamport 1980]{pease1980reaching}
+\abntrefinfo{Pease, Shostak e Lamport}{PEASE; SHOSTAK; LAMPORT}{1980}
+{PEASE, M.; SHOSTAK, R.; LAMPORT, L. Reaching agreement in the presence of
+  faults.
+\emph{Journal of the ACM}, v.~27, n.~2, p. 228--234, 1980.}
+
+\bibitem[Popek e Goldberg 1974]{popek1974formal}
+\abntrefinfo{Popek e Goldberg}{POPEK; GOLDBERG}{1974}
+{POPEK, G.; GOLDBERG, R. Formal requirements for virtualizable third generation
+  architectures.
+\emph{Communications of the ACM}, ACM, v.~17, n.~7, p. 412--421, 1974.}
+
+\bibitem[Reiser e Kapitza 2007]{reiser2007vm}
+\abntrefinfo{Reiser e Kapitza}{REISER; KAPITZA}{2007}
+{REISER, H.; KAPITZA, R. Vm-fit: supporting intrusion tolerance with
+  virtualisation technology. In:  \emph{Proceedings of the Workshop on Recent
+  Advances on Intrusion-Tolerant Systems}. [S.l.: s.n.], 2007.}
+
+\bibitem[Reiser e Kapitza 2008]{reiser2008fault}
+\abntrefinfo{Reiser e Kapitza}{REISER; KAPITZA}{2008}
+{REISER, H.; KAPITZA, R. Fault and intrusion tolerance on the basis of virtual
+  machines.
+\emph{Tagungsband des}, v.~1, p. 11--12, 2008.}
+
+\bibitem[Reiter 1995]{reiter1995rampart}
+\abntrefinfo{Reiter}{REITER}{1995}
+{REITER, M. The rampart toolkit for building high-integrity services.
+\emph{Theory and Practice in Distributed Systems}, Springer, p. 99--110, 1995.}
+
+\bibitem[Reiter et al. 1996]{reiter1996omega}
+\abntrefinfo{Reiter et al.}{REITER et al.}{1996}
+{REITER, M. et al. The ? key management service. In:  ACM. \emph{Proceedings of
+  the 3rd ACM conference on Computer and communications security}. [S.l.],
+  1996. p. 38--47.}
+
+\bibitem[Rodrigues, Castro e Liskov 2001]{rodrigues2001base}
+\abntrefinfo{Rodrigues, Castro e Liskov}{RODRIGUES; CASTRO; LISKOV}{2001}
+{RODRIGUES, R.; CASTRO, M.; LISKOV, B. Base: Using abstraction to improve fault
+  tolerance.
+\emph{ACM SIGOPS Operating Systems Review}, ACM, v.~35, n.~5, p. 15--28, 2001.}
+
+\bibitem[Rosenblum 2004]{rosenblum2004reincarnation}
+\abntrefinfo{Rosenblum}{ROSENBLUM}{2004}
+{ROSENBLUM, M. The reincarnation of virtual machines.
+\emph{Queue}, ACM, v.~2, n.~5, p.~34, 2004.}
+
+\bibitem[Rosenblum e Garfinkel 2005]{rosenblum2005virtual}
+\abntrefinfo{Rosenblum e Garfinkel}{ROSENBLUM; GARFINKEL}{2005}
+{ROSENBLUM, M.; GARFINKEL, T. Virtual machine monitors: Current technology and
+  future trends.
+\emph{Computer}, IEEE, v.~38, n.~5, p. 39--47, 2005.}
+
+\bibitem[Sahoo, Mohapatra e Lath 2010]{sahoo2010virtualization}
+\abntrefinfo{Sahoo, Mohapatra e Lath}{SAHOO; MOHAPATRA; LATH}{2010}
+{SAHOO, J.; MOHAPATRA, S.; LATH, R. Virtualization: A survey on concepts,
+  taxonomy and associated security issues. In:  IEEE. \emph{Computer and
+  Network Technology (ICCNT), 2010 Second International Conference on}. [S.l.],
+  2010. p. 222--226.}
+
+\bibitem[Schneider 1982]{schneider1982synchronization}
+\abntrefinfo{Schneider}{SCHNEIDER}{1982}
+{SCHNEIDER, F. Synchronization in distributed programs.
+\emph{ACM Transactions on Programming Languages and Systems (TOPLAS)}, ACM,
+  v.~4, n.~2, p. 125--148, 1982.}
+
+\bibitem[Schneider 1990]{schneider1990implementing}
+\abntrefinfo{Schneider}{SCHNEIDER}{1990}
+{SCHNEIDER, F. Implementing fault-tolerant services using the state machine
+  approach: A tutorial.
+\emph{ACM Computing Surveys (CSUR)}, ACM, v.~22, n.~4, p. 299--319, 1990.}
+
+\bibitem[Smith e Nair 2005]{smith2005architecture}
+\abntrefinfo{Smith e Nair}{SMITH; NAIR}{2005}
+{SMITH, J.; NAIR, R. The architecture of virtual machines.
+\emph{Computer}, IEEE, v.~38, n.~5, p. 32--38, 2005.}
+
+\bibitem[Sousa, Neves e Verissimo 2005]{sousa2005resilient}
+\abntrefinfo{Sousa, Neves e Verissimo}{SOUSA; NEVES; VERISSIMO}{2005}
+{SOUSA, P.; NEVES, N.; VERISSIMO, P. How resilient are distributed f
+  fault/intrusion-tolerant systems? In:  IEEE. \emph{Dependable Systems and
+  Networks, 2005. DSN 2005. Proceedings. International Conference on}. [S.l.],
+  2005. p. 98--107.}
+
+\bibitem[Stumm et al. 2010]{stumm2010intrusion}
+\abntrefinfo{Stumm et al.}{STUMM et al.}{2010}
+{STUMM, V. et al. Intrusion tolerant services through virtualization: a shared
+  memory approach. In:  IEEE. \emph{Advanced Information Networking and
+  Applications (AINA), 2010 24th IEEE International Conference on}. [S.l.],
+  2010. p. 768--774.}
+
+\bibitem[Tanenbaum 1992]{tanenbaum1992modern}
+\abntrefinfo{Tanenbaum}{TANENBAUM}{1992}
+{TANENBAUM, A. \emph{Modern operating systems}. [S.l.]: Prentice Hall New
+  Jersey, 1992.}
+
+\bibitem[Ver{\'\i}ssimo 2006]{verissimo2006travelling}
+\abntrefinfo{Ver{\'\i}ssimo}{VER{\'I}SSIMO}{2006}
+{VER{\'I}SSIMO, P. Travelling through wormholes: a new look at distributed
+  systems models.
+\emph{ACM SIGACT News}, ACM, v.~37, n.~1, p. 66--81, 2006.}
+
+\bibitem[Ver{\'\i}ssimo e Casimiro 2002]{verissimo2002timely}
+\abntrefinfo{Ver{\'\i}ssimo e Casimiro}{VER{\'I}SSIMO; CASIMIRO}{2002}
+{VER{\'I}SSIMO, P.; CASIMIRO, A. The timely computing base model and
+  architecture.
+\emph{Computers, IEEE Transactions on}, IEEE, v.~51, n.~8, p. 916--930, 2002.}
+
+\bibitem[Ver{\'\i}ssimo, Neves e Correia 2003]{verissimo2003intrusion}
+\abntrefinfo{Ver{\'\i}ssimo, Neves e Correia}{VER{\'I}SSIMO; NEVES;
+  CORREIA}{2003}
+{VER{\'I}SSIMO, P.; NEVES, N.; CORREIA, M. Intrusion-tolerant architectures:
+  Concepts and design.
+\emph{Architecting Dependable Systems}, Springer, p. 3--36, 2003.}
+
+\bibitem[Veronese et al. 2011]{veronese2011efficient}
+\abntrefinfo{Veronese et al.}{VERONESE et al.}{2011}
+{VERONESE, G. et al. Efficient byzantine fault tolerance.
+\emph{Computers, IEEE Transactions on}, IEEE, p.~1--1, 2011.}
+
+\bibitem[Wood et al. 2008]{wood2008zz}
+\abntrefinfo{Wood et al.}{WOOD et al.}{2008}
+{WOOD, T. et al. \emph{ZZ: Cheap practical BFT using virtualization}.
+[S.l.], 2008.}
+
+\bibitem[Yin et al. 2003]{yin2003separating}
+\abntrefinfo{Yin et al.}{YIN et al.}{2003}
+{YIN, J. et al. Separating agreement from execution for byzantine fault
+  tolerant services.
+\emph{ACM SIGOPS Operating Systems Review}, ACM, v.~37, n.~5, p. 253--267,
+  2003.}
+
+\bibitem[Zhou, Schneider e Renesse 2002]{zhou2002coca}
+\abntrefinfo{Zhou, Schneider e Renesse}{ZHOU; SCHNEIDER; RENESSE}{2002}
+{ZHOU, L.; SCHNEIDER, F.; RENESSE, R. V. Coca: A secure distributed online
+  certification authority.
+\emph{ACM Transactions on Computer Systems (TOCS)}, ACM, v.~20, n.~4, p.
+  329--368, 2002.}
+
+\end{thebibliography}

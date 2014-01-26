@@ -1,0 +1,758 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Universidade Federal de Santa Catarina             
+% Biblioteca Universitária                     
+%                                                           
+% (c)2010 Roberto Simoni (roberto.emc@gmail.com)
+%         Carlos R Rocha (cticarlo@gmail.com)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\PassOptionsToPackage{abnt-etal-cite=1, abnt-etal-list=0}{abntcite}
+\documentclass{ufscThesis}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pacotes usados especificamente para este documento
+% Definidos pelo criador do documento
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pacote que permite o uso de múltiplas linhas em uma tabela
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{multirow}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pacote que permite a criação de algoritmos computacionais
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[lined,boxed,commentsnumbered]{algorithm2e}
+
+%\renewcommand{\theequation}{\arabic{equation}} %se desejar tirar o capitulo
+
+%\usepackage[labelsep=period]{caption} % O separador de legenda é um .
+\usepackage[labelsep=endash]{caption} % O separador de legenda é um -
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Identificadores do trabalho
+% Usados para preencher os elementos pré-textuais
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titulo{Otimizando um Espaço de Tuplas Tolerante a Intrusões} % Titulo do trabalho
+%\subtitulo{Estilo \LaTeX~ padrão}                % Subtitulo do trabalho (opcional)
+\autor{Marcelo Ribeiro Xavier da Silva}           % Nome do autor
+\data{01}{junho}{2012}                           % Data da publicação do trabalho
+
+\orientador{Prof. Dr. Lau Cheuk Lung}                    % Nome do orientador e (opcional) seu título
+\coorientador{Prof. Dr. Aldelir Fernando Luiz}                % Nome do coorientador e seu título (opcional)
+%\coordenador{Prof. Dr. ?}              % Nome do coordenador do curso e (opcional) seu título
+
+%\departamento[a]{Faculdade de Ciências do Mar}
+%\curso[a]{Atividade de Extensão em Corte e Costura}
+
+
+%%% Sobre a Banca
+\numerodemembrosnabanca{3} % Isso decide se haverá uma folha adicional
+\orientadornabanca{sim} % Se faz parte da banca definir como sim
+%\coorientadornabanca{sim} % Se faz parte da banca definir como sim
+\bancaMembroA{Prof. Dr. Convidado} %Nome do presidente da banca
+\bancaMembroB{Prof. Dr Outro}      % Nome do membro da Banca
+\bancaMembroC{Prof. Dr E mais um}     % Nome do membro da Banca
+%\bancaMembroD{Prof. quarto membro}       % Nome do membro da Banca
+%\bancaMembroE{Prof. quinto membro}       % Nome do membro da Banca
+%\bancaMembroF{Prof. sexto membro}        % Nome do membro da Banca
+%\bancaMembroG{Prof. sétimo membro}       % Nome do membro da Banca
+
+%\dedicatoria{A quem o trabalho é dedicado, se é que o é (opcional)}
+
+%\agradecimento{Agradecimentos opcionais, caso existam pessoas ou entidades a quem se deve apoio ou suporte ao trabalho ora apresentado.}
+
+%\epigrafe{Um bonito pensamento ou citação, se for o caso}{autor do pensamento}
+
+%\textoResumo {Aqui é redigido o resumo do documento...  blabla blablablabla blabla ipsum loren e a sophia também blab ablablabl ablbalbalblab lablablbalb lab lab lab labl a blab lablablab la blab alballbalba lba lba }
+
+%\palavrasChave {chave 1. chave 2. ... chave n.}
+
+%\textAbstract {Here is written the abstract of the document}
+
+%\keywords {key 1. key 2. ... key n.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Início do documento                                
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%--------------------------------------------------------
+% Elementos pré-textuais
+\capa  
+%\folhaderosto[comficha] % Se nao quiser imprimir a ficha, é só não usar o parâmetro
+%\folhaaprovacao
+%\paginadedicatoria
+%\paginaagradecimento
+%\paginaepigrafe
+%\paginaresumo
+%\paginaabstract
+\listadefiguras
+%\listadetabelas 
+%\listadeabreviaturas
+%\listadesimbolos
+\sumario
+
+%-------------------------------------------------------------------------------
+% Para listagens de algoritmos e de código, recomenda-se consultar os
+% pacotes algorithms e lstlistings, que são usados para definir esses
+% dois tipos de elementos de texto e possuem os comandos
+% \listofalgorithms e \lstlistoflistings, respectivamente.
+%-------------------------------------------------------------------------------
+
+%--------------------------------------------------------
+% Elementos textuais
+
+
+\chapter{Introdução}
+A popularização da \textit{Internet}, redes socias e \textit{softwares} na \textit{web} fez com que houvesse um significativo crescimento na área de computação distribuída. Este crescimento traz em si a preocupação em assegurar que estas aplicações, que fazem parte do nosso dia-a-dia, não venham a falhar ou ficarem indisponíveis. Esta preocupação com a disponibilidade, corretude e integridade destes serviços estimula o estudo de mecanismos que visam a segurança de funcionamento destes sistemas, isto é, os sistemas atuais devem ser cada vez mais robustos e devem, do ponto de vista dos utilizadores, estar sempre disponíveis com garantias de corretude e integridade, já que as falhas dos mesmos acarretam não apenas desperdícios financeiros, mas também de tempo. Neste âmbito, os requisitos de tolerância a faltas, que costumavam ser aplicados apenas no domínio dos sistemas de missão crítica e de segurança nacional, são hoje também aplicados a outros domínios de sistemas, como é o caso dos sistemas distribuídos.
+
+Com o uso massivo da  \textit{Internet} para tráfego de dados (pessoais, profissionais, empresariais, etc), surge também a preocupação com segurança e o sigilo destes dados. A confidencialidade torna-se um agravante em sistemas distribuídos, isto deve-se ao fato das informações estarem replicadas em vários servidores, ou seja, é mais fácil interceptar os dados que estão sendo trafegados.
+Dentro da área de tolerância a intrusão existe uma grande preocupação com a diminuição de recursos e passos para que os servidores cheguem a um acordo \cite{bessani2008depspace} \cite{correia2002efficient} \cite{bessaniefficient}, entretanto são mais raros os trabalhos que propõe aliar confidencialidade à diminução recursos computacionais. As novas soluções para sistemas distribuídos devem atender aos requisitos da atualidade tolerando faltas e mantendo a coerência.
+
+Diante destes fatos, parece lógico afirmar que se fazem necessários novos modelos que consigam agregar as qualidades dos anteriormente propostos de maneira a atingir soluções ainda mais completas para a área da computação distribuída. Estas soluções tem por desafio a manutenção da consistência e da disponibilidade do sistema de maneira confidencial, mesmo que situações de adversidade venham a ocorrer.
+
+O objetivo geral deste trabalho é a otimização de um modelo de espaço de tuplas tolerante a faltas bizantinas usando replicação \cite{bessani2008depspace} que, através do uso de uma infraestrutura de algoritmos baseados em registradores (memória compartilhada distribuída), consiga manter a confidencialidade aliada à diminuição de quantidade de recursos de $3f + 1$ \cite{lamport1982byzantine} para $2f +1$. Este modelo deve possuir interfaces que permitam sua utilização por diferentes tipos de aplicações, i.e., devem ser definidos mecanismos que permitam que aplicações críticas possam ser desenvolvidas e façam uso deste modelo. Tendo em vista que este modelo será utilizado como base para as mais variadas aplicações, devem ser também estudados aspectos de qualidade de serviço, tendo em vista a possibilidade de presença de entidades bizantinas no sistema.
+
+Em suma, as falhas em sistemas distribuídos, 	que podem ter origens diversas,  sejam de natureza acidental, e.g., erros de programação, erros de depuração, queima de componentes, etc, ou de  natureza maliciosa, tal como ataques de segurança bem sucedidos, podem resultar em intrusões nos sistemas comprometendo as propriedades de segurança e/ou causando falhas nos componentes invadidos. Isto expõe que a tolerância a faltas e intrusões é um requisito fundamental para prover um nível satisfatório de qualidade de serviço para as aplicações executadas em ambientes de computação distribuída.
+
+\section{Organização do Texto}
+O restante do documento esta organizado conforme segue. O capítulo \ref{traCor} apresenta os trabalhos que se relacionam diretamente com o assunto da proposta. O capítulo \ref{conBasComDis}
+apresenta os principais conceitos  da literatura.  Por fim o capítulo \ref{proTrab} apresenta o trabalho proposto para desenvolvimento da tese de mestrado onde é exposta a motivação, os objetivos, considerações sobre os aspectos relacionados a proposta de tese e toda a base necessária a fim de atingir os objetivos estabelecidos.
+
+\chapter{Trabalhos Correlatos} \label{traCor}
+\section{An Efficient Byzantine-Resilient Tuple Space}
+
+Em \cite{bessani2009efficient} os autores sugerem um espaço de tuplas capaz de tolerar faltas bizantinas aqui chamado de Espaço de Tuplas Bizantinas Linearizáveis (ETBL).
+
+O ETBL possui duas propriedades interessantes. A primeira é a linearização que provê uma forte semântica de concorrência onde operações invocadas de maneiras concorrentes parecem ter efeito instantâneo entre sua invocação e o seu retorno. O ETBL é livre de espera, ou seja, esta segunda propriedade garante que cada processo de clientes corretos que invoque uma operação no ETBL vai eventualmente receber uma resposta independente da falha de outros clientes ou conteção de acesso. 
+Adicionalmente, o ETBL é baseado em uma nova filosofia quórum de Sistemas de replicação Bizantina onde a semântica de cada operação é cuidadosamente analisada e é utilizado um protocolo mais simples possível para cada.
+As principais contribuições do artigo são:
+\begin{enumerate}
+\item Apresentar o primeiro Espaço de Tuplas Linearizáveis tolerante à faltas Bizantinas;
+\item Introduzir uma nova filosofia para implementar memória de objetos compartilhados com número de consenso maior que um, usando protocolos de quórum;
+\item Apresentar as condições corretas para um espaço de tuplas linearizáveis;
+\item Comparar a solução proposta com a máquina de estados para replicação bizantina mostrando os benefícios da ETBL.
+\end{enumerate}
+
+Sistemas de quórum são técnicas para implementar objetos de memória compartilhada dependentes em sistemas distribuídos de troca de mensagens. Dentro do universo de servidores de dados, um sistema de quórum é um conjunto de servidores que possuem uma intersessão não vazia. A intuição é que uma memória compartilhada é armazenada de maneira replicada em todos os servidores, qualquer operação de escrita ou leitura é precisa ser feita em apenas um quórum de servidores, não em todos. Como existe a intercessão entre os quóruns e possível implementar estratégias de manutenção da integridade dos dados, mesmo que as operações sejam efetuadas em diferentes quóruns.
+
+A filosofia da Espaço de Tuplas Bizantinas Linearizáveis é usar protocolos baseados em quórum para as operações de leitura e escrita e uma primitiva de acordo para as operações de leitura-remoção.
+Em sistemas de quórum a escrita é usualmente feita através dos passos 1) leitura da estampilha temporal de um quórum, 2)incrementá-la 3) escrita do novo valor e da nova estampilha temporal. A leitura, nesses sistemas, executa os passos 1) leitura do par de estapilhas temporais de um quórum, 2) aplicar alguma regra de consolidação de leitura, e.g. "o valor atual do registro é aquele associado com o maior valor de estampilha temporal que aparece $f + 1$ vezes".
+Para desenvolver um espaço de tuplas de objetos usando estas técnicas, surgem duas diferenças: 1) o estado do espaço de tuplas pode ser arbitrariamente grande e 2) a operação de leitura-remoção não pode ser implementada por protocolos de leitura e escrita devido ao fato de que uma mesma tupla não pode ser removida por duas operações concorrentes.
+A primeira diferença torna impossível o uso de estampilhas temporais. A segunda diferença faz com que a opereção de leitura-remoção sejam executadas de maneira concorrente em todos os servidores. Para solucionar estes problemas, três técnicas são implementadas pelos autores.
+A primeira técnica cria três estados para as tuplas não inserido, inserido e removido. Isto é, não é mais necessário o uso de estampilhas temporais, pois um processo que invoca uma operação de leitura vai receber uma resposta apenas das tuplas que estiverem no estado inserido.
+A segunda técnica é a aplicação de um de padrão de \textit{listener} de comunicação para operações de leitura assegurando que o decisão usual por quórum possa ser aplicada no sistema mesmo com execuções em paralelo.
+A terceira técnica  é a modificação do algoritmo Bizantino de PAXOS para permitir que o líder possa propor a ordem para operação, permitindo que sistema alcance um acordo mesmo quando não houver acordo de estado entre as réplicas.
+
+Antes de descrever os protocolos os autores fazem algumas suposições adicionais:
+\begin{itemize}
+\item Para permitir que tuplas locais sejam representadas como conjuntos, os autores assumiram que todas as tuplas são únicas;
+\item Toda mensagem que deveria estar assinada por um servidor e não está corretamente assinada é simplesmente ignorada;
+\item Todas as mensagens carregam um \textit{nonce} para evitar ataques de repetição;
+\item Controle de acesso é implicitamente forçado. Isto é, cada espaço de tuplas possui algum tipo mecanismo de controle de acesso especificando quais processos podem inserir tuplas e cada tupla possui dois conjuntos de processos que podem ler e remover;
+\item Os algoritmos são descritos considerando um espaço de tuplas único, mas sua extensão para suportar múltiplos espaços tupla é simples: Uma cópia de cada espaço é implantada em cada servidor e todos os protocolos são executados no escopo de um dos espaços adicionando o campo em cada mensagem indicando que espaço de tuplas está sendo acessado.
+\item As reações dos servidores às recepções de mensagens são atomicas.
+\end{itemize}
+
+Cada servidor $s$ possui em si quatro variáveis: $T_s, r_s, R_s$ e $L_s$. A variável $T_s$ representa a cópia local do espaço de tuplas $T$ neste servidor. A variável $r_s$ é o número de de tuplas anteriormente removidas da réplica de espaço de tuplas em $s$. O conjunto $R_s$ contém as tuplas que já foram removidas da cópia local do espaço de tuplas. Esta variável garante que uma tupla não seja removida mais de uma vez. A variável $r_s$ é atualizada apenas pelo protocolo de leitura-remoção. A última variável, $L_s$ contém todos os clientes registrados para receberem atualizações deste espaço de tuplas. É a variável usada nas operações de leitura.
+
+Quando um processo $p$ quer inserir uma tupla $t$ em um espaço de tuplas, este processo envia $t$ para todos os servidores e espera pelos \textit{acknowledgements} de um quórum de servidores.
+Do lado do servidor, se uma tupla não estiver no conjunto de remoção $R_s$, então a mesma é inserida no espaço de tuplas e um \textit{acknowledgement} é retornado.
+Com este algoritmo simples, um processo faltoso de um cliente pode inserir uma tupla em um conjunto de servidores. Entretanto, a operação de leitura só pode ser efetuada se a tupla desejada estiver inserida em pelo menos $f + 1$ servidores.
+
+O protocolo de leitura de tuplas é um pouco mais complicado que o anterior por duas razões. Primeiro por empregar o padrão de \textit{listener} de comunicação para capturar o estado das réplicas entre as remoções. E a segunda razão é que, se uma tupla correspondente for encontrada, o processo pode ter que escrevê-la no sistema para assegurar sua leitura em leituras subsequentes, satisfazendo a propriedade de linearização.
+Quando uma leitura é chamada, o cliente $p$ envia o \textit{template} $t$ para os servidores. Quando um servidor $s$ recebe essa mensagem, o mesmo registra $p$ como um \textit{listener} e responde com todas as tuplas em $T_s$ que combinam com $t$ e com o número atual de tuplas que já foram removidas $r_s$. Enquanto $p$ está registrado como um \textit{listener}, sempre que uma tupla é adicionada ou removida do espaço, um conjunto com as tuplas que combinam com $t$ é enviado para $p$.
+O processo $p$ coleta as respostas dos servidores, colocando-as em uma matriz de Respostas, até que tenha um conjunto de respostas de um quórum de servidores reportando o estado após o mesmo número de remoções de tuplas $r$. Depois disso, uma mensagem de LEITURA-COMPLETA é enviada aos servidores.
+O resultado da operação depende apenas de uma linha da matriz de Respostas. Essa linha representa um corte no estado do sistema onde um quórum  de servidores processaram exatamente as mesmas $r$ remoções, portanto, neste corte, a fundamentação de quórum pode ser aplicada.
+Este é um mecanismo fundamental para assegurar que os algoritmos de acordo e os protocolos baseados em quórum possam ser utilizados em conjunto por diferentes operações.
+
+Os protocolos anteriores são implementados usando apenas técnicas de quórum Bizantino. O protocolo para leitura-remoção, por ouro lado, requer abstrações mais fortes. Esta é uma consequência direta da semântica do espaço de tuplas que não permite leitura-remoção remover a mesma tupla duas vezes. Isto é o que faz com que o espaço de tuplas de memória compartilhada de objetos tenha número de consenso igual à dois.
+Uma abordagem para implementar esta semântica é executar todas as operações de leitura-remoção na mesma ordem em todos os servidores corretos. Isto pode ser feito usando um protocolo \textit{multicast} de ordem total baseado no algoritmo \textit{Byzantine PAXOS}.
+Uma abordam simples seria usar isso como um bloco sem modificações, porém isso requer duas execuções do protocolo para cada leitura-remoção. Para evitar esta sobrecarga, a solução proposta pelos autores é baseada na modificação deste algoritmo em quatro pontos específicos:
+\begin{enumerate}
+\item Quando o líder recebe uma requisição de leitura-remoção de um cliente $p$, ele envia para outros servidores uma mensagem de PRE-PREPARE com não apenas o número de sequência $i$, mas também uma mensagem com todas as tuplas que combinam com a tupla da requisição;
+\item Um servidor correto $s'$ aceita a remover uma tupla $t_t$ proposta pelo líder na mensagem de PRE-PREPARE se:
+\begin{enumerate}
+\item Se as condições do algoritmo \textit{Byzantine PAXOS} forem satisfeitas;
+\item $s'$ não aceitou a remoção de $t_t$ anteriormente;
+\item $t_t$ e $t$ combinam;
+\item $t_t$ não é forjada.
+\end{enumerate}
+\item Quando um novo líder $l'$ é eleito, cada servidor envia seu protocolo de estado e um conjunto de tuplas das tuplas que combinanm com $t$ assinado em sua tupla local para o novo líder;
+\item Um cliente aguarda por $(n+1)\over2$ respostas dos servidores que combinem, ao invés de $f + 1$ como é em \textit{Byzantine PAXOS}.
+Com estas modificações, para um cliente $p$, a operação leitura-remoção ocorre exatamente como se o espaço de tuplas replicado tivesse sido implementado a replicação de máquinas de estado baseada em \textit{Byzantine PAXOS}. O cliente $p$ envia uma requisição para todos os servidores e espera até que $(n+1)\over2$ servidores respondam com o mesmo valor para o resultado da operação.
+No lado do servidor, as requisições de leitura-remoção são inseridas no conjunto pendente $P_s$. Para cada requisição pendente em $P_s$ é atribuído um número de sequência. O líder pega as tuplas que combinam com $t$ do espaço de tuplas e as marca para serem removidas na iésima remoção. Se nenhuma tupla desmarcada combina com $t$ então é proposto $\bot$ para acordo via \textit{Byzantine PAXOS}.
+Quando os servidores entram em acordo sobre o número de sequência e a tupla à ser removida, o predicado \textit{paxos\underline{ }deliver} torna-se verdadeiro. Então, cada servidor $s$ desmarca qualquer tupla que estiver marcada para remoção com o número de sequência $i$ e remove a requisição de $P_s$. Em seguida, se o resultado da operação é uma tupla $t_t$ válida, então o servidor verifica se existe no espaço de tuplas local $T_s$. Se existir, então é feita a remoção. Finalmente, $t_t$ é adicionada à $R_s$, o contador $r_s$ é incrementado e o resultado é enviado para o processo cliente que efetuou a requisição.
+\end{enumerate}
+
+\textbf{Conclusões}
+
+Os autores apresentaram o ETBL, cuja construção provê confiabilidade, disponibilidade e integridade para coordenação entre processos em sistemas distribuídos abertos.
+De maneira geral o sistema é baseado em um conjunto de servidores de onde menos de um quarto pode ser faltoso e um número ilimitado de processos clientes onde, arbitrariamente, vários podem ser faltosos.
+Sua arquitetura combina  protocolos de sistemas de quórum com protocolos baseados em consenso.
+A contribuição deste trabalho é muito importante, entretanto, ainda existem pontos que podem ser melhorados, entre estes pontos destaco a necessidade de diminuir a quantidade de recursos para tolerar faltas bizantinas, já que ainda são necessárias mais que $2f + 1$ máquinas.
+
+\section{DepSpace: a Byzantine fault-tolerant coordination service}
+
+Em \cite{bessani2008depspace} os autores, baseados em trabalhos anteriores, sugerem uma abordagem que faz uso de espaço aumentado de tuplas para prover um serviço de coordenação Tolerante a Faltas Bizantinas (TFB).
+
+O espaço de tuplas proposto é não centralizado, sendo implementado por um conjunto de servidores de espaço de tuplas. Este conjunto forma um espaço de tuplas com as características de confiabilidade, disponibilidade, integridade e confidencialidade, mesmo na ocorrência de faltas bizantinas, como ataques e invasões e alguns dos servidores.
+A implementação de um espaço de tuplas com as características citadas trás alguns desafios interessantes. A arquitetura proposta é baseada na abordagem de máquina de estados. Entretanto esta abordagem não garante confidencialidade dos dados armazenados nos servidores; e a ideia de replicar dados em vários servidores vai no sentido contrário ao da confidencialidade já que torna mais simples para um invasor encontrar estes dados. Portanto, combinar confidencialidade com a abordagem de máquina de estados é um desafio à ser endereçado. 
+Um segundo desafio é intrinsecamente relacionado ao modelo de espaço de tuplas. Para executar uma operação de leitura, um processo qualquer provê um \textit{template} e o espaço de tuplas retorna uma tupla que combine com o valor passado. Entretanto os dados são criptografados visando confidencialidade, portanto, isto torna-se um empecilho para a comparação da tupla com o \textit{template}.
+
+Para endereçar estes problemas os autores criaram o DepSpace que usa um esquema de compatilhamento de segredo em conjunto com primitivas padrões de criptografia de maneira que se garante que a tupla armazenada no sistema terá seu conteúdo revelado apenas para partes autorizadas.
+
+As contribuções do artigo são:
+\begin{enumerate}
+\item Arquitetura e implementação de um espaço de tuplas com segurança de funcionamento tolerante a intrusão. Esta arquitetura envolve uma combinação sistemática não trivial de segurança e mecanismos de tolerância a faltas;
+\item Desenvolvimento de um esquema de confidencialidade de conteúdo para dados replicados que pode ser combinado com qualquer protocolo de replicação TFB;
+\item Desenvolvimento de vários serviços genéricos mostrando a simplicidade de se desenvolver abstrações de sistemas distribuídos usando o modelo de espaço de tuplas.
+\end{enumerate}
+
+Um espaço de tuplas pode ser visto como um objeto de memória compartilhada que provê operações para armazenamento e busca de conjutos de dados ordenados chamados de tuplas. Uma tupla $t$ na qual todos os campos tem um valor definido é chamada de entrada.  Uma tupla com um mais campos indefinidos é chamada de \textit{template}. Um campo indefinido é representado por um coringa $('*')$. \textit{Templates} são utilizados para permitir acesso à tuplas no espaço de tuplas. Uma entrada $t$ e um \textit{template} $\overline{t}$ combinam se possuírem o mesmo número de campos e todos os valores definidos em $\overline{t}$ corresponderem aos valores em $t$. Uma tupla $t$ pode ser inserida no espaço de tuplas usando-se a operação $out(t)$. A operação $rd(t)$ é usada para ler tuplas do espaço, e seu retorno é qualquer tupla do espaço que combine com o \textit{template}. Uma tupla pode ser lida e removida do espaço usando-se a operação $in(t)$. As operações $in$ e $rd$ são bloqueantes. Versões não bloqueantes, $inp$ e $rdp$, são usualmente disponibilizadas também.
+Neste artigo os autores implementaram PEATS (\textit{Policy-Enforced Augmented Tuple Space}) que disponibiliza também a operação $cas(t; t)$ (\textit{conditional atomic swap}. Esta operação  insere $t$ no se não encontrar nenhuma tupla que combine com o \textit{template}. A operação $cas$ é importante principalmente para resolver o problema de consenso que é a base para solucionar vários problemas de sincronização como \textit{commit} atômico, difusão com ordem total e eleição de líder.
+Um espaço de tuplas é dito com segurança de funcionamento se satisfizer os atributos de segurança de funcionamento. Os atributos relevantes neste caso são:
+\begin{itemize}
+\item Confiabilidade: as operações realizadas no espaço de tuplas fazem com que seu estado se modifique de acordo com sua especificação;
+\item Disponibilidade: o espaço de tuplas sempre está pronto para executar as operações requisitadas pelas partes autorizadas;
+\item  Integridade: nenhuma alteração imprópria no estado de um espaço de tuplas pode ocorrer, i.e., o estado de um espaço de tuplas só pode ser alterado através da correta execução de suas operações;
+\item Confidencialidade: o conteúdo dos campos de uma tupla não podem ser revelados para partes não autorizadas.
+\end{itemize}
+
+A dificuldade para garantir os atributos citados está na ocorrência de faltas, sejam acidentais ou maliciosas. Por ser difícil de modelar comportamento malicioso, sistemas tolerantes a intrusão assumem a mais genérica classe de faltas. Em conjunto com um esquema de controle de acesso é possível prover todos os atributos de dependabilidade, excetando-se apenas a confidencialidade.
+
+A arquitetura do espaço de tuplas com segurança de funcionamento é  constituída de várias camadas que reforçam cada uma das propriedades de dependabilidade citadas. A figura 1 apresenta esta arquitetura mostrando todas as camadas. No topo do lado do cliente está a camada de \textit{proxy} que fornece acesso ao espaço de tuplas replicado. No topo do lado do servidor está a implementação (local) do espaço de tuplas. 
+A comunicação segue um esquema semelhante à chamadas remotas de procedimento. A aplicação interage com o sistema chamando as operações já citadas para o espaço de tuplas. Estas funções são chamadas no \textit{proxy}. A camada logo abaixo, lida com o controle de acesso . Na camada seguinte é trabalhada a confidencialidade e então vem a camada que lida com a replicação. O lado do servidor funciona de maneira semelhante, exceto pelo fato que de existe uma camada que lida com as políticas de acesso.
+Nem todas as camadas precisam ser utilizadas, isso é configurável de acordo com a necessidade do projeto.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.8\textwidth]{figs/figDep.png}
+\caption{Arquitetura do DepSpace.}
+\label{figDep}
+\end{figure}
+
+O espaço de tuplas do DepSpace é mantido em um conjunto de $n$ servidores de maneira que mesmo que $f$ destes servidores falhem, isso não implicará em perda das propriedades de confiabilidade, disponibilidade e integridade do sistema. A ideia é que, se alguns servidores falharem, o espaço ainda esteja disponível e as operações ocorram funcionem de maneira correta. As réplicas não faltosas se gerenciam para superar o mau comportamento das faltosas.
+A abordagem escolhida, máquina de estados, requer que todas as réplicas (i) sejam iniciadas no mesmo estado e (ii) executem todas as requisições na mesma ordem. O primeiro é simples de alcançar fazendo com que o espaço de tuplas seja iniciado sem tuplas. O segundo requer um protocolo de difusão com ordem total. Essa abordagem também força que as réplicas sejam determinísticas. Isto implica que uma remoção ou leitura em diferentes servidores, que estejam no mesmo estado, tenha como retorno a mesma resposta.
+O protocolo funciona de maneira simples, o cliente envia uma requisição de operação usando o protocolo de difusão com ordem total  e espera por $f + 1$ respostas com o mesmo valor e vindas de servidores diferentes. Como os servidores recebem o mesmo conjunto de mensagens na mesma ordem e como o espaço de tuplas é determinístico, sempre existirão pelo menos $n - f \geq 2f + 1$ servidores corretos que executarão a operação e responderão com o mesmo valor.
+
+O principal esquema criptográfico utilizado no mecanismo de confidencialidade do DepSpace é compartilhamento de segredo verificável publicamente. No esquema PVSS utilizado, um distribuidor (\textit{dealer}) distribui fragmentos (\textit{shares}) de um segredo para $n$ partes distintas, chamadas portadores (\textit{share holders}), usando um protocolo de distribuição. Posteriormente, um combinador (\textit{combiner}) obtém pelo menos $k$ fragmentos para reconstruir o segredo. O PVSS também fornece duas funções de verificação, uma para cada servidor poder verificar o fragmento que recebeu do distribuidor e outro para o cliente/combinador verificar se as partes coletadas dos servidores não estão corrompidas.
+O esquema de confidencialidade tem que lidar também com o problema de combinar tuplas encriptadas com \textit{templates}. Quando um cliente insere uma tupla no espaço é escolhido um dos três tipo de proteção para cada campo da tupla:
+\begin{itemize}
+\item Público: o campo não é cifrado e portanto seu valor pode ser comparado arbitrariamente e revelado a partes maliciosas;
+\item Comparável:  o campo é cifrado e um resumo criptográfico de seu valor é armazenado juntamente com a tupla de tal forma que as comparações de igualdade sejam possíveis;
+\item Privado: o campo é cifrado e nenhuma informação derivada dele é armazenada, logo seu conteúdo não pode ser alvo de comparação.
+\end{itemize}
+E através destas proteções é implementada a ideia de campos comparáveis que permite que seja feita a comparação de tuplas protegendo seus conteúdos.
+
+Na arquitetura proposta o controle de acesso é implementado por uma camada específica tanto no cliente quanto no servidor. No lado do cliente, quando uma operação $out$ ou $cas$ é invocada são anexadas as credenciais à tupla. No servidor é verificada se a operação pode ser executada. Se a operação é de inserção de uma tupla $t$, as credenciais do cliente anexadas à $t$ são suficientes. Se a operação for de leitura ou remoção, as crendencias associadas ao \textit{template} $\overline{t}$ devem ser suficientes para executar a operação.
+
+As políticas de segurança consideram três tipos de parâmetros para decidir se uma operação é aprovada ou negada: o identificador do invocador; operações e seus argumentos; e as atuais tuplas dentro do espaço.
+O espaço de tuplas tem uma única política de acesso. Esta política deve ser definida durante o \textit{setup} do sistema. Sempre que uma invocação de operação é recebida por um servidor, é verificado se a mesma satisfaz a política de acesso na camada de políticas de segurança. A verificação é uma avaliação de uma condição lógica expressa na regra da operação invocada. Quando uma operação é rejeitada, o servidor retorna um código de erro para o invocador. O cliente aceita a rejeição se receber $f + 1$ cópias do mesmo código de erro.
+
+\textbf{Conclusões}
+
+O artigo tem grande importância na área, principalmente por integrar replicação de dados com confidencialidade. Os resultados atingidos demonstram um avanço sobre os trabalhos anteriores, entretanto, ainda são necessários $3f + 1$ recursos para que o sistema seja tolerante a faltas bizantinas.
+
+\section{Efficient Byzantine Fault Tolerance}
+
+Em \cite{bessaniefficient} os autores, através de melhorias em trabalhos anteriores, criam dois algoritmos Tolerantes a Faltas Bizantinas (TFB).
+
+O artigo mostra como melhorar os trabalhos BFT e Zyzzyva considerando-se três métricas para isto: número de réplicas, simplicidade de serviço confiável e número de passos de comunicação. Os autores afirmam que os algoritmos são eficientes por serem tão bom ou melhores que os anteriores, levando-se em conta as mesmas métricas. A eficiência, neste caso, vem de um 
+ confiável. Isto significa que o modelo do sistema que considera-se é um pouco diferente da maioria dos trabalhos anteriores, entretanto é uma diferença valorosa.
+
+\textbf{Número de réplicas.} Geralmente  os algoritmos de TFB requerem $3f + 1$ réplicas para tolerar $f$ servidores bizantinos. Estes trabalhos se baseiam na ideia de que servidores corretos conseguem superar os faltosos através de uma sequência de votos. Para isto, são necessárias $f + 1$ réplicas corretas, num total de $2f + 1$ servidores. Contudo, a maioria destes algoritmos precisam de $f$ outros servidores à mais que o mínimo. Somente outros dois algoritmos precisam de apenas $2f + 1$ servidores.
+
+\textbf{Simplicidade de serviço confiável.} Trabalhos anteriores mostram que é possível reduzir o número de réplicas de $3f + 1$ para $2f + 1$ estendendo os servidores com componentes invioláveis, i.e., com componentes que fornecem um serviço correto mesmo que os servidores onde estejam instalados sejam faltosos. Portanto um aspecto importante para chegar à $2f + 1$ é a arquitetura destes componentes invioláveis. Um objetivo fundamental é fazer com que a componente seja verificável, o que requer simplicidade.
+A eficiência do algoritmo proposto é também baseada na simplicidade da componente inviolável se comparada às propostas anteriormente (TTCB, A2M).
+
+\textbf{Número de passos de comunicação.} O número de passos de comunicação é uma importante métrica para algoritmos distribuídos, pelo fato do atraso na comunicação tender a ter mais impacto na latência do algoritmo.
+O primeiro algoritmo proposto - MinBFT - segue um padrão de troca de mensagens similar ao PBFT. As réplicas se movimentam através de uma sucessão de configurações chamadas de Visões ou Pontos de Vista. Cada visão tem uma réplica primária e as demais são apoio (\textit{backups}). Quando um quórum de réplicas suspeita que a primária é faltosa, é feita a troca de primária, permitindo o progresso do sistema. Em casa visão existem passos de comunicação onde a primária envia mensagens para todas as réplicas de apoio, e existem passos em que todas as réplicas enviam mensagens entre si. A ideia fundamental do MinBFT é a utilização de um contador, por parte da primária, para assinar números de sequência para as requisições de clientes. Porém, mais do que assinar números, a componente inviolável gera um certificado que prova de maneira inequívoca que o número assinado pertence apenas àquela mensagem e que o contador foi incrementado.
+
+O segundo algoritmo proposto - MinZyzzyva - é baseado em especulação, i.e., na tentativa de execução de requisições de clientes sem acordo inicial sobre a ordem de execução. MinZyzzyva é uma versão modificada de Zyzzyva, o primeiro algoritmo TFB especulativo. O padrão de comunicação do Zyzzyva é similar ao PBFT, exceto pela especulação: quando as réplicas de apoio recebem uma requisição da primária, de maneira especulativa executam a requisição e enviam uma resposta ao cliente.
+
+A contribuição do artigo está na simplicidade alcançada em termos de números de réplicas, simplicidade de serviço confiável e número de passos de comunicação. Os autores acreditam que a simplicidade torna os algoritmos práticos a um nível apenas comparável com algoritmos tolerantes a faltas de \textit{crash}.
+
+O \textit{Unique Sequential Identifier Generator} (USIG) é um serviço local que existe em todos os servidores. O serviço é responsável por fornecer o valor do contador para mensagens e por assinar esta mensagem ao valor passado. Os identificadores são únicos, monotônicos, e sequenciais para o servidor. Estas três propriedades garantem que o USIG (1) nunca irá assinar o mesmo identificador para duas mensagens distintas, (2) nunca assinará um identificador menor que o anterior, e (3) nunca assinará um identificador que não é o sucessor do anterior. Estas propriedades são garantidas mesmo que o servidor esteja comprometido, portanto o serviço tem que ser implementado em um módulo inviolável. A interface do serviço tem duas funções:
+\begin{itemize}
+\item $createUI(m)$ - retorna um certificado USIG que contém um identificador único e a certificação de que este identificador foi criado pela componente inviolável para a mensagem $m$. O identificador é a leitura do contador monotônico, que é incrementado sempre que a função $createUI$ é chamada.
+\item $VerifyUI(PK, UI, m)$ - verifica se o identificador único ($UI$)  é válido para a mensagem $m$, i.e., se o certificado USIG combina com a mensagem e com o resto dos dados em $UI$.
+\end{itemize}
+Existem duas maneira de se implementar o serviço:
+\begin{itemize}
+\item USIG-Hmac: um certificado contém um Código de Autenticação de Mensagem baseado em \textit{Hash} (Hmac - acrônimo do inglês) obtido através da mensagem e da chave secreta do USIG. A chave de cada USIG é conhecida pelos demais USIG, assim todos são capazes de verificar os certificados gerados.
+\item USIG-sign: o certificado contém uma assinatura obtida usando a mensagem e a chave privada do USIG.
+\end{itemize}
+
+No USIG-Hmac as propriedades do serviço são baseadas na chaves compartilhadas.  Em USIG-Sign as propriedades são baseadas nas chaves privadas. Portanto, para o USIG-Hmac ambas as funções $createUI$ e $verifyUI$ precisam ser implementadas dentro da componente inviolável. No USIG-Sign a verificação necessita apenas da chave pública do USIG que criou o certificado, em função disso, esta operação pode ser executada fora da componente. Em ambas as implementações, as chaves precisam ser compartilhadas para que as verificações sejam executadas.
+
+O MinBFT é um algoritmo não especulativo $2f + 1$ que segue um padrão de troca de mensagens similar ao PBFT.
+Na operação normal a sequência de eventos do MinBFT é a seguinte: (1) o cliente envia uma requisição para todos os servidores; (2) a réplica primária assina o número de sequência para a requisição e envia para todos os servidores numa mensagem $PREPARE$; (3) cada servidor difunde uma mensagem de $COMMIT$ para os demais assim que recebe um $PREPARE$ da primária; (4) quando um servidor aceita uma requisição, ele executa a operação correspondente e retorna uma resposta para o cliente; (5) o cliente espera por $f + 1$ respostas iguais para a requisição e completa a operação.
+Quando $f + 1$ réplicas de apoio suspeitam que a primária esteja faltosa, uma mudança de visão  é executada, e um novo servidor se torna o primário. Este mecanismo garante \textit{liveness} permitindo que o sistema faça progresso quando a primária é faltosa.
+
+O MinZyzzyva tem características similares ao MinBFT, entretanto tem o número de passos de comunicação reduzidos em um em execução de caso normal por ser especulativo.
+A ideia da especulação é que os servidores respondem para os cliente sem primeiro concordar sobre a ordem em que as requisições devem ser executadas. Os servidores adotam, de maneira otimista, a ordem proposta pelo servidor primário, executam a requisição, e respondem imediatamente ao cliente. Esta execução é especulativa porque pode não ser a ordem real em que a requisição deveria ser executada. Se alguns servidores tornam'se inconsistentes em relação aos outros, os clientes detectam a inconsistência e ajudam os servidores à convergirem numa única ordem total de requisições, possilmente tendo que fazer o \textit{rollback} de algumas execuções. Os cliente só confiam nas respostas que estiverem consistentes com esta ordem total.
+O MinZyzzyva usa o serviço USIG para constranger o comportamento da réplica primária, permitindo a redução do número de réplicas de $3f + 1$ para $2f + 1$, preservando as propriedades de segurança (\textit{safety}) e vivacidade (\textit{liveness}).
+
+\textbf{Conclusões}
+
+O artigo proposto conseguiu eficiência e simplicidade através da diminuição do número de réplicas, simplicidade de serviço confiável e diminuição de número de passos de comunicação. O uso do serviço USIG possibilita a criação de arquiteturas com $2f + 1$ recursos e por isso representa uma enorme contribuição para a área. Todavia, ainda existem melhorias a serem feitas como, por exemplo, aliar esta simplicidade e eficiência à segurança dos dados replicados.
+
+\section{REPEATS-Uma Arquitetura para Replica{\c{c}} ao Tolerante a Faltas Bizantinas baseada em Espa{\c{c}}o de Tuplas}
+
+Em \cite{luiz2008repeats} os autores, motivados pelo progresso nos estudos na área de tolerância à faltas com uso de replicação de máquinas de estados, apresentam RePEATS (\textit{Replication over Policy-Enforced Augmented Tuple Space}).
+
+Os autores sugerem uma solução para Tolerância à Faltas Bizantinas (TFB) através da abordagem de Replicação de Máquina de Estados (RME),  que combina 
+uma série de mecanismos que contribuem para a manutenção da disponibilidade e integridade das aplicações, bem como dos ambientes de execução.
+
+O artigo apresenta REPEATS (\textit{Replication over Policy-Enforced Augmented Tuple Space}), uma arquitetura para RME Tolerante à Faltas Bizantinas fundamentado no modelo PEATS (\textit{Replication over Policy-Enforced Augmented Tuple Space}) \cite{bessani2009sharing}, onde os processos (tanto clientes quanto as réplicas do serviço) coordenam-se através de uma abstração de alto nível: um espaço de tuplas resistente à Faltas Bizantinas. 
+
+O uso desta abstração permite também a separação das entidades responsáveis pelo acordo, implementado pelo espaço de tuplas,
+daquelas responsáveis pela execução das requisições enviadas pelos clientes, com a vantagem de se ter algoritmos de replicação modulares e muito mais simples. 
+
+O modelo requer apenas $2f + 1$ réplicas para um serviço, e é genérico o suficiente para comportar diversos conjuntos de serviços (com diferentes aplicações) compartilhando o mesmo suporte de comunicação e coordenação (o espaço de tuplas), de modo que as particularidades de um 
+serviço não interferem nas outras.
+
+O espaço de tuplas é uma abstração de memória compartilhada útil para a coordenação de processos, bem como para o armazenamento de dados. Esta
+abstração é oriunda do modelo de coordenação generativa e teve sua primeira implementação na linguagem LINDA. No espaço de tuplas é possível realizar o armazenamento e a recuperação de estruturas de dados genéricas sob a forma
+de tuplas. Uma tupla $t = (f1 , f2 , ..., fn )$ é composta por uma sequência de campos. Um campo $fi$ de uma tupla pode conter um valor definido, um formal(variável) "?" ou ainda um símbolo especial "*". Um campo formal é usado para extrair conte údos individuais dos campos de uma tupla, já os símbolos especiais são usados para representar campos sem valor definido. Uma tupla $t$ cujos campos têm valores definidos é denomidade entrada. Uma tupla que possui algum campo formal "?" e/ou um campo especial "*"é denominada molde, e é representada por $t$. Um molde $t$ combina uma entrada $t$se ambas as tuplas têm o mesmo número de campos e todos os campos com valores definidos de $t$ contém o mesmo valor do campo correspondente em $t$. Por exemplo, uma tupla $("RePEATS", 2008)$ combina com os moldes $("RePEATS", *), (*, 2008)$ e $(*, *)$ mas não com $(*, 2007)$. 
+
+O modelo clássico de coodenação por espaço de tuplas não provê mecanismos capazes de lidas com processos maliciosos acessando o espaço de tuplas. Este problema foi resolvido com a introdução do PEATS, que consiste em um espaço de tuplas onde as interações entre os processos são reguladas por políticas de acesso de granularidade fina. Estas políticas, que são usadas como mecanismo de controle de acesso ao espaço de tuplas, são compostas por um conjunto de regras que são definidas por meio da especificação de padrões de invocação para operações no espaço de tuplas e condições que devem ser satisfeitas para que estas invocações possam ser executadas, ou negadas. Para isto, o PEATS considera os dados advindos da invocação (o processo invocador e os parâmetros da invocação) e o estado atual do espaço.
+
+O RePEATS consiste em uma concretização de Replicação de Máquina de Estados tendo como elemento de comunicação entre os processos envolvidos um PEATS, dando origem então a uma arquitetura de suporte à replicação tolerante à faltas bizantinas.
+
+Os clente inserem suas requisições na forma de tuplas no PEATS e as réplicas do serviço que está sendo acessado leem estas tuplas do PEATS para obter as requisições à serem executadas. Em seguida, os serviços replicados processam as requisições e enviam os resultados também na forma de tuplas dentro do PEATS, para que os clientes possam obter as respostas.
+
+Uma premissa do RePEATS é o determinismo de réplica. Este requisito define que réplicas partindo de um mesmo estado inicial e sujeitas à execução de uma mesma sequência de operações, devem chegar ao mesmo estado final. Assim, em um sistema onde as réplicas implementam um serviço determinista, esta propriedade é implementada por meio do uso de protocolos de difusão com ordem total que garantem que todas as operações enviadas ao sistema são processadas por todas as réplicas (acordo) em uma mesma ordem (ordem total). A partir daí cada réplica executa a operação, atualiza seu estado e envia ao cliente o resultado obtido. O cliente aceita o resultado da operação caso receba $f + 1$ respostas iguais de diferentes réplicas considerando $f$ o número máximo de servidores faltosos. O PEATS implementa o algoritmo de difusão com ordem total.
+
+As seguintes propriedades tem que ser satisfeitas para que o RePEATS cumpra com as propriedades de vivacidade e segurança:
+\begin{itemize}
+\item Ordem total: as requisições são executadas na mesma ordem por todas as réplicas corretas do sistema;
+\item Liberdade de bloqueio (lock-freedom): em qualquer execução do sistema, se um processo correto envia uma requisição para execução onde existam requisições pendentes de execução, alguma requisição será executada.
+\end{itemize}
+Além das propriedades descritas, um serviço replicado usando o RePEATS apresenta um comportamento equivalente a sua implementação em um sistema não replicado, isto é, satisfaz o modelo de consistência conhecido por linearização.
+
+O controle de acesso é o mecanismo que permite que o RePEATS seja tolerante à faltas. Este controle de acesso se dá através das políticas de granularidade fina suportadas pelo PEATS. Quando uma operação é invocada no PEATS, as regras especificadas nestas políticas são verificadas tomando como base o identificados do processo que invoca a operação, a operação que está sendo invocada e o estado atual do espaço de tuplas para negar ou permitir a execução da operação.
+
+O funcionamento do algoritmo no lado do cliente é iniciado quando um cliente deseja enviar um comando $C$ qualquer. Este cliente tenta inserir uma tupla REQUEST no espaço com um número de sequência igual ao seu último acrescido de uma unidade, sendo que seu valor inicial é zero. A chamada $cas$ insere esta tupla caso já não esteja inserida, caso contrário o cliente incrementa seu número de sequência e tenta novamente. Após inserir a tupla, o cliente fica em modo espera aguardando por $f + 1$ respostas iguais entre si vindaS de réplicas diferentes.
+
+O algoritmo no lado do servidor também é iniciado com o valor zero para o número de sequência. As réplicas processam as tuplas REQUEST respeitando a ordem ascendente de chegada, isto é, são processadas primeiro as requisições com número de sequência mais próximo daquele que foi processado na última execução. Ao processar a requisição do cliente o servidor, por questões de desempenho, envia a resposta diretamente ao cliente que fez a requisição.
+
+A política de acesso do PEATS utilizada pelos autores serve para evitar que processos maliciosos quebrem a ordem total, inserindo tuplas REQUEST fora do intervalo de sequência no espaço. Para isso, a inclusão de requisições só pode ser efetuada através da instrução $cas$, na condição de que a tupla REQUEST com número sequencial anterior ao que está sendo incluído esteja presente no espaço. A operação $rd$ é permitida somente para tuplas REQUEST, desde que os campos 3 e 4 do molde sejam formais.
+
+Para correção do protocolo, algumas premissas são admitidas: (i) cada requisição do cliente tem um identificador único e crescente; (ii) o cliente só envia uma requisição após ter recebido a resposta da requisição anterior; (iii) um temporizador é associado a cada requisição enviada, e caso ocorra um \textit{timeout} e a resposta da requisição ainda não tenha sido obtida, o cliente reenvia a requisição.
+
+A ideia fundamental do algoritmo de \textit{checkpointing} é guardar o estado das réplicas corretas do serviço no espaço de tuplas a cada $N$ requisições executadas, sendo $N$ um parâmetro configurável e igual em todas as réplicas corretas do serviço. No entanto alguns cuidados são tomados para que réplicas maliciosas não criem \textit{checkpoints} com estados incorretos.
+
+Como as requisições são armazenadas no espaço de tuplas, os autores exploraram esta facilidade para fins de definição de um mecanismo de \textit{logging}. Este mecanismo é necessário para a recuperação das réplicas que venham a falhar. As requisições perduram no espaço ate o momento da gravação de um \textit{checkpoint} posterior, que sinaliza que as requisições anterios não são mais necessárias durante o processo de recuperação de réplicas. Deste modo, para a recuperação pontual de uma réplica, o processo restaura os checkpoints necessários e se houver requisições após o último \textit{checkpoint}, estas são recuperadas diretamente do espaço.
+
+\textbf{Conclusões}
+
+Os autores apresentaram uma arquitetura para replicação tolerante à faltas bizantinas baseada no modelo de coordenação por espaço de tuplas cuja contribuição é de suma importância por conseguir uma configuração que diminui a quantidade de recursos para atender uma requisição para $2f + 1$, apesar da necessidade de um espaço de tuplas com $3f + 1$ recursos. Como um mesmo espaço de tuplas pode ser utilizado para uma grande variedade de serviços a quantidade de recursos total se aproxima de $2f + 1$.
+
+Apesar da grande contribuição do trabalho, ainda são necessárias algumas mensurações para comprovar os benefícios e custos associados à proposta apresentada. 
+
+\section{Sharing memory between Byzantine processes using policy-enforced tuple spaces}
+
+Em \cite{bessani2009sharing} os autores, devido ao crescimento da área de Tolerância à Faltas Bizantinas através do uso de memória compartilhada, exploram uma solução focada em serviços de troca de mensagens em sistemas distribuídos.
+Os autores sugerem o avanço do modelo de Listas de Controle de Acesso (LCA)
+através de dois aspectos. Primeiro o uso de políticas de segurança de ajuste-fino para controlar o acesso aos objetos de memória compartilhada. Essas políticas permitem especificar quando a invocação de uma operação em um objeto da memória compartilhada deve ser permitida ou proíbida em termos de quem invoca a operação, e do estado corrente do objeto. Objetos protegidos por esta política são chamados de Objetos de Política Forçada (OPF).
+O segundo aspecto é o uso de apenas um tipo de memória compartilhada: um espaço de tuplas aumentadas. Este objeto armazena estruturas genéricas chamadas de tuplas. As operações disponíveis são: inclusão, remoção, leitura e inclusão condicional de tuplas.
+Para a coordenação de processos Bizantinos os autores propõe a Política Forçada de Espaço de Tuplas Aumentadas (PFETA).
+As principais contribuições são:
+\begin{itemize}
+\item Apresentação de um novo modelo computacional onde objetos de memória compartilhada são protegidos por políticas de acesso de ajuste-fino;
+\item Apresentação de um novo objeto de memória compartilhada, PFETA;
+\item Apresentação dos benefícios do modelo provendo algoritmos de consenso simples e efetivo com resiliência $n \geq 3t + 1$, e provam que é a esta é a melhor resiliência para consenso binário forte no modelo dos autores;
+\item Apresentação de PFETA para resolver, também, consenso multivalorado forte e consenso multivalorado padrão no modelo dos autores;
+\item Prova de que PFETA é universal, i.e., que pode ser utilizado para implementar qualquer outro objeto de memória compartilhada, provendo duas construções universais baseadas em PFETA:  uma construção uniforme livre de \textit{lock} e uma construção livre de espera.
+\end{itemize}
+
+A implementação da política de acesso se dá em torno de Listas de Controle de Acesso estendidas para maior segurança. Os OPF são aqueles cujo acesso é governado por uma política de segurança de ajuste-fino. Um monitor de referência permite a execução de uma operação em um OPF se a invocação correspondente satisfizer a política de acesso do objeto. A política de acesso é composta por regras. Cada regra é composta por um padrão de invocação e uma expressão lógica. Uma execução é permitida somente se sua expressão estiver satisfeita pelo padrão de invocação. Portanto, qualquer invocação negada caso não esteja de acordo com nenhuma regra e o valor retornado é \textit{false}.
+O monitor de referência possui três peças de informação para avaliar invoncações:
+\begin{itemize}
+\item O identificador do processo $p$ que fez a invocação; 
+\item a operação op e seus argumentos; e
+\item o estado corrente de $x$.
+\end{itemize}
+Um exemplo de OPF é a política numérica forçada de que um registro atômico $r$ só pode representar valores maiores que o seu valor corrente e onde apenas os processo $p_1, p_2$ e $p_3$ podem escrevê-lo.
+
+O problema do consenso diz respeito a um conjunto de $n$ processos propondo valores para um conjunto $V$ de possíveis valores tentando entrar em acordo sobre um valor único. Um objeto de consenso é um objeto de memória compartilhada que encapsula um algoritmo de consenso. A seguir são apresentados algoritmos para resolver três tipos de objetos de consenso:
+\begin{itemize}
+\item Consenso fraco - Um objeto de consenso fraco $x$ é um objeto de memória compartilhada com uma operação simples x.propose($v$) onde $v \in V$, satisfazendo as propriedades: (Acordo) em cada execução, x.propose retorna o mesmo valor, chamado valor de consenso, para todo processo correto que o invoca; (Validade) em qualquer execução finita na qual todos os processos participantes são corretos, se o valor de consenso é $v$, então algum processo invocou x.propose($v$);
+\item Consenso forte - Um objeto de consenso forte $x$ é definido por uma condição de Validade forte: (Validade forte) se o valor de consenso é $v$, então algum processo correto invocou x.propose($v$).
+\end{itemize}
+
+Uma outra variante do consenso é definida e implementada no artigo, é o consenso (multivalorado) padrão, que é um pouco mais fraca que a versão de consenso forte:
+\begin{itemize}
+\item Consenso padrão - Um objeto de consenso padrão $x$ é definido por uma Validade mais fraca que a Validade do consenso forte: (Validade forte padrão). O valor de consenso precisa satisfazer duas condições 1) Se todos os processos corretos invocam x.propose($v$), então $v$ é o valor de consenso e 2) se o valor de consenso é $v$, então algum processo correto invocou x.propose($v$) ou v = $\bot$.
+\end{itemize}
+
+Em um objeto de consenso fraco, o valor de consenso pode ser qualquer um dos valores propostos. Com essa condição de validade, é perfeitamente legal que o valor proposto por um processo faltante seja o valor de consenso.
+O algoritmo de consenso fraco é simples: um processo tenta inserir sua proposta no objeto PFETA usando a operação cas (\textit{conditional atomic swap operation}). Isso ocorre se não houver nenhuma tupla no espaço. Se existir uma tupla de decisão, este valor à ser decidido e retornado.
+
+Este algoritmo possui algumas características interessantes: Primeiro, é uniforme, i.e., funciona para qualquer número de processos e os processos não precisam saber a quantidade de processos estão envolvidos nos sistema. Segundo, através disto é possível resolver consensos multivalorados, desde que o intervalo de valores proposto possa ser arbitrário. E, por último, o algoritmo é \textit{wait-free}, i.e., sempre termina, mesmo que ajam falhas de qualquer número de processos envolvidos.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.7\textwidth]{figs/figPFETA.png}
+\caption{Política de acesso ao PFETA usado no consenso fraco.}
+\label{figPFETA}
+\end{figure}
+
+Um objeto de consenso forte força a condição de validade requerendo que o valor de consenso proposto seja feito por um processo correto mesmo na presença de outros processos faltosos. Esta condição resulta em um algoritmo mais complexo, porém, ainda assim simples. Com isto alguns benefícios são perdido em relação ao algoritmo de consenso fraco:
+\begin{itemize}
+\item Não uniforme. O algoritmo de consenso forte não é uniforme já que um processo precisa conhecer os demais processos para decidir em consenso.
+\item Consenso binário. O algoritmo proposto pelos autores resolve apenas consenso binários. Esta limitação se dá também pelo fato de que um processo precisa saber se um valor foi proposto por um processo correto.
+\item Objeto \textit{t-threshold}. O consenso forte não é \textit{wait-free} já que precisa de $n - t$ processos envolvidos. Entretanto, o número de processos necessários no algoritmo proposto é: $n \geq 3t + 1$.
+\end{itemize}
+
+O algoritmo trabalha da seguinte maneira: um processo $p_i$ primeiramente insere sua proposta no espaço de tuplas aumentadas $ts$ usando uma tupla de PROPOSTA. Então, $p_i$ consulta $ts$ continuamente tentando ler propostas até que encontre algum valor que tenha sido proposto por pelo menos $t + 1$ processos. A lógica para $t + 1$ é que pelo menos um processo correto precisa ter proposto este valor, já que existem até $t$ processos faltosos. O primeiro valor que satisfizer esta condição é inserido no espação de tuplas usando a operação cas. Esta fase de \textit{commitment} é importante, pois diferentes processos podem coletar $t + 1$ propostas para diferentes valores e precisamos assegurar que um valor único será decidido. Todas as invocações posteriores de cas retornarão este valor.
+A política de acesso para o PFETA usando consendo forte especifica que:
+\begin{enumerate}
+\item Qualquer processo pode ler qualquer tupla;
+\item Cada processo pode introduzir apenas uma PROPOSTA no espaço;
+\item O segundo campo de um template usado em uma operação cas seja um campo formal; 
+\item O valor de decisão $v$ apareça em pelo menos $t + 1$ propostas de processos. 
+\end{enumerate}
+
+Um objeto de consenso forte multivalorado pode ser obtido com pequenas modificações no algoritmo de consenso forte binário. Se considerarmos um problema consenso k-valorado, onde existam $k$ possíveis entradas para processos proporem, i.e., $|V| = k$, pode-se usar o mesmo algoritmo e coletar diferentes valores de propostas em diferentes conjuntos $S_v$, com $v in V$ e $|V| = k$.
+O algoritmo funciona exatamente da mesma maneira do algoritmo de consenso forte.
+Infelizmente este algoritmo precisa de mais processos para resistir à $t$ faltas.
+
+Um objeto de consenso forte multivalorado pode ser obtido com pequenas modificações no algoritmo de consenso forte binário. O objetivo deste algoritmo é mostrar que PFETA possibilita a resolução de consenso multivalorado mais forte que o consenso fraco com resiliência ótima, i.e., com $n \geq 3t + 1$.
+As modificações no algoritmo de consenso forte binário são:
+\begin{itemize}
+\item É preciso ter um conjunto $S_v$ para cada valor $v$ diferente na tupla PROPOSTA obtida do PFETA.
+\item Depois que um processo ler $n - t$ valores propostos, se não tiver nenhum valor $v$ proposto por pelo menor $t + 1$ processos, o valor na tupla DECISÃO é $\bot$.
+\item Se o valor na tupla DECISÃO for $\bot$, o terceiro campo da tupla DECISÃO precisa ser todos os conjuntos $S_v$ preenchidos.
+
+Existem também diferenças na política de acesso entre um algoritmo e outro. As duas principais são: 1) todos os valores propostos precisam ser diferentes de $ \bot $ e 2) a regra $R_c$$_a$$_s$ afirma que se $p$ quer colocar $v = \bot$ como tupla DECISÃO de saída em PFETA, então $p$ precisa mostrar que não encontrou um valor proposto por pelo menos $t + 1$ processos. 
+\end{itemize}
+
+Um problema fundamental em computação distribuída com memória compartilhada é descobrir se um objeto $X$ pode ser utilizado para implementar um outro objeto $Y$. Os autores provam que em PFETA os objetos são universais, i.e., que podem ser usados para emular qualquer outro objeto de memória compartilhada.
+A prova dos autores é feita provando outras duas construções universais:
+\begin{enumerate}
+\item Construção Universal Uniforme Livre de \textit{Lock};
+\item Construção Universal Uniforme Livre de Espera;
+\end{enumerate}
+
+
+\textbf{Conclusões}
+
+Os autores propuseram um modelo de computação distribuída com memória compartilhada por processos Bizantinos que se difere das demais que utilizam Listas de Controle de Acesso por criar políticas de acesso de ajuste-fino que especificam regras que permitem ou negam a invocação de uma operação à ser executada em algum objeto baseando-se nos argumentos da operação, seu invocador, e o estado do objeto.
+A solução permite a criação de um ambiente que tolera faltas de maneira elegante e simples, entretanto ainda são necessários $n \geq 3t + 1$ processos envolvidos.
+
+
+\chapter{Conceitos Básicos em Computação Distribuída}\label{conBasComDis}
+\section{Ambiente de Computação Distribuída}
+\subsection{Modelo de Sistema}
+O modelo de sistema define as asserções que sustentam os algoritmos. Isto é, o modelo de sistema, neste trabalho, pode ser visto como a especificação formal do conjunto das hipóteses que asseguram a inviolabilidade das propriedades do sistema.
+
+\subsection{Processos}
+Um processo corresponde à execução de um algoritmo em um processador \cite{attiya2004distributed} \cite{nancy1996distributed}.  Isto é, um processo deve ser entendido como uma entidade independente, com seu próprio contador de programa e estado interno \cite{tanenbaum1992modern}, este estado, ou este conjunto de estados, evolui na medida em que os passos descritos no processo são executados. O estado global do sistema distribuído e composto pelo estado local de cada um dos processos e pelo estado dos canais de comunicação  \cite{chandy1985distributed}. As comunicações interprocessos são feitas através dos \textit{links} ou canais de comunicação. A inicialização de um sistema distribuído ocorre quando os processos se encontram em seus estados iniciais (arbitrários) e os canais estão vazios \cite{nancy1996distributed}.
+
+\subsection{Sincronismo}
+Sincronismo em computação distribuída é uma propriedade importantíssima já que é através dela que se define os limites de tempo de processamento para determinados eventos. Usualmente o sincronismo de um sistema distribuído é definido através de três características básicas \cite{hadzilacos1994modular} \cite{cristian1995atomic}:
+\begin{enumerate}
+\item Tempo de processamento;
+\item Tempo de entrega de mensagem;
+\item Desvio do relógio local onde está se executando o processo.
+\end{enumerate}
+
+\subsection{Tipos de falhas}
+Um processo que executa corretamente sua especificação é chamado \textbf{correto}, em contrapartida, um processo que não executa corretamente o algoritmo especificado é denominado \textbf{não-correto} ou \textbf{faltoso}.
+As falhas dos processos podem ocorrer tanto no domínio do tempo quanto no domínio dos valores. Os tipos de falhas de acordo com a literatura são \cite{hadzilacos1994modular}:
+\begin{itemize}
+\item \textbf{Parada:} O processo para de funcionar de maneira antecipada. Ex.: Desligamento da máquina onde ocorria o processamento;
+\item \textbf{Omissão de Envio:} O processo incorre em omissão, aleatória ou eventual, de envio de mensagens;
+\item \textbf{Omissão de Recepção:} O processo deixa de receber mensagens à ele enviadas de maneira aleatória ou eventual; 
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.5\textwidth]{figs/figSeveridade.png}
+\caption{Grafo de tipos de falhas de acordo com a severidade.}
+\label{figSeveridade}
+\end{figure}
+
+Estas falhas ocorrem no domínio do tempo e são mais simples de se tratar. Falhas que ocorrem nos domínios de tempo e valor são chamadas Bizantinas:
+\begin{itemize}
+\item \textbf{Bizantina, maliciosa ou arbitrária}: \cite{lamport1982byzantine}. O processo faltoso pode apresentar qualquer tipo de comportamento. Isto é, pode se comportar como as falhas anteriormente citadas ou apresentar qualquer tipo de comportamento arbitrário. Estas falhas podem ser intencionais ou não;
+\item \textbf{Bizantina com Autenticação:} Semelhante à Bizantina, entretanto possui autenticação não forjável que permite a detecção do comportamento bizantino. 
+\end{itemize}
+
+A figura \ref{figSeveridade} representa a severidade sequencial das falhas em um modelo. Por exemplo, falhas arbitrárias são mais severas que falhas falhas arbitrárias com autenticação.
+
+\subsection{Canais de comunicação}
+A comunicação em sistemas distribuídos ocorre, de maneira geral, através da troca de mensagens entre os processos. Para tanto, é necessário que aja coordenação entre os processos \cite{coulouris2005distributed}.
+Na comunicação em sistemas distribuídos os canais de comunicação ou \textit{links} \cite{guerraoui2006introduction} representam o sistema subjacente de comunicação e fornecem uma topologia de conectividade completa entre os elementos do sistema.
+A comunicação entre processos é também passível de falhas e, portanto, podem ocorrer perdas, duplicação e corrupção de mensagens. Com respeito à confiabilidade dos canais de comunicação, duas propriedades podem ser consideradas \cite{charron2002broadcasting}:
+\begin{itemize}
+\item \textbf{Sem Perdas}: Se um processo envia uma mensagem a um outro processo correto, então a mensagem será recebida;
+\item \textbf{Perda Justa}: Se um primeiro processo envia um número infinito de mensagens a um segundo processo correto, então um número infinito de mensagens do primeiro processo será recebido pelo segundo processo.
+\end{itemize}
+Os canais que não admitem perdas são conhecidos na literatura como canais confiáveis \cite{basu1996simulating}. Já os canais que admitem perda são denominados \textit{Fair-lossy links} \cite{basu1996simulating}. Entretanto, é possível atingir primitivas de difusão e recepcão mais robustas semelhantes as dos canais con?áveis a partir dos \textit{Fair-lossy links} , basta empregar
+mecanismos de reconhecimento e retransmissao \cite{charron2002broadcasting}.
+
+\section{Problemas de Acordo}
+\subsection{Difusão com Ordem Total}
+A difusão com ordem total força a confiabilidade na difusão de mensagens e força também que todos os processos receptores entreguem as mensagens na mesma ordem.
+O problema pode ser definido através de duas primitivas básicas: (i) $TO$-$multicast(G,m)$: A mensagem $m$ é difundida para todos os processos pertencentes ao grupo G; e (ii) $TO$-$deliver(m)$: A mensagem $m$ é entregue pelo processo $p_i$ para a aplicação com ordem total.
+
+Para que se obtenha a difusão com ordem total deve-se satisfazer as seguintes propriedades \cite{defago2004total}:
+\begin{itemize}
+\item Validade: Se um processo correto difunde uma mensagem em seu grupo, então algum processo correto pertencente ao mesmo grupo entregará a mensagem ou nenhum processo do grupo esta correto;
+\item Acordo: Se um processo correto em determinado grupo entrega uma mensagem, então todos os processos corretos pertencentes ao mesmo grupo entregarão esta mensagem;
+\item Integridade: Para qualquer mensagem enviada dentro de um determinado grupo, cada processo correto pertencente ao mesmo grupo a entregará apenas uma vez;
+\item Ordenação Total Local: Se dois processos corretos $p$ e $q$ entregam as mensagens $m$ e $m'$ difundidas em G, então ambos entregarão $m$ e $m'$ na mesma ordem.
+\end{itemize}
+
+No escopo de sistemas distribuídos, em função da possibilidade de um processo poder participar de mais de um grupo, são verificadas duas primitivas na validação da difusão, isto é, além da Ordenação Total Local é verificada a Ordenação Total Global \cite{hadzilacos1994modular}, que garante que a ordem de entrega de mensagens é correta mesmo sob a gerência de múltiplos grupos.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.5\textwidth]{figs/figRelProbDifusao.png}
+\caption{Relacionamento entre problemas de difusão. \cite{hadzilacos1994modular}}
+\label{figRelProbDifusao}
+\end{figure}
+
+\subsection{Consenso}
+O problema do consenso delimita os sistemas computacionais onde o acordo pode ser implementado e forma a base algoritimica para quase todos os problemas de acordo. Ou seja, por se tratar da forma canônica de acordo, este é um dos problemas mais estudados entre os problemas de acordo.
+
+Formalmente o problema é definido por:
+\begin{itemize}
+\item $propose(G, v)$: O valor $v$ é proposto dentro do grupo $G$;
+\item $decide(v)$: O valor $v$ é decido.
+\end{itemize}
+Portanto, o problema consiste em proposições de valor $v \in V$ e a decisão unânime dos processos em função do $v$ proposto. Em sua definição, as seguintes propriedades ser satisfeitas: (i) \textbf{acordo} - todos os processos corretos decidirão pelo mesmo $v$, (ii) \textbf{validade} - se algum processo corredo decide por um $v \in V$ então $v$ foi proposto por outro processo, e (iii) \textbf{terminação} - todos os processos corretos acabarão por decidir.
+Nas sistemas distribuídos sujeitos à faltas bizantinas, em geral se descarta a validade da maneira definida anteriormente, pois a mesma permite que um valor proposto por um processo faltoso seja decidido. Em geral implementa-se a \textbf{validade fraca} ou \textbf{não trivialidade} \cite{correia2005low} \cite{nancy1996distributed} que estipula que se todos os processos corretos propõe inicial $v \in V$ então $v$ é a única decisão possível para os processos corretos.
+Esta condição evita a implementação de protocolos que decidem sempre o mesmo valor independentemente das proposições dos processos. Entrentanto há autores que a descartam na prática, já que quando os processos propõe valores diferentes, o valor decidido não precisa tem ligação com a entrada \cite{baldoni2003consensus}.
+
+\subsection{Acordo Bizantino}
+Em ambientes onde é possível a ocorrência de faltas bizantinas, o problema de consenso ou acordo, do ponto de vista teórico, necessita que mais de dois terços dos participantes entrem em acordo \cite{lamport1982byzantine} considerando-se $f$ faltas e $3f + 1$ participantes.
+
+Em  \cite{lamport1982byzantine}, usando o conceito de generais bizantinos, os autores provam que esta proporção é válida, e é em função deste trabalho que surge o termo faltas bizantinas. As figuras \ref{figGeneralTraidor} e \ref{figTenenteTraidor} mostram a impossibilidade de acordo bizantino descrita no artigo.  
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.6\textwidth]{figs/figGeneralTraidor.png}
+\caption{General traídor.}
+\label{figGeneralTraidor}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.6\textwidth]{figs/figTenenteTraidor.png}
+\caption{Tenente traídor.}
+\label{figTenenteTraidor}
+\end{figure}
+
+O problema é descrito da seguinte maneira: Dado um exército com um general e seus tenentes,  o general envia uma ordem aos tenentes. Esta ordem pode ser atacar ou recuar, os tenentes trocam entre si a informação que cada um recebeu do general para validá-las. No primeiro caso (figura \ref{figGeneralTraidor}) o general traídor emite ordens diferentes aos tenentes. Ao trocarem informações, os tenentes não chegarão a um consenso, portanto, não saberão como agir. No segundo caso  (figura \ref{figTenenteTraidor}) quem forja uma ordem é um dos tenentes, gerando o mesmo impasse. Como não existe nenhuma maneira de validar quem é o traídor, o processo simplesmente estagna. A impossibilidade de acordo bizantino com $n$ menor que $3f + 1$ é válida tanto para sistemas síncronos e assíncronos.
+
+A figura \ref{figGeneralTraidor_n4} demonstra que com acréscimo de mais um participante, isto é, aumentando-se de $2f + 1$ para $3f +1$ e, neste exemplo considerando-se $f = 1$, é possível prosseguir com a ordem, mesmo que haja até $f$ traídores no exército. Isto é possível em função da segunda etapa do processo, onde os tenentes trocam informações entre si. Pois, segundo a figura, ao final do processo, cada tenente terá pelos duas ordens para atacar conseguindo uma predominância da ordem para atacar, i.e., entrando em consenso. Este fato prova que com pelo menos $3f + 1$ participantes é possível resolver o problema de acordo bizantino.
+ 
+ A literatura apresenta soluções práticas que conseguem diminur o número de participantes \cite{dolev1983authenticated} \cite{juniorsmit} \cite{bessaniefficient}, entretanto ainda existe bastante espaço para pesquisas.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1\textwidth]{figs/figGeneralTraidor_n4.png}
+\caption{Possibilidade de acordo bizantino com $3f + 1$ participantes.}
+\label{figGeneralTraidor_n4}
+\end{figure}
+
+
+\chapter{PROPOSTA DE TRABALHO}\label{proTrab}
+\section{Introdução}
+A tese de mestrado aqui proposta abordará aspectos relacionados a ambientes de computação distribuída suscetíveis a faltas bizantinas. A proposta é baseada na procura de respostas e soluções para alguns problemas fundamentais na construção de sistemas distribuídos. A proposta é concebida sob a ótica de um espaço de tuplas aumentado e protegido por políticas encapsulando um modelo de registradores tolerante a faltas bizantinas .
+A proposta foca na diminuição recursos computacionais necessários para se conseguir acordo através de uma variação do protocolo Paxos bizantino em uma infraestrutura de espaço de tuplas aumentado.
+
+Este capítulo esta organizado da seguinte maneira: a seção  \ref{proMot}  apresenta a motivação para a proposta desta tese; a
+seção  \ref{proObj} e sua subseção \ref{proObjEsp} descrevem, respectivamente, o objetivo geral e os objetivos específicos do trabalho; a seção \ref{proDesDetProTes} apresenta os detalhes da proposta de tese; Por fim, seção \ref{proPla} descreve as etapas planejadas para execução do trabalho.
+
+
+\section{Motivação}\label{proMot}
+A popularização da \textit{Internet}, redes socias e \textit{softwares} na \textit{web} fez com que houvesse um significativo crescimento na área de computação distribuída. Este crescimento traz em si a preocupação em assegurar que estas aplicações, que fazem parte do nosso dia-a-dia, não venham a falhar ou ficarem indisponíveis. Esta preocupação com a disponibilidade, corretude e integridade destes serviços estimula o estudo de mecanismos que visam a segurança de funcionamento destes sistemas, isto é, os sistemas atuais devem ser cada vez mais robustos e devem, do ponto de vista dos utilizadores, estar sempre disponíveis com garantias de corretude e integridade, já que as falhas dos mesmos acarretam não apenas desperdícios financeiros, mas também de tempo. Neste âmbito, os requisitos de tolerância a faltas, que costumavam ser aplicados apenas no domínio dos sistemas de missão crítica e de segurança nacional, são hoje também aplicados a outros domínios de sistemas, como é o caso dos sistemas distribuídos.
+
+Com o uso massivo da  \textit{Internet} para tráfego de dados (pessoais, profissionais, empresariais, etc), surge também a preocupação com segurança e o sigilo destes dados. A confidencialidade torna-se um agravante em sistemas distribuídos, isto deve-se ao fato das informações estarem replicadas em vários servidores, ou seja, é mais fácil interceptar os dados que estão sendo trafegados.
+Dentro da área de tolerância a intrusão existe uma grande preocupação com a diminuição de recursos computacionais para que os servidores cheguem a um acordo \cite{bessani2008depspace} \cite{correia2002efficient} \cite{bessaniefficient}, entretanto são mais raros os trabalhos que propõe aliar confidencialidade à diminução de recursos computacionais. As novas soluções para sistemas distribuídos devem atender aos requisitos da atualidade, tais como: confiabilidade, consistência, tolerância a faltas e coerência.
+
+Diante destes fatos, parece lógico afirmar que se fazem necessários novos modelos que consigam agregar as qualidades dos anteriormente propostos de maneira a atingir soluções ainda mais completas para a área da computação distribuída. Estas soluções tem por desafio a manutenção da consistência e da disponibilidade do sistema de maneira confidencial, mesmo que situações de adversidade venham a ocorrer. Esta proposta de tese tem como objetivo investigar soluções e modelos para que se alcance a diminuição de recursos computacionais necessários para tolerar faltas bizantinas em sistemas distribuídos com espaço de tuplas com o manutenção da confidencialidade.
+
+\section{Objetivos}\label{proObj}
+\subsection{Objetivo Geral}
+O objetivo geral deste trabalho é a otimização de um modelo de espaço de tuplas tolerante a faltas bizantinas usando replicação \cite{bessani2008depspace} que, através do uso de uma infraestrutura de algoritmos baseados em registradores (memória compartilhada distribuída), consiga manter a confidencialidade aliada à diminuição de quantidade de recursos de $3f + 1$ \cite{lamport1982byzantine} para $2f +1$. Este modelo deve possuir interfaces que permitam sua utilização por diferentes tipos de aplicações, i.e., devem ser definidos mecanismos que permitam que aplicações críticas possam ser desenvolvidas e façam uso deste modelo. Tendo em vista que este modelo será utilizado como base para as mais variadas aplicações, devem ser também estudados aspectos de qualidade de serviço, tendo em vista a possibilidade de presença de entidades bizantinas no sistema.
+
+Os protocolos e algoritmos a serem desenvolvidos devem incorporar propriedades de segurança de funcionamento \cite{avizienis2004basic}, e, portanto, devem prover os atributos de confiabilidade, disponibilidade, integridade e confidencialidade \cite{bessani2008depspace} de forma transparente para as aplicações.
+Dentro dos objetivos está a implementação de um protocolo Paxos \cite{lamport2001paxos} \cite{bessani2009efficient} \cite{zielinski2004paxos} simplificado que necessite de apenas $2f + 1$ recursos para resolver o problema de consenso. Este protocolo deve ser incorporado a um modelo de coordenação de tuplas  \cite{bessani2008depspace} que será a base para garantir confidencialidade.
+
+A partir dos trabalhos desenvolvidos se pretende implementar um \textit{middleware} como solução completa para servir de suporte para sistemas de computações que preveem a participação de processos maliciosos e não confiáveis.
+
+
+\subsection{Objetivos Específicos}\label{proObjEsp}
+Após definido o objetivo geral é possível traçar os objetivos específicos desta proposta:
+
+\begin{enumerate}
+
+\item Desenvolvimento de um protocolo baseado no Paxos Bizantino que funcione sobre um ambiente de registradores para resolução do problema de consenso com diminuição de recursos computacionais necessários;
+
+\item Desenvolvimento de um espaço de tuplas tolerante a faltas bizantinas utilizando técnicas de replicação que incorpore o Paxos desenvolvido;
+
+\item Avaliação das extensões a serem agregadas ao modelo visando permitir que aplicações sujeitas a faltas maliciosas possam ser desenvolvidas a partir dele;
+
+\item Agregar mecanismos de segurança de funcionamento \cite{avizienis2004basic} ao espaço de tuplas;
+
+\item Desenvolvimento de métricas para avaliação dos modelos;
+
+\item Implementação de um middleware que sirva de suporte para sistemas de computações que preveem a participação de processos maliciosos e não confiáveis;
+
+\end{enumerate}
+
+\section{Descrição Detalhada da Proposta de Tese}\label{proDesDetProTes}
+\subsection{Arquitetura e Modelo de Sistema}
+O modelo de sistema adotado consiste em um sistema assíncrono onde existem os conjuntos de processos $C = \{c_1, c_2, c_3, ... \}$ com um numero arbitrário de clientes e $S = \{s_1, s_2, s_3, ... , s_n\}$ com $n$ servidores que implementam cópias do serviço replicado. Os servidores consistem em máquinas virtuais cada uma hospedada em uma máquina real, isto é, para cada máquina física existirá apenas uma máquina virtual. O modelo de falhas de processos admite que um número arbitrário de clientes e até $f  \leq [{n - 1 \over 2}] $ servidores venham a falhar em suas especificações apresentando faltas bizantinas \cite{lamport1982byzantine}: os processos faltosos podem (fugindo de maneira arbitrária de suas especificações) parar, omitir envio ou entrega de mensagens, enviar respostas incorretas, ou agir de qualquer maneira não especificada. Contudo, assume-se independência de faltas , i.e., a probabilidade da ocorrência de uma falta em determinada réplica de um serviço independe da ocorrência de falta em outra réplica. Isto pode ser obtido na prática através do uso extensivo de diversidade (hardware, sistemas operacionais, máquinas virtuais, bancos de dados, linguagens, etc) \cite{rodrigues2001base} \cite{obelheiro2005analisando}.
+
+Os processos comunicam-se através de um PEATS \cite{bessani2009sharing}. O espaço de tuplas é confiável, i.e., não sucetível a falhas. Esta premissa é substanciada na prática através do uso de um espaço de tuplas tolerante a faltas bizantinas \cite{luiz2008repeats}.
+
+O DepSpace \cite{bessani2008depspace} é suportado pela arquitetura expressa nas figuras \ref{figOverallArchitecture} e  \ref{figSingleMachineArchitecture}, onde máquinas físicas possuem uma, e apenas uma, máquina virtual hospedada. Estas máquinas compõe um espaço de registro através de uma memória compartilhada distribuída. Cada servidor físico possui um espaço próprio dentro da memória compartilhada distribuída onde sua respectiva máquina virtual registra as mensagens recebidas dos clientes e na ordem em que recebem. Os demais servidores tem acesso a estes registros  apenas para leitura.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.9\textwidth]{figs/figOverallArchitecture.png}
+\caption{Visão geral da arquitetura.}
+\label{figOverallArchitecture}
+\end{figure}
+
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.5\textwidth]{figs/figSingleMachineArchitecture.png}
+\caption{Arquitetura de cada máquina servidora.}
+\label{figSingleMachineArchitecture}
+\end{figure}
+
+
+Assumimos que os canais de comunicação que ligam os processos ao PEATS, bem como entre os servidores e clientes são confiáveis e autenticados. Este canais são implementados a partir do protocolo TCP e do uso de Códigos de Autenticação de Mensagens (MACs) juntamente com chaves de sessão, além de ser empregados mecanismos de retransmissão e reconexão quando necessário. Finalmente, admitimos que todos os processos tem relógios locais, e que estes relógios não são sincronizados, tendo como única premissa o progresso.
+
+\subsection{Formato das Mensagens}
+\begin{itemize}
+\item $ {\langle REQUEST, o, t, c \rangle_\sigma}_c $: Mensagem gerada e enviada pelos clientes que desejam executar uma operação nos servidores. No corpo da mensagem $o$ é a operação desejada, $t$ é o \textit{timestamp} e $c$ representa a assinatura do cliente; 
+\item $ {\langle REPLY, t, c, r_i, r \rangle_\sigma}_i $: Mensagem gerada e enviada pelos servidores como reposta a uma requisição de um cliente. É composta pelo \textit{timestamp} $t$ da requisição, a assinatura $c$ do cliente, a assinatura $r_i$ da réplica que gerou a mensagem e o resultado $r$ da execução da operação requisitada;
+\item $ {\langle PROPOSE, n, m \rangle_\sigma}_p $: Mensagem gerada e escrita no registrador pela réplica primária. Possui em seu corpo a mensagem $m$ do cliente e o número de sequência $n$ gerado para a mensagem;
+\item $ {\langle ACCEPT, n, m \rangle_\sigma}_a $: Mensagem gerada e escrita no registrador por todas as réplicas que aceitarem uma proposição da réplica primária. Contém os mesmos atributos de uma mensagem PROPOSE, isto é, a mensagem $m$ do cliente com seu respectivo número de sequência $n$.
+\end{itemize}
+ 
+\subsection{O Protocolo Paxos Simplificado}
+\subsubsection{Operação normal}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1\textwidth]{figs/figAllPhases.png}
+\caption{Protocolo em caso normal.}
+\label{figAllPhases}
+\end{figure}
+
+O protocolo inicia-se com um cliente enviando para todos os servidores uma mensagem de REQUEST $m$ assinada. Um dos servidores, chamado de líder, ou réplica primária, é responsável por ordenar as mensagens enviadas pelos clientes. O líder gera para a mensagem $m$ um número de sequência $i$. O líder então escreve uma mensagem PROPOSE em seu registrador com todas as mensagens que deseja ordenar e cada mensagem com seu respectivo número de sequência. Os demais servidores acessam o registro do servidor líder e deliberam sobre a proposta. As réplicas aceitarão a proposta do líder caso a mesma seja válida: (i) a assinatura de $m$ é verificada e dada como correta e (ii) nenhuma mensagem PROPOSE tenha sido anteriormente aceita para o número de sequência $i$. Quando um servidor replicado aceita a mensagem PROPOSE do líder, ele escreve em seu registrador a mensagem ACCEPT permitindo que os demais servidores acessem este registro. Quando  um servidor averigua que $[{f + 1}] $ servidores possuem o mesmo número de sequência $i$ para a mensagem $m$, então este servidor marca a mensagem $m$ como aceita, ou seja, o mesmo aceita que a mensagem $m$ é a i-ésima mensagem entregue. A figura \ref{figAllPhases} mostra a operação  do protocolo em caso normal
+
+\subsubsection{Troca de Líder}
+Quando um líder é detectado como faltoso, isto é, $f + 1$ réplicas suspeitam do mesmo, então um protocolo de eleição de líder é executado para congelar a rodada atual do protocolo, eleger um novo líder e iniciar uma nova rodada. Quando um novo líder é escolhido, o mesmo coletará informações sobre o estado atual do protocolo fazendo a leitura dos registradores de $f + 1$ réplicas. O estado do protocolo contém informações sobre mensagens respondidas, em PROPOSE e em ACCEPT. À par destas informações o líder é capaz de continuar a ordenação de mensagens.
+
+\subsection{Clientes Maliciosos}
+Clientes maliciosos podem enviar mensagens diferentes para as réplicas e podem também enviar mensagens com assinaturas diferentes. Do ponto de vista dos servidores, mensagens deste tipo serão descartadas.
+O único caso que pode gerar discussões é o caso do cliente enviar mensagens para todas as réplicas menos para a réplica primária. Entretanto, isto não geraria grandes problemas, uma vez que as réplicas passariam a suspeitar da réplica primária iniciando um processo de troca de líder. Ao final do processo outra réplica seria definida como primária e os processos voltariam a funcionar.
+
+\subsection{Réplicas Maliciosas}
+Réplicas maliciosas criam ou alteram requisições vindas do cliente, entretanto como as mensagens devem estar assinadas, uma réplica maliciosa não poderá criar mensagens, a não ser que esteja em conluio com o cliente malicioso, o qual forneceu sua chave privada. Neste caso, a mensagem é tratada como se tivesse sido enviada pelo cliente. 
+
+Uma réplica maliciosa pode deixar de registrar uma mensagem. Porém, neste caso o algoritmo continua funcionando de maneira correta com até $f$ réplicas faltosas. Mas, caso a réplica faltosa seja a primária, então $f + 1$ réplicas podem vir a suspeitar da primária e um processo de troca de líder é iniciado e em seu término uma nova réplica será líder permitindo que o algoritmo avance.
+
+\section{Planejamento}\label{proPla}
+
+\subsection{Metodologia}
+
+Um importantíssimo passo para desenvolvimento e consolidação deste trabalho é um levantamento e entendimento do atual estado de evolução ou estado da arte da área de tolerância a faltas bizantinas, buscando embasamento para o desenvolvimento dos protocolo e serviços com menor custo, tanto computacional, quanto de desempenho.
+
+O primeiro passo é a definição dos protocolos e serviços, detalhando passos e algoritmos. Após isso, para demonstrar a utilidade prática do protocolo, seus algoritmos devem ser implementados e testados a partir de novos desenvolvimentos e utilização de ferramentas existentes. 
+
+A implementação em um ambiente real, tornará possí­vel o refinamento dos algoritmos na intenção de promoção de melhorias e adaptação dos modelos propostos. Os resultados significativos obtidos com este trabalho devem ser refletidos em publicações científicas de forma a aferir a qualidade do proposto.
+
+\subsection{Cronograma}
+
+A seguir são apresentadas as principais atividades previstas para o desenvolvimento deste trabalho, apresentadas relacionadas com o tempo na Tabela \ref{tab:cronograma}:
+
+\begin{enumerate}
+  \item Realização de pesquisa bibliográfica para levantamento do estado da arte da área de tolerância a faltas; \label{tarPes}
+  \item Detalhamento do protocolo Paxos bizantino em conjunto com registradores implementados à partir de mémória compartilhada distribuída; \label{tarDet}
+  \item Desenvolvimento e validação dos algoritmos propostos no protocolo;\label{tarDes}
+  \item Acoplamento do protocolo em um ambiente de espaço de tuplas aumentado;\label{tarAco} 
+  \item Desenvolvimento de uma aplicação que se utilize das técnicas propostas   para validar o protocolo; \label{tarDesApl}
+  \item Redação da dissertação e elaboração de artigos para publicação em  eventos e periódicos;\label{tarRed}
+  \item Defesa da dissertação.\label{tarDef}
+\end{enumerate}
+
+\begin{table}[h]
+\centering 
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\multirow{2}{*}{Etapas} & \multicolumn{7}{|c|}{2012} &
+\multicolumn{3}{|c|}{2013} \\ \cline{2-11}
+  & 06 & 07 & 08 & 09 & 10 & 11 & 12 & 01 & 02 & 03\\ \hline
+\ref{tarPes} & X  & X  & X  & X  & X  & X  & X  & X  &    &   \\ \hline 
+\ref{tarDet} & X  & X  & X  &    &    &    &    &    &    &   \\ \hline
+\ref{tarDes} &    &    & X  & X  & X  &    &    &    &    &   \\ \hline
+\ref{tarAco} &    &    &    & X  & X  & X  &    &    &    &   \\ \hline
+\ref{tarDesApl} &    &    &    & X  & X  & X  &  X  &    &    &   \\ \hline
+\ref{tarRed} & X  & X  & X  & X  & X  & X  & X  & X  & X  &   \\ \hline
+\ref{tarDef} &    &    &    &    &    &    &    &    &    & X \\ \hline
+\end{tabular}
+\caption{Cronograma de atividades previstas}
+\label{tab:cronograma}
+\end{table}
+
+\section{Algoritmo}
+Esta seção provê uma descrição mais profunda do algoritmo Paxos modificado. São apresentadas as sequências de operações efetuadas, em caso normal de operação e em casos excepcionais.
+
+\subsection{Operação em Caso Normal}
+\begin{enumerate}
+\item O cliente envia uma requisição para todos os servidores. O cliente $c$, portanto, envia uma mensagem $\lange REQUEST, c, t, op \rangle \sigma_c$ através de uma requisição demonstrando interesse na execução de uma operação. O campo $t$ é a estampilha temporal da requisição que é utilizada para assegurar a semântica de execução única. Isto é, os servidores não executam uma requisição para um cliente com um $t$ menor que o último executado para o mesmo cliente, evitando assim que uma mesma requisição seja executada duas ou inúmeras vezes.
+\end{enumerate}
+
+
+2. Upon server si becoming the primary of view v. When the view changes and a server si becomes the primary of v it verifies if: (i) it accepted the request from view v? 1; (ii) it is in the normal state; and (iii) if it has at least one client request pending to be ordered. If these conditions are satisfied the primary sends a ?PRE-PREPARE,si,v,dm??si message to all servers, where si is the server identifier, v the view number and dm a digest of the request sent by a client.
+
+
+
+\IncMargin{1em}
+\begin{algorithm}[H]
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{A bitmap $Im$ of size $w\times l$}
+\Output{A partition of the bitmap}
+\BlankLine
+\emph{special treatment of the first line}\;
+\For{$i\leftarrow 2$ \KwTo $l$}{
+\emph{special treatment of the first element of line $i$}\;
+\For{$j\leftarrow 2$ \KwTo $w$}{\label{forins}
+\Left$\leftarrow$ \FindCompress{$Im[i,j-1]$}\;
+\Up$\leftarrow$ \FindCompress{$Im[i-1,]$}\;
+\This$\leftarrow$ \FindCompress{$Im[i,j]$}\;
+\If(\tcp*[h]{O(\Left,\This)==1}){\Left compatible with \This}{\label{lt}
+\lIf{\Left $<$ \This}{\Union{\Left,\This}}\;
+\lElse{\Union{\This,\Left}\;}
+}
+\If(\tcp*[f]{O(\Up,\This)==1}){\Up compatible with \This}{\label{ut}
+\lIf{\Up $<$ \This}{\Union{\Up,\This}}\;
+\tcp{\This is put under \Up to keep tree as flat as possible}\label{cmt}
+\lElse{\Union{\This,\Up}}\tcp*[r]{\This linked to \Up}\label{lelse}
+}
+}
+\lForEach{element $e$ of the line $i$}{\FindCompress{p}}
+}
+\caption{disjoint decomposition}\label{algo_disjdecomp}
+\end{algorithm}\DecMargin{1em}
+
+\bibliographystyle{ufscThesis/ufsc-alf}
+\bibliography{bibliografia}
+
+\end{document}

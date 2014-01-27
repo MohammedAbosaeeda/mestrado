@@ -1,0 +1,16 @@
+\select@language {brazil}
+\contentsline {figure}{\numberline {1}{\ignorespaces Vis\~ao geral da metodologia de projeto de sistemas orientado \`a aplica\c c\~ao~\cite {Froehlich:2001}\relax }}{29}
+\contentsline {figure}{\numberline {2}{\ignorespaces Classe $Vector$ generalizada \cite {Stroustrup:c++}\relax }}{30}
+\contentsline {figure}{\numberline {3}{\ignorespaces Classe $Vector$ instanciada com $int$.\relax }}{31}
+\contentsline {figure}{\numberline {4}{\ignorespaces Classe $Vector$ instanciada com $MyClass$.\relax }}{31}
+\contentsline {figure}{\numberline {5}{\ignorespaces Atividades de integra\c c\~ao entre emulador e depurador\relax }}{40}
+\contentsline {figure}{\numberline {6}{\ignorespaces Trecho do \textit {trait} da aplica\c c\~ao o componente DMEC.\relax }}{45}
+\contentsline {figure}{\numberline {7}{\ignorespaces Exemplo do arquivo de configura\c c\~ao do teste para a \texttt {TAP}.\relax }}{46}
+\contentsline {figure}{\numberline {8}{\ignorespaces Intera\c c\~ao entre o coordenador e os trabalhadores na aplica\c c\~ao teste do DMEC~\cite {DMEC}.\relax }}{49}
+\contentsline {figure}{\numberline {9}{\ignorespaces Teste do DMEC com configura\c c\~ao \texttt {NUM\_WORKERS} = 6\relax }}{50}
+\contentsline {figure}{\numberline {10}{\ignorespaces Teste do DMEC com configura\c c\~ao \texttt {NUM\_WORKERS} = 60\relax }}{50}
+\contentsline {figure}{\numberline {11}{\ignorespaces DMEC debug with GDB execution with \texttt {NUM\_WORKERS} = 60\relax }}{51}
+\contentsline {figure}{\numberline {12}{\ignorespaces Trecho do relat\'orio com a troca da propriedade \texttt {NUM\_WORKERS} por valores gerados aleatoriamente.\relax }}{52}
+\contentsline {figure}{\numberline {13}{\ignorespaces Classifica\c c\~ao das tentativas realizadas versus a configura\c c\~ao da granularidade.\relax }}{53}
+\contentsline {figure}{\numberline {14}{\ignorespaces Classifica\c c\~ao das tentativas realizadas versus o consumo de tempo.\relax }}{53}
+\contentsline {figure}{\numberline {15}{\ignorespaces Consumo de mem\'oria extra para armazenar as informa\c c\~oes de depura\c c\~ao.\relax }}{54}

@@ -63,21 +63,21 @@
 \numerodemembrosnabanca{3} % Isso decide se haverá uma folha adicional
 \orientadornabanca{sim} % Se faz parte da banca definir como sim
 %\bancaMembroA{Prof. Presidente da banca} %Nome do presidente da banca
-\bancaMembroB{Prof. segundo membro} % Nome do membro da Banca
-\bancaMembroC{Prof. terceiro membro} % Nome do membro da Banca
-\bancaMembroD{Prof. terceiro membro} % Nome do membro da Banca
+\bancaMembroB{Prof.  membro} % Nome do membro da Banca
+\bancaMembroC{Prof.  membro} % Nome do membro da Banca
+\bancaMembroD{Prof.  membro} % Nome do membro da Banca
 
-\dedicatoria{A quem o trabalho é dedicado, se é que o é (opcional)}
+\dedicatoria{Dedico esta dissertação à minha familia: meus amados pais Célia Regina Cazu Soldi e Luis Carlos Soldi, minha irmazinha do coração Luiza Helena Cazu Soldi e meu companheiro para todas as horas, Marcelo Ribeiro Xavier da Silva.}
 
-\agradecimento{Agradecimentos opcionais, caso existam pessoas ou entidades a quem se deve apoio ou suporte ao trabalho ora apresentado.}
+\agradecimento{Ainda não escrevi.}
 
 \epigrafe{How often have I said to you that when you have eliminated the impossible, whatever remains, however improbable, must be the truth?}{ Sherlock Holmes}
 
-\textoResumo {Aqui é redigido o resumo do documento... blabla blablablabla blabla ipsum loren e a sophia também blab ablablabl ablbalbalblab lablablbalb lab lab lab labl a blab lablablab la blab alballbalba lba lba }
+\textoResumo {he process of testing and debugging embedded software is non-trivial, once it needs a thorough inspection of the entire source code to make sure that there is no behavior beyond expectations. Perform these activities on embedded software is even more defiant, once developers need to find out how to optimize the use of the scarce resources since the test itself will compete with the application under test by the scarce system resources. This paper presents \texttt{TAP}, a tool for helping developers in the process of testing and debugging embedded systems. The main idea of this tool is emulating various possible system configurations to try to find errors in the application. Once detected an unspecified behavior, \texttt{TAP} automatically perform compilation, emulation and debugging accordingly to a XML specification file. }
 
 \palavrasChave {chave 1. chave 2. ... chave n.}
 
-\textAbstract {Here is written the abstract of the document}
+\textAbstract {The process of testing and debugging embedded software is non-trivial, once it needs a thorough inspection of the entire source code to make sure that there is no behavior beyond expectations. Perform these activities on embedded software is even more defiant, once developers need to find out how to optimize the use of the scarce resources since the test itself will compete with the application under test by the scarce system resources. This paper presents \texttt{TAP}, a tool for helping developers in the process of testing and debugging embedded systems. The main idea of this tool is emulating various possible system configurations to try to find errors in the application. Once detected an unspecified behavior, \texttt{TAP} automatically perform compilation, emulation and debugging accordingly to a XML specification file.}
 
 \keywords {key 1. key 2. ... key n.}
 
@@ -88,16 +88,16 @@
 %--------------------------------------------------------
 % Elementos pré-textuais
 \capa
-%\folhaderosto[comficha] % Se nao quiser imprimir a ficha, é só não usar o parâmetro
+\folhaderosto[comficha] % Se nao quiser imprimir a ficha, é só não usar o parâmetro
 %\folhaaprovacao
-%\paginadedicatoria
-%\paginaagradecimento
-%\paginaepigrafe
-%\paginaresumo
-%\paginaabstract
-%\listadefiguras
-%\listadetabelas
-%\listadeabreviaturas
+\paginadedicatoria
+\paginaagradecimento
+\paginaepigrafe
+\paginaresumo
+\paginaabstract
+\listadefiguras
+\listadetabelas
+\listadeabreviaturas
 %\listadesimbolos
 \sumario
 
@@ -572,46 +572,51 @@ A Tabela~\ref{ref:tabQuestao2TAP} apresenta uma análise de $TAP$ para os desafio
 
 \begin{description}		
 	\item[Meta: testes 100\% automaticos] dependem de um ambiente de teste poderoso e que pode automaticamente providenciar a instrumentação do \textit{software}, a geração/recuperação do suporte necessário (ex. \textit{drivers}, \textit{stubs}, simuladores, emuladores), ser responsável pela geração automática dos casos de teste mais adequados para o modelo, executá-los e, finalmente, emitir um relatório sobre o ensaio executado.
+	
 			\begin{description}
-			\item[Desafio: geração de dados de entrada para o teste ]
-			\item[Desafio: eficácia do teste]
-			\item[Desafio: testes de composição]
-			\item[Desafio: Corpo de evidências empíricas]
+			\item[Desafio: geração de dados de entrada para o teste] sempre foi um tópico de pesquisa muito ativo, mas até hoje todos os esforços têm produzido um impacto limitado na indústria, onde a atividade de geração de teste permanece em grande parte manual.Os resultados mais promissores são as abordagem baseada em modelo e a geração aleatória acrescida de alguma técnica com inteligência.
+			
+			\item[Desafio: abordagens de teste específicas para o domínio] apontam que é necessário estender abordagens específicas de domínio para a fase de testes com o intuito de encontrar métodos e ferramentas específicas de domínio e poder aprimorar a automação de teste. Neste sentido, alguns trabalhos já conseguiram demonstar a extração automática de requisitos para o teste a partir de um modelo escrito em uma linguagem fortemente tipada e específica de um domínio.
+			
+			\item[Desafio: testes \textit{on-line}] representam a idéia de monitorar o comportamento de um sistema em funcionamento na vida real. Nem sempre é possível realizar este tipo de teste, especialmente para aplicações embarcadas implantados em um ambiente de recursos limitados, onde a sobrecarga exigida pela instrumentação de teste não poderia ser viável.
 		\end{description}
 \end{description}
-A Tabela~\ref{ref:tabQuestao2TAP} apresenta uma análise de $TAP$ para os desafios propostos pela meta de modelagem baseada em testes.
+
+A Tabela~\ref{ref:tabQuestao3TAP} apresenta uma análise de $TAP$ em relação à automação completa da execução de testes de \textit{software}.
 
 \begin{table*}[htb]
 \begin{center}
-\begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} 
+\begin{tabular}{|p{.2\textwidth}|p{.8\textwidth}|} 
 
 \hline
-\textbf{Testes baseados em modelos} & Atualmente a ferramenta possui uma contribuição \textbf{limitada} à agregação de outros modelos e prevê apenas o ensaio de conformidade a partir de uma configuração de teste.\\ 
+\textbf{Geração de dados de entrada} & O suporte à geração de dados é \textbf{parcial}, pois a informação inicial dos dados de entrada são fornecidos pelo usuário da ferramenta e somente depois $TAP$ realiza a retroalimentação de acordo com a configuração dos testes. No caso do teste não ser determinado pelo usuário, a ferramenta inclui dados iniciais aleatórios, sem adição de inteligência.\\ 
 
 \hline
-\textbf{Testes baseados em anti-modelo} & Apesar de não ser o foco deste trabalho, o relatório fornecido por TAP apresenta todas as características e os valores trocadas em tempo de execução. Estes dados podem ser utilizados para realizar uma modelagem do sistema, portanto a ferramenta \textbf{possui} suporte para o anti-modelo. \\ 
+\textbf{Abordagens específicas para o domínio} &  $TAP$  consegue importar configurações específicas de domino e realizar testes sobe elas, contemplando de forma \textbf{parcial} a extração de dados relacionados ao domínio da aplicação.\\ 
 
 \hline
-\textbf{Oráculos de teste } & TAP \textbf{não contém} um oráculo de teste, uma vez que não faz parte deste trabalho a geração de casos de teste.\\ 
+\textbf{Testes \textit{on-line}} & Este diferencial é apesentado pela ferramenta através do ambiente de teste e depuração, com suporte \textbf{total} aos testes durante à execução da aplicação.\\ 
 
 \hline
 \end{tabular}
-\label{ref:tabQuestao2TAP} 
+\label{ref:tabQuestao3TAP} 
 \end{center}
-\caption{Análise de TAP referente à modelagem baseada em testes}
+\caption{Análise de TAP referente à automação total da atividade de testes de \textit{software}}
 \end{table*}
 
 \begin{description}		
 	\item[Meta: maior eficácia na engenharia de testes] procura estudar questões técnicas e de organização do teste, que devem ser conciliadas em um processo para produzir o máximo de eficiência e eficácia. Este estudo pretende dar suporte para o desenvolvimento de os métodos, ferramentas e processos de teste que mantenham uma boa relação custo-benefício no desenvolvimento de software de alta qualidade.
+	
 			\begin{description}
-			\item[Desafio: hipóteses explícitas de teste]
-			\item[Desafio: eficácia do teste]
-			\item[Desafio: testes de composição]
-			\item[Desafio: Corpo de evidências empíricas]
+			\item[Desafio: controlar a evolução]
+			\item[Desafio: aproveitar recursos]
+			\item[Desafio: padrões de teste]
+			\item[Desafio: compreender os custos dos ensaios]
+			\item[Desafio: aprendizado dos testadores de \textit{software}]
 		\end{description}
 \end{description}
 
-A Tabela~\ref{ref:tabQuestao1TAP} apresenta uma análise de $TAP$ para os desafios propostos pela teoria de teste universal.
+A Tabela~\ref{ref:tabQuestao4TAP} apresenta uma análise de $TAP$ para os desafios propostos pela teoria de teste universal.
 
 \begin{table*}[htb]
 \begin{center}
@@ -619,24 +624,39 @@ A Tabela~\ref{ref:tabQuestao1TAP} apresenta uma análise de $TAP$ para os desafio
 \begin{tabular}{|p{.3\textwidth}|p{.7\textwidth}|} 
 
 \hline
-\textbf{Hipóteses explícitas} & As hipóteses podem ser \textbf{parcialmente} explicitadas através do arquivo de configuração, onde  é possível importar definições semi-formais.\\ 
+\textbf{Controlar a evolução} & \\ 
 
 \hline
-\textbf{Eficácia do teste} & Cobertura \textbf{total}, onde a eficácia é testada de forma quantitativa pela controvérsia convencional entre a técnica proposta versus a técnica aleatória\\ 
+\textbf{Aproveitando de recursos} & \\ 
 
 \hline
-\textbf{Testes de composição} & Testes \textbf{parcialmente atendidos}, pois cada componente pode ser testado como uma parte separada do sistema. A integração entre os componentes é apenas simulada\\ 
+\textbf{Padrões de teste} & \\ 
 
 \hline
-\textbf{Evidências empíricas} & A implementação e o algoritmo estão completamente liberadas para o usode terceiros, mas devido à especificidades na modelagem do sistema \textbf{não foi possível} utilizar testes de repositórios. \\
+\textbf{Compreensão dos custos dos ensaios} & \\
+
+\hline
+\textbf{Aprendizado dos testadores de \textit{software}} & \\
 
 \hline
 \end{tabular}
-\label{ref:tabQuestao1TAP} 
+\label{ref:tabQuestao4TAP} 
 \end{center}
 \end{table*}
 
 \section{Comparativo entre as ferramentas}
+
+\chapter{Conclusões e perspectivas futuras}
+Neste trabalho foi introduzida $TAP$, uma ferramenta para a troca automática de parâmetros de configuração e apresentado um roteiro para a geração de um ambiente de desenvolvimento de aplicações embarcadas baseadas em requisitos de \textit{hardware} e \textit{software} específicos.
+
+O ambiente de desenvolvimento integrado fornece independência em relação à plataforma física de destino. Desta forma, os desenvolvedores não precisam gastar tempo compreendendo uma nova plataforma de desenvolvimento sempre que alguma característica do sistema embarcado for atualizada. Este é um passo importante, pois alguns sistemas embarcados podem não ser capazes de armazenar os dados adicionais necessários para apoiar a depuração. 
+
+O experimento realizado apontou valores quantitativos de *********.
+Foi confirmada que a eficácia do algoritmo está intimamente ligada à eficácia da configuração recebida quando $TAP$ testou e depurou o \texttt{DMEC} com as três granularidades da ferramenta. A avaliação do impacto da informação de depuração no tamanho do código da aplicação foi de mais de 500\% e a sobrecarga para o tempo de execução é de cerca de 60\%.
+
+Também foi realizada uma análise qualitativa da ferramenta, levando-se em conta os desafios ainda presentes na área de teste e depuração de sistemas embarcados. ***** 
+
+
 \bibliographystyle{ufscThesis/ufsc-alf}
 \bibliography{bibliografia}
 \end{document}

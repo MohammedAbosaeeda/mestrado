@@ -1,40 +1,41 @@
 \select@language {brazil}
-\contentsline {chapter}{\numberline {1}\MakeUppercase {Introdu\c c\~ao}}{3}
-\contentsline {section}{\numberline {1.1}Motiva\c c\~ao}{4}
-\contentsline {section}{\numberline {1.2}Objetivo}{4}
-\contentsline {subsection}{\numberline {1.2.1}Objetivo Geral}{4}
-\contentsline {subsection}{\numberline {1.2.2}Objetivos Espec\IeC {\'\i }ficos}{5}
-\contentsline {subsection}{\numberline {1.2.3}Delimita\c c\~oes}{5}
-\contentsline {chapter}{\numberline {2}\MakeUppercase {Conceitos b\'asicos}}{7}
-\contentsline {section}{\numberline {2.1}Teste de sistemas computacionais}{7}
-\contentsline {section}{\numberline {2.2}Depura\c c\~ao de sistemas computacionais}{8}
-\contentsline {section}{\numberline {2.3}Projeto de sistemas orientado a aplica\c c\~ao}{9}
-\contentsline {section}{\numberline {2.4}Programa\c c\~ao gen\'erica}{11}
-\contentsline {subsection}{\numberline {2.4.1}Utiliza\c c\~ao em C++: \textit {templates}}{12}
-\contentsline {chapter}{\numberline {3}\MakeUppercase {Trabalhos relacionados}}{15}
-\contentsline {section}{\numberline {3.1}Justitia}{15}
-\contentsline {section}{\numberline {3.2}Automatic testing environment for multi-core embedded software (ATEMES)}{16}
-\contentsline {section}{\numberline {3.3}Statistical Debugging}{17}
-\contentsline {subsection}{\numberline {3.3.1}Statistical Debugging of Sampled Programs}{17}
-\contentsline {subsection}{\numberline {3.3.2}Statistical debugging: simultaneous identification of multiple bugs}{18}
-\contentsline {subsection}{\numberline {3.3.3}Statistical debugging using a hierarchical model of correlated predicates}{18}
-\contentsline {section}{\numberline {3.4}Program Slicing}{19}
-\contentsline {subsection}{\numberline {3.4.1}\cite {sasirekha2011program}}{19}
-\contentsline {subsection}{\numberline {3.4.2}\cite {Xu:2005:BSP:1050849.1050865}}{19}
-\contentsline {subsection}{\numberline {3.4.3}\cite {artho2011iterative}}{19}
-\contentsline {section}{\numberline {3.5}Capture and Replay}{19}
-\contentsline {subsection}{\numberline {3.5.1}Pinpointing interrupts in embedded real-time systems using context checksums}{20}
-\contentsline {subsection}{\numberline {3.5.2}Replaying and isolating failing multi-object interactions}{20}
-\contentsline {subsection}{\numberline {3.5.3}\cite {qi2011locating}}{20}
-\contentsline {subsection}{\numberline {3.5.4}\cite {orso2005selective}}{20}
-\contentsline {chapter}{\numberline {4}\MakeUppercase {O ambiente Compartilhado de Teste e Depura\c c\~ao}}{21}
-\contentsline {section}{\numberline {4.1}Configura\c c\~ao do ambiente remoto}{21}
-\contentsline {chapter}{\numberline {5}\MakeUppercase {A arquitetura de Automa\c c\~ao de Testes}}{25}
-\contentsline {section}{\numberline {5.1}Abstra\c c\~oes no $EPOS$}{27}
-\contentsline {section}{\numberline {5.2}Configura\c c\~ao do Teste/Depura\c c\~ao}{27}
-\contentsline {section}{\numberline {5.3}Discuss\~ao sobre a granularidade na configura\c c\~ao dos testes}{28}
-\contentsline {chapter}{\numberline {6}\MakeUppercase {Resultado experimental de teste e depura\c c\~ao de uma aplica\c c\~ao real}}{31}
-\contentsline {section}{\numberline {6.1}Resultados}{33}
-\contentsline {chapter}{\numberline {7}\MakeUppercase {An\'alise qualitativa das ferramentas de teste e depura\c c\~ao de \textit {software}}}{37}
-\contentsline {section}{\numberline {7.1}Comparativo entre as ferramentas}{41}
-\contentsline {chapter}{Refer\^encias Bibliogr\'aficas}{43}
+\contentsline {chapter}{\numberline {1}\MakeUppercase {Introdu\c c\~ao}}{21}
+\contentsline {section}{\numberline {1.1}Motiva\c c\~ao}{22}
+\contentsline {section}{\numberline {1.2}Objetivo}{22}
+\contentsline {subsection}{\numberline {1.2.1}Objetivo Geral}{22}
+\contentsline {subsection}{\numberline {1.2.2}Objetivos Espec\IeC {\'\i }ficos}{23}
+\contentsline {subsection}{\numberline {1.2.3}Delimita\c c\~oes}{23}
+\contentsline {chapter}{\numberline {2}\MakeUppercase {Conceitos b\'asicos}}{25}
+\contentsline {section}{\numberline {2.1}Teste de sistemas computacionais}{25}
+\contentsline {section}{\numberline {2.2}Depura\c c\~ao de sistemas computacionais}{26}
+\contentsline {section}{\numberline {2.3}Projeto de sistemas orientado a aplica\c c\~ao}{27}
+\contentsline {section}{\numberline {2.4}Programa\c c\~ao gen\'erica}{29}
+\contentsline {subsection}{\numberline {2.4.1}Utiliza\c c\~ao em C++: \textit {templates}}{30}
+\contentsline {chapter}{\numberline {3}\MakeUppercase {Trabalhos relacionados}}{33}
+\contentsline {section}{\numberline {3.1}Justitia}{33}
+\contentsline {section}{\numberline {3.2}Automatic testing environment for multi-core embedded software (ATEMES)}{34}
+\contentsline {section}{\numberline {3.3}Statistical Debugging}{35}
+\contentsline {subsection}{\numberline {3.3.1}Statistical Debugging of Sampled Programs}{35}
+\contentsline {subsection}{\numberline {3.3.2}Statistical debugging: simultaneous identification of multiple bugs}{36}
+\contentsline {subsection}{\numberline {3.3.3}Statistical debugging using a hierarchical model of correlated predicates}{36}
+\contentsline {section}{\numberline {3.4}Program Slicing}{37}
+\contentsline {subsection}{\numberline {3.4.1}\cite {sasirekha2011program}}{37}
+\contentsline {subsection}{\numberline {3.4.2}\cite {Xu:2005:BSP:1050849.1050865}}{37}
+\contentsline {subsection}{\numberline {3.4.3}\cite {artho2011iterative}}{37}
+\contentsline {section}{\numberline {3.5}Capture and Replay}{37}
+\contentsline {subsection}{\numberline {3.5.1}Pinpointing interrupts in embedded real-time systems using context checksums}{38}
+\contentsline {subsection}{\numberline {3.5.2}Replaying and isolating failing multi-object interactions}{38}
+\contentsline {subsection}{\numberline {3.5.3}\cite {qi2011locating}}{38}
+\contentsline {subsection}{\numberline {3.5.4}\cite {orso2005selective}}{38}
+\contentsline {chapter}{\numberline {4}\MakeUppercase {O ambiente Compartilhado de Teste e Depura\c c\~ao}}{39}
+\contentsline {section}{\numberline {4.1}Configura\c c\~ao do ambiente remoto}{39}
+\contentsline {chapter}{\numberline {5}\MakeUppercase {A arquitetura de Automa\c c\~ao de Testes}}{43}
+\contentsline {section}{\numberline {5.1}Abstra\c c\~oes no $EPOS$}{45}
+\contentsline {section}{\numberline {5.2}Configura\c c\~ao do Teste/Depura\c c\~ao}{45}
+\contentsline {section}{\numberline {5.3}Discuss\~ao sobre a granularidade na configura\c c\~ao dos testes}{46}
+\contentsline {chapter}{\numberline {6}\MakeUppercase {Resultado experimental de teste e depura\c c\~ao de uma aplica\c c\~ao real}}{49}
+\contentsline {section}{\numberline {6.1}Resultados}{51}
+\contentsline {chapter}{\numberline {7}\MakeUppercase {An\'alise qualitativa das ferramentas de teste e depura\c c\~ao de \textit {software}}}{55}
+\contentsline {section}{\numberline {7.1}Comparativo entre as ferramentas}{59}
+\contentsline {chapter}{\numberline {8}\MakeUppercase {Conclus\~oes e perspectivas futuras}}{61}
+\contentsline {chapter}{Refer\^encias Bibliogr\'aficas}{63}

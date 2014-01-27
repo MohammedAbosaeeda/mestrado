@@ -8,8 +8,8 @@
 \contentsline {chapter}{\numberline {2}\MakeUppercase {Conceitos b\'asicos}}{7}
 \contentsline {section}{\numberline {2.1}Teste de sistemas computacionais}{7}
 \contentsline {section}{\numberline {2.2}Depura\c c\~ao de sistemas computacionais}{8}
-\contentsline {section}{\numberline {2.3}Projeto de sistemas orientado \`a aplica\c c\~ao}{9}
-\contentsline {section}{\numberline {2.4}Programa\c c\~ao gen\'erica}{10}
+\contentsline {section}{\numberline {2.3}Projeto de sistemas orientado a aplica\c c\~ao}{9}
+\contentsline {section}{\numberline {2.4}Programa\c c\~ao gen\'erica}{11}
 \contentsline {subsection}{\numberline {2.4.1}Utiliza\c c\~ao em C++: \textit {templates}}{12}
 \contentsline {chapter}{\numberline {3}\MakeUppercase {Trabalhos relacionados}}{15}
 \contentsline {section}{\numberline {3.1}Justitia}{15}
@@ -29,18 +29,12 @@
 \contentsline {subsection}{\numberline {3.5.4}\cite {orso2005selective}}{20}
 \contentsline {chapter}{\numberline {4}\MakeUppercase {O ambiente Compartilhado de Teste e Depura\c c\~ao}}{21}
 \contentsline {section}{\numberline {4.1}Configura\c c\~ao do ambiente remoto}{21}
-\contentsline {chapter}{\numberline {5}\MakeUppercase {A arquitetura de Automa\c c\~ao de Testes}}{23}
-\contentsline {section}{\numberline {5.1}Abstra\c c\~oes no $EPOS$}{25}
-\contentsline {section}{\numberline {5.2}Configura\c c\~ao do Teste/Depura\c c\~ao}{25}
-\contentsline {section}{\numberline {5.3}Discuss\~ao sobre a granularidade na configura\c c\~ao dos testes}{26}
-\contentsline {chapter}{\numberline {6}\MakeUppercase {Resultado experimental de teste e depura\c c\~ao de uma aplica\c c\~ao real}}{29}
-\contentsline {section}{\numberline {6.1}Resultados}{31}
-\contentsline {chapter}{\numberline {7}\MakeUppercase {An\'alise qualitativa entre as ferramentas de teste e depura\c c\~ao de \textit {software}}}{35}
-\contentsline {section}{\numberline {7.1}Defini\c c\~ao das caracter\IeC {\'\i }sticas}{37}
-\contentsline {section}{\numberline {7.2}Resultados}{37}
-\contentsline {subsection}{\numberline {7.2.1}Justitia}{37}
-\contentsline {subsection}{\numberline {7.2.2}ATEMES}{37}
-\contentsline {subsection}{\numberline {7.2.3}Statistical Debugging}{37}
-\contentsline {subsection}{\numberline {7.2.4}Program Slicing}{37}
-\contentsline {subsection}{\numberline {7.2.5}Capture and Replay}{37}
-\contentsline {chapter}{Refer\^encias Bibliogr\'aficas}{39}
+\contentsline {chapter}{\numberline {5}\MakeUppercase {A arquitetura de Automa\c c\~ao de Testes}}{25}
+\contentsline {section}{\numberline {5.1}Abstra\c c\~oes no $EPOS$}{27}
+\contentsline {section}{\numberline {5.2}Configura\c c\~ao do Teste/Depura\c c\~ao}{27}
+\contentsline {section}{\numberline {5.3}Discuss\~ao sobre a granularidade na configura\c c\~ao dos testes}{28}
+\contentsline {chapter}{\numberline {6}\MakeUppercase {Resultado experimental de teste e depura\c c\~ao de uma aplica\c c\~ao real}}{31}
+\contentsline {section}{\numberline {6.1}Resultados}{33}
+\contentsline {chapter}{\numberline {7}\MakeUppercase {An\'alise qualitativa das ferramentas de teste e depura\c c\~ao de \textit {software}}}{37}
+\contentsline {section}{\numberline {7.1}Comparativo entre as ferramentas}{41}
+\contentsline {chapter}{Refer\^encias Bibliogr\'aficas}{43}

@@ -31,10 +31,10 @@
 
 
 \titulo{Automação de teste de software para sistemas embarcados} % Titulo do trabalho
-\autor{Rita de Cássia Cazu Soldi}           % Nome do autor
-\data{28}{fevereiro}{2014}                           % Data da publicação do trabalho
+\autor{Rita de Cássia Cazu Soldi} % Nome do autor
+\data{28}{fevereiro}{2014} % Data da publicação do trabalho
 
-\orientador{Prof. Dr. Antônio Augusto Medeiros Fröhlich}                    % Nome do orientador e (opcional) 
+\orientador{Prof. Dr. Antônio Augusto Medeiros Fröhlich} % Nome do orientador e (opcional)
 %\departamento[a]{Faculdade de Ciências do Mar}
 %\curso[a]{Atividade de Extensão em Corte e Costura}
 
@@ -63,9 +63,9 @@
 \numerodemembrosnabanca{3} % Isso decide se haverá uma folha adicional
 \orientadornabanca{sim} % Se faz parte da banca definir como sim
 %\bancaMembroA{Prof. Presidente da banca} %Nome do presidente da banca
-\bancaMembroB{Prof. segundo membro}      % Nome do membro da Banca
-\bancaMembroC{Prof. terceiro membro}     % Nome do membro da Banca
-\bancaMembroD{Prof. terceiro membro}     % Nome do membro da Banca
+\bancaMembroB{Prof. segundo membro} % Nome do membro da Banca
+\bancaMembroC{Prof. terceiro membro} % Nome do membro da Banca
+\bancaMembroD{Prof. terceiro membro} % Nome do membro da Banca
 
 \dedicatoria{A quem o trabalho é dedicado, se é que o é (opcional)}
 
@@ -73,7 +73,7 @@
 
 \epigrafe{How often have I said to you that when you have eliminated the impossible, whatever remains, however improbable, must be the truth?}{ Sherlock Holmes}
 
-\textoResumo {Aqui é redigido o resumo do documento...  blabla blablablabla blabla ipsum loren e a sophia também blab ablablabl ablbalbalblab lablablbalb lab lab lab labl a blab lablablab la blab alballbalba lba lba }
+\textoResumo {Aqui é redigido o resumo do documento... blabla blablablabla blabla ipsum loren e a sophia também blab ablablabl ablbalbalblab lablablbalb lab lab lab labl a blab lablablab la blab alballbalba lba lba }
 
 \palavrasChave {chave 1. chave 2. ... chave n.}
 
@@ -82,12 +82,12 @@
 \keywords {key 1. key 2. ... key n.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Início do documento                                
+% Início do documento
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 %--------------------------------------------------------
 % Elementos pré-textuais
-\capa  
+\capa
 %\folhaderosto[comficha] % Se nao quiser imprimir a ficha, é só não usar o parâmetro
 %\folhaaprovacao
 %\paginadedicatoria
@@ -96,7 +96,7 @@
 %\paginaresumo
 %\paginaabstract
 %\listadefiguras
-%\listadetabelas 
+%\listadetabelas
 %\listadeabreviaturas
 %\listadesimbolos
 \sumario
@@ -107,18 +107,18 @@ Sistemas embarcados podem ser apresentados como uma combinação entre \textit{har
 
 Estas soluções baseam-se na premissa de que cada componente está efetuando corretamente as suas atividades e que a integração entre os mesmos não se desvia do comportamento esperado. Caso contrário, as consequências podem ser custosas como, por exemplo, falhas em sistemas financeiros, diminuição de uma determinada quota de mercado, perda/corrupção de informações importantes de clientes, etc~\cite{tassey2002economic}.
 
-Para garantir que as componentes vão agir de acordo com o requisitado, uma boa prática é testar de maneira pragmática cada detalhe do software. Sendo que pelo menos uma parte destes testes seja automatizada, de maneira que sirvam como um contrato de funcionamento do sistema. 
+Para garantir que as componentes vão agir de acordo com o requisitado, uma boa prática é testar de maneira pragmática cada detalhe do software. Sendo que pelo menos uma parte destes testes seja automatizada, de maneira que sirvam como um contrato de funcionamento do sistema.
 
 Entretanto, o teste não é um comportamento do \textit{software} e nunca deve interferir no fluxo de atividades que está sendo testado. Na maior parte dos sistemas isto é possível sem demandar muito esforço, mas sistemas embarcados costumam ser mais restritos em termos de: memória, capacidade processamento, tempo de bateria, prazos para executar uma determinada atividade, entre outros.
 
-Além da dificuldade da própria atividade de teste, os desenvolvedores ainda precisam se adaptar a uma grande variedade de plataformas, sistemas operacionais, arquitetura, fornecedores, ferramenta de depuração, etc~\cite{schneider2004ten}. 
+Além da dificuldade da própria atividade de teste, os desenvolvedores ainda precisam se adaptar a uma grande variedade de plataformas, sistemas operacionais, arquitetura, fornecedores, ferramenta de depuração, etc~\cite{schneider2004ten}.
 
 Existem diversas ferramentas de apoio ao desenvolvimento de \textit{software} embarcado que tentam minimizar o impacto destas variações. A escolha e integração destas ferramentas é uma etapa importante no construção de sistemas embarcados e deve ser feita de maneira criteriosa, uma vez que pode simplificar todo o processo de desenvolvimento.
 
 \section{Motivação}
-Atualmente interagimos com mais de um sistema embarcado por dia e o número destes sistemas já superam o número de habitantes do nosso planeta, ainda, este número continua crescendo em ritmo acelerado~\cite{Marcondes:MSC:2009}. 
+Atualmente interagimos com mais de um sistema embarcado por dia e o número destes sistemas já superam o número de habitantes do nosso planeta, ainda, este número continua crescendo em ritmo acelerado~\cite{Marcondes:MSC:2009}.
 
-Além da quantidade, a complexidade dos sistemas embarcados é um fator que nunca para de crescer. O projeto de \textit{hardware} e \textit{software} está cada vez mais sofisticado e com requisitos mais rígidos. Para atender a esta demanda o \textit{software} embarcado deixou de ser composto por um conjunto limitado de instuções \textit{assembly} e deu espaço a uma gama de possibilidades oferecidas pelas linguagens de alto nível. 
+Além da quantidade, a complexidade dos sistemas embarcados é um fator que nunca para de crescer. O projeto de \textit{hardware} e \textit{software} está cada vez mais sofisticado e com requisitos mais rígidos. Para atender a esta demanda o \textit{software} embarcado deixou de ser composto por um conjunto limitado de instuções \textit{assembly} e deu espaço a uma gama de possibilidades oferecidas pelas linguagens de alto nível.
 
 Mesmo com este acúmulo de atividades, o \textit{software} embarcado ainda representa uma parcela minoritária do sistema, cerca de 20\%, então grande parte das ferramentas de auxílio ao desenvolvimento ainda possuem poucas funcionalidades de validação e verificação. Ainda, constatou-se que as ferramentas disponíveis para automação de teste não são de fácil compreensão/execução e não possuem resposta satisfatória para os casos de falhas do caso de teste. Um ponto de melhoria seria pausar a execução no exato momento em que o \textit{software} apresentar o comportamento inesperado e fornecer um relatório com os testes já realizados e oferecer dicas para que se possa detectar o \textit{bug}.
 
@@ -131,11 +131,11 @@ O principal objetivo deste trabalho é identificar o estado da arte do processo d
 \subsection{Objetivos Específicos}
 Para atender o objetivo geral, os seguintes objetivos específicos devem ser concluídos:
 \begin{itemize}
-	\item Planejar e executar uma revisão sistemática dos trabalhos relacionados, formando uma base de conhecimento sólida da área de teste de sistemas embarcados.
-	\item Especificação de uma arquitetura que realize a automação de testes de maneira simples, sem que seja necessário configurar cada teste a ser executado.
-	\item Especificação de um ambiente capaz de integrar a execução automática dos testes e a depuração de um \textit{software}.
-	\item Avaliação qualitativa e quantitativa da arquitetura proposta
-	\item Apresentar o presente trabalho em forma de artigo científico em conferências e periódicos, para que especialistas da área de sistemas embarcados possam corroborar os resultados obtidos e a contribuição científica.
+        \item Planejar e executar uma revisão sistemática dos trabalhos relacionados, formando uma base de conhecimento sólida da área de teste de sistemas embarcados.
+        \item Especificação de uma arquitetura que realize a automação de testes de maneira simples, sem que seja necessário configurar cada teste a ser executado.
+        \item Especificação de um ambiente capaz de integrar a execução automática dos testes e a depuração de um \textit{software}.
+        \item Avaliação qualitativa e quantitativa da arquitetura proposta
+        \item Apresentar o presente trabalho em forma de artigo científico em conferências e periódicos, para que especialistas da área de sistemas embarcados possam corroborar os resultados obtidos e a contribuição científica.
 \end{itemize}
 
 \subsection{Delimitações}
@@ -173,7 +173,7 @@ A depuração é a arte de diagnosticar erros em sistemas e determinar a melhor for
 
 Erros podem ser encontrados por qualquer pessoa em qualquer etapa do ciclo de vida do \textit{software}. Isto implica que tanto o formato do relatório de um resultado inesperado, quanto as características dos erros podem variar de acordo com o conhecimento do autor do relato. Sendo assim, para realizar uma depuração eficaz deve-se ser capaz de identificar a técnica apropriada para analisar diferentes tipos de relatórios e obter as informações necessárias para eliminar o problema.
 
-A depuração é uma tarefa complexa, cuja dificuldade varia de acordo com o ambiente de desenvolvimento, linguagem de programação, tamanho do sistema e disponibilidade de ferramentas disponíveis para auxiliar o processo. 
+A depuração é uma tarefa complexa, cuja dificuldade varia de acordo com o ambiente de desenvolvimento, linguagem de programação, tamanho do sistema e disponibilidade de ferramentas disponíveis para auxiliar o processo.
 
 Depuradores são ferramentas que auxiliam no monitoramento da execução de um programa, incluindo opções como: executar o programa passo-a-passo, pausar/reiniciar a execução e, em alguns casos, até voltar no tempo e desfazer a execução de uma determinada instrução.
 
@@ -215,7 +215,7 @@ Os algoritmos podem ser vistos como procedimentos parametrizados completamente i
 \subsection{Utilização em C++: \textit{templates}}
 Mecanismos de \textit{templates} providos pela linguagem de progamação C++ são uma maneira de adicionar às classes e funções conceitos genéricos, isto é, permitem criar um código reutilizável onde os tipos sejam passados como parâmetro. 
 
-No \textit{template} ficam descritas classes/funções genéricas que podem variar sua declaração de acordo com um determinado argumento fornecido como parâmetro para o modelo. 
+No \textit{template} ficam descritas classes/funções genéricas que podem variar sua declaração de acordo com um determinado argumento fornecido como parâmetro para o modelo.
 
 É função do compilador gerar as novas classes/funções quando houver os argumentos necessários para selecionar o parâmetro correto para instanciar o \textit{template}. As classes/funções geradas a partir de um \textit{template} são especializações deste modelo.
 
@@ -226,11 +226,11 @@ Um exemplo de implementação de classe genérica utilizando \textit{templates} pod
 Supondo que o programa apresente posteriormente a seguinte declaração:
 \lstset{language=C++}
 \begin{lstlisting}
-	Vector<int> vector_i;
-	Vector<MyClass> vector_my_class;
+        Vector<int> vector_i;
+        Vector<MyClass> vector_my_class;
 \end{lstlisting}
 
-O Resultado seria a instanciação de duas classes diferentes de acordo com o argumento, como apresentado na Figura~\ref{progcpp:especializacao_i} e Figura~\ref{progcpp:especializacao_my_class}: 
+O Resultado seria a instanciação de duas classes diferentes de acordo com o argumento, como apresentado na Figura~\ref{progcpp:especializacao_i} e Figura~\ref{progcpp:especializacao_my_class}:
 
 \progcpp{especializacao_i}{Classe $Vector$ instanciada com $int$.}
 \progcpp{especializacao_my_class}{Classe $Vector$ instanciada com $MyClass$.}
@@ -246,7 +246,7 @@ A área de automação de testes possui uma vasta literatura de apoio, sendo a maio
 \section{Justitia}
 Justitia~\cite{seo} é uma  ferramenta de testes automatizados capaz de detectar automaticamente erros na interface, gerar casos de testes completos - com entradas, estados internos, valores de variáveis, saídas - e emular a execução do \textit{software} na arquitetura alvo.
 
-Ela surgiu como um estudo de caso para demonstrar a automação de testes para \textit{software} embarcado, em que os autores propuseram em esquema de teste automatizado para as interfaces das camadas do sistema embarcado baseado em sua emulação na arquitetura alvo. 
+Ela surgiu como um estudo de caso para demonstrar a automação de testes para \textit{software} embarcado, em que os autores propuseram em esquema de teste automatizado para as interfaces das camadas do sistema embarcado baseado em sua emulação na arquitetura alvo.
 
 Para defender que a interface é um critério essencial para um teste de \textit{software} embarcado, a base de Justitia consiste na união de duas técnicas:
 \begin{description}
@@ -254,7 +254,7 @@ Para defender que a interface é um critério essencial para um teste de \textit{s
 	\item[Técnica de emulação dos casos de teste] é uma combinação entre o monitoramemento e a depuração do sistema. A ideia é definir \textit{breakpoints} para os casos de teste da interface e monitorar a tabela de simbolos para definir o sucesso ou falha do teste.
 \end{description}
 
-Os resultados foram analisados através de experimentos sob três pontos de vista: a densidade da interface, a complexidade do \textit{software} e a relação interface \textit{versus} erros. 
+Os resultados foram analisados através de experimentos sob três pontos de vista: a densidade da interface, a complexidade do \textit{software} e a relação interface \textit{versus} erros.
 
 A primeira questão a ser investigada foi a da densidade da interface, pois, apesar de estar estritamente ligada ao grau de acoplamento do \textit{software} embarcado, não há uma relação definida entre o grau de acoplamento \textit{software} e sua testabilidade. A partir da primeira questão houve a necessidade de estabelecer uma outra relação entre a densidade e a complexidade de um \textit{software}. Atualmente é uma das principais métricas para a previsão de falhas.
 
@@ -284,19 +284,19 @@ Trabalhos do tipo \textit{statistical debugging} se utilizam de dados estatístic
 
 Apesar do espaço de busca minimizado, a técnica retorna alguns locais espalhados no código, o que não facilita o trabalho do desenvolvedor. Para tentar suprir a necessidade de mais informações, foram sugeridas as extrações de algumas métricas destes dados estatísticos. Um exemplo seria o \textit{ranking} de desconfiança, uma relação entre uma determinada característica versus seu o número de execuções com falha, classificados em ordem decrescente.
 
-Como a análise é realizada a partir de uma depuração estática, estes modelos expõem as relações entre comportamentos do \textit{software} e seu eventual sucesso/fracasso de uma maneira estática. Então é possível fornecer uma identifiçao aproximada de qual parte do sistema gerou o erro. 
+Como a análise é realizada a partir de uma depuração estática, estes modelos expõem as relações entre comportamentos do \textit{software} e seu eventual sucesso/fracasso de uma maneira estática. Então é possível fornecer uma identifiçao aproximada de qual parte do sistema gerou o erro.
 
-Devido ao grande volume de dados necessários para guardar todas as execuções e realizar toda esta análise, esta técnica é difícil de ser implementada em um sistema embarcado real. 
+Devido ao grande volume de dados necessários para guardar todas as execuções e realizar toda esta análise, esta técnica é difícil de ser implementada em um sistema embarcado real.
 
 \subsection{Statistical Debugging of Sampled Programs}
-Esta abordagem propõe recolher os dados estatísticos através de declarações inseridas no código e  que podem coletar dicas, em tempo de execução, sobre os dados que não estão relacionados com as falhas~\cite{zheng2003statistical}.
+Esta abordagem propõe recolher os dados estatísticos através de declarações inseridas no código e que podem coletar dicas, em tempo de execução, sobre os dados que não estão relacionados com as falhas~\cite{zheng2003statistical}.
 
 Um dos desafios desta proposta é coletar os dados necessários sem penalizar a execução do \textit{software} e garantindo a melhor utilização de todos os recursos do sistema. A solução encontrada foi inserir um evento aleatório junto às declarações inseridas no \textit{software}, possibilitando que apenas uma pequena parte delas seja executada para cada nova execução do sistema.
 
 A partir desta probalidade foi possível reduzir tempo gasto para coletar os dados, já que não é obrigatório executar todas as declarações em todas as execuções do sistema. Além disso, as amostras recebidas são agregadas sem a informação de cronologia e considerando apenas a quantidade de vezes em que o resultado das declarações permaneceu o mesmo, o que minimiza o espaço necessário para armazenar os dados.
 
 \subsection{Statistical debugging: simultaneous identification of multiple bugs}
-Este modelo de \textit{statistical debugging}  tem o propósito de identificar a origem dos erros em um \textit{software} com uma modelagem probabilística de predicados, considerando inclusive que o \textit{software} pode conter mais de um erro simultaneamente~\cite{zheng2006statistical}. 
+Este modelo de \textit{statistical debugging} tem o propósito de identificar a origem dos erros em um \textit{software} com uma modelagem probabilística de predicados, considerando inclusive que o \textit{software} pode conter mais de um erro simultaneamente~\cite{zheng2006statistical}.
 
 Os modelos baseados em \textit{statistical debugging} têm como característica possuirem dados esparsos como amostragem e uma grande variedade de predicados para manipular. Por isso a manipulação destes predicados nem sempre é um trabalho trivial, o que faz com que muitos modelos não consigam selecionar padrões de erros úteis. Para mitigar este problema foram utilizadas técnicas semelhantes às dos algoritmos \textit{bi-clusters} que permite a extração de dados bidirecional simultâneamente.
 
@@ -313,7 +313,7 @@ Depois de cada execução um predicado pode receber tanto um voto completo quando 
 \cite{parsa2011statistical}
 
 \section{Program Slicing}
-Em técnicas que utilizam \textit{program slicing} a ideia principal é a partição do código e a remoção de estados ou caminhos que são irrelevantes para alcançar o objetivo selecionado, o que no caso da verificação e validação de um \textit{software} é encontrar um erro. Esta técnica possui duas abordagens principais: estática e dinâmica. 
+Em técnicas que utilizam \textit{program slicing} a ideia principal é a partição do código e a remoção de estados ou caminhos que são irrelevantes para alcançar o objetivo selecionado, o que no caso da verificação e validação de um \textit{software} é encontrar um erro. Esta técnica possui duas abordagens principais: estática e dinâmica.
 
 A partição estática é o tipo mais rápido e aponta apenas uma aproximação do conjunto final de caminhos que podem levar ao erro. Isto ocorre porque o foco é simplificar ao máximo o \textit{software} em questão, reduzindo-o ao ponto de conter todos os estados que poderiam afetar o valor final, mas sem considerar o valor de entrada do \textit{software}. Este tipo de partição é mais utilizada para \textit{software} de pequeno porte e de pouca complexidade, em que o tamanho da partição permanece compatível com a sua simplicidade.
 
@@ -329,7 +329,7 @@ Independente da abordagem selecionada, a partição do código é uma técnica intere
 Em trabalhos que utilizam \textit{capture and replay} a ideia é capturar toda a execução do programa até o final e armazenar as operações envolvidas em um registro. Este tipo de sistema permite que o desenvolvedor controle a nova execução do \textit{software} com execução de passos a frente, voltando passos na execução (contra o fluxo), examinando o contexto de alguma variável, verificando um determinado controle de fluxo, analisando fluxos alternativos, entre outras possibilidades.
 
 \subsection{Pinpointing interrupts in embedded real-time systems using context checksums}
-Um grande desafio nesta técnica é como se adaptar a interrupções, pois toda a estrutura de reprodução do \textit{software} se baseia no fluxo de controle e uma interrupção tem a capacidade de romper esta sequência.  Uma interrupção pode ocorrer a qualquer momento e provocar uma ruptura no fluxo de controle, então a execução do programa para na instrução atual, e continua a rotina de tratamento de interrupção. 
+Um grande desafio nesta técnica é como se adaptar a interrupções, pois toda a estrutura de reprodução do \textit{software} se baseia no fluxo de controle e uma interrupção tem a capacidade de romper esta sequência. Uma interrupção pode ocorrer a qualquer momento e provocar uma ruptura no fluxo de controle, então a execução do programa para na instrução atual, e continua a rotina de tratamento de interrupção.
 
 Neste aspecto, a solução de tirar um \textit{snapshot} do contexto de execução quando ocorre uma interrupção~\cite{Sundmark} se mostra uma boa alternativa para que o desenvolvedor possa analisar erros oriundos de interrupções.
 
@@ -341,7 +341,7 @@ Burger e Zeller~\cite{burger2008replaying} se destacaram por desenvolver uma fer
 
 %@% Revisão do Celo - Todo o capítulo
 \chapter{O ambiente Compartilhado de Teste e Depuração}
-Este capítulo apresenta instruções de como integrar a execução de testes com os possíveis ambientes de 
+Este capítulo apresenta instruções de como integrar a execução de testes com os possíveis ambientes de
 depuração, gerando o ambiente compartilhado de desenvolvimento.
 
 O ambiente utilizado pelo \textit{script} de troca de parâmetros conta com um emulador para simular a execução da aplicação e rodar os testes. No caso de sucesso em um teste, isto é um erro ser detectado, automaticamente uma ferramenta de depuração é iniciada e o resultado de todas as operações é repassado ao usuário.
@@ -373,30 +373,30 @@ Por exemplo, se uma aplicação compilada com informações de depuração (app.img) i
 \chapter{A arquitetura de Automação de Testes}
 \label{sec:tap}
 
-A ideia de desenvolver a troca de parâmetros surgiu extrapolando-se conceitos da metodologia de projeto orientado aplicação (AOSD - \textit{Application-Oriented System Design}) e do uso de programação genérica para a área de testes. O projeto orientado à aplicação fornece um sistema embarcado desenvolvido a partir de componentes especificamente adaptados e configurados de acordo com os requisitos da aplicação alvo. O fato de existir uma aplicação que fornece a certeza de que tudo que a compõe é essencial para seu funcionamento pode tornar o teste dos requisitos mais assertivo. Ainda, a programação genérica fornece uma maior adaptação do sistema às várias implementações de uma especificação. 
+A ideia de desenvolver a troca de parâmetros surgiu extrapolando-se conceitos da metodologia de projeto orientado aplicação (AOSD - \textit{Application-Oriented System Design}) e do uso de programação genérica para a área de testes. O projeto orientado à aplicação fornece um sistema embarcado desenvolvido a partir de componentes especificamente adaptados e configurados de acordo com os requisitos da aplicação alvo. O fato de existir uma aplicação que fornece a certeza de que tudo que a compõe é essencial para seu funcionamento pode tornar o teste dos requisitos mais assertivo. Ainda, a programação genérica fornece uma maior adaptação do sistema às várias implementações de uma especificação.
 
 No desenvolvimento para sistemas embarcados é frequente que uma única especificação seja reimplementada para atender a variabilidade de um componente de \textit{software} ou \textit{hardware}. Para cada uma destas implementações, um novo conjunto de testes é realizado. A vantagem de unir a AOSD com programação genérica ao desenvolvimento e teste de sistemas embarcados está em poder fazer uma única aplicação e um único teste para todas as implementações que seguem a mesma especificação, modificando apenas a configuração desejada.
 
-O algoritmo de $TAP$ (Troca Automática de Parâmetros de Software) é independente do sistema operacional e plataforma. No entanto, trabalhamos com a premissa de que este sistema seja orientado a aplicação, com modelagem baseada em \textit{features} e parametrização. Também é desejável que cada abstração do sistema seja configurada conforme necessário através de \textit{traits} de um modelo de \textit{templates}, como o definido por Stroustrup \cite{Stroustrup:c++}. 
+O algoritmo de $TAP$ (Troca Automática de Parâmetros de Software) é independente do sistema operacional e plataforma. No entanto, trabalhamos com a premissa de que este sistema seja orientado a aplicação, com modelagem baseada em \textit{features} e parametrização. Também é desejável que cada abstração do sistema seja configurada conforme necessário através de \textit{traits} de um modelo de \textit{templates}, como o definido por Stroustrup \cite{Stroustrup:c++}.
 
 No algoritmo~\ref{algoritmo_AEP} são apresentados os passos a realizar a partir do momento em que se tem uma aplicação alvo até o retorno do relatório para o desenvolvedor. A entrada do algoritmo é o arquivo de configuração que possui o caminho da aplicação sob teste e de seus \textit{traits}. A partir destas informações o algoritmo flui no sentido de tentar encontrar a característica desejada, trocá-la por uma valor predeterminado, executar a nova aplicação e recolher o retorno da aplicação.
 
 
 \begin{algorithm}
 \caption{Algoritmo de Troca dos Parâmetros de Configuração}\label{algoritmo_AEP}
-\KwIn{arquivo \# Arquivo de configura\c{c}\~{a}o do teste  }
+\KwIn{arquivo \# Arquivo de configura\c{c}\~{a}o do teste }
 \KwOut{relat\'{o}rio \# Relat\'{o}rio de tentativas }
 propriedades $\Leftarrow$ GetTraitFile(arquivo)\;
 \eIf{ o arquivo possui valor de configura\c{c}\~{a}o }{
   \ForEach{configura\c{c}\~{a}o no arquivo}{
-     	linha $\Leftarrow$ GetTheConfiguration(configura\c{c}\~{a}o, propriedades)\;
+             linha $\Leftarrow$ GetTheConfiguration(configura\c{c}\~{a}o, propriedades)\;
 \ForEach{valor entre os da configura\c{c}\~{a}o}{
         novoPropriedade$\Leftarrow$ ExchangeValue(linha, propriedades) \;
         novaApp$\Leftarrow$ Compile(aplica\c{c}\~{a}o, novoPropriedade) \;
         relat\'{o}rio$\Leftarrow$ relat\'{o}rio + Emulate(novaApp) \;
-     	}
+             }
 }
-}{ 
+}{
 \eIf{ o arquivo possui n$\circ$ m\'{a}ximo de tentativas}{
         numMaxTentativas$\Leftarrow$ GetMaxSize(arquivo)\;
 }{
@@ -487,64 +487,156 @@ Conforme apresentado na Figura~\ref{fig:dmec_size_results}, a aplicação não tem 
 
 \fig{dmec_size_results}{Consumo de memória extra para armazenar as informações de depuração.}{scale = 0.7}
 
-\chapter{Análise qualitativa entre as ferramentas de teste e depuração de \textit{software}}
+\chapter{Análise qualitativa das ferramentas de teste e depuração de \textit{software}}
 No Capítulo \ref{ref:relacionados} foram apresentados vários estudos focados em apresentar soluções práticas para os diversos pontos de melhoria na área de teste e depuração de sistemas. Os mesmos trabalhos serão agora o foco de um estudo qualitativo de suas características.
 
-A definição das características a serem analisadas foram insperadas na pesquisa de Antonia Bertolino\cite{bertolino:07}, no qual são explicitados os conceitos mais relavantes para a área de testes de \textit{software}, separados em realizações passadas e em metas ainda não atingidas. As metas para a pesquisa em teste de \textit{software} são compostas por desafios relevantes a serem abordados, essenciais para o avanço do estado da arte. São eles:
+A definição das características a serem analisadas foram insperadas na pesquisa de Antonia Bertolino~\cite{bertolino:07}, no qual são explicitados os conceitos mais relavantes para a área de testes de \textit{software}, separados em realizações passadas e em metas ainda não atingidas. As metas para a pesquisa em teste de \textit{software} são compostas por desafios relevantes a serem abordados, essenciais para o avanço do estado da arte.
 
-\begin{enumerate}
-	\item \textbf{Teoria de teste universal} significa ter um padrão coerente de modelos/técnicas de teste, tornando possível averiguar os pontos fortes e as limitações de cada um deles e escolher racionalmente a melhor opção para cada caso.	
+\begin{description}
+	\item [Meta: teoria de teste universal] propõe um padrão coerente de modelos/técnicas de teste, tornando possível averiguar os pontos fortes e as limitações de cada um deles e escolher racionalmente a melhor opção para cada caso.	
+	
 		\begin{description}
-			\item[Desafio: hipóteses explícitas.]
+			\item[Desafio: hipóteses explícitas]
 Com a exceção de algumas abordagens formais, normalmente os testes são baseaddos em aproximações de uma amostra de dados inicial, suprimindo as demais informações das hipóteses. Entretanto, é de suma importância tornar estas informações explícitas, uma vez que esses pressupostos podem eluciar o porquê de observamos algumas execuções.
 
-			\item[Desafio: eficácia do teste.]
+			\item[Desafio: eficácia do teste]
 Para estabelecer uma teoria útil para testes, é preciso avaliar a eficácia dos critérios de teste existentes e novas técnicas que estão surgindo. Ainda não foi possível contextualizar e comparar a complexidade do teste do mundo real vesus o teste em ambiente controlado e nem refinar hipóteses nas bases para tais comparações. Por exemplo, mesmo a controvérsia convencional entre a técnica proposta versus técnicas aleatórias é amplamente utilizada até pelos métodos mais sofisticados. Este desafio aborda o porquê, como e quantos testes  são necessários para descorir um determinado tipo de erro.
 
-			\item[Desafio: testes de composição.]
+			\item[Desafio: testes de composição]
 Este desafio está relacionado à como testar sistemas complexos. Tradicionalmente, a complexidade de teste tem sido abordada pela decomposição do teste em ensaios que testam separadamente alguns aspectos do sistema. Entretanto, ainda é preciso descobrir se a composição destes ensaios é equivalente ao teste do sistema todo, entender como podemos reutilizar os resultados da decomposição e quais conclusões podem ser inferidas para o sistema a partir destes resultados.
 
-			\item[Desafio: evidências empíricas.]
-Na pesquisa de teste de \textit{software}, estudos empíricos são essenciais para avaliar as técnicas e práticas propostas, para entender como e quando elas funcionam, e aperfeiçoá-las. Infelizmente, mais da metade do conhecimento existente é baseada em impressões/percepções dos autores, desprovida de qualquer fundamento formal. Para contribuir com o estado da arte de forma concreta é necessário realizar experimentos  mais robustos e significativos em termos de escala, do contexto e do tema abordado. %A consciência de unir forças para aprimorar os experimentos está se espalhando e já conta com iniciativas como a construção de repositórios de dados compartilhados e de bancos de dados de ensaios experimentais.
+			\item[Desafio: evidências empíricas]
+Na pesquisa de teste de \textit{software}, estudos empíricos são essenciais para avaliar as técnicas e práticas propostas, para entender como elas funcionam e aperfeiçoá-las. Infelizmente, mais da metade do conhecimento existente é baseada em impressões/percepções dos autores, desprovida de qualquer fundamento formal. Para contribuir com o estado da arte de forma concreta é necessário realizar experimentos  mais robustos e significativos em termos de escala, do contexto e do tema abordado. A consciência de unir forças para aprimorar os experimentos está se espalhando e já conta com iniciativas como a construção de repositórios de dados compartilhados e de bancos de dados de ensaios experimentais.
 		\end{description}
-		
-	\item \textbf{Modelagem baseada em teste}
+\end{description}
+
+A Tabela~\ref{ref:tabQuestao1TAP} apresenta uma análise de $TAP$ para os desafios propostos pela teoria de teste universal.
+
+\begin{table*}[htb]
+\begin{center}
+\caption{Análise de TAP referente à teoria de teste universal}
+\begin{tabular}{|p{.3\textwidth}|p{.7\textwidth}|} 
+
+\hline
+\textbf{Hipóteses explícitas} & As hipóteses podem ser \textbf{parcialmente} explicitadas através do arquivo de configuração, onde  é possível importar definições semi-formais.\\ 
+
+\hline
+\textbf{Eficácia do teste} & Cobertura \textbf{total}, onde a eficácia é testada de forma quantitativa pela controvérsia convencional entre a técnica proposta versus a técnica aleatória\\ 
+
+\hline
+\textbf{Testes de composição} & Testes \textbf{parcialmente atendidos}, pois cada componente pode ser testado como uma parte separada do sistema. A integração entre os componentes é apenas simulada\\ 
+
+\hline
+\textbf{Evidências empíricas} & A implementação e o algoritmo estão completamente liberadas para o usode terceiros, mas devido à especificidades na modelagem do sistema \textbf{não foi possível} utilizar testes de repositórios. \\
+
+\hline
+\end{tabular}
+\label{ref:tabQuestao1TAP} 
+\end{center}
+\end{table*}
+
+\begin{description}		
+	\item[Meta: modelagem baseada em teste] é considerar que devemos construir o modelo para que o \textit{software} pode ser efetivamente testado, ao invés de seguir o conceito tradicional de tomar um modelo de software e procurar alternativas para melhor explorá-lo para o teste. A idéia é migrar de teste baseado em modelos para modelagem baseada em teste.
+
+			\begin{description}
+			\item[Desafio: testes baseados em modelos]
+são propostos para combinar os diferentes estilos de modelagem, visto que as práticas tradicionais de teste estão se tornando economicamente inviável devido ao aumento dos níveis de complexidade. É comum que sistemas complexos e heterogêneos sejam utilizados mais de um tipo de modelagem de \textit{software} e a meta desse desafio é garantir que os modelos resultantes de diferentes paradigmas possam ser expressos em qualquer notação e serem perfeitamente integrados dentro de um único ambiente. Um dos casos promissores de teste baseados em modelos é o ensaio de conformidade, cujo objetivo é verificar se o sistema em teste está em conformidade com a sua especificação, considerando alguma relação definida no modelo.
+
+			\item[Desafio: testes baseados em anti-modelo] assume que, por vezes, os modelos de \textit{software} simplesmente não existem ou não são acessíveis. Por exemplo, em casos em que um modelo é originalmente criados, mas durante o desenvolvimento, torna-se cada vez menos úteis desde a sua correspondência com a implementação não é aplicada e se perde. Então ao invés de elaborar um plano de teste e comparar os resultados do teste com o modelo, a abordagem ani-modelo coletam informações da execução do programa e tentam sintetizar as propriedades do sistema em um modelo próximo do \textit{software} real.
+			
+			\item[Desafio: oráculos de teste] pretende solucionar o problema de como derivar os casos de teste e como decidir se um resultado do teste é aceitável ou não. Um oráculo é uma heurística que pode emitir um veredicto de aprovação/reprovação das saídas de um determinado teste. A precisão e a eficiência dos oráculos afeta muito custo do teste, pois não é aceitável que falhas nos testes passem despercebidos, mas por outro lado não é desejável que hajam muitos falsos positivos, que desperdiçam recursos importantes.
+		\end{description}
+\end{description}
+
+A Tabela~\ref{ref:tabQuestao2TAP} apresenta uma análise de $TAP$ para os desafios propostos pela meta de modelagem baseada em testes.
+
+\begin{table*}[htb]
+\begin{center}
+\begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} 
+
+\hline
+\textbf{Testes baseados em modelos} & Atualmente a ferramenta possui uma contribuição \textbf{limitada} à agregação de outros modelos e prevê apenas o ensaio de conformidade a partir de uma configuração de teste.\\ 
+
+\hline
+\textbf{Testes baseados em anti-modelo} & Apesar de não ser o foco deste trabalho, o relatório fornecido por TAP apresenta todas as características e os valores trocadas em tempo de execução. Estes dados podem ser utilizados para realizar uma modelagem do sistema, portanto a ferramenta \textbf{possui} suporte para o anti-modelo. \\ 
+
+\hline
+\textbf{Oráculos de teste } & TAP \textbf{não contém} um oráculo de teste, uma vez que não faz parte deste trabalho a geração de casos de teste.\\ 
+
+\hline
+\end{tabular}
+\label{ref:tabQuestao2TAP} 
+\end{center}
+\caption{Análise de TAP referente à modelagem baseada em testes}
+\end{table*}
+
+\begin{description}		
+	\item[Meta: testes 100\% automaticos] dependem de um ambiente de teste poderoso e que pode automaticamente providenciar a instrumentação do \textit{software}, a geração/recuperação do suporte necessário (ex. \textit{drivers}, \textit{stubs}, simuladores, emuladores), ser responsável pela geração automática dos casos de teste mais adequados para o modelo, executá-los e, finalmente, emitir um relatório sobre o ensaio executado.
+			\begin{description}
+			\item[Desafio: geração de dados de entrada para o teste ]
+			\item[Desafio: eficácia do teste]
+			\item[Desafio: testes de composição]
+			\item[Desafio: Corpo de evidências empíricas]
+		\end{description}
+\end{description}
+A Tabela~\ref{ref:tabQuestao2TAP} apresenta uma análise de $TAP$ para os desafios propostos pela meta de modelagem baseada em testes.
+
+\begin{table*}[htb]
+\begin{center}
+\begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} 
+
+\hline
+\textbf{Testes baseados em modelos} & Atualmente a ferramenta possui uma contribuição \textbf{limitada} à agregação de outros modelos e prevê apenas o ensaio de conformidade a partir de uma configuração de teste.\\ 
+
+\hline
+\textbf{Testes baseados em anti-modelo} & Apesar de não ser o foco deste trabalho, o relatório fornecido por TAP apresenta todas as características e os valores trocadas em tempo de execução. Estes dados podem ser utilizados para realizar uma modelagem do sistema, portanto a ferramenta \textbf{possui} suporte para o anti-modelo. \\ 
+
+\hline
+\textbf{Oráculos de teste } & TAP \textbf{não contém} um oráculo de teste, uma vez que não faz parte deste trabalho a geração de casos de teste.\\ 
+
+\hline
+\end{tabular}
+\label{ref:tabQuestao2TAP} 
+\end{center}
+\caption{Análise de TAP referente à modelagem baseada em testes}
+\end{table*}
+
+\begin{description}		
+	\item[Meta: maior eficácia na engenharia de testes] procura estudar questões técnicas e de organização do teste, que devem ser conciliadas em um processo para produzir o máximo de eficiência e eficácia. Este estudo pretende dar suporte para o desenvolvimento de os métodos, ferramentas e processos de teste que mantenham uma boa relação custo-benefício no desenvolvimento de software de alta qualidade.
 			\begin{description}
 			\item[Desafio: hipóteses explícitas de teste]
 			\item[Desafio: eficácia do teste]
 			\item[Desafio: testes de composição]
 			\item[Desafio: Corpo de evidências empíricas]
 		\end{description}
-		
-	\item \textbf{Testes 100\% automaticos}
-			\begin{description}
-			\item[Desafio: hipóteses explícitas de teste]
-			\item[Desafio: eficácia do teste]
-			\item[Desafio: testes de composição]
-			\item[Desafio: Corpo de evidências empíricas]
-		\end{description}
-		
-	\item \textbf{Maior eficácia na engenharia de testes}
-			\begin{description}
-			\item[Desafio: hipóteses explícitas de teste]
-			\item[Desafio: eficácia do teste]
-			\item[Desafio: testes de composição]
-			\item[Desafio: Corpo de evidências empíricas]
-		\end{description}
-\end{enumerate}
-s
+\end{description}
 
-\section{Definição das características}
+A Tabela~\ref{ref:tabQuestao1TAP} apresenta uma análise de $TAP$ para os desafios propostos pela teoria de teste universal.
 
-\section{Resultados}
+\begin{table*}[htb]
+\begin{center}
+\caption{Análise de TAP referente à teoria de teste universal}
+\begin{tabular}{|p{.3\textwidth}|p{.7\textwidth}|} 
 
+\hline
+\textbf{Hipóteses explícitas} & As hipóteses podem ser \textbf{parcialmente} explicitadas através do arquivo de configuração, onde  é possível importar definições semi-formais.\\ 
 
-\subsection{Justitia}
-\subsection{ATEMES}
-\subsection{Statistical Debugging}
-\subsection{Program Slicing}
-\subsection{Capture and Replay}
+\hline
+\textbf{Eficácia do teste} & Cobertura \textbf{total}, onde a eficácia é testada de forma quantitativa pela controvérsia convencional entre a técnica proposta versus a técnica aleatória\\ 
 
+\hline
+\textbf{Testes de composição} & Testes \textbf{parcialmente atendidos}, pois cada componente pode ser testado como uma parte separada do sistema. A integração entre os componentes é apenas simulada\\ 
+
+\hline
+\textbf{Evidências empíricas} & A implementação e o algoritmo estão completamente liberadas para o usode terceiros, mas devido à especificidades na modelagem do sistema \textbf{não foi possível} utilizar testes de repositórios. \\
+
+\hline
+\end{tabular}
+\label{ref:tabQuestao1TAP} 
+\end{center}
+\end{table*}
+
+\section{Comparativo entre as ferramentas}
 \bibliographystyle{ufscThesis/ufsc-alf}
 \bibliography{bibliografia}
 \end{document}

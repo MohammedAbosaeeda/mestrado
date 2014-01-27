@@ -10,17 +10,18 @@
 {ANSI/IEEE. \emph{{Std 1008-1987: IEEE Standard for Software Unit Testing}}.
 [S.l.], 1986.}
 
-\bibitem[Artho 2011]{artho2011iterative}
-\abntrefinfo{Artho}{ARTHO}{2011}
-{ARTHO, C. Iterative delta debugging.
-\emph{International Journal on Software Tools for Technology Transfer (STTT)},
-  Springer, v.~13, n.~3, p. 223--246, 2011.}
-
 \bibitem[Bertolino 2007]{bertolino:07}
 \abntrefinfo{Bertolino}{BERTOLINO}{2007}
 {BERTOLINO, A. Software testing research: Achievements, challenges, dreams. In:
    \emph{Proceedings of the Future of Software Engineering at ICSE 2007}.
   [S.l.]: IEEE-CS Press, 2007. p. 85--103.}
+
+\bibitem[Binkley, Gold e Harman 2007]{binkley2007empirical}
+\abntrefinfo{Binkley, Gold e Harman}{BINKLEY; GOLD; HARMAN}{2007}
+{BINKLEY, D.; GOLD, N.; HARMAN, M. An empirical study of static program slice
+  size.
+\emph{ACM Transactions on Software Engineering and Methodology (TOSEM)}, ACM,
+  v.~16, n.~2, p.~8, 2007.}
 
 \bibitem[Burger e Zeller 2008]{burger2008replaying}
 \abntrefinfo{Burger e Zeller}{BURGER; ZELLER}{2008}
@@ -34,6 +35,14 @@
 {CARRO, L.; WAGNER, F.~R. Sistemas computacionais embarcados.
 \emph{Jornadas de atualiza{\c{c}}{\~a}o em inform{\'a}tica. Campinas: UNICAMP},
   2003.}
+
+\bibitem[Chebaro et al. 2012]{Chebaro:2012}
+\abntrefinfo{Chebaro et al.}{CHEBARO et al.}{2012}
+{CHEBARO, O. et al. Program slicing enhances a verification technique combining
+  static and dynamic analysis. In:  \emph{Proceedings of the 27th Annual ACM
+  Symposium on Applied Computing}. New York, NY, USA: ACM, 2012.  (SAC '12), p.
+  1284--1291.
+ISBN 978-1-4503-0857-1. \ $<$http://doi.acm.org/10.1145/2245276.2231980$>$.}
 
 \bibitem[Chern e Volder 2007]{Chern:2007}
 \abntrefinfo{Chern e Volder}{CHERN; VOLDER}{2007}
@@ -73,6 +82,12 @@ ISBN 978-1-59593-993-7.}
   p. 43--60, jan. 2012.
 ISSN 0164-1212.
 \ $<$http://dx.doi.org/10.1016/j.jss.2011.08.030$>$.}
+
+\bibitem[Lucia 2001]{972675}
+\abntrefinfo{Lucia}{LUCIA}{2001}
+{LUCIA, A. D. Program slicing: methods and applications. In:  \emph{Source Code
+  Analysis and Manipulation, 2001. Proceedings. First IEEE International
+  Workshop on}. [S.l.: s.n.], 2001. p. 142--149.}
 
 \bibitem[Ludwich e Frohlich 2011]{DMEC}
 \abntrefinfo{Ludwich e Frohlich}{LUDWICH; FROHLICH}{2011}
@@ -136,6 +151,13 @@ ISBN 9788563308337.}
   board. In:  ZHU, H.; WONG, W.~E.; PARADKAR, A.~M. (Ed.). \emph{AST}. [S.l.]:
   IEEE, 2007. p. 44--50.
 ISBN 0-7695-2892-9.}
+
+\bibitem[Sridharan, Fink e Bodik 2007]{Sridharan:2007:TS:1250734.1250748}
+\abntrefinfo{Sridharan, Fink e Bodik}{SRIDHARAN; FINK; BODIK}{2007}
+{SRIDHARAN, M.; FINK, S.~J.; BODIK, R. Thin slicing. In:  \emph{Proceedings of
+  the 2007 ACM SIGPLAN Conference on Programming Language Design and
+  Implementation}. New York, NY, USA: ACM, 2007.  (PLDI '07), p. 112--122.
+ISBN 978-1-59593-633-2. \ $<$http://doi.acm.org/10.1145/1250734.1250748$>$.}
 
 \bibitem[Stroustrup 1994]{Stroustrup:c++}
 \abntrefinfo{Stroustrup}{STROUSTRUP}{1994}

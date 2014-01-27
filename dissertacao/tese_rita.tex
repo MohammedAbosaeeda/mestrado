@@ -4,6 +4,7 @@
 \usepackage{color,graphicx}
 \usepackage[lined,ruled,linesnumbered,portuguese]{algorithm2e}
 \usepackage{listings}
+\usepackage{verbatim}
 
 \lstloadlanguages{C,HTML}
 \lstdefinestyle{prg}{basicstyle=\small\sffamily, lineskip=-0.2ex, showspaces=false}
@@ -88,16 +89,16 @@
 %--------------------------------------------------------
 % Elementos pré-textuais
 \capa
-\folhaderosto[comficha] % Se nao quiser imprimir a ficha, é só não usar o parâmetro
+%\folhaderosto[comficha] % Se nao quiser imprimir a ficha, é só não usar o parâmetro
 %\folhaaprovacao
-\paginadedicatoria
-\paginaagradecimento
-\paginaepigrafe
-\paginaresumo
-\paginaabstract
-\listadefiguras
-\listadetabelas
-\listadeabreviaturas
+%\paginadedicatoria
+%\paginaagradecimento
+%\paginaepigrafe
+%\paginaresumo
+%\paginaabstract
+%\listadefiguras
+%\listadetabelas
+%\listadeabreviaturas
 %\listadesimbolos
 \sumario
 
@@ -140,6 +141,19 @@ Para atender o objetivo geral, os seguintes objetivos específicos devem ser conc
 
 \subsection{Delimitações}
 O presente trabalho não tem como objetivo a geração de casos de teste para um determinado \textit{software}, limitando-se apenas em executá-los de maneira automatizada. Sendo assim, qualquer erro presente nos testes recebidos pelo protótipo para execução automática serão considerados como erro do próprio \textit{software}.
+
+\section{Organização do texto}
+*************** quando tiver definido a ordem dos capítulos
+
+\begin{itemize}
+	\item[Capítulo] Neste capítulo são apresentados os conceitos fundamentais da área, compondo uma base teórica para auxiliar no desenvolvimento das ideias e na assimilação das técnicas apresentadas neste trabalho.
+	
+	\item[Capítulo] São apresentados neste capítulo os trabalhos que representam o estado da arte da literatura e que servem de insperação para o desenvolvimento dedta dissertação. Todos os trabalhos aqui apresentado se relacionam diretamente com o tema abordado.
+	
+	\item[Capítulo]
+	
+	\item[Capítulo] é o capítulo de desfecho da dissertação e apresenta as conclusões extraídas durante o desenvovimento deste trabalho, além de alguns pontos de melhoria para trabalhos futuros.
+\end{itemize}
 
 %@% Revisão do Celo do capítulo inteiro
 \chapter{Conceitos básicos}
@@ -198,7 +212,7 @@ Esta metodologia permite manter o foco nas aplicações que utilizarão o sistema d
 	Resumem as características de todos os membros da família em um único componente de interface, permitindo que a implementação dos componentes de \textit{software} considerem sempre uma interface bem abrangente e, desta forma, postergando a decisão sobre qual membro da família utilizar. Esta decisão pode ser automatizada através de ferramentas que identificam quais características da família foram utilizadas e selecionam o membro dessa família que implementa o subconjunto da interface inflada.
 \end{description}
 
-\fig{aosd}{Visão geral da metodologia de projeto de sistemas orientado à aplicação~\cite{Froehlich:2001}}{scale=.5}
+\fig{aosd}{Visão geral da metodologia de projeto de sistemas orientado à aplicação~\cite{Froehlich:2001}}{scale=.6}
 
 A Figura\ref{fig:aosd} mostra uma visão geral da AOSD, metodologia na qual é possível visualizar a decomposição do domínio em famílias de abstrações independentes de cenários e das dependências ambientais - separadamente modeladas como aspectos de cenário. A arquitetura do sistema é capturada pelos \textit{frameworks} dos componentes modelados a partir do domínio. Somente estes componentes serão reunidos para formar o sistema, pois somente eles são necessários para fornecer suporte à aplicação.
 
@@ -288,6 +302,8 @@ Como a análise é realizada a partir de uma depuração estática, estes modelos exp
 
 Devido ao grande volume de dados necessários para guardar todas as execuções e realizar toda esta análise, esta técnica é difícil de ser implementada em um sistema embarcado real.
 
+%Iterative delta debugging - \cite{artho2011iterative}
+
 \subsection{Statistical Debugging of Sampled Programs}
 Esta abordagem propõe recolher os dados estatísticos através de declarações inseridas no código e que podem coletar dicas, em tempo de execução, sobre os dados que não estão relacionados com as falhas~\cite{zheng2003statistical}.
 
@@ -313,7 +329,9 @@ Depois de cada execução um predicado pode receber tanto um voto completo quando 
 \cite{parsa2011statistical}
 
 \section{Program Slicing}
-Em técnicas que utilizam \textit{program slicing} a ideia principal é a partição do código e a remoção de estados ou caminhos que são irrelevantes para alcançar o objetivo selecionado, o que no caso da verificação e validação de um \textit{software} é encontrar um erro. Esta técnica possui duas abordagens principais: estática e dinâmica.
+Em técnicas que utilizam \textit{program slicing} a ideia principal é a partição do código e a remoção de estados ou caminhos que são irrelevantes para alcançar o objetivo selecionado, o que no caso da verificação e validação de um \textit{software} é encontrar um erro~\cite{Xu:2005:BSP:1050849.1050865}. 
+
+Esta técnica possui várias abordagens \cite{972675,sasirekha2011program}, mas as principais são: estática e dinâmica.
 
 A partição estática é o tipo mais rápido e aponta apenas uma aproximação do conjunto final de caminhos que podem levar ao erro. Isto ocorre porque o foco é simplificar ao máximo o \textit{software} em questão, reduzindo-o ao ponto de conter todos os estados que poderiam afetar o valor final, mas sem considerar o valor de entrada do \textit{software}. Este tipo de partição é mais utilizada para \textit{software} de pequeno porte e de pouca complexidade, em que o tamanho da partição permanece compatível com a sua simplicidade.
 
@@ -321,23 +339,34 @@ Já na partição dinâmica, as informações do critério de corte tradicional não são
 
 Independente da abordagem selecionada, a partição do código é uma técnica interessante porque necessita apenas de uma execução com falhas para ser capaz de simplificar o grupo de entradas a serem examinadas.
 
-\subsection{\cite{sasirekha2011program}}
-\subsection{\cite{Xu:2005:BSP:1050849.1050865}}
-\subsection{\cite{artho2011iterative}}
+
+\subsection{An empirical study of static program slice size}
+\cite{binkley2007empirical}
+
+\subsection{Thin slicing}
+\cite{Sridharan:2007:TS:1250734.1250748}
+
+\subsection{Program Slicing Enhances a Verification Technique Combining Static and Dynamic Analysis}
+\cite{Chebaro:2012}
+
 
 \section{Capture and Replay}
 Em trabalhos que utilizam \textit{capture and replay} a ideia é capturar toda a execução do programa até o final e armazenar as operações envolvidas em um registro. Este tipo de sistema permite que o desenvolvedor controle a nova execução do \textit{software} com execução de passos a frente, voltando passos na execução (contra o fluxo), examinando o contexto de alguma variável, verificando um determinado controle de fluxo, analisando fluxos alternativos, entre outras possibilidades.
+
+\subsection{Selective capture and replay of program executions}
+\cite{orso2005selective}
+
+\subsection{Replaying and isolating failing multi-object interactions}
+Burger e Zeller~\cite{burger2008replaying} se destacaram por desenvolver uma ferramenta $JINSI$ que consegue capturar e reproduzir as interações intercomponentes e intracomponentes. Assim, todas as operações relevantes são observadas e executadas passo a passo, considerando-se todas as comunicações entre dois componentes até encontrar o \textit{bug}.
 
 \subsection{Pinpointing interrupts in embedded real-time systems using context checksums}
 Um grande desafio nesta técnica é como se adaptar a interrupções, pois toda a estrutura de reprodução do \textit{software} se baseia no fluxo de controle e uma interrupção tem a capacidade de romper esta sequência. Uma interrupção pode ocorrer a qualquer momento e provocar uma ruptura no fluxo de controle, então a execução do programa para na instrução atual, e continua a rotina de tratamento de interrupção.
 
 Neste aspecto, a solução de tirar um \textit{snapshot} do contexto de execução quando ocorre uma interrupção~\cite{Sundmark} se mostra uma boa alternativa para que o desenvolvedor possa analisar erros oriundos de interrupções.
 
-\subsection{Replaying and isolating failing multi-object interactions}
-Burger e Zeller~\cite{burger2008replaying} se destacaram por desenvolver uma ferramenta $JINSI$ que consegue capturar e reproduzir as interações intercomponentes e intracomponentes. Assim, todas as operações relevantes são observadas e executadas passo a passo, considerando-se todas as comunicações entre dois componentes até encontrar o \textit{bug}.
+\subsection{Locating failure-inducing environment changes}
+\cite{qi2011locating}
 
-\subsection{\cite{qi2011locating}}
-\subsection{\cite{orso2005selective}}
 
 %@% Revisão do Celo - Todo o capítulo
 \chapter{O ambiente Compartilhado de Teste e Depuração}
@@ -361,11 +390,11 @@ Uma explicação adicional das técnicas e ferramentas utilizadas neste processo es
 	\item[Compilar com informações de depuração] é o primeiro passo. Como entrada é necessário o código-fonte do aplicativo e como saída esperada encontra-se o código compilado com informações de depuração. Quem utilizar o gcc (GNU project C and C ++ compiler) pode realizar esta atividade simplesmente usando opção $-g$ para compilar. 
 	
 	\item [Emular o sistema utilizando um emulador] é um passo necessário para executar a aplicação na arquitetura alvo correta. Para executar este passo utilizamos o QEMU, que deve ser inicializado com os argumentos $-s -S$. A primeira opção ativa o \textit{stub} para conectar um depurador, a fim de abrir a comunicação entre o emulador e o depurador. A opção $-S$ é utilizada para forçar que o QEMU espere a conexão do depurador antes da inicialização do sistema.
-Por exemplo, se uma aplicação compilada com informações de depuração (app.img) imprime algo na tela (stdio), a chamada do QEMU deve ser semelhante à: $qemu -fda app.img -serial stdio -s -S$
+Por exemplo, se uma aplicação compilada com informações de depuração (app.img) imprime algo na tela (stdio), a chamada do QEMU deve ser semelhante à: $qemu$ $-fda$ $app.img$ $-serial$ $stdio$ $-s$ $-S$
 	
-	\item [Conectar-se com o depurador] começa com uma sessão do depurador inicializada em uma janela separada. Então, para se conectar ao depurador no QEMU o desenvolvedor deve explicitar que o alvo a ser examinado é remoto e informar o endereço da máquina alvo e porta em que se encontra o alvo a ser examinado (neste caso, o QEMU). Utilizando-se o GDB, a tela será iniciada a partir do comando: $target remote [endereço\_alvo]:[porta\_alvo]$
+	\item [Conectar-se com o depurador] começa com uma sessão do depurador inicializada em uma janela separada. Então, para se conectar ao depurador no QEMU o desenvolvedor deve explicitar que o alvo a ser examinado é remoto e informar o endereço da máquina alvo e porta em que se encontra o alvo a ser examinado (neste caso, o QEMU). Utilizando-se o GDB, a tela será iniciada a partir do comando: $target$ $remote$ $[endereço\_alvo]:[porta\_alvo]$
 
-	\item [Recuperar as informações de depuração] é um passo importante para ajudar os desenvolvedores a encontrarem erros. O arquivo gerado no primeiro item contém todas as informações que podem ser retiradas da compilação, como por exemplo o endereço de uma variável, ou os nomes contidos na tabela de símbolos. O arquivo usado para manter as informações de depuração deverá ser informado para o GDB usando o comando: $file [caminho\_do\_arquivo]$
+	\item [Recuperar as informações de depuração] é um passo importante para ajudar os desenvolvedores a encontrarem erros. O arquivo gerado no primeiro item contém todas as informações que podem ser retiradas da compilação, como por exemplo o endereço de uma variável, ou os nomes contidos na tabela de símbolos. O arquivo usado para manter as informações de depuração deverá ser informado para o GDB usando o comando: $file$ $[caminho\_do\_arquivo]$
 	
 	\item [Encontrar origem dos erros] é uma atividade que depende do programa a ser depurado. A partir desta etapa, o desenvolvedor pode definir \textit{breakpoints}, \textit{watchpoints}, controlar a execução do programa e até mesmo permitir \textit{logs}. Existem vários trabalhos com o foco em ajudar a encontrar os erros através da automação de alguns pontos, como a gerarão automática de \textit{breakpoints}~\cite{JSWjsw0803603616} e o controle do fluxo de execução \cite{Chern:2007}.
 \end{description}
@@ -412,23 +441,23 @@ novoPropriedade$\Leftarrow$ ExchangeValue(linha, propriedades)\;
 \Return relat\'{o}rio;
 \end{algorithm}
 
-A implementação atual utiliza o sistema operacional (\texttt{EPOS})~\cite{Froehlich:2001}, uma vez que adiciona uma grande capacidade de configuração do sistema, o que é muito adequado para avaliar o \textit{script}. Para um melhor entendimento da implementação do algoritmo de \texttt{TAP} será necessária uma breve explicação de como configurar as abstrações no EPOS.
+A implementação atual utiliza o sistema operacional ($EPOS$)~\cite{Froehlich:2001}, uma vez que adiciona uma grande capacidade de configuração do sistema, o que é muito adequado para avaliar o \textit{script}. Para um melhor entendimento da implementação do algoritmo de $TAP$ será necessária uma breve explicação de como configurar as abstrações no $EPOS$.
 
 \section{Abstrações no $EPOS$}
 $EPOS$ é um \textit{framework} baseado em componentes que fornece todas as abstrações tradicionais de sistemas operacionais e serviços como: gerenciamento de memória, comunicação e gestão do tempo. Além disso, possui vários projetos industriais e pesquisas acadêmicas que o utilizam como base \footnote{http://www.lisha.ufsc.br/pub/index.php?key=EPOS}.
 
 Este sistema operacional é instanciado apenas com o suporte básico para sua aplicação dedicada. É importante salientar que todas as características dos componentes também são características da aplicação, desta maneira, a escolha dos valores destas propriedades tem influência direta no comportamento final da aplicação. Neste contexto, a troca automatizada destes parâmetros pode ser utilizada tanto para a descoberta de um \textit{bug} no programa quanto para melhorar o desempenho para a aplicação através da seleção de uma melhor configuração.
 
-Cada aplicação tem seu próprio arquivo de configuração de abstrações para definir o seu comportamento. A Figura~\ref{progcpp:traitbuild} mostra um trecho desta configuração para uma aplicação que simula um componente de estimativa de movimento para codificação H.264, o \texttt{DMEC}. Este trecho mostra como construir a aplicação, que neste caso foi configurada para executar no modo biblioteca para a arquitetura \texttt{IA-32} (\textit{Intel Architecture, 32-bit}), através de um \texttt{PC} (\textit{Personal Computer}).
+Cada aplicação tem seu próprio arquivo de configuração de abstrações para definir o seu comportamento. A Figura~\ref{progcpp:traitbuild} mostra um trecho desta configuração para uma aplicação que simula um componente de estimativa de movimento para codificação $H.264$, o $DMEC$. Este trecho mostra como construir a aplicação, que neste caso foi configurada para executar no modo biblioteca para a arquitetura $IA-32$ (\textit{Intel Architecture, 32-bit}), através de um $PC$ (\textit{Personal Computer}).
 
-\progcpp{traitbuild}{Trecho do \textit{trait} da aplicação o componente DMEC.}
+\progcpp{traitbuild}{Trecho do \textit{trait} da aplicação o componente $DMEC$.}
 
 \section{Configuração do Teste/Depuração}
-Para melhorar a usabilidade do \textit{script}, é possível definir um arquivo de configuração com as informações necessárias para executar os testes unitários e de tipagem. Nós escolhemos XML para definir as configurações de teste, pois pode definir todas as regras necessárias para executar o \textit{script} de forma legível e, além disso, também é facilmente interpretado pelo computador.
+Para melhorar a usabilidade do \textit{script}, é possível definir um arquivo de configuração com as informações necessárias para executar os testes unitários e de tipagem. Nós escolhemos $XML$ para definir as configurações de teste, pois pode definir todas as regras necessárias para executar o \textit{script} de forma legível e, além disso, também é facilmente interpretado pelo computador.
 
-A Figura~\ref{progxml:philosopherxml} traz um exemplo do arquivo de configuração de \texttt{TAP} para a aplicação \texttt{DMEC}.
+A Figura~\ref{progxml:philosopherxml} traz um exemplo do arquivo de configuração de $TAP$ para a aplicação $DMEC$.
 
-\progxml{philosopherxml}{Exemplo do arquivo de configuração do teste para a \texttt{TAP}.}
+\progxml{philosopherxml}{Exemplo do arquivo de configuração do teste para a $TAP$.}
 
 O arquivo do configuração é responsável pelo teste, então seu conteúdo deve estar sempre atualizado e em concordância com os requisitos da aplicação. O ajuste inicial é manual e simples, uma vez que este arquivo pode ser lido quase como um texto: há um teste para a aplicação (\textit{philosopher\_dinner\_app}), dentro dela deseja-se especificar duas propriedades. A primeira é a propriedade identificada como \textit{ARCH} que pode assumir os valores \textit{IA32} ou \textit{AVR8}. A segunda está relacionada à depuração, é um arquivo que contém \textit{breakpoints} que está no seguinte caminho: "\textit{/home/breakpoints.txt}".
 
@@ -444,7 +473,7 @@ Teste aleatório foi desenvolvido como o pior caso. Ele só deve ser usado quando 
 
 \chapter{Resultado experimental de teste e depuração de uma aplicação real}
 \label{sec:case_study}
-A troca automática de parâmetros foi utilizada para testar e depurar o componente de estimativa de movimento para codificação H.264, o \textit{Distributed Motion Estimation Component} ($DMEC$). Este componente executa uma estimativa de movimento explorando a semelhança entre imagens adjacentes numa sequência de vídeo que permite que as imagens sejam codificadas diferencialmente, aumentando a taxa de compressão da sequência de \textit{bits} gerada. Estimativa de movimento é uma fase importante para codificação H.264 já que consome cerca de 90\% do tempo total do processo de codificação ~\cite{DMEC}.
+A troca automática de parâmetros foi utilizada para testar e depurar o componente de estimativa de movimento para codificação H.264, o $DMEC$ - \textit{Distributed Motion Estimation Component}. Este componente executa uma estimativa de movimento explorando a semelhança entre imagens adjacentes numa sequência de vídeo que permite que as imagens sejam codificadas diferencialmente, aumentando a taxa de compressão da sequência de \textit{bits} gerada. Estimativa de movimento é uma fase importante para codificação H.264 já que consome cerca de 90\% do tempo total do processo de codificação ~\cite{DMEC}.
 
 Teste de DMEC verifica o desempenho de estimativa de movimento usando uma estratégia de particionamento de dados, enquanto os trabalhadores $Workers$) realizam a estimativa e o coordenador ($Coordinator$) processa os resultados.
 
@@ -492,6 +521,8 @@ No Capítulo \ref{ref:relacionados} foram apresentados vários estudos focados em 
 
 A definição das características a serem analisadas foram insperadas na pesquisa de Antonia Bertolino~\cite{bertolino:07}, no qual são explicitados os conceitos mais relavantes para a área de testes de \textit{software}, separados em realizações passadas e em metas ainda não atingidas. As metas para a pesquisa em teste de \textit{software} são compostas por desafios relevantes a serem abordados, essenciais para o avanço do estado da arte.
 
+\section{Definição das características e análise de $TAP$}
+
 \begin{description}
 	\item [Meta: teoria de teste universal] propõe um padrão coerente de modelos/técnicas de teste, tornando possível averiguar os pontos fortes e as limitações de cada um deles e escolher racionalmente a melhor opção para cada caso.	
 	
@@ -510,9 +541,9 @@ Na pesquisa de teste de \textit{software}, estudos empíricos são essenciais para
 		\end{description}
 \end{description}
 
-A Tabela~\ref{ref:tabQuestao1TAP} apresenta uma análise de $TAP$ para os desafios propostos pela teoria de teste universal.
+A Tabela~\ref{ref:tabQuestao1TAP} apresenta uma análise de $TAP$ para os desafios propostos pela teoria de teste universal. Nela é possível observar que a ferramenta proposta atende a todos os desafios proposto, exceto o desafio de evidências empíricas, pois a modelagem $AOSD$ possui especificidades que ainda não estão contempladas nos \textit{testbeds} disponíveis.
 
-\begin{table*}[htb]
+\begin{table*}[h]
 \begin{center}
 \caption{Análise de TAP referente à teoria de teste universal}
 \begin{tabular}{|p{.3\textwidth}|p{.7\textwidth}|} 
@@ -527,7 +558,7 @@ A Tabela~\ref{ref:tabQuestao1TAP} apresenta uma análise de $TAP$ para os desafio
 \textbf{Testes de composição} & Testes \textbf{parcialmente atendidos}, pois cada componente pode ser testado como uma parte separada do sistema. A integração entre os componentes é apenas simulada\\ 
 
 \hline
-\textbf{Evidências empíricas} & A implementação e o algoritmo estão completamente liberadas para o usode terceiros, mas devido à especificidades na modelagem do sistema \textbf{não foi possível} utilizar testes de repositórios. \\
+\textbf{Evidências empíricas} & A implementação e o algoritmo estão completamente liberadas para o uso de terceiros, mas devido à especificidades na modelagem do sistema \textbf{não foi possível} utilizar testes de repositórios. \\
 
 \hline
 \end{tabular}
@@ -548,20 +579,20 @@ são propostos para combinar os diferentes estilos de modelagem, visto que as prá
 		\end{description}
 \end{description}
 
-A Tabela~\ref{ref:tabQuestao2TAP} apresenta uma análise de $TAP$ para os desafios propostos pela meta de modelagem baseada em testes.
+A Tabela~\ref{ref:tabQuestao2TAP} apresenta uma análise de todas as contribuições de $TAP$ referente aos desafios propostos pela meta de modelagem baseada em testes. É importante ressaltar que o desafio de oráculos é uma característica relevante para a área de testes de \textit{software}, mas não foi contemplada pela ferramente porque foge dos objetivos específicos deste trabalho e será considerada uma melhoria futura.
 
-\begin{table*}[htb]
+\begin{table*}[h]
 \begin{center}
-\begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} 
+\begin{tabular}{|p{.21\textwidth}|p{.79\textwidth}|} 
 
 \hline
-\textbf{Testes baseados em modelos} & Atualmente a ferramenta possui uma contribuição \textbf{limitada} à agregação de outros modelos e prevê apenas o ensaio de conformidade a partir de uma configuração de teste.\\ 
+\textbf{Teste baseado em modelos} & Atualmente a ferramenta possui uma contribuição \textbf{limitada} à agregação de outros modelos e prevê apenas o ensaio de conformidade a partir de uma configuração de teste.\\ 
 
 \hline
-\textbf{Testes baseados em anti-modelo} & Apesar de não ser o foco deste trabalho, o relatório fornecido por TAP apresenta todas as características e os valores trocadas em tempo de execução. Estes dados podem ser utilizados para realizar uma modelagem do sistema, portanto a ferramenta \textbf{possui} suporte para o anti-modelo. \\ 
+\textbf{Teste baseado em anti-modelo} & Apesar de não ser o foco deste trabalho, o relatório fornecido por TAP apresenta todas as características e os valores trocadas em tempo de execução. Estes dados podem ser utilizados para realizar uma modelagem do sistema, portanto a ferramenta \textbf{possui} suporte para o anti-modelo. \\ 
 
 \hline
-\textbf{Oráculos de teste } & TAP \textbf{não contém} um oráculo de teste, uma vez que não faz parte deste trabalho a geração de casos de teste.\\ 
+\textbf{Oráculos de teste} & TAP \textbf{não contém} um oráculo de teste, uma vez que não faz parte deste trabalho a geração de casos de teste.\\ 
 
 \hline
 \end{tabular}
@@ -571,22 +602,22 @@ A Tabela~\ref{ref:tabQuestao2TAP} apresenta uma análise de $TAP$ para os desafio
 \end{table*}
 
 \begin{description}		
-	\item[Meta: testes 100\% automaticos] dependem de um ambiente de teste poderoso e que pode automaticamente providenciar a instrumentação do \textit{software}, a geração/recuperação do suporte necessário (ex. \textit{drivers}, \textit{stubs}, simuladores, emuladores), ser responsável pela geração automática dos casos de teste mais adequados para o modelo, executá-los e, finalmente, emitir um relatório sobre o ensaio executado.
+	\item[Meta: testes 100\% automáticos] dependem de um ambiente de teste poderoso e que pode automaticamente providenciar a instrumentação do \textit{software}, a geração/recuperação do suporte necessário (ex. \textit{drivers}, \textit{stubs}, simuladores, emuladores), ser responsável pela geração automática dos casos de teste mais adequados para o modelo, executá-los e, finalmente, emitir um relatório sobre o ensaio executado.
 	
 			\begin{description}
 			\item[Desafio: geração de dados de entrada para o teste] sempre foi um tópico de pesquisa muito ativo, mas até hoje todos os esforços têm produzido um impacto limitado na indústria, onde a atividade de geração de teste permanece em grande parte manual.Os resultados mais promissores são as abordagem baseada em modelo e a geração aleatória acrescida de alguma técnica com inteligência.
 			
 			\item[Desafio: abordagens de teste específicas para o domínio] apontam que é necessário estender abordagens específicas de domínio para a fase de testes com o intuito de encontrar métodos e ferramentas específicas de domínio e poder aprimorar a automação de teste. Neste sentido, alguns trabalhos já conseguiram demonstar a extração automática de requisitos para o teste a partir de um modelo escrito em uma linguagem fortemente tipada e específica de um domínio.
 			
-			\item[Desafio: testes \textit{on-line}] representam a idéia de monitorar o comportamento de um sistema em funcionamento na vida real. Nem sempre é possível realizar este tipo de teste, especialmente para aplicações embarcadas implantados em um ambiente de recursos limitados, onde a sobrecarga exigida pela instrumentação de teste não poderia ser viável.
+			\item[Desafio: testes \textit{online}] representam a idéia de monitorar o comportamento de um sistema em funcionamento na vida real. Nem sempre é possível realizar este tipo de teste, especialmente para aplicações embarcadas implantados em um ambiente de recursos limitados, onde a sobrecarga exigida pela instrumentação de teste não poderia ser viável.
 		\end{description}
 \end{description}
 
-A Tabela~\ref{ref:tabQuestao3TAP} apresenta uma análise de $TAP$ em relação à automação completa da execução de testes de \textit{software}.
+A Tabela~\ref{ref:tabQuestao3TAP} mostra a relação de $TAP$ com a meta de automação completa da execução de testes de \textit{software}. É possível notar que $TAP$ oferece algum nível de automação em todos o desafios propostos.Entretanto, para ser cosiderada uma ferramenta 100\% automática ainda serão necessários avanços na  informação de dados de entrada de teste, seja a partir da extração de valores do modelo ou através de algum tipo de inteligência atificial.
 
-\begin{table*}[htb]
+\begin{table*}[h]
 \begin{center}
-\begin{tabular}{|p{.2\textwidth}|p{.8\textwidth}|} 
+\begin{tabular}{|p{.18\textwidth}|p{.82\textwidth}|} 
 
 \hline
 \textbf{Geração de dados de entrada} & O suporte à geração de dados é \textbf{parcial}, pois a informação inicial dos dados de entrada são fornecidos pelo usuário da ferramenta e somente depois $TAP$ realiza a retroalimentação de acordo com a configuração dos testes. No caso do teste não ser determinado pelo usuário, a ferramenta inclui dados iniciais aleatórios, sem adição de inteligência.\\ 
@@ -595,7 +626,7 @@ A Tabela~\ref{ref:tabQuestao3TAP} apresenta uma análise de $TAP$ em relação à au
 \textbf{Abordagens específicas para o domínio} &  $TAP$  consegue importar configurações específicas de domino e realizar testes sobe elas, contemplando de forma \textbf{parcial} a extração de dados relacionados ao domínio da aplicação.\\ 
 
 \hline
-\textbf{Testes \textit{on-line}} & Este diferencial é apesentado pela ferramenta através do ambiente de teste e depuração, com suporte \textbf{total} aos testes durante à execução da aplicação.\\ 
+\textbf{Testes \textit{online}} & Este diferencial é apesentado pela ferramenta através do ambiente de teste e depuração, com suporte \textbf{total} aos testes durante à execução da aplicação.\\ 
 
 \hline
 \end{tabular}
@@ -604,6 +635,9 @@ A Tabela~\ref{ref:tabQuestao3TAP} apresenta uma análise de $TAP$ em relação à au
 \caption{Análise de TAP referente à automação total da atividade de testes de \textit{software}}
 \end{table*}
 
+%%%%%%%%%%%%%%%%%%%%%
+\begin{comment}
+%%%%%%%%%%%%%%%%%%%%%
 \begin{description}		
 	\item[Meta: maior eficácia na engenharia de testes] procura estudar questões técnicas e de organização do teste, que devem ser conciliadas em um processo para produzir o máximo de eficiência e eficácia. Este estudo pretende dar suporte para o desenvolvimento de os métodos, ferramentas e processos de teste que mantenham uma boa relação custo-benefício no desenvolvimento de software de alta qualidade.
 	
@@ -618,7 +652,7 @@ A Tabela~\ref{ref:tabQuestao3TAP} apresenta uma análise de $TAP$ em relação à au
 
 A Tabela~\ref{ref:tabQuestao4TAP} apresenta uma análise de $TAP$ para os desafios propostos pela teoria de teste universal.
 
-\begin{table*}[htb]
+\begin{table*}[h]
 \begin{center}
 \caption{Análise de TAP referente à teoria de teste universal}
 \begin{tabular}{|p{.3\textwidth}|p{.7\textwidth}|} 
@@ -643,19 +677,185 @@ A Tabela~\ref{ref:tabQuestao4TAP} apresenta uma análise de $TAP$ para os desafio
 \label{ref:tabQuestao4TAP} 
 \end{center}
 \end{table*}
+%%%%%%%%%%%%%%%%%%%%%
+\end{comment}
+%%%%%%%%%%%%%%%%%%%%%
 
-\section{Comparativo entre as ferramentas}
+\section{Análise comparativa}
+Após a contextualização das características importantes para a evolução do estado da arte e da análise qualitativa de $TAP$, agora as ferramentas e técnicas dos trabalhos relacionados também serão analisadas sob o mesmo ponto de vista.
 
-\chapter{Conclusões e perspectivas futuras}
+A Tabela~\ref{ref:tabQuestao1Ferramenta} apresenta uma análise comparativa entre $TAP$ e as ferrametas correlatas no quesito teoria de teste universal.
+
+\begin{table*}[h]
+\begin{center}
+\caption{Comparativo qualitativo do suporte para a meta de teoria de teste universal}
+\begin{tabular}{|p{.3\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.15\textwidth}|} 
+\hline
+ & \multicolumn{4}{c}{\textbf{Suporte para o desafio}} \\
+
+\cline{2-5}
+\textbf{Ferramentas} & \textbf{Hipóteses explícitas} & \textbf{Eficácia do teste} & \textbf{Testes de composição} & \textbf{Evidências empíricas}\\ 
+
+\hline
+$TAP$ & Parcial & Sim & Parcial & Não\\ 
+
+\hline
+$Justitia$ & Parcial & Sim & Sim & Não\\ 
+
+\hline
+$ATEMES$ & Parcial & Parcial & Sim & Não\\ 
+
+\hline
+Statistical debugging & Parcial & Sim & Parcial & Não\\ 
+
+\hline
+Program slicing & Parcial & Sim & Sim & Não\\ 
+
+\hline
+Capture and replay & Não & Parcial & Parcial & Não\\ 
+
+\hline
+\end{tabular}
+\label{ref:tabQuestao1Ferramenta} 
+\end{center}
+\end{table*}
+
+
+A Tabela~\ref{ref:tabQuestao2Ferramenta} apresenta uma análise comparativa entre as ferrametas e técnicas correlatas para os desafios propostos pela meta de modelagem baseada em teste.
+
+\begin{table*}[h]
+\begin{center}
+\caption{Comparativo qualitativo do suporte para a meta de modelagem baseada em teste}
+\begin{tabular}{|p{.3\textwidth}|p{.2\textwidth}|p{.25\textwidth}|p{.15\textwidth}|} 
+\hline
+ & \multicolumn{3}{c}{\textbf{Suporte para o desafio}} \\
+
+\cline{2-4}
+\textbf{Ferramentas} & \textbf{Teste baseado em modelos} & \textbf{Teste baseado em anti-modelos} & \textbf{Oráculos de teste}\\ 
+
+\hline
+$TAP$ & Parcial & Sim & Não\\ 
+
+\hline
+$Justitia$ & Sim & Não & Parcial \\ 
+
+\hline
+$ATEMES$ & Sim & Sim & Sim\\ 
+
+\hline
+Statistical debugging & Sim  & Sim & Não \\ 
+
+\hline
+Program slicing & Sim & Sim & Não \\ 
+
+\hline
+Capture and replay & Sim & Sim & Parcial \\ 
+
+\hline
+\end{tabular}
+\label{ref:tabQuestao2Ferramenta} 
+\end{center}
+\end{table*}
+
+A Tabela~\ref{ref:tabQuestao3Ferramenta} apresenta uma análise comparativa entre as ferrametas e técnicas correlatas para os desafios propostos através de testes 100\% automatizados.
+
+\begin{table*}[h]
+\begin{center}
+\caption{Comparativo qualitativo do suporte para a meta de testes 100\% automáticos}
+\begin{tabular}{|p{.3\textwidth}|p{.2\textwidth}|p{.3\textwidth}|p{.15\textwidth}|} 
+\hline
+ & \multicolumn{3}{c}{\textbf{Suporte para o desafio}} \\
+
+\cline{2-4}
+\textbf{Ferramentas} & \textbf{Geração de entradas} & \textbf{Abordagem específica para domínio} & \textbf{teste \textit{online}}\\ 
+
+\hline
+$TAP$ & Parcial & Parcial & Sim \\ 
+
+\hline
+$Justitia$ & Sim & Parcial & Sim \\ 
+
+\hline
+$ATEMES$ & Sim & Não & Sim \\ 
+
+\hline
+Statistical debugging & Não & Sim & Sim \\ 
+
+\hline
+Program slicing & Não & Sim & Sim \\ 
+
+\hline
+Capture and replay & Não & Sim & Sim\\ 
+
+\hline
+\end{tabular}
+\label{ref:tabQuestao3Ferramenta} 
+\end{center}
+\end{table*}
+
+%%%%%%%%%%%%%%%%%%%%%
+\begin{comment}
+%%%%%%%%%%%%%%%%%%%%%
+A Tabela~\ref{ref:tabQuestao4Ferramenta} apresenta uma análise comparativa entre as ferramentas e técnicas correlatas para oo desafio de maior eficácia na engenharia de testes.
+
+\begin{table*}[h]
+\begin{center}
+\caption{Comparativo qualitativo do suporte para uma maior maior eficácia na engenharia de testes}
+\begin{tabular}{|p{.25\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.15\textwidth}|} 
+\hline
+ & \multicolumn{5}{c}{\textbf{Suporte para o desafio}} \\
+
+\cline{2-6}
+\textbf{Ferramentas} & \textbf{Controlar a evolução} & \textbf{Aproveitar recursos} & \textbf{Padrões de teste} & \textbf{Compreender os custos dos ensaios}  & \textbf{Aprendizado dos testadores de \textit{software}\\ 
+
+\hline
+$TAP$ &  &  &  &  & \\ 
+
+\hline
+$Justitia$ &  &  &  & & \\ 
+
+\hline
+$ATEMES$ &  &  &  & & \\ 
+
+\hline
+Statistical debugging &  &  &  & & \\ 
+
+\hline
+Program slicing &  &  &  & & \\ 
+
+\hline
+Capture and replay &  &  &  & & \\ 
+
+\hline
+\end{tabular}
+\label{ref:tabQuestao4Ferramenta} 
+\end{center}
+\end{table*}
+%%%%%%%%%%%%%%%%%%%%%
+\end{comment}
+%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Conclusões}
 Neste trabalho foi introduzida $TAP$, uma ferramenta para a troca automática de parâmetros de configuração e apresentado um roteiro para a geração de um ambiente de desenvolvimento de aplicações embarcadas baseadas em requisitos de \textit{hardware} e \textit{software} específicos.
 
 O ambiente de desenvolvimento integrado fornece independência em relação à plataforma física de destino. Desta forma, os desenvolvedores não precisam gastar tempo compreendendo uma nova plataforma de desenvolvimento sempre que alguma característica do sistema embarcado for atualizada. Este é um passo importante, pois alguns sistemas embarcados podem não ser capazes de armazenar os dados adicionais necessários para apoiar a depuração. 
 
-O experimento realizado apontou valores quantitativos de *********.
-Foi confirmada que a eficácia do algoritmo está intimamente ligada à eficácia da configuração recebida quando $TAP$ testou e depurou o \texttt{DMEC} com as três granularidades da ferramenta. A avaliação do impacto da informação de depuração no tamanho do código da aplicação foi de mais de 500\% e a sobrecarga para o tempo de execução é de cerca de 60\%.
+O experimento realizado apontou valores quantitativos do tempo consumido para realizar os teses e da efetividade dos ensaios. Foi confirmada que a eficácia do algoritmo está intimamente ligada à eficácia da configuração dos valores e da granularidade apresentadas à ferramenta. 
 
-Também foi realizada uma análise qualitativa da ferramenta, levando-se em conta os desafios ainda presentes na área de teste e depuração de sistemas embarcados. ***** 
+Foram avaliados os impactos inerentes ao uso da ferramenta para verificar se existiam pontos de melhoria, que devem ser tratados em trabalhos futuros. Dentre eles estão a redução do uso de memória e do tempo utilizados para recuperar as informações de depuração, que atualmente apresenta um aumento de mais de 500\% no tamanho do código da aplicação e a uma sobrecarga de 60\% para o tempo de execução do teste.
 
+Também foi realizada a análise qualitativa da ferramenta, levando-se em conta os desafios ainda presentes no teste de \textit{software} e metas que necessitam ser atingidas. Os resultados demonstram o comprometimento da ferrameta com o avanço do estado da arte, pois procura oferecer uma solução viável a pelo menos 80\% dos desafios propostos. Também possui resultados promissores se comparada com outras ferramentas correlatas, frequentemente apresentando soluções equivalentes às de outras ferramentas e, eventualmente, cobrindo características que não fazem parte do escopo inicial deste trabalho.
+
+\section{Perspectivas futuras}
+Durante o desenvolvimento deste trabalho foram identificados pontos que podem ser otimizados em trabalhos futuros:
+\begin{itemize}
+	\item Analisar a possibilidade de reduzir o custo de memória e de tempo utiliado para a execução de testes. 
+	\item Verificar formas de melhorar a configuração de $TAP$ e dos dados de entrada do algoritmo.
+	\item Realizar um maior número de experimentos para verificar o desempenho da ferramenta em ambientes com um número de restrições eque apresentam testes mais complexos.
+	\item Aprimorar a ferramenta para conseguir atingir todos os desafios identificados na área de teste e depuração de \textit{software}.
+\end{itemize}
+
+O desenvolvimento deste trabalho resultou em artigos publicados em eventos, e que contribuiram para o estado da arte nas áreas de verificação de \textit{software} e de construção de sistemas embarcados. Como perspectiva futura também encontra-se a produção de mais artigos.
 
 \bibliographystyle{ufscThesis/ufsc-alf}
 \bibliography{bibliografia}

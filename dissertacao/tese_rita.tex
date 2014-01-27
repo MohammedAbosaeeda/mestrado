@@ -141,68 +141,66 @@ Para atender o objetivo geral, os seguintes objetivos específicos devem ser conc
 \subsection{Delimitações}
 O presente trabalho não tem como objetivo a geração de casos de teste para um determinado \textit{software}, limitando-se apenas em executá-los de maneira automatizada. Sendo assim, qualquer erro presente nos testes recebidos pelo protótipo para execução automática serão considerados como erro do próprio \textit{software}.
 
+%@% Revisão do Celo do capítulo inteiro
 \chapter{Conceitos básicos}
 \section{Teste de sistemas computacionais}
-Teste de \textit{software} é uma área de pesquisa relativamente recente e teve sua primeira conferência formal foi organizada em junho de 1972~\cite{Gelperin:1988}. Desde então há um esforço para definir melhor os conceitos relacionados à área e também para chegar a um consenso sobre como documentação de testes deve ser feita. 
+A área de pesquisa em teste de \textit{software} é relativamente recente e a primeira conferência que em que o tema foi discutido foi organizada em junho de 1972~\cite{Gelperin:1988}. Desde então há um esforço para definir melhor os conceitos relacionados à área e também para chegar a um consenso sobre como documentação de testes deve ser feita. 
 
-A definição com maior aceitação é a padronizada pela IEEE, na qual um o teste de \textit{software} é o processo de análise de um item de \textit{software} para detectar as diferenças entre as condições existentes e exigidas (ou seja, erros) e avaliar as características do item de software~\cite{ieee87}. É importante ressaltar que o teste de \textit{software} visa ressaltar a presença dos erros e não sua ausência, ou seja, o 
-sucesso do teste mostra que o \textit{software} analisado possui um desvio do comportamento previsto, mas  quando o teste não encontra erros (inconclusivo) não se sabe se há ou não desvio no comportamento do \textit{software} analisado.
+A definição com maior aceitação é a padronizada pela IEEE, na qual um o teste de \textit{software} é o processo de análise de um item de \textit{software} para detectar as diferenças entre as condições existentes e exigidas (isto é, os erros), e avaliar as características do item de software~\cite{ieee87}. É importante ressaltar que o teste de \textit{software} visa ressaltar a presença dos erros e não sua ausência. Isto significa que o sucesso de um teste em encontrar um desvio de comportamento em um determinado \textit{software} não garante que todas as possíveis falhas foram encontradas. O teste que não encontra erros é meramente inconclusivo, pois não se sabe se há ou não desvio no comportamento do \textit{software} analisado.
 
-Testar um \textit{software} é essencial para revelar o número máximo de erros a partir do menor de esforço e esta atividade deve começar logo no início do projeto, com a definição dos requisitos a serem testados, da abordagem utilizada, da política de testes, critérios para a conclusão do teste, entre outros. Para que o processo de teste alcance seu objetivo é necessária uma estratégia de testes, suficientemente flexível para modelar-se às peculiaridades do \textit{software} e rígida o bastante para um acompanhamento satisfatório do projeto.
+Testar um \textit{software} é essencial para revelar o número máximo de erros a partir do menor esforço. Esta atividade deve ser adotada desde o início do projeto de \textit{software}, com a definição dos requisitos a serem testados, da abordagem utilizada, da política de testes, critérios para a conclusão do teste, entre outros. Para que o processo de teste alcance seu objetivo é necessária uma estratégia de testes, suficientemente flexível para modelar-se às peculiaridades do \textit{software} e rígida o bastante para um acompanhamento satisfatório do projeto.
 
 Segundo Pressman~\cite{pressman}, muitas estratégias de testes já foram propostas na literatura e todas fornecem um modelo para o teste com as seguintes características genéricas:
 \begin{itemize}
-	\item Para executar um teste eficaz, proceder as revisões ténicas eficazes. Fazendo isso, muitos erros serão eliminados antes do começo do teste.
+	\item Para executar um teste de maneira eficaz, deve-se fazer revisões técnicas eficazes. Fazendo isso, muitos erros serão eliminados antes do começo do teste.
 	\item O teste começa no nível de componente e progride em direção à integração do sistema computacional como um todo.
 	\item Diferentes técnicas de teste são apropriadas para diferentes abordagens de engenharia de \textit{software} e em diferentes pontos no tempo.
 	\item O teste é feito pelo desenvolvedor do \textit{software} e (para grandes projetos) por um grupo independente de teste.
-	\item O teste e a depuração são atividades diferentes, mas depuração deve ser associada com alguma estratégia de teste.
+	\item O teste e a depuração são atividades diferentes, mas depuração deve ser associada a alguma estratégia de teste.
 \end{itemize}
 
-As características gerais enumeradas por Pressman se referem a uma abordagem estratégica para teste de \textit{software}. Para sistemas embarcados o teste também tem como objetivo aumentar a confiabilidade do sistema, pois sistemas embarcados estão intríscincos no dia-a-dia das pessoas e um erro neste tipo de sistema  pode ser fatal. Então é desejável que a estratégia de teste de um sistema embarcado englobe:
+As características gerais enumeradas por Pressman se referem a uma abordagem estratégica para teste de \textit{software}. Em sistemas embarcados os testes também tem como objetivo o aumento da confiabilidade do sistema, pois sistemas embarcados estão presentes no dia-a-dia das pessoas e um erro neste tipo de sistema pode levar a acidentes fatais, como por exemplo, falhas no sistema de bordo de um veículo motorizado. É desejável que a estratégia de teste de um sistema embarcado englobe:
 \begin{itemize}
-	\item Teste de baixo nível - para verificar se os requisitos de \textit{software} de baixo nível estão sendo atendidos e apontar se um pequeno segmento de código fonte foi implementado corretamente.
-	\item Teste de integração de \textit{software} - para verificar se o funcionamento do \textit{software} está de acordo com os requisitos e analisar o relacionamento/comportamento entre os próprios componentes do \textit{software} e dos componentes em relação à arquitetura do \textit{software}.
-	\item Teste de integração \textit{software}/\textit{hardware} - para verificar se a execução do \textit{software} no \textit{hardware} alvo ocorre corretamente e conforme o especificado.
+	\item Testes de baixo nível - para verificar se os requisitos de \textit{software} de baixo nível estão sendo atendidos e apontar se um pequeno segmento de código fonte foi implementado corretamente.
+	\item Testes de integração de \textit{software} - para verificar se o funcionamento do \textit{software} está de acordo com os requisitos e analisar o relacionamento/comportamento entre os próprios componentes do \textit{software} e dos componentes em relação à arquitetura do \textit{software}.
+	\item Testes de integração \textit{software}/\textit{hardware} - para verificar se a execução do \textit{software} no \textit{hardware} alvo ocorre corretamente e conforme o especificado.
 \end{itemize}
 
-Sendo assim, espera-se que os testes do sistema embarcado seja mais completos e robustos, a fim de descobrir os erros antecipadamente e, desta forma, garantir maior segurança ao \textit{software} final.
+Sendo assim, espera-se que os testes do sistema embarcado sejam mais completos e robustos, com o intuito de descobrir os erros antecipadamente e, desta forma, garantir maior segurança ao \textit{software} final.
 
 \section{Depuração de sistemas computacionais}
-A depuração é a arte de diagnosticar erros em sistemas e determinar a melhor forma de corrigi-los. Devido esta atividade partir de um sistema com algum tipo de problema, é muito comum que a depuração ocorra como consequência de um teste bem sucedido.
+A depuração é a arte de diagnosticar erros em sistemas e determinar a melhor forma de corrigí-los. Em geral, o ponto de partida para a depuração de um sistema é a ocorrência de algum erro, portanto, é muito comum que a depuração ocorra como consequência de um teste bem sucedido (isto, que encontrou erros).
 
-Como o erro pode ser encontrado por qualquer pessoa e em qualquer etapa do ciclo de vida do \textit{software}, tanto o formato do relatório de um resultado inesperado quanto as características do próprio erro podem variar de acordo com o conhecimento do autor do relato. Sendo assim, para realizar uma depuração eficaz deve-se ser capaz de identificar a técnica apropriada para analisar diferentes tipos de relatórios e obter as informações necessárias para eliminar o problema.
+Erros podem ser encontrados por qualquer pessoa em qualquer etapa do ciclo de vida do \textit{software}. Isto implica que tanto o formato do relatório de um resultado inesperado, quanto as características dos erros podem variar de acordo com o conhecimento do autor do relato. Sendo assim, para realizar uma depuração eficaz deve-se ser capaz de identificar a técnica apropriada para analisar diferentes tipos de relatórios e obter as informações necessárias para eliminar o problema.
 
 A depuração é uma tarefa complexa, cuja dificuldade varia de acordo com o ambiente de desenvolvimento, linguagem de programação, tamanho do sistema e disponibilidade de ferramentas disponíveis para auxiliar o processo. 
 
-Depuradores são ferramentas que permitem monitorar a execução de um programa, como opções como executar o programa passo a passo, pausar/reiniciar a execução e, em alguns casos, até voltar no tempo e desfazer a execução de uma determinada instrução.
+Depuradores são ferramentas que auxiliam no monitoramento da execução de um programa, incluindo opções como: executar o programa passo-a-passo, pausar/reiniciar a execução e, em alguns casos, até voltar no tempo e desfazer a execução de uma determinada instrução.
 
-A conexão entre o programa e o depurador pode ocorrer localmente ou remotamente. Ambas possuem vantagens e pontos de melhoria que devem ser consideradas para construir um ambiente de depuração estável.
-
-O método local é quando o programa é executado na mesma máquina que o depurador, de modo que o processo tem uma latência mais baixa e há grande influência entre ambos. Por exemplo, se um processo provoca um \textit{crash}, o depurador só poderia formar a hipótese de \textit{crash} porque ele mesmo realizou um comportamento inesperado (travar ou reiniciar). 
-
-Já na depuração remota não ocorre este tipo de interferência, uma vez que aplicação e execução do depurador encontram-se em máquinas separadas.Do ponto de vista do ambiente de depuração, a depuração remota é semelhante à uma depuração local com duas telas conectadas em um único sistema.
+A conexão entre o programa e o depurador pode ocorrer localmente ou remotamente. Ambas possuem vantagens e pontos de melhoria que devem ser considerados na construção de um ambiente de depuração estável.
+No método local o programa é executado na mesma máquina que o depurador, isto implica em um processo com latência menor e com grande influência entre ambos. Por exemplo, se um processo provoca um \textit{crash} no sistema, o depurador perde grande parte das informações de deputação do sistema, pois pertence ao mesmo ambiente que sofreu a parada e só poderia formar a hipótese de \textit{crash} porque ter ele mesmo realizado um comportamento inesperado (travar ou reiniciar).
+Já na depuração remota não ocorre este tipo de interferência, uma vez que a aplicação sob depuração e o depurador encontram-se em máquinas separadas.Do ponto de vista do ambiente de depuração, a depuração remota é semelhante a uma depuração local com duas telas conectadas em um único sistema.
 
 Além da interferência e da latência, também deve-se utilizar de ferramentas aliadas para delimitar outros importantes conceitos envolvidos na depuração, tais como, a forma de configurar o modo de execução do código, como observar as saídas da aplicação, como verificar uma determinada variável de ambiente, como visualizar o \textit{log} das tarefas realizadas, entre outros.
 
-\section{Projeto de sistemas orientado à aplicação}
-A metodologia de projeto de sistemas orientado à aplicação (***AOSD - acrônimo para \textit{Application-Oriented System Design}) tem como objetivo principal a produção de sistemas para aplicações de computação dedicada e adaptados para atender exigências específicas da aplicação que irá utilizá-lo~\cite{Froehlich:2001}. 
+\section{Projeto de sistemas orientado a aplicação}
+A metodologia de projeto de sistemas orientado a aplicação (AOSD - acrônimo para \textit{Application-Oriented System Design}) tem como objetivo principal a produção de sistemas para aplicações de computação dedicada e adaptados para atender exigências específicas da aplicação que irá utilizá-lo~\cite{Froehlich:2001}. 
 
-Esta metodologia permite manter o foco nas aplicações que utilizarão o sistema que desde o início do projeto, então tanto a arquitetura quanto os componentes podem ser definidos a fim de maximizar a reutilização e a configurabilidade do sistema de acordo com as peculiaridades da sua aplicação. Os principais conceitos envolvidos em sua utilização são:
+Esta metodologia permite manter o foco nas aplicações que utilizarão o sistema desde o início do projeto. Desta forma, tanto a arquitetura quanto os componentes podem ser definidos a fim de maximizar a reutilização e a configurabilidade do sistema de acordo com as peculiaridades da sua aplicação. Os principais conceitos envolvidos em sua utilização são:
 \begin{description}
-	\item[Familias de abstrações independentes de cenário]  \hfill \\
-	Durante a decomposição de domínio as abstrações identificadas são agrupadas em familias de abstrações e modeladas como membros desta familia. As abstrações devem ser modeladas de forma totalmente independente de cenários, garantindo que sejam genéricas o suficiente para que sejam reutilizadas para compor qualquer sistema. Dependências ambientais observadas durante a decomposição de domínio devem ser separadamente modeladas como aspectos de cenário.
+	\item[Famílias de abstrações independentes de cenário]  \hfill \\
+	Durante a decomposição de domínio as abstrações identificadas são agrupadas em famílias de abstrações e modeladas como membros desta família. As abstrações devem ser modeladas de forma totalmente independente de cenários, garantindo que sejam genéricas o suficiente para que sejam reutilizadas para compor qualquer sistema. Dependências ambientais observadas durante a decomposição de domínio devem ser separadamente modeladas como aspectos de cenário.
 	\item[Características Configuráveis]  \hfill \\
-	Utilizadas quando uma determinada característica pode ser aplicada a todos os membros de uma familia, mas com valores diferentes. Então ao invés de aumentar a familia modelando novos membros, esta característica compartilhada é modelada como uma configurável. Desta forma é possível definir o comportamento desejado e aplicá-lo às abstrações de forma semelhante aos aspectos de cenário.
+	Utilizadas quando uma determinada característica pode ser aplicada a todos os membros de uma família, mas com valores diferentes. Então, ao invés de aumentar a família modelando novos membros, esta característica compartilhada é modelada como uma configurável. Desta forma é possível definir o comportamento desejado e aplicá-lo às abstrações de forma semelhante aos aspectos de cenário.
 	\item[Adaptadores de cenário]  \hfill \\
 	Utilizados para aplicar os aspectos de forma transparente às abstrações do sistema. Eles funcionam como uma membrana, que envolve uma determinada abstração e se torna um intermediário na comunicação dessa abstração, inserindo as adaptações necessárias para cada requisição que seja dependente de um cenário.
 	\item[Interfaces infladas]  \hfill \\
-	Resumem as características de todos os membros da familia em um único componente de interface, permitindo que a implementação dos componentes de \textit{software} considere sempre uma interface bem abrangente e, desta forma, postergando a decisão sobre qual membro da familia utilizar. Esta decisão pode ser automatizada através de ferramentas que identificam quais características da familia foram utilizadas e selecionam o membro dessa familia que implementa o subconjunto da interface inflada.
+	Resumem as características de todos os membros da família em um único componente de interface, permitindo que a implementação dos componentes de \textit{software} considerem sempre uma interface bem abrangente e, desta forma, postergando a decisão sobre qual membro da família utilizar. Esta decisão pode ser automatizada através de ferramentas que identificam quais características da família foram utilizadas e selecionam o membro dessa família que implementa o subconjunto da interface inflada.
 \end{description}
 
 \fig{aosd}{Visão geral da metodologia de projeto de sistemas orientado à aplicação~\cite{Froehlich:2001}}{scale=.5}
 
-A Figura\ref{fig:aosd} mostra uma visão geral da ***AOSD, metodologia na qual é possível visualizar a decomposição do domínio em famílias de abstrações independentes de cenários e das dependências ambientais - separadamente modeladas como aspectos de cenário. A arquitetura do sistema é capturada pelos \textit{frameworks} dos componentes modelados a partir do domínio. Somente estes componentes serão reunidos para formar o sistema, pois somente eles são necessários para fornecer suporte à aplicação.
+A Figura\ref{fig:aosd} mostra uma visão geral da AOSD, metodologia na qual é possível visualizar a decomposição do domínio em famílias de abstrações independentes de cenários e das dependências ambientais - separadamente modeladas como aspectos de cenário. A arquitetura do sistema é capturada pelos \textit{frameworks} dos componentes modelados a partir do domínio. Somente estes componentes serão reunidos para formar o sistema, pois somente eles são necessários para fornecer suporte à aplicação.
 
 \section{Programação genérica}
 A programação genérica pode ser abordada de vários pontos de vista. Para entender os conceitos básicos utilizados neste presente trabalho será utilizada a visão de Musser e Stepanov:
@@ -210,18 +208,18 @@ A programação genérica pode ser abordada de vários pontos de vista. Para entende
 "By generic programming, we mean the definition of algorithms and data structures at an abstract or generic level, thereby accomplishing many related programming tasks simultaneously. The central notion is that of generic algorithms, which are parameterized procedural schemata that are completely independent of the underlying data representation and are derived from concrete efficient algorithms" \cite{musser1989generic}.
 \end{quotation}
 
-Esta noção de programação genérica foi a que motivou o projeto da ***STL e defende um paradigma de programação para a concepção e desenvolvimento de estruturas reutilizáveis e algoritmos eficientes.
+Esta noção de programação genérica foi a que motivou o projeto da STL e defende um paradigma de programação para a concepção e desenvolvimento de estruturas reutilizáveis e algoritmos eficientes.
 
 Os algoritmos podem ser vistos como procedimentos parametrizados completamente independentes da representação de dados e são suficientemente genéricos para manter a mesma semântica e eficiência do algoritmo original, mesmo quando instanciado e assumindo tarefas simultâneas.
 
 \subsection{Utilização em C++: \textit{templates}}
-Mecanismos de \textit{templates} providos pelo C++ são uma maneira de adicionar à classes e funções conceitos genéricos, isto é, permitem criar um código reutilizável onde os tipos sejam passados como parâmetro. 
+Mecanismos de \textit{templates} providos pela linguagem de progamação C++ são uma maneira de adicionar às classes e funções conceitos genéricos, isto é, permitem criar um código reutilizável onde os tipos sejam passados como parâmetro. 
 
 No \textit{template} ficam descritas classes/funções genéricas que podem variar sua declaração de acordo com um determinado argumento fornecido como parâmetro para o modelo. 
 
-É função do compilador gera as novas classes/funções quando houver os argumentos necessários para selecionar o parâmetro correto para instanciar o \textit{template}. As classes/funções geradas a partir de um \textit{template} são especializações deste modelo.
+É função do compilador gerar as novas classes/funções quando houver os argumentos necessários para selecionar o parâmetro correto para instanciar o \textit{template}. As classes/funções geradas a partir de um \textit{template} são especializações deste modelo.
 
-Um exemplo de implementação de classe genérica utilizando \textit{templates} pode ser observado na Figura~\ref{progcpp:vector}, onde letra $T$ representa o parâmetro genérico que será trocado pelo compilador quando o \textit{template} for instanciado.
+Um exemplo de implementação de classe genérica utilizando \textit{templates} pode ser observado na Figura~\ref{progcpp:vector}, onde a letra $T$ representa o parâmetro genérico que será trocado pelo compilador quando o \textit{template} for instanciado.
 
 \progcpp{vector}{Classe $Vector$ generalizada \cite{Stroustrup:c++}}
 
@@ -240,50 +238,51 @@ O Resultado seria a instanciação de duas classes diferentes de acordo com o argu
 
 Por padrão, as classes \textit{template} possuem uma única implementação para qualquer argumento recebido e quando deseja-se dar um tratamento mais refinado para atribuir uma determinada característica é necessário realizar descrições alternativas do \textit{template}. Estas descrições, também conhecidas como especializações, são escolhidas pelo compilador com base nos argumentos fornecidos para o \texttt{template}.
 
+%@% Revisão do Celo - Todo o capítulo dos trabalhos relacionados
 \chapter{Trabalhos relacionados}
 \label{ref:relacionados}
 A área de automação de testes possui uma vasta literatura de apoio, sendo a maioria relacionada a sistemas de propósito geral.
 
 \section{Justitia}
-Justitia~\cite{seo} é uma  ferramenta de testes automatizados capaz de detectar automaticamente erros na interface, gerar casos de testes completos (entradas, estados internos, valores de variáveis, saídas) e emular a execução do \textit{software} na arquitetura alvo.
+Justitia~\cite{seo} é uma  ferramenta de testes automatizados capaz de detectar automaticamente erros na interface, gerar casos de testes completos - com entradas, estados internos, valores de variáveis, saídas - e emular a execução do \textit{software} na arquitetura alvo.
 
 Ela surgiu como um estudo de caso para demonstrar a automação de testes para \textit{software} embarcado, em que os autores propuseram em esquema de teste automatizado para as interfaces das camadas do sistema embarcado baseado em sua emulação na arquitetura alvo. 
 
 Para defender que a interface é um critério essencial para um teste de \textit{software} embarcado, a base de Justitia consiste na união de duas técnicas:
 \begin{description}
 	\item[Técnica de teste de interface] é reponsável por gerar casos de teste através da análise do arquivo (imagem) executável do sistema. Como o próprio nome sugere, a técnica foca nas interfaces do sistema embarcado, em especial as referentes às camadas do sistema operacional e às camadas do \textit{hardware}.
-	\item[Técnica de emulação dos casos de teste] é uma combinação entre o monitoramenmento e a depuração do sistema. A ideia é definir \textit{breakpoints} para os casos de teste da interface e monitorar a tabela de simbolos para definir o sucesso ou falha do teste.
+	\item[Técnica de emulação dos casos de teste] é uma combinação entre o monitoramemento e a depuração do sistema. A ideia é definir \textit{breakpoints} para os casos de teste da interface e monitorar a tabela de simbolos para definir o sucesso ou falha do teste.
 \end{description}
 
 Os resultados foram analisados através de experimentos sob três pontos de vista: a densidade da interface, a complexidade do \textit{software} e a relação interface \textit{versus} erros. 
 
-A primeira questão a ser investigada foi a da densidade da interface, pois que apesar de estar estritamente ligada ao grau de acoplamento do \textit{software} embarcado, não há uma relação definida entre o grau de acoplamento \textit{software} e sua testabilidade. A partir da primeira questão houve a necessidade de estabelecer uma outra relação entre a densidade e a complexidade de um \textit{software}, que atualmente é uma das principais métricas para a previsão de falhas.
+A primeira questão a ser investigada foi a da densidade da interface, pois, apesar de estar estritamente ligada ao grau de acoplamento do \textit{software} embarcado, não há uma relação definida entre o grau de acoplamento \textit{software} e sua testabilidade. A partir da primeira questão houve a necessidade de estabelecer uma outra relação entre a densidade e a complexidade de um \textit{software}. Atualmente é uma das principais métricas para a previsão de falhas.
 
-O primeiro protótipo apresentou resultados satisfatórios para as questões acima e chegou-se a conclusão de que a interface deve ser utilizada como um \textit{checkpoint} para encontrar e corrigir erros. A técnica foi novamente corroborada por uma nova versão de Justitia~\cite{KiSCL08}, agora aplicada ao teste  de um \textit{driver} de um dispositivo embarcado e com a capacidade de suportar um número ainda maior de testes.
+O primeiro protótipo apresentou resultados satisfatórios para as questões acima e chegou-se a conclusão de que a interface deve ser utilizada como um \textit{checkpoint} para encontrar e corrigir erros. A técnica foi novamente corroborada por uma versão mais recente de Justitia~\cite{KiSCL08}, agora aplicada ao teste de um \textit{driver} de um dispositivo embarcado e com a capacidade de suportar um número ainda maior de testes.
 
 \section{Automatic testing environment for multi-core embedded software (ATEMES)}
-$ATEMES$~\cite{atemes} é uma ferramenta para automação de teste para sistemas embarcados de multiplos núcleos. Dentre os tipos de teste suportados estão os aleatórios, de unidade, cobertura, desempenho e condições de corrida. A ferramenta também prevê instrumentação do código, geração de casos de uso e de dados de entrada para sistemas de múltiplos núcleos. 
+$ATEMES$~\cite{atemes} é uma ferramenta para automação de teste para sistemas embarcados de múltiplos núcleos. Dentre os tipos de teste suportados estão os aleatórios, de unidade, cobertura, desempenho e condições de corrida. A ferramenta também prevê instrumentação do código, geração de casos de uso e de dados de entrada para sistemas de múltiplos núcleos. 
 
 Para desempenhar todas estas funções $ATEMES$ conta com os seguintes componentes:
 \begin{description}
-	\item[PRPM] é módulo que realiza o de pré-processamento. Dentre suas atribuições estão a análise de código fonte, geração automatica de casos de teste, geração automática dos dados de entrada de teste e instrumentação do código fonte. Suas funções são automáticas, mas também é possível intervir manualmente nos testes através de uma interface.
+	\item[PRPM] - Módulo que realiza pré-processamento. Dentre suas atribuições estão a análise de código fonte, geração automatica de casos de teste, geração automática dos dados de entrada de teste e instrumentação do código fonte. Suas funções são automáticas, mas também é possível intervir manualmente nos testes através de uma interface.
 	
-	\item[HSATM] é uma das partes do módulo de teste automático, a que pertence ao lado anfitrião. Responsável por gerar automaticamente uma base para os testes baseados em uma biblioteca pré-definida, compilar o código fonte para uma determinada arquitetura de \textit{hardware} e enviar a imagem executável para a plataforma alvo.
+	\item[HSATM] - Uma das partes do módulo de teste automático e pertence ao lado anfitrião. Responsável por gerar automaticamente uma base para os testes baseados em uma biblioteca pré-definida, compilar o código fonte para uma determinada arquitetura de \textit{hardware} e enviar a imagem executável para a plataforma alvo.
 	
-	\item[TSATM] também compõe o módulo de teste automático, mas com a foco voltado à plataforma de \textit{hardware} alvo. Sua principal função é executar a imagem recebida do $HSATM$, monitorar o andamento dos testes e enviar os dados desta execução. 
+	\item[TSATM] - Compõe o módulo de teste automático e tem o foco voltado para a plataforma de \textit{hardware} alvo. Sua principal função é executar a imagem recebida do $HSATM$, monitorar o andamento dos testes e enviar os dados desta execução. 
 	
-	\item[POPM] é módulo de pós-processamento, o qual analisa todos os resultados e dados coletados durante o teste.
+	\item[POPM] - Módulo de pós-processamento que analisa todos os resultados e dados coletados durante o teste.
 \end{description}
 
-A partir destes componentes é possivel executar os testes em uma plataforma alvo a partir de uma estação de trabalho remota, o que diminui a quantidade de restrições de recursos dos sistemas embarcados. Para tanto, o \textit{software} é sofre uma compilação cruzada no lado anfitrião (estação de trabalho) e é enviado automaticamente para a plataforma alvo, onde é que o executado. 
+A partir destes componentes é possivel executar os testes em uma plataforma alvo a partir de uma estação de trabalho remota, diminuindo a quantidade de restrições de recursos dos sistemas embarcados. Para tanto, o \textit{software} passa por uma compilação cruzada no lado anfitrião (estação de trabalho) e é enviado automaticamente para a plataforma alvo onde é executado. 
 
-As atividades são gravadas em um \textit{log}, dentre estas estão os dados de execução do sistema, o tempo de utilização de cada núcleo da CPU durante a execução dos testes, o resultado de saída, entre outros. O \textit{log} pode ser passado para o lado anfitrião em tempo de execução, onde pode ser armazenado, processado e até apresentado de maneira visual através de uma interface.
+As atividades são gravadas em um registro, dentre estes registros estão os dados de execução do sistema, o tempo de utilização de cada núcleo da CPU durante a execução dos testes, o resultado de saída, entre outros. O registro pode ser passado para o lado anfitrião em tempo de execução, onde pode ser armazenado, processado e até apresentado de maneira visual através de uma interface.
 
 % universal:2013
 \section{Statistical Debugging}
-Trabalhos com \textit{statistical debugging} se utilizam dados estatísticos relacionados a várias execuções do sistema para isolar um \textit{bug}. Esta análise reduz o espaço de busca utilizando-se de recursos estatisticamente relacionados ao fracasso, limitando assim o conjunto de dados até chegar a uma seleção em que o erro se faz presente. 
+Trabalhos do tipo \textit{statistical debugging} se utilizam de dados estatísticos relacionados a várias execuções do sistema para isolar um \textit{bug}. Esta análise reduz o espaço de busca utilizando-se de recursos estatisticamente relacionados ao fracasso, limitando assim o conjunto de dados até chegar a uma seleção em que o erro se faz presente. 
 
-Apesar do espaço de busca minimizado, a técnica retorna alguns locais espalhados no código, o que não facilita o trabalho do desenvolvedor. Para tentar suprir a necessidade de mais informações, foram sugeridas as extrações de algumas métricas destes dados estatísticos. Um exemplo seria o \textit{ranking} de desconfiança, que é uma relação entre uma determinada característica versus seu o número de execuções com falha, classificados em ordem decrescente.
+Apesar do espaço de busca minimizado, a técnica retorna alguns locais espalhados no código, o que não facilita o trabalho do desenvolvedor. Para tentar suprir a necessidade de mais informações, foram sugeridas as extrações de algumas métricas destes dados estatísticos. Um exemplo seria o \textit{ranking} de desconfiança, uma relação entre uma determinada característica versus seu o número de execuções com falha, classificados em ordem decrescente.
 
 Como a análise é realizada a partir de uma depuração estática, estes modelos expõem as relações entre comportamentos do \textit{software} e seu eventual sucesso/fracasso de uma maneira estática. Então é possível fornecer uma identifiçao aproximada de qual parte do sistema gerou o erro. 
 
@@ -299,11 +298,11 @@ A partir desta probalidade foi possível reduzir tempo gasto para coletar os dado
 \subsection{Statistical debugging: simultaneous identification of multiple bugs}
 Este modelo de \textit{statistical debugging}  tem o propósito de identificar a origem dos erros em um \textit{software} com uma modelagem probabilística de predicados, considerando inclusive que o \textit{software} pode conter mais de um erro simultaneamente~\cite{zheng2006statistical}. 
 
-Os modelos baseados em \textit{statistical debugging} têm como características possuir dos dados esparsos como amostragem e uma grande variedade de predicados para manipular. Por isso a manipulação destes predicados nem sempre é um trabalho trivial, o que faz com que muitos modelos não consigam selecionar padrões de erros úteis. Para mitigar este problema foram utilizadas técnicas semelhantes às dos algoritmos \textit{bi-clusters}, que permite a extração de dados bidirecional simultâneamente.
+Os modelos baseados em \textit{statistical debugging} têm como característica possuirem dados esparsos como amostragem e uma grande variedade de predicados para manipular. Por isso a manipulação destes predicados nem sempre é um trabalho trivial, o que faz com que muitos modelos não consigam selecionar padrões de erros úteis. Para mitigar este problema foram utilizadas técnicas semelhantes às dos algoritmos \textit{bi-clusters} que permite a extração de dados bidirecional simultâneamente.
 
-A implementação da extração de dados bidirecional executa um processo de votação coletiva iterativo, no qual todos os predicados tem um número que define a qualidade de representação, que pode ser modificado durante a execução do algoritmo através da distribuição de votos. Cada execução em que ocorre um erro tem direito a um voto para selecionar o predicado que melhor se encaixa na situação.
+A implementação da extração de dados bidirecional executa um processo de votação coletiva iterativo, no qual todos os predicados tem um número que define a qualidade de representação. Este número pode ser modificado durante a execução do algoritmo através da distribuição de votos. Cada execução em que ocorre um erro tem direito a um voto para selecionar o predicado que melhor se encaixa na situação.
 
-Esta solução é interessante porque reduz o problema de redundancia, pois o processo de votação só acaba quando hover convergência e quanto maior o número de predicados competindo pelo votos, menor é a quantidade de votos que cada um deles pode ter. 
+Esta solução é interessante porque reduz o problema de redundância, pois o processo de votação só acaba quando hover convergência e quanto maior o número de predicados competindo pelo votos, menor é a quantidade de votos que cada um deles pode ter. 
 
 Depois de cada execução um predicado pode receber tanto um voto completo quando uma parcela do voto. No final, os predicados são classificados e selecionados considerando o número de votos que receberam.
 
@@ -327,7 +326,7 @@ Independente da abordagem selecionada, a partição do código é uma técnica intere
 \subsection{\cite{artho2011iterative}}
 
 \section{Capture and Replay}
-Em trabalhos que utilizam \textit{capture and replay} a ideia é capturar toda a execução do programa até o final e armazenar as operações envolvidas em um \textit{log}. Este tipo de sistema permite que o desenvolvedor controle a nova execução do \textit{software} com execução de passos a frente, voltando passos na execução (contra o fluxo), examinando o contexto de alguma variável, verificando um determinado controle de fluxo, analisando fluxos alternativos, entre outras possibilidades.
+Em trabalhos que utilizam \textit{capture and replay} a ideia é capturar toda a execução do programa até o final e armazenar as operações envolvidas em um registro. Este tipo de sistema permite que o desenvolvedor controle a nova execução do \textit{software} com execução de passos a frente, voltando passos na execução (contra o fluxo), examinando o contexto de alguma variável, verificando um determinado controle de fluxo, analisando fluxos alternativos, entre outras possibilidades.
 
 \subsection{Pinpointing interrupts in embedded real-time systems using context checksums}
 Um grande desafio nesta técnica é como se adaptar a interrupções, pois toda a estrutura de reprodução do \textit{software} se baseia no fluxo de controle e uma interrupção tem a capacidade de romper esta sequência.  Uma interrupção pode ocorrer a qualquer momento e provocar uma ruptura no fluxo de controle, então a execução do programa para na instrução atual, e continua a rotina de tratamento de interrupção. 
@@ -340,16 +339,16 @@ Burger e Zeller~\cite{burger2008replaying} se destacaram por desenvolver uma fer
 \subsection{\cite{qi2011locating}}
 \subsection{\cite{orso2005selective}}
 
-
+%@% Revisão do Celo - Todo o capítulo
 \chapter{O ambiente Compartilhado de Teste e Depuração}
 Este capítulo apresenta instruções de como integrar a execução de testes com os possíveis ambientes de 
 depuração, gerando o ambiente compartilhado de desenvolvimento.
 
-O ambiente utilizado pelo \textit{script} de troca de parâmetros conta com um emulador para simular a execução da aplicação e rodar os testes. No caso de sucesso em um teste, automaticamente uma ferramenta de depuração é iniciada e o resultado de todas as operações é repassada para o usuário.
+O ambiente utilizado pelo \textit{script} de troca de parâmetros conta com um emulador para simular a execução da aplicação e rodar os testes. No caso de sucesso em um teste, isto é um erro ser detectado, automaticamente uma ferramenta de depuração é iniciada e o resultado de todas as operações é repassado ao usuário.
 
-As ferramentas utilizadas neste ambiente podem ser substituídas por qualquer outra equivalente. A configuração será apresentada apenas para que o experimento possa ser reproduzido. Nele foi utilizado o QEMU para emular a máquina com a aplicação alvo a partir de outra máquina, usando tradução dinâmica. Desta forma torna-se possível utilizar um computador pessoal para testar aplicações compiladas para algum outro sistema embarcado. 
+As ferramentas utilizadas neste ambiente podem ser substituídas por qualquer outra equivalente. A configuração será apresentada apenas para fins de reprodução do experimento. Nele foi utilizado o QEMU para emular a máquina com a aplicação alvo a partir de outra máquina, usando tradução dinâmica. Desta forma torna-se possível utilizar um computador pessoal para testar aplicações compiladas para algum outro sistema embarcado. 
 
-Para dar suporte também à depuração, foi necessário procurar um aliado para ver quais os passos do programa foi executado um momento antes de um \textit{crash}. O GBD - o GNU Project Debugger encaixou-se no papel de depurador, pois nele é possível especificar qualquer regra que possa afetar seu comportamento de maneira estática.
+Para dar suporte também à depuração, foi necessário procurar um aliado para ver quais passos do programa foram executados um momento antes de um \textit{crash}. O GBD - o GNU Project Debugger encaixou-se no papel de depurador, pois nele é possível especificar qualquer regra que possa afetar seu comportamento de maneira estática.
 
 \section{Configuração do ambiente remoto}
 A integração de ambos é particular para cada máquina anfitriã e alvo, portanto, talvez alguns passos aqui apresentados devam ser adaptados dependendo de sua arquitetura alvo. A Figura~\ref{fig:emulator_debugger_gray} apresenta as atividades necessárias para executar a depuração remota em conjunto com a simulação dos testes.
@@ -361,12 +360,12 @@ Uma explicação adicional das técnicas e ferramentas utilizadas neste processo es
 \begin{description}
 	\item[Compilar com informações de depuração] é o primeiro passo. Como entrada é necessário o código-fonte do aplicativo e como saída esperada encontra-se o código compilado com informações de depuração. Quem utilizar o gcc (GNU project C and C ++ compiler) pode realizar esta atividade simplesmente usando opção $-g$ para compilar. 
 	
-	\item [Emular o sistema utilizando um emulador] é um passo necessário para executar a aplicação na arquitetura alvo correta. Para executar este passo utilizamos o QEMU, qu deve ser inicializado com os argumentos $-s -S$. A primeira opção ativa o stub do para conectar um depurador, a fim de abrir a comunicação entre o emulador e o depurador. A opção $-S$ é utilizada para forçar o QEMU esperar depurador para conectar antes da inicialização do sistema.
-Por exemplo, se uma aplicação compilada com informações de depuração (app.img) e imprime algo na tela (stdio), chamada QEMU deve ser semelhante à: $qemu -fda app.img -serial stdio -s -S$
+	\item [Emular o sistema utilizando um emulador] é um passo necessário para executar a aplicação na arquitetura alvo correta. Para executar este passo utilizamos o QEMU, que deve ser inicializado com os argumentos $-s -S$. A primeira opção ativa o \textit{stub} para conectar um depurador, a fim de abrir a comunicação entre o emulador e o depurador. A opção $-S$ é utilizada para forçar que o QEMU espere a conexão do depurador antes da inicialização do sistema.
+Por exemplo, se uma aplicação compilada com informações de depuração (app.img) imprime algo na tela (stdio), a chamada do QEMU deve ser semelhante à: $qemu -fda app.img -serial stdio -s -S$
 	
-	\item [Conectar-se com o depurador] começa com uma sessão do depurador inicializada em uma janela separada. Então, para se conectar odepurador no QEMU o desenvolvedor deve explicitar que o alvo a ser examinado é remoto e informar o endereço da máquina alvo e porta em que se encontra o alvo a ser examinado (neste caso, o QEMU). Utilizando-se o GDB, a tela será iniciada a partir do comando: $target remote [endereço\_alvo]:[porta\_alvo]$
+	\item [Conectar-se com o depurador] começa com uma sessão do depurador inicializada em uma janela separada. Então, para se conectar ao depurador no QEMU o desenvolvedor deve explicitar que o alvo a ser examinado é remoto e informar o endereço da máquina alvo e porta em que se encontra o alvo a ser examinado (neste caso, o QEMU). Utilizando-se o GDB, a tela será iniciada a partir do comando: $target remote [endereço\_alvo]:[porta\_alvo]$
 
-	\item [Recuperar as informações de debug] é um passo importante para ajudar os desenvolvedores a encontrar erros, pois este aquivo contém todas as informações que podem ser retiradas da compilação, como por exemplo o endereço de uma variável, ou os nomes contidos na tabela de símbolos. O arquivo usado para manter as informações de depuração deverá ser informado para o GDB usando o comando: $file [caminho\_do\_arquivo]$
+	\item [Recuperar as informações de depuração] é um passo importante para ajudar os desenvolvedores a encontrarem erros. O arquivo gerado no primeiro item contém todas as informações que podem ser retiradas da compilação, como por exemplo o endereço de uma variável, ou os nomes contidos na tabela de símbolos. O arquivo usado para manter as informações de depuração deverá ser informado para o GDB usando o comando: $file [caminho\_do\_arquivo]$
 	
 	\item [Encontrar origem dos erros] é uma atividade que depende do programa a ser depurado. A partir desta etapa, o desenvolvedor pode definir \textit{breakpoints}, \textit{watchpoints}, controlar a execução do programa e até mesmo permitir \textit{logs}. Existem vários trabalhos com o foco em ajudar a encontrar os erros através da automação de alguns pontos, como a gerarão automática de \textit{breakpoints}~\cite{JSWjsw0803603616} e o controle do fluxo de execução \cite{Chern:2007}.
 \end{description}

@@ -5,6 +5,7 @@
 \usepackage[lined,ruled,linesnumbered,portuguese]{algorithm2e}
 \usepackage{listings}
 \usepackage{verbatim}
+\usepackage[printonlyused,smaller]{acronym}
 
 \lstloadlanguages{C,HTML}
 \lstdefinestyle{prg}{basicstyle=\small\sffamily, lineskip=-0.2ex, showspaces=false}
@@ -30,17 +31,22 @@
 \SetKwFor{ForEach}{para cada}{fa\c{c}a}{fim}
 \SetKwRepeat{Repeat}{repita}{at\'{e}}
 
-
-\titulo{Automação de teste de software para sistemas embarcados} % Titulo do trabalho
+\titulo{Automação de testes de unidade e integração para software embarcado} % Titulo do trabalho
 \autor{Rita de Cássia Cazu Soldi} % Nome do autor
-\data{28}{fevereiro}{2014} % Data da publicação do trabalho
+\data{03}{março}{2014} % Data da publicação do trabalho
 
 \orientador{Prof. Dr. Antônio Augusto Medeiros Fröhlich} % Nome do orientador e (opcional)
 %\departamento[a]{Faculdade de Ciências do Mar}
 %\curso[a]{Atividade de Extensão em Corte e Costura}
 
+\begin{acronym}
+\acro{ADESD}{\textit{Application-Driven Embedded System Design}}
+\acro{MCO}{\textit{The Mars Climate Orbiter}}
+\acro{MPL}{\textit{The Mars Polar Lander}}
+\end{acronym}
+
 \newcommand{\fig}[4][h]{
-  \begin{figure}[#1] {\centering{\includegraphics[#4]{fig/#2}}\par}
+  \begin{figure}[#1] {\centering{\includegraphics[#4]{fig/#2}} \par}
     \caption{#3\label{fig:#2}}
   \end{figure}
 }
@@ -59,6 +65,7 @@
    \caption{#3\label{progxml:#2}}
  \end{figure}
 }
+
 
 %%% Sobre a Banca
 \numerodemembrosnabanca{3} % Isso decide se haverá uma folha adicional
@@ -104,83 +111,110 @@
 
 \chapter{Introdução}
 \label{cap:introducao}
-Sistemas embarcados podem ser apresentados como uma combinação entre \textit{hardware} e \textit{software} concebida para realizar uma tarefa específica. Estes sistemas estão amplamente acoplados a inúmeros dispositivos eletrônicos e suas atividades se tornaram muito populares e estão cada vez mais presentes no dia-a-dia das pessoas~\cite{carro2003sistemas}. Controle de bordo automotivos, análise/monitoramento ambiental, eletrodomésticos, celulares e equipamentos de rede são apenas uma amostra de soluções proporcionadas através de sistemas embarcados.
+Sistemas embarcados podem ser apresentados como uma combinação entre \textit{hardware} e \textit{software} concebida para realizar uma tarefa específica. Estes sistemas estão amplamente acoplados a inúmeros dispositivos e suas funcionalidades estão cada vez mais intrínsecas no cotidiano das pessoas~\cite{carro2003sistemas}. Atualmente interagimos com mais de um sistema embarcado por dia e o número destes sistemas já superam o número de habitantes do nosso planeta, ainda, este número continua crescendo em ritmo acelerado~\cite{Marcondes:MSC:2009}.
 
-Estas soluções baseam-se na premissa de que cada componente está efetuando corretamente as suas atividades e que a integração entre os mesmos não se desvia do comportamento esperado. Caso contrário, as consequências podem ser custosas como, por exemplo, falhas em sistemas financeiros, diminuição de uma determinada quota de mercado, perda/corrupção de informações importantes de clientes, etc~\cite{tassey2002economic}.
+Como em qualquer sistema computacional, as soluções embarcadas também basearam-se na premissa de que cada componente utilizado está efetuando corretamente as suas atividades e que a integração entre os mesmos não se desvia do comportamento esperado. Caso contrário, o sistema pode apresentar erros. É comum que a consequência de um erro resulte em perdas financeiras, como por exemplo a perda de uma determinada quota de mercado, corrupção de dados do cliente, etc~\cite{tassey2002economic}. 
 
-Para garantir que as componentes vão agir de acordo com o requisitado, uma boa prática é testar de maneira pragmática cada detalhe do software. Sendo que pelo menos uma parte destes testes seja automatizada, de maneira que sirvam como um contrato de funcionamento do sistema.
+Os danos materiais são inconvenientes, mas colocar em perigo a vida humana é um risco inaceitável. Infelizmente não faltam exemplos de erros em sistemas que resultaram em risco de morte, como a falha do sistema de defesa contra mísseis, a ruptura do oleoduto ou nos casos de overdose de radiação no tratamento de câncer~\cite{zhivich2009real}. Também existem vários exemplos relacionados à erros em sistemas embarcados, como por exemplo as tragédias aeroespaciais de Ariane 501, \ac{MCO}, \ac{MPL}, entre outros ~\cite{leveson2009software}. 
 
-Entretanto, o teste não é um comportamento do \textit{software} e nunca deve interferir no fluxo de atividades que está sendo testado. Na maior parte dos sistemas isto é possível sem demandar muito esforço, mas sistemas embarcados costumam ser mais restritos em termos de: memória, capacidade processamento, tempo de bateria, prazos para executar uma determinada atividade, entre outros.
+Grande parte destas tragédias possui um relatório descrevendo como ocorreu o acidente e neles é possível verificar que a causa mais comuns é subestimar a complexidade do sistema e superestimar a eficácia dos testes~\cite{frola1984system}. Mesmo depois de várias perdas relacionadas à erros em sistemas computacionais, ainda há muita complacência quando um sistema desvia do comportamento esperado, o que acaba subestimando a consequência deste erro. Para garantir que os componentes vão agir de acordo com o requisitado, uma boa prática é testar de maneira pragmática cada detalhe do sistema e sem subestimar a complexidade do mesmo.
 
-Além da dificuldade da própria atividade de teste, os desenvolvedores ainda precisam se adaptar a uma grande variedade de plataformas, sistemas operacionais, arquitetura, fornecedores, ferramenta de depuração, etc~\cite{schneider2004ten}.
+Durante o planejamento e desenvolvimento dos testes, é necessário lembrar que o teste em si não é um comportamento do sistema e nunca deve interferir no fluxo de atividades que está sendo testado. Quando este teste tem como alvo um sistema embarcado é importante ressaltar que tanto a complexidade do sistema quanto a do teste são maiores, pois estes sistemas costumam ser mais restritos em termos de memória, capacidade processamento, tempo de bateria, prazos para executar uma determinada atividade, entre outros. 
 
-Existem diversas ferramentas de apoio ao desenvolvimento de \textit{software} embarcado que tentam minimizar o impacto destas variações. A escolha e integração destas ferramentas é uma etapa importante no construção de sistemas embarcados e deve ser feita de maneira criteriosa, uma vez que pode simplificar todo o processo de desenvolvimento.
+Além da dificuldade da própria atividade de teste, os desenvolvedores ainda precisam se adaptar a uma grande variedade de plataformas, sistemas operacionais, arquitetura, fornecedores, ferramenta de depuração, etc~\cite{schneider2004ten}. Existem diversas ferramentas de apoio ao desenvolvimento de \textit{software} embarcado que tentam minimizar o impacto destas variações. A escolha e integração destas ferramentas é uma etapa importante na construção de sistemas embarcados e deve ser feita de maneira criteriosa, uma vez que pode simplificar todo o processo de desenvolvimento.
 
 \section{Motivação}
-Atualmente interagimos com mais de um sistema embarcado por dia e o número destes sistemas já superam o número de habitantes do nosso planeta, ainda, este número continua crescendo em ritmo acelerado~\cite{Marcondes:MSC:2009}.
+Além da quantidade, a complexidade dos sistemas embarcados é um fator que nunca para de crescer. O projeto de \textit{hardware} e \textit{software} está cada vez mais sofisticado e com requisitos mais rígidos. Para atender a esta demanda, o \textit{software} embarcado deixou de ser composto por um conjunto limitado de instruções \textit{assembly} e deu espaço à novas possibilidades, que antes era oferecidas apenas pelas linguagens de alto nível. 
 
-Além da quantidade, a complexidade dos sistemas embarcados é um fator que nunca para de crescer. O projeto de \textit{hardware} e \textit{software} está cada vez mais sofisticado e com requisitos mais rígidos. Para atender a esta demanda o \textit{software} embarcado deixou de ser composto por um conjunto limitado de instuções \textit{assembly} e deu espaço a uma gama de possibilidades oferecidas pelas linguagens de alto nível.
+Mesmo com este acúmulo de atividades, o \textit{software} embarcado ainda representa uma parcela minoritária do sistema~\cite{ebert2009embedded}. Então apesar de sua crescente complexidade, ainda são poucas as ferramentas de auxílio ao desenvolvimento de sistemas embarcados que focam em validação e verificação do \textit{software}.
 
-Mesmo com este acúmulo de atividades, o \textit{software} embarcado ainda representa uma parcela minoritária do sistema, cerca de 20\%, então grande parte das ferramentas de auxílio ao desenvolvimento ainda possuem poucas funcionalidades de validação e verificação. Ainda, constatou-se que as ferramentas disponíveis para automação de teste não são de fácil compreensão/execução e não possuem resposta satisfatória para os casos de falhas do caso de teste. Um ponto de melhoria seria pausar a execução no exato momento em que o \textit{software} apresentar o comportamento inesperado e fornecer um relatório com os testes já realizados e oferecer dicas para que se possa detectar o \textit{bug}.
+Ainda, constatou-se que as ferramentas disponíveis para automação da execução de testes não são de fácil compreensão/execução e poucas possuem resposta satisfatória para os casos de falhas do caso de teste. Um ponto de melhoria seria pausar a execução no exato momento em que o \textit{software} apresentar o comportamento inesperado, fornecer um relatório com os testes já realizados e oferecer dicas para que se possa detectar o \textit{bug}.
 
-Trabalhos recentes apontam que mais de 80\% dos erros de um sistema embarcado provém do \textit{software}, não do \textit{hardware}, e que tanto o teste quanto a depuração são de suma importância para a qualidade do projeto embarcado. Desta forma, a motivação deste trabalho está em diminuir a dificuldade para realizar a verificação de sistemas embarcados, para que seja possível aproveitar melhor as oportunidades que são oferecidas pela indústria e tecnologia.
+Trabalhos recentes apontam que mais de 80\% dos erros de um sistema embarcado provém do \textit{software}, não do \textit{hardware}, e que tanto o teste quanto a depuração são de suma importância para a qualidade do projeto embarcado~\cite{torri2010evaluation}. Desta forma, a motivação deste trabalho está em diminuir a dificuldade para realizar-se a verificação de sistemas embarcados, para que seja possível aproveitar melhor as oportunidades que são oferecidas pela indústria e tecnologia.
 
 \section{Objetivo}
-\subsection{Objetivo Geral}
-O principal objetivo deste trabalho é identificar o estado da arte do processo de teste de \textit{software} de sistemas embarcados. A partir deste estudo será proposta uma ferramenta para execução automatizada de testes de \textit{software}. Além disso, esta ferramenta deve integrar-se automaticamente com um sistema de depuração de maneira simples e produzir informações que auxiliem na manutenção da qualidade do \textit{software}.
-
-\subsection{Objetivos Específicos}
-Para atender o objetivo geral, os seguintes objetivos específicos devem ser concluídos:
-\begin{itemize}
-        \item Planejar e executar uma revisão sistemática dos trabalhos relacionados, formando uma base de conhecimento sólida da área de teste de sistemas embarcados.
-        \item Especificação de uma arquitetura que realize a automação de testes de maneira simples, sem que seja necessário configurar cada teste a ser executado.
-        \item Especificação de um ambiente capaz de integrar a execução automática dos testes e a depuração de um \textit{software}.
-        \item Avaliação qualitativa e quantitativa da arquitetura proposta
-        \item Apresentar o presente trabalho em forma de artigo científico em conferências e periódicos, para que especialistas da área de sistemas embarcados possam corroborar os resultados obtidos e a contribuição científica.
-\end{itemize}
+O principal objetivo deste trabalho é identificar o estado da arte do processo de teste de \textit{software} de sistemas embarcados. A partir deste estudo, será proposta uma ferramenta para execução automatizada de testes de \textit{software}. Além disso, esta ferramenta deve integrar-se automaticamente com um sistema de depuração de maneira simples e produzir informações que auxiliem na manutenção da qualidade do \textit{software}.
 
 \subsection{Delimitações}
 O presente trabalho não tem como objetivo a geração de casos de teste para um determinado \textit{software}, limitando-se apenas em executá-los de maneira automatizada. Sendo assim, qualquer erro presente nos testes recebidos pelo protótipo para execução automática serão considerados como erro do próprio \textit{software}.
 
+\subsection{Objetivos Específicos}
+Para atender o objetivo geral, os seguintes objetivos específicos devem ser concluídos:
+\begin{itemize}
+ \item Planejar e executar uma revisão sistemática dos trabalhos relacionados, formando uma base de conhecimento sólida da área de teste de sistemas embarcados.
+ \item Desenvolver uma arquitetura que realize a automação da execução de testes de maneira simples, sem que seja necessário configurar cada teste a ser executado.
+ \item Especificar de um ambiente capaz de integrar a execução automática dos testes e a depuração de um \textit{software}.
+ \item Realizar uma avaliação qualitativa e quantitativa da arquitetura proposta, comparando o presente trabalho com os trabalhos relacionados.
+ \item Apresentar o trabalho desenvolvido em forma de artigo científico em conferências e periódicos, para que especialistas da área de sistemas embarcados possam corroborar os resultados obtidos e a contribuição técnica/científica.
+\end{itemize}
+
+
 \section{Organização do texto}
-*************** quando tiver definido a ordem dos capítulos
-
 \begin{itemize}
-	\item[Capítulo] Neste capítulo são apresentados os conceitos fundamentais da área, compondo uma base teórica para auxiliar no desenvolvimento das ideias e na assimilação das técnicas apresentadas neste trabalho.
-	
-	\item[Capítulo] São apresentados neste capítulo os trabalhos que representam o estado da arte da literatura e que servem de insperação para o desenvolvimento dedta dissertação. Todos os trabalhos aqui apresentado se relacionam diretamente com o tema abordado.
-	
-	\item[Capítulo]
-	
-	\item[Capítulo] é o capítulo de desfecho da dissertação e apresenta as conclusões extraídas durante o desenvovimento deste trabalho, além de alguns pontos de melhoria para trabalhos futuros.
+ \item \textbf{Capítulo \ref{cap:conceitosBasicos}}: apresenta os conceitos fundamentais da área, compondo uma base teórica para auxiliar no desenvolvimento das ideias e na assimilação das técnicas apresentadas neste trabalho.
+ \item \textbf{Capítulo \ref{cap:trabalhosRelacionados}}: possui os trabalhos que representam o estado da arte da literatura e que servem de insperação para o desenvolvimento desta dissertação. Todos os trabalhos aqui apresentado se relacionam diretamente com o tema abordado.
+	%\item[Capítulo]
+	%\item[Capítulo] é o capítulo de desfecho da dissertação e apresenta as conclusões extraídas durante o desenvovimento deste trabalho, além de alguns pontos de melhoria para trabalhos futuros.
 \end{itemize}
 
-%@% Revisão do Celo do capítulo inteiro
 \chapter{Conceitos básicos}
-\section{Teste de sistemas computacionais}
-A área de pesquisa em teste de \textit{software} é relativamente recente e a primeira conferência que em que o tema foi discutido foi organizada em junho de 1972~\cite{Gelperin:1988}. Desde então há um esforço para definir melhor os conceitos relacionados à área e também para chegar a um consenso sobre como documentação de testes deve ser feita. 
+\label{cap:conceitosBasicos}
 
-A definição com maior aceitação é a padronizada pela IEEE, na qual um o teste de \textit{software} é o processo de análise de um item de \textit{software} para detectar as diferenças entre as condições existentes e exigidas (isto é, os erros), e avaliar as características do item de software~\cite{ieee87}. É importante ressaltar que o teste de \textit{software} visa ressaltar a presença dos erros e não sua ausência. Isto significa que o sucesso de um teste em encontrar um desvio de comportamento em um determinado \textit{software} não garante que todas as possíveis falhas foram encontradas. O teste que não encontra erros é meramente inconclusivo, pois não se sabe se há ou não desvio no comportamento do \textit{software} analisado.
+\section{Teste de \textit{software}}
+A área de pesquisa em teste de \textit{software} é relativamente recente e a primeira conferência em que o tema foi discutido foi organizada em junho de 1972~\cite{Gelperin:1988}. Desde então há um esforço para definir melhor os conceitos relacionados à área e também para chegar-se a um consenso sobre a pontos chave como nomenclatura, documentação, especificação e execução de testes.
 
-Testar um \textit{software} é essencial para revelar o número máximo de erros a partir do menor esforço. Esta atividade deve ser adotada desde o início do projeto de \textit{software}, com a definição dos requisitos a serem testados, da abordagem utilizada, da política de testes, critérios para a conclusão do teste, entre outros. Para que o processo de teste alcance seu objetivo é necessária uma estratégia de testes, suficientemente flexível para modelar-se às peculiaridades do \textit{software} e rígida o bastante para um acompanhamento satisfatório do projeto.
+A definição com maior aceitação apresenta o teste de \textit{software} como o processo de análise de um item de \textit{software} para detectar as diferenças entre as condições existentes e exigidas (isto é, os erros), e avaliar as características do item de software~\cite{ieee87}. Sendo assim, esta atividade é amplamente utilizada para assegurar que o \textit{software} comtempla as funcionalidades especificadas e quem todas elas estão funcionando corretamente.
 
-Segundo Pressman~\cite{pressman}, muitas estratégias de testes já foram propostas na literatura e todas fornecem um modelo para o teste com as seguintes características genéricas:
+Segundo Myers, os objetivos do teste de \textit{software} podem ser expressos a partir da obsrevação de três regras\cite{Myers:2004:AST:983238}:
 \begin{itemize}
-	\item Para executar um teste de maneira eficaz, deve-se fazer revisões técnicas eficazes. Fazendo isso, muitos erros serão eliminados antes do começo do teste.
-	\item O teste começa no nível de componente e progride em direção à integração do sistema computacional como um todo.
-	\item Diferentes técnicas de teste são apropriadas para diferentes abordagens de engenharia de \textit{software} e em diferentes pontos no tempo.
-	\item O teste é feito pelo desenvolvedor do \textit{software} e (para grandes projetos) por um grupo independente de teste.
-	\item O teste e a depuração são atividades diferentes, mas depuração deve ser associada a alguma estratégia de teste.
+ \item A atividade de teste é o processo de executar um programa com a intenção de descobrir um erro.
+ \item Um bom caso de teste é aquele que apresenta uma elevada probabilidade de revelar um erro ainda não descoberto.
+ \item Um teste bem sucedido é aquele que revela um erro ainda não descoberto.
 \end{itemize}
 
-As características gerais enumeradas por Pressman se referem a uma abordagem estratégica para teste de \textit{software}. Em sistemas embarcados os testes também tem como objetivo o aumento da confiabilidade do sistema, pois sistemas embarcados estão presentes no dia-a-dia das pessoas e um erro neste tipo de sistema pode levar a acidentes fatais, como por exemplo, falhas no sistema de bordo de um veículo motorizado. É desejável que a estratégia de teste de um sistema embarcado englobe:
+Estas três regras ressaltam o objetivo do teste de \textit{software}, que visa salientar a presença dos erros e não sua ausência. Isto significa que o sucesso de um teste em encontrar um desvio de comportamento em um determinado \textit{software} não garante que todas as possíveis falhas tenham sido encontradas. O teste que não encontra erros é meramente inconclusivo, pois não se sabe se há ou não desvio no comportamento do \textit{software} analisado.
+
+Segundo Pressman, muitas estratégias de testes já foram propostas na literatura e todas fornecem um modelo para o teste com as seguintes características genéricas ~\cite{pressman}:
 \begin{itemize}
-	\item Testes de baixo nível - para verificar se os requisitos de \textit{software} de baixo nível estão sendo atendidos e apontar se um pequeno segmento de código fonte foi implementado corretamente.
-	\item Testes de integração de \textit{software} - para verificar se o funcionamento do \textit{software} está de acordo com os requisitos e analisar o relacionamento/comportamento entre os próprios componentes do \textit{software} e dos componentes em relação à arquitetura do \textit{software}.
-	\item Testes de integração \textit{software}/\textit{hardware} - para verificar se a execução do \textit{software} no \textit{hardware} alvo ocorre corretamente e conforme o especificado.
+ \item Para executar um teste de maneira eficaz, deve-se fazer revisões técnicas eficazes. Fazendo isso, muitos erros serão eliminados antes do começo do teste.
+ \item O teste começa no nível de componente e progride em direção à integração do sistema computacional como um todo.
+ \item Diferentes técnicas de teste são apropriadas para diferentes abordagens de engenharia de \textit{software} e em diferentes pontos no tempo.
+ \item O teste é feito pelo desenvolvedor do \textit{software} e (para grandes projetos) por um grupo independente de teste.
+ \item O teste e a depuração são atividades diferentes, mas depuração deve ser associada a alguma estratégia de teste.
 \end{itemize}
 
-Sendo assim, espera-se que os testes do sistema embarcado sejam mais completos e robustos, com o intuito de descobrir os erros antecipadamente e, desta forma, garantir maior segurança ao \textit{software} final.
+Testar um \textit{software} é essencial para revelar o número máximo de erros a partir do menor esforço, ou seja, quanto antes forem detectadas divergências entre o que foi querisitado e o que foi entregue menor será o disperdícide tempo e esforço do retrabalho para adequar o \textit{software}. 
+
+Os testes devem ser adotados desde o início do projeto de \textit{software} a partir da definição dos requisitos a serem testados, escolha da abordagem utilizada, da política de testes, critérios para a conclusão do teste, entre outros. Para que o processo de teste alcance seu objetivo é necessária uma estratégia de testes, suficientemente flexível para modelar-se às peculiaridades do \textit{software} e rígida o bastante para um acompanhamento satisfatório do projeto.
+
+\subsection{Classificação dos níveis de teste}
+As atividades de teste de \textit{software} são normalmente classificados em níveis. Dentre os mais tradicionais estão a categorização baseada no processo de processo de \textit{software} e a categorização baseada na maturidade de pensamento testadores\cite{Ammann:2008:softwareTestig}.
+
+\subsubsection{Modelo V}
+A classificação baseada no processo genérico do desenvolvimento do \textit{software} e incentiva o projeto dos testes simultâneo com cada etapa de desenvolvimento, mesmo que o software só possa ser executado após a fase de implementação~\cite{Rook:vMovel}. Nela cada atividade do processo de construção de um \textit{software} é acompanhado de uma atividade de teste, ou seja, a informação de entrada do teste é normalmente derivada de uma atividade de desenvolvimento do \textit{software}. 
+
+A Figura~\ref{modeloV} apresenta um mapeamento típico entre as atividades \textit{Modelo V}, nela é possível visualizar como cada tipo de teste se relaciona com o processo genérico do desenvolvimento de \textit{software}.
+\fig{modeloV}{>>Vou colocar outra imagem, mas a ideia eh a mesma>> Mapeamento entre as atividades de desenvolvimento e teste de \textit{software}.}{scale=.4}
+
+\textbf{Análise de requisitos e Teste de aceitação}: No desenvolvimento de \textit{software}, a fase de análise de requisitos é quando se captura as necessidades do cliente, sendo assim, o teste de aceitação foi concebido para determinar se o \textit{software} atingiu o objetivo e realmente satisfaz estas necessidades. Este tipo de teste geralmente são executados por um grupo restrito de usuários que simulam operações de rotina do sistema, de modo a verificar se seu comportamento está de acordo com o solicitado.
+ 
+\textbf{Espeficicação funcional e Teste de sistema} - A fase de especificicação funcional é quando arquiterura e os componentes são selecionados e, juntos, vão compor o \textit{software}. Então, o teste de sistema é foi projetado para determinar se o sistema funciona conforme estipulado. Este nível de teste procura falhas no projeto e na especificação do \textit{software} através de sua execução nos mesmos ambientes e nas mesmas condições que um usuário final o utilizaria.
+ 
+\textbf{Especificação técnica e Teste de integração} - A fase de especificação técnica é voltada para o projeto da arquitetura do \textit{software}, definindo a estrutura, comportamento e papel dos subsistemas que compõem a arquitetura geral do \textit{software}. Seguindo a mesma linha, o teste de integração é projetado para avaliar se as interfaces entre subsistemas sao consistentes e se a comunicação ocorre corretamente. Este teste geralmente é de responsabilidade dos membros da equipe de desenvolvimento e visa provocar falhas de comunicação entre os módulos integrados para construir o \textit{software}.
+ 
+\textbf{Implementação e Teste de unidade} - Implementação é a fase do desenvolvimento de  \textit{software} que realmente produz o código fonte. Portanto, o teste de unidade tem como alvo o código desenvolvido, ou seja, métodos, procedimentos (\textit{procedures}) ou até mesmo mesmo pequenos trechos de código. Tanto aimplementação quanto o teste são de responsabilidade dos membros da equipe de desenvolvimento.
+ 
+\subsubsection{Modelo de maturidade}
+A classificação de níveis baseada na maturidade do processo de teste propõe que o nível dos testes seja derivado do objetivo do teste, que podem ser ~\cite{Beizer:1990}:
+\textbf{Nível 0} - Não há nenhuma diferença entre teste e depuração. Um teste com o nível zero não tem um propósito específico.
+\textbf{Nível 1} - possui o objetivo de mostrar que o \textit{software} funciona. Normalmente este nível é utilizado quando a corretude do \textit{software} ainda não foi alcançada/demonstrada, então é selecionado um conjunto de dados de teste que faz o \textit{software} passar em determinados testes e falhar em outros. Apesar de ser uma técnica menos ingênua que o nível 0, este tipo de teste pode não propiciar a escoberta de defeitos.
+\textbf{Nível 2} - possui o objetivo de mostrar que o \textit{software} não funciona.
+
+
+
+\textbf{Nível 3} - não possui o objetivo de reduzir o risco de utilizar \textit{software}, sem provar que o \textit{software} funciona ou não.
+
+\textbf{Nível 4} - o teste é considerado como uma ferramenta que auxilia no desenvolvmento de um \textit{software} com maior qualidade.
 
 \section{Depuração de sistemas computacionais}
 A depuração é a arte de diagnosticar erros em sistemas e determinar a melhor forma de corrigí-los. Em geral, o ponto de partida para a depuração de um sistema é a ocorrência de algum erro, portanto, é muito comum que a depuração ocorra como consequência de um teste bem sucedido (isto, que encontrou erros).
@@ -189,6 +223,7 @@ Erros podem ser encontrados por qualquer pessoa em qualquer etapa do ciclo de vi
 
 A depuração é uma tarefa complexa, cuja dificuldade varia de acordo com o ambiente de desenvolvimento, linguagem de programação, tamanho do sistema e disponibilidade de ferramentas disponíveis para auxiliar o processo.
 
+\subsection{Depuradores}
 Depuradores são ferramentas que auxiliam no monitoramento da execução de um programa, incluindo opções como: executar o programa passo-a-passo, pausar/reiniciar a execução e, em alguns casos, até voltar no tempo e desfazer a execução de uma determinada instrução.
 
 A conexão entre o programa e o depurador pode ocorrer localmente ou remotamente. Ambas possuem vantagens e pontos de melhoria que devem ser considerados na construção de um ambiente de depuração estável.
@@ -198,7 +233,7 @@ Já na depuração remota não ocorre este tipo de interferência, uma vez que a apli
 Além da interferência e da latência, também deve-se utilizar de ferramentas aliadas para delimitar outros importantes conceitos envolvidos na depuração, tais como, a forma de configurar o modo de execução do código, como observar as saídas da aplicação, como verificar uma determinada variável de ambiente, como visualizar o \textit{log} das tarefas realizadas, entre outros.
 
 \section{Projeto de sistemas orientado a aplicação}
-A metodologia de projeto de sistemas orientado a aplicação (AOSD - acrônimo para \textit{Application-Oriented System Design}) tem como objetivo principal a produção de sistemas para aplicações de computação dedicada e adaptados para atender exigências específicas da aplicação que irá utilizá-lo~\cite{Froehlich:2001}. 
+A metodologia de projeto de sistemas orientado a aplicação, a \ac{ADESD}, tem como objetivo principal a produção de sistemas para aplicações de computação dedicada e adaptados para atender exigências específicas da aplicação que irá utilizá-lo~\cite{Froehlich:2001}. 
 
 Esta metodologia permite manter o foco nas aplicações que utilizarão o sistema desde o início do projeto. Desta forma, tanto a arquitetura quanto os componentes podem ser definidos a fim de maximizar a reutilização e a configurabilidade do sistema de acordo com as peculiaridades da sua aplicação. Os principais conceitos envolvidos em sua utilização são:
 \begin{description}
@@ -254,7 +289,7 @@ Por padrão, as classes \textit{template} possuem uma única implementação para qu
 
 %@% Revisão do Celo - Todo o capítulo dos trabalhos relacionados
 \chapter{Trabalhos relacionados}
-\label{ref:relacionados}
+\label{cap:trabalhosRelacionados}
 A área de automação de testes possui uma vasta literatura de apoio, sendo a maioria relacionada a sistemas de propósito geral.
 
 \section{Justitia}

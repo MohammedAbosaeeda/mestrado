@@ -5,6 +5,12 @@
 \providecommand{\abntbstabout}[1]{}
 \abntbstabout{1.45.2.1 }
 
+\bibitem[Ammann e Offutt 2008]{Ammann:2008:softwareTestig}
+\abntrefinfo{Ammann e Offutt}{AMMANN; OFFUTT}{2008}
+{AMMANN, P.; OFFUTT, J. \emph{Introduction to Software Testing}. 1. ed. New
+  York, NY, USA: Cambridge University Press, 2008.
+ISBN 0521880386, 9780521880381.}
+
 \bibitem[ANSI/IEEE 1986]{ieee87}
 \abntrefinfo{ANSI/IEEE}{ANSI/IEEE}{1986}
 {ANSI/IEEE. \emph{{Std 1008-1987: IEEE Standard for Software Unit Testing}}.
@@ -51,11 +57,21 @@ ISBN 978-1-4503-0857-1. \ $<$http://doi.acm.org/10.1145/2245276.2231980$>$.}
   Software Development}. New York, NY, USA: ACM, 2007.  (AOSD '07), p. 96--106.
 ISBN 1-59593-615-7. \ $<$http://doi.acm.org/10.1145/1218563.1218575$>$.}
 
+\bibitem[Ebert e Jones 2009]{ebert2009embedded}
+\abntrefinfo{Ebert e Jones}{EBERT; JONES}{2009}
+{EBERT, C.; JONES, C. Embedded software: Facts, figures, and future.
+\emph{IEEE Computer}, v.~42, n.~4, p. 42--52, 2009.}
+
 \bibitem[Fr{\"{o}}hlich 2001]{Froehlich:2001}
 \abntrefinfo{Fr{\"{o}}hlich}{FR{\"{O}}HLICH}{2001}
 {FR{\"{O}}HLICH, A.~A. \emph{Application-Oriented Operating Systems}. Sankt
   Augustin: GMD - Forschungszentrum Informationstechnik, 2001.  (GMD Research
   Series, 17).}
+
+\bibitem[Frola e Miller 1984]{frola1984system}
+\abntrefinfo{Frola e Miller}{FROLA; MILLER}{1984}
+{FROLA, F.~R.; MILLER, C. \emph{System safety in aircraft acquisition}.
+[S.l.], 1984.}
 
 \bibitem[Gelperin e Hetzel 1988]{Gelperin:1988}
 \abntrefinfo{Gelperin e Hetzel}{GELPERIN; HETZEL}{1988}
@@ -83,6 +99,11 @@ ISBN 978-1-59593-993-7.}
 ISSN 0164-1212.
 \ $<$http://dx.doi.org/10.1016/j.jss.2011.08.030$>$.}
 
+\bibitem[Leveson 2009]{leveson2009software}
+\abntrefinfo{Leveson}{LEVESON}{2009}
+{LEVESON, N.~G. Software challenges in achieving space safety.
+British Interplanetary Society, 2009.}
+
 \bibitem[Lucia 2001]{972675}
 \abntrefinfo{Lucia}{LUCIA}{2001}
 {LUCIA, A. D. Program slicing: methods and applications. In:  \emph{Source Code
@@ -106,6 +127,12 @@ ISSN 0164-1212.
 \abntrefinfo{Musser e Stepanov}{MUSSER; STEPANOV}{1989}
 {MUSSER, D.~R.; STEPANOV, A.~A. Generic programming. In:  \emph{Symbolic and
   Algebraic Computation}. [S.l.]: Springer, 1989. p. 13--25.}
+
+\bibitem[Myers e Sandler 2004]{Myers:2004:AST:983238}
+\abntrefinfo{Myers e Sandler}{MYERS; SANDLER}{2004}
+{MYERS, G.~J.; SANDLER, C. \emph{The Art of Software Testing}. [S.l.]: John
+  Wiley \& Sons, 2004.
+ISBN 0471469122.}
 
 \bibitem[Orso e Kennedy 2005]{orso2005selective}
 \abntrefinfo{Orso e Kennedy}{ORSO; KENNEDY}{2005}
@@ -132,6 +159,12 @@ ISBN 9788563308337.}
 {QI, D. et al. Locating failure-inducing environment changes. In:  ACM.
   \emph{Proceedings of the 10th ACM SIGPLAN-SIGSOFT workshop on Program
   analysis for software tools}. [S.l.], 2011. p. 29--36.}
+
+\bibitem[Rook 1986]{Rook:vMovel}
+\abntrefinfo{Rook}{ROOK}{1986}
+{ROOK, P. Controlling software projects.
+\emph{Software Engineering Journal}, v.~1, n.~1, p.~7--, January 1986.
+ISSN 0268-6961.}
 
 \bibitem[Sasirekha, Robert e Hemalatha 2011]{sasirekha2011program}
 \abntrefinfo{Sasirekha, Robert e Hemalatha}{SASIREKHA; ROBERT; HEMALATHA}{2011}
@@ -179,6 +212,12 @@ ISBN 0-201-54330-3.}
 \emph{National Institute of Standards and Technology}, Citeseer, p. 02--3,
   2002.}
 
+\bibitem[Torri et al. 2010]{torri2010evaluation}
+\abntrefinfo{Torri et al.}{TORRI et al.}{2010}
+{TORRI, L. et al. An evaluation of free/open source static analysis tools
+  applied to embedded software. In:  IEEE. \emph{Test Workshop (LATW), 2010
+  11th Latin American}. [S.l.], 2010. p.~1--6.}
+
 \bibitem[Xu et al. 2005]{Xu:2005:BSP:1050849.1050865}
 \abntrefinfo{Xu et al.}{XU et al.}{2005}
 {XU, B. et al. A brief survey of program slicing.
@@ -203,5 +242,10 @@ ISSN 0163-5948.
 {ZHENG, A. et al. Statistical debugging: simultaneous identification of
   multiple bugs. In:  ACM. \emph{Proceedings of the 23rd international
   conference on Machine learning}. [S.l.], 2006. p. 1105--1112.}
+
+\bibitem[Zhivich e Cunningham 2009]{zhivich2009real}
+\abntrefinfo{Zhivich e Cunningham}{ZHIVICH; CUNNINGHAM}{2009}
+{ZHIVICH, M.; CUNNINGHAM, R.~K. The real cost of software errors.
+Institute of Electrical and Electronics Engineers (IEEE), 2009.}
 
 \end{thebibliography}

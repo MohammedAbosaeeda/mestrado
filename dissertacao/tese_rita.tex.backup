@@ -221,7 +221,7 @@ As atividades de teste de \textit{software} são normalmente classificados em nív
 \subsubsection{Modelo V}
 A classificação baseada no processo genérico do desenvolvimento do \textit{software} e incentiva o projeto dos testes simultâneo com cada etapa de desenvolvimento, mesmo que o software só possa ser executado após a fase de implementação~\cite{Rook:vMovel}. Nela cada atividade do processo de construção de um \textit{software} é acompanhado de uma atividade de teste, ou seja, a informação de entrada do teste é normalmente derivada de uma atividade de desenvolvimento do \textit{software}. 
 
-A Figura~\ref{modeloV} apresenta um mapeamento típico entre as atividades \textit{Modelo V}, nela é possível visualizar como cada tipo de teste se relaciona com o processo genérico do desenvolvimento de \textit{software}.
+A Figura~\ref{fig:modeloV} apresenta um mapeamento típico entre as atividades \textit{Modelo V}, nela é possível visualizar como cada tipo de teste se relaciona com o processo genérico do desenvolvimento de \textit{software}.
 \fig{modeloV}{>>Vou colocar outra imagem, mas a ideia eh a mesma>> Mapeamento entre as atividades de desenvolvimento e teste de \textit{software}.}{scale=.4}
 
 \textbf{Análise de requisitos e Teste de aceitação}: No desenvolvimento de \textit{software}, a fase de análise de requisitos é quando se captura as necessidades do cliente, sendo assim, o teste de aceitação foi concebido para determinar se o \textit{software} atingiu o objetivo e realmente satisfaz estas necessidades. Este tipo de teste geralmente são executados por um grupo restrito de usuários que simulam operações de rotina do sistema, de modo a verificar se seu comportamento está de acordo com o solicitado.
@@ -234,11 +234,17 @@ A Figura~\ref{modeloV} apresenta um mapeamento típico entre as atividades \texti
  
 \subsubsection{Modelo de maturidade}
 A classificação de níveis baseada na maturidade do processo de teste propõe que o nível dos testes seja derivado do objetivo do teste, que podem ser ~\cite{Beizer:1990}:
-\textbf{Nível 0} - Não há nenhuma diferença entre teste e depuração. Um teste com o nível zero não tem um propósito específico.
-\textbf{Nível 1} - possui o objetivo de mostrar que o \textit{software} funciona. Normalmente este nível é utilizado quando a corretude do \textit{software} ainda não foi alcançada/demonstrada, então é selecionado um conjunto de dados de teste que faz o \textit{software} passar em determinados testes e falhar em outros. Apesar de ser uma técnica menos ingênua que o \textit{Nível 0}, este tipo de teste pode não propiciar a escoberta de defeitos.
-\textbf{Nível 2} - possui o objetivo de mostrar que o \textit{software} não funciona. Normalmente se seleciona um conjunto de dados para chegar pontos específicos do sistema como, por exemplo,  checar a fronteira superior e inferior de um determinado dado de entrada. A transição do \textit{Nível 1} para o \textit{Nível 2} demanda cautela, pois apesar da descoberta de erros fazer parte linha raciocínio dos testadores, grande parte dos desenvolvedores possui linha de raciocínio mais próxima do nível anerior. Ou seja, esta mudança de nível pode gerar conflitos e afetar negativamente a moral da equipe.
-\textbf{Nível 3} - não possui o objetivo de reduzir o risco de utilizar \textit{software}, sem provar que o \textit{software} funciona ou não. Ao atingir a conciência de que testes não mostram ausência de falhas no \textit{software} percebe-se também que sempre há um risco do \textit{software} não funcionar corretamente. A partir deste nível, desenvolvedores e testadores compartilham o objetivo de reduzir o risco de utilizar o sistema, pois compreendem que embora o ideal seja testar todas as possibilidades, isto pode não ser possível.
-\textbf{Nível 4} - o teste é considerado como uma ferramenta que auxilia no desenvolvmento de um \textit{software} com maior qualidade. O ato de testar não é um simples ato, mas sim uma maneira de produzir um \textit{software} de baixo risco com pouco esforço. Neste nível, a geração de código é realizada de maneira a suportar a concepção e o desenvolvimento de testes, facilitando também o reuso e manutenção do sistema.
+\begin{itemize}
+ \item \textbf{Nível 0} - Não há nenhuma diferença entre teste e depuração. Um teste com o nível zero não tem um propósito específico.
+ 
+ \item \textbf{Nível 1} - possui o objetivo de mostrar que o \textit{software} funciona. Normalmente este nível é utilizado quando a corretude do \textit{software} ainda não foi alcançada/demonstrada, então é selecionado um conjunto de dados de teste que faz o \textit{software} passar em determinados testes e falhar em outros. Apesar de ser uma técnica menos ingênua que o \textit{Nível 0}, este tipo de teste pode não propiciar a escoberta de defeitos.
+ 
+ \item \textbf{Nível 2} - possui o objetivo de mostrar que o \textit{software} não funciona. Normalmente se seleciona um conjunto de dados para chegar pontos específicos do sistema como, por exemplo,  checar a fronteira superior e inferior de um determinado dado de entrada. A transição do \textit{Nível 1} para o \textit{Nível 2} demanda cautela, pois apesar da descoberta de erros fazer parte linha raciocínio dos testadores, grande parte dos desenvolvedores possui linha de raciocínio mais próxima do nível anerior. Ou seja, esta mudança de nível pode gerar conflitos e afetar negativamente a moral da equipe.
+ 
+ \item \textbf{Nível 3} - não possui o objetivo de reduzir o risco de utilizar \textit{software}, sem provar que o \textit{software} funciona ou não. Ao atingir a conciência de que testes não mostram ausência de falhas no \textit{software} percebe-se também que sempre há um risco do \textit{software} não funcionar corretamente. A partir deste nível, desenvolvedores e testadores compartilham o objetivo de reduzir o risco de utilizar o sistema, pois compreendem que embora o ideal seja testar todas as possibilidades, isto pode não ser possível.
+ 
+ \item \textbf{Nível 4} - o teste é considerado como uma ferramenta que auxilia no desenvolvmento de um \textit{software} com maior qualidade. O ato de testar não é um simples ato, mas sim uma maneira de produzir um \textit{software} de baixo risco com pouco esforço. Neste nível, a geração de código é realizada de maneira a suportar a concepção e o desenvolvimento de testes, facilitando também o reuso e manutenção do sistema.
+\end{itemize}
 
 \section{Depuração de sistemas computacionais}
 A depuração é a arte de diagnosticar erros em sistemas e determinar a melhor forma de corrigí-los. Em geral, o ponto de partida para a depuração de um sistema é a ocorrência de algum erro, portanto, é muito comum que a depuração ocorra como consequência de um teste bem sucedido (isto, que encontrou erros).
@@ -264,10 +270,13 @@ Esta metodologia permite manter o foco nas aplicações que utilizarão o sistema d
 \begin{description}
 	\item[Famílias de abstrações independentes de cenário]  \hfill \\
 	Durante a decomposição de domínio as abstrações identificadas são agrupadas em famílias de abstrações e modeladas como membros desta família. As abstrações devem ser modeladas de forma totalmente independente de cenários, garantindo que sejam genéricas o suficiente para que sejam reutilizadas para compor qualquer sistema. Dependências ambientais observadas durante a decomposição de domínio devem ser separadamente modeladas como aspectos de cenário.
+	
 	\item[Características Configuráveis]  \hfill \\
 	Utilizadas quando uma determinada característica pode ser aplicada a todos os membros de uma família, mas com valores diferentes. Então, ao invés de aumentar a família modelando novos membros, esta característica compartilhada é modelada como uma configurável. Desta forma é possível definir o comportamento desejado e aplicá-lo às abstrações de forma semelhante aos aspectos de cenário.
+	
 	\item[Adaptadores de cenário]  \hfill \\
 	Utilizados para aplicar os aspectos de forma transparente às abstrações do sistema. Eles funcionam como uma membrana, que envolve uma determinada abstração e se torna um intermediário na comunicação dessa abstração, inserindo as adaptações necessárias para cada requisição que seja dependente de um cenário.
+	
 	\item[Interfaces infladas]  \hfill \\
 	Resumem as características de todos os membros da família em um único componente de interface, permitindo que a implementação dos componentes de \textit{software} considerem sempre uma interface bem abrangente e, desta forma, postergando a decisão sobre qual membro da família utilizar. Esta decisão pode ser automatizada através de ferramentas que identificam quais características da família foram utilizadas e selecionam o membro dessa família que implementa o subconjunto da interface inflada.
 \end{description}
@@ -282,37 +291,19 @@ A programação genérica pode ser abordada de vários pontos de vista. Para entende
 "By generic programming, we mean the definition of algorithms and data structures at an abstract or generic level, thereby accomplishing many related programming tasks simultaneously. The central notion is that of generic algorithms, which are parameterized procedural schemata that are completely independent of the underlying data representation and are derived from concrete efficient algorithms" \cite{musser1989generic}.
 \end{quotation}
 
-Esta noção de programação genérica foi a que motivou o projeto da STL e defende um paradigma de programação para a concepção e desenvolvimento de estruturas reutilizáveis e algoritmos eficientes.
-
-Os algoritmos podem ser vistos como procedimentos parametrizados completamente independentes da representação de dados e são suficientemente genéricos para manter a mesma semântica e eficiência do algoritmo original, mesmo quando instanciado e assumindo tarefas simultâneas.
+Esta noção de programação genérica foi a que motivou o projeto da STL e defende um paradigma de programação para a concepção e desenvolvimento de estruturas reutilizáveis e algoritmos eficientes. Os algoritmos podem ser vistos como procedimentos parametrizados completamente independentes da representação de dados e são suficientemente genéricos para manter a mesma semântica e eficiência do algoritmo original, mesmo quando instanciado e assumindo tarefas simultâneas.
 
 \subsection{Utilização em C++: \textit{templates}}
 Mecanismos de \textit{templates} providos pela linguagem de progamação C++ são uma maneira de adicionar às classes e funções conceitos genéricos, isto é, permitem criar um código reutilizável onde os tipos sejam passados como parâmetro. 
 
-No \textit{template} ficam descritas classes/funções genéricas que podem variar sua declaração de acordo com um determinado argumento fornecido como parâmetro para o modelo.
-
-É função do compilador gerar as novas classes/funções quando houver os argumentos necessários para selecionar o parâmetro correto para instanciar o \textit{template}. As classes/funções geradas a partir de um \textit{template} são especializações deste modelo.
+No \textit{template} ficam descritas classes/funções genéricas que podem variar sua declaração de acordo com um determinado argumento fornecido como parâmetro para o modelo. É função do compilador gerar as novas classes/funções quando houver os argumentos necessários para selecionar o parâmetro correto para instanciar o \textit{template}. As classes/funções geradas a partir de um \textit{template} são especializações deste modelo.
 
 Um exemplo de implementação de classe genérica utilizando \textit{templates} pode ser observado na Figura~\ref{progcpp:vector}, onde a letra $T$ representa o parâmetro genérico que será trocado pelo compilador quando o \textit{template} for instanciado.
 
 \progcpp{vector}{Classe $Vector$ generalizada \cite{Stroustrup:c++}}
 
-Supondo que o programa apresente posteriormente a seguinte declaração:
-\lstset{language=C++}
-\begin{lstlisting}
-        Vector<int> vector_i;
-        Vector<MyClass> vector_my_class;
-\end{lstlisting}
-
-O Resultado seria a instanciação de duas classes diferentes de acordo com o argumento, como apresentado na Figura~\ref{progcpp:especializacao_i} e Figura~\ref{progcpp:especializacao_my_class}:
-
-\progcpp{especializacao_i}{Classe $Vector$ instanciada com $int$.}
-\progcpp{especializacao_my_class}{Classe $Vector$ instanciada com $MyClass$.}
-
-
 Por padrão, as classes \textit{template} possuem uma única implementação para qualquer argumento recebido e quando deseja-se dar um tratamento mais refinado para atribuir uma determinada característica é necessário realizar descrições alternativas do \textit{template}. Estas descrições, também conhecidas como especializações, são escolhidas pelo compilador com base nos argumentos fornecidos para o \texttt{template}.
 
-%@% Revisão do Celo - Todo o capítulo dos trabalhos relacionados
 \chapter{Trabalhos relacionados}
 \label{cap:trabalhosRelacionados}
 A área de automação de testes possui uma vasta literatura de apoio, sendo a maioria relacionada a sistemas de propósito geral.

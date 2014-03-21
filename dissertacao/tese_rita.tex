@@ -31,9 +31,9 @@
 \SetKwFor{ForEach}{para cada}{fa\c{c}a}{fim}
 \SetKwRepeat{Repeat}{repita}{at\'{e}}
 
-\titulo{Automação de testes de unidade e integração para software embarcado} % Titulo do trabalho
+\titulo{Automação da execução de testes para software embarcado} % Titulo do trabalho
 \autor{Rita de Cássia Cazu Soldi} % Nome do autor
-\data{03}{março}{2014} % Data da publicação do trabalho
+\data{18}{março}{2014} % Data da publicação do trabalho
 
 \orientador{Prof. Dr. Antônio Augusto Medeiros Fröhlich} % Nome do orientador e (opcional)
 %\departamento[a]{Faculdade de Ciências do Mar}
@@ -41,7 +41,9 @@
 
 \begin{acronym}
 \acro{ADESD}{\textit{Application-Driven Embedded System Design}}
+\acro{ICE}{\textit{In-circuit emulator}}
 \acro{IEEE}{\textit{Institute of Electrical and Electronics Engineers}}
+\acro{JTAG}{\textit{Joint Test Access Group}}
 \acro{MCO}{\textit{The Mars Climate Orbiter}}
 \acro{MPL}{\textit{The Mars Polar Lander}}
 \end{acronym}
@@ -112,11 +114,15 @@
 
 \chapter{Introdução}
 \label{cap:introducao}
-Sistemas embarcados podem ser apresentados como uma combinação entre \textit{hardware} e \textit{software} concebida para realizar uma tarefa específica. Estes sistemas estão amplamente acoplados a inúmeros dispositivos e suas funcionalidades estão cada vez mais intrínsecas no cotidiano das pessoas~\cite{carro2003sistemas}. Atualmente interagimos com mais de um sistema embarcado por dia e o número destes sistemas já superam o número de habitantes do nosso planeta, ainda, este número continua crescendo em ritmo acelerado~\cite{Marcondes:MSC:2009}.
+Sistemas embarcados podem ser apresentados como uma combinação entre \textit{hardware} e \textit{software} concebida para realizar uma tarefa específica. Estes sistemas estão amplamente acoplados a inúmeros dispositivos e suas funcionalidades estão cada vez mais intrínsecas no cotidiano das pessoas~\cite{carro2003sistemas}. 
 
-Como em qualquer sistema computacional, as soluções embarcadas também basearam-se na premissa de que cada componente utilizado está efetuando corretamente as suas atividades e que a integração entre os mesmos não se desvia do comportamento esperado. Caso contrário, o sistema pode apresentar erros. É comum que a consequência de um erro resulte em perdas financeiras, como por exemplo a perda de uma determinada quota de mercado, corrupção de dados do cliente, etc~\cite{tassey2002economic}. 
+Atualmente interagimos com mais de um sistema embarcado por dia e o número destes sistemas já superam o número de habitantes do nosso planeta, ainda, este número continua crescendo em ritmo acelerado~\cite{Marcondes:MSC:2009}.
 
-Os danos materiais são inconvenientes, mas colocar em perigo a vida humana é um risco inaceitável. Infelizmente não faltam exemplos de erros em sistemas que resultaram em risco de morte, como a falha do sistema de defesa contra mísseis, a ruptura do oleoduto ou nos casos de overdose de radiação no tratamento de câncer~\cite{zhivich2009real}. Também existem vários exemplos relacionados à erros em sistemas embarcados, como por exemplo as tragédias aeroespaciais de Ariane 501, \ac{MCO}, \ac{MPL}, entre outros ~\cite{leveson2009software}. 
+Como em qualquer sistema computacional, as soluções embarcadas também basearam-se na premissa de que cada componente utilizado está efetuando corretamente as suas atividades e que a integração entre os mesmos não se desvia do comportamento esperado. Caso contrário, o sistema pode apresentar erros. 
+
+É comum que a consequência de um erro resulte em perdas financeiras, como por exemplo a perda de uma determinada quota de mercado, corrupção de dados do cliente, etc~\cite{tassey2002economic}. Os danos materiais são inconvenientes, mas colocar em perigo a vida humana é um risco inaceitável. 
+
+Infelizmente não faltam exemplos de erros em sistemas que resultaram em risco de morte, como a falha do sistema de defesa contra mísseis, a ruptura do oleoduto ou nos casos de overdose de radiação no tratamento de câncer~\cite{zhivich2009real}. Também existem vários exemplos relacionados à erros em sistemas embarcados, como por exemplo as tragédias aeroespaciais de Ariane 501, \ac{MCO}, \ac{MPL}, entre outros ~\cite{leveson2009software}. 
 
 Grande parte destas tragédias possui um relatório descrevendo como ocorreu o acidente e neles é possível verificar que a causa mais comuns é subestimar a complexidade do sistema e superestimar a eficácia dos testes~\cite{frola1984system}. Mesmo depois de várias perdas relacionadas à erros em sistemas computacionais, ainda há muita complacência quando um sistema desvia do comportamento esperado, o que acaba subestimando a consequência deste erro. Para garantir que os componentes vão agir de acordo com o requisitado, uma boa prática é testar de maneira pragmática cada detalhe do sistema e sem subestimar a complexidade do mesmo.
 
@@ -191,9 +197,9 @@ Apesar de contemplarem ideias parecias, os termos não são sinônimos e são utiliz
 \section{Teste de \textit{software}}
 A área de pesquisa em teste de \textit{software} é relativamente recente e a primeira conferência em que o tema foi discutido foi organizada em junho de 1972~\cite{Gelperin:1988}. Desde então há um esforço para definir melhor os conceitos relacionados à área e também para chegar-se a um consenso sobre a pontos chave como nomenclatura, documentação, especificação e execução de testes.
 
-A definição com maior aceitação apresenta o teste de \textit{software} como o processo de análise de um item de \textit{software} para detectar as diferenças entre as condições existentes e exigidas (isto é, os erros), e avaliar as características do item de software~\cite{ieee87}. Sendo assim, esta atividade é amplamente utilizada para assegurar que o \textit{software} comtempla as funcionalidades especificadas e quem todas elas estão funcionando corretamente.
+A definição com maior aceitação apresenta o teste de \textit{software} como o processo de análise de um item de \textit{software} para detectar as diferenças entre as condições existentes e exigidas (isto é, os erros), e avaliar as características do item de software~\cite{ieee87}. Sendo assim, esta atividade é amplamente utilizada para assegurar que o \textit{software} contempla as funcionalidades especificadas e quem todas elas estão funcionando corretamente.
 
-Segundo Myers, os objetivos do teste de \textit{software} podem ser expressos a partir da obsrevação de três regras\cite{Myers:2004:AST:983238}:
+Segundo Myers, os objetivos do teste de \textit{software} podem ser expressos a partir da observação de três regras\cite{Myers:2004:AST:983238}:
 \begin{itemize}
  \item A atividade de teste é o processo de executar um programa com a intenção de descobrir um erro.
  \item Um bom caso de teste é aquele que apresenta uma elevada probabilidade de revelar um erro ainda não descoberto.
@@ -211,7 +217,7 @@ Segundo Pressman, muitas estratégias de testes já foram propostas na literatura 
  \item O teste e a depuração são atividades diferentes, mas depuração deve ser associada a alguma estratégia de teste.
 \end{itemize}
 
-Testar um \textit{software} é essencial para revelar o número máximo de erros a partir do menor esforço, ou seja, quanto antes forem detectadas divergências entre o que foi querisitado e o que foi entregue menor será o disperdícide tempo e esforço do retrabalho para adequar o \textit{software}. 
+Testar um \textit{software} é essencial para revelar o número máximo de erros a partir do menor esforço, ou seja, quanto antes forem detectadas divergências entre o que foi requisitado e o que foi entregue menor será o desperdício tempo e esforço do retrabalho para adequar o \textit{software}. 
 
 Os testes devem ser adotados desde o início do projeto de \textit{software} a partir da definição dos requisitos a serem testados, escolha da abordagem utilizada, da política de testes, critérios para a conclusão do teste, entre outros. Para que o processo de teste alcance seu objetivo é necessária uma estratégia de testes, suficientemente flexível para modelar-se às peculiaridades do \textit{software} e rígida o bastante para um acompanhamento satisfatório do projeto.
 
@@ -226,42 +232,64 @@ A Figura~\ref{fig:modeloV} apresenta um mapeamento típico entre as atividades \t
 
 \textbf{Análise de requisitos e Teste de aceitação}: No desenvolvimento de \textit{software}, a fase de análise de requisitos é quando se captura as necessidades do cliente, sendo assim, o teste de aceitação foi concebido para determinar se o \textit{software} atingiu o objetivo e realmente satisfaz estas necessidades. Este tipo de teste geralmente são executados por um grupo restrito de usuários que simulam operações de rotina do sistema, de modo a verificar se seu comportamento está de acordo com o solicitado.
  
-\textbf{Espeficicação funcional e Teste de sistema} - A fase de especificicação funcional é quando arquiterura e os componentes são selecionados e, juntos, vão compor o \textit{software}. Então, o teste de sistema é foi projetado para determinar se o sistema funciona conforme estipulado. Este nível de teste procura falhas no projeto e na especificação do \textit{software} através de sua execução nos mesmos ambientes e nas mesmas condições que um usuário final o utilizaria.
+\textbf{Especificação funcional e Teste de sistema} - A fase de especificação funcional é quando arquitetura e os componentes são selecionados e, juntos, vão compor o \textit{software}. Então, o teste de sistema é foi projetado para determinar se o sistema funciona conforme estipulado. Este nível de teste procura falhas no projeto e na especificação do \textit{software} através de sua execução nos mesmos ambientes e nas mesmas condições que um usuário final o utilizaria.
  
-\textbf{Especificação técnica e Teste de integração} - A fase de especificação técnica é voltada para o projeto da arquitetura do \textit{software}, definindo a estrutura, comportamento e papel dos subsistemas que compõem a arquitetura geral do \textit{software}. Seguindo a mesma linha, o teste de integração é projetado para avaliar se as interfaces entre subsistemas sao consistentes e se a comunicação ocorre corretamente. Este teste geralmente é de responsabilidade dos membros da equipe de desenvolvimento e visa provocar falhas de comunicação entre os módulos integrados para construir o \textit{software}.
+\textbf{Especificação técnica e Teste de integração} - A fase de especificação técnica é voltada para o projeto da arquitetura do \textit{software}, definindo a estrutura, comportamento e papel dos subsistemas que compõem a arquitetura geral do \textit{software}. Seguindo a mesma linha, o teste de integração é projetado para avaliar se as interfaces entre subsistemas são consistentes e se a comunicação ocorre corretamente. Este teste geralmente é de responsabilidade dos membros da equipe de desenvolvimento e visa provocar falhas de comunicação entre os módulos integrados para construir o \textit{software}.
  
-\textbf{Implementação e Teste de unidade} - Implementação é a fase do desenvolvimento de  \textit{software} que realmente produz o código fonte. Portanto, o teste de unidade tem como alvo o código desenvolvido, ou seja, métodos, procedimentos (\textit{procedures}) ou até mesmo mesmo pequenos trechos de código. Tanto aimplementação quanto o teste são de responsabilidade dos membros da equipe de desenvolvimento.
+\textbf{Implementação e Teste de unidade} - Implementação é a fase do desenvolvimento de  \textit{software} que realmente produz o código fonte. Portanto, o teste de unidade tem como alvo o código desenvolvido, ou seja, métodos, procedimentos (\textit{procedures}) ou até mesmo mesmo pequenos trechos de código. Tanto a implementação quanto o teste são de responsabilidade dos membros da equipe de desenvolvimento.
  
 \subsubsection{Modelo de maturidade}
 A classificação de níveis baseada na maturidade do processo de teste propõe que o nível dos testes seja derivado do objetivo do teste, que podem ser ~\cite{Beizer:1990}:
 \begin{itemize}
  \item \textbf{Nível 0} - Não há nenhuma diferença entre teste e depuração. Um teste com o nível zero não tem um propósito específico.
  
- \item \textbf{Nível 1} - possui o objetivo de mostrar que o \textit{software} funciona. Normalmente este nível é utilizado quando a corretude do \textit{software} ainda não foi alcançada/demonstrada, então é selecionado um conjunto de dados de teste que faz o \textit{software} passar em determinados testes e falhar em outros. Apesar de ser uma técnica menos ingênua que o \textit{Nível 0}, este tipo de teste pode não propiciar a escoberta de defeitos.
+ \item \textbf{Nível 1} - possui o objetivo de mostrar que o \textit{software} funciona. Normalmente este nível é utilizado quando a corretude do \textit{software} ainda não foi alcançada/demonstrada, então é selecionado um conjunto de dados de teste que faz o \textit{software} passar em determinados testes e falhar em outros. Apesar de ser uma técnica menos ingênua que o \textit{Nível 0}, este tipo de teste pode não propiciar a descoberta de defeitos.
  
- \item \textbf{Nível 2} - possui o objetivo de mostrar que o \textit{software} não funciona. Normalmente se seleciona um conjunto de dados para chegar pontos específicos do sistema como, por exemplo,  checar a fronteira superior e inferior de um determinado dado de entrada. A transição do \textit{Nível 1} para o \textit{Nível 2} demanda cautela, pois apesar da descoberta de erros fazer parte linha raciocínio dos testadores, grande parte dos desenvolvedores possui linha de raciocínio mais próxima do nível anerior. Ou seja, esta mudança de nível pode gerar conflitos e afetar negativamente a moral da equipe.
+ \item \textbf{Nível 2} - possui o objetivo de mostrar que o \textit{software} não funciona. Normalmente se seleciona um conjunto de dados para chegar pontos específicos do sistema como, por exemplo,  checar a fronteira superior e inferior de um determinado dado de entrada. A transição do \textit{Nível 1} para o \textit{Nível 2} demanda cautela, pois apesar da descoberta de erros fazer parte linha raciocínio dos testadores, grande parte dos desenvolvedores possui linha de raciocínio mais próxima do nível anterior. Ou seja, esta mudança de nível pode gerar conflitos e afetar negativamente a moral da equipe.
  
- \item \textbf{Nível 3} - não possui o objetivo de reduzir o risco de utilizar \textit{software}, sem provar que o \textit{software} funciona ou não. Ao atingir a conciência de que testes não mostram ausência de falhas no \textit{software} percebe-se também que sempre há um risco do \textit{software} não funcionar corretamente. A partir deste nível, desenvolvedores e testadores compartilham o objetivo de reduzir o risco de utilizar o sistema, pois compreendem que embora o ideal seja testar todas as possibilidades, isto pode não ser possível.
+ \item \textbf{Nível 3} - não possui o objetivo de reduzir o risco de utilizar \textit{software}, sem provar que o \textit{software} funciona ou não. Ao atingir a consciência de que testes não mostram ausência de falhas no \textit{software} percebe-se também que sempre há um risco do \textit{software} não funcionar corretamente. A partir deste nível, desenvolvedores e testadores compartilham o objetivo de reduzir o risco de utilizar o sistema, pois compreendem que embora o ideal seja testar todas as possibilidades, isto pode não ser possível.
  
- \item \textbf{Nível 4} - o teste é considerado como uma ferramenta que auxilia no desenvolvmento de um \textit{software} com maior qualidade. O ato de testar não é um simples ato, mas sim uma maneira de produzir um \textit{software} de baixo risco com pouco esforço. Neste nível, a geração de código é realizada de maneira a suportar a concepção e o desenvolvimento de testes, facilitando também o reuso e manutenção do sistema.
+ \item \textbf{Nível 4} - o teste é considerado como uma ferramenta que auxilia no desenvolvimento de um \textit{software} com maior qualidade. O ato de testar não é um simples ato, mas sim uma maneira de produzir um \textit{software} de baixo risco com pouco esforço. Neste nível, a geração de código é realizada de maneira a suportar a concepção e o desenvolvimento de testes, facilitando também o reuso e manutenção do sistema.
 \end{itemize}
 
-\section{Depuração de sistemas computacionais}
-A depuração é a arte de diagnosticar erros em sistemas e determinar a melhor forma de corrigí-los. Em geral, o ponto de partida para a depuração de um sistema é a ocorrência de algum erro, portanto, é muito comum que a depuração ocorra como consequência de um teste bem sucedido (isto, que encontrou erros).
+\section{Depuração de \textit{software} embarcado}
+A depuração é a arte de diagnosticar erros em sistemas e determinar a melhor forma de corrigi-los. Em geral, o ponto de partida para a depuração de um sistema é a ocorrência de algum erro, portanto, é muito comum que a depuração ocorra como consequência de um teste bem sucedido (isto, que encontrou erros).
 
 Erros podem ser encontrados por qualquer pessoa em qualquer etapa do ciclo de vida do \textit{software}. Isto implica que tanto o formato do relatório de um resultado inesperado, quanto as características dos erros podem variar de acordo com o conhecimento do autor do relato. Sendo assim, para realizar uma depuração eficaz deve-se ser capaz de identificar a técnica apropriada para analisar diferentes tipos de relatórios e obter as informações necessárias para eliminar o problema.
 
-A depuração é uma tarefa complexa, cuja dificuldade varia de acordo com o ambiente de desenvolvimento, linguagem de programação, tamanho do sistema e disponibilidade de ferramentas disponíveis para auxiliar o processo. Inclusive, dentre os processos de depuração mais utilizados ainda se destacam técnicas rudmentares como piscar LEDS e código morse.
+A depuração \textit{software} embarcado é uma tarefa complexa, cuja dificuldade varia de acordo com o ambiente de desenvolvimento, linguagem de programação, tamanho do sistema e disponibilidade de ferramentas disponíveis para auxiliar o processo. Para um suporte de depuração eficaz, existem alguns requisitos a serem seguidos~\cite{debugSuport}:
+\begin{itemize}
+	\item O suporte à depuração não deve alterar significativamente o comportamento do sistema sob teste.
+	\item Deve existir uma infra-estrutura de observação do estado interno do sistema e de possíveis pontos críticos.
+	\item Garantia de acesso externo para controlar o estado interno do sistema e de seus recursos (incluindo periféricos).
+	\item O impacto do custo do sistema deve ser o mínimo possível, principalmente quando são necessárias mudanças no \textit{hardware}.
+\end{itemize}
 
+O apoio à depuração de \textit{software} normalmente ocorre a partir do monitoramento do \textit{software} compilado e instrumentado. A instrumentação é independente de plataforma e pode ser suportada de várias maneiras, dentre as mais frequentes estão a execução do \textit{software} em modo de depuração, o uso de tratadores de interrupções e o uso de instruções de suporte à depuração.
+
+\subsection{Imprimir dados em dispositivos de saída}
+Um exemplo de instrumentação \textit{software} é utilizar instruções de impressão para exibir/registrar variáveis, informações sobre o estado do sistema ou até o seu progresso através do código do programa. 
+Esta técnica de depuração é um tanto primitiva e bastante intrusiva, pois normalmente está associada à mudanças no código fonte e recompilação do \textit{software}.
+
+Para realizar este tipo de depuração é necessário que o erro possa ser reproduzido e que ele não se altere com as impressões. Dependendo de como utilizada, esta técnica pode retardar a execução do sistema, modificando inclusive requisitos do próprio \textit{software} sob teste. 
+
+Como a própria tentativa encontrar erros pode apresentar efeitos colaterais que mascaram o verdadeiro problema, torna-se difícil identificar erros relacionados com operações temporais, paralelismo e alocação de recursos.
+
+\subsection{Emulador em circuito}
+\ac{ICE} é um \textit{hardware} utilizado em depuração de projeto de sistemas embarcados, fornecendo recursos e conectividade que ajudam a superar as limitações de teste e depuração tanto do \textit{software} quanto do \textit{hardware}. 
+
+Este equipamento é específico para cada microprocessador, por isso permite controle total do processador e fornece a observação das operações do sistema de maneira consistente e eficaz. A informação coletada por ele fica disponível em tempo de execução e, a princípio, o equipamento extra não exerce nenhum impacto sobre o comportamento do sistema sob teste. 
+
+As placas \ac{ICE} conseguem integrar o controle de execução do microprocessador, acesso à memória e monitoração em tempo real. Por isso é uma estratégia muito utilizada no início do desenvolvimento dos sistemas embarcados. Entretanto, o aumento da complexidade do sistema pode exigir adaptações no projeto de integração dos \ac{ICE}s ao sistema. No caso de sistemas complexos o esforço e o custo para realizar tal adaptação pode ser tão grande que tornam a depuração proibitiva~\cite{debugSuport}.
 
 \subsection{Depuradores}
 Depuradores são ferramentas que auxiliam no monitoramento da execução de um programa, incluindo opções como: executar o programa passo-a-passo, pausar/reiniciar a execução e, em alguns casos, até voltar no tempo e desfazer a execução de uma determinada instrução.
 
 A conexão entre o programa e o depurador pode ocorrer localmente ou remotamente. Ambas possuem vantagens e pontos de melhoria que devem ser considerados na construção de um ambiente de depuração estável.
-No método local o programa é executado na mesma máquina que o depurador, isto implica em um processo com latência menor e com grande influência entre ambos. Por exemplo, se um processo provoca um \textit{crash} no sistema, o depurador perde grande parte das informações de deputação do sistema, pois pertence ao mesmo ambiente que sofreu a parada e só poderia formar a hipótese de \textit{crash} porque ter ele mesmo realizado um comportamento inesperado (travar ou reiniciar).
-Já na depuração remota não ocorre este tipo de interferência, uma vez que a aplicação sob depuração e o depurador encontram-se em máquinas separadas.Do ponto de vista do ambiente de depuração, a depuração remota é semelhante a uma depuração local com duas telas conectadas em um único sistema.
 
-Além da interferência e da latência, também deve-se utilizar de ferramentas aliadas para delimitar outros importantes conceitos envolvidos na depuração, tais como, a forma de configurar o modo de execução do código, como observar as saídas da aplicação, como verificar uma determinada variável de ambiente, como visualizar o \textit{log} das tarefas realizadas, entre outros.
+No método local o programa é executado na mesma máquina que o depurador, isto implica em um processo com latência menor e com grande influência entre ambos. Por exemplo, se um processo provoca um \textit{crash} no sistema, o depurador perde grande parte das informações de deputação, pois pertence ao mesmo ambiente que sofreu a parada e só poderia formar a hipótese de \textit{crash} porque ele mesmo realizou um comportamento inesperado (travar ou reiniciar).
+
+Já na depuração remota não ocorre este tipo de interferência, uma vez que a aplicação sob depuração e o depurador encontram-se em máquinas separadas. Do ponto de vista do ambiente de depuração, a depuração remota é semelhante a uma depuração local com duas telas conectadas em um único sistema.
 
 \section{Projeto de sistemas orientado a aplicação}
 A metodologia de projeto de sistemas orientado a aplicação, a \ac{ADESD}, tem como objetivo principal a produção de sistemas para aplicações de computação dedicada e adaptados para atender exigências específicas da aplicação que irá utilizá-lo~\cite{Froehlich:2001}. 
@@ -270,55 +298,23 @@ Esta metodologia permite manter o foco nas aplicações que utilizarão o sistema d
 \begin{description}
 	\item[Famílias de abstrações independentes de cenário]  \hfill \\
 	Durante a decomposição de domínio as abstrações identificadas são agrupadas em famílias de abstrações e modeladas como membros desta família. As abstrações devem ser modeladas de forma totalmente independente de cenários, garantindo que sejam genéricas o suficiente para que sejam reutilizadas para compor qualquer sistema. Dependências ambientais observadas durante a decomposição de domínio devem ser separadamente modeladas como aspectos de cenário.
-	\item[Características Configuráveis]  \hfill \\
-	Utilizadas quando uma determinada característica pode ser aplicada a todos os membros de uma família, mas com valores diferentes. Então, ao invés de aumentar a família modelando novos membros, esta característica compartilhada é modelada como uma configurável. Desta forma é possível definir o comportamento desejado e aplicá-lo às abstrações de forma semelhante aos aspectos de cenário.
+	
 	\item[Adaptadores de cenário]  \hfill \\
 	Utilizados para aplicar os aspectos de forma transparente às abstrações do sistema. Eles funcionam como uma membrana, que envolve uma determinada abstração e se torna um intermediário na comunicação dessa abstração, inserindo as adaptações necessárias para cada requisição que seja dependente de um cenário.
+		
+	\item[Características Configuráveis]  \hfill \\
+	Utilizadas quando uma determinada característica pode ser aplicada a todos os membros de uma família, mas com valores diferentes. Então, ao invés de aumentar a família modelando novos membros, esta característica compartilhada é modelada como uma configurável. Desta forma é possível definir o comportamento desejado e aplicá-lo às abstrações de forma semelhante aos aspectos de cenário.
+	
 	\item[Interfaces infladas]  \hfill \\
 	Resumem as características de todos os membros da família em um único componente de interface, permitindo que a implementação dos componentes de \textit{software} considerem sempre uma interface bem abrangente e, desta forma, postergando a decisão sobre qual membro da família utilizar. Esta decisão pode ser automatizada através de ferramentas que identificam quais características da família foram utilizadas e selecionam o membro dessa família que implementa o subconjunto da interface inflada.
 \end{description}
 
 \fig{aosd}{Visão geral da metodologia de projeto de sistemas orientado à aplicação~\cite{Froehlich:2001}}{scale=.6}
 
-A Figura\ref{fig:aosd} mostra uma visão geral da AOSD, metodologia na qual é possível visualizar a decomposição do domínio em famílias de abstrações independentes de cenários e das dependências ambientais - separadamente modeladas como aspectos de cenário. A arquitetura do sistema é capturada pelos \textit{frameworks} dos componentes modelados a partir do domínio. Somente estes componentes serão reunidos para formar o sistema, pois somente eles são necessários para fornecer suporte à aplicação.
+A Figura~\ref{fig:aosd} mostra uma visão geral da AOSD, metodologia na qual é possível visualizar a decomposição do domínio em famílias de abstrações independentes de cenários e das dependências ambientais - separadamente modeladas como aspectos de cenário. 
 
-\section{Programação genérica}
-A programação genérica pode ser abordada de vários pontos de vista. Para entender os conceitos básicos utilizados neste presente trabalho será utilizada a visão de Musser e Stepanov:
-\begin{quotation}
-"By generic programming, we mean the definition of algorithms and data structures at an abstract or generic level, thereby accomplishing many related programming tasks simultaneously. The central notion is that of generic algorithms, which are parameterized procedural schemata that are completely independent of the underlying data representation and are derived from concrete efficient algorithms" \cite{musser1989generic}.
-\end{quotation}
+A arquitetura do sistema é capturada pelos \textit{frameworks} dos componentes modelados a partir do domínio. Somente estes componentes serão reunidos para formar o sistema, pois somente eles são necessários para fornecer suporte à aplicação.
 
-Esta noção de programação genérica foi a que motivou o projeto da STL e defende um paradigma de programação para a concepção e desenvolvimento de estruturas reutilizáveis e algoritmos eficientes.
-
-Os algoritmos podem ser vistos como procedimentos parametrizados completamente independentes da representação de dados e são suficientemente genéricos para manter a mesma semântica e eficiência do algoritmo original, mesmo quando instanciado e assumindo tarefas simultâneas.
-
-\subsection{Utilização em C++: \textit{templates}}
-Mecanismos de \textit{templates} providos pela linguagem de progamação C++ são uma maneira de adicionar às classes e funções conceitos genéricos, isto é, permitem criar um código reutilizável onde os tipos sejam passados como parâmetro. 
-
-No \textit{template} ficam descritas classes/funções genéricas que podem variar sua declaração de acordo com um determinado argumento fornecido como parâmetro para o modelo.
-
-É função do compilador gerar as novas classes/funções quando houver os argumentos necessários para selecionar o parâmetro correto para instanciar o \textit{template}. As classes/funções geradas a partir de um \textit{template} são especializações deste modelo.
-
-Um exemplo de implementação de classe genérica utilizando \textit{templates} pode ser observado na Figura~\ref{progcpp:vector}, onde a letra $T$ representa o parâmetro genérico que será trocado pelo compilador quando o \textit{template} for instanciado.
-
-\progcpp{vector}{Classe $Vector$ generalizada \cite{Stroustrup:c++}}
-
-Supondo que o programa apresente posteriormente a seguinte declaração:
-\lstset{language=C++}
-\begin{lstlisting}
-        Vector<int> vector_i;
-        Vector<MyClass> vector_my_class;
-\end{lstlisting}
-
-O Resultado seria a instanciação de duas classes diferentes de acordo com o argumento, como apresentado na Figura~\ref{progcpp:especializacao_i} e Figura~\ref{progcpp:especializacao_my_class}:
-
-\progcpp{especializacao_i}{Classe $Vector$ instanciada com $int$.}
-\progcpp{especializacao_my_class}{Classe $Vector$ instanciada com $MyClass$.}
-
-
-Por padrão, as classes \textit{template} possuem uma única implementação para qualquer argumento recebido e quando deseja-se dar um tratamento mais refinado para atribuir uma determinada característica é necessário realizar descrições alternativas do \textit{template}. Estas descrições, também conhecidas como especializações, são escolhidas pelo compilador com base nos argumentos fornecidos para o \texttt{template}.
-
-%@% Revisão do Celo - Todo o capítulo dos trabalhos relacionados
 \chapter{Trabalhos relacionados}
 \label{cap:trabalhosRelacionados}
 A área de automação de testes possui uma vasta literatura de apoio, sendo a maioria relacionada a sistemas de propósito geral.

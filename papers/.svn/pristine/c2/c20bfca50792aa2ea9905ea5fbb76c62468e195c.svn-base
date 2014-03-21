@@ -1,7 +1,0 @@
-\section{Conclusion}
-\label{sec:conc}
-This paper presented an OS runtime reprogramming infrastructure for WSN which consists of a data dissemination protocol and ELUS. %, an OS support environment.
-%The protocol ensures correct delivery of all data to all  nodes of the network, and the environment allows runtime reconfiguration of the system without data loss. 
-The infrastructure was tested in a WSN with real nodes, Mica2, and evaluated in terms of memory consumption, and dissemination and reprogramming time.
-Our results corroborate our design choices, with figures better than that present in related work.
-We have also reduced ELUS memory consumption by more than 50\% by using C++ templates specialization techniques.

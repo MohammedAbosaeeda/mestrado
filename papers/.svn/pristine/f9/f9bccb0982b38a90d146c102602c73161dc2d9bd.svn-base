@@ -1,8 +1,0 @@
-\begin{tabular}{lcccc}
-\multicolumn{1}{c}{\textbf{Mode}} & \textbf{FULL} & \textbf{LIGHT} & \textbf{STANDBY} & \textbf{OFF} \\
-\hline
-\textbf{Energy}		& high		& low		& very low	& none \\
-\textbf{Functionality}	& all		& all		& none		& none \\
-\textbf{Performance}	& high		& low		& NA		& NA \\
-\textbf{Wake up Delay}	& NA		& very low	& high		& very high \\
-\end{tabular}

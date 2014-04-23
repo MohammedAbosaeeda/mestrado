@@ -41,11 +41,17 @@
 
 \begin{acronym}
 \acro{ADESD}{\textit{Application-Driven Embedded System Design}}
+\acro{DID}{\textit{Discovery Interface Device}}
+\acro{GCC}{\textit{GNU project C and C ++ compiler}}
+\acro{GDB}{\textit{GNU Project Debugger}}
 \acro{ICE}{\textit{In-circuit emulator}}
 \acro{IEEE}{\textit{Institute of Electrical and Electronics Engineers}}
 \acro{JTAG}{\textit{Joint Test Access Group}}
 \acro{MCO}{\textit{The Mars Climate Orbiter}}
 \acro{MPL}{\textit{The Mars Polar Lander}}
+\acro{TAP}{Troca Automática de Parâmetros de \textit{Software}}
+\acro{TBT}{\textit{Target Based system Testing}}
+\acro{SUT}{\textit{Software Under Test}}
 \end{acronym}
 
 \newcommand{\fig}[4][h]{
@@ -259,7 +265,7 @@ Erros podem ser encontrados por qualquer pessoa em qualquer etapa do ciclo de vi
 
 A depuração \textit{software} embarcado é uma tarefa complexa, cuja dificuldade varia de acordo com o ambiente de desenvolvimento, linguagem de programação, tamanho do sistema e disponibilidade de ferramentas disponíveis para auxiliar o processo. Para um suporte de depuração eficaz, existem alguns requisitos a serem seguidos~\cite{debugSuport}:
 \begin{itemize}
-	\item O suporte à depuração não deve alterar significativamente o comportamento do sistema sob teste.
+	\item O suporte à depuração não deve alterar significativamente o comportamento do sistema sob teste(\ac{SUT}).
 	\item Deve existir uma infra-estrutura de observação do estado interno do sistema e de possíveis pontos críticos.
 	\item Garantia de acesso externo para controlar o estado interno do sistema e de seus recursos (incluindo periféricos).
 	\item O impacto do custo do sistema deve ser o mínimo possível, principalmente quando são necessárias mudanças no \textit{hardware}.
@@ -271,14 +277,14 @@ O apoio à depuração de \textit{software} normalmente ocorre a partir do monitora
 Um exemplo de instrumentação \textit{software} é utilizar instruções de impressão para exibir/registrar variáveis, informações sobre o estado do sistema ou até o seu progresso através do código do programa. 
 Esta técnica de depuração é um tanto primitiva e bastante intrusiva, pois normalmente está associada à mudanças no código fonte e recompilação do \textit{software}.
 
-Para realizar este tipo de depuração é necessário que o erro possa ser reproduzido e que ele não se altere com as impressões. Dependendo de como utilizada, esta técnica pode retardar a execução do sistema, modificando inclusive requisitos do próprio \textit{software} sob teste. 
+Para realizar este tipo de depuração é necessário que o erro possa ser reproduzido e que ele não se altere com as impressões. Dependendo de como utilizada, esta técnica pode retardar a execução do sistema, modificando inclusive requisitos do próprio \ac{SUT}. 
 
 Como a própria tentativa encontrar erros pode apresentar efeitos colaterais que mascaram o verdadeiro problema, torna-se difícil identificar erros relacionados com operações temporais, paralelismo e alocação de recursos.
 
 \subsection{Emulador em circuito}
 \ac{ICE} é um \textit{hardware} utilizado em depuração de projeto de sistemas embarcados, fornecendo recursos e conectividade que ajudam a superar as limitações de teste e depuração tanto do \textit{software} quanto do \textit{hardware}. 
 
-Este equipamento é específico para cada microprocessador, por isso permite controle total do processador e fornece a observação das operações do sistema de maneira consistente e eficaz. A informação coletada por ele fica disponível em tempo de execução e, a princípio, o equipamento extra não exerce nenhum impacto sobre o comportamento do sistema sob teste. 
+Este equipamento é específico para cada microprocessador, por isso permite controle total do processador e fornece a observação das operações do sistema de maneira consistente e eficaz. A informação coletada por ele fica disponível em tempo de execução e, a princípio, o equipamento extra não exerce nenhum impacto sobre o comportamento do \ac{SUT}. 
 
 As placas \ac{ICE} conseguem integrar o controle de execução do microprocessador, acesso à memória e monitoração em tempo real. Por isso é uma estratégia muito utilizada no início do desenvolvimento dos sistemas embarcados. Entretanto, o aumento da complexidade do sistema pode exigir adaptações no projeto de integração dos \ac{ICE}s ao sistema. No caso de sistemas complexos o esforço e o custo para realizar tal adaptação pode ser tão grande que tornam a depuração proibitiva~\cite{debugSuport}.
 
@@ -311,72 +317,107 @@ Esta metodologia permite manter o foco nas aplicações que utilizarão o sistema d
 
 \fig{aosd}{Visão geral da metodologia de projeto de sistemas orientado à aplicação~\cite{Froehlich:2001}}{scale=.6}
 
-A Figura~\ref{fig:aosd} mostra uma visão geral da AOSD, metodologia na qual é possível visualizar a decomposição do domínio em famílias de abstrações independentes de cenários e das dependências ambientais - separadamente modeladas como aspectos de cenário. 
+A Figura~\ref{fig:aosd} mostra uma visão geral da \ac{ADESD}, metodologia na qual é possível visualizar a decomposição do domínio em famílias de abstrações independentes de cenários e das dependências ambientais - separadamente modeladas como aspectos de cenário. 
 
 A arquitetura do sistema é capturada pelos \textit{frameworks} dos componentes modelados a partir do domínio. Somente estes componentes serão reunidos para formar o sistema, pois somente eles são necessários para fornecer suporte à aplicação.
 
 \chapter{Trabalhos relacionados}
 \label{cap:trabalhosRelacionados}
-A área de automação de testes possui uma vasta literatura de apoio, sendo a maioria relacionada a sistemas de propósito geral.
+Desde a formulação da área de testes de \textit{software}, muitos estudos surgiram com as mais variadas soluções para a automação deste processo. Apesar de existir uma vasta literatura de apoio, a maior parte dela relaciona-se à sistemas de propósito geral e, portanto, apenas alguns conceitos podem ser aplicados à sistemas embarcados. 
+
+Os trabalhos que focam na automação de teste de \textit{software} embarcado procuram soluções em que o teste não prejudique a execução do \ac{SUT} e ainda consiga contornar as restrições inerentes ao próprio sistema embarcado.
 
 \section{Justitia}
-Justitia~\cite{seo} é uma  ferramenta de testes automatizados capaz de detectar automaticamente erros na interface, gerar casos de testes completos - com entradas, estados internos, valores de variáveis, saídas - e emular a execução do \textit{software} na arquitetura alvo.
+Ferramenta de testes de \textit{software} embarcado capaz de detectar automaticamente falhas na interface, gerar casos de testes completos - com entradas, estados internos, valores de variáveis, saídas - e emular a execução do \textit{software} na arquitetura alvo~\cite{seo}.
 
-Ela surgiu como um estudo de caso para demonstrar a automação de testes para \textit{software} embarcado, em que os autores propuseram em esquema de teste automatizado para as interfaces das camadas do sistema embarcado baseado em sua emulação na arquitetura alvo.
+$Justitia$ possui a hipótese de que a interface é um critério essencial para um teste de \textit{software} embarcado, e para defendê-la utiliza uma solução que une as seguintes técnicas:
+\begin{itemize}
+	\item{\textbf{Técnica de teste de interface}},  na qual os casos de teste são gerados através da análise do arquivo (imagem) executável do sistema. Como o próprio nome sugere, a técnica foca nas interfaces do sistema embarcado, em especial as referentes às camadas do sistema operacional e às camadas do \textit{hardware}.
+	\item{\textbf{Técnica de emulação dos casos de teste}}, uma combinação entre o monitoramento e a depuração do sistema. A ideia é definir \textit{breakpoints} para os casos de teste da interface e monitorar a tabela de símbolos para definir o sucesso ou falha do teste.
+\end{itemize}
 
-Para defender que a interface é um critério essencial para um teste de \textit{software} embarcado, a base de Justitia consiste na união de duas técnicas:
+A solução foi analisada sob três pontos de vista: a densidade da interface, a complexidade do \textit{software} e a relação interface \textit{versus} falhas. Os pontos de análise surgiram de uma premissa que aponta o forte acoplamento entre \textit{hardware} e \textit{software} como a razão para aumento de dificuldades no teste de \textit{software} embarcado. 
+
+Sendo assim, $Justitia$ apresenta uma análise da densidade da interface, na qual é estabelecida uma relação entre o grau de acoplamento \textit{software} e sua testabilidade. Já a complexidade do \textit{software} é atualmente uma das principais métricas para a previsão de falhas no sistema e no caso de $Justitia$ pode ser extrapolada para estimar a probabilidade de falhas na interface. O último ponto de vista aponta a análise da relação entre interface \textit{versus} falhas como base para os resultados encontrados pela ferramenta.
+
+O primeiro protótipo apresentou resultados satisfatórios para as questões acima e chegou-se a conclusão de que a interface deve ser utilizada como um \textit{checkpoint} para encontrar falhas. A solução foi novamente corroborada por uma versão mais recente~\cite{KiSCL08}, agora aplicada ao teste de um \textit{driver} de um dispositivo embarcado e com a capacidade de suportar um número ainda maior de testes.
+
 \begin{description}
-	\item[Técnica de teste de interface] é reponsável por gerar casos de teste através da análise do arquivo (imagem) executável do sistema. Como o próprio nome sugere, a técnica foca nas interfaces do sistema embarcado, em especial as referentes às camadas do sistema operacional e às camadas do \textit{hardware}.
-	\item[Técnica de emulação dos casos de teste] é uma combinação entre o monitoramemento e a depuração do sistema. A ideia é definir \textit{breakpoints} para os casos de teste da interface e monitorar a tabela de simbolos para definir o sucesso ou falha do teste.
+\item[Resumo]  \hfill \\
+Este trabalho ganhou destaque ao apontar que a maior parte das falhas nos testes de \textit{software} embarcados são oriundos da integração de componentes heterogêneos e ao propor que a interface seja um ponto de intersecção entre os testes de \textit{software} e \textit{hardware}.
+
+Outro diferencial encontra-se na infraestrutura de execução dos testes baseada em emulação, na qual tanto o resultado da execução do \ac{SUT} quanto o monitoramento da tabela de símbolos são utilizados para determinar o sucesso ou falha do teste.
 \end{description}
 
-Os resultados foram analisados através de experimentos sob três pontos de vista: a densidade da interface, a complexidade do \textit{software} e a relação interface \textit{versus} erros.
-
-A primeira questão a ser investigada foi a da densidade da interface, pois, apesar de estar estritamente ligada ao grau de acoplamento do \textit{software} embarcado, não há uma relação definida entre o grau de acoplamento \textit{software} e sua testabilidade. A partir da primeira questão houve a necessidade de estabelecer uma outra relação entre a densidade e a complexidade de um \textit{software}. Atualmente é uma das principais métricas para a previsão de falhas.
-
-O primeiro protótipo apresentou resultados satisfatórios para as questões acima e chegou-se a conclusão de que a interface deve ser utilizada como um \textit{checkpoint} para encontrar e corrigir erros. A técnica foi novamente corroborada por uma versão mais recente de Justitia~\cite{KiSCL08}, agora aplicada ao teste de um \textit{driver} de um dispositivo embarcado e com a capacidade de suportar um número ainda maior de testes.
-
-\section{Automatic testing environment for multi-core embedded software (ATEMES)}
-$ATEMES$~\cite{atemes} é uma ferramenta para automação de teste para sistemas embarcados de múltiplos núcleos. Dentre os tipos de teste suportados estão os aleatórios, de unidade, cobertura, desempenho e condições de corrida. A ferramenta também prevê instrumentação do código, geração de casos de uso e de dados de entrada para sistemas de múltiplos núcleos. 
+\section{ATEMES}
+$ATEMES$~\cite{atemes} é uma ferramenta para automação de teste para sistemas embarcados \textit{multicore}. Dentre os tipos de teste suportados estão os aleatórios, de unidade, cobertura, desempenho e condições de corrida. A ferramenta também prevê instrumentação do código, geração de casos de uso e de dados de entrada para sistemas de múltiplos núcleos. 
 
 Para desempenhar todas estas funções $ATEMES$ conta com os seguintes componentes:
+\begin{itemize}
+	\item{\textbf{PRPM}} - módulo de pré-processamento - cujas atribuições consistem em a análise de código fonte, geração automática de casos de teste, geração automática dos dados de entrada de teste e instrumentação do código fonte. %Suas funções são automáticas, mas também é possível intervir manualmente nos testes através de uma interface.
+	
+	\item{\textbf{HSATM}} - módulo de teste automático do lado \textit{host} - é responsável por gerar automaticamente testes baseados em uma biblioteca pré-definida, compilar o código fonte para uma determinada arquitetura de \textit{hardware} e enviar a imagem executável para a plataforma alvo.
+	
+	\item{\textbf{TSATM}} - módulo de teste automático da plataforma de \textit{hardware} alvo - tem como principal função a execução da imagem recebida do $HSATM$, além de monitorar o andamento dos testes e enviar os dados desta execução. 
+	
+	\item{\textbf{POPM}} - módulo de pós-processamento - que analisa todos os resultados e dados coletados durante o teste.
+\end{itemize}
+
+A partir destes componentes é possível executar os testes em uma plataforma alvo a partir de uma estação de trabalho remota, diminuindo restrições quanto ao uso de recursos dos sistemas embarcados. Para tanto, o \textit{software} passa por uma compilação cruzada no lado \textit{host} (estação de trabalho) e é enviado automaticamente para a plataforma alvo onde é executado. 
+
+As atividades são gravadas em um registro, dentre estes registros estão os dados de execução do sistema, o tempo de utilização de cada núcleo da CPU durante a execução dos testes, o resultado de saída, entre outros. O registro pode ser passado para o lado \textit{host} em tempo de execução, onde pode ser armazenado, processado e até apresentado de maneira visual através de uma interface.
+
 \begin{description}
-	\item[PRPM] - Módulo que realiza pré-processamento. Dentre suas atribuições estão a análise de código fonte, geração automatica de casos de teste, geração automática dos dados de entrada de teste e instrumentação do código fonte. Suas funções são automáticas, mas também é possível intervir manualmente nos testes através de uma interface.
-	
-	\item[HSATM] - Uma das partes do módulo de teste automático e pertence ao lado anfitrião. Responsável por gerar automaticamente uma base para os testes baseados em uma biblioteca pré-definida, compilar o código fonte para uma determinada arquitetura de \textit{hardware} e enviar a imagem executável para a plataforma alvo.
-	
-	\item[TSATM] - Compõe o módulo de teste automático e tem o foco voltado para a plataforma de \textit{hardware} alvo. Sua principal função é executar a imagem recebida do $HSATM$, monitorar o andamento dos testes e enviar os dados desta execução. 
-	
-	\item[POPM] - Módulo de pós-processamento que analisa todos os resultados e dados coletados durante o teste.
+\item[Resumo]  \hfill \\
+Ao explorar sistematicamente a automação de testes de \textit{software} embarcado e componentizar cada operação necessária, $ATEMES$ apresenta uma solução de grande desempenho para sistemas mutiprocessados. A ferramenta é tão robusta que é possível inclusive automatizar a geração de casos de testes à partir da análise do código fonte.
+
+Conforme será visto no Capítulo~\ref{ref:ambiente}, a abordagem de execução automática de testes  de $ATEMES$ é similar ao deste presente trabalho. Ambos utilizam depuração cruzada para compilar o código fonte para uma determinada arquitetura de \textit{hardware} e monitoram a execução desta imagem à partir de uma conexão remota. O registro dos dados de execução dos testes e a apresentação de um relatório para o usuário também é uma semelhança notória.
 \end{description}
 
-A partir destes componentes é possivel executar os testes em uma plataforma alvo a partir de uma estação de trabalho remota, diminuindo a quantidade de restrições de recursos dos sistemas embarcados. Para tanto, o \textit{software} passa por uma compilação cruzada no lado anfitrião (estação de trabalho) e é enviado automaticamente para a plataforma alvo onde é executado. 
+\section{Automação da execução de testes baseada na interface do sistema alvo}
+Este trabalho apresenta uma abordagem o testes de sistemas embarcados heterogêneos, baseada nas características do \ac{SUT}~\cite{universal:2013}. 
 
-As atividades são gravadas em um registro, dentre estes registros estão os dados de execução do sistema, o tempo de utilização de cada núcleo da CPU durante a execução dos testes, o resultado de saída, entre outros. O registro pode ser passado para o lado anfitrião em tempo de execução, onde pode ser armazenado, processado e até apresentado de maneira visual através de uma interface.
+Diferente da escolha tradicional, que normalmente é feita a partir de uma mistura de vários modelos para tentar alcançar o maior número possível de arquiteturas, a nova abordagem (\ac{TBT}) reforça que cada sistema embarcado possui características únicas e que devem ser consideradas na escolha do modelo de teste que será aplicado ao sistema.
 
-% universal:2013
-\section{Statistical Debugging}
-Trabalhos do tipo \textit{statistical debugging} se utilizam de dados estatísticos relacionados a várias execuções do sistema para isolar um \textit{bug}. Esta análise reduz o espaço de busca utilizando-se de recursos estatisticamente relacionados ao fracasso, limitando assim o conjunto de dados até chegar a uma seleção em que o erro se faz presente. 
+A \textit{framework} criada utiliza-se de um módulo \ac{DID} que fica conectado diretamente com o sistema embarcado. Este módulo é o responsável por detectar o sistema, descobrir suas características (\textit{drivers} e interfaces) e apontar os testes que melhor se encaixam ao perfil do sistema conectado.  
+
+Entretanto, para que seja possível a extração das informações do sistema alvo e realizar a execução automática dos testes o \ac{SUT} deve ter o projeto de testes baseado em interfaces, ou seja, cada módulo quem compõe o sistema deve implementar uma determinada interface de testes. 
+
+Com estas informações, o mecanismo de teste da \textit{framework} consegue sugerir e executar três tipos de teste. Os testes gerais são sugeridos para sistemas que compõem o sistema embarcado como, por exemplo, capacitores, resistores, \textit{leds}, sensores, etc. Os testes internos verificam cada componente em separado e podem ser realizados com a ajuda de ferramentas que geram algoritmos para sistemas embarcados. Os testes externos verificam o sistema como um todo, contemplando também a integração do sistema.
+
+Em uma nova versão da abordagem~\cite{priyaneural} o mecanismo de teste foi adaptado para considerar um oráculo, composto por uma rede neural de 2 camadas com retroalimentação. O treinamento desta rede neural ocorre a partir de execuções corretas do sistema embarcado até que o oráculo tenha um modelo de simulação do \textit{software} com a precisão desejada. 
+
+Quando novas versões do sistema original forem lançadas, o \textit{software} é novamente executado e sua saída é incorporado através da retroalimentação. O resultado obtido pelo ensaio deve ser comparado com a saída do oráculo para determinar se está correto ou não.
+
+\begin{description}
+\item[Resumo]  \hfill \\
+	O destaque desta abordagem está na escolha de técnicas para teste de sistemas heterogêneos. A \textit{framework} apresenta uma característica que pode facilitar muito a automação de testes para sistemas embarcados, pois desenvolver testes específicos para um sistema embarcado e que ainda sejam independentes do ambiente de implantação (\textit{deploy}) não é uma tarefa trivial. 
+	
+A adaptação do mecanismo de testes para o uso de um oráculo composto por uma rede neural é com certeza outro diferencial, tornando possível que a \textit{framework} aprenda com os próprios resultados e consiga generalizar ou especializar uma determinada configuração de testes.
+
+No capítulo~\ref{sec:tap} será possível verificar uma grande semelhança no processo de avaliação dos testes para determinar seu sucesso/falha, principalmente quando utilizada a estratégia de comparação entre os resultados das execuções realizadas.
+\end{description}
+
+\section{Depuração estatística}
+Trabalhos baseados em depuração estatística utilizam-se de dados estatísticos relacionados a várias execuções do sistema para isolar um \textit{bug}. Esta análise reduz o espaço de busca utilizando-se de recursos estatisticamente relacionados ao fracasso, limitando assim o conjunto de dados até chegar a uma seleção em que o erro se faz presente. 
+
+Como a análise é realizada a partir de uma depuração estática, estes modelos expõem as relações entre comportamentos do \textit{software} e seu eventual sucesso/fracasso de uma maneira estática. Então é possível fornecer uma identificação aproximada de qual parte do sistema gerou o erro.
 
 Apesar do espaço de busca minimizado, a técnica retorna alguns locais espalhados no código, o que não facilita o trabalho do desenvolvedor. Para tentar suprir a necessidade de mais informações, foram sugeridas as extrações de algumas métricas destes dados estatísticos. Um exemplo seria o \textit{ranking} de desconfiança, uma relação entre uma determinada característica versus seu o número de execuções com falha, classificados em ordem decrescente.
 
-Como a análise é realizada a partir de uma depuração estática, estes modelos expõem as relações entre comportamentos do \textit{software} e seu eventual sucesso/fracasso de uma maneira estática. Então é possível fornecer uma identifiçao aproximada de qual parte do sistema gerou o erro.
-
-Devido ao grande volume de dados necessários para guardar todas as execuções e realizar toda esta análise, esta técnica é difícil de ser implementada em um sistema embarcado real.
-
-%Iterative delta debugging - \cite{artho2011iterative}
-
-\subsection{Statistical Debugging of Sampled Programs}
-Esta abordagem propõe recolher os dados estatísticos através de declarações inseridas no código e que podem coletar dicas, em tempo de execução, sobre os dados que não estão relacionados com as falhas~\cite{zheng2003statistical}.
+\subsection{Depuração estatística baseada em amostras}
+É uma das primeiras abordagens que propõe recolher os dados estatísticos através de declarações inseridas no código e, em tempo de execução, consegue coletar dicas sobre os dados que não estão relacionados com as falhas~\cite{zheng2003statistical}.
 
 Um dos desafios desta proposta é coletar os dados necessários sem penalizar a execução do \textit{software} e garantindo a melhor utilização de todos os recursos do sistema. A solução encontrada foi inserir um evento aleatório junto às declarações inseridas no \textit{software}, possibilitando que apenas uma pequena parte delas seja executada para cada nova execução do sistema.
 
-A partir desta probalidade foi possível reduzir tempo gasto para coletar os dados, já que não é obrigatório executar todas as declarações em todas as execuções do sistema. Além disso, as amostras recebidas são agregadas sem a informação de cronologia e considerando apenas a quantidade de vezes em que o resultado das declarações permaneceu o mesmo, o que minimiza o espaço necessário para armazenar os dados.
+A partir desta probabilidade foi possível reduzir tempo gasto para coletar os dados, já que não é obrigatório executar todas as declarações em todas as execuções do sistema. Além disso, as amostras recebidas são agregadas sem a informação de cronologia e considerando apenas a quantidade de vezes em que o resultado das declarações permaneceu o mesmo, o que minimiza o espaço necessário para armazenar os dados.
 
-\subsection{Statistical debugging: simultaneous identification of multiple bugs}
-Este modelo de \textit{statistical debugging} tem o propósito de identificar a origem dos erros em um \textit{software} com uma modelagem probabilística de predicados, considerando inclusive que o \textit{software} pode conter mais de um erro simultaneamente~\cite{zheng2006statistical}.
+%%%%%%%%%%%%%%%%%%%%%
+\begin{comment}
+\subsection{Depuração estatística baseada em predicados}
+Este modelo tem o propósito de identificar a origem dos erros em um \textit{software} com uma modelagem probabilística de predicados, considerando inclusive que o \textit{software} pode conter mais de um erro simultaneamente~\cite{zheng2006statistical}.
 
-Os modelos baseados em \textit{statistical debugging} têm como característica possuirem dados esparsos como amostragem e uma grande variedade de predicados para manipular. Por isso a manipulação destes predicados nem sempre é um trabalho trivial, o que faz com que muitos modelos não consigam selecionar padrões de erros úteis. Para mitigar este problema foram utilizadas técnicas semelhantes às dos algoritmos \textit{bi-clusters} que permite a extração de dados bidirecional simultâneamente.
+Os modelos baseados em depuração estatística têm como característica possuirem dados esparsos como amostragem e uma grande variedade de predicados para manipular. Por isso a manipulação destes predicados nem sempre é um trabalho trivial, o que faz com que muitos modelos não consigam selecionar padrões de erros úteis. Para mitigar este problema foram utilizadas técnicas semelhantes às dos algoritmos \textit{bi-clusters} que permite a extração de dados bidirecional simultâneamente.
 
 A implementação da extração de dados bidirecional executa um processo de votação coletiva iterativo, no qual todos os predicados tem um número que define a qualidade de representação. Este número pode ser modificado durante a execução do algoritmo através da distribuição de votos. Cada execução em que ocorre um erro tem direito a um voto para selecionar o predicado que melhor se encaixa na situação.
 
@@ -384,11 +425,25 @@ Esta solução é interessante porque reduz o problema de redundância, pois o proce
 
 Depois de cada execução um predicado pode receber tanto um voto completo quando uma parcela do voto. No final, os predicados são classificados e selecionados considerando o número de votos que receberam.
 
-%\subsection{Capturing propagation of infected program states}
-%\cite{zhang2009capturing}
+%%%%%%%%%%%%%%%%%%%%%
+\end{comment}
 
 \subsection{Statistical debugging using a hierarchical model of correlated predicates}
 \cite{parsa2011statistical}
+
+\subsection{Iterative delta debugging}
+\cite{artho2011iterative}
+
+\begin{description}
+\item[Resumo]  \hfill \\
+Os trabalhos que utilizam-se de depuração estatística necessitam de um grande volume de dados para realizar uma análise confiável das informações e retornar resultados válidos. Este técnica é de difícil implementação em um sistema embarcado real por não estarem preparados para tal armazenamento. Entretanto, conforme será demonstrado nos capítulos seguintes, é possível coletar e armazenar estes dados no caso da depuração remota.
+
+A depuração estátistica baseada em amostras contribui com a discussão sobre a necessidade de ativar todos os possíveis estados do \textit{sotware} em todas as execuções do sistema para que seja possível descobrir a origem do erro. Sabe-se que ao inserir declarações aleatórias no \textit{software} é possível reduzir a quantidade de dados a serem analisados, visto que apenas uma parte é executada a cada rodada. Sendo assim, a aleatoriedade pode ser um aliada na depuração do sistema e por isso o presente trabalho possui uma discussão sobre a configuração da aleatoridade do sistema.
+
+\end{description}
+
+%\subsection{Capturing propagation of infected program states}
+%\cite{zhang2009capturing}
 
 \section{Program Slicing}
 Em técnicas que utilizam \textit{program slicing} a ideia principal é a partição do código e a remoção de estados ou caminhos que são irrelevantes para alcançar o objetivo selecionado, o que no caso da verificação e validação de um \textit{software} é encontrar um erro~\cite{Xu:2005:BSP:1050849.1050865}. 
@@ -430,47 +485,49 @@ Neste aspecto, a solução de tirar um \textit{snapshot} do contexto de execução q
 \cite{qi2011locating}
 
 
-%@% Revisão do Celo - Todo o capítulo
-\chapter{O ambiente Compartilhado de Teste e Depuração}
+\chapter{O ambiente compartilhado de teste e depuração}
+\label{ref:ambiente}
 Este capítulo apresenta instruções de como integrar a execução de testes com os possíveis ambientes de
 depuração, gerando o ambiente compartilhado de desenvolvimento.
 
-O ambiente utilizado pelo \textit{script} de troca de parâmetros conta com um emulador para simular a execução da aplicação e rodar os testes. No caso de sucesso em um teste, isto é um erro ser detectado, automaticamente uma ferramenta de depuração é iniciada e o resultado de todas as operações é repassado ao usuário.
+O ambiente utilizado desenvolvido para dar suporte ao presente trabalho conta com um emulador para simular a execução da aplicação e da automação dos testes. No caso de sucesso em um teste, ou seja, quando um erro é detectado, automaticamente uma ferramenta de depuração é iniciada e o resultado de todas as operações é repassado ao usuário.
 
-As ferramentas utilizadas neste ambiente podem ser substituídas por qualquer outra equivalente. A configuração será apresentada apenas para fins de reprodução do experimento. Nele foi utilizado o QEMU para emular a máquina com a aplicação alvo a partir de outra máquina, usando tradução dinâmica. Desta forma torna-se possível utilizar um computador pessoal para testar aplicações compiladas para algum outro sistema embarcado. 
+As ferramentas utilizadas neste ambiente podem ser substituídas por qualquer outra equivalente. A configuração será apresentada apenas para fins de reprodução do experimento. Nele foi utilizado o $QEMU$ para emular a máquina com a aplicação alvo a partir de outra máquina, usando tradução dinâmica. Desta forma torna-se possível utilizar um computador pessoal para testar aplicações compiladas para algum outro sistema embarcado. 
 
-Para dar suporte também à depuração, foi necessário procurar um aliado para ver quais passos do programa foram executados um momento antes de um \textit{crash}. O GBD - o GNU Project Debugger encaixou-se no papel de depurador, pois nele é possível especificar qualquer regra que possa afetar seu comportamento de maneira estática.
+Para dar suporte também à depuração, foi necessário procurar um aliado para ver quais passos do programa foram executados um momento antes de um \textit{crash}. O \ac{GBD} encaixou-se no papel de depurador, pois nele é possível especificar qualquer regra que possa afetar seu comportamento de maneira estática.
 
 \section{Configuração do ambiente remoto}
-A integração de ambos é particular para cada máquina anfitriã e alvo, portanto, talvez alguns passos aqui apresentados devam ser adaptados dependendo de sua arquitetura alvo. A Figura~\ref{fig:emulator_debugger_gray} apresenta as atividades necessárias para executar a depuração remota em conjunto com a simulação dos testes.
+A integração da execução dos testes e da depuração é particular para cada máquina hospedeira e alvo, portanto, talvez alguns passos aqui apresentados devam ser adaptados dependendo de sua arquitetura alvo. A Figura~\ref{fig:emulator_debugger_gray} apresenta as atividades necessárias para executar a depuração remota em conjunto com a simulação dos testes.
 
 \fig{emulator_debugger_gray}{Atividades de integração entre emulador e depurador}{scale=.25}
 
 Uma explicação adicional das técnicas e ferramentas utilizadas neste processo estão listados abaixo:
 
 \begin{description}
-	\item[Compilar com informações de depuração] é o primeiro passo. Como entrada é necessário o código-fonte do aplicativo e como saída esperada encontra-se o código compilado com informações de depuração. Quem utilizar o gcc (GNU project C and C ++ compiler) pode realizar esta atividade simplesmente usando opção $-g$ para compilar. 
+\item[Compilar com informações de depuração] é o primeiro passo. Como entrada é necessário o código-fonte do aplicativo e como saída esperada encontra-se o código compilado com informações de depuração. Quem utilizar o \ac{GCC} pode realizar esta atividade simplesmente usando opção $-g$ para compilar. 
 	
-	\item [Emular o sistema utilizando um emulador] é um passo necessário para executar a aplicação na arquitetura alvo correta. Para executar este passo utilizamos o QEMU, que deve ser inicializado com os argumentos $-s -S$. A primeira opção ativa o \textit{stub} para conectar um depurador, a fim de abrir a comunicação entre o emulador e o depurador. A opção $-S$ é utilizada para forçar que o QEMU espere a conexão do depurador antes da inicialização do sistema.
-Por exemplo, se uma aplicação compilada com informações de depuração (app.img) imprime algo na tela (stdio), a chamada do QEMU deve ser semelhante à: $qemu$ $-fda$ $app.img$ $-serial$ $stdio$ $-s$ $-S$
+\item [Emular o sistema utilizando um emulador] é um passo necessário para executar a aplicação na arquitetura alvo correta. Para executar este passo utilizamos o $QEMU$, que deve ser inicializado com os argumentos $-s -S$. A primeira opção ativa o \textit{stub} para conectar um depurador, a fim de abrir a comunicação entre o emulador e o depurador. A opção $-S$ é utilizada para forçar que o $QEMU$ espere a conexão do depurador antes da inicialização do sistema.
+Por exemplo, se uma aplicação compilada com informações de depuração ($app.img$) imprime algo na tela ($stdio$), a chamada do $QEMU$ deve ser semelhante à: $qemu$ $-fda$ $app.img$ $-serial$ $stdio$ $-s$ $-S$
 	
-	\item [Conectar-se com o depurador] começa com uma sessão do depurador inicializada em uma janela separada. Então, para se conectar ao depurador no QEMU o desenvolvedor deve explicitar que o alvo a ser examinado é remoto e informar o endereço da máquina alvo e porta em que se encontra o alvo a ser examinado (neste caso, o QEMU). Utilizando-se o GDB, a tela será iniciada a partir do comando: $target$ $remote$ $[endereço\_alvo]:[porta\_alvo]$
+\item [Conectar-se com o depurador] começa com uma sessão do depurador inicializada em uma janela separada. Então, para se conectar ao depurador ao $QEMU$ o desenvolvedor deve explicitar que o alvo a ser examinado é remoto e informar o endereço da máquina alvo e porta em que se encontra o alvo a ser examinado. Utilizando-se o GDB, a tela será iniciada a partir do comando: $target$ $remote$ $[endereço\_alvo]:[porta\_alvo]$
 
-	\item [Recuperar as informações de depuração] é um passo importante para ajudar os desenvolvedores a encontrarem erros. O arquivo gerado no primeiro item contém todas as informações que podem ser retiradas da compilação, como por exemplo o endereço de uma variável, ou os nomes contidos na tabela de símbolos. O arquivo usado para manter as informações de depuração deverá ser informado para o GDB usando o comando: $file$ $[caminho\_do\_arquivo]$
+\item [Recuperar as informações de depuração] é um passo importante para ajudar os desenvolvedores a encontrarem erros. O arquivo gerado no primeiro item contém todas as informações que podem ser retiradas da compilação, como por exemplo o endereço de uma variável, ou os nomes contidos na tabela de símbolos. O arquivo usado para manter as informações de depuração deverá ser informado para o $GDB$ usando o comando: $file$ $[caminho\_do\_arquivo]$
 	
-	\item [Encontrar origem dos erros] é uma atividade que depende do programa a ser depurado. A partir desta etapa, o desenvolvedor pode definir \textit{breakpoints}, \textit{watchpoints}, controlar a execução do programa e até mesmo permitir \textit{logs}. Existem vários trabalhos com o foco em ajudar a encontrar os erros através da automação de alguns pontos, como a gerarão automática de \textit{breakpoints}~\cite{JSWjsw0803603616} e o controle do fluxo de execução \cite{Chern:2007}.
+\item [Encontrar origem dos erros] é uma atividade que depende do programa a ser depurado. A partir desta etapa, o desenvolvedor pode definir \textit{breakpoints}, \textit{watchpoints}, controlar a execução do programa e até mesmo permitir \textit{logs}. Existem vários trabalhos com o foco em ajudar a encontrar os erros através da automação de alguns pontos, como a gerarão automática de \textit{breakpoints}~\cite{JSWjsw0803603616} e o controle do fluxo de execução \cite{Chern:2007}.
 \end{description}
 
-\chapter{A arquitetura de Automação de Testes}
+\chapter{A arquitetura de automação da execução de testes}
 \label{sec:tap}
 
-A ideia de desenvolver a troca de parâmetros surgiu extrapolando-se conceitos da metodologia de projeto orientado aplicação (AOSD - \textit{Application-Oriented System Design}) e do uso de programação genérica para a área de testes. O projeto orientado à aplicação fornece um sistema embarcado desenvolvido a partir de componentes especificamente adaptados e configurados de acordo com os requisitos da aplicação alvo. O fato de existir uma aplicação que fornece a certeza de que tudo que a compõe é essencial para seu funcionamento pode tornar o teste dos requisitos mais assertivo. Ainda, a programação genérica fornece uma maior adaptação do sistema às várias implementações de uma especificação.
+A ideia de desenvolver a troca de parâmetros surgiu extrapolando-se conceitos da metodologia de projeto orientado aplicação (\ac{ADESD}) e do uso de programação genérica para a área de testes. O projeto orientado à aplicação fornece um sistema embarcado desenvolvido a partir de componentes especificamente adaptados e configurados de acordo com os requisitos da aplicação alvo. 
 
-No desenvolvimento para sistemas embarcados é frequente que uma única especificação seja reimplementada para atender a variabilidade de um componente de \textit{software} ou \textit{hardware}. Para cada uma destas implementações, um novo conjunto de testes é realizado. A vantagem de unir a AOSD com programação genérica ao desenvolvimento e teste de sistemas embarcados está em poder fazer uma única aplicação e um único teste para todas as implementações que seguem a mesma especificação, modificando apenas a configuração desejada.
+O fato de existir uma aplicação que fornece a certeza de que tudo que a compõe é essencial para seu funcionamento pode tornar o teste dos requisitos mais assertivo. Ainda, a programação genérica fornece uma maior adaptação do sistema às várias implementações de uma especificação.
 
-O algoritmo de $TAP$ (Troca Automática de Parâmetros de Software) é independente do sistema operacional e plataforma. No entanto, trabalhamos com a premissa de que este sistema seja orientado a aplicação, com modelagem baseada em \textit{features} e parametrização. Também é desejável que cada abstração do sistema seja configurada conforme necessário através de \textit{traits} de um modelo de \textit{templates}, como o definido por Stroustrup \cite{Stroustrup:c++}.
+No desenvolvimento para sistemas embarcados é frequente que uma única especificação seja reimplementada para atender a variabilidade de um componente de \textit{software} ou \textit{hardware}. Para cada uma destas implementações, um novo conjunto de testes é realizado. A vantagem de unir \ac{ADESD} e programação genérica ao desenvolvimento/teste de sistemas embarcados é poder aplicar um único conjunto de testes para todas as implementações que seguem uma mesma especificação, especializando apenas a configuração desejada.
 
-No algoritmo~\ref{algoritmo_AEP} são apresentados os passos a realizar a partir do momento em que se tem uma aplicação alvo até o retorno do relatório para o desenvolvedor. A entrada do algoritmo é o arquivo de configuração que possui o caminho da aplicação sob teste e de seus \textit{traits}. A partir destas informações o algoritmo flui no sentido de tentar encontrar a característica desejada, trocá-la por uma valor predeterminado, executar a nova aplicação e recolher o retorno da aplicação.
+O algoritmo de \ac{TAP} é independente do sistema operacional e plataforma. No entanto, trabalhamos com a premissa de que este sistema seja orientado a aplicação, com modelagem baseada em \textit{features} e parametrização. Também é desejável que cada abstração do sistema seja configurada conforme necessário através de \textit{traits} de um modelo de \textit{templates}, como o definido por Stroustrup \cite{Stroustrup:c++}.
+
+No algoritmo~\ref{algoritmo_AEP} são apresentados os passos a realizar a partir do momento em que se tem uma aplicação alvo até o retorno do relatório para o desenvolvedor. A entrada do algoritmo é o arquivo de configuração que possui o caminho do \ac{SUT} e de seus \textit{traits}. A partir destas informações o algoritmo flui no sentido de tentar encontrar a característica desejada, trocá-la por uma valor predeterminado, executar a nova aplicação e recolher o retorno da aplicação.
 
 
 \begin{algorithm}
@@ -503,7 +560,7 @@ novoPropriedade$\Leftarrow$ ExchangeValue(linha, propriedades)\;
 \Return relat\'{o}rio;
 \end{algorithm}
 
-A implementação atual utiliza o sistema operacional ($EPOS$)~\cite{Froehlich:2001}, uma vez que adiciona uma grande capacidade de configuração do sistema, o que é muito adequado para avaliar o \textit{script}. Para um melhor entendimento da implementação do algoritmo de $TAP$ será necessária uma breve explicação de como configurar as abstrações no $EPOS$.
+A implementação atual utiliza o sistema operacional ($EPOS$)~\cite{Froehlich:2001}, uma vez que adiciona uma grande capacidade de configuração do sistema, o que é muito adequado para avaliar o \textit{script}. Para um melhor entendimento da implementação do algoritmo de \ac{TAP} será necessária uma breve explicação de como configurar as abstrações no $EPOS$.
 
 \section{Abstrações no $EPOS$}
 $EPOS$ é um \textit{framework} baseado em componentes que fornece todas as abstrações tradicionais de sistemas operacionais e serviços como: gerenciamento de memória, comunicação e gestão do tempo. Além disso, possui vários projetos industriais e pesquisas acadêmicas que o utilizam como base \footnote{http://www.lisha.ufsc.br/pub/index.php?key=EPOS}.
@@ -514,26 +571,25 @@ Cada aplicação tem seu próprio arquivo de configuração de abstrações para defini
 
 \progcpp{traitbuild}{Trecho do \textit{trait} da aplicação o componente $DMEC$.}
 
-\section{Configuração do Teste/Depuração}
+\section{Configuração do teste/depuração}
 Para melhorar a usabilidade do \textit{script}, é possível definir um arquivo de configuração com as informações necessárias para executar os testes unitários e de tipagem. Nós escolhemos $XML$ para definir as configurações de teste, pois pode definir todas as regras necessárias para executar o \textit{script} de forma legível e, além disso, também é facilmente interpretado pelo computador.
 
-A Figura~\ref{progxml:philosopherxml} traz um exemplo do arquivo de configuração de $TAP$ para a aplicação $DMEC$.
+A Figura~\ref{progxml:philosopherxml} traz um exemplo do arquivo de configuração de \ac{TAP} para a aplicação $DMEC$.
 
-\progxml{philosopherxml}{Exemplo do arquivo de configuração do teste para a $TAP$.}
+\progxml{philosopherxml}{Exemplo do arquivo de configuração do teste para a \ac{TAP}.}
 
 O arquivo do configuração é responsável pelo teste, então seu conteúdo deve estar sempre atualizado e em concordância com os requisitos da aplicação. O ajuste inicial é manual e simples, uma vez que este arquivo pode ser lido quase como um texto: há um teste para a aplicação (\textit{philosopher\_dinner\_app}), dentro dela deseja-se especificar duas propriedades. A primeira é a propriedade identificada como \textit{ARCH} que pode assumir os valores \textit{IA32} ou \textit{AVR8}. A segunda está relacionada à depuração, é um arquivo que contém \textit{breakpoints} que está no seguinte caminho: "\textit{/home/breakpoints.txt}".
 
-\section{Discussão sobre a granularidade na configuração dos testes}
-Cada configuração do teste interfere diretamente com o tempo e eficácia do \textit{script}. Prevendo este comportamento, \texttt{TAP} oferece três granularidades de configuração para o teste: determinada, parcialmente aleatória e aleatória. Elas devem ser escolhidas de acordo com a finalidade do usuário ao executar o \textit{script} de troca de parâmetros, do tipo de teste e das características de aplicação.
+\section{Discussão sobre a granularidade na configuração da execução dos testes}
+Cada configuração do teste interfere diretamente com o tempo e eficácia do \textit{script}. Prevendo este comportamento, \ac{TAP} oferece três granularidades de configuração para o teste: determinada, parcialmente aleatória e aleatória. Elas devem ser escolhidas de acordo com a finalidade do usuário ao executar o \textit{script} de troca de parâmetros, do tipo de teste e das características de aplicação.
 
-Quando se deseja testar uma especificação bem definida, é possível determinar qual valor uma propriedade deve atingir. Toda a especificação pode ser traduzida no arquivo de configuração e \texttt{TAP} só considerará sucesso no teste as execuções que seguirem fielmente o descrito. O modo determinado também é interessante quando se deseja otimizar uma configuração, pois uma vez que o comportamento da aplicação e todas suas configurações sejam conhecidas, a única variável do sistema afetará o resultado final.
+Quando se deseja testar uma especificação bem definida, é possível determinar qual valor uma propriedade deve atingir. Toda a especificação pode ser traduzida no arquivo de configuração e \ac{TAP} só considerará sucesso no teste as execuções que seguirem fielmente o descrito. O modo determinado também é interessante quando se deseja otimizar uma configuração, pois uma vez que o comportamento da aplicação e todas suas configurações sejam conhecidas, a única variável do sistema afetará o resultado final.
 
 Testes parcialmente aleatórios são usados para verificar as configurações do sistema que não possuem um valor determinado, ou seja, mais de um valor pode ser considerado correto. Neste caso, a informação faltante na configuração será atribuída pelo \textit{script} no momento do teste. Sem nenhuma informação prévia, o algoritmo não garante que os valores gerados serão válidos e distintos uns dos outros, desta forma pode ser que o teste seja repetido e gere resultados com falsos negativos.
 
 Teste aleatório foi desenvolvido como o pior caso. Ele só deve ser usado quando deseja-se testar valores fora do convencional para verificar a robustez da aplicação. Também é útil caso a aplicação falhe ao passar nos testes e não se tenha dica alguma sobre onde poderia estar o erro no momento de iniciar a depuração. Através dele pode-se encontrar valores errados de configuração e ajudar os desenvolvedores menos experientes a depurar pequenas aplicações.
 
-
-\chapter{Resultado experimental de teste e depuração de uma aplicação real}
+\chapter{Experimento: execução automática de teste e depuração de uma aplicação real}
 \label{sec:case_study}
 A troca automática de parâmetros foi utilizada para testar e depurar o componente de estimativa de movimento para codificação H.264, o $DMEC$ - \textit{Distributed Motion Estimation Component}. Este componente executa uma estimativa de movimento explorando a semelhança entre imagens adjacentes numa sequência de vídeo que permite que as imagens sejam codificadas diferencialmente, aumentando a taxa de compressão da sequência de \textit{bits} gerada. Estimativa de movimento é uma fase importante para codificação H.264 já que consome cerca de 90\% do tempo total do processo de codificação ~\cite{DMEC}.
 
@@ -551,15 +607,15 @@ Apesar do \textit{script} de troca de parâmetros gerar várias configurações para
 
 O \textit{script} foi configurado para adicionar pontos de interrupção depois de iniciar cada uma das 5 funções da aplicação, inclusive na função principal, para descobrir se o problema encontrado era resultado de alguma delas. Foram consideradas corretas as execuções que contivessem então a resposta (\textit{continue}) de cada uma delas. A Figura~\ref{fig:gdb_dmec_60_workers} mostra que não havia nenhuma resposta para a aplicação, informando que nem mesmo a função principal era atingida. 
 
-\fig{gdb_dmec_60_workers}{DMEC debug with GDB execution with \texttt{NUM\_WORKERS} = 60}{scale=.4}
+\fig{gdb_dmec_60_workers}{Execução da depuração do DMEC com a configuração \texttt{NUM\_WORKERS} = 60}{scale=.4}
 
 Observando o relatório final do \textit{script} foi possível descobrir que sempre que a configuração \texttt{NUM\_WORKERS} apresentava um número maior que 10 a aplicação se comportava de maneira anômala. Neste caso o conjunto de testes, depuração e relatório foi crucial para determinar o limite máximo de trabalhadores da aplicação. 
 
-\section{Resultados}
+\section{Avaliação dos resultados}
 \label{sec:eval}
 Os testes foram realizados com a aplicação \texttt{DMEC}, executando sob EPOS 1.1 e compilado com GNU 4.5.2 e cross-compilados através de um computador pessoal com a arquitetura IA32. O ambiente integrado é composto por GDB 7.2 e QEMU 0.14.0. 
 
-A qualidade da informação de retorno é inerente à qualidade de informação de configuração do \textit{script} de \texttt{TAP}. A Figura~\ref{fig:comp_report_partial} apresenta um trecho de relatório com algumas configurações geradas.
+A qualidade da informação de retorno é inerente à qualidade de informação de configuração do \textit{script} de \ac{TAP}. A Figura~\ref{fig:comp_report_partial} apresenta um trecho de relatório com algumas configurações geradas.
 
 \fig{comp_report_partial}{Trecho do relatório com a troca da propriedade \texttt{NUM\_WORKERS} por valores gerados aleatoriamente.}{scale = 0.55}
 
@@ -603,11 +659,11 @@ Na pesquisa de teste de \textit{software}, estudos empíricos são essenciais para
 		\end{description}
 \end{description}
 
-A Tabela~\ref{ref:tabQuestao1TAP} apresenta uma análise de $TAP$ para os desafios propostos pela teoria de teste universal. Nela é possível observar que a ferramenta proposta atende a todos os desafios proposto, exceto o desafio de evidências empíricas, pois a modelagem $AOSD$ possui especificidades que ainda não estão contempladas nos \textit{testbeds} disponíveis.
+A Tabela~\ref{ref:tabQuestao1TAP} apresenta uma análise de \ac{TAP} para os desafios propostos pela teoria de teste universal. Nela é possível observar que a ferramenta proposta atende a todos os desafios proposto, exceto o desafio de evidências empíricas, pois a modelagem \ac{ADESD} possui especificidades que ainda não estão contempladas nos \textit{testbeds} disponíveis.
 
 \begin{table*}[h]
 \begin{center}
-\caption{Análise de TAP referente à teoria de teste universal}
+\caption{Análise de \ac{TAP} referente à teoria de teste universal}
 \begin{tabular}{|p{.3\textwidth}|p{.7\textwidth}|} 
 
 \hline
@@ -641,7 +697,7 @@ são propostos para combinar os diferentes estilos de modelagem, visto que as prá
 		\end{description}
 \end{description}
 
-A Tabela~\ref{ref:tabQuestao2TAP} apresenta uma análise de todas as contribuições de $TAP$ referente aos desafios propostos pela meta de modelagem baseada em testes. É importante ressaltar que o desafio de oráculos é uma característica relevante para a área de testes de \textit{software}, mas não foi contemplada pela ferramente porque foge dos objetivos específicos deste trabalho e será considerada uma melhoria futura.
+A Tabela~\ref{ref:tabQuestao2TAP} apresenta uma análise de todas as contribuições de \ac{TAP} referente aos desafios propostos pela meta de modelagem baseada em testes. É importante ressaltar que o desafio de oráculos é uma característica relevante para a área de testes de \textit{software}, mas não foi contemplada pela ferramente porque foge dos objetivos específicos deste trabalho e será considerada uma melhoria futura.
 
 \begin{table*}[h]
 \begin{center}
@@ -651,16 +707,16 @@ A Tabela~\ref{ref:tabQuestao2TAP} apresenta uma análise de todas as contribuiçõe
 \textbf{Teste baseado em modelos} & Atualmente a ferramenta possui uma contribuição \textbf{limitada} à agregação de outros modelos e prevê apenas o ensaio de conformidade a partir de uma configuração de teste.\\ 
 
 \hline
-\textbf{Teste baseado em anti-modelo} & Apesar de não ser o foco deste trabalho, o relatório fornecido por TAP apresenta todas as características e os valores trocadas em tempo de execução. Estes dados podem ser utilizados para realizar uma modelagem do sistema, portanto a ferramenta \textbf{possui} suporte para o anti-modelo. \\ 
+\textbf{Teste baseado em anti-modelo} & Apesar de não ser o foco deste trabalho, o relatório fornecido por \ac{TAP} apresenta todas as características e os valores trocadas em tempo de execução. Estes dados podem ser utilizados para realizar uma modelagem do sistema, portanto a ferramenta \textbf{possui} suporte para o anti-modelo. \\ 
 
 \hline
-\textbf{Oráculos de teste} & TAP \textbf{não contém} um oráculo de teste, uma vez que não faz parte deste trabalho a geração de casos de teste.\\ 
+\textbf{Oráculos de teste} & \ac{TAP} \textbf{não contém} um oráculo de teste, uma vez que não faz parte deste trabalho a geração de casos de teste.\\ 
 
 \hline
 \end{tabular}
 \label{ref:tabQuestao2TAP} 
 \end{center}
-\caption{Análise de TAP referente à modelagem baseada em testes}
+\caption{Análise de \ac{TAP} referente à modelagem baseada em testes}
 \end{table*}
 
 \begin{description}		
@@ -675,17 +731,17 @@ A Tabela~\ref{ref:tabQuestao2TAP} apresenta uma análise de todas as contribuiçõe
 		\end{description}
 \end{description}
 
-A Tabela~\ref{ref:tabQuestao3TAP} mostra a relação de $TAP$ com a meta de automação completa da execução de testes de \textit{software}. É possível notar que $TAP$ oferece algum nível de automação em todos o desafios propostos.Entretanto, para ser cosiderada uma ferramenta 100\% automática ainda serão necessários avanços na  informação de dados de entrada de teste, seja a partir da extração de valores do modelo ou através de algum tipo de inteligência atificial.
+A Tabela~\ref{ref:tabQuestao3TAP} mostra a relação de \ac{TAP} com a meta de automação completa da execução de testes de \textit{software}. É possível notar que \ac{TAP} oferece algum nível de automação em todos o desafios propostos.Entretanto, para ser cosiderada uma ferramenta 100\% automática ainda serão necessários avanços na  informação de dados de entrada de teste, seja a partir da extração de valores do modelo ou através de algum tipo de inteligência atificial.
 
 \begin{table*}[h]
 \begin{center}
 \begin{tabular}{|p{.18\textwidth}|p{.82\textwidth}|} 
 
 \hline
-\textbf{Geração de dados de entrada} & O suporte à geração de dados é \textbf{parcial}, pois a informação inicial dos dados de entrada são fornecidos pelo usuário da ferramenta e somente depois $TAP$ realiza a retroalimentação de acordo com a configuração dos testes. No caso do teste não ser determinado pelo usuário, a ferramenta inclui dados iniciais aleatórios, sem adição de inteligência.\\ 
+\textbf{Geração de dados de entrada} & O suporte à geração de dados é \textbf{parcial}, pois a informação inicial dos dados de entrada são fornecidos pelo usuário da ferramenta e somente depois \ac{TAP} realiza a retroalimentação de acordo com a configuração dos testes. No caso do teste não ser determinado pelo usuário, a ferramenta inclui dados iniciais aleatórios, sem adição de inteligência.\\ 
 
 \hline
-\textbf{Abordagens específicas para o domínio} &  $TAP$  consegue importar configurações específicas de domino e realizar testes sobe elas, contemplando de forma \textbf{parcial} a extração de dados relacionados ao domínio da aplicação.\\ 
+\textbf{Abordagens específicas para o domínio} &  \ac{TAP}  consegue importar configurações específicas de domino e realizar testes sobe elas, contemplando de forma \textbf{parcial} a extração de dados relacionados ao domínio da aplicação.\\ 
 
 \hline
 \textbf{Testes \textit{online}} & Este diferencial é apesentado pela ferramenta através do ambiente de teste e depuração, com suporte \textbf{total} aos testes durante à execução da aplicação.\\ 
@@ -694,7 +750,7 @@ A Tabela~\ref{ref:tabQuestao3TAP} mostra a relação de $TAP$ com a meta de automa
 \end{tabular}
 \label{ref:tabQuestao3TAP} 
 \end{center}
-\caption{Análise de TAP referente à automação total da atividade de testes de \textit{software}}
+\caption{Análise de \ac{TAP} referente à automação total da atividade de testes de \textit{software}}
 \end{table*}
 
 %%%%%%%%%%%%%%%%%%%%%
@@ -712,11 +768,11 @@ A Tabela~\ref{ref:tabQuestao3TAP} mostra a relação de $TAP$ com a meta de automa
 		\end{description}
 \end{description}
 
-A Tabela~\ref{ref:tabQuestao4TAP} apresenta uma análise de $TAP$ para os desafios propostos pela teoria de teste universal.
+A Tabela~\ref{ref:tabQuestao4TAP} apresenta uma análise de \ac{TAP} para os desafios propostos pela teoria de teste universal.
 
 \begin{table*}[h]
 \begin{center}
-\caption{Análise de TAP referente à teoria de teste universal}
+\caption{Análise de \ac{TAP} referente à teoria de teste universal}
 \begin{tabular}{|p{.3\textwidth}|p{.7\textwidth}|} 
 
 \hline
@@ -744,9 +800,9 @@ A Tabela~\ref{ref:tabQuestao4TAP} apresenta uma análise de $TAP$ para os desafio
 %%%%%%%%%%%%%%%%%%%%%
 
 \section{Análise comparativa}
-Após a contextualização das características importantes para a evolução do estado da arte e da análise qualitativa de $TAP$, agora as ferramentas e técnicas dos trabalhos relacionados também serão analisadas sob o mesmo ponto de vista.
+Após a contextualização das características importantes para a evolução do estado da arte e da análise qualitativa de \ac{TAP}, agora as ferramentas e técnicas dos trabalhos relacionados também serão analisadas sob o mesmo ponto de vista.
 
-A Tabela~\ref{ref:tabQuestao1Ferramenta} apresenta uma análise comparativa entre $TAP$ e as ferrametas correlatas no quesito teoria de teste universal.
+A Tabela~\ref{ref:tabQuestao1Ferramenta} apresenta uma análise comparativa entre \ac{TAP} e as ferrametas correlatas no quesito teoria de teste universal.
 
 \begin{table*}[h]
 \begin{center}
@@ -759,7 +815,7 @@ A Tabela~\ref{ref:tabQuestao1Ferramenta} apresenta uma análise comparativa entre
 \textbf{Ferramentas} & \textbf{Hipóteses explícitas} & \textbf{Eficácia do teste} & \textbf{Testes de composição} & \textbf{Evidências empíricas}\\ 
 
 \hline
-$TAP$ & Parcial & Sim & Parcial & Não\\ 
+\ac{TAP} & Parcial & Sim & Parcial & Não\\ 
 
 \hline
 $Justitia$ & Parcial & Sim & Sim & Não\\ 
@@ -796,7 +852,7 @@ A Tabela~\ref{ref:tabQuestao2Ferramenta} apresenta uma análise comparativa entre
 \textbf{Ferramentas} & \textbf{Teste baseado em modelos} & \textbf{Teste baseado em anti-modelos} & \textbf{Oráculos de teste}\\ 
 
 \hline
-$TAP$ & Parcial & Sim & Não\\ 
+\ac{TAP} & Parcial & Sim & Não\\ 
 
 \hline
 $Justitia$ & Sim & Não & Parcial \\ 
@@ -832,7 +888,7 @@ A Tabela~\ref{ref:tabQuestao3Ferramenta} apresenta uma análise comparativa entre
 \textbf{Ferramentas} & \textbf{Geração de entradas} & \textbf{Abordagem específica para domínio} & \textbf{teste \textit{online}}\\ 
 
 \hline
-$TAP$ & Parcial & Parcial & Sim \\ 
+\ac{TAP} & Parcial & Parcial & Sim \\ 
 
 \hline
 $Justitia$ & Sim & Parcial & Sim \\ 
@@ -871,7 +927,7 @@ A Tabela~\ref{ref:tabQuestao4Ferramenta} apresenta uma análise comparativa entre
 \textbf{Ferramentas} & \textbf{Controlar a evolução} & \textbf{Aproveitar recursos} & \textbf{Padrões de teste} & \textbf{Compreender os custos dos ensaios}  & \textbf{Aprendizado dos testadores de \textit{software}\\ 
 
 \hline
-$TAP$ &  &  &  &  & \\ 
+\ac{TAP} &  &  &  &  & \\ 
 
 \hline
 $Justitia$ &  &  &  & & \\ 
@@ -898,7 +954,7 @@ Capture and replay &  &  &  & & \\
 %%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Conclusões}
-Neste trabalho foi introduzida $TAP$, uma ferramenta para a troca automática de parâmetros de configuração e apresentado um roteiro para a geração de um ambiente de desenvolvimento de aplicações embarcadas baseadas em requisitos de \textit{hardware} e \textit{software} específicos.
+Neste trabalho foi introduzida \ac{TAP}, uma ferramenta para a troca automática de parâmetros de configuração e apresentado um roteiro para a geração de um ambiente de desenvolvimento de aplicações embarcadas baseadas em requisitos de \textit{hardware} e \textit{software} específicos.
 
 O ambiente de desenvolvimento integrado fornece independência em relação à plataforma física de destino. Desta forma, os desenvolvedores não precisam gastar tempo compreendendo uma nova plataforma de desenvolvimento sempre que alguma característica do sistema embarcado for atualizada. Este é um passo importante, pois alguns sistemas embarcados podem não ser capazes de armazenar os dados adicionais necessários para apoiar a depuração. 
 
@@ -912,7 +968,7 @@ Também foi realizada a análise qualitativa da ferramenta, levando-se em conta os
 Durante o desenvolvimento deste trabalho foram identificados pontos que podem ser otimizados em trabalhos futuros:
 \begin{itemize}
 	\item Analisar a possibilidade de reduzir o custo de memória e de tempo utiliado para a execução de testes. 
-	\item Verificar formas de melhorar a configuração de $TAP$ e dos dados de entrada do algoritmo.
+	\item Verificar formas de melhorar a configuração de \ac{TAP} e dos dados de entrada do algoritmo.
 	\item Realizar um maior número de experimentos para verificar o desempenho da ferramenta em ambientes com um número de restrições eque apresentam testes mais complexos.
 	\item Aprimorar a ferramenta para conseguir atingir todos os desafios identificados na área de teste e depuração de \textit{software}.
 \end{itemize}

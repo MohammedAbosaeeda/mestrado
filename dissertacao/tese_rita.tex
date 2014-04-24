@@ -33,7 +33,7 @@
 
 \titulo{Automação da execução de testes para software embarcado} % Titulo do trabalho
 \autor{Rita de Cássia Cazu Soldi} % Nome do autor
-\data{18}{março}{2014} % Data da publicação do trabalho
+\data{25}{abril}{2014} % Data da publicação do trabalho
 
 \orientador{Prof. Dr. Antônio Augusto Medeiros Fröhlich} % Nome do orientador e (opcional)
 %\departamento[a]{Faculdade de Ciências do Mar}
@@ -41,17 +41,20 @@
 
 \begin{acronym}
 \acro{ADESD}{\textit{Application-Driven Embedded System Design}}
+\acro{DD}{\textit{Delta Debugging}}
 \acro{DID}{\textit{Discovery Interface Device}}
 \acro{GCC}{\textit{GNU project C and C ++ compiler}}
 \acro{GDB}{\textit{GNU Project Debugger}}
 \acro{ICE}{\textit{In-circuit emulator}}
+\acro{IDD}{\textit{Iterative Delta Debugging}}
 \acro{IEEE}{\textit{Institute of Electrical and Electronics Engineers}}
 \acro{JTAG}{\textit{Joint Test Access Group}}
 \acro{MCO}{\textit{The Mars Climate Orbiter}}
 \acro{MPL}{\textit{The Mars Polar Lander}}
 \acro{TAP}{Troca Automática de Parâmetros de \textit{Software}}
-\acro{TBT}{\textit{Target Based system Testing}}
+\acro{TBT}{\textit{Target Based embedded system Testing}}
 \acro{SUT}{\textit{Software Under Test}}
+\acro{XML}{\textit{eXtensible Markup Language}}
 \end{acronym}
 
 \newcommand{\fig}[4][h]{
@@ -377,7 +380,7 @@ Conforme será visto no Capítulo~\ref{ref:ambiente}, a abordagem de execução auto
 \section{Automação da execução de testes baseada na interface do sistema alvo}
 Este trabalho apresenta uma abordagem o testes de sistemas embarcados heterogêneos, baseada nas características do \ac{SUT}~\cite{universal:2013}. 
 
-Diferente da escolha tradicional, que normalmente é feita a partir de uma mistura de vários modelos para tentar alcançar o maior número possível de arquiteturas, a nova abordagem (\ac{TBT}) reforça que cada sistema embarcado possui características únicas e que devem ser consideradas na escolha do modelo de teste que será aplicado ao sistema.
+Diferente da escolha tradicional, que normalmente é feita a partir de uma mistura de vários modelos para tentar alcançar o maior número possível de arquiteturas, a \ac{TBT} reforça que cada sistema embarcado possui características únicas e que devem ser consideradas na escolha do modelo de teste que será aplicado ao sistema.
 
 A \textit{framework} criada utiliza-se de um módulo \ac{DID} que fica conectado diretamente com o sistema embarcado. Este módulo é o responsável por detectar o sistema, descobrir suas características (\textit{drivers} e interfaces) e apontar os testes que melhor se encaixam ao perfil do sistema conectado.  
 
@@ -398,12 +401,39 @@ A adaptação do mecanismo de testes para o uso de um oráculo composto por uma red
 No capítulo~\ref{sec:tap} será possível verificar uma grande semelhança no processo de avaliação dos testes para determinar seu sucesso/falha, principalmente quando utilizada a estratégia de comparação entre os resultados das execuções realizadas.
 \end{description}
 
+\section{Partição do \textit{software}}
+O conceito de partição do \textit{software} surgiu da afirmação de que quando as pessoas estão depurando um \textit{software}, o processo mais comum é fazer abstrações mentais correspondentes à partes do todo. Desta forma desenvolve-se a hipótese de integrar particionadoress de código-fonte nos ambientes de deupuração~\cite{Weiser:1981}.
+
+Após a definição de Weiser, a partição foi utilizada em diversas áreas da computação, como paralelização, ajuste de níveis de compilação, engenharia reversa,  manutenção de \textit{software}, testes, entre outros. Na área de depuração, focou-se na partição sistemática do \textit{software}, investindo na remoção de estados ou caminhos que são irrelevantes para alcançar o objetivo selecionado, o que no caso da depuração é encontrar um erro~\cite{Xu:2005:BSP:1050849.1050865}. 
+
+Cada trabalho apresenta um critério diferente para particionar, mas todos possuem o conceito de fatia (\textit{slice}) como um subconjunto de predicados do programa que afetam os valores computados, de acordo com o critério de controle. Uma distinção importante para particionar é o tipo de fatia que será realizada: estática, dinâmica ou uma variação delas~\cite{sasirekha2011program}.
+
+A partição estática é o tipo mais rápido e, em contrapartida, aponta apenas uma aproximação do conjunto final de caminhos que podem levar ao erro. Isto ocorre porque o foco é simplificar ao máximo o \textit{software} em questão, reduzindo-o ao ponto de conter todos os estados que poderiam afetar o valor final, mas sem considerar o valor de entrada do \textit{software}. Este tipo de partição é mais utilizada para \textit{software} de pequeno porte e de pouca complexidade, em que o tamanho da partição permanece compatível com a sua simplicidade.
+
+Na partição dinâmica, as informações do critério de corte tradicional não são suficientes, sendo necessária uma informação adicional sobre os valores de entrada do \textit{software}. A partição será realizada a partir destes dados e sequência de valores de entrada no qual o \textit{software} foi executado é determinante para o conjunto de saída. Esta partição é mais utilizada para \textit{software} complexo e de alto grau de acoplamento.
+
+Além dos tipos base de partição, também existem modelos criados pela união deles\cite{Venkatesh:1991,binkley2005minimal,Sridharan:2007:TS:1250734.1250748,Chebaro:2012}, proporcionando uma maior configurabilidade de depuração e atendendo melhor às características do \ac{SUT}.
+
+\begin{description}
+\item[Resumo]  \hfill \\
+A automação da partição do código deriva de uma abstração tradicionalmente utilizada por seres humanos durante a depuração. Desde que foi computacionalmente implementado, surgiram inúmeras variações no critério de partição, tamanho da fatiar o programa e alternativas para o cálculo das fatias. A principal razão desta diversidade está na peculiaridade de cada \textit{software}, onde cada característica requer uma maneira diferenciada de realizar a partição.
+
+Independente da abordagem selecionada, a partição do código é uma técnica versátil e muito utilizada, principalmente porque necessita apenas de uma execução com falhas para ser capaz de simplificar o \textit{software} em \textit{slices}, cujo grupo de entradas a serem examinadas é bem reduzido. Poder selecionar pequenos componentes do código-fonte para seres testadas e depuradas em partes é uma das principais características da ferramenta apresentada no capítulo~\ref{sec:tap}.
+\end{description}
+
 \section{Depuração estatística}
 Trabalhos baseados em depuração estatística utilizam-se de dados estatísticos relacionados a várias execuções do sistema para isolar um \textit{bug}. Esta análise reduz o espaço de busca utilizando-se de recursos estatisticamente relacionados ao fracasso, limitando assim o conjunto de dados até chegar a uma seleção em que o erro se faz presente. 
 
-Como a análise é realizada a partir de uma depuração estática, estes modelos expõem as relações entre comportamentos do \textit{software} e seu eventual sucesso/fracasso de uma maneira estática. Então é possível fornecer uma identificação aproximada de qual parte do sistema gerou o erro.
+O primeiro passo deve ser a instrumentação do \textit{software} para coletar dados sobre os valores de determinados tipos de predicados em pontos específicos da execução do \textit{software}. Existem três categorias de predicados rastreados:
+\begin{itemize}
+\item \textbf{Ramificação} - para cada condicional encontrado são gerados dois predicados: um que indica o se o caminho escolhido foi o da condição verdadeira e outro que indica a escolha do caminho caso a condição seja falsa.
+\item \textbf{Retorno de funções} - cada retorno de função com um valor escalar são gerados seis tipos de predicados para rastrear o valor: $>0$, $\geq0$, $=0$, $<0$, $\leq0$, $\neq0$.
+\item \textbf{Atribuição} - em toda atribuição escalar também são gerados seis tipos de predicados para comparar os valores: $>$, $\geq$, $=$, $<$, $\leq$, $\neq$.
+\end{itemize}
 
-Apesar do espaço de busca minimizado, a técnica retorna alguns locais espalhados no código, o que não facilita o trabalho do desenvolvedor. Para tentar suprir a necessidade de mais informações, foram sugeridas as extrações de algumas métricas destes dados estatísticos. Um exemplo seria o \textit{ranking} de desconfiança, uma relação entre uma determinada característica versus seu o número de execuções com falha, classificados em ordem decrescente.
+Essas informações são armazenadas em relatórios como um vetor de \textit{bits}, com dois \textit{bits} para cada predicado - um para o resultado observado e outro para o resultado verdadeiro e um bit final que representa o sucesso ou falah da execução. Em sequência, são atribuídas pontuações numéricas para identificar qual foi o predicado que melhor expressa o conjunto de predicados.
+
+Como a análise é realizada a partir de uma depuração estática, estes modelos expõem as relações entre comportamentos do \textit{software} e seu eventual sucesso/fracasso de uma maneira estática. Então é possível fornecer uma identificação aproximada de qual parte do sistema gerou o erro.
 
 \subsection{Depuração estatística baseada em amostras}
 É uma das primeiras abordagens que propõe recolher os dados estatísticos através de declarações inseridas no código e, em tempo de execução, consegue coletar dicas sobre os dados que não estão relacionados com as falhas~\cite{zheng2003statistical}.
@@ -412,63 +442,82 @@ Um dos desafios desta proposta é coletar os dados necessários sem penalizar a ex
 
 A partir desta probabilidade foi possível reduzir tempo gasto para coletar os dados, já que não é obrigatório executar todas as declarações em todas as execuções do sistema. Além disso, as amostras recebidas são agregadas sem a informação de cronologia e considerando apenas a quantidade de vezes em que o resultado das declarações permaneceu o mesmo, o que minimiza o espaço necessário para armazenar os dados.
 
-%%%%%%%%%%%%%%%%%%%%%
-\begin{comment}
+%\begin{comment}
 \subsection{Depuração estatística baseada em predicados}
 Este modelo tem o propósito de identificar a origem dos erros em um \textit{software} com uma modelagem probabilística de predicados, considerando inclusive que o \textit{software} pode conter mais de um erro simultaneamente~\cite{zheng2006statistical}.
 
-Os modelos baseados em depuração estatística têm como característica possuirem dados esparsos como amostragem e uma grande variedade de predicados para manipular. Por isso a manipulação destes predicados nem sempre é um trabalho trivial, o que faz com que muitos modelos não consigam selecionar padrões de erros úteis. Para mitigar este problema foram utilizadas técnicas semelhantes às dos algoritmos \textit{bi-clusters} que permite a extração de dados bidirecional simultâneamente.
+A manipulação de predicados espelhados pelo código fonte não é um trabalho trivial, e isso faz com que muitos modelos não consigam selecionar padrões de erros úteis. Para mitigar este problema a depuração estatística baseada em predicados utilizada técnicas semelhantes às dos algoritmos \textit{bi-clusters},  que permite a extração de dados bidirecionais simultâneamente.
 
 A implementação da extração de dados bidirecional executa um processo de votação coletiva iterativo, no qual todos os predicados tem um número que define a qualidade de representação. Este número pode ser modificado durante a execução do algoritmo através da distribuição de votos. Cada execução em que ocorre um erro tem direito a um voto para selecionar o predicado que melhor se encaixa na situação.
 
 Esta solução é interessante porque reduz o problema de redundância, pois o processo de votação só acaba quando hover convergência e quanto maior o número de predicados competindo pelo votos, menor é a quantidade de votos que cada um deles pode ter. 
 
 Depois de cada execução um predicado pode receber tanto um voto completo quando uma parcela do voto. No final, os predicados são classificados e selecionados considerando o número de votos que receberam.
-
-%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{comment}
+\subsection{Depuração estatística através do perfil da execução}
+\cite{chilimbi2009holmes}
 \end{comment}
-
-\subsection{Statistical debugging using a hierarchical model of correlated predicates}
-\cite{parsa2011statistical}
-
-\subsection{Iterative delta debugging}
-\cite{artho2011iterative}
+%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{description}
 \item[Resumo]  \hfill \\
 Os trabalhos que utilizam-se de depuração estatística necessitam de um grande volume de dados para realizar uma análise confiável das informações e retornar resultados válidos. Este técnica é de difícil implementação em um sistema embarcado real por não estarem preparados para tal armazenamento. Entretanto, conforme será demonstrado nos capítulos seguintes, é possível coletar e armazenar estes dados no caso da depuração remota.
 
-A depuração estátistica baseada em amostras contribui com a discussão sobre a necessidade de ativar todos os possíveis estados do \textit{sotware} em todas as execuções do sistema para que seja possível descobrir a origem do erro. Sabe-se que ao inserir declarações aleatórias no \textit{software} é possível reduzir a quantidade de dados a serem analisados, visto que apenas uma parte é executada a cada rodada. Sendo assim, a aleatoriedade pode ser um aliada na depuração do sistema e por isso o presente trabalho possui uma discussão sobre a configuração da aleatoridade do sistema.
+A depuração estátistica baseada em amostras contribui com a discussão sobre a necessidade de ativar todos os possíveis estados do \textit{sotware} em todas as execuções do sistema para que seja possível descobrir a origem do erro. Sabe-se que ao inserir declarações aleatórias no \textit{software} é possível reduzir a quantidade de dados a serem analisados, visto que apenas uma parte é executada a cada rodada. 
 
+A aleatoriedade pode ser um aliada na depuração do sistema, mas deve-se tomar cuidado com a quantidade de predicados e valores que os mesmos podem atingir. Para eliminar predicados pouco representativos, alternativas como \textit{ranking} e votação foram apresentadas. Levando em conta estes aspectos, o presente trabalho possui no Capítulo~\ref{sec:tap} uma discussão sobre a configuração da do sistema, para que a aleatoriedade não prejudique o resultado desejado.
+\end{description}
+
+\section{Depuração por delta}
+A técnica de \ac{DD} estabelece uma hipótese sobre o motivo de um \textit{software} parar de funcionar corretamente e, dependendo dos resultados da execução dos testes, esta hipótese deve ser refinada ou rejeitada~\cite{zeller1999yesterday}. A idéia do \ac{DD} é chegar a um mínimo local, onde todos os eventos presentes interferem diretamete no comportamente incoerente do \textit{software}.
+
+Assumindo-se que o erro é determinístico e que pode ser reproduzido automaticamente, é possível refinar a hipótese ao remover de forma iterativa os trechos do \textit{software} que não colaboram na ocorrência do erro. O mesmo ocorre com a rejeição da hipótese, quando um techo é retirado e o \textit{software} não apresenta mais o erro. 
+
+Para automatizar a escolha, refinamento e rejeição de hipóteses, a \ac{DD} trabalha com dois algoritmos:
+\begin{itemize}
+\item \textbf{Simplificação} - este algoritmo foca na simplificação da entrada que ocasionou a falha do teste. Para tanto, a entrada é analisada e tenta-se reduzir ao máximo sua complexidade, até que não seja mais possível simplificá-la sem eliminar o fracasso dos testes.
+\item \textbf{Isolamento} - algoritmo para encontrar uma configuração na qual a adição ou remoção de um elemento tem influência direta no resultado dos testes. Ele é ideal para encontrar os subconjuntos de um caso de falha.
+\end{itemize}
+
+A automação dos testes e da depuração procura determinar as causas do comportamento inadequado a partir da observação as diferenças (deltas) entre versões. Ela pode ser utilizada para simplificar ou isolar causas da falha e pode ser aplicado a qualquer tipo de dado que afete de alguma forma a execução do \ac{SUT}.
+
+Nesta abordagem é comum trabalhar com o teste e a depuração em conjunto, inclusive porque refazer a excução dos testes de um \textit{software} sob novas circunstâncias é uma técnica comum de depuração e, muitas vezes, é a única maneira de provar que as novas circunstâncias realmente podem causar a falha~\cite{zeller2002simplifying}.
+
+\subsection{Depuração por delta com hierarquias}
+A técnica generérica de \ac{DD} utiliza os algoritmos de simplificação e isolamento para fornecer um subconjunto onde encontra-se a mudança que possivelmente causou o erro. Porém, em casos mais complexos o \ac{DD} perde um pouco de eficácia e aponta para vários subconjuntos com falha nos testes e cujas entradas não são tão simplificadas.
+
+O HDD - \textit{Hierarchical Delta Debugging} \cite{Misherghi:2006} surgiu para melhorar o desempenho dos algoritmos do \ac{DD}, principalmente quando o código-fonte analisado possui uma estrutura hierárquica e semântica, ou seja, o \ac{SUT} não é apenas uma estrutura de linhas desconexas e independentes. 
+
+A ideia é aproveitar a estrutura hierárquica da entrada para reduzir o número de tentativas inválidas, pois explorando a estrutura dos dados de entrada é possível melorar a convergência e chegar mais rápido à estrutura simplificada.
+
+Para considera a hierarquia, o algoritmo de simplificação \ac{DD} foi modificado para operar em uma árvore de sintaxe abstrata e sua implementação foi aplicada para avaliar arquivos \ac{XML} e programas escritos em $C$. A versão \ac{XML} explora diretamente a estrutura hierárquica da entrada, extraindo sub-árvores, folhas, atributos e até caracteres. Para a versão $C$ foi necessário gerar um analisador do código-fonte, essencial para manipular o \textit{software} de acordo com a árvore de sintaxe simplificada.
+
+\subsection{Depuração por delta e iterativa}
+Para identificar o mínimo local a \ac{DD} necessita de duas versõs do \textit{software}: uma falha e uma correta. Contudo, quando um novo erro é descoberto, pode ser que a versão anterior também contenha o mesmo erro e será necessário procurar em versões ainda mais antigas, até encontrar uma versão correta para aplicar o delta. 
+
+A escolha desta de versões foi abordada pelo \ac{IDD}~\cite{artho2011iterative}, o qual automatizou a busca dessa versão correta através de comparações iterativas. O conjuntos de testes também são executados de forma automática para cada iteração e o algoritmo prosseguem até que uma das três condições sejam atingidas:(i) a versão que passa pelos testes é encontrada, (ii) não haja mais versões antigas disponíveis no repositório, ou (iii) foi alcançado o tempo limite da busca.
+
+Durante a comparação, sempre que a execução do \textit{software} não alcança o sucesso porque diverge do esperado (ex. erros de compilação, \textit{looping} infinito, mudanças sintáticas), os algoritmos de \ac{DD} fazem pequenos \textit{patch} para preservar o resultado anterior. No caso de não ser possível aplicar o \textit{patch}, o \ac{IDD} considera o resultado como fracasso.
+
+Para garantir que os algoritmos do \ac{DD} não remova trechos de código que contribuem para o valor do resultado do teste, o \ac{IDD} também automatizou o monitoramento de dados importantes da execução, dos arquivos de log, consumo de memória e o tempo necessário para executar o \textit{software} tanto para ambas versões do delta.
+
+\begin{description}
+\item[Resumo]  \hfill \\
+A base da \ac{DD} está em analisar a diferença entre duas versões do sistema e isolar/analisar as possíveis causas do comportamento inesperado automaticamente quando alguma divergência é identificada na execução da nova versão.
+
+Se o delta for bem aplicado, a estrutura que resta aponta apenas para os elementos relevantes no fracasso do teste do \textit{software}. Entretanto, no caso de grandes mudanças, a estrutura restante pode ser complexa e apresentar um grande número de dados para explorar. 
+
+Alguns trabalhos subsequentes concentraram em maneiras mais assertivas de reduzir o conjunto de entradas e isolar o problema. Uma delas é a $HDD$, que utiliza-se de dados referentes à hierarquia do programa para agilizar o trabalho realizado pelo algoritmo de redução. Outra alternativa interessane é o \ac{IDD}, que procura o melhor delta entre várias versões disponíveis no repositório.
+
+A comparação de versões no repositório é uma técnica interessante de depuração e pode ser aplicada inclusive para a geração de relatórios e gráficos sobre a consistência do \textit{software}. No capítulo~\ref{sec:tap} será apresentado um algoritmo quem também se utiliza do delta para determinar sucesso/falha dos testes do \ac{SUT}.
 \end{description}
 
 %\subsection{Capturing propagation of infected program states}
 %\cite{zhang2009capturing}
 
-\section{Program Slicing}
-Em técnicas que utilizam \textit{program slicing} a ideia principal é a partição do código e a remoção de estados ou caminhos que são irrelevantes para alcançar o objetivo selecionado, o que no caso da verificação e validação de um \textit{software} é encontrar um erro~\cite{Xu:2005:BSP:1050849.1050865}. 
-
-Esta técnica possui várias abordagens \cite{972675,sasirekha2011program}, mas as principais são: estática e dinâmica.
-
-A partição estática é o tipo mais rápido e aponta apenas uma aproximação do conjunto final de caminhos que podem levar ao erro. Isto ocorre porque o foco é simplificar ao máximo o \textit{software} em questão, reduzindo-o ao ponto de conter todos os estados que poderiam afetar o valor final, mas sem considerar o valor de entrada do \textit{software}. Este tipo de partição é mais utilizada para \textit{software} de pequeno porte e de pouca complexidade, em que o tamanho da partição permanece compatível com a sua simplicidade.
-
-Já na partição dinâmica, as informações do critério de corte tradicional não são suficientes, sendo necessária uma informação adicional sobre os valores de entrada do \textit{software}. A partição será realizada a partir destes dados e sequência de valores de entrada no qual o \textit{software} foi executado é determinante para o conjunto de saída. Esta partição é mais utilizada para \textit{software}s complexos e de alto grau de acoplamento.
-
-Independente da abordagem selecionada, a partição do código é uma técnica interessante porque necessita apenas de uma execução com falhas para ser capaz de simplificar o grupo de entradas a serem examinadas.
-
-
-\subsection{An empirical study of static program slice size}
-\cite{binkley2007empirical}
-
-\subsection{Thin slicing}
-\cite{Sridharan:2007:TS:1250734.1250748}
-
-\subsection{Program Slicing Enhances a Verification Technique Combining Static and Dynamic Analysis}
-\cite{Chebaro:2012}
-
-
-\section{Capture and Replay}
-Em trabalhos que utilizam \textit{capture and replay} a ideia é capturar toda a execução do programa até o final e armazenar as operações envolvidas em um registro. Este tipo de sistema permite que o desenvolvedor controle a nova execução do \textit{software} com execução de passos a frente, voltando passos na execução (contra o fluxo), examinando o contexto de alguma variável, verificando um determinado controle de fluxo, analisando fluxos alternativos, entre outras possibilidades.
+\section{Captura e Reexecução}
+Também existem trabalhos que utilizam a ideia é capturar toda a execução do programa até o final e armazenar as operações envolvidas em um registro. Este tipo de abordagem permite que o desenvolvedor controle a nova execução do \textit{software} com execução de passos a frente, voltando passos na execução (contra o fluxo), examinando o contexto de alguma variável, verificando um determinado controle de fluxo, analisando fluxos alternativos, entre outras possibilidades.
 
 \subsection{Selective capture and replay of program executions}
 \cite{orso2005selective}
@@ -477,13 +526,19 @@ Em trabalhos que utilizam \textit{capture and replay} a ideia é capturar toda a 
 Burger e Zeller~\cite{burger2008replaying} se destacaram por desenvolver uma ferramenta $JINSI$ que consegue capturar e reproduzir as interações intercomponentes e intracomponentes. Assim, todas as operações relevantes são observadas e executadas passo a passo, considerando-se todas as comunicações entre dois componentes até encontrar o \textit{bug}.
 
 \subsection{Pinpointing interrupts in embedded real-time systems using context checksums}
-Um grande desafio nesta técnica é como se adaptar a interrupções, pois toda a estrutura de reprodução do \textit{software} se baseia no fluxo de controle e uma interrupção tem a capacidade de romper esta sequência. Uma interrupção pode ocorrer a qualquer momento e provocar uma ruptura no fluxo de controle, então a execução do programa para na instrução atual, e continua a rotina de tratamento de interrupção.
+Um grande desafio nesta técnica é como se adaptar a interrupções, pois toda a estrutura de reprodução do \textit{software} se baseia no fluxo de controle e uma interrupção tem a capacidade de romper esta sequência.
+
+Interrupções podem ocorrer a qualquer momento e provocar uma ruptura no fluxo de controle e, desta forma, barrar a execução do programa na instrução atual para continuar a partir da rotina de tratamento de interrupção.
 
 Neste aspecto, a solução de tirar um \textit{snapshot} do contexto de execução quando ocorre uma interrupção~\cite{Sundmark} se mostra uma boa alternativa para que o desenvolvedor possa analisar erros oriundos de interrupções.
 
 \subsection{Locating failure-inducing environment changes}
 \cite{qi2011locating}
 
+\begin{description}
+\item[Resumo]  \hfill \\
+
+\end{description}
 
 \chapter{O ambiente compartilhado de teste e depuração}
 \label{ref:ambiente}
@@ -534,27 +589,27 @@ No algoritmo~\ref{algoritmo_AEP} são apresentados os passos a realizar a partir 
 \caption{Algoritmo de Troca dos Parâmetros de Configuração}\label{algoritmo_AEP}
 \KwIn{arquivo \# Arquivo de configura\c{c}\~{a}o do teste }
 \KwOut{relat\'{o}rio \# Relat\'{o}rio de tentativas }
-propriedades $\Leftarrow$ GetTraitFile(arquivo)\;
+propriedades $\Leftarrow$ pegarPropriedadeDoArquivo(arquivo)\;
 \eIf{ o arquivo possui valor de configura\c{c}\~{a}o }{
   \ForEach{configura\c{c}\~{a}o no arquivo}{
-             linha $\Leftarrow$ GetTheConfiguration(configura\c{c}\~{a}o, propriedades)\;
+             linha $\Leftarrow$ pegarConfiguracao(configura\c{c}\~{a}o, propriedades)\;
 \ForEach{valor entre os da configura\c{c}\~{a}o}{
-        novoPropriedade$\Leftarrow$ ExchangeValue(linha, propriedades) \;
-        novaApp$\Leftarrow$ Compile(aplica\c{c}\~{a}o, novoPropriedade) \;
-        relat\'{o}rio$\Leftarrow$ relat\'{o}rio + Emulate(novaApp) \;
+        novaPropriedade$\Leftarrow$ modificarValorPropriedade(linha, propriedades) \;
+        novaApp$\Leftarrow$ compilar(aplica\c{c}\~{a}o, novaPropriedade) \;
+        relat\'{o}rio$\Leftarrow$ relat\'{o}rio + emular(novaApp) \;
              }
 }
 }{
 \eIf{ o arquivo possui n$\circ$ m\'{a}ximo de tentativas}{
-        numMaxTentativas$\Leftarrow$ GetMaxSize(arquivo)\;
+        numMaxTentativas$\Leftarrow$ pegarTamanhoMaximo(arquivo)\;
 }{
-        numMaxTentativas$\Leftarrow$ GetRandomNumber()\;
+        numMaxTentativas$\Leftarrow$ gerarValorAleatorio()\;
   }
 \While{tentativas $<$ numMaxTentativas}{
     linha$\Leftarrow$ GetRandomNumber()\;
-novoPropriedade$\Leftarrow$ ExchangeValue(linha, propriedades)\;
-    novaApp$\Leftarrow$ Compile(aplica\c{c}\~{a}o, novoPropriedade)\;
-    relat\'{o}rio$\Leftarrow$ relat\'{o}rio + Emulate(novaApp)\;
+novaPropriedade$\Leftarrow$ modificarValorPropriedade(linha, propriedades)\;
+    novaApp$\Leftarrow$ compilar(aplica\c{c}\~{a}o, novaPropriedade)\;
+    relat\'{o}rio$\Leftarrow$ relat\'{o}rio + emular(novaApp)\;
   }
 }
 \Return relat\'{o}rio;

@@ -51,6 +51,7 @@
 \acro{JTAG}{\textit{Joint Test Access Group}}
 \acro{MCO}{\textit{The Mars Climate Orbiter}}
 \acro{MPL}{\textit{The Mars Polar Lander}}
+\acro{RSSF}{Redes de Sensores Sem Fio}
 \acro{TAP}{Troca Automática de Parâmetros de \textit{Software}}
 \acro{TBT}{\textit{Target Based embedded system Testing}}
 \acro{SUT}{\textit{Software Under Test}}
@@ -394,7 +395,7 @@ Quando novas versões do sistema original forem lançadas, o \textit{software} é n
 
 \begin{description}
 \item[Resumo]  \hfill \\
-	O destaque desta abordagem está na escolha de técnicas para teste de sistemas heterogêneos. A \textit{framework} apresenta uma característica que pode facilitar muito a automação de testes para sistemas embarcados, pois desenvolver testes específicos para um sistema embarcado e que ainda sejam independentes do ambiente de implantação (\textit{deploy}) não é uma tarefa trivial. 
+O destaque desta abordagem está na escolha de técnicas para teste de sistemas heterogêneos. A \textit{framework} apresenta uma característica que pode facilitar muito a automação de testes para sistemas embarcados, pois desenvolver testes específicos para um sistema embarcado e que ainda sejam independentes do ambiente de implantação (\textit{deploy}) não é uma tarefa trivial. 
 	
 A adaptação do mecanismo de testes para o uso de um oráculo composto por uma rede neural é com certeza outro diferencial, tornando possível que a \textit{framework} aprenda com os próprios resultados e consiga generalizar ou especializar uma determinada configuração de testes.
 
@@ -408,11 +409,15 @@ Após a definição de Weiser, a partição foi utilizada em diversas áreas da comput
 
 Cada trabalho apresenta um critério diferente para particionar, mas todos possuem o conceito de fatia (\textit{slice}) como um subconjunto de predicados do programa que afetam os valores computados, de acordo com o critério de controle. Uma distinção importante para particionar é o tipo de fatia que será realizada: estática, dinâmica ou uma variação delas~\cite{sasirekha2011program}.
 
-A partição estática é o tipo mais rápido e, em contrapartida, aponta apenas uma aproximação do conjunto final de caminhos que podem levar ao erro. Isto ocorre porque o foco é simplificar ao máximo o \textit{software} em questão, reduzindo-o ao ponto de conter todos os estados que poderiam afetar o valor final, mas sem considerar o valor de entrada do \textit{software}. Este tipo de partição é mais utilizada para \textit{software} de pequeno porte e de pouca complexidade, em que o tamanho da partição permanece compatível com a sua simplicidade.
+A partição estática é o tipo mais rápido e, em contrapartida, aponta apenas uma aproximação do conjunto final de caminhos que podem levar ao erro. Isto ocorre porque o foco é simplificar ao máximo o \textit{software} em questão, reduzindo-o ao ponto de conter todos os estados que poderiam afetar o valor final, mas sem considerar o valor de entrada do \textit{software}. 
 
-Na partição dinâmica, as informações do critério de corte tradicional não são suficientes, sendo necessária uma informação adicional sobre os valores de entrada do \textit{software}. A partição será realizada a partir destes dados e sequência de valores de entrada no qual o \textit{software} foi executado é determinante para o conjunto de saída. Esta partição é mais utilizada para \textit{software} complexo e de alto grau de acoplamento.
+Este tipo de partição é mais utilizada para \textit{software} de pequeno porte e de pouca complexidade, em que o tamanho da partição permanece compatível com a sua simplicidade.
 
-Além dos tipos base de partição, também existem modelos criados pela união deles\cite{Venkatesh:1991,binkley2005minimal,Sridharan:2007:TS:1250734.1250748,Chebaro:2012}, proporcionando uma maior configurabilidade de depuração e atendendo melhor às características do \ac{SUT}.
+Na partição dinâmica, as informações do critério de corte tradicional não são suficientes, sendo necessária uma informação adicional sobre os valores de entrada do \textit{software}. A partição será realizada a partir destes dados e sequência de valores de entrada no qual o \textit{software} foi executado é determinante para o conjunto de saída. 
+
+Esta partição é mais utilizada para \textit{software} complexo e de alto grau de acoplamento.
+
+Além dos tipos base de partição, também existem modelos que são variações de um dos dois principais ou até gerados pela união de modelos~\cite{Venkatesh:1991,binkley2005minimal,Sridharan:2007:TS:1250734.1250748,Chebaro:2012}, proporcionando uma maior configurabilidade de depuração e atendendo melhor às características do \ac{SUT}.
 
 \begin{description}
 \item[Resumo]  \hfill \\
@@ -453,12 +458,9 @@ A implementação da extração de dados bidirecional executa um processo de votação
 Esta solução é interessante porque reduz o problema de redundância, pois o processo de votação só acaba quando hover convergência e quanto maior o número de predicados competindo pelo votos, menor é a quantidade de votos que cada um deles pode ter. 
 
 Depois de cada execução um predicado pode receber tanto um voto completo quando uma parcela do voto. No final, os predicados são classificados e selecionados considerando o número de votos que receberam.
-%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{comment}
-\subsection{Depuração estatística através do perfil da execução}
-\cite{chilimbi2009holmes}
-\end{comment}
-%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\subsection{Depuração estatística através do perfil da execução}
+%\cite{chilimbi2009holmes}
 
 \begin{description}
 \item[Resumo]  \hfill \\
@@ -516,71 +518,107 @@ A comparação de versões no repositório é uma técnica interessante de depuração e
 %\subsection{Capturing propagation of infected program states}
 %\cite{zhang2009capturing}
 
-\section{Captura e Reexecução}
-Também existem trabalhos que utilizam a ideia é capturar toda a execução do programa até o final e armazenar as operações envolvidas em um registro. Este tipo de abordagem permite que o desenvolvedor controle a nova execução do \textit{software} com execução de passos a frente, voltando passos na execução (contra o fluxo), examinando o contexto de alguma variável, verificando um determinado controle de fluxo, analisando fluxos alternativos, entre outras possibilidades.
+\section{Captura e Reprodução}
+A idéia da técnica de captura e reprodução consiste em selecionar um subsistema do \textit{software} como alvo do estudo, captuar todas as operações entre este subsistema e o resto do \textit{software} e depois reexecutar as operações isoladas do subsistema~\cite{orso2005selective}.
 
-\subsection{Selective capture and replay of program executions}
-\cite{orso2005selective}
+Este tipo de depuração permite que o desenvolvedor controle a nova execução do \textit{software} com execução de passos a frente, voltando passos na execução (contra o fluxo), examinando o contexto de alguma variável, verificando um determinado controle de fluxo, analisando fluxos alternativos, entre outras possibilidades.
 
-\subsection{Replaying and isolating failing multi-object interactions}
-Burger e Zeller~\cite{burger2008replaying} se destacaram por desenvolver uma ferramenta $JINSI$ que consegue capturar e reproduzir as interações intercomponentes e intracomponentes. Assim, todas as operações relevantes são observadas e executadas passo a passo, considerando-se todas as comunicações entre dois componentes até encontrar o \textit{bug}.
+A ferramenta $JINSI$ foi implementada para aplicar os conceitos de captura e reprodução para programas na linguagem Java~\cite{orso2006isolating}. Dado um sistema e um componente presente no sistema, $JINSI$ grava as interações entre esse componente e o resto do sistema. Neste contexto, o componente é considerado como um conjunto de classes com uma função definida.
 
-\subsection{Pinpointing interrupts in embedded real-time systems using context checksums}
-Um grande desafio nesta técnica é como se adaptar a interrupções, pois toda a estrutura de reprodução do \textit{software} se baseia no fluxo de controle e uma interrupção tem a capacidade de romper esta sequência.
+$JINSI$ foi novamente abordada por Burger e Zeller~\cite{burger2008replaying}, adquirindo a capacidade de capturar e reproduzir as interações intercomponentes e intracomponentes. Assim, todas as operações relevantes são observadas e executadas passo a passo, considerando-se todas as comunicações entre dois componentes até encontrar o \textit{bug}.
 
-Interrupções podem ocorrer a qualquer momento e provocar uma ruptura no fluxo de controle e, desta forma, barrar a execução do programa na instrução atual para continuar a partir da rotina de tratamento de interrupção.
+Um grande desafio nesta técnica é como se adaptar a interrupções, pois toda a estrutura de reprodução do \textit{software} se baseia no fluxo de controle e uma interrupção tem a capacidade de romper esta sequência. Afina, interrupções podem ocorrer a qualquer momento e provocar uma ruptura no fluxo de controle e, desta forma, barrar a execução do programa na instrução atual para continuar a partir da rotina de tratamento de interrupção.
 
 Neste aspecto, a solução de tirar um \textit{snapshot} do contexto de execução quando ocorre uma interrupção~\cite{Sundmark} se mostra uma boa alternativa para que o desenvolvedor possa analisar erros oriundos de interrupções.
 
-\subsection{Locating failure-inducing environment changes}
-\cite{qi2011locating}
+%\subsection{Locating failure-inducing environment changes}
+%\cite{qi2011locating}
 
 \begin{description}
 \item[Resumo]  \hfill \\
+Captura e Reprodução sempre foi muito utilizada para testes de interface, em que a interação do usuário com o \textit{software} era armazenada para poder servir como caso de testes. Desta forma torna-se possível realizar testes de funcionalidade do sistema de acordo com o estímulo do usuário.
 
+Já a depuração é um caso mais específico, pois nem todo erro pode ser reproduzido, mesmo que todas as ações sejam reexecutadas na mesma ordem. Contudo, para um erro determinístico em que se tem todas as operações que podem ter causado de um determinado erro, é possível realizar uma investigação baseada no fluxo de controle do \textit{software}.
+
+A ferramenta $JINSI$ foi utilizada para corroborar a técnica, que além de capturar e reproduzir o \textit{software}, agora também incorporou os algoritmos de \ac{DD} para isolar o subconjunto de interações relevantes para simular o erro.
 \end{description}
 
 \chapter{O ambiente compartilhado de teste e depuração}
 \label{ref:ambiente}
-Este capítulo apresenta instruções de como integrar a execução de testes com os possíveis ambientes de
-depuração, gerando o ambiente compartilhado de desenvolvimento.
+Este capítulo apresenta o ambiente compartilhado de teste e depuração, demostrando de onde as ideias foram extraídas, adaptadas e, em alguns casos, melhoradas. Além disso, serão apresentas instruções para integrar a execução de testes com os possíveis ambientes de depuração, gerando o ambiente compartilhado de desenvolvimento. 
 
-O ambiente utilizado desenvolvido para dar suporte ao presente trabalho conta com um emulador para simular a execução da aplicação e da automação dos testes. No caso de sucesso em um teste, ou seja, quando um erro é detectado, automaticamente uma ferramenta de depuração é iniciada e o resultado de todas as operações é repassado ao usuário.
+Para definir a infraestrutura do ambiente foram analisados vários ambientes de execução automática de testes e de depuração, ambos com foco em sistemas embarcados. Estes sistemas são conhecidos por realizar tarefas específicas e possuirem apenas os recursos essenciais para desempenhá-la. 
 
-As ferramentas utilizadas neste ambiente podem ser substituídas por qualquer outra equivalente. A configuração será apresentada apenas para fins de reprodução do experimento. Nele foi utilizado o $QEMU$ para emular a máquina com a aplicação alvo a partir de outra máquina, usando tradução dinâmica. Desta forma torna-se possível utilizar um computador pessoal para testar aplicações compiladas para algum outro sistema embarcado. 
+As \ac{RSSF}, por exemplo, podem ser formadas por vários sensores espalhados por uma grande área de monitoramento. Em geral estes sensores possuem pouco poder de processamento e contam com uma memória de poucos \textit{kilobytes}~\cite{pottie2000wireless}. Logo, torna-se fundamental ressaltar que apesar do teste do \textit{software} embarcado compartilhar recursos com as aplicações do sistema, ele não deve influenciar sua operação.
 
-Para dar suporte também à depuração, foi necessário procurar um aliado para ver quais passos do programa foram executados um momento antes de um \textit{crash}. O \ac{GBD} encaixou-se no papel de depurador, pois nele é possível especificar qualquer regra que possa afetar seu comportamento de maneira estática.
+A emulação é uma opção é interessante quando o \ac{SUT} possui difícil acesso. No caso da \ac{RSSF} seria impraticável coletar todos os sensores para realizar um testes. Além da quantidade e da dificuldade de acesso às áreas em que os sensores atuam, as atividades de monitoramento teriam que sofere uma pausa até o término do teste.
+
+Em sistemas embarcados é comum que componentes de \textit{software} e \textit{hardware} trabalhem em conjunto para desempenhar uma tarefa. Contudo, grande parte das falhas nos testes de um \textit{software} embarcado são oriundos da integração de componentes heterogêneos~\cite{seo}. Uma das alternativas para se atenuar este efeito é utilizar emulação, que possibilita a visualização do estado do software além de permitir o controle de sua execução\cite{KiSCL08}. Desta maneira, é possível analisar a intersecção entre componentes e monitorar a execução dos testes através da tabela de símbolos.
+
+O processo de teste para sistemas heterogênios é uma tarefa trabalhosa, principalmente quando não se sabe qual ambiente de implantação será utilizado~\cite{universal:2013}. Existem várias alternativas para ajudar na tarefa e aprimorar a qualidade dos testes, como utilizar oráculo como um repositório de testes~\cite{priyaneural}, selecionar \textit{checkpoints} baseados na interfaces dos componentes~\cite{KiSCL08}, módulos de pré-processamento com análise de código fonte~\cite{atemes}.
+
+Sabe-se que o processo de depuração também precisa de ferramentas específicas para auxiliar no monitoramento da execução de um programa. O sucesso das técnicas que focam em automação da depuração não dependem apenas dos algoritmos ou dados coletados, mas também da estabilidade fornecida pelo ambiente para desempenhar tais atividades. Por exemplo, nas ferramentas de captura e reprodução~\cite{orso2005selective, orso2006isolating, qi2011locating} é essencial que a etapa de captura grave todas as operações que levam ao erro.
 
 \section{Configuração do ambiente remoto}
-A integração da execução dos testes e da depuração é particular para cada máquina hospedeira e alvo, portanto, talvez alguns passos aqui apresentados devam ser adaptados dependendo de sua arquitetura alvo. A Figura~\ref{fig:emulator_debugger_gray} apresenta as atividades necessárias para executar a depuração remota em conjunto com a simulação dos testes.
+As ferramentas utilizadas para a construção deste ambiente remoto podem ser substituídas por qualquer outra equivalente, contudo, a configuração completa será tecnicamente apresentada para que seja possível a reprodução do experimento.
+
+O ambiente compartilhado proposto utiliza o $QEMU$ para emular a máquina com a aplicação alvo a partir de outra máquina, usando tradução dinâmica. Desta forma torna-se possível utilizar um computador pessoal para testar aplicações compiladas para algum outro sistema embarcado. O \ac{GDB} encaixou-se no papel de depurador, pois nele é possível especificar qualquer regra que possa afetar seu comportamento de maneira estática.
+
+A integração da execução dos testes e da depuração é particular para cada máquina hospedeira e alvo, portanto, talvez alguns passos aqui apresentados devam ser adaptados para a arquitetura alvo. 
+
+A Figura~\ref{fig:emulator_debugger_gray} apresenta as atividades necessárias para executar a depuração remota em conjunto com a simulação dos testes.
 
 \fig{emulator_debugger_gray}{Atividades de integração entre emulador e depurador}{scale=.25}
 
 Uma explicação adicional das técnicas e ferramentas utilizadas neste processo estão listados abaixo:
 
 \begin{description}
-\item[Compilar com informações de depuração] é o primeiro passo. Como entrada é necessário o código-fonte do aplicativo e como saída esperada encontra-se o código compilado com informações de depuração. Quem utilizar o \ac{GCC} pode realizar esta atividade simplesmente usando opção $-g$ para compilar. 
+\item[1. Compilar com informações de depuração] \hfill \\
+Este passo realiza uma compilação simbólica e sem otimizações. A otimização correta é importante para a execução do \textit{software}, mas quando o foco é a depuração o ideal é que não haja muita diferença entre o código-fonte e as instruções geradas.
+
+Como entrada é necessário o código-fonte do \textit{software} e como saída esperada encontra-se o código compilado com informações de depuração. O \ac{GCC} realiza esta atividade quando acrescentada a opção $-g$ para compilar. 
 	
-\item [Emular o sistema utilizando um emulador] é um passo necessário para executar a aplicação na arquitetura alvo correta. Para executar este passo utilizamos o $QEMU$, que deve ser inicializado com os argumentos $-s -S$. A primeira opção ativa o \textit{stub} para conectar um depurador, a fim de abrir a comunicação entre o emulador e o depurador. A opção $-S$ é utilizada para forçar que o $QEMU$ espere a conexão do depurador antes da inicialização do sistema.
+\item [2. Emular o sistema utilizando um emulador] \hfill \\
+É um passo necessário para executar a \textit{software} na arquitetura alvo correta. É importante ressaltar que o \textit{software} a ser emulado não deve iniciar a execução antes que o depurador esteja conectado. Caso isso ocorra, não será possível inspecionar todos os detalhes da execução.
+
+Para executar este passo utilizamos o $QEMU$, que deve ser inicializado com os argumentos $-s -S$. A primeira opção ativa o \textit{stub} para conectar um depurador, a fim de abrir a comunicação entre o emulador e o depurador. A opção $-S$ é utilizada para forçar que o $QEMU$ espere a conexão do depurador antes da inicialização do sistema.
 Por exemplo, se uma aplicação compilada com informações de depuração ($app.img$) imprime algo na tela ($stdio$), a chamada do $QEMU$ deve ser semelhante à: $qemu$ $-fda$ $app.img$ $-serial$ $stdio$ $-s$ $-S$
 	
-\item [Conectar-se com o depurador] começa com uma sessão do depurador inicializada em uma janela separada. Então, para se conectar ao depurador ao $QEMU$ o desenvolvedor deve explicitar que o alvo a ser examinado é remoto e informar o endereço da máquina alvo e porta em que se encontra o alvo a ser examinado. Utilizando-se o GDB, a tela será iniciada a partir do comando: $target$ $remote$ $[endereço\_alvo]:[porta\_alvo]$
+\item [3. Conectar-se com o depurador] \hfill \\
+Esta conecção é importante para fornecer ações ao usuário, tais como: executar o programa passo-a-passo, pausar/reiniciar a execução, entre outras. Para fornecer a estabilidade necessária para a infraestrutura gerada, a conexão do depurador será realizada de maneira remota.
 
-\item [Recuperar as informações de depuração] é um passo importante para ajudar os desenvolvedores a encontrarem erros. O arquivo gerado no primeiro item contém todas as informações que podem ser retiradas da compilação, como por exemplo o endereço de uma variável, ou os nomes contidos na tabela de símbolos. O arquivo usado para manter as informações de depuração deverá ser informado para o $GDB$ usando o comando: $file$ $[caminho\_do\_arquivo]$
+Para que a depuração seja remota a sessão do depurador deve ser inicializada em um amniente separado. Então, para se conectar ao depurador ao $QEMU$ o desenvolvedor deve explicitar que o alvo a ser examinado é remoto e informar o endereço da máquina alvo e porta em que se encontra o alvo a ser examinado. Utilizando-se o \ac{GDB}, a tela será iniciada a partir do comando: $target$ $remote$ $[endereço\_alvo]:[porta\_alvo]$
+
+\item [4. Recuperar as informações de depuração] \hfill \\
+O arquivo gerado no primeiro passo   contém todas as informações que podem ser retiradas da compilação, como por exemplo o endereço de uma variável, ou os nomes contidos na tabela de símbolos. Então este passo é importante para ajudar os desenvolvedores a encontrarem erros.
+
+O arquivo usado para manter as informações de depuração deverá ser informado para o \ac{GDB} usando o comando: $file$ $[caminho\_do\_arquivo]$
 	
-\item [Encontrar origem dos erros] é uma atividade que depende do programa a ser depurado. A partir desta etapa, o desenvolvedor pode definir \textit{breakpoints}, \textit{watchpoints}, controlar a execução do programa e até mesmo permitir \textit{logs}. Existem vários trabalhos com o foco em ajudar a encontrar os erros através da automação de alguns pontos, como a gerarão automática de \textit{breakpoints}~\cite{JSWjsw0803603616} e o controle do fluxo de execução \cite{Chern:2007}.
+\item [5. Encontrar origem dos erros] \hfill \\
+Encontrar e corrigir erros é uma atividade depende do programa a ser depurado. A partir desta etapa, o desenvolvedor pode definir \textit{breakpoints}, \textit{watchpoints}, controlar a execução do programa e até mesmo permitir \textit{logs}. 
+
+Existem vários trabalhos com o foco em ajudar a encontrar os erros através da automação de alguns pontos, como a gerarão automática de \textit{breakpoints}~\cite{JSWjsw0803603616} e o controle do fluxo de execução \cite{Chern:2007}.
 \end{description}
 
-\chapter{A arquitetura de automação da execução de testes}
-\label{sec:tap}
+Após a definição da infraestrutura compartilhada para testes e depuração também foi necessário dividir as funções para cada uma das atividades. A ideia é utilizar o emulador para a automação da execução do \textit{software} e de seus casos de teste. A depuração será iniciadas somente no caso de sucesso em um teste, ou seja, quando um erro é detectado.
 
-A ideia de desenvolver a troca de parâmetros surgiu extrapolando-se conceitos da metodologia de projeto orientado aplicação (\ac{ADESD}) e do uso de programação genérica para a área de testes. O projeto orientado à aplicação fornece um sistema embarcado desenvolvido a partir de componentes especificamente adaptados e configurados de acordo com os requisitos da aplicação alvo. 
+\chapter{O algoritmo de automação da execução de testes}
+A execução automática dos testes
 
-O fato de existir uma aplicação que fornece a certeza de que tudo que a compõe é essencial para seu funcionamento pode tornar o teste dos requisitos mais assertivo. Ainda, a programação genérica fornece uma maior adaptação do sistema às várias implementações de uma especificação.
+
+A ideia por trás do algoritmo de automação da execução de testes surgiu extrapolando-se conceitos da metodologia de projeto orientado aplicação (\ac{ADESD}) e do uso de programação genérica. 
+
+Em um projeto orientado à aplicação o sistema é desenvolvido a partir de componentes especificamente adaptados e configurados de acordo com os requisitos da aplicação alvo. O fato de existir uma aplicação que certifica que tudo que a compõe é essencial para seu funcionamento pode tornar o teste dos requisitos mais assertivo. Desta forma, a própria aplicação garante uma entrada simplificada.
+
+
+
+
+
+Ainda, a programação genérica fornece uma maior adaptação do sistema às várias implementações de uma especificação.
 
 No desenvolvimento para sistemas embarcados é frequente que uma única especificação seja reimplementada para atender a variabilidade de um componente de \textit{software} ou \textit{hardware}. Para cada uma destas implementações, um novo conjunto de testes é realizado. A vantagem de unir \ac{ADESD} e programação genérica ao desenvolvimento/teste de sistemas embarcados é poder aplicar um único conjunto de testes para todas as implementações que seguem uma mesma especificação, especializando apenas a configuração desejada.
 
-O algoritmo de \ac{TAP} é independente do sistema operacional e plataforma. No entanto, trabalhamos com a premissa de que este sistema seja orientado a aplicação, com modelagem baseada em \textit{features} e parametrização. Também é desejável que cada abstração do sistema seja configurada conforme necessário através de \textit{traits} de um modelo de \textit{templates}, como o definido por Stroustrup \cite{Stroustrup:c++}.
+O algoritmo de \ac{TAP} é independente do sistema operacional e plataforma. No entanto, trabalha com a premissa de que este sistema seja orientado a aplicação, com modelagem baseada em \textit{features} e parametrização. Também é desejável que cada abstração do sistema seja configurada conforme necessário através de \textit{traits} de um modelo de \textit{templates}~\cite{Stroustrup:c++}.
 
 No algoritmo~\ref{algoritmo_AEP} são apresentados os passos a realizar a partir do momento em que se tem uma aplicação alvo até o retorno do relatório para o desenvolvedor. A entrada do algoritmo é o arquivo de configuração que possui o caminho do \ac{SUT} e de seus \textit{traits}. A partir destas informações o algoritmo flui no sentido de tentar encontrar a característica desejada, trocá-la por uma valor predeterminado, executar a nova aplicação e recolher o retorno da aplicação.
 
@@ -615,6 +653,8 @@ novaPropriedade$\Leftarrow$ modificarValorPropriedade(linha, propriedades)\;
 \Return relat\'{o}rio;
 \end{algorithm}
 
+
+\chapter{A arquitetura de automação da execução de testes}
 A implementação atual utiliza o sistema operacional ($EPOS$)~\cite{Froehlich:2001}, uma vez que adiciona uma grande capacidade de configuração do sistema, o que é muito adequado para avaliar o \textit{script}. Para um melhor entendimento da implementação do algoritmo de \ac{TAP} será necessária uma breve explicação de como configurar as abstrações no $EPOS$.
 
 \section{Abstrações no $EPOS$}

@@ -29,6 +29,7 @@
 \usepackage{subfigure}		% permite ter subfiguras
 \usepackage{indentfirst}	% indenta a primeira linha dos paragrafos
 \usepackage{remreset}		% reinicia contadores
+
 %\usepackage{url}
 
 %---------------------------------------------------------------------------
@@ -70,7 +71,7 @@
 
 %---------------------------------------------------------------------------
 % Tipo do documento
-\providecommand{\UFSCdocumentodata}{Tese}
+\providecommand{\UFSCdocumentodata}{Monografia}
 \providecommand{\UFSCdocumentogenerodata}{a}
 \newcommand{\documento}[2][a]%
     {\renewcommand{\UFSCdocumentodata}{#2} \renewcommand{\UFSCdocumentogenerodata}{#1} \detgenerodoc{#2}}
@@ -105,7 +106,7 @@
 \renewcommand{\data}[3]{\renewcommand{\diadata}{#1}\renewcommand{\mesdata}{#2}\renewcommand{\anodata}{#3}}
 
 %---------------------------------------------------------------------------
-% Orientador e co-orientador
+% Orientador, co-orientador e candidato
 \renewcommand{\orientador}[2][Orientador]%
     {
     \renewcommand{\ABNTorientadorname}{#2}%
@@ -119,6 +120,12 @@
     \renewcommand{\ABNTcoorientadordata}{#1}
     }
 \renewcommand{\coorientadorformat}{}
+
+\newcommand{\candidato}[1][Candidato]%
+    {
+    \renewcommand{\ABNTcoorientadorname}{#1}
+    }
+\newcommand{\candidatoformat}{}
 
 %---------------------------------------------------------------------------
 % Coordenador do curso

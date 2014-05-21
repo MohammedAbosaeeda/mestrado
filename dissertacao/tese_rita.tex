@@ -90,7 +90,7 @@
 \bancaMembroC{Prof.  membro2} % Nome do membro da Banca
 %\bancaMembroD{Prof.  membro3} % Nome do membro da Banca
 
-\dedicatoria{Dedico esta dissertação à minha familia: meus amados pais Célia Regina Cazu Soldi e Luis Carlos Soldi, minha irmãzinha Luiza Helena Cazu Soldi e meu companheiro para todas as horas, Marcelo Ribeiro Xavier da Silva.}
+\dedicatoria{Dedico este trabalho à minha familia: meus amados pais Célia Regina Cazu Soldi e Luis Carlos Soldi, minha irmãzinha Luiza Helena Cazu Soldi e meu companheiro para todas as horas, Marcelo Ribeiro Xavier da Silva.}
 
 \agradecimento{Ainda não escrevi.}
 
@@ -111,15 +111,15 @@
 %--------------------------------------------------------
 % Elementos pré-textuais
 \capa
-\folhaderosto % Se nao quiser imprimir a ficha, é só não usar o parâmetro
-\folhaaprovacao
-\paginadedicatoria
-\paginaagradecimento
-\paginaepigrafe
-\paginaresumo
-\paginaabstract
-\listadefiguras
-\listadetabelas
+%\folhaderosto % Se nao quiser imprimir a ficha, é só não usar o parâmetro
+%\folhaaprovacao
+%\paginadedicatoria
+%\paginaagradecimento
+%\paginaepigrafe
+%\paginaresumo
+%\paginaabstract
+%\listadefiguras
+%\listadetabelas
 %\listadeabreviaturas
 %\listadesimbolos
 \sumario
@@ -168,13 +168,13 @@ Para atender o objetivo geral, os seguintes objetivos específicos devem ser conc
 \end{itemize}
 
 
-\section{Organização do texto}
-\begin{itemize}
- \item \textbf{Capítulo \ref{cap:conceitosBasicos}}: apresenta os conceitos fundamentais da área, compondo uma base teórica para auxiliar no desenvolvimento das ideias e na assimilação das técnicas apresentadas neste trabalho.
- \item \textbf{Capítulo \ref{cap:trabalhosRelacionados}}: possui os trabalhos que representam o estado da arte da literatura e que servem de inspiração para o desenvolvimento desta dissertação. Todos os trabalhos aqui apresentado se relacionam diretamente com o tema abordado.
+%\section{Organização do texto}
+%\begin{itemize}
+% \item \textbf{Capítulo \ref{cap:conceitosBasicos}}: apresenta os conceitos fundamentais da área, compondo uma base teórica para auxiliar no desenvolvimento das ideias e na assimilação das técnicas apresentadas neste trabalho.
+% \item \textbf{Capítulo \ref{cap:trabalhosRelacionados}}: possui os trabalhos que representam o estado da arte da literatura e que servem de inspiração para o desenvolvimento desta dissertação. Todos os trabalhos aqui apresentado se relacionam diretamente com o tema abordado.
 	%\item[Capítulo]
 	%\item[Capítulo] é o capítulo de desfecho da dissertação e apresenta as conclusões extraídas durante o desenvolvimento deste trabalho, além de alguns pontos de melhoria para trabalhos futuros.
-\end{itemize}
+%\end{itemize}
 
 \chapter{Conceitos básicos}
 \label{cap:conceitosBasicos}
@@ -604,7 +604,7 @@ Existem vários trabalhos com o foco em ajudar a encontrar os erros através da au
 
 Após a definição da infraestrutura compartilhada para testes e depuração também foi necessário dividir as funções para cada uma das atividades. A ideia é utilizar o emulador para a automação da execução do \textit{software} e de seus casos de teste. A depuração será iniciadas somente no caso de sucesso em um teste, ou seja, quando um erro é detectado.
 
-\chapter{\ac{TAP}}
+\chapter{A troca automática dos parâmetros de \textit{software}}
 \label{sec:tap}
 No desenvolvimento para sistemas embarcados é comum que uma especificação seja reutilizada, diferenciando apenas alguns requisitos não funcionais. Esta estratégia visa utilizar a propriedade intelectual já adquirida para reduzir o tempo para que um novo produto entre no mercado~\cite{gupta1997introducing}.
 
@@ -861,7 +861,7 @@ A Tabela~\ref{ref:tabQuestao1Ferramenta} apresenta um resumo da análise comparat
 \begin{table*}[h]
 \begin{center}
 \caption{Resumo comparativo do suporte para a meta de teoria de teste universal}
-\begin{tabular}{|p{.3\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.15\textwidth}|} 
+\begin{tabular}{|p{.29\textwidth}|p{.13\textwidth}|p{.13\textwidth}|p{.15\textwidth}|p{.14\textwidth}|} 
 \hline
  & \multicolumn{4}{c}{\textbf{Suporte para o desafio}} \\
 
@@ -898,15 +898,20 @@ Captura e reprodução & Não & Parcial & Parcial & Não\\
 \end{center}
 \end{table*}
 
-Um aspecto que ficou bastante realçado que nenhuma das técnica contemplou o desafio das evidências empíricas. Apesar de grande parte dos autores disponibilizam seus trabalhos para o púbico em geral, os dados derivados das pesquisas ainda não são maduros o suficiente parar desenvolver o estado da arte. Ou seja, grande parte dos dados existentes são originados de impressões e deduções dos próprios autores e, muitas vezes,  desprovidos de fundamento formal. 
+Um aspecto que ficou bastante realçado que nenhuma das técnica contemplou o desafio das evidências empíricas. Apesar de grande parte dos autores disponibilizam seus trabalhos para o púbico em geral, os dados derivados das pesquisas ainda não são maduros o suficiente parar desenvolver o estado da arte. Ou seja, grande parte dos dados existentes são originados de impressões e deduções dos próprios autores e, muitas vezes,  desprovidos de fundamento formal.
 
+\subsection{Meta da modelagem baseada em testes}
+Devido à falta de maturidade na produção de sistemas, hoje há um foco muito grande no desenvolvimento do \textit{software}, e as atividades de teste e depuração são apenas subprodutos que ajudam na combiabilidade do sistema.
 
-\subsection{Modelagem baseada em testes}
-A Tabela~\ref{ref:tabQuestao2TAP} apresenta uma análise das contribuições de \ac{TAP} referente aos desafios propostos pela meta de modelagem baseada em testes.
+Neste contexo, a meta de modelagem baseada em testes se torna muito importante, pois defende um \textit{software} só pode ser completamente testado caso haja um planejamento para a geração dos testes e que sejam originados à partir de um modelo definido.
+
+Uma análise das contribuições de \ac{TAP} na meta de modelagem baseada em testes será apresentada na Tabela~\ref{ref:tabelaModelagemBaseadaTesteTAP}.
 
 \begin{table*}[h]
 \begin{center}
-\begin{tabular}{|p{.21\textwidth}|p{.79\textwidth}|} 
+\caption{Análise de \ac{TAP} para a meta de modelagem baseada em testes}
+\begin{tabular}{|p{.19\textwidth}|p{.81\textwidth}|} 
+
 \hline
 \textbf{Teste baseado em modelos} & Atualmente a ferramenta possui uma contribuição \textbf{limitada} à agregação de outros modelos e prevê apenas o ensaio de conformidade a partir de uma configuração de teste.\\ 
 
@@ -918,19 +923,31 @@ A Tabela~\ref{ref:tabQuestao2TAP} apresenta uma análise das contribuições de \ac
 
 \hline
 \end{tabular}
-\label{ref:tabQuestao2TAP} 
+\label{ref:tabelaModelagemBaseadaTesteTAP} 
 \end{center}
 \caption{Análise de \ac{TAP} para a meta de modelagem baseada em testes}
 \end{table*}
 
 Todos os desafios da meta de modelagem baseada em testes são relevantes para a área de testes de \textit{software}, contudo, grande parte dos desafios são contemplados de maneira parcial em \ac{TAP} por distanciar-se muito dos objetivos específicos deste trabalho. Satisfazer esta meta é um ponto de melhoria que deve ser analisado para implementação futura.
 
-A Tabela~\ref{ref:tabQuestao2Ferramenta} apresenta uma análise comparativa entre as ferramentas e técnicas correlatas para os desafios propostos pela meta de modelagem baseada em teste.
+Durante o comparativo entre as ferramentas foi possível identificar que todos os trabalhos abordam de alguma forma o desafio de testes baseados em modelos e anti-modelos, exceto $Justitia$, que só suporta os testes baseados em modelos. $Justitia$ utiliza as interfaces como modelos para a construção dos casos de teste e também como \textit{checkpoint} das atividades do \textit{software}, não sendo possível utilizar outra abordagem de verificação do sistema.
+
+Dentre todas as técnicas analisadas, apenas duas contemplaram a meta por completo, apresentando soluções para todos os desafios propostos: Captura e reprodução e $ATEMES$. 
+
+Na Captura e reprodução, o padrão é o teste baseado em anti-modelos, pois toda a execução do sistema é gravada e utilizada para o teste e depuração do sistema. Embora seja menos comum, algumas ferramentas da técnica ainda oferecem o teste baseado em modelo, que são mesclados os dados do anti-modelo para fornecer um resultado melhor na identificação dos \textit{bugs}.
+
+Já $ATEMES$ se destaca pela quantidade de tipos de teste que podem ser gerados pelo módulo \texttt{PRPM} da ferramenta, sendo que a base destes casos de teste pode ser vir de modelos bem definidos, anti-modelos, agregação de modelos ou até de maneira aleatória. O oráculo de $ATEMES$ processa as informações de execução do sistema e repassa informações para vários módulos, por exemplo, o módulo \texttt{POPM} recebe um conunto de linhas do código fonte apontadas como prováveis geradoras de erros.
+
+Outra técnica que se destaca pelo oráculo de testes é a Execução de testes por sistema alvo. Além de permitir uma alimentação à partir de execuções consideradas corretas do \textit{software}, recentemente uma das implementações da técnica adaptou-a com um oráculo composto por uma rede neural com \textit{backpropagation}.
+
+Depuração por delta e Depuração estatística são técnicas de depuração e por isso não apresentam um oráculo de testes. Algo semelhante ocorre com a partição de código, pois sua principal característica é particionar o código, respeitando o modelo (ou anti-modelo) do \textit{software}. Este particionamento pode ocorrer de várias formas, mas não é um oráculo quem define qual algoritmo utilizar.
+
+A Tabela~\ref{ref:tabQuestao2Ferramenta} apresenta um resumo da análise comparativa entre as ferramentas e técnicas correlatas para os desafios propostos pela meta de modelagem baseada em teste.
 
 \begin{table*}[h]
 \begin{center}
 \caption{Comparativo qualitativo do suporte para a meta de modelagem baseada em teste}
-\begin{tabular}{|p{.3\textwidth}|p{.2\textwidth}|p{.25\textwidth}|p{.15\textwidth}|} 
+\begin{tabular}{|p{.29\textwidth}|p{.2\textwidth}|p{.25\textwidth}|p{.15\textwidth}|} 
 \hline
  & \multicolumn{3}{c}{\textbf{Suporte para o desafio}} \\
 
@@ -941,13 +958,13 @@ A Tabela~\ref{ref:tabQuestao2Ferramenta} apresenta uma análise comparativa entre
 \ac{TAP} & Parcial & Sim & Não\\ 
 
 \hline
-$Justitia$ & Sim & Não & Parcial \\ 
+$Justitia$ & Parcial & Não & Parcial \\ 
 
 \hline
 $ATEMES$ & Sim & Sim & Sim \\ 
 
 \hline
-Execução de testes por sistema alvo & Não & Não & Sim \\ 
+Execução de testes por sistema alvo & Sim & Não & Sim \\ 
 
 \hline
 Partição do \textit{software} & Sim & Sim & Não \\ 
@@ -959,7 +976,7 @@ Depuração estatística & Sim  & Sim & Não \\
 Depuração por delta & Sim  & Sim & Não \\ 
 
 \hline
-Captura e reprodução & Sim & Sim & Parcial \\ 
+Captura e reprodução & Parcial & Sim & Parcial \\ 
 
 \hline
 \end{tabular}
@@ -967,12 +984,19 @@ Captura e reprodução & Sim & Sim & Parcial \\
 \end{center}
 \end{table*}
 
-\subsection{?}
+Analisando o comparativo é possível identificar que as técnicas e ferramentas que possuem a geração de testes 
+dispõem de um oráculo. Esta preocupação é apropriada para que a geração dos testes seja efetiva para encontrar os erros e melhorar cada vez mais a qualdade do código.
+
+Outra perspectiva relevante é a utilizada pelas ferramentas de depuração, que responsabilizam-se por depurar um \textit{software} e descobrir se ele é correspondente a um determinado modelo. Quando não há um modelo disponível, estas ferramentas estão preparadas para comparar as diversas execuções do próprio \textit{software} e efetuar a análise sob os dados obtidos do próprio \ac{SUT}.
+
+\subsection{Meta dos testes 100\% automáticos}
+A meta dos testes completamente automatizados permite um controle de qualidade no desenvolvimento e manutenção de um \textit{software}. É de difícil implantação, mas uma vez que a automação esteja em pleno funcionamento é possível manter a confiabilidade do sistema de maneira rápida e eficiente.
 
 A Tabela~\ref{ref:tabQuestao3TAP} mostra a relação de \ac{TAP} com a meta de automação completa da execução de testes de \textit{software}, em que nota-se níveis de automação em todos o desafios propostos.
 
 \begin{table*}[h]
 \begin{center}
+\caption{Análise de \ac{TAP} para a meta de automação dos testes}
 \begin{tabular}{|p{.18\textwidth}|p{.82\textwidth}|} 
 
 \hline
@@ -988,17 +1012,20 @@ A Tabela~\ref{ref:tabQuestao3TAP} mostra a relação de \ac{TAP} com a meta de aut
 \end{tabular}
 \label{ref:tabQuestao3TAP} 
 \end{center}
-\caption{Análise de \ac{TAP} para a meta de automação dos testes}
 \end{table*}
 
 Para ser considerada uma ferramenta 100\% automática \ac{TAP}, ainda deve-se investir em técnicas para receber a entrada dos dados, seja a partir da extração de valores do modelo ou através de algum tipo de inteligência artificial. Ao integrar \ac{TAP} ferramentas como, por exemplo, a \textit{ADESDTool}~\cite{Cancian:PHD:2011} pode-se fornecer melhores configurações para o próprio sistema embarcado.
+
+A geração de dados de entrada é uma característica que muitas vezes é preterida por ferramentas que não realizam a geração dos casos de teste. Técnicas como a Partição de \textit{software} e Captura e reprodução empregam o modelo do \textit{software} como dado de entrada para o teste/depuração e não são capazes incluir multabilidade coerente ao modelo.
+
+Conjuntamente, a abordagem específica de domínio também exerce bastante influência para uma automação total dos testes. Existem trabalhos totalmente focados para uma abordagem específica de domínio, como é o caso da Execução de testes por sistema alvo. Nesta técnica considera que cada sistema embarcado possui propriedades que o definem e, portanto, devem ser levadas em conta na escolha do modelo de testes a ser utilizado.
 
 A Tabela~\ref{ref:tabQuestao3Ferramenta} apresenta uma análise comparativa entre as ferramentas e técnicas correlatas para os desafios propostos através de testes 100\% automatizados.
 
 \begin{table*}[h]
 \begin{center}
 \caption{Comparativo qualitativo do suporte para a meta de testes 100\% automáticos}
-\begin{tabular}{|p{.3\textwidth}|p{.2\textwidth}|p{.3\textwidth}|p{.15\textwidth}|} 
+\begin{tabular}{|p{.3\textwidth}|p{.19\textwidth}|p{.22\textwidth}|p{.15\textwidth}|} 
 \hline
  & \multicolumn{3}{c}{\textbf{Suporte para o desafio}} \\
 
@@ -1009,19 +1036,25 @@ A Tabela~\ref{ref:tabQuestao3Ferramenta} apresenta uma análise comparativa entre
 \ac{TAP} & Parcial & Parcial & Sim \\ 
 
 \hline
-$Justitia$ & Sim & Parcial & Sim \\ 
+$Justitia$ & Sim & Não & Sim \\ 
 
 \hline
 $ATEMES$ & Sim & Não & Sim \\ 
 
 \hline
-Statistical debugging & Não & Sim & Sim \\ 
+Execução de testes por sistema alvo & Parcial & Sim & Sim \\ 
 
 \hline
-Program slicing & Não & Sim & Sim \\ 
+Partição do \textit{software} & Não & Parcial & Sim \\ 
 
 \hline
-Capture and replay & Não & Sim & Sim\\ 
+Depuração estatística & Não & Parcial & Não \\ 
+
+\hline
+Depuração por delta & Parcial  & Parcial & Não \\ 
+
+\hline
+Captura e reprodução & Não & Não & Sim\\ 
 
 \hline
 \end{tabular}
@@ -1029,6 +1062,7 @@ Capture and replay & Não & Sim & Sim\\
 \end{center}
 \end{table*}
 
+Esta meta deixa em evidência que o ambiente integrado de \ac{TAP} fornece uma grande utilizade para a conseguir realizar tanto o teste quando a depuração \textit{online}. Isto não ocorre com as outras ferramentas de depuração, que deixam a desejar no desafio de execução \textit{online}. 
 
 \chapter{Conclusões}
 Neste trabalho foi introduzida \ac{TAP}, uma ferramenta para a troca automática de parâmetros de configuração e apresentado um roteiro para a geração de um ambiente de desenvolvimento de aplicações embarcadas baseadas em requisitos de \textit{hardware} e \textit{software} específicos.

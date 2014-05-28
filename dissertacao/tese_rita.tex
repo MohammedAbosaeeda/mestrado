@@ -31,7 +31,7 @@
 \SetKwFor{ForEach}{para cada}{fa\c{c}a}{fim}
 \SetKwRepeat{Repeat}{repita}{at\'{e}}
 
-\titulo{Automação da execução de testes para software embarcado} % Titulo do trabalho
+\titulo{Automação da execução de testes de software embarcado} % Titulo do trabalho
 \autor{Rita de Cássia Cazu Soldi} % Nome do autor
 \data{16}{maio}{2014} % Data da publicação do trabalho
 
@@ -111,36 +111,34 @@
 %--------------------------------------------------------
 % Elementos pré-textuais
 \capa
-%\folhaderosto % Se nao quiser imprimir a ficha, é só não usar o parâmetro
-%\folhaaprovacao
-%\paginadedicatoria
-%\paginaagradecimento
-%\paginaepigrafe
-%\paginaresumo
-%\paginaabstract
-%\listadefiguras
-%\listadetabelas
-%\listadeabreviaturas
+\folhaderosto % Se nao quiser imprimir a ficha, é só não usar o parâmetro
+\folhaaprovacao
+\paginadedicatoria
+\paginaagradecimento
+\paginaepigrafe
+\paginaresumo
+\paginaabstract
+\listadefiguras
+\listadetabelas
+\listadeabreviaturas
 %\listadesimbolos
 \sumario
 
 \chapter{Introdução}
 \label{cap:introducao}
-Sistemas embarcados podem ser apresentados como uma combinação entre \textit{hardware} e \textit{software} concebida para realizar uma tarefa específica. Estes sistemas estão amplamente acoplados a inúmeros dispositivos e suas funcionalidades estão cada vez mais intrínsecas no cotidiano das pessoas~\cite{carro2003sistemas}. 
-
-Atualmente interagimos com mais de um sistema embarcado por dia e o número destes sistemas já superam o número de habitantes do nosso planeta, ainda, este número continua crescendo em ritmo acelerado~\cite{Marcondes:MSC:2009}.
+Sistemas embarcados podem ser apresentados como uma combinação de \textit{hardware} e \textit{software} concebida para realizar uma tarefa específica. Estes sistemas estão amplamente acoplados a inúmeros dispositivos e suas funcionalidades estão cada vez mais intrínsecas no cotidiano das pessoas~\cite{carro2003sistemas}. Stualmente interagimos com mais de um sistema embarcado por dia e o número destes sistemas já superam o número de habitantes do nosso planeta, ainda, este número continua crescendo em ritmo acelerado~\cite{Marcondes:MSC:2009}.
 
 Como em qualquer sistema computacional, as soluções embarcadas também basearam-se na premissa de que cada componente utilizado está efetuando corretamente as suas atividades e que a integração entre os mesmos não se desvia do comportamento esperado. Caso contrário, o sistema pode apresentar erros. 
 
-É comum que a consequência de um erro resulte em perdas financeiras, como por exemplo a perda de uma determinada quota de mercado, corrupção de dados do cliente, etc~\cite{tassey2002economic}. Os danos materiais são inconvenientes, mas colocar em perigo a vida humana é um risco inaceitável. 
+É comum que a consequência de um erro resulte em perdas financeiras, como por exemplo a perda de uma determinada quota de mercado, corrupção de dados do cliente, etc~\cite{tassey2002economic}. Os danos materiais são inconvenientes, mas colocar em perigo a vida humana é um risco inaceitável. Infelizmente não faltam exemplos de erros em sistemas que resultaram em risco de morte, como a falha do sistema de defesa contra mísseis (Patriot), a ruptura do oleoduto de Bellingham - Washington, ou nos casos de overdose de radiação no tratamento de câncer ocasionadas pelo Therac-25 ~\cite{zhivich2009real}. Também existem vários exemplos relacionados à erros em sistemas embarcados, como por exemplo as tragédias aeroespaciais de Ariane 501, \ac{MCO}, \ac{MPL}, entre outros ~\cite{leveson2009software}. 
 
-Infelizmente não faltam exemplos de erros em sistemas que resultaram em risco de morte, como a falha do sistema de defesa contra mísseis, a ruptura do oleoduto ou nos casos de overdose de radiação no tratamento de câncer~\cite{zhivich2009real}. Também existem vários exemplos relacionados à erros em sistemas embarcados, como por exemplo as tragédias aeroespaciais de Ariane 501, \ac{MCO}, \ac{MPL}, entre outros ~\cite{leveson2009software}. 
-
-Grande parte destas tragédias possui um relatório descrevendo como ocorreu o acidente e neles é possível verificar que a causa mais comuns é subestimar a complexidade do sistema e superestimar a eficácia dos testes~\cite{frola1984system}. Mesmo depois de várias perdas relacionadas à erros em sistemas computacionais, ainda há muita complacência quando um sistema desvia do comportamento esperado, o que acaba subestimando a consequência deste erro. Para garantir que os componentes vão agir de acordo com o requisitado, uma boa prática é testar de maneira pragmática cada detalhe do sistema e sem subestimar a complexidade do mesmo.
+Grande parte destas tragédias possui um relatório descrevendo como ocorreu o acidente, os quais indicaram que a causa mais comum das falhas continua sendo subestimar a complexidade do sistema e superestimar a eficácia dos testes~\cite{frola1984system,leveson2004role,leveson2009software}. Mesmo depois de várias perdas relacionadas à erros em sistemas computacionais, ainda há muita complacência quando um sistema desvia do comportamento esperado, o que acaba subestimando a consequência deste erro. Para garantir que os componentes vão agir de acordo com o requisitado, uma boa prática é testar de maneira pragmática cada detalhe do sistema e sem subestimar a complexidade do mesmo.
 
 Durante o planejamento e desenvolvimento dos testes, é necessário lembrar que o teste em si não é um comportamento do sistema e nunca deve interferir no fluxo de atividades que está sendo testado. Quando este teste tem como alvo um sistema embarcado é importante ressaltar que tanto a complexidade do sistema quanto a do teste são maiores, pois estes sistemas costumam ser mais restritos em termos de memória, capacidade processamento, tempo de bateria, prazos para executar uma determinada atividade, entre outros. 
 
-Além da dificuldade da própria atividade de teste, os desenvolvedores ainda precisam se adaptar a uma grande variedade de plataformas, sistemas operacionais, arquitetura, fornecedores, ferramenta de depuração, etc~\cite{schneider2004ten}. Existem diversas ferramentas de apoio ao desenvolvimento de \textit{software} embarcado que tentam minimizar o impacto destas variações. A escolha e integração destas ferramentas é uma etapa importante na construção de sistemas embarcados e deve ser feita de maneira criteriosa, uma vez que pode simplificar todo o processo de desenvolvimento.
+Além da dificuldade da própria atividade de teste, os desenvolvedores ainda precisam se adaptar a uma grande variedade de plataformas, sistemas operacionais, arquitetura, fornecedores, ferramenta de depuração, etc~\cite{schneider2004ten}. 
+
+Existem diversas ferramentas de apoio ao desenvolvimento de \textit{software} embarcado que tentam minimizar o impacto destas variações. A escolha e integração destas ferramentas é uma etapa importante na construção de sistemas embarcados e deve ser feita de maneira criteriosa, uma vez que pode simplificar todo o processo de desenvolvimento.
 
 \section{Motivação}
 Além da quantidade, a complexidade dos sistemas embarcados é um fator que nunca para de crescer. O projeto de \textit{hardware} e \textit{software} está cada vez mais sofisticado e com requisitos mais rígidos. Para atender a esta demanda, o \textit{software} embarcado deixou de ser composto por um conjunto limitado de instruções \textit{assembly} e deu espaço à novas possibilidades, que antes era oferecidas apenas pelas linguagens de alto nível. 
@@ -152,7 +150,7 @@ Ainda, constatou-se que as ferramentas disponíveis para automação da execução de
 Trabalhos recentes apontam que mais de 80\% dos erros de um sistema embarcado provém do \textit{software}, não do \textit{hardware}, e que tanto o teste quanto a depuração são de suma importância para a qualidade do projeto embarcado~\cite{torri2010evaluation}. Desta forma, a motivação deste trabalho está em diminuir a dificuldade para realizar-se a verificação de sistemas embarcados, para que seja possível aproveitar melhor as oportunidades que são oferecidas pela indústria e tecnologia.
 
 \section{Objetivo}
-O principal objetivo deste trabalho é identificar o estado da arte do processo de teste de \textit{software} de sistemas embarcados. A partir deste estudo, será proposta uma ferramenta para execução automatizada de testes de \textit{software}. Além disso, esta ferramenta deve integrar-se automaticamente com um sistema de depuração de maneira simples e produzir informações que auxiliem na manutenção da qualidade do \textit{software}.
+O principal objetivo deste trabalho é identificar o estado da arte do processo de teste e depuração de \textit{software} de sistemas embarcados. A partir deste estudo, será proposta uma ferramenta para execução automatizada de testes de \textit{software}. Além disso, esta ferramenta deve integrar-se automaticamente com um sistema de depuração de maneira simples e produzir informações que auxiliem na manutenção da qualidade do \textit{software}.
 
 \subsection{Delimitações}
 O presente trabalho não tem como objetivo a geração de casos de teste para um determinado \textit{software}, limitando-se apenas em executá-los de maneira automatizada. Sendo assim, qualquer erro presente nos testes recebidos pelo protótipo para execução automática serão considerados como erro do próprio \textit{software}.
@@ -160,7 +158,7 @@ O presente trabalho não tem como objetivo a geração de casos de teste para um de
 \subsection{Objetivos Específicos}
 Para atender o objetivo geral, os seguintes objetivos específicos devem ser concluídos:
 \begin{itemize}
- \item Planejar e executar uma revisão sistemática dos trabalhos relacionados, formando uma base de conhecimento sólida da área de teste de sistemas embarcados.
+ \item Planejar e executar uma revisão sistemática dos trabalhos relacionados, formando uma base de conhecimento da área de teste e depuração de sistemas embarcados.
  \item Desenvolver uma arquitetura que realize a automação da execução de testes de maneira simples, sem que seja necessário configurar cada teste a ser executado.
  \item Especificar de um ambiente capaz de integrar a execução automática dos testes e a depuração de um \textit{software}.
  \item Realizar uma avaliação qualitativa e quantitativa da arquitetura proposta, comparando o presente trabalho com os trabalhos relacionados.
@@ -207,7 +205,7 @@ Apesar de contemplarem ideias parecias, os termos não são sinônimos e são utiliz
 %%%%%%%%%%%%%%%%%%%%%
 
 \section{Teste de \textit{software}}
-A área de pesquisa em teste de \textit{software} é relativamente recente e a primeira conferência em que o tema foi discutido foi organizada em junho de 1972~\cite{Gelperin:1988}. Desde então há um esforço para definir melhor os conceitos relacionados à área e também para chegar-se a um consenso sobre a pontos chave como nomenclatura, documentação, especificação e execução de testes.
+A primeira conferência com foco em teste de \textit{software} ocorreu há apenas 42 anos, em junho de 1972~\cite{Gelperin:1988}. Desde então há um esforço para definir melhor os conceitos relacionados à área e também para chegar-se a um consenso sobre a pontos chave como nomenclatura, documentação, especificação e execução de testes.
 
 A definição com maior aceitação apresenta o teste de \textit{software} como o processo de análise de um item de \textit{software} para detectar as diferenças entre as condições existentes e exigidas (isto é, os erros), e avaliar as características do item de software~\cite{ieee87}. Sendo assim, esta atividade é amplamente utilizada para assegurar que o \textit{software} contempla as funcionalidades especificadas e quem todas elas estão funcionando corretamente.
 
@@ -240,11 +238,11 @@ As atividades de teste de \textit{software} são normalmente classificados em nív
 A classificação baseada no processo genérico do desenvolvimento do \textit{software} e incentiva o projeto dos testes simultâneo com cada etapa de desenvolvimento, mesmo que o software só possa ser executado após a fase de implementação~\cite{Rook:vMovel}. Nela cada atividade do processo de construção de um \textit{software} é acompanhado de uma atividade de teste, ou seja, a informação de entrada do teste é normalmente derivada de uma atividade de desenvolvimento do \textit{software}. 
 
 A Figura~\ref{fig:modeloV} apresenta um mapeamento típico entre as atividades \textit{Modelo V}, nela é possível visualizar como cada tipo de teste se relaciona com o processo genérico do desenvolvimento de \textit{software}.
-\fig{modeloV}{>>Vou colocar outra imagem, mas a ideia eh a mesma>> Mapeamento entre as atividades de desenvolvimento e teste de \textit{software}.}{scale=.4}
+\fig{modeloV}{Mapeamento entre as atividades de desenvolvimento e teste de \textit{software}.}{scale=.3}
 
 \textbf{Análise de requisitos e Teste de aceitação}: No desenvolvimento de \textit{software}, a fase de análise de requisitos é quando se captura as necessidades do cliente, sendo assim, o teste de aceitação foi concebido para determinar se o \textit{software} atingiu o objetivo e realmente satisfaz estas necessidades. Este tipo de teste geralmente são executados por um grupo restrito de usuários que simulam operações de rotina do sistema, de modo a verificar se seu comportamento está de acordo com o solicitado.
  
-\textbf{Especificação funcional e Teste de sistema} - A fase de especificação funcional é quando arquitetura e os componentes são selecionados e, juntos, vão compor o \textit{software}. Então, o teste de sistema é foi projetado para determinar se o sistema funciona conforme estipulado. Este nível de teste procura falhas no projeto e na especificação do \textit{software} através de sua execução nos mesmos ambientes e nas mesmas condições que um usuário final o utilizaria.
+\textbf{Especificação funcional e Teste de sistema} - A fase de especificação funcional é quando arquitetura e os componentes são selecionados e, juntos, vão compor o \textit{software}. Então, o teste de sistema é projetado para determinar se o sistema funciona conforme estipulado. Este nível de teste procura falhas no projeto e na especificação do \textit{software} através de sua execução nos mesmos ambientes e nas mesmas condições que um usuário final o utilizaria.
  
 \textbf{Especificação técnica e Teste de integração} - A fase de especificação técnica é voltada para o projeto da arquitetura do \textit{software}, definindo a estrutura, comportamento e papel dos subsistemas que compõem a arquitetura geral do \textit{software}. Seguindo a mesma linha, o teste de integração é projetado para avaliar se as interfaces entre subsistemas são consistentes e se a comunicação ocorre corretamente. Este teste geralmente é de responsabilidade dos membros da equipe de desenvolvimento e visa provocar falhas de comunicação entre os módulos integrados para construir o \textit{software}.
  
@@ -264,20 +262,22 @@ A classificação de níveis baseada na maturidade do processo de teste propõe que 
  \item \textbf{Nível 4} - o teste é considerado como uma ferramenta que auxilia no desenvolvimento de um \textit{software} com maior qualidade. O ato de testar não é um simples ato, mas sim uma maneira de produzir um \textit{software} de baixo risco com pouco esforço. Neste nível, a geração de código é realizada de maneira a suportar a concepção e o desenvolvimento de testes, facilitando também o reuso e manutenção do sistema.
 \end{itemize}
 
+\subsection{Testes de \textit{software} embarcado}
+
 \section{Depuração de \textit{software} embarcado}
 A depuração é a arte de diagnosticar erros em sistemas e determinar a melhor forma de corrigi-los. Em geral, o ponto de partida para a depuração de um sistema é a ocorrência de algum erro, portanto, é muito comum que a depuração ocorra como consequência de um teste bem sucedido (isto, que encontrou erros).
 
 Erros podem ser encontrados por qualquer pessoa em qualquer etapa do ciclo de vida do \textit{software}. Isto implica que tanto o formato do relatório de um resultado inesperado, quanto as características dos erros podem variar de acordo com o conhecimento do autor do relato. Sendo assim, para realizar uma depuração eficaz deve-se ser capaz de identificar a técnica apropriada para analisar diferentes tipos de relatórios e obter as informações necessárias para eliminar o problema.
 
-A depuração \textit{software} embarcado é uma tarefa complexa, cuja dificuldade varia de acordo com o ambiente de desenvolvimento, linguagem de programação, tamanho do sistema e disponibilidade de ferramentas disponíveis para auxiliar o processo. Para um suporte de depuração eficaz, existem alguns requisitos a serem seguidos~\cite{debugSuport}:
+A depuração \textit{software} embarcado é uma tarefa complexa, cuja dificuldade varia de acordo com o ambiente de desenvolvimento, linguagem de programação, tamanho do sistema e disponibilidade de ferramentas disponíveis para auxiliar o processo. Para um suporte de depuração eficaz, existem algumas diretrizes a serem seguidas~\cite{debugSuport}:
 \begin{itemize}
-	\item O suporte à depuração não deve alterar significativamente o comportamento do sistema sob teste(\ac{SUT}).
+	\item O suporte à depuração não deve alterar e nem interferir no comportamento do sistema sob teste (em inglês, \ac{SUT}).
 	\item Deve existir uma infraestrutura de observação do estado interno do sistema e de possíveis pontos críticos.
 	\item Garantia de acesso externo para controlar o estado interno do sistema e de seus recursos (incluindo periféricos).
 	\item O impacto do custo do sistema deve ser o mínimo possível, principalmente quando são necessárias mudanças no \textit{hardware}.
 \end{itemize}
 
-O apoio à depuração de \textit{software} normalmente ocorre a partir do monitoramento do \textit{software} compilado e instrumentado. A instrumentação é independente de plataforma e pode ser suportada de várias maneiras, dentre as mais frequentes estão a execução do \textit{software} em modo de depuração, o uso de tratadores de interrupções e o uso de instruções de suporte à depuração.
+O apoio à depuração de \textit{software} normalmente ocorre a partir do monitoramento do \textit{software} compilado e instrumentado. A instrumentação pode ser aplicada e suportada de várias maneiras, dentre as mais frequentes estão a execução do \textit{software} em modo de depuração, o uso de tratadores de interrupções e o uso de instruções de suporte à depuração.
 
 \subsection{Imprimir dados em dispositivos de saída}
 Um exemplo de instrumentação \textit{software} é utilizar instruções de impressão para exibir/registrar variáveis, informações sobre o estado do sistema ou até o seu progresso através do código do programa. 
@@ -334,12 +334,12 @@ Desde a formulação da área de testes de \textit{software}, muitos estudos surgir
 Os trabalhos que focam na automação de teste de \textit{software} embarcado procuram soluções em que o teste não prejudique a execução do \ac{SUT} e ainda consiga contornar as restrições inerentes ao próprio sistema embarcado.
 
 \section{Justitia}
-Ferramenta de testes de \textit{software} embarcado capaz de detectar automaticamente falhas na interface, gerar casos de testes completos - com entradas, estados internos, valores de variáveis, saídas - e emular a execução do \textit{software} na arquitetura alvo~\cite{seo}.
+Esta ferramenta de testes de \textit{software} embarcado é capaz de detectar automaticamente falhas na interface, gerar casos de testes completos - com entradas, estados internos, valores de variáveis, saídas - e emular a execução do \textit{software} na arquitetura alvo~\cite{seo}.
 
 $Justitia$ possui a hipótese de que a interface é um critério essencial para um teste de \textit{software} embarcado, e para defendê-la utiliza uma solução que une as seguintes técnicas:
 \begin{itemize}
-	\item{\textbf{Técnica de teste de interface}},  na qual os casos de teste são gerados através da análise do arquivo (imagem) executável do sistema. Como o próprio nome sugere, a técnica foca nas interfaces do sistema embarcado, em especial as referentes às camadas do sistema operacional e às camadas do \textit{hardware}.
-	\item{\textbf{Técnica de emulação dos casos de teste}}, uma combinação entre o monitoramento e a depuração do sistema. A ideia é definir \textit{breakpoints} para os casos de teste da interface e monitorar a tabela de símbolos para definir o sucesso ou falha do teste.
+	\item{\textbf{Técnica de teste de interface}},  na qual os casos de teste são gerados através da análise do arquivo (imagem) executável do sistema. Como o próprio nome sugere, a técnica foca nas interfaces do sistema embarcado, em especial as referentes às camadas do sistema operacional e às camadas do \textit{hardware}. Quando teste é executado são extraídas as informações de depuração, tais como símbolos,  relações entre os componentes, informações do \textit{driver} de dispositivo, etc.
+	\item{\textbf{Técnica de emulação dos casos de teste}}, uma combinação entre o monitoramento e a depuração do sistema. A ideia é definir \textit{breakpoints} para os casos de teste da interface e monitorar  as variáveis ??de interface para definir o sucesso ou falha do teste. As variáveis de interface desempenham o papel de indicador para o funcionamento do sistema embarcado,verificando se alguma camada está instável e encapsulando a influência do \textit{hardware} sobre falhas em \textit{software} embarcado
 \end{itemize}
 
 A solução foi analisada sob três pontos de vista: a densidade da interface, a complexidade do \textit{software} e a relação interface \textit{versus} falhas. Os pontos de análise surgiram de uma premissa que aponta o forte acoplamento entre \textit{hardware} e \textit{software} como a razão para aumento de dificuldades no teste de \textit{software} embarcado. 
@@ -381,7 +381,7 @@ Conforme será visto no Capítulo~\ref{ref:ambiente}, a abordagem de execução auto
 \end{description}
 
 \section{Automação da execução de testes baseada na interface do sistema alvo}
-Este trabalho apresenta uma abordagem o testes de sistemas embarcados heterogêneos, baseada nas características do \ac{SUT}~\cite{universal:2013}. 
+Este trabalho apresenta uma abordagem o testes de sistemas embarcados heterogêneos e baseada nas características do \ac{SUT}~\cite{universal:2013}. 
 
 Diferente da escolha tradicional, que normalmente é feita a partir de uma mistura de vários modelos para tentar alcançar o maior número possível de arquiteturas, a \ac{TBT} reforça que cada sistema embarcado possui características únicas e que devem ser consideradas na escolha do modelo de teste que será aplicado ao sistema.
 
@@ -405,19 +405,15 @@ No capítulo~\ref{sec:tap} será possível verificar uma grande semelhança no proce
 \end{description}
 
 \section{Partição do \textit{software}}
-O conceito de partição do \textit{software} surgiu da afirmação de que quando as pessoas estão depurando um \textit{software}, o processo mais comum é fazer abstrações mentais correspondentes à partes do todo. Desta forma desenvolve-se a hipótese de integrar particionadores de código-fonte nos ambientes de depuração~\cite{Weiser:1981}.
+O conceito de partição do \textit{software} surgiu da afirmação de que quando as pessoas estão depurando um \textit{software}, o processo mais comum é fazer abstrações mentais correspondentes a partes do todo. Desta forma desenvolve-se a hipótese de integrar particionadores de código-fonte nos ambientes de depuração~\cite{Weiser:1981}.
 
 Após a definição de Weiser, a partição foi utilizada em diversas áreas da computação, como paralelização, ajuste de níveis de compilação, engenharia reversa,  manutenção de \textit{software}, testes, entre outros. Na área de depuração, focou-se na partição sistemática do \textit{software}, investindo na remoção de estados ou caminhos que são irrelevantes para alcançar o objetivo selecionado, o que no caso da depuração é encontrar um erro~\cite{Xu:2005:BSP:1050849.1050865}. 
 
 Cada trabalho apresenta um critério diferente para particionar, mas todos possuem o conceito de fatia (\textit{slice}) como um subconjunto de predicados do programa que afetam os valores computados, de acordo com o critério de controle. Uma distinção importante para particionar é o tipo de fatia que será realizada: estática, dinâmica ou uma variação delas~\cite{sasirekha2011program}.
 
-A partição estática é o tipo mais rápido e, em contrapartida, aponta apenas uma aproximação do conjunto final de caminhos que podem levar ao erro. Isto ocorre porque o foco é simplificar ao máximo o \textit{software} em questão, reduzindo-o ao ponto de conter todos os estados que poderiam afetar o valor final, mas sem considerar o valor de entrada do \textit{software}. 
+A partição estática é o tipo mais rápido e, em contrapartida, aponta apenas uma aproximação do conjunto final de caminhos que podem levar ao erro. Isto ocorre porque o foco é simplificar ao máximo o \textit{software} em questão, reduzindo-o ao ponto de conter todos os estados que poderiam afetar o valor final, mas sem considerar o valor de entrada do \textit{software}. Este tipo de partição é mais utilizada para \textit{software} de pequeno porte e de pouca complexidade, em que o tamanho da partição permanece compatível com a sua simplicidade.
 
-Este tipo de partição é mais utilizada para \textit{software} de pequeno porte e de pouca complexidade, em que o tamanho da partição permanece compatível com a sua simplicidade.
-
-Na partição dinâmica, as informações do critério de corte tradicional não são suficientes, sendo necessária uma informação adicional sobre os valores de entrada do \textit{software}. A partição será realizada a partir destes dados e sequência de valores de entrada no qual o \textit{software} foi executado é determinante para o conjunto de saída. 
-
-Esta partição é mais utilizada para \textit{software} complexo e de alto grau de acoplamento.
+Na partição dinâmica, as informações do critério de corte tradicional não são suficientes, sendo necessária uma informação adicional sobre os valores de entrada do \textit{software}. A partição será realizada a partir destes dados e sequência de valores de entrada no qual o \textit{software} foi executado é determinante para o conjunto de saída. Esta partição é mais utilizada para \textit{software} complexo e de alto grau de acoplamento.
 
 Além dos tipos base de partição, também existem modelos que são variações de um dos dois principais ou até gerados pela união de modelos~\cite{Venkatesh:1991,binkley2005minimal,Sridharan:2007:TS:1250734.1250748,Chebaro:2012}, proporcionando uma maior configurabilidade de depuração e atendendo melhor às características do \ac{SUT}.
 
@@ -521,7 +517,7 @@ A comparação de versões no repositório é uma técnica interessante de depuração e
 %\cite{zhang2009capturing}
 
 \section{Captura e Reprodução}
-A idéia da técnica de captura e reprodução consiste em selecionar um subsistema do \textit{software} como alvo do estudo, capturar todas as operações entre este subsistema e o resto do \textit{software} e depois reexecutar as operações isoladas do subsistema~\cite{orso2005selective}.
+A ideia da técnica de captura e reprodução consiste em selecionar um subsistema do \textit{software} como alvo do estudo, capturar todas as operações entre este subsistema e o resto do \textit{software} e depois reexecutar as operações isoladas do subsistema~\cite{orso2005selective}.
 
 Este tipo de depuração permite que o desenvolvedor controle a nova execução do \textit{software} com execução de passos a frente, voltando passos na execução (contra o fluxo), examinando o contexto de alguma variável, verificando um determinado controle de fluxo, analisando fluxos alternativos, entre outras possibilidades.
 
@@ -545,7 +541,7 @@ Já a depuração é um caso mais específico, pois nem todo erro pode ser reproduzid
 A ferramenta $JINSI$ foi utilizada para corroborar a técnica, que além de capturar e reproduzir o \textit{software}, agora também incorporou os algoritmos de \ac{DD} para isolar o subconjunto de interações relevantes para simular o erro.
 \end{description}
 
-\chapter{O ambiente compartilhado de teste e depuração}
+\chapter{Ambiente compartilhado de teste e depuração}
 \label{ref:ambiente}
 Este capítulo apresenta o ambiente compartilhado de teste e depuração, demostrando de onde as ideias foram extraídas, adaptadas e, em alguns casos, melhoradas. Além disso, serão apresentas instruções para integrar a execução de testes com os possíveis ambientes de depuração, gerando o ambiente compartilhado de desenvolvimento. 
 
@@ -604,7 +600,7 @@ Existem vários trabalhos com o foco em ajudar a encontrar os erros através da au
 
 Após a definição da infraestrutura compartilhada para testes e depuração também foi necessário dividir as funções para cada uma das atividades. A ideia é utilizar o emulador para a automação da execução do \textit{software} e de seus casos de teste. A depuração será iniciadas somente no caso de sucesso em um teste, ou seja, quando um erro é detectado.
 
-\chapter{A troca automática dos parâmetros de \textit{software}}
+\chapter{Troca automática dos parâmetros de \textit{software}}
 \label{sec:tap}
 No desenvolvimento para sistemas embarcados é comum que uma especificação seja reutilizada, diferenciando apenas alguns requisitos não funcionais. Esta estratégia visa utilizar a propriedade intelectual já adquirida para reduzir o tempo para que um novo produto entre no mercado~\cite{gupta1997introducing}.
 
@@ -776,7 +772,7 @@ O desafio das evidências empíricas procura fomentar a consciência de unir forças
 \subsection{Modelagem baseada em teste}
 A concepção tradicional de testes de \textit{software} é desenvolver os casos de teste à partir do estudo do \textit{software} e procurar alternativas para melhor explorá-lo.
 
-Esta meta defende que um \textit{software} só pode ser efetivamente testado se ele for desenvolvido à partir de um modelo. A idéia é realizar uma inversão de valores, ou seja, migrar de uma geração de casos de testes baseado em modelos para uma modelagem do sistema baseada em teste.
+Esta meta defende que um \textit{software} só pode ser efetivamente testado se ele for desenvolvido à partir de um modelo. A ideia é realizar uma inversão de valores, ou seja, migrar de uma geração de casos de testes baseado em modelos para uma modelagem do sistema baseada em teste.
 
 \subsubsection{Desafio dos testes baseados em modelos}
 Em sistemas complexos e heterogêneos é comum que se utilize mais de um tipo de modelagem de \textit{software} para definir suas funcionalidades. A meta desse desafio é garantir que os modelos resultantes de diferentes paradigmas possam ser expressos em qualquer notação e serem perfeitamente integrados dentro de um único ambiente. 
@@ -809,7 +805,7 @@ O atual estado da arte aponta para a necessidade executar a fase de testes com a
 O intuito deste desafio é encontrar métodos e ferramentas específicas de domínio e poder aprimorar a automação de teste. Neste sentido, alguns trabalhos já conseguiram demonstrar a extração automática de requisitos para o teste a partir de um modelo escrito em uma linguagem fortemente tipada e específica de um domínio.
 			
 \subsubsection{Desafio dos testes \textit{online}} 
-O desafio de testes \textit{online} focam na idéia de monitorar o comportamento de um sistema em pleno  funcionamento, com o \textit{software} executando e recebendo todas as interferências reais.
+O desafio de testes \textit{online} focam na ideia de monitorar o comportamento de um sistema em pleno  funcionamento, com o \textit{software} executando e recebendo todas as interferências reais.
 
 É um desafio importante e complexo, pois nem sempre é possível realizar este tipo de teste, especialmente para aplicações embarcadas implantados em um ambiente de recursos limitados, onde a sobrecarga exigida pela instrumentação de teste não poderia ser viável.
 
@@ -854,7 +850,7 @@ A análise de $Justitia$  também aponta semelhanças na declaração parcial de hipó
 
 Já a comparação de \ac{TAP} com $ATEMES$ as características só se distanciam nos desafios de eficácia do teste e testes de composição. Ambas ferramentas possuem estratégias diferentes, visto que $ATEMES$ foca em explorar sistematicamente a componentização da própria ferramenta e a robustez no teste do \textit{software} em detrimento da avaliação da eficácia dos testes.
 
-A única técnica avaliada que não apresenta hipóteses explícitas é a captura e reprodução. Isto ocorre porque a entrada das ferramentas não são as hipóteses, e sim o próprio executável, ou seja, observa-se o sistema através da caputura de toda a sua execução, não sendo necessário observar execuções relacionadas à uma determinada hipótese.
+A única técnica avaliada que não apresenta hipóteses explícitas é a captura e reprodução. Isto ocorre porque a entrada das ferramentas não são as hipóteses, e sim o próprio executável, ou seja, observa-se o sistema através da captura de toda a sua execução, não sendo necessário observar execuções relacionadas à uma determinada hipótese.
 
 A Tabela~\ref{ref:tabQuestao1Ferramenta} apresenta um resumo da análise comparativa entre \ac{TAP} e as ferramentas correlatas no quesito teoria de teste universal.
 
@@ -901,9 +897,9 @@ Captura e reprodução & Não & Parcial & Parcial & Não\\
 Um aspecto que ficou bastante realçado que nenhuma das técnica contemplou o desafio das evidências empíricas. Apesar de grande parte dos autores disponibilizam seus trabalhos para o púbico em geral, os dados derivados das pesquisas ainda não são maduros o suficiente parar desenvolver o estado da arte. Ou seja, grande parte dos dados existentes são originados de impressões e deduções dos próprios autores e, muitas vezes,  desprovidos de fundamento formal.
 
 \subsection{Meta da modelagem baseada em testes}
-Devido à falta de maturidade na produção de sistemas, hoje há um foco muito grande no desenvolvimento do \textit{software}, e as atividades de teste e depuração são apenas subprodutos que ajudam na combiabilidade do sistema.
+Devido à falta de maturidade na produção de sistemas, hoje há um foco muito grande no desenvolvimento do \textit{software}, e as atividades de teste e depuração são apenas subprodutos que ajudam na confiabilidade do sistema.
 
-Neste contexo, a meta de modelagem baseada em testes se torna muito importante, pois defende um \textit{software} só pode ser completamente testado caso haja um planejamento para a geração dos testes e que sejam originados à partir de um modelo definido.
+Neste contexto, a meta de modelagem baseada em testes se torna muito importante, pois defende um \textit{software} só pode ser completamente testado caso haja um planejamento para a geração dos testes e que sejam originados à partir de um modelo definido.
 
 Uma análise das contribuições de \ac{TAP} na meta de modelagem baseada em testes será apresentada na Tabela~\ref{ref:tabelaModelagemBaseadaTesteTAP}.
 
@@ -936,7 +932,7 @@ Dentre todas as técnicas analisadas, apenas duas contemplaram a meta por complet
 
 Na Captura e reprodução, o padrão é o teste baseado em anti-modelos, pois toda a execução do sistema é gravada e utilizada para o teste e depuração do sistema. Embora seja menos comum, algumas ferramentas da técnica ainda oferecem o teste baseado em modelo, que são mesclados os dados do anti-modelo para fornecer um resultado melhor na identificação dos \textit{bugs}.
 
-Já $ATEMES$ se destaca pela quantidade de tipos de teste que podem ser gerados pelo módulo \texttt{PRPM} da ferramenta, sendo que a base destes casos de teste pode ser vir de modelos bem definidos, anti-modelos, agregação de modelos ou até de maneira aleatória. O oráculo de $ATEMES$ processa as informações de execução do sistema e repassa informações para vários módulos, por exemplo, o módulo \texttt{POPM} recebe um conunto de linhas do código fonte apontadas como prováveis geradoras de erros.
+Já $ATEMES$ se destaca pela quantidade de tipos de teste que podem ser gerados pelo módulo \texttt{PRPM} da ferramenta, sendo que a base destes casos de teste pode ser vir de modelos bem definidos, anti-modelos, agregação de modelos ou até de maneira aleatória. O oráculo de $ATEMES$ processa as informações de execução do sistema e repassa informações para vários módulos, por exemplo, o módulo \texttt{POPM} recebe um conjunto de linhas do código fonte apontadas como prováveis geradoras de erros.
 
 Outra técnica que se destaca pelo oráculo de testes é a Execução de testes por sistema alvo. Além de permitir uma alimentação à partir de execuções consideradas corretas do \textit{software}, recentemente uma das implementações da técnica adaptou-a com um oráculo composto por uma rede neural com \textit{backpropagation}.
 
@@ -985,7 +981,7 @@ Captura e reprodução & Parcial & Sim & Parcial \\
 \end{table*}
 
 Analisando o comparativo é possível identificar que as técnicas e ferramentas que possuem a geração de testes 
-dispõem de um oráculo. Esta preocupação é apropriada para que a geração dos testes seja efetiva para encontrar os erros e melhorar cada vez mais a qualdade do código.
+dispõem de um oráculo. Esta preocupação é apropriada para que a geração dos testes seja efetiva para encontrar os erros e melhorar cada vez mais a qualidade do código.
 
 Outra perspectiva relevante é a utilizada pelas ferramentas de depuração, que responsabilizam-se por depurar um \textit{software} e descobrir se ele é correspondente a um determinado modelo. Quando não há um modelo disponível, estas ferramentas estão preparadas para comparar as diversas execuções do próprio \textit{software} e efetuar a análise sob os dados obtidos do próprio \ac{SUT}.
 
@@ -1016,7 +1012,7 @@ A Tabela~\ref{ref:tabQuestao3TAP} mostra a relação de \ac{TAP} com a meta de aut
 
 Para ser considerada uma ferramenta 100\% automática \ac{TAP}, ainda deve-se investir em técnicas para receber a entrada dos dados, seja a partir da extração de valores do modelo ou através de algum tipo de inteligência artificial. Ao integrar \ac{TAP} ferramentas como, por exemplo, a \textit{ADESDTool}~\cite{Cancian:PHD:2011} pode-se fornecer melhores configurações para o próprio sistema embarcado.
 
-A geração de dados de entrada é uma característica que muitas vezes é preterida por ferramentas que não realizam a geração dos casos de teste. Técnicas como a Partição de \textit{software} e Captura e reprodução empregam o modelo do \textit{software} como dado de entrada para o teste/depuração e não são capazes incluir multabilidade coerente ao modelo.
+A geração de dados de entrada é uma característica que muitas vezes é preterida por ferramentas que não realizam a geração dos casos de teste. Técnicas como a Partição de \textit{software} e Captura e reprodução empregam o modelo do \textit{software} como dado de entrada para o teste/depuração e não são capazes incluir mutabilidade coerente ao modelo.
 
 Conjuntamente, a abordagem específica de domínio também exerce bastante influência para uma automação total dos testes. Existem trabalhos totalmente focados para uma abordagem específica de domínio, como é o caso da Execução de testes por sistema alvo. Nesta técnica considera que cada sistema embarcado possui propriedades que o definem e, portanto, devem ser levadas em conta na escolha do modelo de testes a ser utilizado.
 
@@ -1062,7 +1058,7 @@ Captura e reprodução & Não & Não & Sim\\
 \end{center}
 \end{table*}
 
-Esta meta deixa em evidência que o ambiente integrado de \ac{TAP} fornece uma grande utilizade para a conseguir realizar tanto o teste quando a depuração \textit{online}. Isto não ocorre com as outras ferramentas de depuração, que deixam a desejar no desafio de execução \textit{online}. 
+Esta meta deixa em evidência que o ambiente integrado de \ac{TAP} fornece uma grande utilidade para a conseguir realizar tanto o teste quando a depuração \textit{online}. Isto não ocorre com as outras ferramentas de depuração, que deixam a desejar no desafio de execução \textit{online}. 
 
 \chapter{Conclusões}
 Neste trabalho foi introduzida \ac{TAP}, uma ferramenta para a troca automática de parâmetros de configuração e apresentado um roteiro para a geração de um ambiente de desenvolvimento de aplicações embarcadas baseadas em requisitos de \textit{hardware} e \textit{software} específicos.
@@ -1073,7 +1069,7 @@ Os experimentos realizados apontaram valores quantitativos do tempo consumido pa
 
 Foram avaliados os impactos inerentes ao uso da ferramenta para verificar se existiam pontos de melhoria, que devem ser tratados em trabalhos futuros. Dentre eles estão a redução do uso de memória e do tempo utilizados para recuperar as informações de depuração, que atualmente apresenta um aumento de mais de 500\% no tamanho do código da aplicação e a uma sobrecarga de 60\% para o tempo de execução do teste.
 
-Também foi realizada a análise qualitativa da ferramenta, levando-se em conta os desafios ainda presentes no teste de \textit{software} e metas que necessitam ser atingidas. Os resultados demonstram o comprometimento da ferrameta com o avanço do estado da arte, pois procura oferecer uma solução viável a pelo menos 80\% dos desafios propostos. 
+Também foi realizada a análise qualitativa da ferramenta, levando-se em conta os desafios ainda presentes no teste de \textit{software} e metas que necessitam ser atingidas. Os resultados demonstram o comprometimento da ferramenta com o avanço do estado da arte, pois procura oferecer uma solução viável a pelo menos 80\% dos desafios propostos. 
 
 A ferramenta possui resultados promissores se comparada com outras ferramentas correlatas, frequentemente apresentando soluções equivalentes às de outras ferramentas e, eventualmente, cobrindo características que não fazem parte do escopo inicial deste trabalho.
 

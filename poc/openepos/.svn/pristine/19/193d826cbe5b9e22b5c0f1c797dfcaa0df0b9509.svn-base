@@ -1,0 +1,57 @@
+#ifndef _WSTREAM_H_
+#define _WSTREAM_H_
+
+#include <mutex.h>
+
+#include "CircularBuf.h"
+
+__USING_SYS
+
+class WStream {
+
+        public:
+
+                WStream() {
+
+                        c = new CircularBuf();
+                        mutex = new Mutex();
+
+			send_buffer = (unsigned char *) malloc(1500);
+	                send_buffer_pos = send_buffer;
+			
+			n = 0;
+                }
+
+                unsigned short prot;
+                CircularBuf * c;
+		
+		unsigned char * send_buffer;
+		unsigned char * send_buffer_pos;
+
+                Mutex * mutex;
+
+		int n; // debug: number of receives/sends
+
+};
+
+class WStreamList {
+
+        public:
+                WStreamList * n;
+                WStream * ws;
+
+                WStreamList(WStream * w) : n(0), ws(w) {};
+
+                void insert(WStream * w) {     // sempre insere como segundo na lista (nao precisa atualizar pointer no wrapper)
+
+                        WStreamList * tmpstream = new WStreamList(w);
+                        tmpstream->n = n;
+
+                        n = tmpstream;
+
+                }
+
+};
+
+#endif
+

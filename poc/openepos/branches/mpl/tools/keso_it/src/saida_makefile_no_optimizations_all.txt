@@ -1,0 +1,50 @@
+mateus@kenobi:~/keso_it/src$ make -f makefile_no_optimizations 
+Creating parser
+cd builder; /usr/bin/javacc -OUTPUT_DIRECTORY=keso/compiler/config/parser keso/compiler/config/ConfigReader.jj
+Java Compiler Compiler Version 5.0 (Parser Generator)
+(type "javacc" with no arguments for help)
+Reading from file keso/compiler/config/ConfigReader.jj . . .
+File "TokenMgrError.java" does not exist.  Will create one.
+File "ParseException.java" does not exist.  Will create one.
+File "Token.java" does not exist.  Will create one.
+File "SimpleCharStream.java" does not exist.  Will create one.
+Parser generated successfully.
+Creating intermediate classes
+createNodes.pl: Generating sources of intermediate classes.
+Compiling the Java-2-C Builder Rev. exported
+Note: ./keso/compiler/Main.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+Creating keso-system for rc/thread_test-keso.kcl
+jino -bootmodules core -op /home/mateus/keso_it/src/tmp/ -def rc/thread_test-keso.kcl -noprune -noinline
+=================================================================
+ This is JINO.
+ see http://www4.informatik.uni-erlangen.de/Research/KESO/pubs/
+ for documentation
+=================================================================
+Module core
+Module debug
+Module thread_test-keso
+Generating keso.core.Events
+Generating keso.core.Counters
+Generating keso.core.Appmodes
+
+
+=========== load classes ===========
+=========== compute vtables ===========
+=========== ssa etc. ===========
+warning: ssa: ignore i3_2=i3_2 (c30_Integer_m12_toString)
+warning: ssa: ignore i4_2=i4_2 (c30_Integer_m17_parseInt)
+warning: ssa: ignore i5_2=i5_2 (c29_Long_m3_toString)
+warning: ssa: ignore i5_2=i5_2 (c29_Long_m9_parseLong)
+=========== write C code ===========
+warning: keso_isStackRef is using stack refernce marker version 1.
+warning: fmod not impl.
+warning: fmod not impl.
+warning: fmod not impl.
+warning: fmod not impl.
+warning: fmod not impl.
+writing OIL file '/home/mateus/keso_it/src/tmp//keso_epos/keso_main.oil'
+

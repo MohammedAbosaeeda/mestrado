@@ -1,0 +1,21 @@
+#!/bin/bash
+GDB='arm-xilinx-eabi-gdb'
+if [ "$1" == "gui" ]; then
+	GDB='arm-insight'
+fi
+
+#killing anyone using port :1234
+dead=$(lsof -i :1234 | grep --only-matching "[0-9][0-9]*" | head -n 1)
+if [ "$dead" -z ]; then
+	kill -9 $dead
+	echo "Killing $dead"
+fi
+
+echo "Running qemu."
+gnome-terminal -x bash -c 'qemu-system-arm -no-reboot -nographic -s -S -machine xilinx-zynq-a9 -cpu cortex-a9 -kernel img/panda_app -m 512 -fda img/panda_app.img' 
+QEMUPID=$!
+$GDB -ex "target remote :1234"
+echo Killing $QEMUPID
+kill -9 $QEMUPID
+
+#gnome-terminal -x bash -c 'arm-none-eabi-gdb -ex "target remote :1234";bash'

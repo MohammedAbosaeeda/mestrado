@@ -1,0 +1,264 @@
+make: Entering directory `/home/sergio/code/georouting'
+(cd etc && make)
+make[1]: Entering directory `/home/sergio/code/georouting/etc'
+sed -e 's/^#define ARCH.*$/#define ARCH ia32/' -i  /home/sergio/code/georouting/include/system/config.h
+sed -e 's/^#define MACH.*$/#define MACH pc/' -i  /home/sergio/code/georouting/include/system/config.h
+make[1]: Leaving directory `/home/sergio/code/georouting/etc'
+(cd tools && make)
+make[1]: Entering directory `/home/sergio/code/georouting/tools'
+(cd emote && make)
+make[2]: Entering directory `/home/sergio/code/georouting/tools/emote'
+install -m 775 red-bsl.py ssl.bin flasher.bin /home/sergio/code/georouting/bin
+make[2]: Leaving directory `/home/sergio/code/georouting/tools/emote'
+(cd eposcc && make)
+make[2]: Entering directory `/home/sergio/code/georouting/tools/eposcc'
+install -m 775 eposcc /home/sergio/code/georouting/bin
+sed -e 's/^EPOS=.*$/EPOS=\/home\/sergio\/code\/georouting/' -i  /home/sergio/code/georouting/bin/eposcc
+make[2]: Leaving directory `/home/sergio/code/georouting/tools/eposcc'
+(cd eposldr && make)
+make[2]: Entering directory `/home/sergio/code/georouting/tools/eposldr'
+g++ -c -ansi -fno-exceptions -m32 -Wall -O2 -I/home/sergio/code/georouting/include eposldr.cc
+eposldr.cc: In function ‘int main(int, char**)’:
+eposldr.cc:114:34: warning: ignoring return value of ‘ssize_t write(int, const void*, size_t)’, declared with attribute warn_unused_result [-Wunused-result]
+gcc -m32 -o eposldr eposldr.o
+install eposldr /home/sergio/code/georouting/bin
+make[2]: Leaving directory `/home/sergio/code/georouting/tools/eposldr'
+(cd eposmkbi && make)
+make[2]: Entering directory `/home/sergio/code/georouting/tools/eposmkbi'
+g++ -c -ansi -fno-exceptions -m32 -Wall -O2 -I/home/sergio/code/georouting/include eposmkbi.cc
+eposmkbi.cc: In function ‘bool parse_config(FILE*, Configuration*)’:
+eposmkbi.cc:245:12: warning: variable ‘ret’ set but not used [-Wunused-but-set-variable]
+gcc -m32 -o eposmkbi eposmkbi.o
+install -m 775 eposmkbi /home/sergio/code/georouting/bin
+make[2]: Leaving directory `/home/sergio/code/georouting/tools/eposmkbi'
+make[1]: Leaving directory `/home/sergio/code/georouting/tools'
+(cd src && make)
+make[1]: Entering directory `/home/sergio/code/georouting/src'
+(cd utility && make)
+make[2]: Entering directory `/home/sergio/code/georouting/src/utility'
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include elf.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libutil_ia32.a elf.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include heap.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libutil_ia32.a heap.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include malloc.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libutil_ia32.a malloc.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include math.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libutil_ia32.a math.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include observer.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libutil_ia32.a observer.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include ostream.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libutil_ia32.a ostream.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include random.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libutil_ia32.a random.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include srec.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libutil_ia32.a srec.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include string.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libutil_ia32.a string.o
+make[2]: Leaving directory `/home/sergio/code/georouting/src/utility'
+(cd arch && make)
+make[2]: Entering directory `/home/sergio/code/georouting/src/arch'
+(cd ia32 && make)
+make[3]: Entering directory `/home/sergio/code/georouting/src/arch/ia32'
+/usr/local/ia32/gcc/bin/ia32-gcc -E -Wa,--32 -I/home/sergio/code/georouting/include ia32_crt1.S -o ia32_crt1.s
+/usr/local/ia32/gcc/bin/ia32-as --32 ia32_crt1.s -o ia32_crt1.o
+/usr/local/ia32/gcc/bin/ia32-gcc -E -Wa,--32 -I/home/sergio/code/georouting/include ia32_crtbegin.S -o ia32_crtbegin.s
+/usr/local/ia32/gcc/bin/ia32-as --32 ia32_crtbegin.s -o ia32_crtbegin.o
+/usr/local/ia32/gcc/bin/ia32-gcc -E -Wa,--32 -I/home/sergio/code/georouting/include ia32_crtend.S -o ia32_crtend.s
+/usr/local/ia32/gcc/bin/ia32-as --32 ia32_crtend.s -o ia32_crtend.o
+/usr/local/ia32/gcc/bin/ia32-gcc -E -Wa,--32 -I/home/sergio/code/georouting/include ia32_crti.S -o ia32_crti.s
+/usr/local/ia32/gcc/bin/ia32-as --32 ia32_crti.s -o ia32_crti.o
+/usr/local/ia32/gcc/bin/ia32-gcc -E -Wa,--32 -I/home/sergio/code/georouting/include ia32_crtn.S -o ia32_crtn.s
+/usr/local/ia32/gcc/bin/ia32-as --32 ia32_crtn.s -o ia32_crtn.o
+install ia32_crt1.o ia32_crtbegin.o ia32_crtend.o ia32_crti.o ia32_crtn.o /home/sergio/code/georouting/lib
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include -fomit-frame-pointer cpu.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libarch_ia32.a cpu.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include fpu.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libarch_ia32.a fpu.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include mmu.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libarch_ia32.a mmu.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include pmu.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libarch_ia32.a pmu.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include cpu_init.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libinit_ia32.a cpu_init.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include mmu_init.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libinit_ia32.a mmu_init.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include pmu_init.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libinit_ia32.a pmu_init.o
+make[3]: Leaving directory `/home/sergio/code/georouting/src/arch/ia32'
+make[2]: Leaving directory `/home/sergio/code/georouting/src/arch'
+(cd mach && make)
+make[2]: Entering directory `/home/sergio/code/georouting/src/mach'
+(cd common && make)
+make[3]: Entering directory `/home/sergio/code/georouting/src/mach/common'
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include cmac.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libmach_ia32.a cmac.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include cmac_init.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libmach_ia32.a cmac_init.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include ethernet.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libmach_ia32.a ethernet.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include neighborhood.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libmach_ia32.a neighborhood.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include radio_common.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libmach_ia32.a radio_common.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include rtc_common.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libmach_ia32.a rtc_common.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include serial_display.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libmach_ia32.a serial_display.o
+make[3]: Leaving directory `/home/sergio/code/georouting/src/mach/common'
+(cd pc && make)
+make[3]: Entering directory `/home/sergio/code/georouting/src/mach/pc'
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include device.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libmach_ia32.a device.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include display.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libmach_ia32.a display.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include e100.cc
+In file included from e100.cc:4:
+/home/sergio/code/georouting/include/mach/pc/e100.h: In member function 'void System::E100::software_reset()':
+/home/sergio/code/georouting/include/mach/pc/e100.h:389: warning: dereferencing type-punned pointer will break strict-aliasing rules
+/home/sergio/code/georouting/include/mach/pc/e100.h:391: warning: dereferencing type-punned pointer will break strict-aliasing rules
+e100.cc: In member function 'int System::E100::exec_command(unsigned char, long unsigned int)':
+e100.cc:148: warning: dereferencing type-punned pointer will break strict-aliasing rules
+e100.cc: In member function 'int System::E100::self_test()':
+e100.cc:476: warning: dereferencing type-punned pointer will break strict-aliasing rules
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libmach_ia32.a e100.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include ic.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libmach_ia32.a ic.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include machine.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libmach_ia32.a machine.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include pci.cc
+pci.cc: In static member function 'static void System::PC_PCI::header(const System::PCI_Common::Locator&, System::PCI_Common::Header*)':
+pci.cc:19: warning: unused variable 'last'
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libmach_ia32.a pci.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include -fomit-frame-pointer pc_interrupt.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libmach_ia32.a pc_interrupt.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include pcnet32.cc
+pcnet32.cc: In constructor 'System::PCNet32::PCNet32(unsigned int, short unsigned int, short unsigned int, System::IA32_MMU::DMA_Buffer*)':
+pcnet32.cc:96: warning: large integer implicitly truncated to unsigned type
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libmach_ia32.a pcnet32.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include rtc.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libmach_ia32.a rtc.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include timer.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libmach_ia32.a timer.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include uart.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libmach_ia32.a uart.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include e100_init.cc
+In file included from e100_init.cc:5:
+/home/sergio/code/georouting/include/mach/pc/e100.h: In member function 'void System::E100::software_reset()':
+/home/sergio/code/georouting/include/mach/pc/e100.h:389: warning: dereferencing type-punned pointer will break strict-aliasing rules
+/home/sergio/code/georouting/include/mach/pc/e100.h:391: warning: dereferencing type-punned pointer will break strict-aliasing rules
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libinit_ia32.a e100_init.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include ethernet_init.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libinit_ia32.a ethernet_init.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include ic_init.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libinit_ia32.a ic_init.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include machine_init.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libinit_ia32.a machine_init.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include pci_init.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libinit_ia32.a pci_init.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include pcnet32_init.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libinit_ia32.a pcnet32_init.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include timer_init.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libinit_ia32.a timer_init.o
+make[3]: Leaving directory `/home/sergio/code/georouting/src/mach/pc'
+make[2]: Leaving directory `/home/sergio/code/georouting/src/mach'
+(cd abstraction && make)
+make[2]: Entering directory `/home/sergio/code/georouting/src/abstraction'
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include alarm.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libsystem_ia32.a alarm.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include cpu_affinity_scheduler.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libsystem_ia32.a cpu_affinity_scheduler.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include dhcp.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libsystem_ia32.a dhcp.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include g726.cc
+g726.cc: In function 'void System::G726_sync(short int, short int*, short int*, short int*, short int*, char*, short int*)':
+g726.cc:3151: warning: 'id' may be used uninitialized in this function
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libsystem_ia32.a g726.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include icmp.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libsystem_ia32.a icmp.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include ieee1451_tim.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libsystem_ia32.a ieee1451_tim.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include ip.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libsystem_ia32.a ip.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include modbus_ascii.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libsystem_ia32.a modbus_ascii.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include network.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libsystem_ia32.a network.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include rtp.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libsystem_ia32.a rtp.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include sip_body.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libsystem_ia32.a sip_body.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include sip_defs.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libsystem_ia32.a sip_defs.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include sip_header.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libsystem_ia32.a sip_header.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include sip_manager.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libsystem_ia32.a sip_manager.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include sip_message.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libsystem_ia32.a sip_message.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include sip_transactions.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libsystem_ia32.a sip_transactions.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include sip_user_agent.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libsystem_ia32.a sip_user_agent.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include tcp.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libsystem_ia32.a tcp.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include thread.cc
+thread.cc: In static member function 'static void System::Thread::reschedule(bool)':
+thread.cc:263: warning: comparison between signed and unsigned integer expressions
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libsystem_ia32.a thread.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include udp.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libsystem_ia32.a udp.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include alarm_init.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libinit_ia32.a alarm_init.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include system_init.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libinit_ia32.a system_init.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include task_init.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libinit_ia32.a task_init.o
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include thread_init.cc
+/usr/local/ia32/gcc/bin/ia32-ar rcs /home/sergio/code/georouting/lib/libinit_ia32.a thread_init.o
+make[2]: Leaving directory `/home/sergio/code/georouting/src/abstraction'
+(cd setup && make)
+make[2]: Entering directory `/home/sergio/code/georouting/src/setup'
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include pc_setup.cc
+/usr/local/ia32/gcc/bin/ia32-ld  -L/home/sergio/code/georouting/lib -Bstatic -L`/usr/local/ia32/gcc/bin/ia32-gcc -ansi -c -Wa,--32 -print-file-name=` --omagic -Ttext=0x00100000 -o pc_setup pc_setup.o -linit_ia32 -lmach_ia32 -larch_ia32 -lutil_ia32 -lgcc
+/usr/local/ia32/gcc/bin/ia32-strip -R .note -R .comment -o pc_setup.tmp pc_setup
+install pc_setup.tmp /home/sergio/code/georouting/img/pc_setup
+rm -f pc_setup.tmp
+make[2]: Leaving directory `/home/sergio/code/georouting/src/setup'
+(cd boot && make)
+make[2]: Entering directory `/home/sergio/code/georouting/src/boot'
+/usr/local/ia32/gcc/bin/ia32-gcc -E -Wa,--32 -I/home/sergio/code/georouting/include pc_boot.S -o pc_boot.s
+sed -e 's/^ELF_HDR_SIZE =.*$/ELF_HDR_SIZE = 0x00000060/' -i pc_boot.s
+as86 -0 -o pc_boot.o pc_boot.s
+ld86 -0 -s -T 0x00007c00 -o pc_boot pc_boot.o
+dd if=pc_boot of=pc_boot.tmp ibs=32 skip=1 obs=512 >& /dev/null
+install pc_boot.tmp /home/sergio/code/georouting/img/pc_boot
+rm -f pc_boot.tmp
+make[2]: Leaving directory `/home/sergio/code/georouting/src/boot'
+(cd system && make)
+make[2]: Entering directory `/home/sergio/code/georouting/src/system'
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include application_scaffold.cc
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include system_scaffold.cc
+install system_scaffold.o pc_system.o
+install application_scaffold.o pc_application.o
+install pc_system.o /home/sergio/code/georouting/lib
+install pc_application.o /home/sergio/code/georouting/lib
+make[2]: Leaving directory `/home/sergio/code/georouting/src/system'
+(cd init && make)
+make[2]: Entering directory `/home/sergio/code/georouting/src/init'
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include init_application.cc
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include init_first.cc
+/usr/local/ia32/gcc/bin/ia32-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -Wa,--32 -O2 -nostdinc -Wall -fdata-sections -ffunction-sections -I/home/sergio/code/georouting/include init_system.cc
+install init_first.o pc_init_first.o
+install init_system.o pc_init_system.o
+install init_application.o pc_init_application.o
+install pc_init_first.o /home/sergio/code/georouting/lib
+install pc_init_system.o /home/sergio/code/georouting/lib
+install pc_init_application.o /home/sergio/code/georouting/lib
+make[2]: Leaving directory `/home/sergio/code/georouting/src/init'
+make[1]: Leaving directory `/home/sergio/code/georouting/src'
+(cd app && make)
+make[1]: Entering directory `/home/sergio/code/georouting/app'
+make[1]: *** No rule to make target `testeMultiple.cc.cc', needed by `testeMultiple.cc.o'.  Stop.
+make[1]: Leaving directory `/home/sergio/code/georouting/app'
+make: *** [app] Error 2
+make: Leaving directory `/home/sergio/code/georouting'

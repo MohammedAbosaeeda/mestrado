@@ -1,0 +1,410 @@
+
+syscall_handler.o:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+00000000 <_ZN4EPOS15Syscall_HandlerC2Ev>:
+   0:	55                   	push   %ebp
+   1:	89 e5                	mov    %esp,%ebp
+   3:	5d                   	pop    %ebp
+   4:	c3                   	ret    
+   5:	90                   	nop
+
+00000006 <_ZN4EPOS15Syscall_HandlerC1Ev>:
+   6:	55                   	push   %ebp
+   7:	89 e5                	mov    %esp,%ebp
+   9:	5d                   	pop    %ebp
+   a:	c3                   	ret    
+   b:	90                   	nop
+
+0000000c <_ZN4EPOS15Syscall_HandlerD2Ev>:
+   c:	55                   	push   %ebp
+   d:	89 e5                	mov    %esp,%ebp
+   f:	5d                   	pop    %ebp
+  10:	c3                   	ret    
+  11:	90                   	nop
+
+00000012 <_ZN4EPOS15Syscall_HandlerD1Ev>:
+  12:	55                   	push   %ebp
+  13:	89 e5                	mov    %esp,%ebp
+  15:	5d                   	pop    %ebp
+  16:	c3                   	ret    
+  17:	90                   	nop
+
+00000018 <_ZN4EPOS15Syscall_Handler8sysenterER18Syscall_Message_st>:
+  18:	55                   	push   %ebp
+  19:	89 e5                	mov    %esp,%ebp
+  1b:	57                   	push   %edi
+  1c:	56                   	push   %esi
+  1d:	53                   	push   %ebx
+  1e:	83 ec 2c             	sub    $0x2c,%esp
+  21:	8b 7d 08             	mov    0x8(%ebp),%edi
+  24:	8d 45 dc             	lea    -0x24(%ebp),%eax
+  27:	89 04 24             	mov    %eax,(%esp)
+  2a:	e8 fc ff ff ff       	call   2b <_ZN4EPOS15Syscall_Handler8sysenterER18Syscall_Message_st+0x13>
+  2f:	8b 45 0c             	mov    0xc(%ebp),%eax
+  32:	89 c0                	mov    %eax,%eax
+  34:	50                   	push   %eax
+  35:	c7 44 24 04 00 00 00 	movl   $0x0,0x4(%esp)
+  3c:	00 
+  3d:	8d 45 dc             	lea    -0x24(%ebp),%eax
+  40:	89 04 24             	mov    %eax,(%esp)
+  43:	e8 fc ff ff ff       	call   44 <_ZN4EPOS15Syscall_Handler8sysenterER18Syscall_Message_st+0x2c>
+  48:	c7 44 24 04 00 00 70 	movl   $0xff700000,0x4(%esp)
+  4f:	ff 
+  50:	c7 44 24 08 00 00 00 	movl   $0x0,0x8(%esp)
+  57:	00 
+  58:	c7 04 24 74 01 00 00 	movl   $0x174,(%esp)
+  5f:	e8 fc ff ff ff       	call   60 <_ZN4EPOS15Syscall_Handler8sysenterER18Syscall_Message_st+0x48>
+  64:	c7 44 24 04 0b 00 00 	movl   $0xb,0x4(%esp)
+  6b:	00 
+  6c:	8d 45 dc             	lea    -0x24(%ebp),%eax
+  6f:	89 04 24             	mov    %eax,(%esp)
+  72:	e8 fc ff ff ff       	call   73 <_ZN4EPOS15Syscall_Handler8sysenterER18Syscall_Message_st+0x5b>
+  77:	b8 00 00 00 00       	mov    $0x0,%eax
+  7c:	89 c2                	mov    %eax,%edx
+  7e:	c1 fa 1f             	sar    $0x1f,%edx
+  81:	89 c3                	mov    %eax,%ebx
+  83:	80 e7 ff             	and    $0xff,%bh
+  86:	89 d6                	mov    %edx,%esi
+  88:	83 e6 00             	and    $0x0,%esi
+  8b:	89 5c 24 04          	mov    %ebx,0x4(%esp)
+  8f:	89 74 24 08          	mov    %esi,0x8(%esp)
+  93:	c7 04 24 75 01 00 00 	movl   $0x175,(%esp)
+  9a:	e8 fc ff ff ff       	call   9b <_ZN4EPOS15Syscall_Handler8sysenterER18Syscall_Message_st+0x83>
+  9f:	c7 44 24 04 11 00 00 	movl   $0x11,0x4(%esp)
+  a6:	00 
+  a7:	8d 45 dc             	lea    -0x24(%ebp),%eax
+  aa:	89 04 24             	mov    %eax,(%esp)
+  ad:	e8 fc ff ff ff       	call   ae <_ZN4EPOS15Syscall_Handler8sysenterER18Syscall_Message_st+0x96>
+  b2:	c7 44 24 04 00 00 7c 	movl   $0xff7c0000,0x4(%esp)
+  b9:	ff 
+  ba:	c7 44 24 08 00 00 00 	movl   $0x0,0x8(%esp)
+  c1:	00 
+  c2:	c7 04 24 76 01 00 00 	movl   $0x176,(%esp)
+  c9:	e8 fc ff ff ff       	call   ca <_ZN4EPOS15Syscall_Handler8sysenterER18Syscall_Message_st+0xb2>
+  ce:	c7 44 24 04 17 00 00 	movl   $0x17,0x4(%esp)
+  d5:	00 
+  d6:	8d 45 dc             	lea    -0x24(%ebp),%eax
+  d9:	89 04 24             	mov    %eax,(%esp)
+  dc:	e8 fc ff ff ff       	call   dd <_ZN4EPOS15Syscall_Handler8sysenterER18Syscall_Message_st+0xc5>
+  e1:	0f 34                	sysenter 
+  e3:	c7 44 24 04 28 00 00 	movl   $0x28,0x4(%esp)
+  ea:	00 
+  eb:	8d 45 dc             	lea    -0x24(%ebp),%eax
+  ee:	89 04 24             	mov    %eax,(%esp)
+  f1:	e8 fc ff ff ff       	call   f2 <_ZN4EPOS15Syscall_Handler8sysenterER18Syscall_Message_st+0xda>
+  f6:	89 f8                	mov    %edi,%eax
+  f8:	83 c4 2c             	add    $0x2c,%esp
+  fb:	5b                   	pop    %ebx
+  fc:	5e                   	pop    %esi
+  fd:	5f                   	pop    %edi
+  fe:	5d                   	pop    %ebp
+  ff:	c2 04 00             	ret    $0x4
+
+00000102 <_ZN4EPOS15Syscall_Handler5wrmsrEmy>:
+ 102:	55                   	push   %ebp
+ 103:	89 e5                	mov    %esp,%ebp
+ 105:	53                   	push   %ebx
+ 106:	83 ec 34             	sub    $0x34,%esp
+ 109:	8b 45 0c             	mov    0xc(%ebp),%eax
+ 10c:	89 45 e0             	mov    %eax,-0x20(%ebp)
+ 10f:	8b 45 10             	mov    0x10(%ebp),%eax
+ 112:	89 45 e4             	mov    %eax,-0x1c(%ebp)
+ 115:	8d 45 ec             	lea    -0x14(%ebp),%eax
+ 118:	89 04 24             	mov    %eax,(%esp)
+ 11b:	e8 fc ff ff ff       	call   11c <_ZN4EPOS15Syscall_Handler5wrmsrEmy+0x1a>
+ 120:	8b 45 e0             	mov    -0x20(%ebp),%eax
+ 123:	89 45 f0             	mov    %eax,-0x10(%ebp)
+ 126:	8b 45 e0             	mov    -0x20(%ebp),%eax
+ 129:	8b 55 e4             	mov    -0x1c(%ebp),%edx
+ 12c:	89 d0                	mov    %edx,%eax
+ 12e:	31 d2                	xor    %edx,%edx
+ 130:	89 45 f4             	mov    %eax,-0xc(%ebp)
+ 133:	8b 5d 08             	mov    0x8(%ebp),%ebx
+ 136:	c7 44 24 04 38 00 00 	movl   $0x38,0x4(%esp)
+ 13d:	00 
+ 13e:	8d 45 ec             	lea    -0x14(%ebp),%eax
+ 141:	89 04 24             	mov    %eax,(%esp)
+ 144:	e8 fc ff ff ff       	call   145 <_ZN4EPOS15Syscall_Handler5wrmsrEmy+0x43>
+ 149:	89 5c 24 04          	mov    %ebx,0x4(%esp)
+ 14d:	89 04 24             	mov    %eax,(%esp)
+ 150:	e8 fc ff ff ff       	call   151 <_ZN4EPOS15Syscall_Handler5wrmsrEmy+0x4f>
+ 155:	c7 44 24 04 3e 00 00 	movl   $0x3e,0x4(%esp)
+ 15c:	00 
+ 15d:	89 04 24             	mov    %eax,(%esp)
+ 160:	e8 fc ff ff ff       	call   161 <_ZN4EPOS15Syscall_Handler5wrmsrEmy+0x5f>
+ 165:	8b 5d f4             	mov    -0xc(%ebp),%ebx
+ 168:	c7 44 24 04 40 00 00 	movl   $0x40,0x4(%esp)
+ 16f:	00 
+ 170:	8d 45 ec             	lea    -0x14(%ebp),%eax
+ 173:	89 04 24             	mov    %eax,(%esp)
+ 176:	e8 fc ff ff ff       	call   177 <_ZN4EPOS15Syscall_Handler5wrmsrEmy+0x75>
+ 17b:	89 5c 24 04          	mov    %ebx,0x4(%esp)
+ 17f:	89 04 24             	mov    %eax,(%esp)
+ 182:	e8 fc ff ff ff       	call   183 <_ZN4EPOS15Syscall_Handler5wrmsrEmy+0x81>
+ 187:	c7 44 24 04 3e 00 00 	movl   $0x3e,0x4(%esp)
+ 18e:	00 
+ 18f:	89 04 24             	mov    %eax,(%esp)
+ 192:	e8 fc ff ff ff       	call   193 <_ZN4EPOS15Syscall_Handler5wrmsrEmy+0x91>
+ 197:	8b 5d f0             	mov    -0x10(%ebp),%ebx
+ 19a:	c7 44 24 04 47 00 00 	movl   $0x47,0x4(%esp)
+ 1a1:	00 
+ 1a2:	8d 45 ec             	lea    -0x14(%ebp),%eax
+ 1a5:	89 04 24             	mov    %eax,(%esp)
+ 1a8:	e8 fc ff ff ff       	call   1a9 <_ZN4EPOS15Syscall_Handler5wrmsrEmy+0xa7>
+ 1ad:	89 5c 24 04          	mov    %ebx,0x4(%esp)
+ 1b1:	89 04 24             	mov    %eax,(%esp)
+ 1b4:	e8 fc ff ff ff       	call   1b5 <_ZN4EPOS15Syscall_Handler5wrmsrEmy+0xb3>
+ 1b9:	c7 44 24 04 3e 00 00 	movl   $0x3e,0x4(%esp)
+ 1c0:	00 
+ 1c1:	89 04 24             	mov    %eax,(%esp)
+ 1c4:	e8 fc ff ff ff       	call   1c5 <_ZN4EPOS15Syscall_Handler5wrmsrEmy+0xc3>
+ 1c9:	8b 4d 08             	mov    0x8(%ebp),%ecx
+ 1cc:	8b 45 f0             	mov    -0x10(%ebp),%eax
+ 1cf:	8b 55 f4             	mov    -0xc(%ebp),%edx
+ 1d2:	0f 30                	wrmsr  
+ 1d4:	83 c4 34             	add    $0x34,%esp
+ 1d7:	5b                   	pop    %ebx
+ 1d8:	5d                   	pop    %ebp
+ 1d9:	c3                   	ret    
+
+000001da <_ZN4EPOS6handleEv>:
+ 1da:	55                   	push   %ebp
+ 1db:	89 e5                	mov    %esp,%ebp
+ 1dd:	57                   	push   %edi
+ 1de:	56                   	push   %esi
+ 1df:	53                   	push   %ebx
+ 1e0:	83 ec 4c             	sub    $0x4c,%esp
+ 1e3:	8b 5d 08             	mov    0x8(%ebp),%ebx
+ 1e6:	8d 45 e0             	lea    -0x20(%ebp),%eax
+ 1e9:	89 04 24             	mov    %eax,(%esp)
+ 1ec:	e8 fc ff ff ff       	call   1ed <_ZN4EPOS6handleEv+0x13>
+ 1f1:	c7 44 24 04 4d 00 00 	movl   $0x4d,0x4(%esp)
+ 1f8:	00 
+ 1f9:	8d 45 e0             	lea    -0x20(%ebp),%eax
+ 1fc:	89 04 24             	mov    %eax,(%esp)
+ 1ff:	e8 fc ff ff ff       	call   200 <_ZN4EPOS6handleEv+0x26>
+ 204:	e8 fc ff ff ff       	call   205 <_ZN4EPOS6handleEv+0x2b>
+ 209:	89 45 e4             	mov    %eax,-0x1c(%ebp)
+ 20c:	8b 45 d0             	mov    -0x30(%ebp),%eax
+ 20f:	83 f8 05             	cmp    $0x5,%eax
+ 212:	0f 87 9a 01 00 00    	ja     3b2 <_ZN4EPOS6handleEv+0x1d8>
+ 218:	8b 04 85 78 00 00 00 	mov    0x78(,%eax,4),%eax
+ 21f:	ff e0                	jmp    *%eax
+ 221:	8b 45 e4             	mov    -0x1c(%ebp),%eax
+ 224:	89 04 24             	mov    %eax,(%esp)
+ 227:	e8 fc ff ff ff       	call   228 <_ZN4EPOS6handleEv+0x4e>
+ 22c:	8d 55 c0             	lea    -0x40(%ebp),%edx
+ 22f:	8d 4d d0             	lea    -0x30(%ebp),%ecx
+ 232:	89 4c 24 08          	mov    %ecx,0x8(%esp)
+ 236:	89 44 24 04          	mov    %eax,0x4(%esp)
+ 23a:	89 14 24             	mov    %edx,(%esp)
+ 23d:	e8 fc ff ff ff       	call   23e <_ZN4EPOS6handleEv+0x64>
+ 242:	83 ec 04             	sub    $0x4,%esp
+ 245:	8b 45 c0             	mov    -0x40(%ebp),%eax
+ 248:	8b 55 c4             	mov    -0x3c(%ebp),%edx
+ 24b:	89 03                	mov    %eax,(%ebx)
+ 24d:	89 53 04             	mov    %edx,0x4(%ebx)
+ 250:	e9 5d 01 00 00       	jmp    3b2 <_ZN4EPOS6handleEv+0x1d8>
+ 255:	8b 45 e4             	mov    -0x1c(%ebp),%eax
+ 258:	89 04 24             	mov    %eax,(%esp)
+ 25b:	e8 fc ff ff ff       	call   25c <_ZN4EPOS6handleEv+0x82>
+ 260:	8d 55 c0             	lea    -0x40(%ebp),%edx
+ 263:	8d 4d d0             	lea    -0x30(%ebp),%ecx
+ 266:	89 4c 24 08          	mov    %ecx,0x8(%esp)
+ 26a:	89 44 24 04          	mov    %eax,0x4(%esp)
+ 26e:	89 14 24             	mov    %edx,(%esp)
+ 271:	e8 fc ff ff ff       	call   272 <_ZN4EPOS6handleEv+0x98>
+ 276:	83 ec 04             	sub    $0x4,%esp
+ 279:	8b 45 c0             	mov    -0x40(%ebp),%eax
+ 27c:	8b 55 c4             	mov    -0x3c(%ebp),%edx
+ 27f:	89 03                	mov    %eax,(%ebx)
+ 281:	89 53 04             	mov    %edx,0x4(%ebx)
+ 284:	e9 29 01 00 00       	jmp    3b2 <_ZN4EPOS6handleEv+0x1d8>
+ 289:	8b 45 e4             	mov    -0x1c(%ebp),%eax
+ 28c:	89 04 24             	mov    %eax,(%esp)
+ 28f:	e8 fc ff ff ff       	call   290 <_ZN4EPOS6handleEv+0xb6>
+ 294:	8d 55 c0             	lea    -0x40(%ebp),%edx
+ 297:	8d 4d d0             	lea    -0x30(%ebp),%ecx
+ 29a:	89 4c 24 08          	mov    %ecx,0x8(%esp)
+ 29e:	89 44 24 04          	mov    %eax,0x4(%esp)
+ 2a2:	89 14 24             	mov    %edx,(%esp)
+ 2a5:	e8 fc ff ff ff       	call   2a6 <_ZN4EPOS6handleEv+0xcc>
+ 2aa:	83 ec 04             	sub    $0x4,%esp
+ 2ad:	8b 45 c0             	mov    -0x40(%ebp),%eax
+ 2b0:	8b 55 c4             	mov    -0x3c(%ebp),%edx
+ 2b3:	89 03                	mov    %eax,(%ebx)
+ 2b5:	89 53 04             	mov    %edx,0x4(%ebx)
+ 2b8:	e9 f5 00 00 00       	jmp    3b2 <_ZN4EPOS6handleEv+0x1d8>
+ 2bd:	8b 45 e4             	mov    -0x1c(%ebp),%eax
+ 2c0:	89 04 24             	mov    %eax,(%esp)
+ 2c3:	e8 fc ff ff ff       	call   2c4 <_ZN4EPOS6handleEv+0xea>
+ 2c8:	8d 55 c0             	lea    -0x40(%ebp),%edx
+ 2cb:	8d 4d d0             	lea    -0x30(%ebp),%ecx
+ 2ce:	89 4c 24 08          	mov    %ecx,0x8(%esp)
+ 2d2:	89 44 24 04          	mov    %eax,0x4(%esp)
+ 2d6:	89 14 24             	mov    %edx,(%esp)
+ 2d9:	e8 fc ff ff ff       	call   2da <_ZN4EPOS6handleEv+0x100>
+ 2de:	83 ec 04             	sub    $0x4,%esp
+ 2e1:	8b 45 c0             	mov    -0x40(%ebp),%eax
+ 2e4:	8b 55 c4             	mov    -0x3c(%ebp),%edx
+ 2e7:	89 03                	mov    %eax,(%ebx)
+ 2e9:	89 53 04             	mov    %edx,0x4(%ebx)
+ 2ec:	e9 c1 00 00 00       	jmp    3b2 <_ZN4EPOS6handleEv+0x1d8>
+ 2f1:	8b 45 d8             	mov    -0x28(%ebp),%eax
+ 2f4:	83 c0 04             	add    $0x4,%eax
+ 2f7:	8b 00                	mov    (%eax),%eax
+ 2f9:	8b 00                	mov    (%eax),%eax
+ 2fb:	8b 30                	mov    (%eax),%esi
+ 2fd:	8b 45 d8             	mov    -0x28(%ebp),%eax
+ 300:	83 c0 04             	add    $0x4,%eax
+ 303:	8b 00                	mov    (%eax),%eax
+ 305:	8b 38                	mov    (%eax),%edi
+ 307:	c7 44 24 04 5c 00 00 	movl   $0x5c,0x4(%esp)
+ 30e:	00 
+ 30f:	8d 45 e0             	lea    -0x20(%ebp),%eax
+ 312:	89 04 24             	mov    %eax,(%esp)
+ 315:	e8 fc ff ff ff       	call   316 <_ZN4EPOS6handleEv+0x13c>
+ 31a:	89 7c 24 04          	mov    %edi,0x4(%esp)
+ 31e:	89 04 24             	mov    %eax,(%esp)
+ 321:	e8 fc ff ff ff       	call   322 <_ZN4EPOS6handleEv+0x148>
+ 326:	c7 44 24 04 73 00 00 	movl   $0x73,0x4(%esp)
+ 32d:	00 
+ 32e:	89 04 24             	mov    %eax,(%esp)
+ 331:	e8 fc ff ff ff       	call   332 <_ZN4EPOS6handleEv+0x158>
+ 336:	89 74 24 04          	mov    %esi,0x4(%esp)
+ 33a:	89 04 24             	mov    %eax,(%esp)
+ 33d:	e8 fc ff ff ff       	call   33e <_ZN4EPOS6handleEv+0x164>
+ 342:	c7 44 24 04 3e 00 00 	movl   $0x3e,0x4(%esp)
+ 349:	00 
+ 34a:	89 04 24             	mov    %eax,(%esp)
+ 34d:	e8 fc ff ff ff       	call   34e <_ZN4EPOS6handleEv+0x174>
+ 352:	8b 45 e4             	mov    -0x1c(%ebp),%eax
+ 355:	89 04 24             	mov    %eax,(%esp)
+ 358:	e8 fc ff ff ff       	call   359 <_ZN4EPOS6handleEv+0x17f>
+ 35d:	8d 55 c0             	lea    -0x40(%ebp),%edx
+ 360:	8d 4d d0             	lea    -0x30(%ebp),%ecx
+ 363:	89 4c 24 08          	mov    %ecx,0x8(%esp)
+ 367:	89 44 24 04          	mov    %eax,0x4(%esp)
+ 36b:	89 14 24             	mov    %edx,(%esp)
+ 36e:	e8 fc ff ff ff       	call   36f <_ZN4EPOS6handleEv+0x195>
+ 373:	83 ec 04             	sub    $0x4,%esp
+ 376:	8b 45 c0             	mov    -0x40(%ebp),%eax
+ 379:	8b 55 c4             	mov    -0x3c(%ebp),%edx
+ 37c:	89 03                	mov    %eax,(%ebx)
+ 37e:	89 53 04             	mov    %edx,0x4(%ebx)
+ 381:	eb 2f                	jmp    3b2 <_ZN4EPOS6handleEv+0x1d8>
+ 383:	8b 45 e4             	mov    -0x1c(%ebp),%eax
+ 386:	89 04 24             	mov    %eax,(%esp)
+ 389:	e8 fc ff ff ff       	call   38a <_ZN4EPOS6handleEv+0x1b0>
+ 38e:	8d 55 c0             	lea    -0x40(%ebp),%edx
+ 391:	8d 4d d0             	lea    -0x30(%ebp),%ecx
+ 394:	89 4c 24 08          	mov    %ecx,0x8(%esp)
+ 398:	89 44 24 04          	mov    %eax,0x4(%esp)
+ 39c:	89 14 24             	mov    %edx,(%esp)
+ 39f:	e8 fc ff ff ff       	call   3a0 <_ZN4EPOS6handleEv+0x1c6>
+ 3a4:	83 ec 04             	sub    $0x4,%esp
+ 3a7:	8b 45 c0             	mov    -0x40(%ebp),%eax
+ 3aa:	8b 55 c4             	mov    -0x3c(%ebp),%edx
+ 3ad:	89 03                	mov    %eax,(%ebx)
+ 3af:	89 53 04             	mov    %edx,0x4(%ebx)
+ 3b2:	89 d8                	mov    %ebx,%eax
+ 3b4:	8d 65 f4             	lea    -0xc(%ebp),%esp
+ 3b7:	83 c4 00             	add    $0x0,%esp
+ 3ba:	5b                   	pop    %ebx
+ 3bb:	5e                   	pop    %esi
+ 3bc:	5f                   	pop    %edi
+ 3bd:	5d                   	pop    %ebp
+ 3be:	c2 04 00             	ret    $0x4
+
+Disassembly of section .text._ZN4EPOS7OStreamC1Ev:
+
+00000000 <_ZN4EPOS7OStreamC1Ev>:
+   0:	55                   	push   %ebp
+   1:	89 e5                	mov    %esp,%ebp
+   3:	8b 45 08             	mov    0x8(%ebp),%eax
+   6:	c7 00 0a 00 00 00    	movl   $0xa,(%eax)
+   c:	5d                   	pop    %ebp
+   d:	c3                   	ret    
+
+Disassembly of section .text._ZN4EPOS7OStreamlsEi:
+
+00000000 <_ZN4EPOS7OStreamlsEi>:
+   0:	55                   	push   %ebp
+   1:	89 e5                	mov    %esp,%ebp
+   3:	83 ec 58             	sub    $0x58,%esp
+   6:	8d 45 b8             	lea    -0x48(%ebp),%eax
+   9:	89 44 24 08          	mov    %eax,0x8(%esp)
+   d:	8b 45 0c             	mov    0xc(%ebp),%eax
+  10:	89 44 24 04          	mov    %eax,0x4(%esp)
+  14:	8b 45 08             	mov    0x8(%ebp),%eax
+  17:	89 04 24             	mov    %eax,(%esp)
+  1a:	e8 fc ff ff ff       	call   1b <_ZN4EPOS7OStreamlsEi+0x1b>
+  1f:	c6 44 05 b8 00       	movb   $0x0,-0x48(%ebp,%eax,1)
+  24:	8d 45 b8             	lea    -0x48(%ebp),%eax
+  27:	89 44 24 04          	mov    %eax,0x4(%esp)
+  2b:	8b 45 08             	mov    0x8(%ebp),%eax
+  2e:	89 04 24             	mov    %eax,(%esp)
+  31:	e8 fc ff ff ff       	call   32 <_ZN4EPOS7OStreamlsEi+0x32>
+  36:	8b 45 08             	mov    0x8(%ebp),%eax
+  39:	c9                   	leave  
+  3a:	c3                   	ret    
+
+Disassembly of section .text._ZN4EPOS7OStreamlsEPKv:
+
+00000000 <_ZN4EPOS7OStreamlsEPKv>:
+   0:	55                   	push   %ebp
+   1:	89 e5                	mov    %esp,%ebp
+   3:	83 ec 58             	sub    $0x58,%esp
+   6:	8d 45 b8             	lea    -0x48(%ebp),%eax
+   9:	89 44 24 08          	mov    %eax,0x8(%esp)
+   d:	8b 45 0c             	mov    0xc(%ebp),%eax
+  10:	89 44 24 04          	mov    %eax,0x4(%esp)
+  14:	8b 45 08             	mov    0x8(%ebp),%eax
+  17:	89 04 24             	mov    %eax,(%esp)
+  1a:	e8 fc ff ff ff       	call   1b <_ZN4EPOS7OStreamlsEPKv+0x1b>
+  1f:	c6 44 05 b8 00       	movb   $0x0,-0x48(%ebp,%eax,1)
+  24:	8d 45 b8             	lea    -0x48(%ebp),%eax
+  27:	89 44 24 04          	mov    %eax,0x4(%esp)
+  2b:	8b 45 08             	mov    0x8(%ebp),%eax
+  2e:	89 04 24             	mov    %eax,(%esp)
+  31:	e8 fc ff ff ff       	call   32 <_ZN4EPOS7OStreamlsEPKv+0x32>
+  36:	8b 45 08             	mov    0x8(%ebp),%eax
+  39:	c9                   	leave  
+  3a:	c3                   	ret    
+
+Disassembly of section .text._ZN4EPOS7OStreamlsEPKc:
+
+00000000 <_ZN4EPOS7OStreamlsEPKc>:
+   0:	55                   	push   %ebp
+   1:	89 e5                	mov    %esp,%ebp
+   3:	83 ec 18             	sub    $0x18,%esp
+   6:	8b 45 0c             	mov    0xc(%ebp),%eax
+   9:	89 44 24 04          	mov    %eax,0x4(%esp)
+   d:	8b 45 08             	mov    0x8(%ebp),%eax
+  10:	89 04 24             	mov    %eax,(%esp)
+  13:	e8 fc ff ff ff       	call   14 <_ZN4EPOS7OStreamlsEPKc+0x14>
+  18:	8b 45 08             	mov    0x8(%ebp),%eax
+  1b:	c9                   	leave  
+  1c:	c3                   	ret    
+
+Disassembly of section .text._ZN4EPOS4Task10table_taskEv:
+
+00000000 <_ZN4EPOS4Task10table_taskEv>:
+   0:	55                   	push   %ebp
+   1:	89 e5                	mov    %esp,%ebp
+   3:	8b 45 08             	mov    0x8(%ebp),%eax
+   6:	5d                   	pop    %ebp
+   7:	c3                   	ret    
+
+Disassembly of section .text._ZN4EPOS4Task15table_semaphoreEv:
+
+00000000 <_ZN4EPOS4Task15table_semaphoreEv>:
+   0:	55                   	push   %ebp
+   1:	89 e5                	mov    %esp,%ebp
+   3:	8b 45 08             	mov    0x8(%ebp),%eax
+   6:	83 e8 80             	sub    $0xffffff80,%eax
+   9:	5d                   	pop    %ebp
+   a:	c3                   	ret    

@@ -1,0 +1,5 @@
+    --systemc-source-file ../top_levels/dtmf/toplevel_synthesis.cc \
+    --systemc-source-file ../dtmf_detector/rtl/dtmf_detector.cc \
+    --systemc-source-file ../dtmf_detector/rtl/dtmf_detector_hardcodded.cc \
+    --systemc-source-file ../adpcm/adpcm_rtl/adpcm.cc
+

@@ -1,0 +1,465 @@
+# vim: set filetype=perl
+Cluster (Keso) {
+	
+	# This file documents all available kesorc options
+	# (if kept up-to-date ;-) )
+	# This file cannot be used to build an actually useful
+	# system and its only purpose is to document the kesorc
+	# settings by example
+	#
+	# "Cluster" can also be called "World".
+	#
+	# A Cluster defines a set of Networks und Nodes.
+	#
+
+	# Definition of a network. The name must be unique and is used to identify the network.
+	Network (can_network) {
+		# The protocol class must implement the keso.core.io.PacketStream interface. The constructors
+		# of a PacketStream must have a special signature which also contains the
+		# DriverInterface below. See PacketStream.java for details.
+		Protocol="keso/driver/can/CanPacketStream";
+
+		# This interface must be implemented by every hardware driver specified in the
+		# service or import definition. This interface has to match the one used in the constructor
+		# of the Protocol. It also has to contain the public Setter methods for all specified
+		# properties below.
+		DriverInterface="keso/driver/can/CanPort";
+
+		# The properties of the hardware drivers are setup using methods with a special signature
+		# equal to the Setter methods specified by the java beans api.
+		# When using this example the method 'setBaudrate(I)V' will be called on every hardware driver
+		# with the parameter value 125000. Only integer is supported as parameter type.
+		Baudrate = 125000;  # myCanDriver.setBaudrate(125000);
+	}
+
+	Node (tricore) {
+		# "Node" can also be called "System".
+		#
+		# A Node is a single micro controller.
+		#
+
+		# Modules used by the system, relative to libs/.
+		# Multiple Modules options may be specified, and each
+		# option may contain multiple modules separated by :
+		Modules = "debug:helloworld";
+		Modules = "debug:test_gc:test_leds";
+		Modules = "debug:test_compiler";
+
+		# The target platform (optional)
+		# (tricore, linux, avr, linux_josek, epos)
+		Target="tricore";
+
+		# The micro controller type is passed to the linker
+		ProcessorType = "tc1796";
+		ProcessorType = "atmega8535";
+
+		# Oscillator frequency in Hz. Used to calculate baudrates, timer values etc.
+		# The value can be accessed in java code using SystemService.getIntegerConstant("Frequency");
+		# This call will be replaced on compile time with the value specified here.
+		Frequency = 8000000;
+
+		OsekOS (KesoOS) {
+		# Enable extended error status reporting
+		# Possible values: STANDARD, EXTENDED
+			STATUS = "EXTENDED";
+
+			STARTUPHOOK = true {
+				HookClass = "test/Hooks";
+				HookMethod = "Startup()V";
+			}
+			ERRORHOOK = true {
+				HookClass = "test/Hooks";
+				HookMethod = "Error(I)V";
+			}
+			SHUTDOWNHOOK = false {}
+			PRETASKHOOK = false {}
+			POSTTASKHOOK = false {}
+
+			USEGETSERVICEID = "FALSE";
+			USEPARAMETERACCESS = "FALSE";
+
+		# Use RES_SCHEDULER resource within application (boolean)
+			USERESSCHEDULER = "TRUE";
+
+		# (PO) Target Microcontroller (TC1796, TC1795B, TC10GP)
+			MICROCONTROLLER = "TC1796";
+
+		# (PO) Choose a timer for the realtime clock feature
+		# (GPTU{0,1}_T{0,1}, STM_T{0,1})
+			TRICORE_RT_CLOCK = "NOT_USED";
+
+		# (PO) Number of Context Save Areas used by the application
+			TRICORE_NUM_CSA = "200";
+
+		# (PO) OSEK conformance class. (BCC1,BCC2,ECC1,ECC2,AUTO)
+			CC = "AUTO";
+
+		# (PO) Overall Scheduling policy (NON,FULL,MIXED,AUTO)
+			SCHEDULE = "AUTO";
+
+		# (PO) size of tracebuffer, 0 disables tracing
+		# TRACEBUFFER = "100";
+
+		# (PO) Use user defined main function (boolean)
+			USERMAIN = "FALSE";
+
+		# (PO) Enable support for Stack checking
+			STACKCHECK = "TRUE";
+
+		# (PO) Additional RT checks (boolean)
+		# checking initialization of variables, checks if TerminateTask() called at
+		# the end of each Task etc.
+			EXTRA_RUNTIME_CHECKS = "FALSE";
+
+
+		# (PO) Allow ORTI aware debuggers to trace syscalls (boolean)
+			SERVICETRACE = "FALSE";
+
+		# (PO) Allow ORTI aware debuggers to access last !=E_OK error code returned
+			USELASTERROR = "FALSE";
+
+		# (PO) PREISRHOOK and POSTISRHOOK routines
+			PREISRHOOK = false {}
+			POSTISRHOOK = false {}
+		}
+
+		Domain (dom1) {
+			# (KESO) Type of the domain's heap
+			# (RestrictedDomainScope (RDS), IdleRoundRobin (IRR), CoffeeBreak (CoB))
+			Heap = IdleRoundRobin {
+				# (KESO) Size of the domain's heap
+				HeapSize=65536;
+
+				# (KESO) alternative you can specify the heap size in KiBi or MiBi
+				# HeapSizeKB=64;
+				# HeapSizeMB=1;
+
+				# (KESO) Size of one slot on the heap (IRR and CoB) (default: 8)
+				SlotSize=8;
+
+				# (KESO) Name of the synchronization group (optional, IRR and CoB)
+				Group = "Default";
+
+				# (KESO) Defines the mode of the Garbage Collector Task. (optional, IRR and CoB)
+				# All domains using the IRR heap need to have the same setting here,
+				# i.e. a non-default value needs to be specified for every domain.
+				# Currently the following modes are defined
+				#
+				# Workaholic:         Workaholic. The GC will always run on lowest priority, even if
+				#                     there is no actual need for garbage collection.
+				#
+				# Lazy (default):     Same as "Workaholic" but sleep when none of the domains needs GC.
+				#                     The GC is activated at object allocation.
+				#		      (This can cause trouble if the "new"-operation is used in the
+				#		      StartupHook or class constructor.)
+				#
+				# EnforceOnDemand:    Same as "Lazy" but defer tasks in "new"-operation if the
+				#		      system runs out of memory. Therefore no "new"-operation
+				#		      is allowed while holding a Resource! In addition the memory
+				#		      usage for code and stack is increased!
+				#
+				# DeferTasksOnDemand: Same as "Lazy" but defers the activation and unblocking of tasks
+				#		      if the domain heap runs low of free memory. The deferment of tasks
+				#		      may cause a priority invertion! This is also true for the
+				#                     EnforceOnDemand mode.
+				#
+				GCTMode  = "Lazy";
+
+				# (KESO) Adjust the percentage of free memory at which the GC should
+				#  start to defer tasks. (optinal, IRR and CoB, default 50).
+				LowWaterMark=50;
+			}
+
+			# Definition of a service. The name must be unique and is used to import the service.
+			Service (my_service) {
+
+				# The java interface that contains all methods that shall be exported by the service.
+				ServiceInterface="robertino/mdsa/MDSAService";
+
+				# The class that provides the service. It has to implement the ServiceInterface as well as the
+				# keso.core.Portal marker interface.
+				ServiceClass="robertino/mdsa/MDSA";
+
+				# The properties below are only for network enabled services.
+
+				# The networks in which the service will be available separated by a ':'. There has to
+				# be a dedicated packet handler task for every network calling
+				# PortalService.handlePackets("my_service", network_name); after initalization.
+				Access="can_network";
+				Access="serial_network:can_network";
+
+				# Hardware drivers for the networks specified above also separated by a ':'.
+				Drivers="keso/driver/can/i82527/ATMega8535CanDriver";
+				Drivers="keso/driver/avr/atmega8535/Usart:keso/driver/can/i82527/ATMega8535CanDriver";
+
+				# Timeout for writing data to the network(s) in us. Zero means no timeout.
+				WriteTimeout=500000;
+
+				# Timeout for allocating receive/transmit buffers during initalization. See keso.core.MemoryService
+				# for allowed values.
+				AllocTimeout=-1;
+			}
+
+			Task (task1) {
+				# (KESO) Choose MainClass and MainMethod of this task
+				# (i.e. where it is started)
+				MainClass="test/HelloWorld";
+				MainMethod="launch()V";
+
+				# Specify if task is automatically set to ready on start up
+				Autostart = false {
+					# specifies in which Appmodes the task is autostarted.
+					# applies only if Autostart is enabled
+					Appmode = "OSDEFAULTAPPMODE";
+				}
+
+				# Priority >=0, the higher the number the higher is the priority
+				Priority = "5";
+
+				# Preemptability of the Task (NON, FULL)
+				# If NON, no internal resources may be assigned to this task
+				Schedule = "full";
+
+				# Max number of recorded activation requests for this task
+				Activation = "1";
+
+				# Corresponds to the OIL RESOURCE attribute
+				# defines Resources used by this task
+				UseResource = "res1";
+				UseResource = "res2";
+
+				# Corresponds to the OIL EVENT attribute
+				UseEvent = "ev1";
+
+				# (PO) Used for optimization. Specifies if the Schedule() call is
+				# used by this task. (YES, NO)
+				CallScheduler = "yes";
+
+				# (PO) BASIC or EXTENDED TASK? (BASIC have no WAITING state)
+				Type = "extended";
+
+				# (PO) Stacksize in bytes required for this task. System will add
+				# additional space for calling system functions
+				# Should include space required by Pre/PostTaskHooks if used
+				Stacksize = "100";
+
+				# (PO) Number of Context Save Areas used by this task
+				# TRICORE_NUM_CSA = "20";
+			}
+
+			Task (task2) {
+				MainClass="test/Task2";
+				MainMethod="launch()V";
+
+				Autostart = true {
+					Appmode = "OSDEFAULTAPPMODE";
+				}
+				Priority = "90";
+				Schedule = "full";
+				Type = "basic";
+				Stacksize = "100";
+				CallScheduler = "yes";
+				Activation = "1";
+
+				UseResource = "res2";
+			}
+
+			# Alarms may also be declared as global objects
+			Alarm (alarm1) {
+				# Counter that serves as base for this alarm
+				UseCounter = "counter1";
+
+				# Action to take upon expiration of this alarm
+				# (ACTIVATETASK, SETEVENT, ALARMCALLBACK)
+				Action = ALARMCALLBACK {
+					# Task to activate/set an event for
+					# applicable only if Action is either ACTIVATETASK or SETEVENT
+					#UseTask = "task1";
+
+					# Event to set for the Task specified by Task
+					# applicable only if Action is SETEVENT
+					#UseEvent = "ev1";
+
+					# (KESO) name and class of the callback method if Action is
+					# ALARMCALLBACK
+					AlarmCallbackClass = "test/Callbacks";
+					AlarmCallbackMethod = "alarm1handler()V";
+				}
+
+				# Specifies if this alarms is automatically started on system start up
+				# based on the given application modes.
+				Autostart = true {
+					# Application modes to automatically start this alarm in
+					Appmode = "OSDEFAULTAPPMODE";
+
+					# time when this alarm shall expire first
+					Alarmtime = "50";
+
+					# cycle time of a cyclic alarm
+					Cycletime = "100";
+				}
+			}
+
+			# Declares an ISR routine
+			# Both cat1 and cat2 ISRs must be declared
+			ISR (isr1) {
+				# Category of the ISR. Cat1 ISRs bypass the OSEK kernel with minimal
+				# overhead. The may not use any system services.
+				# Cat2 ISRs get their own stackframe and may call most OSEK services.
+				Category = "1";
+
+				# The Tricore Service Request Register the ISR will be attached to (PO)
+				Tricore_Vector = "CAN0_SRC0";
+
+				# Relative IRQLevel of this ISR (PO)
+				Tricore_IRQLevel = "3";
+
+				# # of context save areas required by this ISR (PO)
+				Tricore_Num_CSA = "10";
+
+				# Specifies how many bytes of stack are required for this ISR (PO)
+				Stacksize = "64";
+
+				# Optionally may access Resources and Messages
+				# UseResource = "res1";
+				# UseMeesage = "msg1";
+
+				# Class and Methodsignature of the Handlerroutine
+				HandlerClass = "test/ISRHandlers";
+				HandlerMethod = "isr1Handler()V";
+			}
+
+			# Declare an ISR for the AVR
+			# The name must match the c macro for the isr. See avr-libc documentation for details.
+			ISR(SIG_INTERRUPT0) {
+				# only these properties are required for avr isrs.
+				HandlerClass="keso/driver/can/i82527/ATMega8535CanDriver";
+				HandlerMethod="canInterrupt()V";
+			}
+
+
+			Resource (res1) {
+				ResourceProperty = "Standard";
+			}
+
+			Resource (res2) {
+				ResourceProperty = "Linked";
+				LinkedResource = "res1";
+			}
+		}
+
+		Domain (dom2) {
+			Heap = IdleRoundRobin {
+				HeapSize=65536;
+				SlotSize=8;
+			}
+
+			# Import a service. It will be accessible only within this domain. The name must match the service name.
+			Import (my_service) {
+
+				# The properties below are only required when using a remote service.
+
+				# The network that shall be used to communicate with the service.
+				Access="robertino_can";
+
+				# The hardware driver to access the network.
+				Driver="keso/driver/can/i82527/ATMega8535CanDriver";
+
+				# Timeout for reading from the network in us.
+				ReadTimeout=500000;
+
+				# Timeout for writing to the network in us.
+				WriteTimeout=500000;
+
+				# Timeout for allocating receive/transmit buffers. See keso.core.MemoryService for allowed values.
+				AllocTimeout=-1;
+			}
+
+			Task (task1) {
+				MainClass="test/Task3";
+
+				Autostart = true {
+					Appmode = "OSDEFAULTAPPMODE";
+				}
+
+				Priority = "6";
+				Schedule = "full";
+				Type = "basic";
+				Stacksize = "100";
+				CallScheduler = "yes";
+				Activation = "1";
+
+				UseResource = "res1";
+			}
+		}
+
+		Domain (domx) {
+			Heap = RestrictedDomainScope {
+				HeapSize=65536;
+			}
+
+			Task (taskx) {
+				MainClass="test/Task3";
+
+				Autostart = false {
+					Appmode = "OSDEFAULTAPPMODE";
+				}
+				Priority = "2";
+				Schedule = "full";
+				Type = "basic";
+				Stacksize = "100";
+				CallScheduler = "yes";
+				Activation = "1";
+
+				UseResource = "res1";
+			}
+		}
+
+		# global Resource hidden in domain 1
+		Resource (res1) {
+			# Type of this resource. (STANDARD, LINKED, INTERNAL)
+			ResourceProperty = "Standard";
+			# Referenced Resources (applicable only if ResourceProperty==LINKED)
+			# LinkedResource = "res2";
+		}
+
+		# Events are always declared globally but may only be set/queried for tasks
+		# within the same domain (restricted due to getTaskByName)
+		Event (ev1) {
+			# The MASK attribute must either be a power of 2 or auto. In case of auto
+			# KESO will automatically generate a valid mask for the event
+			# numbers prefixed with 0x are considered as hexadecimal numbers
+			Mask = "Auto";
+		}
+
+		# Counters are always declared globally but may be used by different Alarms
+		# which may be locally or globally defined
+		Counter (counter1) {
+			# Maximum allowed counter value. When reached the counter will roll over.
+			MAXALLOWEDVALUE = "128";
+
+			# Minimum cycle time for associated alarms in counter ticks
+			MINCYCLE = "16";
+
+			# Number of ticks required to reach a counter specific unit
+			TICKSPERBASE = "90";
+
+			# (PO) Hardware timer used for this counter or USERCOUNTER if application
+			# increases the counter
+			# (GPTU{0,1}_T{0,1}, STM_T{0,1})
+			TRICORE_TIMER = "STM_T0";
+
+			# (PO) Relative interrupt level of this counter
+			TRICORE_IRQLEVEL = "2";
+
+			# (PO) Ticktime in ns for this counter, if not limited by hardware
+			TIME_IN_NS = "100000000";
+		}
+
+		# Appmode objects can be used to define special modes the application runs in
+		# The application can then run code dependent on the current appmode
+		Appmode (mySpecialAppmode) {
+			# There are no attributes defined for an Appmode object
+		}
+	}
+}

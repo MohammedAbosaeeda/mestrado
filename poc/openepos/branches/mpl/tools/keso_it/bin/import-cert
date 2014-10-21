@@ -1,0 +1,16 @@
+#!/usr/bin/tcsh
+
+set ssl_path=".subversion/auth/svn.ssl.server"
+set ssl_cert="2077c67df4ca86a57cd80ddb1ac3adbe"
+
+if ( -r "${ssl_path}/${ssl_cert}" ) {
+	echo cert allready installed
+	exit 1
+}
+
+if ( ! -d "${ssl_path}" ) {
+	echo ${ssl_path} not found!
+	exit 1
+}
+
+cp ${KESOROOTPATH}/bin/${ssl_cert} ${ssl_path}

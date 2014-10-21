@@ -1,0 +1,19 @@
+# TODO - ps não sei se pode colocar mais de uma class em um .native
+
+class nanovm/dmec/PictureMotionEstimator 48
+method <init>:(II)V 0
+method match:(Lnanovm/dmec/Picture;Lnanovm/dmec/Picture;)Lnanovm/dmec/PictureMotionCounterpart; 1
+
+
+class nanovm/dmec/Picture 49
+method <init>:()V 0
+
+
+class nanovm/dmec/PictureMotionCounterpart 50
+method <init>:()V 0
+
+
+class nanovm/dmec/TestSupport 51
+method <init>:()V 0
+method createPicture:(III)Lnanovm/dmec/Picture; 1
+method testPictureMotionCounterpart:(Lnanovm/dmec/PictureMotionCounterpart;IILnanovm/dmec/Picture;Lnanovm/dmec/Picture;)V 2

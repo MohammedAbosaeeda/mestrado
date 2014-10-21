@@ -1,0 +1,92 @@
+Cluster (Keso) {
+
+	Node (lukas) {
+
+		Modules="debug:test_lukas";
+
+		Target = "tricore";
+		ProcessorType = "tc1796";
+
+		CommandSeqence={1,1,4,18,2,1,3,4,1,2,4,18,2,2,3,4,1,3,4,18,2,3,3,4,1,4,4,18,2,4,3,4,1,5,4,18,2,5,3,4,1,6,4,18,2,6,3,4,1,7,4,18,2,7,3,4,1,1,4,18,2,1,3,4,1,1,4,18,2,1,3,4,1,1,4,18,2,1,3,4,1,1,4,18,2,1,3,4,1,2,4,18,2,1,3,4,1,1,4,18,2,1,3,4,1,1,4,18,2,1,3,4,1,1,4,18,2,1,3,4,1,2,4,18,2,1,3,4,1,1,4,18,2,1,3,4,1,1,4,18,2,1,3,4,1,1,4,18,2,1,3,4,1,2,4,18,2,1,3,4,1,1,4,18,2,1,3,4,1,1,4,18,2,1,3,4,1,1,4,18,2,1,3,4,1,2,4,18,2,1,3,4,1,1,4,18,2,1,3,4,1,1,4,18,2,1,3,4,1,1,4,18,2,1,3,4,1,2,4,18,2,1,3,4,1,1,4,18,2,1,3,4,1,1,4,18,2,1,3,4,1,1,4,18,2,1,3,4,1,2,4,18,2,1,3,4,1,1,4,18,2,1,3,4,1,1,4,18,2,1,3,4,1,1,4,18,2,1,3,4,1,1,4,18,2,7,3,4,1,3,4,18,2,3,3,4,1,3,4,18,2,3,3,4,1,3,4,18,2,3,3,4,1,3,4,18,2,3,4,300,5,0};
+
+		OsekOS (KesoOS) {
+			STATUS = "STANDARD";
+			
+			STARTUPHOOK = true {
+				HookClass = "lukas/Main";
+				HookMethod = "StartupHook()V";
+			}
+			ERRORHOOK = false {}
+			SHUTDOWNHOOK = false {}
+			PRETASKHOOK = false {}
+			POSTTASKHOOK = false {}
+			USEGETSERVICEID = "FALSE";
+			USEPARAMETERACCESS = "FALSE";
+			USERESSCHEDULER = "FALSE";
+			MICROCONTROLLER = "TC1796";
+			TRICORE_RT_CLOCK = "NOT_USED";
+			TRICORE_NUM_CSA = "50";
+			CC = "AUTO";
+			SCHEDULE = "AUTO";
+			USERMAIN = "FALSE";
+			STACKCHECK = "FALSE";
+			EXTRA_RUNTIME_CHECKS = "FALSE";
+			SERVICETRACE = "FALSE";
+			USELASTERROR = "FALSE";
+			PREISRHOOK = false {}
+			POSTISRHOOK = false {}
+		}
+
+		Domain (dom1) {
+
+			Heap = RestrictedDomainScope {
+				HeapSize=1024;
+				#SlotSize=8;
+			}
+
+			Task (FSMTask) {
+				MainClass="lukas/Main";
+				MainMethod="launch()V";
+
+				Autostart = true {
+					Appmode = "OSDEFAULTAPPMODE";
+				}
+
+				Priority = "5";
+				Schedule = "non";
+				Activation = "1";
+				CallScheduler = "no";
+				Type = "basic";
+				Stacksize = "4096";
+			}
+
+			ISR (PS_ISR) {
+				Category = "2";
+				Tricore_Vector = "DMA_SYSSRC2";
+				Tricore_IRQLevel = "128";
+				Tricore_Num_CSA = "20";
+				Stacksize = "4096";
+				HandlerClass = "lukas/device/PhotoSensor";
+				HandlerMethod = "interrupt()V";
+			}
+
+			Alarm (SysAlarm) {
+				UseCounter = "SysCounter";
+				Action = ACTIVATETASK {
+					UseTask = "FSMTask";
+				}
+				Autostart = false {}
+			}
+		}
+
+		Counter (SysCounter) {
+			MAXALLOWEDVALUE = "10000";
+			MINCYCLE = "1";
+			TICKSPERBASE = "1";
+			TRICORE_TIMER = "STM_T0";
+			TRICORE_IRQLEVEL = "4";
+			TIME_IN_NS = "1000000";
+		}
+	}
+}
+

@@ -1,0 +1,94 @@
+install /home/tinha/mestrado/poc/openepos/branches/teaching/src/abstraction/semaphore_test.cc /home/tinha/mestrado/poc/openepos/branches/teaching/app
+install /home/tinha/mestrado/poc/openepos/branches/teaching/src/abstraction/semaphore_test_traits.h /home/tinha/mestrado/poc/openepos/branches/teaching/app
+(cd etc && make -i clean)
+make[1]: Entering directory `/home/tinha/mestrado/poc/openepos/branches/teaching/etc'
+sed -e 's/^#define ARCH.*$/#define ARCH xxx/' -i /home/tinha/mestrado/poc/openepos/branches/teaching/include/system/config.h
+sed -e 's/^#define MACH.*$/#define MACH xxx/' -i /home/tinha/mestrado/poc/openepos/branches/teaching/include/system/config.h
+sed -e 's/^#define APP.*$/#define APPLICATION xxx/' -i /home/tinha/mestrado/poc/openepos/branches/teaching/include/system/config.h
+rm -f *.conf
+make[1]: Leaving directory `/home/tinha/mestrado/poc/openepos/branches/teaching/etc'
+(cd app && make -i clean)
+make[1]: Entering directory `/home/tinha/mestrado/poc/openepos/branches/teaching/app'
+rm -f *.o semaphore_test
+make[1]: Leaving directory `/home/tinha/mestrado/poc/openepos/branches/teaching/app'
+(cd img && make -i clean)
+make[1]: Entering directory `/home/tinha/mestrado/poc/openepos/branches/teaching/img'
+rm -f *_boot *_setup *_init *_system semaphore_test
+make[1]: Leaving directory `/home/tinha/mestrado/poc/openepos/branches/teaching/img'
+(cd src && make -i clean)
+make[1]: Entering directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src'
+make MAKE:="make -i clean" utility arch mach abstraction setup boot system init
+make[2]: Entering directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src'
+(cd utility && make -i clean)
+make[3]: Entering directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/utility'
+rm -f *.o *_test
+make[3]: Leaving directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/utility'
+(cd arch && make -i clean)
+make[3]: Entering directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/arch'
+make MAKE:="make -i clean" 
+make[4]: Entering directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/arch'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/arch'
+make[3]: Leaving directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/arch'
+(cd mach && make -i clean)
+make[3]: Entering directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/mach'
+make MAKE:="make -i clean" common pc
+make[4]: Entering directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/mach'
+(cd common && make -i clean)
+make[5]: Entering directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/mach/common'
+rm -f *.o
+make[5]: Leaving directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/mach/common'
+(cd pc && make -i clean)
+make[5]: Entering directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/mach/pc'
+rm -f *.o *_test
+make[5]: Leaving directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/mach/pc'
+make[4]: Leaving directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/mach'
+make[3]: Leaving directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/mach'
+(cd abstraction && make -i clean)
+make[3]: Entering directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/abstraction'
+rm -f *.o *_test
+make[3]: Leaving directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/abstraction'
+(cd setup && make -i clean)
+make[3]: Entering directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/setup'
+rm -f *.o *_setup
+make[3]: Leaving directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/setup'
+(cd boot && make -i clean)
+make[3]: Entering directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/boot'
+rm -f *.s *.o *_boot *.tmp
+make[3]: Leaving directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/boot'
+(cd system && make -i clean)
+make[3]: Entering directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/system'
+rm -f *.o *_system
+make[3]: Leaving directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/system'
+(cd init && make -i clean)
+make[3]: Entering directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/init'
+rm -f *.o *_init
+make[3]: Leaving directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/init'
+make[2]: Leaving directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src'
+make[1]: Leaving directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src'
+find /home/tinha/mestrado/poc/openepos/branches/teaching/lib -maxdepth 1 -type f -exec rm -f {} \;
+(cd etc && make --print-directory)
+make[1]: Entering directory `/home/tinha/mestrado/poc/openepos/branches/teaching/etc'
+sed -e 's/^#define ARCH.*$/#define ARCH /' -i /home/tinha/mestrado/poc/openepos/branches/teaching/include/system/config.h
+sed -e 's/^#define MACH.*$/#define MACH pc/' -i /home/tinha/mestrado/poc/openepos/branches/teaching/include/system/config.h
+sed -e 's/^#define APPLICATION.*$/#define APPLICATION semaphore_test/' -i /home/tinha/mestrado/poc/openepos/branches/teaching/include/system/config.h
+make[1]: Leaving directory `/home/tinha/mestrado/poc/openepos/branches/teaching/etc'
+(cd tools && make --print-directory)
+make[1]: Entering directory `/home/tinha/mestrado/poc/openepos/branches/teaching/tools'
+(cd eposcc && make --print-directory)
+make[2]: Entering directory `/home/tinha/mestrado/poc/openepos/branches/teaching/tools/eposcc'
+install -m 775 eposcc /home/tinha/mestrado/poc/openepos/branches/teaching/bin
+sed -e 's/^EPOS=.*$/EPOS=\/home\/tinha\/mestrado\/poc\/openepos\/branches\/teaching/' -i /home/tinha/mestrado/poc/openepos/branches/teaching/bin/eposcc
+make[2]: Leaving directory `/home/tinha/mestrado/poc/openepos/branches/teaching/tools/eposcc'
+(cd eposmkbi && make --print-directory)
+make[2]: Entering directory `/home/tinha/mestrado/poc/openepos/branches/teaching/tools/eposmkbi'
+install -m 775 eposmkbi /home/tinha/mestrado/poc/openepos/branches/teaching/bin
+make[2]: Leaving directory `/home/tinha/mestrado/poc/openepos/branches/teaching/tools/eposmkbi'
+make[1]: Leaving directory `/home/tinha/mestrado/poc/openepos/branches/teaching/tools'
+(cd src && make --print-directory)
+make[1]: Entering directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src'
+(cd utility && make --print-directory)
+make[2]: Entering directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/utility'
+g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -Wa,--32 -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/tinha/mestrado/poc/openepos/branches/teaching/include elf.cc
+make[2]: Leaving directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src/utility'
+make[1]: Leaving directory `/home/tinha/mestrado/poc/openepos/branches/teaching/src'

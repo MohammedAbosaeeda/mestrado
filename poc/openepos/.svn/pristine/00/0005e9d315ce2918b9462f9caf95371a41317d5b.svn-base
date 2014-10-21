@@ -1,0 +1,54 @@
+System (Keso) {
+# Default Hello World system
+	Modules = "debug:posix:helloworld";
+
+	ProcessorType = "tc1796";
+
+    OsekOS (KesoOS) {
+		STATUS = "EXTENDED";
+		STARTUPHOOK = false {}
+		ERRORHOOK = false {}
+		SHUTDOWNHOOK = false {}
+		PRETASKHOOK = false {}
+		POSTTASKHOOK = false {}
+		USEGETSERVICEID = "FALSE";
+		USEPARAMETERACCESS = "FALSE";
+		USERESSCHEDULER = "FALSE";
+		MICROCONTROLLER = "TC1796";
+		TRICORE_RT_CLOCK = "NOT_USED";
+		TRICORE_NUM_CSA = "200";
+		CC = "AUTO";
+		SCHEDULE = "AUTO";
+		USERMAIN = "FALSE";
+		STACKCHECK = "TRUE";
+		EXTRA_RUNTIME_CHECKS = "FALSE";
+		SERVICETRACE = "FALSE";
+		USELASTERROR = "FALSE";
+		PREISRHOOK = false {}
+		POSTISRHOOK = false {}
+	}
+	
+	Domain (dom1) {
+		Heap = IdleRoundRobin {
+			HeapSize=1024;
+			SlotSize=16;
+		}
+
+		Task (task1) {
+			MainClass="test/HelloWorld";
+			MainMethod="launch()V";
+
+			Autostart = true {
+				Appmode = "OSDEFAULTAPPMODE";
+			}
+
+			Priority = "5";
+			Schedule = "full";
+			Activation = "1";
+			Type = "basic";
+			Stacksize = "100";
+
+			HelloString = "Hello World";
+		}
+	}
+}

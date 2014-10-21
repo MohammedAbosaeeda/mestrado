@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# cd $EPOS
+cd testing
+cd src/abstraction
+
+arch=([1]=library [2]=builtin [3] kernel)
+
+#Para cada arquivo de tese, monte o nome do traits.
+#Se o arquivo existir, modifiqu-o, senão modifique o arquivo base, que fica na pasta raiz
+
+for test_file in *_test.cc 
+do
+   test_trait=`echo $test_file | cut -d'.' -f 1`
+   test_trait=`echo ${test_trait}_traits.h`
+
+   if [ -e $test_trait ]; then
+      echo "@@@@@@@ "$test_trait " @@@@@@@"
+      #troque a arquitetura
+      cp $test_trait ${test_trait}".bkp"
+
+      
+      sed -i 's/^static const unsigned int MODE.*/static const unsigned int MODE = BUILTIN;/' $test_trait
+      make APPLICATION= $test_file > test_trace.log
+
+      #cp ${test_trait}".bkp" $test_trait
+   else
+	echo $test_file > test_trace.log
+   fi
+  
+
+done

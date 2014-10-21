@@ -1,0 +1,162 @@
+/**********************************************************/
+.weak __epos_library_app_entry
+        .type __epos_library_app_entry,@function
+__epos_library_app_entry:
+/**********************************************************/
+
+#include "avr8/macros.inc"
+
+	.macro	vector name
+	.if (. - __vectors < _VECTORS_SIZE)
+	.weak	\name
+	.set	\name, __bad_interrupt
+	call	\name
+	//XJMP	\name
+	.endif
+	.endm
+
+	.section .vectors,"ax",@progbits
+	.global	__vectors
+	.func	__vectors
+__vectors:
+	XJMP	__init
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	vector	__vector_handler
+	.endfunc
+
+	/* Handle unexpected interrupts (enabled and no handler), which
+	   usually indicate a bug.  Jump to the __vector_default function
+	   if defined by the user, otherwise jump to the reset address.
+
+	   This must be in a different section, otherwise the assembler
+	   will resolve "rjmp" offsets and there will be no relocs.  */
+
+	.text
+	.global	__bad_interrupt
+	.func	__bad_interrupt
+__bad_interrupt:
+	.weak	__vector_default
+	.set	__vector_default, __vectors
+	XJMP	__vector_default
+	.endfunc
+
+	.weak	__setup
+
+
+
+
+	.section .init0,"ax",@progbits
+	.weak	__init
+;	.func	__init
+__init:
+
+#ifndef __AVR_ASM_ONLY__
+	.weak	__stack
+	.set	__stack, RAMEND
+
+	/* By default, malloc() uses the current value of the stack pointer
+	   minus __malloc_margin as the highest available address.
+
+	   In some applications with external SRAM, the stack can be below
+	   the data section (in the internal SRAM - faster), and __heap_end
+	   should be set to the highest address available for malloc().  */
+	.weak	__heap_end
+	.set	__heap_end, 0
+
+	.section .init2,"ax",@progbits
+	clr	__zero_reg__
+	out	_SFR_IO_ADDR(SREG), __zero_reg__
+	ldi	r28,lo8(__stack)
+#ifdef SPH
+	ldi	r29,hi8(__stack)
+	out	_SFR_IO_ADDR(SPH), r29
+#endif
+	out	_SFR_IO_ADDR(SPL), r28
+
+	call	__setup
+
+#if BIG_CODE
+	/* Only for >64K devices with RAMPZ, replaces the default code
+	   provided by libgcc.S which is only linked in if necessary.  */
+
+	.section .init4,"ax",@progbits
+	.global __do_copy_data
+__do_copy_data:
+	ldi	r17, hi8(__data_end)
+	ldi	r26, lo8(__data_start)
+	ldi	r27, hi8(__data_start)
+	ldi	r30, lo8(__data_load_start)
+	ldi	r31, hi8(__data_load_start)
+
+	/* On the enhanced core, "elpm" with post-increment updates RAMPZ
+	   automatically.  Otherwise we have to handle it ourselves.  */
+
+#ifdef __AVR_ENHANCED__
+	ldi	r16, hh8(__data_load_start)
+#else
+	ldi	r16, hh8(__data_load_start - 0x10000)
+.__do_copy_data_carry:
+	inc	r16
+#endif
+	out	_SFR_IO_ADDR(RAMPZ), r16
+	rjmp	.__do_copy_data_start
+.__do_copy_data_loop:
+#ifdef __AVR_ENHANCED__
+	elpm	r0, Z+
+#else
+	elpm
+#endif
+	st	X+, r0
+#ifndef __AVR_ENHANCED__
+	adiw	r30, 1
+	brcs	.__do_copy_data_carry
+#endif
+.__do_copy_data_start:
+	cpi	r26, lo8(__data_end)
+	cpc	r27, r17
+	brne	.__do_copy_data_loop
+#endif /* BIG_CODE */
+
+#endif /* !__AVR_ASM_ONLY__ */
+
+	.section .init9,"ax",@progbits
+	XJMP	main
+;	.endfunc
+

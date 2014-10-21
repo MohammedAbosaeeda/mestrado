@@ -1,0 +1,10 @@
+setMode -bs 
+setCable -p auto 
+identify
+#assignFile -p 2 -file build/platform.bit
+#assignFile -p 2 -file build/config_add_routed.bit
+#assignFile -p 2 -file build/config_mult_routed.bit
+assignFile -p 2 -file build/config_add_routed_pblock_1_partial.bit
+program -p 2 -e
+quit
+

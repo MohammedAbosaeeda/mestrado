@@ -1,0 +1,68 @@
+/*! @class System::NIC_Common
+    @ingroup med_nic
+
+    @brief The NIC family of hardware mediators provides access to network interface cards
+  
+    Each System::Machine provides a @e Meta-NIC.
+    The configuration in System::Traits<@e Machine_NIC> (e.g. PC_NIC or ATMega128_NIC) defines an ordered list of NICs available in the system.
+    Each device may be instantiated through the Machine's @e Meta-NIC with a unit parameter referencing the list of devices in System::Traits<@e Machine_NIC>::NICS.
+    If every device System::Traits<@e Machine_NIC>::NICS is of the same type, that Machine's @e Meta-NIC is non-polimorphic, otherwise, it is.
+
+    <!-- *********************************************************************** -->
+
+    @class System::NIC_Common::Address
+    @brief Provides physical address management for up to 64 bit addresses
+
+    The Address class provides constructors for various types of initialization, from a char array to single bytes.
+    Every one of those constructors provides the same functionality.
+
+    <!-- *********************************************************************** -->
+
+    @struct System::NIC_Common::Statistics
+    @brief Provides transmission and reception statistics for NICs
+
+    <!-- *********************************************************************** -->
+
+    @class System::NIC_Common::NIC_Base
+    @brief Provides a wrapper for all NIC devices
+
+    This wrapper may or may not be polimorphic, according to the system configuration. All NIC devices implement the minimal interface specified by NIC_Base.
+
+    <!-- *********************************************************************** -->
+
+    @fn System::NIC_Common::NIC_Base::NIC_Base(unsigned int unit = 0)
+    @param unit Specifies the unit to be instantiated based on the order defined in System::Traits<Machine_NIC>::NICS.
+
+    <!-- *********************************************************************** -->
+
+    @fn virtual int System::NIC_Common::NIC_Base::send(const Address & dst, const Protocol & prot, const void * data, unsigned int size)
+    @brief Sends size bytes of data to dst with protocol prot
+
+    <!-- *********************************************************************** -->  
+
+    @fn virtual int System::NIC_Common::NIC_Base::receive(Address * src, Protocol * prot, void * data, unsigned int size)
+    @brief Receives size bytes of data, src and prot are set by the method accordingly.
+
+    <!-- *********************************************************************** -->
+
+	@fn virtual void System::NIC_Common::NIC_Base::reset()
+	@brief Resets the NIC device.
+
+    <!-- *********************************************************************** -->
+
+	@fn virtual unsigned int System::NIC_Common::NIC_Base::mtu()
+	@returns The Maximum Transmit Unit of the device.
+
+    <!-- *********************************************************************** -->
+
+	@fn virtual const Address & System::NIC_Common::NIC_Base::address()
+	@returns The physical address of the device.
+
+    <!-- *********************************************************************** -->
+
+	@fn virtual const Statistics & System::NIC_Common::NIC_Base::statistics()
+	@returns The Statistics for the device.
+
+    <!-- *********************************************************************** -->
+
+*/

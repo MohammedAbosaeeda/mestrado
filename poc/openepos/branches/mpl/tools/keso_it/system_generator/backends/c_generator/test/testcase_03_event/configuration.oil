@@ -1,0 +1,32 @@
+CPU RegressionTest {
+	OS KesoOS {
+		STATUS = EXTENDED;
+	};
+
+	EVENT event1 {
+		MASK = 0x1;
+	};
+	EVENT event2 {
+		MASK = 0x2;
+	};
+	EVENT event3 {
+		MASK = 0x4;
+	};
+
+	TASK job1 {
+		AUTOSTART = TRUE;
+		EVENT = event1;
+		EVENT = event3;
+	};
+	TASK job2 {
+		AUTOSTART = FALSE;
+		EVENT = event1;
+		EVENT = event2;
+	};
+	TASK job3 {
+		AUTOSTART = FALSE;
+		EVENT = event2;
+		EVENT = event3;
+	};
+};
+

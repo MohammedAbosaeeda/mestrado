@@ -1,0 +1,488 @@
+// EPOS Mult Abstraction Test Program
+
+#include <machine.h>
+#include <components/rsp_aes.h>
+
+__USING_SYS
+
+OStream cout;
+
+volatile unsigned int * TIMER_REG = reinterpret_cast<volatile unsigned int *>(Traits<EPOSSOC_Timer>::BASE_ADDRESS);
+
+class AES_SW {
+public:
+    enum{
+        EXPANDED_SIZE = 176,
+        CIPHER_SIZE = 16,
+        NK = 4,
+        NB = 4,
+        NR = 10 // devido se 128-bit AES
+    };
+
+private://static const members
+    static const unsigned char _sBox[256];
+
+    static const unsigned char _inv_sBox[256];
+
+    static const unsigned char _Rcon[256]; //Round constant array pre calculated
+
+private:
+    unsigned char _cipher_key[EXPANDED_SIZE];
+
+private:
+
+    void _rotate(unsigned char* in);
+
+    void _scheduleCore(unsigned char* in, unsigned char i);
+
+    unsigned char _expandKey(unsigned char* in);
+
+    void _mixColumns(unsigned char* in);
+
+    void _shiftRows(unsigned char* in);
+
+    void _addRoundKey(unsigned char* state, unsigned char* cipherKey, unsigned char round);
+
+    void _subBytes(unsigned char* in);
+
+    unsigned char* _cipher(unsigned char in[4*NB], unsigned char* key_schedule);
+
+    //++++++++++++++++++++++++INVERSE CIPHER+++++++++++++++++++++++++++++++
+
+    void _invMixColumns(unsigned char* in);
+
+    void _invSubBytes(unsigned char* in);
+
+    void _invShiftRows(unsigned char* in);
+
+    unsigned char* _invCipher(unsigned char in[4*NB], unsigned char* key_schedule);
+
+public:
+
+    void add_key(const unsigned char* in){
+        for (int i = 0; i < CIPHER_SIZE; ++i) {
+            _cipher_key[i] = in[i];
+        }
+        _expandKey(_cipher_key);
+    }
+
+    void cipher_block(const unsigned char in[4*NB], unsigned char out[4*NB]){
+        for (int i = 0; i < CIPHER_SIZE; ++i) {
+            out[i] = in[i];
+        }
+        _cipher(out,_cipher_key);
+    }
+
+};
+
+const unsigned char AES_SW::_sBox[256] = //Byte substitution box pre calculated
+{
+    0x63, 0x7C, 0x77, 0x7B, 0xF2, 0x6B, 0x6F, 0xC5, 0x30, 0x01, 0x67, 0x2B, 0xFE, 0xD7, 0xAB, 0x76,
+    0xCA, 0x82, 0xC9, 0x7D, 0xFA, 0x59, 0x47, 0xF0, 0xAD, 0xD4, 0xA2, 0xAF, 0x9C, 0xA4, 0x72, 0xC0,
+    0xB7, 0xFD, 0x93, 0x26, 0x36, 0x3F, 0xF7, 0xCC, 0x34, 0xA5, 0xE5, 0xF1, 0x71, 0xD8, 0x31, 0x15,
+    0x04, 0xC7, 0x23, 0xC3, 0x18, 0x96, 0x05, 0x9A, 0x07, 0x12, 0x80, 0xE2, 0xEB, 0x27, 0xB2, 0x75,
+    0x09, 0x83, 0x2C, 0x1A, 0x1B, 0x6E, 0x5A, 0xA0, 0x52, 0x3B, 0xD6, 0xB3, 0x29, 0xE3, 0x2F, 0x84,
+    0x53, 0xD1, 0x00, 0xED, 0x20, 0xFC, 0xB1, 0x5B, 0x6A, 0xCB, 0xBE, 0x39, 0x4A, 0x4C, 0x58, 0xCF,
+    0xD0, 0xEF, 0xAA, 0xFB, 0x43, 0x4D, 0x33, 0x85, 0x45, 0xF9, 0x02, 0x7F, 0x50, 0x3C, 0x9F, 0xA8,
+    0x51, 0xA3, 0x40, 0x8F, 0x92, 0x9D, 0x38, 0xF5, 0xBC, 0xB6, 0xDA, 0x21, 0x10, 0xFF, 0xF3, 0xD2,
+    0xCD, 0x0C, 0x13, 0xEC, 0x5F, 0x97, 0x44, 0x17, 0xC4, 0xA7, 0x7E, 0x3D, 0x64, 0x5D, 0x19, 0x73,
+    0x60, 0x81, 0x4F, 0xDC, 0x22, 0x2A, 0x90, 0x88, 0x46, 0xEE, 0xB8, 0x14, 0xDE, 0x5E, 0x0B, 0xDB,
+    0xE0, 0x32, 0x3A, 0x0A, 0x49, 0x06, 0x24, 0x5C, 0xC2, 0xD3, 0xAC, 0x62, 0x91, 0x95, 0xE4, 0x79,
+    0xE7, 0xC8, 0x37, 0x6D, 0x8D, 0xD5, 0x4E, 0xA9, 0x6C, 0x56, 0xF4, 0xEA, 0x65, 0x7A, 0xAE, 0x08,
+    0xBA, 0x78, 0x25, 0x2E, 0x1C, 0xA6, 0xB4, 0xC6, 0xE8, 0xDD, 0x74, 0x1F, 0x4B, 0xBD, 0x8B, 0x8A,
+    0x70, 0x3E, 0xB5, 0x66, 0x48, 0x03, 0xF6, 0x0E, 0x61, 0x35, 0x57, 0xB9, 0x86, 0xC1, 0x1D, 0x9E,
+    0xE1, 0xF8, 0x98, 0x11, 0x69, 0xD9, 0x8E, 0x94, 0x9B, 0x1E, 0x87, 0xE9, 0xCE, 0x55, 0x28, 0xDF,
+    0x8C, 0xA1, 0x89, 0x0D, 0xBF, 0xE6, 0x42, 0x68, 0x41, 0x99, 0x2D, 0x0F, 0xB0, 0x54, 0xBB, 0x16
+};
+
+const unsigned char AES_SW::_inv_sBox[256] =
+{
+    0x52, 0x09, 0x6A, 0xD5, 0x30, 0x36, 0xA5, 0x38, 0xBF, 0x40, 0xA3, 0x9E, 0x81, 0xF3, 0xD7, 0xFB,
+    0x7C, 0xE3, 0x39, 0x82, 0x9B, 0x2F, 0xFF, 0x87, 0x34, 0x8E, 0x43, 0x44, 0xC4, 0xDE, 0xE9, 0xCB,
+    0x54, 0x7B, 0x94, 0x32, 0xA6, 0xC2, 0x23, 0x3D, 0xEE, 0x4C, 0x95, 0x0B, 0x42, 0xFA, 0xC3, 0x4E,
+    0x08, 0x2E, 0xA1, 0x66, 0x28, 0xD9, 0x24, 0xB2, 0x76, 0x5B, 0xA2, 0x49, 0x6D, 0x8B, 0xD1, 0x25,
+    0x72, 0xF8, 0xF6, 0x64, 0x86, 0x68, 0x98, 0x16, 0xD4, 0xA4, 0x5C, 0xCC, 0x5D, 0x65, 0xB6, 0x92,
+    0x6C, 0x70, 0x48, 0x50, 0xFD, 0xED, 0xB9, 0xDA, 0x5E, 0x15, 0x46, 0x57, 0xA7, 0x8D, 0x9D, 0x84,
+    0x90, 0xD8, 0xAB, 0x00, 0x8C, 0xBC, 0xD3, 0x0A, 0xF7, 0xE4, 0x58, 0x05, 0xB8, 0xB3, 0x45, 0x06,
+    0xD0, 0x2C, 0x1E, 0x8F, 0xCA, 0x3F, 0x0F, 0x02, 0xC1, 0xAF, 0xBD, 0x03, 0x01, 0x13, 0x8A, 0x6B,
+    0x3A, 0x91, 0x11, 0x41, 0x4F, 0x67, 0xDC, 0xEA, 0x97, 0xF2, 0xCF, 0xCE, 0xF0, 0xB4, 0xE6, 0x73,
+    0x96, 0xAC, 0x74, 0x22, 0xE7, 0xAD, 0x35, 0x85, 0xE2, 0xF9, 0x37, 0xE8, 0x1C, 0x75, 0xDF, 0x6E,
+    0x47, 0xF1, 0x1A, 0x71, 0x1D, 0x29, 0xC5, 0x89, 0x6F, 0xB7, 0x62, 0x0E, 0xAA, 0x18, 0xBE, 0x1B,
+    0xFC, 0x56, 0x3E, 0x4B, 0xC6, 0xD2, 0x79, 0x20, 0x9A, 0xDB, 0xC0, 0xFE, 0x78, 0xCD, 0x5A, 0xF4,
+    0x1F, 0xDD, 0xA8, 0x33, 0x88, 0x07, 0xC7, 0x31, 0xB1, 0x12, 0x10, 0x59, 0x27, 0x80, 0xEC, 0x5F,
+    0x60, 0x51, 0x7F, 0xA9, 0x19, 0xB5, 0x4A, 0x0D, 0x2D, 0xE5, 0x7A, 0x9F, 0x93, 0xC9, 0x9C, 0xEF,
+    0xA0, 0xE0, 0x3B, 0x4D, 0xAE, 0x2A, 0xF5, 0xB0, 0xC8, 0xEB, 0xBB, 0x3C, 0x83, 0x53, 0x99, 0x61,
+    0x17, 0x2B, 0x04, 0x7E, 0xBA, 0x77, 0xD6, 0x26, 0xE1, 0x69, 0x14, 0x63, 0x55, 0x21, 0x0C, 0x7D
+};
+
+
+const unsigned char AES_SW::_Rcon[256] = //Round constant array pre calculated
+{
+    0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36, 0x6c, 0xd8, 0xab, 0x4d, 0x9a,
+    0x2f, 0x5e, 0xbc, 0x63, 0xc6, 0x97, 0x35, 0x6a, 0xd4, 0xb3, 0x7d, 0xfa, 0xef, 0xc5, 0x91, 0x39,
+    0x72, 0xe4, 0xd3, 0xbd, 0x61, 0xc2, 0x9f, 0x25, 0x4a, 0x94, 0x33, 0x66, 0xcc, 0x83, 0x1d, 0x3a,
+    0x74, 0xe8, 0xcb, 0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36, 0x6c, 0xd8,
+    0xab, 0x4d, 0x9a, 0x2f, 0x5e, 0xbc, 0x63, 0xc6, 0x97, 0x35, 0x6a, 0xd4, 0xb3, 0x7d, 0xfa, 0xef,
+    0xc5, 0x91, 0x39, 0x72, 0xe4, 0xd3, 0xbd, 0x61, 0xc2, 0x9f, 0x25, 0x4a, 0x94, 0x33, 0x66, 0xcc,
+    0x83, 0x1d, 0x3a, 0x74, 0xe8, 0xcb, 0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b,
+    0x36, 0x6c, 0xd8, 0xab, 0x4d, 0x9a, 0x2f, 0x5e, 0xbc, 0x63, 0xc6, 0x97, 0x35, 0x6a, 0xd4, 0xb3,
+    0x7d, 0xfa, 0xef, 0xc5, 0x91, 0x39, 0x72, 0xe4, 0xd3, 0xbd, 0x61, 0xc2, 0x9f, 0x25, 0x4a, 0x94,
+    0x33, 0x66, 0xcc, 0x83, 0x1d, 0x3a, 0x74, 0xe8, 0xcb, 0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20,
+    0x40, 0x80, 0x1b, 0x36, 0x6c, 0xd8, 0xab, 0x4d, 0x9a, 0x2f, 0x5e, 0xbc, 0x63, 0xc6, 0x97, 0x35,
+    0x6a, 0xd4, 0xb3, 0x7d, 0xfa, 0xef, 0xc5, 0x91, 0x39, 0x72, 0xe4, 0xd3, 0xbd, 0x61, 0xc2, 0x9f,
+    0x25, 0x4a, 0x94, 0x33, 0x66, 0xcc, 0x83, 0x1d, 0x3a, 0x74, 0xe8, 0xcb, 0x8d, 0x01, 0x02, 0x04,
+    0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36, 0x6c, 0xd8, 0xab, 0x4d, 0x9a, 0x2f, 0x5e, 0xbc, 0x63,
+    0xc6, 0x97, 0x35, 0x6a, 0xd4, 0xb3, 0x7d, 0xfa, 0xef, 0xc5, 0x91, 0x39, 0x72, 0xe4, 0xd3, 0xbd,
+    0x61, 0xc2, 0x9f, 0x25, 0x4a, 0x94, 0x33, 0x66, 0xcc, 0x83, 0x1d, 0x3a, 0x74, 0xe8, 0xcb, 0x8d
+};
+
+//----------------------CLASS----------------------
+
+//-------------------FUNCTIONS---------------------
+
+void AES_SW::_rotate(unsigned char* in) // the variable in is the "t" variable from key_expansion funciton (array of 4 char)
+{
+    unsigned char a,c; // a is a temporary variable and c is a counter
+    a=in[0]; //
+    for(c = 0; c < 3; c++)
+    {
+        in[c] = in[c+1];
+    }
+    in[3] = a;
+    /*for(int k = 0; k<4; k++)
+    {
+        cout << hex << int(in[k]) << " ";
+
+    }
+    cout << "\n";*/
+}
+
+
+void AES_SW::_scheduleCore(unsigned char* in, unsigned char i)
+{
+    _rotate(in); // rotate the input 8 bits <-
+    for(int a=0; a<4; a++)
+    {
+        in[a]=_sBox[in[a]]; // Substitute the byte for one its correspondent in sbox
+    }
+    /*
+    for(int k = 0; k<4; k++)
+    {
+        cout << hex << int(in[k]) << " ";
+
+    }
+    cout << "\n";
+*/
+
+
+    in[0] ^= _Rcon[i];
+/*
+    for(int k = 0; k<4; k++)
+    {
+        cout << hex << int(in[k]) << " ";
+
+    }
+    cout << "\n" << endl;
+*/}
+
+unsigned char AES_SW::_expandKey(unsigned char* in)  // the variable "in" is an array (unsigned char in[EXPANDED_SIZE]). this array is composed by 11 16-byte words(keys), where
+{                                               //the first is the original Cipher Key
+    unsigned char t[NB];
+    unsigned char c = CIPHER_SIZE; // inicial filling of the array
+    unsigned char i = 1; // set to 1 because the original key is already in the array
+    unsigned char a; // counter of rcon iteration value
+    while(c < EXPANDED_SIZE)
+    {
+        for(a = 0; a < NB; a++)
+        {
+            t[a] = in[a + c - 4]; // asign the last 4 values to t
+        }
+        if(c % CIPHER_SIZE == 0) // new round_key obtained **
+        {
+
+            _scheduleCore(t,i); // call schedule core to complete a new round key
+            i++;
+        }
+        for(a = 0; a < NB; a++)
+        {
+            in[c] = in[c - CIPHER_SIZE] ^ t[a]; //XOR with 4-byte array
+            c++;
+        }
+
+    }
+    return 0;
+    /*
+    cout << "\n";
+    cout << "\n";
+    for(int k = 0; k<EXPANDED_SIZE; k++)
+    {
+        if(k%16 == 0)
+            cout << endl;
+        cout << hex << int(in[k]) << " ";
+
+    }  */
+}
+void AES_SW::_mixColumns(unsigned char* in) //Mix collumn operation in = state
+{
+    unsigned char a[CIPHER_SIZE];
+    unsigned char b[CIPHER_SIZE];
+    unsigned char c, k;
+    unsigned char h;
+    for(k = 0; k < NB; k++)
+    {
+        for(c = 0; c < NB; c++)
+        {
+            a[(4*k)+c] = in[(4*k)+c];
+            h = in[(4*k)+c] & 0x80;
+            b[(4*k)+c] = in[(4*k)+c] << 1;
+            if(h == 0x80)
+            {
+                b[(4*k)+c] ^= 0x1b; // calculates the constants used for the mix columns operation
+            }
+        }
+
+        in[(4*k)+0] = b[(4*k)+0] ^ a[(4*k)+3] ^ a[(4*k)+2] ^ b[(4*k)+1] ^ a[(4*k)+1];
+        in[(4*k)+1] = b[(4*k)+1] ^ a[(4*k)+0] ^ a[(4*k)+3] ^ b[(4*k)+2] ^ a[(4*k)+2];
+        in[(4*k)+2] = b[(4*k)+2] ^ a[(4*k)+1] ^ a[(4*k)+0] ^ b[(4*k)+3] ^ a[(4*k)+3]; // series of XORs to apply the diffusion step
+        in[(4*k)+3] = b[(4*k)+3] ^ a[(4*k)+2] ^ a[(4*k)+1] ^ b[(4*k)+0] ^ a[(4*k)+0];
+    }/*
+    cout << "====MIX COLUMNS RESULT====" << endl;
+    for(int au = 0; au < CIPHER_SIZE; au++)
+    {
+        cout << hex << int(in[au]) << endl;
+    }*/
+}
+
+void AES_SW::_shiftRows(unsigned char* in) // permutation step, in = state
+{
+    unsigned char temp[NB][NK];
+    unsigned char t;
+    unsigned char c,r;
+    unsigned char h=0;
+    for(c = 0; c < NB; c++) // puts the array in matrix form to shift the rows
+    {
+        for(r = 0; r < NB; r++)
+        {
+            temp[c][r] = in[h];
+            h++;
+        }
+    }
+
+    for(r=1;r<NB;r++)
+    {
+        for (c=0;c<r;c++) // permute r bites to the left according to the row
+        {
+            t = temp[0][r];
+            temp[0][r] = temp[1][r];
+            temp[1][r] = temp[2][r];
+            temp[2][r] = temp[3][r];
+            temp[3][r] = t;
+        }
+    }
+
+    for(c = 0,h=0; c < NB; c++) // puts the matrix back in the array form
+    {
+        for(r = 0; r < NB; r++)
+        {
+            in[h] = temp[c][r];
+            h++;
+        }
+    }
+/*
+    cout << "++++SHIFT ROWS RESULT++++" << endl;
+    for(int au = 0; au < CIPHER_SIZE; au++)
+    {
+        cout << hex << int(in[au]) << endl;
+    }*/
+}
+
+
+void AES_SW::_addRoundKey(unsigned char* state, unsigned char* cipherKey, unsigned char round) // state
+{
+    for(int count = 0; count < CIPHER_SIZE; count++)
+    {
+        state[count] ^= cipherKey[(CIPHER_SIZE)*round + count]; // takes the round key, pre calculated in keyExpansion, and XOR with the state array
+    }
+
+/*    cout << "####ADD ROUND KEY RESULT####" << endl;
+    for(int au = 0; au < CIPHER_SIZE; au++)
+    {
+        cout << hex << int(state[au]) << endl;
+    }*/
+
+}
+
+void AES_SW::_subBytes(unsigned char* in)//in = state, confusion step
+{
+    for(int i=0; i<CIPHER_SIZE;i++)
+    {
+        in[i] = _sBox[in[i]]; // takes the correspondent value from the Sbox Array
+    }
+
+    /*cout << "@@@@SUB BYTES RESULT@@@@" << endl;
+    for(int au = 0; au < CIPHER_SIZE; au++)
+    {
+        cout << hex << int(in[au]) << endl;
+    }*/
+}
+
+unsigned char* AES_SW::_cipher(unsigned char in[4*NB], unsigned char* key_schedule) //in = plain text, out = encrypted text, key_schedule = round key array
+{
+    unsigned char* state; // state variable
+    unsigned char* out; //output (not nescessary, since it uses a pointer to the inpt array array)
+    unsigned char round = 0; // round counter
+    state = in; // state recieves the input
+
+    _addRoundKey(state, key_schedule, round); // starts by adding the round key to the array
+
+    for(round = 1; round < 10; round++) // for the next 9 rounds
+    {
+        _subBytes(state); // confuion
+        _shiftRows(state); // permutation
+        _mixColumns(state); // difusion
+        _addRoundKey(state, key_schedule, round); // key secrecy
+    }
+    // ommits mix collumn operation in the last round
+    _subBytes(state);
+    _shiftRows(state);
+    _addRoundKey(state, key_schedule, round);
+
+    out = state; // out recieves state
+
+    return out;
+}
+//++++++++++++++++++++++++INVERSE CIPHER+++++++++++++++++++++++++++++++
+
+void AES_SW::_invMixColumns(unsigned char* in)
+{
+    in[0]++;
+}
+
+
+void AES_SW::_invSubBytes(unsigned char* in)//in = state, confusion step
+{
+    for(int i=0; i<CIPHER_SIZE;i++)
+    {
+        in[i] = _inv_sBox[in[i]]; // takes the correspondent value from the Sbox Array
+    }
+
+    /*cout << "@@@@INVERSE SUB BYTES RESULT@@@@" << endl;
+    for(int au = 0; au < CIPHER_SIZE; au++)
+    {
+        cout << hex << int(in[au]) << endl;
+    }*/
+}
+
+void AES_SW::_invShiftRows(unsigned char* in) // permutation step, in = state
+{
+    unsigned char temp[NB][NK];
+    unsigned char t;
+    unsigned char c,r;
+    unsigned char h=0;
+    for(c = 0; c < NB; c++) // puts the array in matrix form to shift the rows
+    {
+        for(r = 0; r < NB; r++)
+        {
+            temp[c][r] = in[h];
+            h++;
+        }
+    }
+
+    for(r=1;r<NB;r++)
+    {
+        for (c=0;c<r;c++) // permute r bites to the left according to the row
+        {
+            t = temp[3][r];
+            temp[3][r] = temp[2][r];
+            temp[2][r] = temp[1][r];
+            temp[1][r] = temp[0][r];
+            temp[0][r] = t;
+        }
+    }
+
+    for(c = 0,h=0; c < NB; c++) // puts the matrix back in the array form
+    {
+        for(r = 0; r < NB; r++)
+        {
+            in[h] = temp[c][r];
+            h++;
+        }
+    }
+
+    /*cout << "++++INVERSE SHIFT ROWS RESULT++++" << endl;
+    for(int au = 0; au < CIPHER_SIZE; au++)
+    {
+        cout << hex << int(in[au]) << endl;
+    }*/
+}
+
+unsigned char* AES_SW::_invCipher(unsigned char in[4*NB], unsigned char* key_schedule) //in = encrypted text, out = plain text, key schedule = round key array
+{
+    unsigned char* state; // state variable
+    unsigned char* out; //output (not nescessary, since it uses a pointer to the inpt array array)
+    unsigned char round = 10; // round counter
+    state = in; // state recieves the input
+
+    _addRoundKey(state, key_schedule, round);
+
+    for(round = 9; round > 1; round++) // for the next 9 rounds
+    {
+        _invSubBytes(state); // confuion
+        _invShiftRows(state); // permutation
+        _invMixColumns(state); // difusion
+        _addRoundKey(state, key_schedule, round); // we need to call addRoundKey with the inverse number of rounds
+    }
+    // ommits mix collumn operation in the last round
+    _invSubBytes(state);
+    _invShiftRows(state);
+    _addRoundKey(state, key_schedule, round);
+
+    out = state;
+    return out;
+}
+
+const unsigned char cipher_key[AES_SW::CIPHER_SIZE] = // declaration of the key
+    {
+            0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6, 0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c
+    };
+
+const unsigned char in[AES_SW::CIPHER_SIZE] =
+    {
+            0xd4, 0xbf, 0x5d, 0x30, 0xe0, 0xb4, 0x52, 0xae, 0xb8, 0x41, 0x11, 0xf1, 0x1e, 0x27, 0x98, 0xe5
+    };
+
+
+int main()
+{
+
+    cout << "\nRSP AES\n\n";
+
+    cout << "Allocating stuff\n";
+    unsigned char *sw_out = new unsigned char[AES_SW::CIPHER_SIZE];
+
+    AES_SW *aes_sw = new AES_SW;
+    RSP_AES rsp_aes(Component_Manager::dummy_channel,Component_Manager::dummy_channel,0);
+    Implementation::safe_pkt_t safe_pkt;
+
+
+    cout << "Running SW AES\n";
+    unsigned int tmp = *TIMER_REG;
+    aes_sw->add_key(cipher_key);
+    aes_sw->cipher_block(in,sw_out);
+    tmp = *TIMER_REG - tmp;
+    cout << "Finished in " << tmp << " cycles\n";
+
+    cout << "Running RSP_AES\n";
+    tmp = *TIMER_REG;
+    rsp_aes.decipher(safe_pkt);
+    tmp = *TIMER_REG - tmp;
+    cout << "Finished in " << tmp << " cycles\n";
+
+
+
+
+    cout << "\nThe End\n";
+    *((volatile unsigned int*)0xFFFFFFFC) = 0;
+
+    return 0;
+}

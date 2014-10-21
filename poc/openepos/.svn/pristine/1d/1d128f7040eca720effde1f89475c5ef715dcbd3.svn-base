@@ -1,0 +1,97 @@
+/*! @class System::Address_Space
+    @ingroup abs_address_space
+
+    @brief An address space is the addressing range a processor can
+    reach. The Address_Space abstraction is responsible for
+    abstracting this concept.
+
+    Processors always access a logical address space, where physical
+    addresses are organized by strategies such as Paging or
+    Segmentation. In systems which do not feature hardware for memory
+    management the logical and physical address spaces are
+    equivalent. The Address_Space abstraction abstracts the concept it
+    represents by attaching to itself (mapping) physical blocks of
+    memory (@ref System::Segment "segments").
+
+    <!-- *********************************************************************** -->
+
+    @fn System::Address_Space::Address_Space()
+    @brief Creates an Address_Space by calling the System::MMU::Directory constructor.
+
+    <!-- *********************************************************************** -->
+
+    @fn System::Address_Space::Address_Space(const Self & s)
+    @brief Creates an Address_Space using the current in use address
+    space (self reference constructor).
+
+    @param s
+    It is a reference to the SELF enumerator in this class. Using this
+    parameter means that the constructor to be executed is the self
+    reference constructor.
+
+    <!-- *********************************************************************** -->
+
+    @fn System::Address_Space::~Address_Space()
+    @brief Destroys the Address_Space by calling MMU::Directory::~Directory.
+
+    <!-- *********************************************************************** -->
+
+    @fn Log_Addr System::Address_Space::attach(const Segment & seg)
+    @brief Method to attach a @ref System::Segment "segment" to any
+    address of the address space.
+
+    @param seg
+    The segment to be attached.
+
+    @return
+    This function returns the Logical Address the segment was attached
+    to or return false if attach fails.
+
+    @note
+    This function cannot grantee that the logical address of the
+    segment will be equal to its physical address. It depends on the
+    implementation of the @ref System::MMU::Directory::attach "attach"
+    method in the MMU.
+
+    <!-- *********************************************************************** -->
+
+    @fn Log_Addr System::Address_Space::attach(const Segment & seg, Log_Addr addr)
+    @brief Method to attach a @ref System::Segment "segment" to a
+    specific logical address.
+
+    @return
+    This function returns the Logical Address the segment was attached
+    to or return false if attach fails.
+
+    @note
+    This function will only attach (map) the segment to the address
+    space if <b>addr</b> is avaliable.
+
+    <!-- *********************************************************************** -->
+
+    @fn void System::Address_Space::detach(const Segment & seg)
+    @brief Method to detach (unmap) a segment from the address space.
+
+    @param seg
+    The segment to be detached.
+
+    <!-- *********************************************************************** -->
+
+    @fn void System::Address_Space::activate()
+    @brief Method to activate the address space. The activation is
+    done by the @ref System::MMU::Directory::activate "activate"
+    method in the MMU.
+
+    <!-- *********************************************************************** -->
+
+    @fn Phy_Addr System::Address_Space::physical(Log_Addr address)
+    @brief Method to translate a logical address into a physical
+    address.
+
+    @param address
+    A logical address.
+
+    @return
+    The physical address mapped by the supplied logical address.
+
+*/

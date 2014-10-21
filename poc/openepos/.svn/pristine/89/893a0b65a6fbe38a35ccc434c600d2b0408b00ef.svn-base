@@ -1,0 +1,14 @@
+/*! @class System::ATMega16_UART
+    @brief ATMega16 UART Mediator Declarations
+
+    @fn System::ATMega16_UART::ATMega16_UART(unsigned int unit = 0)
+    @fn System::ATMega16_UART::ATMega16_UART(unsigned int baud, unsigned int data_bits, unsigned int parity, unsigned int stop_bits, unsigned int unit = 0)
+    @fn void System::ATMega16_UART::config(unsigned int baud, unsigned int data_bits, unsigned int parity, unsigned int stop_bits)
+    @fn void System::ATMega16_UART::config(unsigned int * baud, unsigned int * data_bits, unsigned int * parity, unsigned int * stop_bits)
+    @fn char System::ATMega16_UART::get()
+    @fn void System::ATMega16_UART::put(char c)
+    @fn void System::ATMega16_UART::loopback(bool flag)
+    @fn char System::ATMega16_UART::power()
+    @fn void System::ATMega16_UART::power(char ps)
+
+*/

@@ -1,0 +1,7 @@
+//EPOS MSRs definition
+
+enum {
+	IA32_SYSENTER_CS = 0x174,
+	IA32_SYSENTER_EIP = 0x175,
+	IA32_SYSENTER_ESP = 0x176
+};

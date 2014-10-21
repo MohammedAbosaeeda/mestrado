@@ -1,0 +1,93 @@
+// EPOS-- Realtime Thread Abstraction Declarations
+
+#ifndef __osek_task_h
+#define __osek_task_h
+
+//#include <utility/handler.h>
+#include <thread.h>
+#include <osek_defs.h>
+#include <alarm.h>
+
+
+__BEGIN_SYS
+
+class OSEK_Task;
+
+class OSEK_Task: public Thread {
+
+public:
+    bool active;
+    short numRecActs;
+    
+    EventMaskType eventsWaitingFor;
+    EventMaskType eventsSet;
+
+    bool isWaiting;    
+    static OSEK_Task* tasks[];
+    static Alarm* alarms[];
+    static TickType alarmCycle[];
+    TaskStateType taskState;
+
+private:
+    TaskType id;
+    static AppModeType appMode;
+    static PriorityType resourcePriority[][2];
+
+public:
+	OSEK_Task(int (* entry)(),
+          const TaskType taskID,
+	       const State & state,
+	       const Priority & priority,
+	       unsigned int stack_size = STACK_SIZE) : 
+                Thread(entry, state, priority, stack_size), 
+                id(taskID),
+                eventsWaitingFor(0),
+                eventsSet(0),
+                isWaiting(false) {
+    
+        mustReset = false;
+    }
+
+    static void setAppMode(AppModeType mode) { appMode = mode; }
+    
+    StatusType activate(bool reschedule);
+    StatusType chain();
+    static StatusType terminate(); //ue
+    static StatusType schedule(); //ue
+    static StatusType getTaskID(TaskRefType taskRef);
+    static StatusType getTaskState(TaskType taskID, TaskStateRefType state);
+    
+    static void enableAllInterrupts();
+    static void disableAllInterrupts();
+    static void resumeAllInterrupts();
+    static void suspendAllInterrupts();
+    static void resumeOSInterrupts();
+    static void suspendOSInterrupts();
+
+    static StatusType getResource(ResourceType resource);
+    static StatusType releaseResource(ResourceType resource);
+
+    static StatusType setEvent(TaskType TaskId, EventMaskType mask);
+    static StatusType getEvent(TaskType TaskId, EventMaskRefType maskRef);
+    static StatusType clearEvent(EventMaskType mask);
+    static StatusType waitEvent(EventMaskType mask);
+
+    static StatusType getAlarmBase(AlarmType alarmId, AlarmBaseRefType info);
+    static StatusType getAlarm(AlarmType alarmId, TickRefType tick);
+    static StatusType setRelAlarm(AlarmType alarmId,
+                                  TickType increment, 
+                                  TickType cycle);
+    static StatusType setAbsAlarm(AlarmType alarmId, //f
+                                  TickType start, 
+                                  TickType cycle);
+    static StatusType cancelAlarm(AlarmType alarmId); //f
+    
+    static AppModeType getActiveApplicationMode(); //f
+    static void startOS(AppModeType mode);
+    static void shutdownOS(StatusType error);
+
+};
+
+__END_SYS
+
+#endif

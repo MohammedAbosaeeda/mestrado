@@ -1,0 +1,48 @@
+// Dummy application for the PandaBoard platform
+
+#include <utility/ostream.h>
+#include <alarm.h>
+#include <chronometer.h>
+__USING_SYS
+
+OStream cout;
+/*
+void enter_system_mode() {
+	CPU::Reg32 flags;
+	ASMV("mrs %0, cpsr\n"
+		"orr %0, %0, #0xf\n"
+		"msr cpsr_c, %0\n":  "=r"(flags) : : "cc");
+}
+void activate_cpu_interface(){
+	CPU::out32(0xF8F01000, 1);
+}*/
+int main() {
+	ASMV("mov r1, r1\n");
+	int x;
+	long long y;
+
+	cout << ">>Main begin<<\n";
+	
+
+	Chronometer chrono;
+	chrono.start();
+	//for(int i=0; i<1000 ;++i)
+		//cout << i << '\n';
+
+	Alarm::delay(10*1000*1000);
+
+	chrono.stop();
+	x = chrono.read();
+
+	cout << "x: "<< x << '\n';
+	
+	//ASMV("ldr	r9,=0xcde\n");
+/*
+    CPU::int_enable();
+	    Alarm::delay(100000);
+*/
+
+	kout << "Main end!\n";
+	while(1);
+	return 0;
+}

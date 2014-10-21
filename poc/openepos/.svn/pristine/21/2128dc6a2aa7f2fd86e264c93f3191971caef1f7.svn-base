@@ -1,0 +1,61 @@
+#ifndef __panda_traits_h
+#define __panda_traits_h
+
+__BEGIN_SYS
+
+template <> struct Traits<Zynq>: public Traits<void>
+{
+	static const unsigned int MAX_CPUS = 2;
+	static const unsigned int CPUS = MAX_CPUS;
+	static const unsigned int CLOCK = 666667000;
+	static const unsigned int APPLICATION_STACK_SIZE = 1024*4096;//4mb
+	static const unsigned int APPLICATION_HEAP_SIZE  = 16*1024*1024;//16mb
+	static const unsigned int SYSTEM_HEAP_SIZE = APPLICATION_STACK_SIZE*32;//128mb
+
+	static const unsigned int APP_CODE = 0; //To place the vector table at 0x0.
+	static const unsigned int APP_DATA = 0x100340;
+
+	static const unsigned int SYS = 0x100140; //After undef stack, but before APP_DATA (sys_info uses 260 bytes)
+	static const unsigned int SYS_HEAP = 0x508000; //SYS_HEAP comes right after APP_DATA, which is no bigger than 1kb.
+
+	static const unsigned int MEM_BASE = 0;
+	//static const unsigned int MEM_TOP = 0x1ffffffc;
+	static const unsigned int MEM_TOP = 0x20000000;
+
+	static const unsigned int BOOT_LENGTH_MIN = 128;
+	static const unsigned int BOOT_LENGTH_MAX = 512;
+	
+
+	//static const unsigned int PRIORITY_HEAP_BASE_ADDR = 0;
+	//static const unsigned int PRIORITY_HEAP_SIZE = 4;
+	//static const unsigned int PRIORITY_HEAP_TOP_ADDR = PRIORITY_HEAP_BASE_ADDR + PRIORITY_HEAP_SIZE - 1;
+	static const unsigned int enabled = true;
+};
+
+template <> struct Traits<Zynq_IC>: public Traits<void>
+{
+    static const bool enabled = true;
+	static const bool debuged = true;
+};
+
+template <> struct Traits<Zynq_Timer>: public Traits<void>
+{
+    static const bool enabled = true;
+	static const bool debuged = true;
+	static const bool prescale = true;
+};
+
+/*template <> struct Traits<PandaBoard_NIC>: public Traits<void>
+{
+    typedef LIST<PandaBoard_NIC> NICS;
+};*/
+
+template <> struct Traits<Zynq_UART>: public Traits<void>
+{
+	// preferably use only 9600 or 115200 (although any number will do)
+	static const unsigned int BAUD_RATE = 115200; 
+};
+__END_SYS
+
+#endif
+

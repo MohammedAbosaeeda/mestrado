@@ -1,0 +1,23 @@
+/*! @class System::IC_Common
+    @ingroup med_ic
+    This class implements common features of Interrupt Controller Family. It defines the "IRQ" type.
+ */
+
+/*! @class System::i8259A
+    @ingroup med_ic
+
+   The Intel 8259 is a family of Programmable Interrupt Controllers (PICs) designed and developed for use with the Intel 8085 and Intel 8086 8-bit and 16-bit microprocessors. The family originally consisted of the 8259, 8259A, and 8259B PICs, though a number of manuafactures make a wide range of compatible chips today. The 8259 acts as a multiplexer, combining multiple interrupt input sources into a single interrupt output to interrupt a single device.
+
+    For more information:
+
+    http://pdos.csail.mit.edu/6.828/2005/readings/hardware/8259A.pdf
+
+    http://en.wikipedia.org/wiki/8259A
+
+ */
+
+/*! @class System::PC_IC
+    @ingroup med_ic
+
+
+ */

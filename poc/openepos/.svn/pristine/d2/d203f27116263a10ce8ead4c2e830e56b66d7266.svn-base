@@ -1,0 +1,11 @@
+/*! @class System::ML310_Timer
+    @ingroup med_timer
+    This class is the timer implementation in platform ML310. The used processor in the ML310 is a PowerPC that have 3 timers internal:
+    
+      - Programmable Interval Timer (PIT)
+      - Fixed Interval Timer (FIT)
+      - Watchdog Timer (WDT)
+
+    In this implementation is used the first. The Programmable Interval Timer (PIT) is a 32-bit register that is decremented at the time base increment frequency. The PIT register is loaded with a delay value. When the PIT count reaches 0, a PIT interrupt occurs. Optionally, the PIT can be programmed to automatically reload the last delay value and begin decrementing again. (http://www.xilinx.com/ipcenter/processor_central/embedded/timer.htm)
+
+ */

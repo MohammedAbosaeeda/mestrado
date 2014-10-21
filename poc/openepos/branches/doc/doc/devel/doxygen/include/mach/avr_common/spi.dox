@@ -1,0 +1,70 @@
+/*! @class System::AVR_SPI
+    @ingroup med_uart
+
+    @brief Common implementation for AVR SPI (Serial Peripheral Interface)
+
+    @todo
+    Allow different configurations. The current version is configured to
+    be used with CC1000.
+ 
+    <!-- *********************************************************************** -->
+
+    @fn void System::AVR_SPI::configure(unsigned char mode = 0, unsigned char order = 0, unsigned char clk_polarity = 0, unsigned char clk_phase = 0) 
+
+    Configures the SPI Interface.
+
+    @todo
+    This implementation currently discards the parameters, and
+    configures the device for the CC1000 transceiver.
+
+    <!-- *********************************************************************** -->
+
+    @fn bool System::AVR_SPI::complete() 
+
+    @returns TRUE if an SPI communication has completed, FALSE otherwise.
+
+    <!-- *********************************************************************** -->
+
+    @fn void System::AVR_SPI::int_enable() 
+
+    Enables the SPI communication complete interrupt.
+
+    <!-- *********************************************************************** -->
+
+    @fn void System::AVR_SPI::int_disable() 
+
+    Disables the SPI communication complete interrupt.
+
+    <!-- *********************************************************************** -->
+
+    @fn char System::AVR_SPI::get() 
+
+    Receives a byte of data from the SPI interface. If no data is available,
+    waits for reception.
+
+    <!-- *********************************************************************** -->
+
+    @fn void System::AVR_SPI::put(char c) 
+
+    Sends a byte of data through the SPI interface. Waits for transmission to
+    complete.
+
+
+    <!-- *********************************************************************** -->
+
+    <!-- *********************************************************************** -->
+
+    @class System::ATMega128_SPI
+    @ingroup med_adc
+
+    @brief This class is simply a wrapper for the AVR_SPI common class.
+
+    <!-- *********************************************************************** -->
+
+    <!-- *********************************************************************** -->
+
+    @class System::ATMega16_SPI
+    @ingroup med_adc
+
+    @brief This class is simply a wrapper for the AVR_SPI common class.
+

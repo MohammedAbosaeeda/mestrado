@@ -1,0 +1,4 @@
+AUTHORS=wawi
+REQUIRE=core
+REQUIRE=posix
+REQUIRE=can

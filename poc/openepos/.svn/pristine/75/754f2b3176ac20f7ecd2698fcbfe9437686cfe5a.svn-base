@@ -1,0 +1,40 @@
+System (helloworld) {
+
+	# Fri Jan 18 09:58:03 CET 2008
+	# -X:no_automake:ssa:ssa_astack:omit_fields:inline_checkcast:dbg_src:_X_dbg_astack
+	#   text    data     bss     dec     hex filename
+	#  10278   66184   65652  142114   22b22 keso_main
+	# -X:no_automake:ssa:ssa_astack:omit_fields:inline_checkcast:dbg_src:_X_dbg_astack:ssa_alias_prop
+	#   text    data     bss     dec     hex filename
+	#  10062   66184   65652  141898   22a4a keso_main
+	# -X:no_automake:ssa:ssa_astack:omit_fields:inline_checkcast:dbg_src:_X_dbg_astack:ssa_alias_prop:const_parameter_propagation:_X_no_arg_cache
+	#    text    data     bss     dec     hex filename
+	#    9870   66184   65652  141706   2298a keso_main
+	# -X:no_automake:ssa:ssa_astack:omit_fields:inline_checkcast:dbg_src:_X_dbg_astack:ssa_alias_prop:const_arg_prop:omit_unused_methods:ssa_fold_cbranch
+	#    text    data     bss     dec     hex filename
+	#    8981   66112   65652  140745   225c9 keso_main
+
+
+	# Default Hello World system
+	Modules = "debug:test_compiler";
+
+        OsekOS (KesoOS) {
+		STATUS = "EXTENDED";
+	}
+
+	Target="Linux_JOSEK";
+
+	Domain (dom1) {
+		Heap = RestrictedDomainScope {
+			HeapSizeKB=64;
+		}
+
+		Task (task1) {
+			Priority = 1;
+			MainClass="test/EscapeTest";
+			Autostart = true {
+				Appmode = "OSDEFAULTAPPMODE";
+			}
+		}
+	}
+}

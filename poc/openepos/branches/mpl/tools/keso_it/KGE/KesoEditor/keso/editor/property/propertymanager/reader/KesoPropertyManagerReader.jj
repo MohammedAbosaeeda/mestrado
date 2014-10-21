@@ -1,0 +1,277 @@
+
+options {
+	STATIC = false;
+}
+
+PARSER_BEGIN(KesoPropertyManagerReader)
+
+package keso.editor.property.propertymanager.reader;
+
+import java.util.Vector;
+import keso.editor.property.*;
+import keso.editor.property.propertymanager.*;
+import java.io.*;
+
+public class KesoPropertyManagerReader {
+	public static void parseFile(String filename) throws Exception {
+		KesoPropertyManagerReader parser = null;
+		try {
+			parser = new KesoPropertyManagerReader(new FileInputStream(filename));
+		} 
+		catch (FileNotFoundException ex) {
+        	throw new Exception(ex.toString());
+        }
+		catch (Exception ex) {
+			ex.printStackTrace();
+			throw new Exception(ex.toString());
+		}
+
+		try {
+			parser.start();
+		} catch (Exception ex) {
+			throw new Exception(ex.toString());
+		}
+	}
+}
+
+PARSER_END(KesoPropertyManagerReader)
+
+SKIP : { " " | "\t" | "\r" | "\n" }
+
+TOKEN : {
+	<DESCRIPTION: "@" (~["\n"])*> |
+	<LINECOMMENT: "#" (~["\n"])*> |
+	<DEFAULTPROPERTY: "default"> |
+	<NOTNULL: "NOT NULL"> |
+	<MUSTEXIST: "MUST EXIST"> |
+	<LOCALYUNIQUE: "LOCALY UNIQUE"> |
+	<GLOBALYUNIQUE: "GLOBALY UNIQUE"> |
+	<VALUE: "value"> |
+	<INTEGER: "Integer"> |
+	<STRING: "String"> |
+	<COMPLEXBOOLEAN: "ComplexBoolean"> |
+	<COMPLEXUNQUOTEDSTRING: "ComplexUnquotedString"> |
+	<INTEGERARRAY: "IntegerArray"> |
+	<IDENTIFIER: <LETTER> (<LETTER>|<DIGIT>)*> |
+	<NUMBER: (<DIGIT>)+> |
+	<LETTER: ["a"-"z","A"-"Z","_","/"]> |
+	<DIGIT: ["0"-"9"]> |
+	<LBRACE: "{"> |
+	<RBRACE: "}"> |
+	<DQUOTE: "\""> |
+	<LBRACKET: "["> |
+	<RBRACKET: "]"> |
+	<SEMICOLON: ";"> |
+	<COMMA: ","> |
+	<ASSIGNMENT: "="> |
+	<DOT: "."> |
+	<LPAREN: "("> |
+	<RPAREN: ")">
+}
+
+
+void start() : {
+	Token name;
+} {
+	(
+		(<LINECOMMENT>)*
+		name = <IDENTIFIER> 
+		{
+			KesoPropertyManagerEntry entry = new KesoPropertyManagerEntry(name.image);
+			entry.setDefault(true);
+			KesoPropertyManager.addEntry(entry);
+		} 
+			(parseProperties(entry))*
+	)*
+}
+
+void parseProperties(KesoPropertyManagerEntry parententry) : {
+	
+} {
+		<LBRACE>
+		(parseProperty(parententry) <SEMICOLON>)*
+		<RBRACE>
+}
+
+void parseProperty(KesoPropertyManagerEntry parententry) : {
+	Token propertytype;
+	Token propertydefault = null;
+	Token propertyname;
+	Token propertydescription;
+	Token value;
+	Token flag;
+	StringBuffer description = null;
+} {
+	
+	(
+		(
+			propertydescription = <DESCRIPTION>
+			{
+				if (description == null) {
+					description = new StringBuffer();
+				} else {
+					if (description.length() != 0) {
+						description.append(" ");
+					}
+				}
+				propertydescription.image = propertydescription.image.trim();
+				propertydescription.image = propertydescription.image.substring(1);
+				if (propertydescription.image.length() != 0) {
+					description.append(propertydescription.image);
+				}
+			}
+				
+		)
+		|
+		(<LINECOMMENT>)
+	)*
+	(propertydefault = <DEFAULTPROPERTY>)?
+	(	
+		propertytype = <INTEGER> |
+		propertytype = <STRING> |
+		propertytype = <COMPLEXBOOLEAN> |
+		propertytype = <COMPLEXUNQUOTEDSTRING> |
+		propertytype = <INTEGERARRAY>
+	)
+	propertyname = <IDENTIFIER>
+	{
+		KesoPropertyManagerEntry entry = new KesoPropertyManagerEntry(propertyname.image);
+		parententry.addEntry(entry);
+		if (propertydefault != null) {
+			entry.setDefault(true);
+		}
+		entry.setPropertyType(propertytype.image);
+		if (description != null) {
+			entry.setDescription(description.toString());
+		}
+	}
+	parseLimit(entry)
+	
+	{
+		if (!propertytype.image.equals("ComplexBoolean")) {
+			parsePossibleValues(entry);	
+		}
+		
+		if (	propertytype.image.equals("ComplexBoolean") ||
+				propertytype.image.equals("ComplexUnquotedString")) {
+			parseProperties(entry);	
+		}
+	}
+	(
+		<VALUE>
+		(
+			value = <IDENTIFIER>
+			|
+			value = <NUMBER>
+		)
+		{
+			entry.setDefaultValue(value.image);
+		}
+	)?
+	(
+		(
+			flag = <NOTNULL>
+			{
+				if (flag.image.equals("NOT NULL")) {
+					entry.setNotNull();
+				}
+			}
+		) 
+		|
+		(
+			flag = <MUSTEXIST>
+			{
+				if (flag.image.equals("MUST EXIST")) {
+					entry.setMustExist();
+				}
+			}
+		)
+		|
+		(
+			flag = <LOCALYUNIQUE>
+			{
+				if (flag.image.equals("LOCALY UNIQUE")) {
+					entry.setLocalyUnique();
+				}
+			}
+		)
+		|
+		(
+			flag = <GLOBALYUNIQUE>
+			{
+				if (flag.image.equals("GLOBALY UNIQUE")) {
+					entry.setGlobalyUnique();
+				}
+			}
+		)
+	)*
+}
+
+void parseLimit(KesoPropertyManagerEntry entry) : {
+	Token min;
+	Token max;
+} {
+	(
+		<LBRACKET>
+		min = <NUMBER>
+		{
+			entry.setMin(Integer.parseInt(min.image));
+		}
+		(
+			<COMMA>
+			max = <NUMBER>
+			{
+				entry.setMax(Integer.parseInt(max.image));
+			}
+		)?
+		<RBRACKET>
+	)?
+}
+
+void parsePossibleValues(KesoPropertyManagerEntry entry) : {
+	Token value;
+} {
+	(
+		<ASSIGNMENT>
+		(
+			(
+				<LBRACE>
+					{
+						Vector possiblevalues = new Vector();
+					}
+					(
+						(
+							value = <IDENTIFIER>
+							|
+							value = <NUMBER>
+						)
+						{
+						possiblevalues.add(value.image);
+						}
+					)
+					(
+						<COMMA>
+						(
+							value = <IDENTIFIER>
+							|
+							value = <NUMBER>
+						)
+						{
+						possiblevalues.add(value.image);
+						}
+					)*
+				<RBRACE>
+				{
+					entry.setPossibleValues(possiblevalues);
+				}
+			) 
+			|
+			(
+				value = <IDENTIFIER>
+				{
+					entry.setFilter(value.image);
+				}
+			)
+		)
+	)?
+}

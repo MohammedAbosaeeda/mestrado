@@ -1,0 +1,28 @@
+Node (helloworld) {
+	# Default Hello World system
+	Modules = "helloworld";
+
+	Target="Linux_josek";
+
+	OsekOS (KesoOS) {
+		STATUS = "EXTENDED";
+		SCHEDULE = "AUTO";
+	}
+
+	Domain (dom1) {
+		Heap = CoffeeBreak {
+			HeapSizeKB=100;
+		}
+
+		ISR (IOISR) {
+			HandlerClass = "test/HelloWorld";
+			HandlerMethod = "ioisr()V";
+			Signal = "IO";
+		}
+
+		Task (task1) {
+			MainClass="test/HelloWorld";
+			HelloString = "Hello World";
+		}
+	}
+}

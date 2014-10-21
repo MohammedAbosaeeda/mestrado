@@ -1,0 +1,8 @@
+/*! @class System::ATMega128_EEPROM
+    @brief ATMega128 EEPROM Mediator Declarations
+
+    @fn System::ATMega128_EEPROM::ATMega128_EEPROM()
+    @fn unsigned char System::ATMega128_EEPROM::read(const Address & a)
+    @fn void System::ATMega128_EEPROM::write(const Address & a, unsigned char d)
+    @fn int System::ATMega128_EEPROM::size() const
+*/

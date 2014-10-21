@@ -1,0 +1,7 @@
+/*! @struct System::System_Info<AVR8>
+    @brief  AVR Run-Time System Information
+    @struct System::System_Info<AVR8>::Boot_Map
+    @struct System::System_Info<AVR8>::Load_Map
+    @struct System::System_Info<AVR8>::Physical_Memory_Map
+    @struct System::System_Info<AVR8>::Logical_Memory_Map
+*/

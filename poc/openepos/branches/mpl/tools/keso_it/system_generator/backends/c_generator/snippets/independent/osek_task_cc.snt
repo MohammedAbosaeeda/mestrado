@@ -1,0 +1,209 @@
+#include <osek_task.h>
+#include <osek_defs.h>
+#include <osek_os.h>
+#include <thread.h>
+
+__USING_SYS
+
+__BEGIN_SYS
+
+
+StatusType OSEK_Task::activate(bool reschedule) {
+//? debug
+	db<Thread>(WRN) << "   OSEK_Task::activate(" << reschedule 
+	                << "): activating task " << this 
+	                << " numRecActs=" << numRecActs << "\n";
+//?
+	numRecActs++; // record activation requests
+
+	if(numRecActs == 1) { // if not activated
+		taskState = READY;
+		osek_resume(); // put t into READY queue without implicit rescheduling
+	}
+//? debug
+	db<Thread>(WRN) << "      Ready queue after: "; osek_printQueue(_ready);
+//? debug
+	if(reschedule) osek_reschedule(); // rescheduling
+}
+
+StatusType OSEK_Task::terminate() {
+    // fetch pointer to running task
+	OSEK_Task * me = static_cast<OSEK_Task*>(OSEK_Task::self());
+//? debug
+	db<Thread>(WRN) << "   OSEK_Task::terminate(): task  " << me
+	                << " terminating. \n"
+	                << "      Number of remaining activation requests: " 
+	                << me->numRecActs - 1 << "\n";
+//?
+    me->mustReset = true;
+    me->numRecActs--;
+    if(me->numRecActs==0) { 
+		me->taskState = SUSPENDED;
+        me->osek_suspend();
+    }
+    osek_reschedule();
+}
+
+StatusType OSEK_Task::chain() {
+//? debug
+	db<Thread>(WRN) << "   OSEK_Task::chain(): chaining task " << this  << "\n";
+//?
+	// set task into READY queue without 
+	// rescheduling (or record multiple activation request)
+	activate(false);
+	terminate(); // terminate running (and btw calling) task 
+}
+
+StatusType OSEK_Task::schedule() {
+	osek_reschedule();
+}
+
+StatusType OSEK_Task::getTaskID(TaskRefType taskRef) {
+	OSEK_Task * m = static_cast<OSEK_Task*>(OSEK_Task::self());
+	*taskRef = m->id;
+}
+
+StatusType OSEK_Task::getTaskState(TaskType taskID, TaskStateRefType state) {
+	state = &(tasks[taskID]->taskState);
+}
+
+void OSEK_Task::enableAllInterrupts() {
+	CPU::int_enable();
+}
+
+void OSEK_Task::disableAllInterrupts() {
+	CPU::int_disable();
+}
+
+void OSEK_Task::resumeAllInterrupts() {
+	enableAllInterrupts();
+}
+
+void OSEK_Task::suspendAllInterrupts() {
+	disableAllInterrupts();
+}
+
+void OSEK_Task::resumeOSInterrupts() {
+	enableAllInterrupts();
+}
+
+void OSEK_Task::suspendOSInterrupts() {
+	disableAllInterrupts();
+}
+
+StatusType OSEK_Task::getResource(ResourceType resource) {
+	OSEK_Task * m = static_cast<OSEK_Task*>(OSEK_Task::self()); 
+//? debug
+    db<Thread>(WRN) << "   OSEK_Task::getResource("
+	                << resource << "): call by task " << m << "\n";
+//?
+	int resPriority = resourcePriority[resource][0];
+	resourcePriority[resource][1] = m->priority();
+//? debug
+	db<Thread>(WRN) << "      old priority: " << m->priority() 
+	                << "; ceiling priority: " << resPriority << "\n";
+//?
+	if(resPriority < m->priority()) {
+		m->priority(resPriority); // set ceiling priority
+//? debug
+		db<Thread>(WRN) << "      setting ceiling priority:" << m->priority() << "\n";
+//?
+	}
+//? debug
+	db<Thread>(WRN) << "      resulting priority: " << m->priority() << "\n";
+//?
+}
+
+
+StatusType OSEK_Task::releaseResource(ResourceType resource) {
+	OSEK_Task * m = static_cast<OSEK_Task*>(OSEK_Task::self());
+//? debug
+	db<Thread>(WRN) << "   OSEK_Task::releaseResource(" 
+	                << resource << "): call by task " << m << "\n";
+	db<Thread>(WRN) << "      old priority: " << m->priority() << "\n";
+//?
+	m->priority(resourcePriority[resource][1]); // set priority to task priority
+//? debug
+	db<Thread>(WRN) << "      resulting priority: " << m->priority() << "\n";
+//?
+	osek_reschedule(); // reschedule after releasing resource
+}
+
+StatusType OSEK_Task::setEvent(TaskType id, EventMaskType mask) {
+	OSEK_Task* t = tasks[id];
+	t->eventsSet |= mask;
+//? debug
+	db<Thread>(WRN) << "   OSEK_Task::setEvent(" << id << ", " << mask <<")\n";
+//?
+	if(t->isWaiting && (t->eventsSet & t->eventsWaitingFor)) {
+//? debug
+		db<Thread>(WRN) << "      releasing task\n";
+//?
+		t->isWaiting = false;
+		t->taskState = READY;
+		t->osek_resume();
+		t->osek_reschedule();
+	}
+	return E_OK;
+}
+
+StatusType OSEK_Task::clearEvent(EventMaskType mask) {
+	OSEK_Task * m = static_cast<OSEK_Task*>(OSEK_Task::self());
+	m->eventsSet &= ~mask;
+	return E_OK;
+}
+
+StatusType OSEK_Task::getEvent(TaskType id, EventMaskType *mask) {
+	*mask = tasks[id]->eventsSet;
+	return E_OK;
+}
+
+StatusType OSEK_Task::waitEvent(EventMaskType mask) {
+	OSEK_Task * m = static_cast<OSEK_Task*>(OSEK_Task::self());
+//? debug
+	db<Thread>(WRN) << "   OSEK_Task::waitEvent call by task " << m
+	                << "  mask:" << mask <<"\n";
+//?
+	if(m->eventsSet & mask) {
+//? debug
+		db<Thread>(WRN) << "      won't wait because event already set\n";
+//?
+		return E_OK;
+	}
+	m->eventsWaitingFor = mask;
+	m->isWaiting = true;
+	m->taskState = WAITING;
+	m->osek_wait();
+	m->osek_reschedule();
+	return E_OK;
+}
+
+StatusType OSEK_Task::getAlarmBase(AlarmType alarmID, AlarmBaseRefType info) {
+	info->maxallowedvalue = 1;
+	info->ticksperbase = 1;
+	info->mincycle = 0;
+}
+
+StatusType OSEK_Task::getAlarm(AlarmType alarmId, TickRefType tick) {
+	alarms[alarmId]->osek_getTicks(tick);
+}
+
+AppModeType OSEK_Task::getActiveApplicationMode() {
+	return appMode;
+}
+
+void OSEK_Task::shutdownOS(StatusType error) {
+//+ CH_EO_C_osek_task_cc_shutdownHook
+	CPU::int_disable();
+	CPU::halt();
+}
+
+void OSEK_Task::startOS(AppModeType mode) {
+	OSEK_Task::appMode = mode;
+//+ CH_EO_C_osek_task_cc_startupHook
+}
+
+AppModeType OSEK_Task::appMode = 0;
+
+__END_SYS
+

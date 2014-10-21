@@ -1,0 +1,7 @@
+
+##################################################
+# IP Sources
+##################################################
+PLAT_COMMON = $(abspath $(addprefix $(BASE_DIR)/hw/platform/common/, \
+global.cc))
+

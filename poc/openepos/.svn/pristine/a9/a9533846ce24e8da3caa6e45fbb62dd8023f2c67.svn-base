@@ -1,0 +1,156 @@
+/*! @class System::AVR8
+    @ingroup med_cpu
+
+    @brief This is the implementation of AVR CPU Mediator
+
+    <!--************************************************************************************************-->
+    @fn Hertz System::AVR8::clock()
+    @return Returns CPU Clock Frequency in Hertz
+
+    <!--************************************************************************************************-->
+    @fn static void System::AVR8::int_enable()
+    Enables CPU Interrupts
+    <!--************************************************************************************************-->
+    @fn static void System::AVR8::int_disable()
+    Disable CPU Interrupts
+    <!--************************************************************************************************-->
+    @fn static void System::AVR8::halt()
+    @copydoc CPU_Common::halt()
+
+    Only an External Reset, a Watchdog Reset, a Brown-out Reset, a Two-wire Serial Interface address match interrupt, or an External Level Interrupt can wake up the MCU. This sleep mode basically halts all generated clocks, allowing operation of asynchronous modules only.
+    <br/>
+    Note that if a level triggered interrupt is used for wake-up from Power-down mode, the changed level must be held for some time to wake up the MCU. Refer to <i>External Interrupts</i> on AVR Manual for details.
+    <br/>
+    When waking up from Power-down mode, there is a delay from the wake-up condition occurs until the wake-up becomes effective. This allows the clock to restart and become stable after having been stopped. The wake-up period is defined by the same CKSEL fuses that define the Reset Time-out period, as described in <i>%Clock Sources<i/> on AVR Manual.
+
+    <!--************************************************************************************************-->
+    @fn static void System::AVR8::switch_context(Context * volatile * o, Context * volatile n)
+    This function handle the CPU switch context.
+    See EPOS Switch %Context Documentantion for a better understanding of this process on EPOS %System.
+    <!--************************************************************************************************-->
+    @fn Reg16 static System::AVR8::sp()
+    Gets value of Stack Pointer Register.
+    <!--************************************************************************************************-->
+    @fn static void System::AVR8::sp(Reg16 sp)
+    Sets value of Stack Pointer Register.
+    <!--************************************************************************************************-->
+    @fn Reg16 static System::AVR8::fr()
+    Gets value of Function Register.
+    <!--************************************************************************************************-->
+    @fn static void System::AVR8::fr(Reg16 fr)
+    Sets value of Function Register.
+    <!--************************************************************************************************-->
+    @fn Reg16 static System::AVR8::pdp()
+    Gets value of Page Directiry Pointer Register. <i>Unnavailable for this architecture</i>
+    <!--************************************************************************************************-->
+    @fn static void System::AVR8::pdp(Reg16 pdp)
+    Gets value of Page Directiry Pointer Register. <i>Unnavailable for this architecture</i>
+    <!--************************************************************************************************-->
+    @fn Log_Addr static void System::AVR8::ip()
+    Gets value of Instruction Pointer.
+    <!--************************************************************************************************-->
+    @fn static bool System::AVR8::tsl(volatile bool & lock)
+    @copydoc CPU_Common::tsl()
+    <!--************************************************************************************************-->
+    @fn static int System::AVR8::finc(volatile int & number)
+    @copydoc CPU_Common::finc()
+    <!--************************************************************************************************-->
+    @fn static int System::AVR8::fdec(volatile int & number)
+    @copydoc CPU_Common::fdec()
+    <!--************************************************************************************************-->
+    @fn static Reg32 System::AVR8::htonl(Reg32 v)
+    Converts the value from CPU endian to Network endian
+    <!--************************************************************************************************-->
+    @fn static Reg16 System::AVR8::htons(Reg16 v)
+    Converts the value from CPU endian to Network endian
+    <!--************************************************************************************************-->
+    @fn static Reg32 System::AVR8::ntohl(Reg32 v)
+    Converts the value from Network endian to CPU endian
+    <!--************************************************************************************************-->
+    @fn static Reg16 System::AVR8::ntohs(Reg16 v)
+    Converts the value from Network endian to CPU endian
+    <!--************************************************************************************************-->
+    @fn static Context * System::AVR8::init_stack(Log_Addr stack, unsigned int size, void (* exit)(), int (* entry)())
+    @brief Initializes one stack for a Thread Context
+
+    This function is called from Thread Constructor since different architectures may manipulate the stack by
+    different ways.
+
+    @param stack Logical Address of Stack
+    @param size  Size of Stack Created
+    @param exit  A pointer to exit function of this Context Stack
+    @param entry The entry point of this Context
+
+    <!--************************************************************************************************-->
+    @fn static Context * System::AVR8::init_stack(Log_Addr stack, unsigned int size, void (* exit)(), int (* entry)(T1 a1), T1 a1)
+    @copydoc AVR8::init_stack()
+    @param a1 First argument of Context entry function
+
+    <!--************************************************************************************************-->
+    @fn static Context * System::AVR8::init_stack(Log_Addr stack, unsigned int size, void (* exit)(), int (* entry)(T1 a1, T2 a2), T1 a1, T2 a2)
+    @copydoc AVR8::init_stack()
+    @param a1 First argument of Context entry function
+    @param a2 Second argument of Context entry function
+
+    <!--************************************************************************************************-->
+    @fn static Context * System::AVR8::init_stack(Log_Addr stack, unsigned int size, void (* exit)(), int (* entry)(T1 a1, T2 a2, T3 a3), T1 a1, T2 a2, T3 a3)
+    @copydoc AVR8::init_stack()
+    @param a1 First argument of Context entry function
+    @param a2 Second argument of Context entry function
+    @param a3 Third argument of Context entry function
+    <!--************************************************************************************************-->
+    @fn Reg8 static System::AVR8::sreg()
+    Gets Status Register.
+    <!--************************************************************************************************-->
+    @fn static void System::AVR8::sreg(Reg8 value)
+    Sets value of Status Register
+    <!--************************************************************************************************-->
+    @fn Reg16 static System::AVR8::sphl()
+    Gets Value of Stack Pointer Register.
+    <!--************************************************************************************************-->
+    @fn static void System::AVR8::sphl(Reg16 value)
+    Sets value of Stack Pointer Register
+    <!--************************************************************************************************-->
+    @fn static void System::AVR8::sphl(Reg16 value)
+    Sets value of Stack Pointer Register
+    <!--************************************************************************************************-->
+    @fn Reg16 static System::AVR8::r25_24()
+    Gets value of R25 and R24 Registers, wich is the 16 bits Function Register
+    <!--************************************************************************************************-->
+    @fn static void System::AVR8::r25_24(Reg16 value)
+    Sets value of R25 and R24 Registers, wich is the 16 bits Function Register
+    <!--************************************************************************************************-->
+    @fn Log_Addr static System::AVR8::pc()
+    Gets value of AVR Program Counter Register
+    <!--************************************************************************************************-->
+    @fn Reg8 static System::AVR8::in8(const unsigned char port)
+    Gets the value of a port.
+    @param port The port address.
+    <!--************************************************************************************************-->
+    @fn Reg16 static System::AVR8::in16(const unsigned char port)
+    Gets the value of a port. The low 8 bits of the value returned is the value of the port addres and the high 8 bits returned is the value of port + 1 address.
+    @param port The port address.
+    <!--************************************************************************************************-->
+    @fn static void System::AVR8::out8(unsigned char port, Reg8 value)
+    Sets port address with value.
+    @param port The port address.
+    @param value The new value to port address.
+    <!--************************************************************************************************-->
+    @fn static void System::AVR8::out16(const unsigned char port, Reg16 value)
+    Sets port address with value.
+    @param port The port address.
+    @param value The new value to port address.
+    <!--************************************************************************************************-->
+    @fn char static void System::AVR8::power()
+    Gets current AVR power state mode.
+    <!--************************************************************************************************-->
+    @fn static void System::AVR8::power(char ps)
+    Sets AVR in a new power state mode. See the power state modes available and how the MCU behaves in each one.
+    <!--************************************************************************************************-->
+    @fn static void System::AVR8::init()
+    Inits AVR MCU. Case Power Management feature is on, AVR is initialized energy saving capable.
+    <!--************************************************************************************************-->
+    @fn static void System::AVR8::sleep(char ps)
+    Puts AVR to sleep. Sleep means that AVR will enter in a power save state mode.
+    @param ps The new power state mode of AVR MCU
+*/

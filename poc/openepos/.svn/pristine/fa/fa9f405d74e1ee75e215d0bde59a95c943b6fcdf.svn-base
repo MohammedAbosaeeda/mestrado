@@ -1,0 +1,21 @@
+/*! @class System::ATMega128_UART
+    @brief ATMega128 UART Mediator Declarations
+
+    @fn System::ATMega128_UART::ATMega128_UART(unsigned int unit = 0)
+    @fn System::ATMega128_UART::ATMega128_UART(unsigned int baud, unsigned int data_bits, unsigned int parity, unsigned int stop_bits, unsigned int unit = 0)
+
+    @fn void System::ATMega128_UART::config(unsigned int baud, unsigned int data_bits, unsigned int parity, unsigned int stop_bits)
+    @fn void System::ATMega128_UART::config(unsigned int * baud, unsigned int * data_bits, unsigned int * parity, unsigned int * stop_bits)
+
+    @fn char System::ATMega128_UART::get()
+    @fn void System::ATMega128_UART::put(char c)
+
+    @fn void System::ATMega128_UART::loopback(bool flag)
+
+    @fn char System::ATMega128_UART::power()
+    @fn void System::ATMega128_UART::power(char ps)
+*/
+
+
+
+

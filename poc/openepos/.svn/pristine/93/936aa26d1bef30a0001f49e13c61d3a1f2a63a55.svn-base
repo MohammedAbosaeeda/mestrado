@@ -1,0 +1,194 @@
+/*! @class System::PPC32
+    @ingroup med_cpu
+
+    @brief This class implements the PowerPC Architecture CPU Component
+
+    <!--************************************************************************************************-->
+    @fn static Hertz System::PPC32::clock()
+    @return CPU Clock Frequency
+
+    <!--************************************************************************************************-->
+    @fn static void System::PPC32::switch_context(Context * volatile * o, Context * volatile n)
+
+    This function handle the CPU switch context. See EPOS Switch %Context Documentantion
+    for a better understanding of this process on EPOS System.
+
+    <!--************************************************************************************************-->
+    @fn static void System::PPC32::int_enable()
+    Enables CPU Interrupts
+
+    <!--************************************************************************************************-->
+    @fn static void System::PPC32::int_disable()
+    Disable CPU Interrupts
+
+    <!--************************************************************************************************-->
+    @fn static void System::PPC32::halt()
+    @copydoc CPU_Common::halt()
+    @note PPC32 CPU stays in Wait State until an interrupt or external agent (eg. JTAG) unset the WaitEnable
+          bit on MSR Register. For correct execution of Thread::idle() in EPOS, this action is done by the 
+          interrupt wrapper of scheduler timer installed on system by Machine Setup.
+
+    <!--************************************************************************************************-->
+    @fn static bool System::PPC32::tsl(volatile bool & lock)
+    @copydoc CPU_Common::tsl()
+
+    <!--************************************************************************************************-->
+    @fn static int System::PPC32::finc(volatile int & number)
+    @copydoc CPU_Common::finc()
+
+    <!--************************************************************************************************-->
+    @fn static int System::PPC32::fdec(volatile int & number)
+    @copydoc CPU_Common::fdec()
+
+    <!--************************************************************************************************-->
+    @fn static Reg32 System::PPC32::htonl(Reg32 v)
+    @brief Converts the value from CPU endian to Network endian
+
+    <!--************************************************************************************************-->
+    @fn static Reg16 System::PPC32::htons(Reg16 v)
+    @brief Converts the value from CPU endian to Network endian
+
+    <!--************************************************************************************************-->
+    @fn static Reg32 System::PPC32::ntohl(Reg32 v)
+    @brief Converts the value from Network endian to CPU endian
+
+    <!--************************************************************************************************-->
+    @fn static Reg16 System::PPC32::ntohs(Reg16 v)
+    @brief Converts the value from Network endian to CPU endian
+
+    <!--************************************************************************************************-->
+    @fn static Reg32 System::PPC32::cpu_to_le32(Reg32 v)
+    @brief Converts the value from CPU endian to little endian.
+
+    This method is usefull to guarantee portability of PCI devices mediators throught different architectures
+    that supports PCI busses.
+    <!--************************************************************************************************-->
+    @fn static Reg16 System::PPC32::cpu_to_le16(Reg16 v)
+    @copydoc PPC32::cpu_to_le32()
+
+    <!--************************************************************************************************-->
+    @fn static Reg32 System::PPC32::le32_to_cpu(Reg32 v)
+    @brief Converts the value from Little-endian to CPU endian.
+
+    This method is usefull to guarantee portability of PCI devices mediators throught different archictetures
+    that supports PCI busses.
+
+    <!--************************************************************************************************-->
+    @fn static Reg16 System::PPC32::le16_to_cpu(Reg16 v)
+    @copydoc PPC32::le32_to_cpu()
+
+    <!--************************************************************************************************-->
+    @fn static Context * System::PPC32::init_stack(Log_Addr stack, unsigned int size, void (* exit)(), int (* entry)())
+    @brief Initializes one stack for a Thread Context
+
+    This function is called from Thread Constructor since different architectures may manipulate the stack by
+    different ways.
+
+    @param stack Logical Address of Stack
+    @param size  Size of Stack Created
+    @param exit  A pointer to exit function of this Context Stack
+    @param entry The entry point of this Context
+
+    <!--************************************************************************************************-->
+    @fn static Context * System::PPC32::init_stack(Log_Addr stack, unsigned int size, void (* exit)(), int (* entry)(T1 a1), T1 a1)
+    @copydoc PPC32::init_stack()
+    @param a1 First argument of Context entry function
+
+    <!--************************************************************************************************-->
+    @fn static Context * System::PPC32::init_stack(Log_Addr stack, unsigned int size, void (* exit)(), int (* entry)(T1 a1, T2 a2), T1 a1, T2 a2)
+    @copydoc PPC32::init_stack()
+    @param a1 First argument of Context entry function
+    @param a2 Second argument of Context entry function
+
+    <!--************************************************************************************************-->
+    @fn static Context * System::PPC32::init_stack(Log_Addr stack, unsigned int size, void (* exit)(), int (* entry)(T1 a1, T2 a2, T3 a3), T1 a1, T2 a2, T3 a3)
+    @copydoc PPC32::init_stack()
+    @param a1 First argument of Context entry function
+    @param a2 Second argument of Context entry function
+    @param a3 Third argument of Context entry function
+
+    <!--************************************************************************************************-->
+    @fn static Reg32 System::PPC32::fr()
+    @brief Get value of Function Return Register (Defined by architecture ABI)
+
+    <!--************************************************************************************************-->
+    @fn static void System::PPC32::fr(const Reg32 fr)
+    @brief Set value of Function Return Register (Defined by architecture ABI)
+
+    <!--************************************************************************************************-->
+    @fn static Reg32 System::PPC32::sp()
+    @brief Get value of Stack Pointer
+
+    <!--************************************************************************************************-->
+    @fn static void System::PPC32::sp(const Reg32 sp)
+    @brief Set value of Stack Pointer
+
+    <!--************************************************************************************************-->
+    @fn static Reg32 System::PPC32::pdp()
+    @return Page Directory Pointer
+
+    <!--************************************************************************************************-->
+    @fn static void System::PPC32::pdp(Reg32 pdp)
+    @brief Set Page Directory Pointer
+
+    <!--************************************************************************************************-->
+    @fn static Reg32 System::PPC32::spr(const unsigned int addr)
+    @brief Get value of SPR registers
+
+    <!--************************************************************************************************-->
+    @fn static void System::PPC32::spr(const unsigned int addr, unsigned int value)
+    @brief Set value of SPR register
+
+    <!--************************************************************************************************-->
+    @fn static void System::PPC32::sync_io()
+    @brief Syncronize Data Storage Instructions
+
+    <!--************************************************************************************************-->
+    @fn static void System::PPC32::entry_wrapper()
+    @brief Set up the parameter values to the Thread Entry Point
+
+    This wrapper removes the arguments from the stack (inserted by the method PPC32::init_stack) and actually calls
+    the real entry point passing the respective arguments. This is needed by architectures ABI that handles 
+    functions arguments with special purpose register and the stack. This wrapper delegates the function argument
+    handling to the compiler, who knows exactly if the arguments must be allocated on stack or register 
+    (i.e. argument size too big to be handled by a register).
+
+    <!--************************************************************************************************-->
+    @fn static void System::PPC32::entry_wrapper(T1 a1)
+    @overload PPC32::entry_wrapper()
+
+    <!--************************************************************************************************-->
+    @fn static void System::PPC32::entry_wrapper(T1 a1, T2 a2)
+    @copydoc PPC32::entry_wrapper()
+
+    <!--************************************************************************************************-->
+    @fn static void System::PPC32::entry_wrapper(T1 a1, T2 a2, T3 a3)
+    @copydoc PPC32::entry_wrapper()
+
+    <!--************************************************************************************************-->
+    @fn static Reg32 System::PPC32::gpr(unsigned int addr)
+    @brief Get the value from General Purpose Register Bank
+    @param addr The index of register in bank (0 - 31)
+
+    <!--************************************************************************************************-->
+    @fn static void System::PPC32::gpr(unsigned int addr, Reg32 value)
+    @brief Set the value from General Purpose Register Bank
+    @param addr The index of register in bank (0 - 31)
+
+    <!--################################################################################################-->
+    @class System::PPC32::Context
+    @ingroup med_cpu
+
+    @brief This class implements the PowerPC CPU %Context
+
+    <!--************************************************************************************************-->
+    @fn void System::PPC32::Context::load() const volatile
+    This function is used for load the first Thread %Context, since all subsequent
+    %Context Load will be handled by CPU::switch_context().
+
+    <!--************************************************************************************************-->
+
+    @fn void System::PPC32::Context::save() volatile
+    This function is never used, actual %Context saving is done at 
+    CPU::switch_context(). Leaved for documentation purpose only.
+*/

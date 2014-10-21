@@ -1,0 +1,161 @@
+/*! @class System::ML310_PCI
+    @ingroup med_pci
+
+    @brief ML310_PCI class definition.
+
+    <!-- *********************************************************************** -->
+    @fn static Locator scan(const Class_Id & c, int order)
+
+    <!-- *********************************************************************** -->
+    @fn static Locator System::ML310_PCI::scan(const Vendor_Id & v, const Device_Id & d, int order)
+    @brief Scan the PCI BUS for a specific device
+
+    @param v Device's Vendor ID
+    @param d Device ID
+    @param order Specify the cardinality of device (if machine has more than one.)
+
+    <!-- *********************************************************************** -->
+    @fn static void System::ML310_PCI::header(const Locator & l, Header * h)
+    
+
+    <!-- *********************************************************************** -->
+    @fn static Reg16 System::ML310_PCI::command(const Locator & l)
+    @brief Return the PCI command register for the device
+    @param l The Device Locator
+
+    <!-- *********************************************************************** -->
+    @fn static void  System::ML310_PCI::command(const Locator & l, Reg16 v)
+    @brief Writes an PCI command in the command register of the specified device
+    @param l The Device Locator
+
+    <!-- *********************************************************************** -->
+    @fn static Reg16 System::ML310_PCI::status(const Locator & l)
+    @brief Return the PCI status register for the device
+    @param l The Device Locator
+
+
+    <!-- *********************************************************************** -->
+    @fn static void  System::ML310_PCI::status(const Locator & l, Reg16 v)
+    @brief Writes an PCI status in the status register of the specified device
+    @param l The Device Locator
+
+    <!-- *********************************************************************** -->
+    @fn static void System::ML310_PCI::init()
+    @brief Performs the initialization of the device.
+
+    <!-- *********************************************************************** -->
+    @fn static int System::ML310_PCI::cmd(CPU::Reg8 bus, CPU::Reg8 dev_fn, CPU::Reg8 addr)
+    @brief Returns a 32 bits register with the BUS, DEV_FN and ADDR encoded for writing
+    in the CONFADD of the PCI bridge.
+
+    CONFADD is a 32 bit register accessed only when referenced as a Dword.
+    A Byte or Word reference will NOT "pass through" the Configuration Address
+    Register onto the PCI bus as an I/O cycle. The CONFADD register
+    contains the Bus Number, Device Number, Function Number, and Register
+    Number for which a subsequent configuration access is intended.
+
+    WARNING -> The above definition follows th PowerPC way for naming bits
+    so bit 0 is the most significant bit (x80000000). In fact, the method
+    cmd is based on little-endian definition, since all the address_space
+    used by PCI is configured as little endian on SLER register.
+
+    bits    -- Field name
+    [25:31] -> Reserved Hardwired to 0
+    [24:24] -> Active High Bit (Enable)
+    [16:23] -> bus (8 bits)
+    [13:15] -> function (3 bits)
+    [ 8:12] -> device (5 bits)
+    [ 6: 7] -> Hardwired to 0
+    [ 0: 5] -> register (6 bits) -> Check
+
+    <!-- *********************************************************************** -->
+    @fn static CPU::Reg8 System::ML310_PCI::cfg8(CPU::Reg8 bus, CPU::Reg8 dev_fn, CPU::Reg8 addr)
+    @brief Read a byte of the devices configuration space
+
+    @param bus The device bus id
+    @param dev_fn The device dev number and function number
+    @param addr The offset within the PCI configuration space
+
+    <!-- *********************************************************************** -->
+    @fn static CPU::Reg16 System::ML310_PCI::cfg16(CPU::Reg8 bus, CPU::Reg8 dev_fn, CPU::Reg8 addr)
+    @brief Read a half-word of the devices configuration space
+
+    @param bus The device bus id
+    @param dev_fn The device dev number and function number
+    @param addr The offset within the PCI configuration space
+
+    <!-- *********************************************************************** -->
+    @fn static CPU::Reg32 System::ML310_PCI::cfg32(CPU::Reg8 bus, CPU::Reg8 dev_fn, CPU::Reg8 addr)
+    @brief Read a word of the devices configuration space
+
+    @param bus The device bus id
+    @param dev_fn The device dev number and function number
+    @param addr The offset within the PCI configuration space
+
+    <!-- *********************************************************************** -->
+    @fn static void System::ML310_PCI::cfg8(CPU::Reg8 bus, CPU::Reg8 dev_fn, CPU::Reg8 addr, CPU::Reg8 value)
+    @brief Writes a byte into the device configuration space
+
+    @param bus The device bus id
+    @param dev_fn The device dev number and function number
+    @param addr The offset within the PCI configuration space
+    @param value
+
+    <!-- *********************************************************************** -->
+    @fn static void System::ML310_PCI::cfg16(CPU::Reg8 bus, CPU::Reg8 dev_fn, CPU::Reg8 addr, CPU::Reg16 value)
+    @brief Writes a half-word into the device configuration space
+    @param bus The device bus id
+    @param dev_fn The device dev number and function number
+    @param addr The offset within the PCI configuration space
+    @param value
+
+    <!-- *********************************************************************** -->
+    @fn static void System::ML310_PCI::cfg32(CPU::Reg8 bus, CPU::Reg8 dev_fn, CPU::Reg8 addr, CPU::Reg32 value)
+    @brief Writes a word into the device configuration space
+
+    @param bus The device bus id
+    @param dev_fn The device dev number and function number
+    @param addr The offset within the PCI configuration space
+    @param value
+
+    <!-- *********************************************************************** -->
+    @fn static CPU::Reg16 System::ML310_PCI::vendor_id(CPU::Reg8 bus, CPU::Reg8 dev_fn)
+    @brief Returns the Vendor ID
+    @param bus The device bus id
+    @param dev_fn The device dev number and function number
+
+    <!-- *********************************************************************** -->
+    @fn static CPU::Reg16 System::ML310_PCI::device_id(CPU::Reg8 bus, CPU::Reg8 dev_fn)
+    @brief Returns the Device ID
+    @param bus The device bus id
+    @param dev_fn The device dev number and function number
+
+    <!-- *********************************************************************** -->
+    @fn static CPU::Reg16 System::ML310_PCI::class_id(CPU::Reg8 bus, CPU::Reg8 dev_fn)
+    @brief Returns the Class ID
+    @param bus The device bus id
+    @param dev_fn The device dev number and function number
+
+    <!-- *********************************************************************** -->
+    @fn static Log_Addr System::ML310_PCI::phy2log(const Phy_Addr & addr)
+    @brief Convert a physical address to logical address
+
+    As PowerPC implements a Flat Address Space, this function returns the self physical address.
+
+    <!-- *********************************************************************** -->
+    @fn static int System::ML310_PCI::autoconfig_setup_bar(int bus, int dev_fn, int bar_qnt = 6)
+    @brief Setups the Base Address Register of device in the PCI Configuration Space
+
+    Since the ML310 Platform doesn't provides a BIOS to initialize all the devices attached on the 
+    Machine, it's necessary initialize all the Base Address Register of the PCI devices in the configuration
+    space.
+
+    <!-- *********************************************************************** -->
+    @fn static int System::ML310_PCI::autoconfig_bus(int bus)
+    @brief Performs the configuration of all PCI device on the BUS
+
+    This method is called by init, and scan all the devices in a bus (and sub-buses recursively)
+    initializing every device found with the method System::ML310_PCI::autoconfig_setup_bar
+
+    This method also initialize the configuration of the Bridges found on the BUS.
+*/

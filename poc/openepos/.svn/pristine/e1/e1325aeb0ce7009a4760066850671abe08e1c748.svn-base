@@ -1,0 +1,92 @@
+/*! @class System::Alarm
+    @ingroup abs_timming
+
+    @brief The Alarm abstraction is used to register and dispatch temporal events
+  
+    The Alarm abstraction is a member of the timepiece family. It may be used to generate timed events.
+    A timer mediator is used to generate system ticks.
+    An application instantiates an Alarm with a handler function, a time offset and a number of iterations.
+    The Alarm holds an event queue, in which every Alarm instantiated by the application is registered.
+    A master Alarm handler is executed every tick and runs any Alarm handlers that are due for execution.
+
+    <!-- *********************************************************************** -->
+
+    @fn System::Alarm::Alarm(const Microsecond & time, Handler * handler, int times = 1)
+    @brief Creates an Alarm and registers its handler
+
+    @param time
+    Time offset for execution in microseconds
+
+    @param handler
+    Function to be executed
+
+    @param times
+    Number of times this alarm will execute
+
+    <!-- *********************************************************************** -->
+
+    @fn System::Alarm::Alarm(const Microsecond & time, Handler * handler, int times, bool int_enable)
+    @brief Creates an Alarm and registers its handler
+
+    @param time
+    Time offset for execution in microseconds
+
+    @param handler
+    Function to be executed
+
+    @param times
+    Number of times this alarm will execute
+
+	@param int_enable
+	Enables or disables the CPU::int_enable function (true or false)
+
+    <!-- *********************************************************************** -->
+
+    @fn static void System::Alarm::master(const Microsecond & time, Handler::Function * handler)
+    @brief Registers the master alarm
+
+    <!-- *********************************************************************** -->
+
+    @fn static Hertz System::Alarm::frequency()
+    
+    @return
+    Returns the alarm frequency in Hertz
+
+    <!-- *********************************************************************** -->
+
+    @fn static void System::Alarm::int_handler(unsigned int irq)
+    @brief Alarm interrupt handler
+
+    @note
+    This is a very special interrupt handler, for the master alarm handler
+    called at the end might trigger a context switch (e.g. when it is set
+    to call the thread scheduler). In this case, int_handler won't finish
+    within the expected time (i.e., it will finish only when the preempted
+    thread return to the CPU). For this NOT to be an issue, the following
+    conditions MUST be met:
+    @li The interrupt dispatcher must acknowledge the handling of interrupts
+        before invoking the respective handler, thus enabling subsequent
+        interrupts to be handled even if a previous didn't come to an end
+    @li Handlers (e.g. master) must be called after incrementing _elapsed
+    @li The manipulation of alarm queue must be guarded (e.g. int_disable)
+
+    <!-- *********************************************************************** -->
+
+    @fn static void System::Alarm::delay(const Microsecond & time)
+    @brief Delays the executing thread for a certain period of time
+
+    @note
+    If System::Traits<Thread>::idle_waiting is true, then the thread will be suspended for the specified period of time.
+    Otherwise, the thread will be kept in a busy waiting loop, in which it yields the processor 
+    every iteration until the specified period is elapsed.
+
+    <!-- *********************************************************************** -->
+
+    @fn static int System::Alarm::init()
+    @brief Initializes the alarm
+
+    This function registers the Alarm interrupt handler as the System::Timer interrupt, configures the timer according to the frequency
+    specified in System::Traits<Timer>::FREQUENCY and enables the System::Timer interrupt.
+   
+
+*/

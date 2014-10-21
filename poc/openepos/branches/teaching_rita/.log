@@ -1,0 +1,19 @@
+make[1]: *** No rule to make target `active_test.cc.cc', needed by `active_test.cc.o'.  Stop.
+make: *** [app] Error 2
+make[1]: *** No rule to make target `active_test.cc.cc', needed by `active_test.cc.o'.  Stop.
+make: *** [app] Error 2
+make[1]: *** No rule to make target `active_test.cc.cc', needed by `active_test.cc.o'.  Stop.
+make: *** [app] Error 2
+make[1]: *** No rule to make target `active_test.cc.cc', needed by `active_test.cc.o'.  Stop.
+make: *** [app] Error 2
+make[1]: *** No rule to make target `active_test.cc.cc', needed by `active_test.cc.o'.  Stop.
+make: *** [app] Error 2
+make[1]: *** No rule to make target `active_test.cc.cc', needed by `active_test.cc.o'.  Stop.
+make: *** [app] Error 2
+make[1]: *** No rule to make target `active_test.cc.cc', needed by `active_test.cc.o'.  Stop.
+make: *** [app] Error 2
+make[1]: *** No rule to make target `active_test.cc.cc', needed by `active_test.cc.o'.  Stop.
+make: *** [app] Error 2
+make[2]: *** [thread_init.o] Interrupt
+make[1]: *** [abstraction] Interrupt
+make: *** [src] Interrupt

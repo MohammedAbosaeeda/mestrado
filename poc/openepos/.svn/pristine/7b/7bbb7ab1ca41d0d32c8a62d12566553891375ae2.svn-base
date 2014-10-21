@@ -1,0 +1,121 @@
+System (Keso) {
+	Modules = "debug:test_gc";
+
+	OsekOS (KesoOS) {
+		# Enable extended error status reporting
+		# Possible values: STANDARD, EXTENDED
+		STATUS = "STANDARD";
+		
+		STARTUPHOOK = false {} 
+		ERRORHOOK = false {}
+		SHUTDOWNHOOK = false {}
+		PRETASKHOOK = false {}
+		POSTTASKHOOK = false {}
+
+		USEGETSERVICEID = "FALSE";
+		USEPARAMETERACCESS = "FALSE";
+		
+		# Use RES_SCHEDULER resource within application (boolean)
+		USERESSCHEDULER = "FALSE";
+		
+		# (PO) Target Microcontroller (TC1796, TC1795B, TC10GP)
+		MICROCONTROLLER = "TC1796";
+
+		# (PO) Choose a timer for the realtime clock feature
+		# (GPTU{0,1}_T{0,1}, STM_T{0,1})
+		TRICORE_RT_CLOCK = "NOT_USED";
+
+		# (PO) Number of Context Save Areas used by the application
+		TRICORE_NUM_CSA = "200";
+		
+		# (PO) OSEK conformance class. (BCC1,BCC2,ECC1,ECC2,AUTO)
+		CC = "AUTO";
+		
+		# (PO) Overall Scheduling policy (NON,FULL,MIXED,AUTO)
+		SCHEDULE = "AUTO";
+		
+		# (PO) size of tracebuffer, 0 disables tracing
+		# TRACEBUFFER = "100";
+
+		# (PO) Use user defined main function (boolean)
+		USERMAIN = "FALSE";
+
+		# (PO) Enable support for Stackchecking
+		STACKCHECK = "FALSE";
+
+		# (PO) Additional RT checks (boolean)
+		# checking initialization of variables, checks if TerminateTask() called at
+		# the end of each Task etc.
+		EXTRA_RUNTIME_CHECKS = "FALSE";
+
+		
+		# (PO) Allow ORTI aware debuggers to trace syscalls (boolean)
+		SERVICETRACE = "FALSE";
+		
+		# (PO) Allow ORTI aware debuggers to access last !=E_OK error code returned
+		USELASTERROR = "FALSE";
+	
+		# (PO) PREISRHOOK and POSTISRHOOK routines
+		PREISRHOOK = false {}
+		POSTISRHOOK = false {}
+	}
+	
+	Domain (dom1) {
+		# (KESO) Type of the domain's heap
+		# (RestrictedDomainScope, IdleRoundRobin)
+		Heap = IdleRoundRobin {
+			# (KESO) Size of the domain's heap
+			HeapSize=2048;
+
+			# (KESO) Size of one slot on the heap (IdleRoundRobin only)
+			SlotSize=8;
+
+			# (KESO) Name of the synchronization group (optional, IdleRoundRobin only)
+			Group = "Default";
+		}
+
+		Task (task1) {
+			# (KESO) Choose MainClass and MainMethod of this task
+			# (i.e. where it is started)
+			MainClass="test/TestObjArray";
+			MainMethod="launch()V";
+
+			# Specifiy if tasks is automatically set to ready on startup
+			Autostart = true {
+				# specifies in which Appmodes the task is autostarted.
+				# applies only if Autostart is enabled
+				Appmode = "OSDEFAULTAPPMODE";
+			}
+
+			# Priority >=0, the higher the number the higher is the priority
+			Priority = "5";
+			
+			# Preemptability of the Task (NON, FULL)
+			# If NON, no internal resources may be assigned to this task
+			Schedule = "full";
+
+			# Max number of recorded activation requests for this task
+			Activation = "1";
+
+			# (PO) Used for optimization. Specifies if the Schedule() call is
+			# used by this task. (YES, NO)
+			CallScheduler = "NO";
+			
+			# (PO) BASIC or EXTENDED TASK? (BASIC have no WAITING state)
+			Type = "basic";
+
+			# (PO) Stacksize in bytes required for this task. System will add
+			# additional space for calling system functions
+			# Should include space required by Pre/PostTaskHooks if used
+			Stacksize = "100";
+
+			# (PO) Number of Context Save Areas used by this task
+			# TRICORE_NUM_CSA = "20";
+		}
+	}
+
+  # Provided for compatibility with regular kesorc.gctest
+	Event (Wakeup) {
+		Mask = "Auto";
+	}
+}

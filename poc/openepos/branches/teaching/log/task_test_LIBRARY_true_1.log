@@ -1,0 +1,78 @@
+install /home/tinha/mestrado/poc/openepos/branches/teaching/src/abstraction/task_test.cc /home/tinha/mestrado/poc/openepos/branches/teaching/app
+install /home/tinha/mestrado/poc/openepos/branches/teaching/src/abstraction/task_test_traits.h /home/tinha/mestrado/poc/openepos/branches/teaching/app
+make --no-print-directory --silent clean1 run1
+
+EPOS bootable image tool
+
+  EPOS mode: library
+  Machine: pc
+  Processor: ia32 (32 bits, little-endian)
+  Memory: 262144 KBytes
+  Boot Length: 128 - 512 (min - max) KBytes
+  Node id: will get from the network
+
+  Creating EPOS bootable image in "task_test.img":
+    Adding boot strap "/home/tinha/mestrado/poc/openepos/branches/teaching/img/pc_boot": done.
+    Adding setup "/home/tinha/mestrado/poc/openepos/branches/teaching/img/pc_setup": done.
+    Adding application "task_test": done.
+    Adding system info: done.
+
+  Adding specific boot features of "pc": done.
+
+  Image successfully generated (53384 bytes)!
+
+Setting up this machine as follows: 
+  Processor:    IA32 at 2496 MHz (BUS clock = 125 MHz)
+  Memory:       262144 Kbytes [0x00000000:0x10000000]
+  User memory:  261816 Kbytes [0x00000000:0x0ffae000]
+  PCI aperture: 45064 Kbytes [0xfc000000:0xfec02000]
+  Node Id:      will get from the network!
+  Setup:        21344 bytes
+  APP code:     30176 bytes	data: 800 bytes
+Task test
+I'll try to clone myself:
+My address space's page directory is located at 0x53e58955
+IC::exc_pf(i=14) => [address=0xa104ec87,err={},ctx={cs=49,ip=0,fl=0x71e7}]
+The running thread will now be terminated!
+The last thread has exited!
+Rebooting the machine ...
+rm -f /home/tinha/mestrado/poc/openepos/branches/teaching/app/task_test*
+install /home/tinha/mestrado/poc/openepos/branches/teaching/src/abstraction/task_test.cc /home/tinha/mestrado/poc/openepos/branches/teaching/app
+install /home/tinha/mestrado/poc/openepos/branches/teaching/src/abstraction/task_test_traits.h /home/tinha/mestrado/poc/openepos/branches/teaching/app
+make --no-print-directory --silent clean1 run1
+
+EPOS bootable image tool
+
+  EPOS mode: library
+  Machine: pc
+  Processor: ia32 (32 bits, little-endian)
+  Memory: 262144 KBytes
+  Boot Length: 128 - 512 (min - max) KBytes
+  Node id: will get from the network
+
+  Creating EPOS bootable image in "task_test.img":
+    Adding boot strap "/home/tinha/mestrado/poc/openepos/branches/teaching/img/pc_boot": done.
+    Adding setup "/home/tinha/mestrado/poc/openepos/branches/teaching/img/pc_setup": done.
+    Adding application "task_test": done.
+    Adding system info: done.
+
+  Adding specific boot features of "pc": done.
+
+  Image successfully generated (53384 bytes)!
+
+Setting up this machine as follows: 
+  Processor:    IA32 at 2497 MHz (BUS clock = 125 MHz)
+  Memory:       262144 Kbytes [0x00000000:0x10000000]
+  User memory:  261816 Kbytes [0x00000000:0x0ffae000]
+  PCI aperture: 45064 Kbytes [0xfc000000:0xfec02000]
+  Node Id:      will get from the network!
+  Setup:        21344 bytes
+  APP code:     30176 bytes	data: 800 bytes
+Task test
+I'll try to clone myself:
+My address space's page directory is located at 0x53e58955
+IC::exc_pf(i=14) => [address=0xa104ec87,err={},ctx={cs=0,ip=0,fl=0}]
+The running thread will now be terminated!
+The last thread has exited!
+Rebooting the machine ...
+rm -f /home/tinha/mestrado/poc/openepos/branches/teaching/app/task_test*

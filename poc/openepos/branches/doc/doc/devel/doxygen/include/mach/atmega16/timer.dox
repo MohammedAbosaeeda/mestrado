@@ -1,0 +1,14 @@
+/*! @class System::ATMega16_Timer
+    @brief ATMega16 Timer Mediator Declarations
+
+    @fn System::ATMega16_Timer::ATMega16_Timer() 
+    @fn System::ATMega16_Timer::ATMega16_Timer(const Hertz & f) 
+    @fn Hertz System::ATMega16_Timer::frequency() const 
+    @fn void System::ATMega16_Timer::frequency(const Hertz & f)
+    @fn void System::ATMega16_Timer::reset() 
+    @fn void System::ATMega16_Timer::enable()
+    @fn void System::ATMega16_Timer::disable()
+    @fn Tick System::ATMega16_Timer::read() 
+    @fn static Hertz System::ATMega16_Timer::count2freq(const Count & c) 
+    @fn static Count System::ATMega16_Timer::freq2count(const Hertz & f) 
+*/

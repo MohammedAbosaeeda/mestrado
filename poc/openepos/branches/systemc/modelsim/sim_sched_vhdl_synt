@@ -1,0 +1,5 @@
+#load design
+vsim work.Toplevel_Simulation_Synthesis
+set StdArithNoWarnings 1
+set NumericStdNoWarnings 1
+

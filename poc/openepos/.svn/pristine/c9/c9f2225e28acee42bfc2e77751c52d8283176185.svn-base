@@ -1,0 +1,219 @@
+
+options {
+	STATIC = false;
+}
+
+PARSER_BEGIN(KesoDataManagerReader)
+
+package keso.editor.data.datamanager.reader;
+
+import keso.editor.data.datamanager.*;
+import java.io.FileInputStream;
+
+public class KesoDataManagerReader {
+	public static void parseFile(String filename) throws Exception {
+		KesoDataManagerReader parser = null;
+
+		try {
+			parser = new KesoDataManagerReader(new FileInputStream(filename));
+		} 
+		catch (FileNotFoundException ex) {
+        	throw new Exception(ex.toString());
+        }
+		catch (Exception ex) {
+			ex.printStackTrace();
+			throw new Exception(ex.toString());
+		}
+
+		try {
+			parser.start();
+		} catch (Exception ex) {
+			throw new Exception(ex.toString());
+		}
+	}
+}
+
+PARSER_END(KesoDataManagerReader)
+
+SKIP : { " " | "\t" | "\r" | "\n" }
+
+TOKEN : {
+	<LINECOMMENT: "#" (~["\n"])*> |
+	<CANHAVE: "CAN HAVE"> |
+	<OR: "OR"> |
+	<AND: "AND"> |
+	<WITHRESTRICTION: "WITH RESTRICTION"> |
+	<IDENTIFIER: <LETTER> (<LETTER>|<DIGIT>)*> |
+	<NUMBER: (<DIGIT>)+> |
+	<LETTER: ["a"-"z","A"-"Z","_","/"]> |
+	<DIGIT: ["0"-"9"]> |
+	<LPAREN: "("> |
+	<RPAREN: ")"> |
+	<LBRACE: "{"> |
+	<RBRACE: "}"> |
+	<DQUOTE: "\""> |
+	<LBRACKET: "["> |
+	<RBRACKET: "]"> |
+	<SEMICOLON: ";"> |
+	<COMMA: ","> |
+	<ASSIGNMENT: "="> |
+	<DOT: ".">
+}
+
+
+
+
+void start() : {
+	Token identifier;
+} {
+	(
+		(<LINECOMMENT>)*
+		identifier = <IDENTIFIER><CANHAVE>
+		{
+			KesoDataManager.addCanHave(identifier.image, parseCanHave());
+		}
+		(
+			<WITHRESTRICTION>
+			{
+				KesoDataManager.addRestriction(identifier.image, parseRestrictions());
+			}
+		)?
+		<SEMICOLON>
+	)* <EOF>
+}
+
+KesoCanHave parseCanHave() : {
+	Token have;
+	KesoCanHave canhave = new KesoCanHave();
+} {
+	have = <IDENTIFIER>
+	{
+		canhave.add(have.image);
+	}
+	(<COMMA>
+		have = <IDENTIFIER>
+		{
+			canhave.add(have.image);
+		}
+	)*
+	{
+		return canhave;
+	}
+}
+
+
+
+KesoDataRestriction parseRestrictions() : {
+	KesoDataRestriction restriction = null;
+	KesoDataRestriction first_restriction = null;
+} {
+	(
+			restriction = parseUnaryRestriction()
+			{
+				return restriction;
+			}
+	) 
+	| 
+	(
+		<LPAREN>
+			{
+				first_restriction = parseRestrictions();
+			}
+			
+			(
+				(
+					<AND>
+					{
+						restriction = parseAndRestrictions();
+					}
+				)
+				|
+				(
+					<OR>
+					{
+						restriction = parseOrRestrictions();
+					}
+				)
+			)			
+			{
+				if (restriction == null) {
+					restriction = first_restriction;
+				} else {
+					((KesoDataRestrictionContainer) restriction).add(0, first_restriction);
+				}
+			}
+		<RPAREN>
+		{
+			return restriction;
+		}
+	)
+	{
+		return restriction;
+	}
+}
+
+
+AndKesoDataRestriction parseAndRestrictions() : {
+	AndKesoDataRestriction restriction = new AndKesoDataRestriction();
+} {
+	{
+		restriction.add(parseRestrictions());
+	}
+	(
+		<AND>
+		{
+			restriction.add(parseRestrictions());
+		}
+	)*	
+	{
+		return restriction;
+	}
+}
+
+OrKesoDataRestriction parseOrRestrictions() : {
+	OrKesoDataRestriction restriction = new OrKesoDataRestriction();
+} {
+	{
+		restriction.add(parseRestrictions());
+	}
+	(
+		<OR>
+		{
+			restriction.add(parseRestrictions());
+		}
+	)*
+	{
+		return restriction;
+	}
+}
+
+
+KesoDataRestriction parseUnaryRestriction() : {
+	Token name;
+	Token min;
+	Token max;
+	UnaryKesoDataRestriction unary;
+} {
+	name = <IDENTIFIER>
+	{
+		unary = new UnaryKesoDataRestriction(name.image);
+	}
+	(
+		<LBRACKET>
+			min = <NUMBER>
+			{
+				unary.setMin(Integer.parseInt(min.image));
+			}
+			(
+				<COMMA>
+				max = <NUMBER>
+				{
+					unary.setMax(Integer.parseInt(max.image));
+				}
+			)?
+		<RBRACKET>
+	)?
+	{
+		return unary;
+	}
+}

@@ -1,0 +1,9 @@
+##################################################
+# IP Sources
+##################################################
+MACH_COMMON_COREGEN_SRCS = \
+clk_xlnx_100M_diff.xco \
+ram_amba_128k.xco \
+chipscope_icon.xco \
+chipscope_ila.xco \
+ram_amba_1024k.xco

@@ -1,0 +1,53 @@
+#!/bin/bash
+
+cd $EPOS/src/abstraction
+
+software_architectures=('LIBRARY' 'BUILTIN' 'KERNEL')
+multithread_options=('true' 'false');
+max_CPU=10;
+successful="****TAP - test successful"
+
+#Para cada arquivo de tese, monte o nome do traits.
+#Se o arquivo existir, modifique-o, senão modifique o arquivo base, que fica na pasta raiz
+
+for test_file in *task_test.cc 
+do
+   application=`echo ${test_file} | cut -d'.' -f 1`
+   trait=`echo ${application}_traits.h`
+   failure=false
+
+   if [ -e $trait ]; then
+      cp ${trait} ${trait}".bkp"
+
+      #troque a arquitetura de software
+      for mode in "${software_architectures[@]}" 
+      do 
+         sed -i "s/static const unsigned int MODE.*/static const unsigned int MODE = $mode;/g" $trait
+
+         #troque o tipo de suporte à threads
+	 for multithreading in "${multithread_options[@]}"
+	 do
+            sed -i "s/static const bool multithread.*/static const bool multithread = $multithreading;/g" $trait
+	
+	    #troque a quantidade de cpus, ou seja, acionando multicore
+   	    for ((cpu=1; cpu <= max_CPU; cpu++))
+	    do
+               sed -i "s/static const unsigned int CPUS.*/static const unsigned int CPUS = $cpu;/g" $trait
+	       echo "========== APPLICATION: "${application}
+	       echo "*** MODE:${mode} - MULTITHREAD:${multithreading} - #CPU:${cpu}"
+
+	       cd $EPOS
+		log_name=${application}_${mode}_${multithreading}_${cpu}.log
+               `make automated_test APPLICATION=${application} 3>&1 1>>log/${log_name} 2>&1`
+		if grep -xq ${successful} log/${log_name}; then
+		   echo "SUCCESSFUL"
+		else
+		   echo "FAILURE"
+		fi
+	       cd $EPOS/src/abstraction
+	    done
+	 done
+      done
+      cp ${trait}".bkp" ${trait}
+   fi
+done

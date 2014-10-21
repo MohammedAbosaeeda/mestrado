@@ -1,0 +1,24 @@
+/*! @class System::Semaphore
+    @ingroup abs_synchronizer
+
+    @brief The Semaphore abstraction
+
+    The Semaphore abstraction controls the access to the value of an integer variable wich is acessed by the operations <b>p</b> and <b>v</b>. The <b>p</b> operation atomically decrements the value of the integer variable and the <b>v</b> operation atomically increments its value. Invoking <b>p</b> on a semaphore whose value is less than or equal to zero causes the thread to wait until the value becomes positive again.
+
+    <!-- *********************************************************************** -->    
+
+    @fn void System::Semaphore::p()
+    @brief Atomically decrements the value of the semaphore
+
+    <!-- *********************************************************************** -->    
+
+    @fn void System::Semaphore::v()
+    @brief Atomically increments the value of the semaphore
+
+    <!-- *********************************************************************** -->    
+
+    @fn System::Semaphore::_value
+    @brief The semaphore value
+
+    <!-- *********************************************************************** -->    
+*/

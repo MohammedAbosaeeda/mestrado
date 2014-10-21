@@ -1,0 +1,35 @@
+<!-- mateus@kenobi:~/keso_it/EPOS-OSEK$ echo $JAVA_HOME
+    /usr/local/local_programs/java/jdk1.6.0_20
+
+    export ANT_HOME=/usr/share/ant
+-->
+
+<project name="EPOS-OSEK" basedir="." default="main" xmlns:aspectj="antlib:org.aspectj">
+
+    <property name="aspectj.home" value="/usr/share/java"/>
+    <property name="src.dir" value="."/>
+    <property name="build.dir" value="classes"/>
+
+    <property name="classpath" value="${build.dir}:${aspectj.home}/aspectjrt.jar"/>
+
+    <target name="run">        
+       <java classname="josek.JOsek"
+        classpath="${classpath}"/>
+    </target>
+
+    <target name="compile">
+		<javac srcdir="${src.dir}" destdir="${build.dir}"/>
+    </target>
+    
+    <target name="compile_aspectj">
+		<aspectj:iajc
+            argfiles="files.lst"
+            destDir="${build.dir}"
+            classpath="${classpath}"
+            source="1.5"
+        />
+    </target>
+	
+	<target name="main" depends="compile"/>
+
+</project>

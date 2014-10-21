@@ -1,0 +1,8 @@
+##################################################
+# IP Sources
+##################################################
+MACH_COMMON_COMP_MANAGER_SRCS = \
+parallel_bit_search.v \
+comp_manager.v \
+comp_manager_axi4lite.v
+

@@ -1,0 +1,155 @@
+#include "../mux2/includes/MuxWrapper.h"
+#include "WStream.h"
+
+#include <utility/ostream.h>
+#include <mach/pc/nic.h>
+
+#define MTU 1500
+
+__USING_SYS
+
+OStream wstream_o;
+
+PC_NIC receive_nic(0);
+PC_NIC send_nic(1);
+
+//PC_NIC::Address receiver(0x00, 0x11, 0xD8, 0x17, 0xCC, 0x33, 0x00, 0x00);
+//PC_NIC::Address receiver(0x00, 0x02, 0x3f, 0x26, 0x1e, 0x92, 0x00, 0x00);
+PC_NIC::Address receiver(0x00, 0x11, 0xD8, 0x17, 0xCB, 0x79, 0x00, 0x00);
+
+WStreamList * stream_list = 0;
+
+WFILE * wfopen(const char *path, const char *mode) {
+
+
+        WStream * ws = new WStream();
+
+        memcpy((void *) &ws->prot, path, sizeof(ws->prot));
+
+        wstream_o << "Opening file " << path << ", protocol " << ws->prot << ".\n";
+
+        if(stream_list) {  // global list
+                       stream_list->insert(ws);
+               } else {
+                stream_list = new WStreamList(ws);
+        }
+
+        return ((WFILE *) ws); // FILE agora é void pointer
+
+}
+
+size_t wfwrite(const  void  *ptr,  size_t  size,  size_t  nmemb,  WFILE *stream) {
+
+        //d->puts("WRAPPER: Writing to file [a.k.a. DOING NOTHING].\n");
+        WStream * ws = (WStream *) stream;
+
+        memcpy(ws->send_buffer_pos, ptr, size * nmemb);
+        ws->send_buffer_pos += size * nmemb;
+
+        if (ws->send_buffer_pos == ws->send_buffer + (188 * 7)) { 
+
+                send_nic.send(receiver, ws->prot, ws->send_buffer, 188 * 7);
+                ws->send_buffer_pos = ws->send_buffer;
+
+                ws->n += 7;
+        }
+
+/*        if (!(ws->n % 1000))
+                wstream_o << "S " <<  ws->n << '\n';
+*/
+
+        return(size * nmemb); // do nothing
+
+}
+
+size_t wfread(void * ptr, size_t size, size_t nmemb, WFILE *stream) {
+
+        //o << "WRAPPER: Reading from file.\n";
+
+        WStream * ws = (WStream *) stream;
+
+        CircularBuf * cb = ws->c;
+
+        char buf[MTU];
+
+        PC_NIC::Protocol p;
+        PC_NIC::Address mac;
+
+        if(size * nmemb > cb->end - cb->start) {         // se existem menos dados validos do que eu preciso
+
+                //wprintf("WFREAD: Preciso receber!!\n");
+
+                while (1) { // fica dando receive ateh chegar coisas no meu protocolo
+
+                        //wprintf("WFREAD: Receiving..\n");
+                        int size = receive_nic.receive(&mac, &p, (void *)buf, MTU);
+				//		if (size != MTU) 
+                        	//wstream_o << "size: " << size << "\n";
+
+						//FIXME: fazer copia soh de size e nao da MTU
+						
+                        //wprintf("WFREAD: Received!\n");
+
+                        //wstream_o << p << "\n";
+
+                        if (p != ws->prot) {                  // nao sou eu
+
+                                //wprintf("WFREAD: Not for me, searching...\n");
+
+                                WStreamList * ws_list = stream_list; // global list
+                                WStream * target = 0;
+
+                                do {                        // procura quem quer esse pacote
+
+                                        if (p == ws_list->ws->prot) {
+
+                                                target = ws_list->ws;
+                                                break;
+
+                                        } else {
+
+                                                ws_list = ws_list->n;
+
+                                        }
+
+                                } while(ws_list);
+
+                                //wprintf("WFREAD: Searched!\n");
+        
+                                if (target) {                // se achou, insere no buffer correto
+                                        target->mutex->lock();
+                                        target->c->insert(buf, MTU);
+                                        target->mutex->unlock();
+                                }
+
+
+                        } else {                                // sou eu!
+                                //wstream_o << ws->n++ << "\n";
+
+                                ws->n++;
+                                //if (!(ws->n % 100))
+                                //        wstream_o << "R " << ws->n << '\n';
+
+                                break;
+
+                        }
+
+                }
+
+                //wprintf("WFREAD: Inserting in me...\n");
+        
+                ws->mutex->lock();
+                cb->insert(buf, MTU);
+                ws->mutex->unlock();
+                //wprintf("WFREAD: Inserted! Have ");
+                //wstream_o << cb->end - cb->start << " valid bytes\n";
+        }
+
+        ws->mutex->lock();
+        cb->remove((char *)ptr, size * nmemb);
+        ws->mutex->unlock();
+
+        return(size * nmemb);
+
+}
+

@@ -1,0 +1,3 @@
+    --systemc-source-file ../top_levels/fir/toplevel_synthesis.cc \
+    --systemc-source-file ../fir/common/fir_coefs.cc
+

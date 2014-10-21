@@ -1,0 +1,76 @@
+# =============================================================================
+# Object list for the Distributed Motion Estimation Component
+# This list also contains the objects for the non-distributed version of the 
+# component.
+
+# Directories
+SRC_DIR = app/dmec/src
+LINUX_SRC_DIR = ../linux/src
+
+PIC_DOUBLE_BUFFER?= 1
+SINGLE_PLANE_PICTURE?= 0
+
+# DMEC -- common-side objects (used by coordinator and workers)
+PC_DMEC_COMMON_OBJ = \
+$(SRC_DIR)/dmec_abst_assert.o \
+$(LINUX_SRC_DIR)/dmec_abst_random.o \
+$(SRC_DIR)/dmec_flat_h264_pmc_node.o \
+$(LINUX_SRC_DIR)/dmec_error.o \
+$(LINUX_SRC_DIR)/dmec_abst_stringer.o
+# $(LINUX_SRC_DIR)/dmec_abst_chronometer.o
+# $(LINUX_SRC_DIR)/dmec_abst_dumper.o
+
+# DMEC -- coordinator-side objects
+PC_DMEC_COORD_OBJ = \
+$(SRC_DIR)/dmec_block_mode.o \
+$(SRC_DIR)/dmec_block_mode_factory.o \
+$(SRC_DIR)/dmec_block_mode_type.o \
+$(SRC_DIR)/dmec_h264_modes_partitioner.o \
+$(SRC_DIR)/dmec_block.o \
+$(SRC_DIR)/dmec_macroblock.o \
+$(SRC_DIR)/dmec_picture.o \
+$(SRC_DIR)/dmec_plane.o \
+$(SRC_DIR)/dmec_reference_picture_motion_counterpart.o \
+$(SRC_DIR)/dmec_reference_full_search_bma.o \
+$(SRC_DIR)/dmec_vectorial_pmc.o \
+$(SRC_DIR)/dmec_dmec_picture.o \
+$(SRC_DIR)/dmec_picture_motion_estimator_coordinator.o \
+$(SRC_DIR)/dmec_picture_partitioner.o \
+$(SRC_DIR)/c_picture_motion_estimator.o \
+$(SRC_DIR)/dmec_util_test_support.o
+
+## DMEC -- coordinator-side PC specific
+DMEC_COORD_PC_OBJ = $(LINUX_SRC_DIR)/dmec_pc_pme_worker_proxy_db_sth.o \
+$(LINUX_SRC_DIR)/dmec_pc_synchronizer.o
+
+
+# DMEC -- worker-side objects
+PC_DMEC_WORKER_OBJ = \
+$(SRC_DIR)/dmec_lazy_flat_h264_pmc.o \
+$(SRC_DIR)/dmec_picture_motion_estimator_worker.o \
+$(SRC_DIR)/dmec_full_search_match_algorithm.o
+# $(LINUX_SRC_DIR)/dmec_adapter_full_search_match_algorithm.o
+# $(LINUX_SRC_DIR)/dmec_xor_match_algorithm.o
+
+ifeq ($(SINGLE_PLANE_PICTURE),1)
+ifeq ($(PIC_DOUBLE_BUFFER),1)
+PC_DMEC_WORKER_OBJ += $(SRC_DIR)/dmec_lazy_picture_db_sp.o
+else
+PC_DMEC_WORKER_OBJ += $(SRC_DIR)/dmec_lazy_picture_sb_sp.o
+endif
+else
+PC_DMEC_WORKER_OBJ += $(SRC_DIR)/dmec_lazy_picture.o
+endif
+
+
+## DMEC -- worker-side PC specific
+DMEC_WORKER_PC_OBJ = \
+$(LINUX_SRC_DIR)/dmec_abst_synchronizer.o \
+$(LINUX_SRC_DIR)/dmec_pc_synchronizer_worker_side.o
+
+
+# DMEC object collection for PC
+PC_OBJ = $(PC_DMEC_COMMON_OBJ) $(PC_DMEC_COORD_OBJ) $(DMEC_COORD_PC_OBJ) $(PC_DMEC_WORKER_OBJ) $(DMEC_WORKER_PC_OBJ)
+
+# =============================================================================
+

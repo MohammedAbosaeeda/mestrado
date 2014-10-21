@@ -1,0 +1,1375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="94">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name="app">
+        <df name="canneal">
+          <df name="src">
+            <in>annealer_thread.cc</in>
+            <in>epos_wrappers.cc</in>
+            <in>math.cc</in>
+            <in>netlist.cc</in>
+            <in>netlist_elem.cc</in>
+            <in>pthread.cc</in>
+            <in>rgn.cc</in>
+          </df>
+        </df>
+        <df name="courses">
+          <df name="emote-basic">
+            <in>01_hello.cc</in>
+            <in>02_sensor.cc</in>
+            <in>03_radio.cc</in>
+            <in>03_radio_sink.cc</in>
+            <in>04_threads.cc</in>
+            <in>04_threads_sink.cc</in>
+          </df>
+        </df>
+        <df name="dmec">
+          <df name="src">
+            <in>dmec_abst_assert.cc</in>
+            <in>dmec_abst_random.cc</in>
+            <in>dmec_abst_synchronizer.cc</in>
+            <in>dmec_block.cc</in>
+            <in>dmec_block_mode.cc</in>
+            <in>dmec_block_mode_factory.cc</in>
+            <in>dmec_block_mode_type.cc</in>
+            <in>dmec_dmec_picture.cc</in>
+            <in>dmec_error.cc</in>
+            <in>dmec_flat_h264_pmc_node.cc</in>
+            <in>dmec_full_search_match_algorithm.cc</in>
+            <in>dmec_h264_modes_partitioner.cc</in>
+            <in>dmec_lazy_flat_h264_pmc.cc</in>
+            <in>dmec_lazy_picture.cc</in>
+            <in>dmec_macroblock.cc</in>
+            <in>dmec_pc_pme_worker_proxy_db_sth.cc</in>
+            <in>dmec_pc_synchronizer.cc</in>
+            <in>dmec_picture.cc</in>
+            <in>dmec_picture_motion_estimator_coordinator.cc</in>
+            <in>dmec_picture_motion_estimator_worker.cc</in>
+            <in>dmec_picture_partitioner.cc</in>
+            <in>dmec_plane.cc</in>
+            <in>dmec_reference_full_search_bma.cc</in>
+            <in>dmec_reference_picture_motion_counterpart.cc</in>
+            <in>dmec_util_test_support.cc</in>
+            <in>dmec_vectorial_pmc.cc</in>
+          </df>
+        </df>
+        <df name="home_automation">
+          <in>ac_control.cc</in>
+          <in>co2_sensor.cc</in>
+          <in>home_gw.cc</in>
+          <in>home_sniffer.cc</in>
+          <in>lamp_actuator.cc</in>
+        </df>
+        <df name="linkgraph_app_gui">
+          <in>CommandMonitor.cpp</in>
+          <in>CommandParser.cpp</in>
+          <in>Serial.cpp</in>
+          <in>emote2-demo.cpp</in>
+        </df>
+        <df name="photoboat">
+          <in>battery_monitor_relay.cc</in>
+          <in>motor_control_digital.cc</in>
+          <in>motor_control_pwm.cc</in>
+        </df>
+        <in>StringUtil.cc</in>
+        <in>adxl345.cc</in>
+        <in>at90can128_app.cc</in>
+        <in>atmega1281_app.cc</in>
+        <in>atmega128_app.cc</in>
+        <in>atmega16_app.cc</in>
+        <in>axi4lite_app.cc</in>
+        <in>canneal_app.cc</in>
+        <in>cartesian.h</in>
+        <in>dmec_app.cc</in>
+        <in>emote2_test.cc</in>
+        <in>integratorcp_app.cc</in>
+        <in>linkgraph_app.cc</in>
+        <in>mc13224v_app.cc</in>
+        <in>ml310_app.cc</in>
+        <in>network.h</in>
+        <in>parser.cc</in>
+        <in>pc_app.cc</in>
+        <in>plasma_app.cc</in>
+        <in>scada.cc</in>
+        <in>sensor.cc</in>
+        <in>sensorOld.cc</in>
+        <in>sink.cc</in>
+        <in>testeMultiple.cc</in>
+        <in>testeSergio.cc</in>
+        <in>timetrigger.cc</in>
+        <in>udp_demo.cc</in>
+      </df>
+      <df name="src">
+        <df name="abstraction">
+          <in>active_test.cc</in>
+          <in>address_space_test.cc</in>
+          <in>alarm.cc</in>
+          <in>alarm_init.cc</in>
+          <in>alarm_test.cc</in>
+          <in>chronometer_test.cc</in>
+          <in>clock_test.cc</in>
+          <in>condition_test.cc</in>
+          <in>cpu_affinity_scheduler.cc</in>
+          <in>dhcp.cc</in>
+          <in>dhcp_test.cc</in>
+          <in>g726.cc</in>
+          <in>icmp.cc</in>
+          <in>icmp_test.cc</in>
+          <in>ieee1451_sink_test.cc</in>
+          <in>ieee1451_tim.cc</in>
+          <in>ieee1451_tim_audio_sensor_test.cc</in>
+          <in>ieee1451_tim_temperature_sensor_test.cc</in>
+          <in>ip.cc</in>
+          <in>modbus_ascii.cc</in>
+          <in>mutex_test.cc</in>
+          <in>network.cc</in>
+          <in>network_client_test.cc</in>
+          <in>network_server_test.cc</in>
+          <in>periodic_thread_test.cc</in>
+          <in>rtp.cc</in>
+          <in>scheduler_test.cc</in>
+          <in>segment_test.cc</in>
+          <in>semaphore2_test.cc</in>
+          <in>semaphore_test.cc</in>
+          <in>sip_body.cc</in>
+          <in>sip_defs.cc</in>
+          <in>sip_header.cc</in>
+          <in>sip_manager.cc</in>
+          <in>sip_message.cc</in>
+          <in>sip_test.cc</in>
+          <in>sip_transactions.cc</in>
+          <in>sip_user_agent.cc</in>
+          <in>system_init.cc</in>
+          <in>task_init.cc</in>
+          <in>task_test.cc</in>
+          <in>tcp.cc</in>
+          <in>tcp_channel_test.cc</in>
+          <in>tcp_test.cc</in>
+          <in>thread.cc</in>
+          <in>thread_init.cc</in>
+          <in>thread_test.cc</in>
+          <in>udp.cc</in>
+        </df>
+        <df name="arch">
+          <df name="arm7">
+            <in>arm7_setup.cc</in>
+            <in>cpu.cc</in>
+            <in>cpu_init.cc</in>
+            <in>exception.cc</in>
+            <in>mmu.cc</in>
+            <in>mmu_init.cc</in>
+            <in>tsc.cc</in>
+            <in>tsc_init.cc</in>
+          </df>
+          <df name="avr8">
+            <in>cpu.cc</in>
+            <in>cpu_init.cc</in>
+            <in>cpu_test.cc</in>
+            <in>mmu.cc</in>
+            <in>mmu_init.cc</in>
+            <in>mmu_test.cc</in>
+            <in>tsc.cc</in>
+            <in>tsc_init.cc</in>
+            <in>tsc_test.cc</in>
+          </df>
+          <df name="common">
+            <in>mmu_common.cc</in>
+          </df>
+          <df name="ia32">
+            <in>cpu.cc</in>
+            <in>cpu_init.cc</in>
+            <in>cpu_test.cc</in>
+            <in>fpu.cc</in>
+            <in>mmu.cc</in>
+            <in>mmu_init.cc</in>
+            <in>mmu_test.cc</in>
+            <in>pmu.cc</in>
+            <in>pmu_init.cc</in>
+            <in>tsc_test.cc</in>
+          </df>
+          <df name="mips32">
+            <in>cpu.cc</in>
+            <in>cpu_init.cc</in>
+            <in>mmu.cc</in>
+            <in>mmu_init.cc</in>
+          </df>
+          <df name="ppc32">
+            <in>cpu.cc</in>
+            <in>cpu_init.cc</in>
+            <in>cpu_test.cc</in>
+            <in>mmu.cc</in>
+            <in>mmu_init.cc</in>
+            <in>mmu_test.cc</in>
+            <in>tsc_test.cc</in>
+          </df>
+        </df>
+        <df name="boot">
+          <in>ml310_boot.cc</in>
+        </df>
+        <df name="init">
+          <in>init_application.cc</in>
+          <in>init_first.cc</in>
+          <in>init_system.cc</in>
+        </df>
+        <df name="mach">
+          <df name="at90can128">
+            <in>adc.cc</in>
+            <in>can.cc</in>
+            <in>can_init.cc</in>
+            <in>can_test.cc</in>
+            <in>ic.cc</in>
+            <in>ic_test.cc</in>
+            <in>machine.cc</in>
+            <in>machine_init.cc</in>
+            <in>machine_test.cc</in>
+            <in>rtc.cc</in>
+            <in>rtc_test.cc</in>
+            <in>uart.cc</in>
+            <in>uart_test.cc</in>
+          </df>
+          <df name="atmega128">
+            <in>adc.cc</in>
+            <in>adc_test.cc</in>
+            <in>cc1000.cc</in>
+            <in>cmac128.cc</in>
+            <in>cmac128_init.cc</in>
+            <in>ic.cc</in>
+            <in>ic_test.cc</in>
+            <in>machine.cc</in>
+            <in>machine_init.cc</in>
+            <in>machine_test.cc</in>
+            <in>mts300.cc</in>
+            <in>nic_init.cc</in>
+            <in>nic_test.cc</in>
+            <in>radio.cc</in>
+            <in>radio_init.cc</in>
+            <in>rtc_test.cc</in>
+            <in>sensor_test.cc</in>
+            <in>timer_test.cc</in>
+            <in>uart_test.cc</in>
+          </df>
+          <df name="atmega1281">
+            <in>adc.cc</in>
+            <in>adc_test.cc</in>
+            <in>at86rf230.cc</in>
+            <in>battery.cc</in>
+            <in>battery_init.cc</in>
+            <in>ic.cc</in>
+            <in>ic_test.cc</in>
+            <in>machine.cc</in>
+            <in>machine_init.cc</in>
+            <in>machine_test.cc</in>
+            <in>nic_init.cc</in>
+            <in>nic_test.cc</in>
+            <in>radio.cc</in>
+            <in>rtc_test.cc</in>
+            <in>sensor_test.cc</in>
+            <in>sht11.cc</in>
+            <in>timer_test.cc</in>
+            <in>uart_test.cc</in>
+          </df>
+          <df name="atmega16">
+            <in>adc.cc</in>
+            <in>adc_test.cc</in>
+            <in>ic.cc</in>
+            <in>ic_test.cc</in>
+            <in>machine.cc</in>
+            <in>machine_init.cc</in>
+            <in>machine_test.cc</in>
+            <in>radio.cc</in>
+            <in>radio_init.cc</in>
+            <in>rtc_test.cc</in>
+            <in>timer_test.cc</in>
+            <in>uart_test.cc</in>
+          </df>
+          <df name="axi4lite">
+            <in>axi4lite_interrupt.cc</in>
+            <in>ic.cc</in>
+            <in>ic_init.cc</in>
+            <in>machine.cc</in>
+            <in>machine_init.cc</in>
+            <in>nic.cc</in>
+            <in>nic_init.cc</in>
+            <in>noc.cc</in>
+            <in>noc_test.cc</in>
+            <in>timer.cc</in>
+            <in>timer_init.cc</in>
+            <in>timer_test.cc</in>
+            <in>uart.cc</in>
+            <in>uart_init.cc</in>
+          </df>
+          <df name="common">
+            <in>cmac.cc</in>
+            <in>cmac_init.cc</in>
+            <in>ethernet.cc</in>
+            <in>neighborhood.cc</in>
+            <in>radio_common.cc</in>
+            <in>rtc_common.cc</in>
+            <in>serial_display.cc</in>
+          </df>
+          <df name="integratorcp">
+            <in>ic.cc</in>
+            <in>machine_init.cc</in>
+            <in>timer.cc</in>
+          </df>
+          <df name="mc13224v">
+            <in>adxl345.cc</in>
+            <in>aes_controller.cc</in>
+            <in>aes_test.cc</in>
+            <in>asm_controller.cc</in>
+            <in>audio_sensor.cc</in>
+            <in>battery.cc</in>
+            <in>battery_init.cc</in>
+            <in>battery_test.cc</in>
+            <in>buck_regulator.cc</in>
+            <in>emote2_startup_test.cc</in>
+            <in>ertj1vg103fa.cc</in>
+            <in>flash.cc</in>
+            <in>flash_init.cc</in>
+            <in>flash_test.cc</in>
+            <in>gpio_pin.cc</in>
+            <in>i2c.cc</in>
+            <in>i2c_test.cc</in>
+            <in>ic.cc</in>
+            <in>ic_test.cc</in>
+            <in>machine.cc</in>
+            <in>machine_init.cc</in>
+            <in>nic_init.cc</in>
+            <in>one_wire.cc</in>
+            <in>one_wire_test.cc</in>
+            <in>radio.cc</in>
+            <in>sensor_test.cc</in>
+            <in>spi.cc</in>
+            <in>timer.cc</in>
+            <in>transceiver.cc</in>
+            <in>uart.cc</in>
+          </df>
+          <df name="ml310">
+            <in>device.cc</in>
+            <in>e100.cc</in>
+            <in>e100_init.cc</in>
+            <in>ic.cc</in>
+            <in>ic_init.cc</in>
+            <in>ic_test.cc</in>
+            <in>machine.cc</in>
+            <in>machine_init.cc</in>
+            <in>machine_test.cc</in>
+            <in>nic_init.cc</in>
+            <in>nic_test.cc</in>
+            <in>pci.cc</in>
+            <in>pci_init.cc</in>
+            <in>pci_test.cc</in>
+            <in>rtc.cc</in>
+            <in>rtc_test.cc</in>
+            <in>timer.cc</in>
+            <in>timer_init.cc</in>
+            <in>timer_test.cc</in>
+            <in>uart.cc</in>
+            <in>uart_init.cc</in>
+            <in>uart_test.cc</in>
+          </df>
+          <df name="pc">
+            <in>device.cc</in>
+            <in>display.cc</in>
+            <in>display_test.cc</in>
+            <in>e100.cc</in>
+            <in>e100_init.cc</in>
+            <in>ethernet_init.cc</in>
+            <in>ic.cc</in>
+            <in>ic_init.cc</in>
+            <in>ic_test.cc</in>
+            <in>machine.cc</in>
+            <in>machine_init.cc</in>
+            <in>machine_test.cc</in>
+            <in>nic_test.cc</in>
+            <in>pc_interrupt.cc</in>
+            <in>pci.cc</in>
+            <in>pci_init.cc</in>
+            <in>pci_test.cc</in>
+            <in>pcnet32.cc</in>
+            <in>pcnet32_init.cc</in>
+            <in>rtc.cc</in>
+            <in>rtc_test.cc</in>
+            <in>timer.cc</in>
+            <in>timer_init.cc</in>
+            <in>timer_test.cc</in>
+            <in>uart.cc</in>
+            <in>uart_test.cc</in>
+          </df>
+          <df name="plasma">
+            <in>ic.cc</in>
+            <in>ic_init.cc</in>
+            <in>machine.cc</in>
+            <in>machine_init.cc</in>
+            <in>nic.cc</in>
+            <in>nic_init.cc</in>
+            <in>plasma_interrupt.cc</in>
+            <in>timer.cc</in>
+            <in>timer_init.cc</in>
+            <in>timer_test.cc</in>
+            <in>uart.cc</in>
+            <in>uart_init.cc</in>
+          </df>
+        </df>
+        <df name="setup">
+          <in>ml310_setup.cc</in>
+          <in>pc_setup.cc</in>
+        </df>
+        <df name="system">
+          <in>application_scaffold.cc</in>
+          <in>system_scaffold.cc</in>
+        </df>
+        <df name="utility">
+          <in>elf.cc</in>
+          <in>handler_test.cc</in>
+          <in>hash_test.cc</in>
+          <in>heap.cc</in>
+          <in>list_test.cc</in>
+          <in>malloc.cc</in>
+          <in>malloc_test.cc</in>
+          <in>math.cc</in>
+          <in>observer.cc</in>
+          <in>ostream.cc</in>
+          <in>ostream_test.cc</in>
+          <in>queue_test.cc</in>
+          <in>random.cc</in>
+          <in>srec.cc</in>
+          <in>string.cc</in>
+          <in>vector_test.cc</in>
+        </df>
+      </df>
+      <df name="tools">
+        <df name="eposldr">
+          <in>eposldr.cc</in>
+        </df>
+        <df name="eposmkbi">
+          <in>eposmkbi.cc</in>
+        </df>
+      </df>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
+          <executablePath></executablePath>
+          <ccTool>
+            <incDir>
+              <pElem>include</pElem>
+              <pElem>app</pElem>
+            </incDir>
+          </ccTool>
+        </makeTool>
+      </makefileType>
+      <item path="app/StringUtil.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/adxl345.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/at90can128_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/atmega1281_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/atmega128_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/atmega16_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/axi4lite_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/canneal/src/annealer_thread.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/canneal/src/epos_wrappers.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/canneal/src/math.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/canneal/src/netlist.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/canneal/src/netlist_elem.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/canneal/src/pthread.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/canneal/src/rgn.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/canneal_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/cartesian.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="app/courses/emote-basic/01_hello.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/courses/emote-basic/02_sensor.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/courses/emote-basic/03_radio.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/courses/emote-basic/03_radio_sink.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/courses/emote-basic/04_threads.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/courses/emote-basic/04_threads_sink.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_abst_assert.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_abst_random.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_abst_synchronizer.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_block.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_block_mode.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_block_mode_factory.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_block_mode_type.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_dmec_picture.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_error.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_flat_h264_pmc_node.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_full_search_match_algorithm.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_h264_modes_partitioner.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_lazy_flat_h264_pmc.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_lazy_picture.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_macroblock.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_pc_pme_worker_proxy_db_sth.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_pc_synchronizer.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_picture.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_picture_motion_estimator_coordinator.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_picture_motion_estimator_worker.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_picture_partitioner.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_plane.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_reference_full_search_bma.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_reference_picture_motion_counterpart.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_util_test_support.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/dmec/src/dmec_vectorial_pmc.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/dmec_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/emote2_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/home_automation/ac_control.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/home_automation/co2_sensor.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/home_automation/home_gw.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/home_automation/home_sniffer.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/home_automation/lamp_actuator.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/integratorcp_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/linkgraph_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/linkgraph_app_gui/CommandMonitor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/linkgraph_app_gui/CommandParser.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/linkgraph_app_gui/Serial.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/linkgraph_app_gui/emote2-demo.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/mc13224v_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/ml310_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/network.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="app/parser.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/pc_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/photoboat/battery_monitor_relay.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/photoboat/motor_control_digital.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="app/photoboat/motor_control_pwm.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/plasma_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/scada.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/sensor.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/sensorOld.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/sink.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/testeMultiple.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/testeSergio.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/timetrigger.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="app/udp_demo.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/active_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/address_space_test.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="src/abstraction/alarm.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/alarm_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/alarm_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/chronometer_test.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="src/abstraction/clock_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/condition_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/cpu_affinity_scheduler.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="src/abstraction/dhcp.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/dhcp_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/g726.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/icmp.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/icmp_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/ieee1451_sink_test.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="src/abstraction/ieee1451_tim.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/ieee1451_tim_audio_sensor_test.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="src/abstraction/ieee1451_tim_temperature_sensor_test.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="src/abstraction/ip.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/modbus_ascii.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/mutex_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/network.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/network_client_test.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="src/abstraction/network_server_test.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="src/abstraction/periodic_thread_test.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="src/abstraction/rtp.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/scheduler_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/segment_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/semaphore2_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/semaphore_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/sip_body.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/sip_defs.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/sip_header.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/sip_manager.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/sip_message.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/sip_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/sip_transactions.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="src/abstraction/sip_user_agent.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/system_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/task_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/task_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/tcp.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/tcp_channel_test.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="src/abstraction/tcp_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/thread.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/thread_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/thread_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/abstraction/udp.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/arm7/arm7_setup.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/arm7/cpu.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/arm7/cpu_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/arm7/exception.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/arm7/mmu.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/arm7/mmu_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/arm7/tsc.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/arm7/tsc_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/avr8/cpu.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/avr8/cpu_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/avr8/cpu_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/avr8/mmu.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/avr8/mmu_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/avr8/mmu_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/avr8/tsc.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/avr8/tsc_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/avr8/tsc_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/common/mmu_common.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/ia32/cpu.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/ia32/cpu_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/ia32/cpu_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/ia32/fpu.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/ia32/mmu.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/ia32/mmu_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/ia32/mmu_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/ia32/pmu.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/ia32/pmu_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/ia32/tsc_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/mips32/cpu.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/mips32/cpu_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/mips32/mmu.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/mips32/mmu_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/ppc32/cpu.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/ppc32/cpu_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/ppc32/cpu_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/ppc32/mmu.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/ppc32/mmu_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/ppc32/mmu_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/arch/ppc32/tsc_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/boot/ml310_boot.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/init/init_application.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/init/init_first.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/init/init_system.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/at90can128/adc.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/at90can128/can.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/at90can128/can_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/at90can128/can_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/at90can128/ic.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/at90can128/ic_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/at90can128/machine.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/at90can128/machine_init.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="src/mach/at90can128/machine_test.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="src/mach/at90can128/rtc.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/at90can128/rtc_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/at90can128/uart.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/at90can128/uart_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega128/adc.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega128/adc_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega128/cc1000.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega128/cmac128.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega128/cmac128_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega128/ic.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega128/ic_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega128/machine.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega128/machine_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega128/machine_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega128/mts300.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega128/nic_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega128/nic_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega128/radio.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega128/radio_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega128/rtc_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega128/sensor_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega128/timer_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega128/uart_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega1281/adc.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega1281/adc_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega1281/at86rf230.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega1281/battery.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega1281/battery_init.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="src/mach/atmega1281/ic.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega1281/ic_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega1281/machine.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega1281/machine_init.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="src/mach/atmega1281/machine_test.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="src/mach/atmega1281/nic_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega1281/nic_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega1281/radio.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega1281/rtc_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega1281/sensor_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega1281/sht11.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega1281/timer_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega1281/uart_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega16/adc.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega16/adc_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega16/ic.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega16/ic_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega16/machine.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega16/machine_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega16/machine_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega16/radio.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega16/radio_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega16/rtc_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega16/timer_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/atmega16/uart_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/axi4lite/axi4lite_interrupt.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="src/mach/axi4lite/ic.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/axi4lite/ic_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/axi4lite/machine.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/axi4lite/machine_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/axi4lite/nic.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/axi4lite/nic_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/axi4lite/noc.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/axi4lite/noc_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/axi4lite/timer.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/axi4lite/timer_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/axi4lite/timer_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/axi4lite/uart.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/axi4lite/uart_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/common/cmac.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/common/cmac_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/common/ethernet.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/common/neighborhood.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/common/radio_common.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/common/rtc_common.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/common/serial_display.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/integratorcp/ic.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/integratorcp/machine_init.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="src/mach/integratorcp/timer.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/adxl345.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/aes_controller.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/aes_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/asm_controller.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/audio_sensor.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/battery.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/battery_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/battery_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/buck_regulator.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/emote2_startup_test.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/ertj1vg103fa.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/flash.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/flash_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/flash_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/gpio_pin.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/i2c.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/i2c_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/ic.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/ic_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/machine.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/machine_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/nic_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/one_wire.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/one_wire_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/radio.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/sensor_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/spi.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/timer.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/transceiver.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/mc13224v/uart.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/ml310/device.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/ml310/e100.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/ml310/e100_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/ml310/ic.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/ml310/ic_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/ml310/ic_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/ml310/machine.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/ml310/machine_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/ml310/machine_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/ml310/nic_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/ml310/nic_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/ml310/pci.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/ml310/pci_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/ml310/pci_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/ml310/rtc.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/ml310/rtc_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/ml310/timer.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/ml310/timer_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/ml310/timer_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/ml310/uart.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/ml310/uart_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/ml310/uart_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/device.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/display.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/display_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/e100.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/e100_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/ethernet_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/ic.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/ic_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/ic_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/machine.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/machine_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/machine_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/nic_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/pc_interrupt.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/pci.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/pci_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/pci_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/pcnet32.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/pcnet32_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/rtc.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/rtc_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/timer.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/timer_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/timer_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/uart.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/pc/uart_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/plasma/ic.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/plasma/ic_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/plasma/machine.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/plasma/machine_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/plasma/nic.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/plasma/nic_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/plasma/plasma_interrupt.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="src/mach/plasma/timer.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/plasma/timer_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/plasma/timer_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/plasma/uart.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/mach/plasma/uart_init.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/setup/ml310_setup.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/setup/pc_setup.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/system/application_scaffold.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/system/system_scaffold.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/utility/elf.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/utility/handler_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/utility/hash_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/utility/heap.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/utility/list_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/utility/malloc.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/utility/malloc_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/utility/math.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/utility/observer.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/utility/ostream.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/utility/ostream_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/utility/queue_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/utility/random.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/utility/srec.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/utility/string.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/utility/vector_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="tools/eposldr/eposldr.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="tools/eposmkbi/eposmkbi.cc" ex="false" tool="1" flavor2="4">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

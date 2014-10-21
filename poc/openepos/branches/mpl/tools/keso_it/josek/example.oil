@@ -1,0 +1,24 @@
+CPU Sample {
+    OS StdOS {
+        CC = AUTO;
+        STATUS = STANDARD;
+        SCHEDULE = NONE;
+        StartupHook = TRUE;
+        ErrorHook = TRUE;
+        ShutdownHook = TRUE;
+        PreTaskHook = FALSE;
+        PostTaskHook = FALSE;
+    };
+    TASK Task1 {
+        TYPE = EXTENDED;
+        SCHEDULE = FULL;
+        PRIORITY = 3;
+        AUTOSTART = FALSE;
+        EVENTS = Event1;
+		EVENTS = Event2;
+		EVENTS = Event3;
+    };
+    EVENT Event1 {
+        MASK = AUTO;
+    };
+};

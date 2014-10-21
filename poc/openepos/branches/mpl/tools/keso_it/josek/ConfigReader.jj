@@ -1,0 +1,307 @@
+/**(c)
+
+  Copyright (C) 2005 Christian Wawersich 
+
+  This file is part of the KESO Operating System.
+
+  It is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+  Please contact wawi@cs.fau.de for more info.
+
+  (c)**/
+
+options {
+	STATIC = false;
+}
+
+PARSER_BEGIN(ConfigReader)
+package josek.parser;
+
+import java.io.InputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import josek.*;
+
+public class ConfigReader {
+	public static Configuration parseDefinition(String filename) {
+		Configuration config = new Configuration();
+		ConfigReader parser = null;
+
+		try {
+			parser = new ConfigReader(new FileInputStream(filename));
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			throw new RuntimeException(ex.toString());
+		}
+		
+		try {
+			 parser.parseConfiguration(config.getRoot());
+		} catch (ParseException ex) {
+			throw new RuntimeException(ex.toString());
+		}
+
+		return config;
+	}
+}
+
+PARSER_END(ConfigReader)
+
+SKIP : { " " | "\t" | "\r" | "\n" }
+
+TOKEN : {  
+	< CPU: "CPU" >
+|	< OBJECTDEFINITION: <OS> | <TASK> | <EVENT> | <ISR> | <ALARM> | <COUNTER> | <RESOURCE> >
+|	< #OS: "OS" >
+|	< #COUNTER: "COUNTER" >
+|	< #TASK: "TASK" >
+|	< #EVENT: "EVENT" >
+|	< #ISR: "ISR" >
+|	< #ALARM: "ALARM" >
+|	< #RESOURCE: "RESOURCE" >
+|	< HEXINTEGER_LITERAL: "0x" (<HEXDECIMAL_LITERAL> | (["0"])) >
+|	< INTEGER_LITERAL: (["+","-"])? <DECIMAL_LITERAL> (["l","L"])?  | (["0"]) >
+|	< #DECIMAL_LITERAL: ["1"-"9"] (["0"-"9"])* >
+|	< #HEXDECIMAL_LITERAL: ["1"-"9", "A"-"F", "a"-"f"] (["0"-"9", "A"-"F", "a"-"f"])* >
+|	< FLOATING_POINT_LITERAL:
+		(["+","-"])? (["0"-"9"])+ "." (["0"-"9"])* (<EXPONENT>)? (["f","F","d","D"])?
+		| (["+","-"])? "." (["0"-"9"])+ (<EXPONENT>)? (["f","F","d","D"])?
+		| (["+","-"])? (["0"-"9"])+ <EXPONENT> (["f","F","d","D"])?
+		| (["+","-"])? (["0"-"9"])+ (<EXPONENT>)? ["f","F","d","D"] >
+|	< #EXPONENT: ["e","E"] (["+","-"])? (["0"-"9"])+ >
+|	< BOOL_TRUE: ("on"|"ON"|"true"|"TRUE"|"yes"|"YES") >
+|	< BOOL_FALSE: ("off"|"OFF"|"false"|"FALSE"|"no"|"NO") >
+|	< LINECOMMENT: "//" (~["\n"])* >
+|	< IDENTIFIER: <LETTER> (<LETTER>|<DIGIT>)* >
+|	< LETTER : ["a"-"z","A"-"Z","_","/"] >
+|	< DIGIT : ["0"-"9"] >
+|	< LBRACE: "{" ("\r"|"\n")* >
+|	< RBRACE: "}" ("\r"|"\n")* >
+|	< LBRACKET: "[" >
+|	< RBRACKET: "]" >
+|	< SEMICOLON: ";" >
+|	< COMMA: "," >
+|	< DOT: "." >
+|	< COLON: ":" >
+|	< PLUS: "+" >
+|	< MINUS: "-" >
+|	< ASSIGNMENT: "=" >
+|	< INCLUDE: "#include" >
+|	< QMARK: "\"" >
+|	< LSHARP: "<" >
+|	< RSHARP: ">" >
+|	< FILENAME: (<LETTER>|<DIGIT>|".")+ >
+}
+
+void parsePrimitiveAttribute(Attribute parent) :
+{
+	Token mName;
+	String lValue;
+}
+{
+	(
+		<LINECOMMENT> 
+		| (
+			(mName=<IDENTIFIER>|mName=<OBJECTDEFINITION>)
+			{
+				lValue = mName.image;
+			}
+			<ASSIGNMENT>
+			(
+				parseStringAttribute(parent, lValue)
+				| parseArrayAttribute(parent, lValue)
+				| parseIntAttribute(parent, lValue)
+				| parseHexAttribute(parent, lValue)
+				| parseBoolAttribute(parent, lValue)
+				| parseFloatAttribute(parent, lValue)
+			)
+			<SEMICOLON>
+		)
+	)
+}
+
+void parseComplexAttribute(Attribute parent) :
+{
+	Token mName;
+	Token mValue;
+	String lValue;
+	String rValue;
+	Attribute newAttribute;
+}
+{
+	(
+		<LINECOMMENT> 
+		| (
+			mName=<IDENTIFIER>
+			{
+				lValue = mName.image;
+			}
+			<ASSIGNMENT>
+			((mValue=<IDENTIFIER>) {	
+					rValue = mValue.image;
+					newAttribute = new PrimitiveStringAttribute(parent, lValue, rValue);
+			}
+				| (mValue=<BOOL_FALSE>) {
+					rValue = mValue.image;
+					newAttribute = new PrimitiveBoolAttribute(parent, lValue, false);
+				}
+				| (mValue=<BOOL_TRUE>) {
+					rValue = mValue.image;
+					newAttribute = new PrimitiveBoolAttribute(parent, lValue, true);
+				}
+			)
+			<LBRACE>
+			(
+				parsePrimitiveAttribute(newAttribute)
+			)+
+			<RBRACE> <SEMICOLON>
+		)
+	)
+}
+
+void parseIntAttribute(Attribute parent, String lValue) :
+{
+	Token rValue;
+}
+{
+	rValue=<INTEGER_LITERAL>
+	{
+		new PrimitiveIntAttribute(parent, lValue, Integer.parseInt(rValue.image));
+	}
+}
+
+void parseHexAttribute(Attribute parent, String lValue) :
+{
+	Token rValue;
+}
+{
+	rValue=<HEXINTEGER_LITERAL>
+	{
+		Integer i = Integer.decode(rValue.image);
+		new PrimitiveIntAttribute(parent, lValue, i.intValue());
+	}
+}
+
+void parseStringAttribute(Attribute parent, String lValue) :
+{
+	Token rValue;
+}
+{
+	rValue=<IDENTIFIER>
+	{
+		new PrimitiveStringAttribute(parent, lValue, rValue.image);
+	}
+}
+
+void parseBoolAttribute(Attribute parent, String lValue) :
+{
+}
+{
+	(<BOOL_TRUE>) { new PrimitiveBoolAttribute(parent, lValue, true); } |
+	(<BOOL_FALSE>) { new PrimitiveBoolAttribute(parent, lValue, false); }
+}
+
+void parseFloatAttribute(Attribute parent, String lValue) :
+{
+	Token rValue;
+}
+{
+	rValue=<FLOATING_POINT_LITERAL>
+	{
+		new PrimitiveFloatAttribute(parent, lValue, Float.parseFloat(rValue.image));
+	}
+}
+
+void parseArrayAttribute(Attribute parent, String lValue) :
+{
+//	ArrayAttr array = null;
+	Token mValue;
+	Token mToken;
+}
+{
+	mToken=<LBRACE> 
+	{
+//		array = new ArrayAttr(parent, lValue, mToken.beginLine);
+		System.out.println("Array Start");
+	}
+	(
+	 	LOOKAHEAD(2)
+		mValue=<INTEGER_LITERAL><COMMA>
+		{
+//			array.add(mValue.image);	
+		}
+	)* 
+	mValue=<INTEGER_LITERAL><RBRACE>
+	{
+//		array.add(mValue.image);	
+//		parent.addAttribute(lValue, array);
+	}
+}
+
+void parseConfiguration(Attribute parent) :
+{
+	Attribute object;
+	Token mToken;
+	Token mName;
+}
+{
+	(
+		<LINECOMMENT>
+		| mToken=<CPU> mName=<IDENTIFIER> <LBRACE>
+		{
+		object = new PrimitiveStringAttribute(parent, mToken.image, mName.image);
+		}
+		(
+			<LINECOMMENT>
+			| parseObjectDefinition(object) 
+		)*
+		<RBRACE> <SEMICOLON>
+		| parseInclude(parent)
+	)+
+	{
+		return;
+	}
+}
+
+void parseObjectDefinition(Attribute parent) :
+{
+	Attribute object;
+	Token mToken;
+	Token mName;
+}
+{
+	mToken=<OBJECTDEFINITION> mName=<IDENTIFIER> <LBRACE>
+	{
+		object = new PrimitiveStringAttribute(parent, mToken.image, mName.image);
+	}
+/*
+Konflikt fuer den Parser, der normal nur das jeweils folgende Token anschaut
+Prim Attr:      <IDENTIFIER> <ASSIGNMENT> <IDENTIFIER> <ASSIGNMENT>
+                                          ^^^ ab hier ist man bereits in parseString, parseInteger, ...
+vs.
+Complex Attr:   <IDENTIFIER> <ASSIGNMENT> <IDENTIFIER> <LBRACE>
+
+Erst beim vierten Token wird der Unterschied sichtbar. Daher brauchst Du hier einen Lookahead von 4
+*/
+	(
+		LOOKAHEAD(4)
+		parsePrimitiveAttribute(object)
+		| parseComplexAttribute(object)
+	)+
+	<RBRACE> <SEMICOLON>
+	{
+		return;
+	}
+}
+
+void parseInclude(Attribute parent) :
+{
+	Token mName;
+}
+{
+	LOOKAHEAD(2)
+	(<INCLUDE> <LSHARP> mName=<FILENAME> <RSHARP>) { new PrimitiveIncludeAttribute(parent, mName.image, true); }
+	| (<INCLUDE> <QMARK> mName=<FILENAME> <QMARK>) { new PrimitiveIncludeAttribute(parent, mName.image, false); }
+}
+

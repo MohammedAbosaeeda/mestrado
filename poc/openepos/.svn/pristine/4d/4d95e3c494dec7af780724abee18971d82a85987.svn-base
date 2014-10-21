@@ -1,0 +1,8 @@
+#ifndef __app_dep_osek_defs_h
+#define __app_dep_osek_defs_h
+
+/* Application Dependent OSEK definitions. */
+
+//+ CH_EO_C_osek_os_h_enums
+
+#endif

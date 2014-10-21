@@ -1,0 +1,51 @@
+/*! @class System::ATMega16_IC
+    @brief ATMega16 Interrupt Controller Mediator Declarations
+
+    @fn System::ATMega16_IC::ATMega16_IC() ;
+    @fn static void System::ATMega16_IC::enable(IRQ irq)
+    @fn static void System::ATMega16_IC::disable()
+    @fn static void System::ATMega16_IC::disable(IRQ irq)
+
+    @fn static Reg8 System::ATMega16_IC::gicr()
+    @fn static void System::ATMega16_IC::gicr(Reg8 value)
+    @fn static Reg8 System::ATMega16_IC::gifr()
+    @returns General Interrupt Flag Register
+    @fn static void System::ATMega16_IC::gifr(Reg8 value)
+    @fn static Reg8 System::ATMega16_IC::timsk()
+    @returns Timer/Counter Interrupt MaSK Register
+    @fn static void System::ATMega16_IC::timsk(Reg8 value)
+    @fn static Reg8 System::ATMega16_IC::tifr()
+    @returns Timer/Counter Interrupt Flag Register
+    @fn static void System::ATMega16_IC::tifr(Reg8 value)
+    @fn static Reg8 System::ATMega16_IC::twcr()
+    @returns 2-wire Serial Control Register
+    @fn static void System::ATMega16_IC::twcr(Reg8 value)
+    @fn static Reg8 System::ATMega16_IC::mcucr()
+    @returns MCU Control Register
+    @fn static void System::ATMega16_IC::mcucr(Reg8 value)
+    @fn static Reg8 System::ATMega16_IC::mcucsr()
+    @returns MCU Status Register
+    @fn static void System::ATMega16_IC::mcucsr(Reg8 value)
+    @fn static Reg8 System::ATMega16_IC::eecr()
+    @returns EEPROM Control Register
+    @fn static void System::ATMega16_IC::eecr(Reg8 value)
+    @fn static Reg8 System::ATMega16_IC::spsr()
+    @returns SPI Status Register
+    @fn static void System::ATMega16_IC::spsr(Reg8 value)
+    @fn static Reg8 System::ATMega16_IC::spcr()
+    @returns SPI Control Register
+    @fn static void System::ATMega16_IC::spcr(Reg8 value)
+    @fn static Reg8 System::ATMega16_IC::ucsra()
+    @returns UART Control/Status Register A
+    @fn static void System::ATMega16_IC::ucsra(Reg8 value)
+    @fn static Reg8 System::ATMega16_IC::ucsrb()
+    @returns UART Control/Status Register B
+    @fn static void System::ATMega16_IC::ucsrb(Reg8 value)
+    @fn static Reg8 System::ATMega16_IC::acsr()
+    @returns Analog Comparator Control and Status Register
+    @fn static void System::ATMega16_IC::acsr(Reg8 value)
+    @fn static Reg8 System::ATMega16_IC::adcsra()
+    @returns ADC Control and status register
+    @fn static void System::ATMega16_IC::adcsra(Reg8 value)
+
+*/

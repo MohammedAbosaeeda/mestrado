@@ -1,0 +1,107 @@
+/*! @class System::NS16550AF
+    @ingroup med_uart
+
+    @brief National Semiconductors NS16550AF (PC16550D) UART
+
+    The class NS16550AF is an abstraction of the National Semiconductors NS16550Af UART controller. The NS16550AF abstraction is a member of the UART mediators family. This is the common UART controller used in PCs nowadays.
+
+    <!-- *********************************************************************** -->
+
+    @fn System::NS16550AF::NS16550AF(IO_Port p)
+    @brief Creates a NS16550AF and associates it with a port
+
+    @param p
+    The IO_Port associated with NS16550AF
+
+    <!-- *********************************************************************** -->
+
+    @fn System::NS16550AF::NS16550AF(IO_Port p, unsigned int div, unsigned int dbits,
+	      unsigned int par, unsigned int sbits)
+    @brief Creates and configures a NS16550AF Object and associates it with a port
+
+    @param p
+    The IO_Port associated with NS16550AF
+
+    @param div
+    The divisor to be used by the UART controller
+
+    @param dbits
+    The number of data bits of a character transmitted
+
+    @param par
+    The parity used by the controller
+
+    @param sbits
+    The number of stop bits used for each character transmitted
+
+    <!-- *********************************************************************** -->
+
+    @fn void System::NS16550AF::config(unsigned int div, unsigned int dbits, 
+		unsigned int par, unsigned int sbits)
+    @brief Configure the NS16550AF Uart controller
+
+    @param div
+    The divisor to be used by the UART controller
+
+    @param dbits
+    The number of data bits in a word (5, 6, 7 or 8)
+
+    @param par
+    The parity used by the controller (0 [no], 1 [odd], 2 [even])
+
+    @param sbits
+    The number of stop bits used for each character transmitted (1, 2 or 3 [1.5])
+
+    <!-- *********************************************************************** -->
+
+    @fn void System::NS16550AF::config(unsigned int * div, unsigned int * dbits,
+		unsigned int * par, unsigned int * sbits)
+    @brief Returns the configuration of the UART through the reference parameters
+
+    @param div
+    A reference to the value of the divisor used by the UART controller
+
+    @param dbits
+    A reference to the number of data bits in a word (5, 6, 7 or 8)
+
+    @param par
+    A reference to the parity used by the UART controller (0 [no], 1 [odd], 2 [even])
+
+    @param sbits
+    A reference to the number of stop bits used in each character transmitted (1, 2 or 3 [1.5])
+
+    <!-- *********************************************************************** -->
+
+    @fn Reg8 System::NS16550AF::rxd()
+    @brief Returns the value of the RX register
+
+    <!-- *********************************************************************** -->
+     
+    @fn void System::NS16550AF::txd(Reg8 c)
+    @brief Writes a byte to the TX register
+
+    @param c
+    The value written
+
+    <!-- *********************************************************************** -->
+
+    @fn void System::NS16550AF::reset()
+    @brief Resets the configuration of the NS16550AF UART controller, reconfiguring it
+
+    <!-- *********************************************************************** -->
+ 
+    @fn void System::NS16550AF::loopback(bool flag)
+    @brief Configures the NS16550AF UART Controller loopback mode
+
+    @param flag
+    The value of loopback mode (true or false)
+
+    <!-- *********************************************************************** -->
+
+    @class System::PC_UART
+    @ingroup med_uart
+
+    @brief PC_UART controller abstraction
+
+    The PC_UART abstraction is a member of the UART mediators family
+*/

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- $Id: mux.conf.sample,v 1.1.2.1 2006-02-01 18:30:57 augusto Exp $ -->
+
+<mux>
+	<ts id="0x1234" output="/dev/sbtvd/ts">
+		<descriptor tag="0x02">
+			<!-- ainda não implementado -->
+		</descriptor>
+
+		<pat rate="250" />
+		<pmt rate="250" />
+
+		<program number="1" pid="0x10" pcrpid="11">
+			<es pid="0x11" type="0x02" source="/dev/sbtvd/video0" />
+			<es pid="0x12" type="0x04" source="/dev/sbtvd/audio0">
+				<descriptor tag="0x10">
+					<!-- ainda não implementado -->
+				</descriptor>
+			</es>
+
+			<descriptor tag="0x10">
+				<!-- ainda não implementado -->
+			</descriptor>
+		</program>
+
+		<program number="2" pid="0x20" pcrpid="0x21">
+			<es pid="0x21" type="0x02" source="/dev/sbtvd/video1" />
+			<es pid="0x22" type="0x04" source="/dev/sbtvd/audio1" />
+		</program>
+	</ts>
+</mux>
+

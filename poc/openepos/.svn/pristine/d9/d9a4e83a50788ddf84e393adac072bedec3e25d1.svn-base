@@ -1,0 +1,52 @@
+/*! @class System::Task
+    @ingroup abs_task
+
+    @brief The Task Abstraction implementation
+
+
+    <!-- 
+	@fn System::Task::Task(const Segment & c, const Segment & d)
+	@brief
+
+	@fn System::Task::~Task()
+	@brief
+	-->
+	
+	@fn Address_Space * System::Task::as()
+	@return
+	Returns the Task Address Space
+
+    <!-- ********************************************************** -->
+
+	@fn const Segment & System::Task::code() const
+	@return
+	Returns the Task code segment
+
+    <!-- ********************************************************** -->
+	
+	@fn const Segment & System::Task::data() const
+	@return
+	Returns the Task data segment
+
+    <!-- ********************************************************** -->
+
+	@fn Thread * System::Task::create_thread(int (* entry)(), 
+	   const Thread::State & state = Thread::READY,
+	   const Thread::Priority & priority = Thread::NORMAL,
+	   unsigned int stack_size = STACK_SIZE) 
+	@brief Creates a Thread
+
+    <!-- ********************************************************** -->
+
+	@fn void System::Task::destroy_thread(Thread * t)
+	@brief Destroys the Thread t
+
+    <!-- ********************************************************** -->
+
+	@fn static void System::Task::init()
+	@brief Task Abstraction Initialization
+
+    <!-- ********************************************************** -->
+    
+*/
+

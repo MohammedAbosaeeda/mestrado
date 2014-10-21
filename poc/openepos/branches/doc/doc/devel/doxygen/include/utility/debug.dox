@@ -1,0 +1,26 @@
+/*! @class System::Debug
+    @ingroup utils
+
+    @brief The Debug class allows the programmer to display error and status messages of varying levels of importance through an OStream object. Through the usage of meta-programmed methods, the db() method returns either a real debug object or an empty one that incurs no overhead at runtime.
+
+    <!-- *********************************************************************** -->
+
+    @fn template<typename T> Select_Debug<(Traits< T >::debugged &&Traits< Debug >::error)> System::db(Debug_Error l)
+	@return A Debug object if the debbuged system trait is set to true, and if the error debug level trait is set to true. Otherwise, it returns a Null_Debug object that ignores all input.
+
+    <!-- *********************************************************************** -->
+
+    @fn template<typename T> Select_Debug<(Traits< T >::debugged &&Traits< Debug >::warning)> System::db(Debug_Warning l)
+	@return A Debug object if the debbuged system trait is set to true, and if the error debug level trait is set to true. Otherwise, it returns a Null_Debug object that ignores all input.
+
+    <!-- *********************************************************************** -->
+
+    @fn template<typename T> Select_Debug<(Traits< T >::debugged &&Traits< Debug >::info)> System::db(Debug_Info l)
+	@return A Debug object if the debbuged system trait is set to true, and if the error debug level trait is set to true. Otherwise, it returns a Null_Debug object that ignores all input.
+
+    <!-- *********************************************************************** -->
+
+    @fn template<typename T> Select_Debug<(Traits< T >::debugged &&Traits< Debug >::trace)> System::db(Debug_Trace l)
+        @return A Debug object if the debbuged system trait is set to true, and if the error debug level trait is set to true. Otherwise, it returns a Null_Debug object that ignores all input.
+
+*/

@@ -1,0 +1,20 @@
+/* 
+
+@fn int memcmp(void * d, const void * s, unsigned int n)
+   @brief gcc built-in function, see 'man memcmp'. 
+@fn void * memcpy(void * d, const void * s, unsigned int n);
+   @brief gcc built-in function, see 'man memcpy'. 
+@fn void * memset(void * d, int c, unsigned int n);
+   @brief gcc built-in function, see 'man memset'. 
+@fn int strcmp(const char * d, const char * s);
+   @brief gcc built-in function, see 'man strcmp'. 
+@fn int strncmp(const char * d, const char * s, unsigned int n);
+   @brief gcc built-in function, see 'man strncmp'. 
+@fn char * strcpy(char * d, const char * s);
+   @brief gcc built-in function, see 'man strcpy'. 
+@fn char * strncpy(char * d, const char * s, unsigned int n);
+   @brief gcc built-in function, see 'man strncpy'. 
+@fn unsigned int strlen(const char * s);
+   @brief gcc built-in function, see 'man strlen'. 
+
+*/

@@ -1,0 +1,7 @@
+/*! @struct System::Memory_Map<ATMega16>
+    @brief ATMega16 Memory Map
+
+    @struct System::Memory_Map<ATMega16>::IO_Map;
+    @struct System::Memory_Map<ATMega16>::IP_Map::IO_Ports;
+
+*/

@@ -1,0 +1,6 @@
+connect arm hw
+fpga -f build/config_dtmf_detector_routed.bit
+source ps7_init.tcl
+ps7_init
+ps7_post_config
+dow -data build/config_dtmf_detector_routed_pblock_1_partial.bin 0x00200000

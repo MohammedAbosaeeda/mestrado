@@ -1,0 +1,8 @@
+/*! @class System::ATMega128_RTC
+    @brief EPOS-- ATMega128 RTC Mediator Declarations
+
+    @fn System::ATMega128_RTC::ATMega128_RTC()
+    @fn static Date System::ATMega128_RTC::date()
+    @fn static void System::ATMega128_RTC::date(const Date & d)
+    @fn static Second System::ATMega128_RTC::seconds_since_epoch()
+*/

@@ -1,0 +1,29 @@
+/*! @class System::Mutex
+    @ingroup abs_synchronizer
+
+    @brief The Mutex abstraction
+
+    The Mutex implements a simple mutual exclusion device that supplies two atomic operations: lock and unlock.
+
+    <!-- *********************************************************************** -->    
+    
+	@fn System::Mutex::Mutex()
+	@brief Sets _locked to false
+	
+	<!-- *********************************************************************** -->    
+
+    @fn void System::Mutex::lock()
+    @brief Locks the mutex
+
+    <!-- *********************************************************************** -->    
+
+    @fn void System::Mutex::unlock()
+    @brief Unlocks the mutex
+
+    <!-- *********************************************************************** -->    
+
+    @var System::Mutex::_locked
+    @brief The Mutex state
+
+    <!-- *********************************************************************** -->    
+*/

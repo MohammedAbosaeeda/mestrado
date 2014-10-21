@@ -1,0 +1,17 @@
+System (helloworld) {
+	# Default Hello World system
+	Modules = "debug:test_compiler.zip";
+
+	Target="Linux";
+
+	Domain (dom1) {
+		Heap = RestrictedDomainScope {
+			HeapSizeKB=64;
+		}
+
+		Task (task1) {
+			MainClass="test/ExceptionTest";
+			MainMethod="launch_jsr()V";
+		}
+	}
+}

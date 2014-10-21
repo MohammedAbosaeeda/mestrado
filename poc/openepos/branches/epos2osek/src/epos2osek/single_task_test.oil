@@ -1,0 +1,11 @@
+CPU Test {
+	OS config {
+        STATUS = STANDARD;       
+    };
+
+    TASK a_task {
+        PRIORITY = 5;
+        AUTOSTART = TRUE;
+    };
+};
+

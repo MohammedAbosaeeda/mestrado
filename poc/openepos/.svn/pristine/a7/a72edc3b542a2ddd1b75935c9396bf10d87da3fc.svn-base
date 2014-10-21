@@ -1,0 +1,54 @@
+/*! @class System::Heap
+    @ingroup utils
+
+    @brief The Heap class uses a Grouping List to allow application programmers to manage application memory. It uses the traditional stdlib malloc/free interface. It uses an additional integer value to the beggining of every memory section to store its size, allowing fast freeing of memory.
+
+    <!-- *********************************************************************** -->
+
+    @fn System::Heap::Heap(void * addr, unsigned int bytes)
+	@param addr Pointer to the start of the memory section to be managed.
+	@param bytes Size in bytes of the section to be managed.
+
+    <!-- *********************************************************************** -->
+
+    @fn void * System::Heap::alloc(unsigned int bytes)
+        @brief Allocates a section of memory.
+
+	@param bytes Number of bytes to allocate.
+
+        @return Returns a pointer to the allocated memory section if successful, 0 on failure to allocate.
+
+    <!-- *********************************************************************** -->
+
+    @fn void * System::Heap::calloc(unsigned int bytes)
+        @brief Allocates and clears (zeroes) a section of memory.
+
+	@param bytes Number of bytes to allocate.
+
+        @return Returns a pointer to the allocated memory section if successful, 0 on failure to allocate.
+
+    <!-- *********************************************************************** -->
+
+    @fn void * System::Heap::realloc(void * ptr, unsigned int bytes)
+        @brief Changes the size of an allocated memory section. Not yet implemented.
+
+    <!-- *********************************************************************** -->
+
+    @fn void System::Heap::free(void * ptr)
+        @brief Frees a pre-allocated section of memory.
+
+        @param ptr Pointer to the section of memory to be freed.
+
+    <!-- *********************************************************************** -->
+
+    @fn void System::Heap::free(void * ptr, unsigned int bytes)
+        @brief Frees a section of memory of 'bytes' size.
+
+        @param ptr Pointer to the section of memory to be freed.
+        @param bytes Size of the memory section to be freed.
+
+    <!-- *********************************************************************** -->
+
+
+        
+*/

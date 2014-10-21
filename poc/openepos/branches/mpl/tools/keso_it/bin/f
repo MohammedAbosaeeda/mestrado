@@ -1,0 +1,4 @@
+#!/bin/bash
+if [ -d "builder" ] ; then
+   find builder/ -name "*.java" | xargs grep "$*"
+fi

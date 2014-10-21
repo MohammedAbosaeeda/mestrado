@@ -1,0 +1,33 @@
+CPU RegressionTest {
+	OS KesoOS {
+		STATUS = EXTENDED;
+	};
+
+	RESOURCE res1 {
+		EMPTYLINE = 1;
+	};
+	RESOURCE res2 {
+		EMPTYLINE = 1;
+	};
+	RESOURCE res3 {
+		EMPTYLINE = 1;
+	};
+	
+	TASK job1 {
+		AUTOSTART = TRUE;
+		PRIORITY = 5;
+		RESOURCE = res2;
+	};
+	TASK job2 {
+		AUTOSTART = FALSE;
+		PRIORITY = 12;
+		RESOURCE = res2;
+		RESOURCE = res3;
+	};
+	TASK job3 {
+		AUTOSTART = FALSE;
+		PRIORITY = 999;
+		RESOURCE = res1;
+	};
+};
+

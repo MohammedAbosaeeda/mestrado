@@ -1,0 +1,26 @@
+System (helloworld) {
+
+	# Default Hello World system
+	Modules = "debug:test_compiler";
+
+        OsekOS (KesoOS) {
+		STATUS = "EXTENDED";
+	}
+
+	Target="epos";
+
+	Domain (dom1) {
+		Heap = RestrictedDomainScope {
+			HeapSizeKB=64;
+		}
+
+		Task (task1) {
+			Priority = 1;
+			MainClass="test/VTWorld";
+			MainMethod="launch()V";
+			Autostart = true {
+				Appmode = "OSDEFAULTAPPMODE";
+			}
+		}
+	}
+}

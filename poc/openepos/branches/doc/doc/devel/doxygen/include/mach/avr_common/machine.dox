@@ -1,0 +1,8 @@
+/*! @class System::AVR_Machine
+    @ingroup med_mach
+    @brief AVR Machine Common Declarations
+    <!--************************************************************************************************-->
+    @fn static void  System::AVR_Machine::panic()
+    Halts the CPU. See AVR8::halt()
+    <!--************************************************************************************************-->
+*/

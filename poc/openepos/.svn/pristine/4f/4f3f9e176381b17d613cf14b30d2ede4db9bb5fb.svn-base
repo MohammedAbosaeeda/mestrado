@@ -1,0 +1,54 @@
+#!/bin/sh
+#
+# -OF 		use short aliases for classes and methods (obfuscate)
+#
+# Architecture:
+#
+# -linux	host system
+# -tricore	ProOSEK on a tricore board
+# -arm 		use ARM cross compiler
+# -avr		use AVR cross compiler
+# -h8300	lego mindstorm
+#
+# Optimization:
+#
+# -prune               prune the class tree (default)
+# -noprune
+#
+# -inline	       in-line method calls (default)
+# -noinline
+# -inline_costs:nnn[:sss]  tune the inline cost-function
+#                          ( :nnn = 20 smaller size (default), 150 better performance, >200 code blow )
+#			   ( :sss = 200 (default) costs for single caller side )
+#
+# Debugging and Visualization: 
+#
+# -v 		verbose
+# -vv		more verbose
+# -v:<class>    verbose output for the given class only
+#
+# -pedantic     add -pedantic to the cc flags
+#
+# -classtree/ct       create class tree
+# -cfg		      create control flow graphs for all methods
+#
+# -X:ssa		enable SSA based optimizations
+# -X:...:...	     	additional options use X-option to find out
+#
+
+echo "================================================================="
+echo " This is JINO modified by mkl."
+echo " see http://www4.informatik.uni-erlangen.de/Research/KESO/pubs/"
+echo " for documentation"
+echo "================================================================="
+
+mkdir -p ${KESOSRCPATH}/tmp
+( cd ${KESOSRCPATH}/tmp ; rm -f keso_main-debug.cmm ; ln -s ../trace32/keso_main-debug.cmm . )
+( cd ${KESOSRCPATH}/tmp ; rm -f keso_main_g_orti.cmm ; ln -s ../trace32/keso_main_g_orti.cmm . )
+( cd ${KESOSRCPATH}/tmp ; rm -f orti.men ; ln -s ../trace32/orti.men . )
+( cd ${KESOSRCPATH}/tmp ; rm -f ortiperf.men ; ln -s ../trace32/ortiperf.men . )
+
+${JAVA} -Xms1024m -Xmx1024m -cp /usr/share/java/aspectjrt.jar:${KESOSRCPATH}/builder/classes/:${JDKTOOLS} keso.compiler.Main \
+	${JINOFLAGS}\
+	-sp ${KESOSRCPATH}/classes \
+	-kesosrcpath ${KESOSRCPATH} $@

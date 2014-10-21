@@ -1,0 +1,36 @@
+##################################################
+# Constants
+##################################################
+BASE_DIR = $(abspath ../../..)
+BIN_FILE = $(TOP_MODULE).bin
+
+SYS_LIBS = -lutil -lsystemc
+SYS_LIBS_DIR = -L/usr/lib -L/usr/systemc-2.2/lib-linux -L/usr/systemc-2.2.0/lib-linux64
+SYS_INCLUDES = -I/usr/systemc-2.2.0/include -I/usr/include -I/usr/systemc-2.2/include -I/opt/Mentor/catapultc-2011a/Mgc_home/pkgs/hls_pkgs.any/src -I/opt/Mentor/catapultc-2011a/Mgc_home/pkgs/siflibs.any -I/opt/Mentor/catapultc-2011a/Mgc_home/shared/include -I/export/Mentor/Catapult/Mgc_home/pkgs/hls_pkgs.any/src -I/export/Mentor/Catapult/Mgc_home/pkgs/siflibs.any -I/export/Mentor/Catapult/Mgc_home/shared/include
+
+CC_FLAGS = -O2 -Wall -Wfatal-errors
+
+CC = g++
+
+##################################################
+# Global Targets
+##################################################
+all: hls $(BIN_FILE)
+	@echo "Platform generation finished"
+
+run: $(BIN_FILE)
+	./$(BIN_FILE)   
+
+clean:
+	$(RM) $(BIN_FILE) *.io
+	
+hls:
+	make all --directory=$(BASE_DIR)/hw/components
+	
+hls_clean:
+	make clean --directory=$(BASE_DIR)/hw/components
+
+veryclean: clean hls_clean
+
+.PHONY: all run clean hls hls_clean veryclean
+

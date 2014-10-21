@@ -1,0 +1,36 @@
+World (Keso) {
+	System (mica) {
+		#
+		# -X:no_automake:ssa:omit_fields:inline_clinit:inline_task:omit_unused_methods:int16:gcc-no-stdlibs:gcc_no_pure
+		#
+		# Rev. 1220
+		#
+		# section    size      addr
+		# .data        32   8388864
+		# .text        56         0
+		#
+
+		Modules = "core:avr:test_leds_mica";
+
+		Target = "AVR";
+		ProcessorType = "atmega128";
+		Frequency = 4000000;
+
+		Stack = true {
+			StackChecks="false";
+			Size = 64;
+			HandlerClass="keso/leds/LEDTask";
+			HandlerMethod="stackOverflow()V";
+		}
+
+		Domain (domain0) {
+			Heap = RestrictedDomainScope {
+				HeapSize=200;
+			}
+
+			Task (task1) {
+				MainClass="keso/leds/LEDTask";
+			}
+		}
+	}
+}

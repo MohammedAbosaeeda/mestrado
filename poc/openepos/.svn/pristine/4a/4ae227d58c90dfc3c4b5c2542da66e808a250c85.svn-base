@@ -1,0 +1,115 @@
+set outputdir ./build
+file mkdir $outputdir
+
+# Static part
+create_project -in_memory
+
+set_property part xc7z020clg484-1 [current_project]
+set_property board em.avnet.com:zynq:zed:c [current_project]
+
+read_vhdl platform.vhd
+
+foreach dir [list ../../../mach/common/amba \
+                  ../../../mach/epossoc/rtsnoc \
+                  ../../../mach/common/amba_wishbone \
+                  ../../../mach/common/coregen \
+                  ../../../mach/common/rtsnoc_router \
+                  ../../../mach/common/rtsnoc_router/router \
+                  ../../../arch/mips32/plasma \
+                  ../../../mach/common/simple_uart \
+                  ../../../mach/common/gpio \
+                  ../../../mach/common/simple_pic \
+                  ../../../mach/common/simple_timer \
+                  ../../../mach/common/comp_manager \
+                  ../ \
+                  ] { 
+    foreach file [list [glob -nocomplain $dir/*.v]] {
+        if {$file != ""} {
+            read_verilog -library work $file
+        }
+    }                                                                                                    
+
+    foreach file [list [glob -nocomplain $dir/*.vhd]] {
+        if {$file != ""} {
+            read_vhdl -library work $file
+        }
+    }                                                                                                    
+
+    foreach file [list [glob -nocomplain $dir/*.ngc]] {
+        if {$file != ""} {
+            read_edif $file
+        }
+    }                                                                                                    
+}
+
+synth_design -flatten_hierarchy rebuilt -top platform
+write_checkpoint -force $outputdir/platform_synth.dcp
+
+# Reconfigurable part
+foreach dir [list ../../../framework/catapult/top_level/mult \
+                  ../../../framework/catapult/top_level/mult/Catapult/toplevel.v1 \
+                  ] { 
+    puts $dir
+    foreach file [list [glob -nocomplain $dir/*.v]] {
+        if {$file != ""} {
+            puts $file
+            read_verilog -library work $file
+        }
+    }                                                                                                    
+}
+
+synth_design -mode out_of_context -top Mult_Node_RTL -generic X=0 -generic Y=0 -generic LOCAL_ADDR=7 -generic SIZE_X=1 -generic SIZE_Y=1 -generic SIZE_DATA=56 -generic RMI_MSG_SIZE=80 -generic IID_SIZE=8
+write_checkpoint -force $outputdir/recfg_mod_mult_synth.dcp
+
+foreach dir [list ../../../framework/catapult/top_level/add \
+                  ../../../framework/catapult/top_level/add/Catapult/toplevel.v1 \
+                  
+                  ] { 
+    foreach file [list [glob -nocomplain $dir/*.v]] {
+        if {$file != ""} {
+            read_verilog -library work $file
+        }
+    }                                                                                                    
+}
+
+synth_design -mode out_of_context -top Add_Node_RTL -generic X=0 -generic Y=0 -generic LOCAL_ADDR=7 -generic SIZE_X=1 -generic SIZE_Y=1 -generic SIZE_DATA=56 -generic RMI_MSG_SIZE=80 -generic IID_SIZE=8
+write_checkpoint -force $outputdir/recfg_mod_add_synth.dcp
+
+open_checkpoint $outputdir/platform_synth.dcp
+read_xdc platform.xdc
+read_checkpoint -cell u_rsp/u_recfg_mod $outputdir/recfg_mod_mult_synth.dcp
+#opt_design
+place_design
+route_design
+write_checkpoint -force $outputdir/config_mult_routed.dcp
+write_checkpoint -force -cell u_rsp/u_recfg_mod $outputdir/recfg_mod_mult_route_design.dcp
+update_design -cell u_rsp/u_recfg_mod -black_box
+write_checkpoint -force $outputdir/static_routed.dcp
+
+open_checkpoint $outputdir/static_routed.dcp
+lock_design -level routing
+read_checkpoint -cell u_rsp/u_recfg_mod $outputdir/recfg_mod_add_synth.dcp
+#opt_design
+place_design
+route_design
+write_checkpoint -force $outputdir/config_add_routed.dcp
+write_checkpoint -force -cell u_rsp/u_recfg_mod $outputdir/recfg_mod_add_route_design.dcp
+
+pr_verify -full_check $outputdir/config_add_routed.dcp $outputdir/config_mult_routed.dcp -file $outputdir/pr_verify.log
+
+read_checkpoint $outputdir/config_add_routed.dcp
+write_bitstream -force $outputdir/config_add_routed
+
+read_checkpoint $outputdir/config_mult_routed.dcp
+write_bitstream -force $outputdir/config_mult_routed
+
+#write_debug_probes debug_probes.ltx
+
+#open_hw
+#connect_hw_server -host localhost -port 60001
+#current_hw_target [get_hw_targets */xilinx_tcf/Digilent/210248471154]
+#open_hw_target
+#current_hw_device [lindex [get_hw_devices] 1]
+#refresh_hw_device -update_hw_probes false [lindex [get_hw_devices] 1]
+#set_property PROGRAM.FILE {/home/jgreis/testecaralho/top.bit} [lindex [get_hw_devices] 1]
+#program_hw_devices [lindex [get_hw_devices] 1]

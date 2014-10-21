@@ -1,0 +1,626 @@
+/**(c)
+
+  Copyright (C) 2005 Christian Wawersich 
+
+  This file is part of the KESO Operating System.
+
+  It is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+  Please contact wawi@cs.fau.de for more info.
+
+  (c)**/
+
+options {
+	STATIC = false;
+}
+
+PARSER_BEGIN(ConfigReader)
+
+package keso.compiler.config.parser;
+
+import keso.compiler.config.*;
+import keso.compiler.CompileException;
+
+import java.io.InputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+public class ConfigReader {
+	public static WorldDefinition parseDefinition(String filename) throws CompileException {
+		ConfigReader parser=null;
+		WorldDefinition world=null;
+
+		try {
+			parser = new ConfigReader(new FileInputStream(filename));
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			throw new CompileException(ex.toString());
+		}
+
+		try {
+			world = parser.parseWorldDefinition();
+		} catch (ParseException ex) {
+			throw new CompileException(ex.toString());
+		}
+
+		return world;
+	}
+}
+
+PARSER_END(ConfigReader)
+
+SKIP : { " " | "\t" | "\r" | "\n" }
+
+TOKEN : {  
+	< WORLD: ("World"|"Cluster") >
+|	< SYSTEM: ("System"|"Node") >
+|	< NETWORK: "Network" >
+|	< PDOMAIN: "PublicDomain">
+|	< DOMAIN: "Domain">
+|	< ISR: "ISR">
+|	< TASK: "Task">
+|	< SERVICE: "Service">
+|	< IMPORT: "Import">
+|	< RESOURCE: "Resource">
+|	< EVENT: "Event">
+|	< COUNTER: "Counter">
+|	< ALARM: "Alarm">
+|	< OS: "OsekOS">
+|	< MESSAGE: "Message">
+|	< APPMODE: "Appmode">
+|	< INTEGER_LITERAL: (["+","-"])? <DECIMAL_LITERAL> (["l","L"])?  | (["0"]) >
+|	< #DECIMAL_LITERAL: ["1"-"9"] (["0"-"9"])* >
+|	< FLOATING_POINT_LITERAL:
+		(["+","-"])? (["0"-"9"])+ "." (["0"-"9"])* (<EXPONENT>)? (["f","F","d","D"])?
+		| (["+","-"])? "." (["0"-"9"])+ (<EXPONENT>)? (["f","F","d","D"])?
+		| (["+","-"])? (["0"-"9"])+ <EXPONENT> (["f","F","d","D"])?
+		| (["+","-"])? (["0"-"9"])+ (<EXPONENT>)? ["f","F","d","D"] >
+|	< #EXPONENT: ["e","E"] (["+","-"])? (["0"-"9"])+ >
+|	< STRING_LITERAL:
+		"\""
+		(	(~["\"","\\","\n","\r"])
+		|	(	"\\"
+				( ["n","t","b","r","f","\\","'","\""]
+				| ["0"-"7"] ( ["0"-"7"]
+				)?
+				| ["0"-"3"] ["0"-"7"] ["0"-"7"]
+			)
+			)
+		|	("\\u"
+			["0"-"9","A"-"F","a"-"f"]
+			["0"-"9","A"-"F","a"-"f"]
+			["0"-"9","A"-"F","a"-"f"]
+			["0"-"9","A"-"F","a"-"f"]
+			)
+		)*
+		"\"" >
+|	< SWITCH_LITERAL: <V_ON> | <V_OFF> >
+|	< #V_ON: "on" >
+|	< #V_OFF: "off" >
+|	< LINECOMMENT: "#" (~["\n"])* >
+|	< IDENTIFIER: <LETTER> (<LETTER>|<DIGIT>)* >
+|	< LETTER : ["a"-"z","A"-"Z","_","/"] >
+|	< DIGIT : ["0"-"9"] >
+|	< DATE: (<DIGIT>)* <COLON> (<DIGIT>)* <COLON> (<DIGIT>)* >
+|	< LPAREN: "(" >
+|	< RPAREN: ")" >
+|	< LBRACE: "{" ("\r"|"\n")* >
+|	< RBRACE: "}" ("\r"|"\n")* >
+|	< DQUOTE: "\"" >
+|	< LBRACKET: "[" >
+|	< RBRACKET: "]" >
+|	< SEMICOLON: ";" >
+|	< COMMA: "," >
+|	< DOT: "." >
+|	< COLON: ":" >
+|	< PLUS: "+" >
+|	< MINUS: "-" >
+|	< ASSIGNMENT: "=" >
+|	< MAPSIGN: "=>" >
+|	< FACTOR : ["k","M"]>
+}
+
+/**
+ * primitive Attributes
+ */
+void parsePrimitiveAttribute(Set parentSet) :
+{
+	Token mName;
+	String ident;
+}
+{
+	(	<LINECOMMENT> |
+		(	mName=<IDENTIFIER>
+		{
+			ident = mName.image;
+		}
+		<ASSIGNMENT>
+		(	parseStringAttribute(parentSet, ident) |
+			parseArrayAttribute(parentSet, ident) |
+			parseIntAttribute(parentSet, ident)
+		)
+		<SEMICOLON>
+		)
+	)
+}
+
+void parsePrimitiveAppmodeAttribute(Set parentSet) :
+{
+	Token mName;
+	String ident;
+}
+{
+	(	<LINECOMMENT> |
+		(	mName=<APPMODE>
+		{
+			ident = mName.image;
+		}
+		<ASSIGNMENT>
+		(	parseStringAttribute(parentSet, ident) |
+			parseArrayAttribute(parentSet, ident) |
+			parseIntAttribute(parentSet, ident)
+		)
+		<SEMICOLON>
+		)
+	)
+}
+
+void parseIntAttribute(Set parentSet, String ident) :
+{
+	Token mValue;
+}
+{
+	mValue=<INTEGER_LITERAL>
+	{
+		parentSet.addAttribute(ident, new IntegerAttr(parentSet, ident, mValue.image, mValue.beginLine));
+	}
+}
+
+void parseStringAttribute(Set parentSet, String ident) :
+{
+	Token mValue;
+	String str;
+}
+{
+	mValue=<STRING_LITERAL>
+	{
+		str = mValue.image;
+		parentSet.addAttribute(ident, new StringAttr(parentSet, ident, str.substring(1,str.length()-1), mValue.beginLine));
+	}
+}
+
+void parseArrayAttribute(Set parentSet, String ident) :
+{
+	ArrayAttr array = null;
+	Token mValue;
+	Token mToken;
+}
+{
+	mToken=<LBRACE> 
+	{
+		array = new ArrayAttr(parentSet, ident, mToken.beginLine);
+	}
+	(
+	 	LOOKAHEAD(2)
+		mValue=<INTEGER_LITERAL><COMMA>
+		{
+			array.add(mValue.image);	
+		}
+	)* 
+	mValue=<INTEGER_LITERAL><RBRACE>
+	{
+		array.add(mValue.image);	
+		parentSet.addAttribute(ident, array);
+	}
+}
+
+/**
+ * World Definition
+ */
+WorldDefinition parseWorldDefinition() :
+{
+	WorldDefinition world=null;
+	Token mToken;
+	Token mName;
+}
+{
+	(
+	<LINECOMMENT>
+	|
+	mToken=<WORLD> <LPAREN> mName=<IDENTIFIER> <RPAREN> <LBRACE>
+	{
+		world = new keso.compiler.config.WorldDefinition(mName.image, mToken.beginLine);
+	}
+	(
+	//<LINECOMMENT> |
+	 LOOKAHEAD(3)
+	 parsePrimitiveAttribute(world) |
+	 parseComplexAttr(world) |
+        parseSystemDefinition(world) |
+        parseNetworkDefinition(world)
+    ) +
+	<RBRACE>
+	| 
+	{
+		world = new keso.compiler.config.WorldDefinition("keso", 0);
+	}
+	parseSystemDefinition(world)
+	)
+	{
+		return world;
+	}
+}
+
+/**
+ * System Definition
+ */
+void parseSystemDefinition(WorldDefinition world) :
+{
+	SystemDefinition system;
+	Token mToken;
+	Token mName;
+}
+{
+	mToken=<SYSTEM> <LPAREN> mName=<IDENTIFIER> <RPAREN> <LBRACE>
+	{
+		system = new keso.compiler.config.SystemDefinition(world, mName.image, mToken.beginLine);
+	}
+	(
+	 parsePDomainDefinition(system)  |
+	 parseDomainDefinition(system)   |
+	 parseCounterDefinition(system)  |
+	 parseEventDefinition(system)    |
+	 parseAppmodeDefinition(system)  |
+	 parseOSDefinition(system) 	 |
+	 LOOKAHEAD(3)
+	 parsePrimitiveAttribute(system) |
+	 parseComplexAttr(system)
+	)+
+	<RBRACE>
+	{
+		system.finalizeCfg();
+		world.addSystem(system);
+		return;
+	}
+}
+
+
+/**
+ * Network Definition
+ */
+void parseNetworkDefinition(WorldDefinition world) :
+{
+	NetworkDefinition myNet;
+	Token mToken;
+	Token mName;
+}
+{
+	mToken=<NETWORK> <LPAREN> mName=<IDENTIFIER> <RPAREN> <LBRACE>
+	{
+		myNet = new keso.compiler.config.NetworkDefinition(world, mName.image, mToken.beginLine);
+	}
+	( LOOKAHEAD(3)
+	  parsePrimitiveAttribute(myNet) |
+	  parseComplexAttr(myNet)
+	)+
+	<RBRACE>
+	{
+	    world.addNetwork(myNet);
+		return;
+	}
+}
+
+
+
+/**
+ * Domain Definition
+ */
+void parseDomainDefinition(SystemDefinition system) :
+{
+	DomainDefinition domain;
+	Token mToken;
+	Token mName;
+}
+{ 
+	mToken=<DOMAIN> <LPAREN>  mName=<IDENTIFIER> <RPAREN> <LBRACE> 
+	{
+		domain = new keso.compiler.config.DomainDefinition(system, mName.image, mToken.beginLine);
+	}
+	( parseTaskDefinition(domain)     |
+		parseResourceDefinition(domain) |
+		parseAlarmDefinition(domain)    |
+		parseISRDefinition(domain)      |
+		parseImportDefinition(domain)   | 
+		parseServiceDefinition(domain)  | 
+		LOOKAHEAD(3)
+		parseComplexAttr(domain)        |
+		parsePrimitiveAttribute(domain)
+	)+
+	<RBRACE>
+	{
+		system.addDomain(domain);
+		return;
+	}
+}
+
+void parsePDomainDefinition(SystemDefinition system) :
+{
+	PublicDomain domain;
+	Token mToken;
+}
+{ 
+	mToken=<PDOMAIN> <LBRACE> 
+	{
+		domain = new keso.compiler.config.PublicDomain(system, mToken.beginLine);
+	}
+	( parseResourceDefinition(domain) |
+		parseAlarmDefinition(domain)    |
+		parseISRDefinition(domain)      |
+		LOOKAHEAD(3)
+		parseComplexAttr(domain)        |
+		parsePrimitiveAttribute(domain)
+	)+
+	<RBRACE>
+	{
+		system.addPDomain(domain);
+		return;
+	}
+}
+
+/**
+ * Appmode Definition
+ */
+void parseAppmodeDefinition(SystemDefinition system) :
+{
+	AppmodeDefinition appmode;
+	Token mToken;
+	Token mName;
+}
+{ 
+	mToken=<APPMODE> <LPAREN>  mName=<IDENTIFIER> <RPAREN> <LBRACE> 
+	{
+		appmode = new keso.compiler.config.AppmodeDefinition(system, mName.image, mToken.beginLine);
+	}
+	( parsePrimitiveAttribute(appmode) )+
+	<RBRACE>
+	{
+		system.addAppmode(appmode);
+		return;
+	}
+}
+
+/**
+ * ISR Definition
+ */
+void parseISRDefinition(ISRContainer parent) :
+{
+	ISRDefinition isr;
+	Token mToken;
+	Token mName;
+}
+{ 
+	mToken=<ISR> <LPAREN>  mName=<IDENTIFIER> <RPAREN> <LBRACE> 
+	{
+		isr = new keso.compiler.config.ISRDefinition((Set)parent, mName.image, mToken.beginLine);
+	}
+	( parsePrimitiveAttribute(isr) )+
+	<RBRACE>
+	{
+		parent.addISR(isr);
+		return;
+	}
+}
+
+
+/**
+ * Event Definition
+ */
+void parseEventDefinition(SystemDefinition sdef) :
+{
+	EventDefinition ev;
+	Token mToken;
+	Token mName;
+}
+{ 
+	mToken=<EVENT> <LPAREN>  mName=<IDENTIFIER> <RPAREN> <LBRACE> 
+	{
+		ev = new keso.compiler.config.EventDefinition(sdef, mName.image, mToken.beginLine);
+	}
+	( parsePrimitiveAttribute(ev) )+
+	<RBRACE>
+	{
+		sdef.addEvent(ev);
+	}
+}
+
+/**
+ * Counter Definition
+ */
+void parseCounterDefinition(SystemDefinition sdef) :
+{
+	CounterDefinition cdef;
+	Token mToken;
+	Token mName;
+}
+{
+	mToken=<COUNTER> <LPAREN> mName=<IDENTIFIER> <RPAREN> <LBRACE> 
+	{
+		cdef = new keso.compiler.config.CounterDefinition(sdef, mName.image, mToken.beginLine);
+	}
+	( parsePrimitiveAttribute(cdef) )+
+	<RBRACE>
+	{
+	sdef.addCounter(cdef);
+	}
+}
+
+/**
+ * Alarm Definition
+ */
+void parseAlarmDefinition(Set parent) :
+{
+	AlarmDefinition adef;
+	Token mToken;
+	Token mName;
+}
+{
+	mToken=<ALARM> <LPAREN> mName=<IDENTIFIER> <RPAREN> <LBRACE> 
+	{
+		adef = new keso.compiler.config.AlarmDefinition(parent, mName.image, mToken.beginLine);
+	}
+	(	LOOKAHEAD(3)
+		parsePrimitiveAttribute(adef) |
+		parseComplexAttr(adef)
+	)+
+	<RBRACE>
+	{
+	((AlarmContainer) parent).addAlarm(adef);
+	}
+}
+
+/**
+ * Resource Definition
+ */
+void parseResourceDefinition(Set parent) :
+{
+	ResourceDefinition res;
+	Token mToken;
+	Token mName;
+}
+{
+	mToken=<RESOURCE> <LPAREN>  mName=<IDENTIFIER> <RPAREN> <LBRACE> 
+	{
+		res = new keso.compiler.config.ResourceDefinition(parent, mName.image, mToken.beginLine);
+	}
+	( parsePrimitiveAttribute(res) )+
+	<RBRACE>
+	{
+		((ResourceContainer) parent).addResource(res);
+	}
+}
+
+/**
+ * Task Definition
+ */
+void parseTaskDefinition(DomainDefinition dom) :
+{
+	TaskDefinition task;
+	Token mToken;
+	Token mName;
+}
+{ 
+	mToken=<TASK> <LPAREN>  mName=<IDENTIFIER> <RPAREN> <LBRACE> 
+	{
+		task = new keso.compiler.config.TaskDefinition(dom, mName.image, mToken.beginLine);
+	}
+	(	LOOKAHEAD(3)
+		parsePrimitiveAttribute(task) |
+		parseComplexAttr(task)
+	)+
+	<RBRACE>
+	{
+		dom.addTask(task);
+	}
+}
+
+/**
+ * Service Definition
+ */
+void parseServiceDefinition(DomainDefinition dom) :
+{
+	ServiceDefinition service;
+	Token mToken;
+	Token mName;
+}
+{ 
+	mToken=<SERVICE> <LPAREN>  mName=<IDENTIFIER> <RPAREN> <LBRACE> 
+	{
+		service = new keso.compiler.config.ServiceDefinition(dom, mName.image, mToken.beginLine);
+	}
+	(	LOOKAHEAD(3)
+		parsePrimitiveAttribute(service) |
+		parseComplexAttr(service)
+	)+
+	<RBRACE>
+	{
+		dom.registerService(mName.image, service);
+	}
+}
+
+/**
+ * Import Definition
+ */
+void parseImportDefinition(DomainDefinition dom) :
+{
+	ImportDefinition imp;
+	Token mToken;
+	Token mName;
+}
+{ 
+	mToken=<IMPORT> <LPAREN> mName=<IDENTIFIER> <RPAREN> <LBRACE>
+	{
+		imp = new keso.compiler.config.ImportDefinition(dom, mName.image, mToken.beginLine);
+	}
+	( parsePrimitiveAttribute(imp) )+ 
+	<RBRACE>
+	{
+		/* the import is registered per domain */
+		dom.registerImport(mName.image, imp);
+	}
+}
+
+/**
+ * Complex Attributes are attributes with a value that may contain
+ * subattributes.
+ */
+void parseComplexAttr(Set parent) :
+{
+	ComplexAttribute cattr;
+	Token mName;
+	Token mValue;
+}
+{ 
+	mName=<IDENTIFIER> <ASSIGNMENT> mValue=<IDENTIFIER> <LBRACE> 
+	{
+		if(mValue.image.compareToIgnoreCase("true")==0 ||
+			mValue.image.compareToIgnoreCase("false")==0)
+			cattr = new ComplexBoolAttribute(parent, mName.image,mValue.image, mName.beginLine);
+		else if(mName.image.compareToIgnoreCase("Action")==0)
+			cattr = new AlarmActionAttribute(parent, mName.image,mValue.image, mName.beginLine);
+		else cattr = new ComplexAttribute(parent, mName.image,mValue.image, mName.beginLine);
+
+		parent.setComplex(cattr);
+	}
+	// any primitive attributes of the complex attribute may follow here
+	(	LOOKAHEAD(3)
+		parsePrimitiveAttribute(cattr) |
+		parsePrimitiveAppmodeAttribute(cattr)
+	)*
+	<RBRACE>
+}
+
+/**
+ * OSEK OS Definition
+ */
+void parseOSDefinition(SystemDefinition system) :
+{
+	OSDefinition os;
+	Token mToken;
+	Token mName;
+}
+{ 
+	mToken=<OS> <LPAREN>  mName=<IDENTIFIER> <RPAREN> <LBRACE> 
+	{
+		os = new keso.compiler.config.OSDefinition(system, mName.image, mToken.beginLine);
+	}
+	(	LOOKAHEAD(3)
+		parsePrimitiveAttribute(os) |
+		parseComplexAttr(os)
+	)+
+	<RBRACE>
+	{
+		system.setOS(os);
+	}
+}

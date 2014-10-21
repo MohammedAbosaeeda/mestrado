@@ -1,0 +1,44 @@
+/*! @class System::ELF
+    @ingroup utils
+
+    @brief The ELF class implements information retrieval and loading of ELF file segments. ELF headers have a constant size, therefore the programmer can use a reinterpret cast of this class on the base address of an ELF file in memory.
+
+    <!-- *********************************************************************** -->
+
+    @fn bool System::ELF::valid()
+	@return Returns true if the ELF file is valid, false otherwise.
+
+    <!-- *********************************************************************** -->
+
+    @fn Elf32_Addr System::ELF::entry()
+	@return Returns the address of the entry point for the first code segment of the ELF file.
+
+    <!-- *********************************************************************** -->
+
+    @fn int System::ELF::segments()
+	@return Returns the number of segments the ELF file contains.
+
+    <!-- *********************************************************************** -->
+
+    @fn Elf32_Word System::ELF::segment_type(int i)
+        @return Returns the type of segment i.
+
+    <!-- *********************************************************************** -->
+
+    @fn Elf32_Addr System::ELF::segment_address(int i)
+        @return Returns the address of segment i.
+   
+    <!-- *********************************************************************** -->
+
+    @fn int System::ELF::segment_size(int i)
+        @return Returns the size of segment i.
+
+    <!-- *********************************************************************** -->
+
+    @fn int System::ELF::load_segment(int i, Elf32_Addr addr)
+        @return Loads segment to the parameter address if it is specified, otherwise it loads it to the segment address specified on the header.
+
+        @param i Segment number.
+        @param addr Target address; this is an optional parameter.
+
+*/

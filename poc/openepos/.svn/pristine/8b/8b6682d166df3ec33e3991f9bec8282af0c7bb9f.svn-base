@@ -1,0 +1,39 @@
+/*! @class System::SREC
+    @ingroup utils
+
+    @brief The SREC class implements information retrieval and loading of SREC file lines.
+
+    <!-- *********************************************************************** -->
+
+    @fn bool System::SREC::valid()
+	@return Returns true if the SREC file is valid, false otherwise.
+
+    <!-- *********************************************************************** -->
+
+    @fn void * System::SREC::entry()
+	@return Returns the address of the entry point for the first code segment of the SREC file.
+
+    <!-- *********************************************************************** -->
+
+    @fn int System::SREC::segments()
+	@return Returns the number of segments the ELF file contains. The current implementation supports only single segment files, therefore this method always returns 1.
+
+    <!-- *********************************************************************** -->
+
+    @fn void * System::SREC::segment_address(int i)
+        @return Returns the address of segment i. The current implementation supports only single segment files, therefore this method always returns the address of the first segment.
+   
+    <!-- *********************************************************************** -->
+
+    @fn int System::SREC::segment_size(int i)
+        @return Returns the size of segment i. The current implementation supports only single segment files, therefore this method always returns the size of the first segment.
+
+    <!-- *********************************************************************** -->
+
+    @fn int System::SREC::load_segment(int i, void * addr)
+        @return Loads segment to the parameter address if it is specified, otherwise it loads it to the segment address specified on the header.
+
+        @param i Segment number.
+        @param addr Target address; this is an optional parameter.
+
+*/

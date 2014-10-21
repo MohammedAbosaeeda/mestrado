@@ -1,0 +1,77 @@
+# GPIO pin to reset the USB OTG PHY
+net gpio[0] LOC = G17  | IOSTANDARD = LVCMOS33; # USB-Reset
+
+# On-board OLED, voltage control and bitbanged SPI over gpio
+net gpio[1] LOC = U11  | IOSTANDARD = LVCMOS33; # OLED-VBAT
+net gpio[2] LOC = U12  | IOSTANDARD = LVCMOS33; # OLED-VDD
+net gpio[3] LOC = U9   | IOSTANDARD = LVCMOS33; # OLED-RES
+net gpio[4] LOC = U10  | IOSTANDARD = LVCMOS33; # OLED-DC
+net gpio[5] LOC = AB12 | IOSTANDARD = LVCMOS33; # OLED-SCLK
+net gpio[6] LOC = AA12 | IOSTANDARD = LVCMOS33; # OLED-SDIN
+
+# On-board LEDs
+net gpio[7]  LOC = T22 | IOSTANDARD = LVCMOS33; # LD0
+net gpio[8]  LOC = T21 | IOSTANDARD = LVCMOS33; # LD1
+net gpio[9]  LOC = U22 | IOSTANDARD = LVCMOS33; # LD2
+net gpio[10] LOC = U21 | IOSTANDARD = LVCMOS33; # LD3
+net gpio[11] LOC = V22 | IOSTANDARD = LVCMOS33; # LD4
+net gpio[12] LOC = W22 | IOSTANDARD = LVCMOS33; # LD5
+net gpio[13] LOC = U19 | IOSTANDARD = LVCMOS33; # LD6
+net gpio[14] LOC = U14 | IOSTANDARD = LVCMOS33; # LD7
+
+# On-board slide switches
+net gpio[15] LOC = F22 | IOSTANDARD = LVCMOS33; # SW0
+net gpio[16] LOC = G22 | IOSTANDARD = LVCMOS33; # SW1
+net gpio[17] LOC = H22 | IOSTANDARD = LVCMOS33; # SW2
+net gpio[18] LOC = F21 | IOSTANDARD = LVCMOS33; # SW3
+net gpio[19] LOC = H19 | IOSTANDARD = LVCMOS33; # SW4
+net gpio[20] LOC = H18 | IOSTANDARD = LVCMOS33; # SW5
+net gpio[21] LOC = H17 | IOSTANDARD = LVCMOS33; # SW6
+net gpio[22] LOC = M15 | IOSTANDARD = LVCMOS33; # SW7
+
+# On-board left, right, up, down, and select pushbuttons
+net gpio[23] LOC = N15 | IOSTANDARD = LVCMOS33; # BTNL
+net gpio[24] LOC = R18 | IOSTANDARD = LVCMOS33; # BTNR
+net gpio[25] LOC = T18 | IOSTANDARD = LVCMOS33; # BTNU
+net gpio[26] LOC = R16 | IOSTANDARD = LVCMOS33; # BTND
+net gpio[27] LOC = P16 | IOSTANDARD = LVCMOS33; # BTNS
+
+# Pmod JA
+net gpio[28] LOC = Y11  | IOSTANDARD = LVCMOS33;    # JA1
+net gpio[29] LOC = AA11 | IOSTANDARD = LVCMOS33;    # JA2
+net gpio[30] LOC = Y10  | IOSTANDARD = LVCMOS33;    # JA3
+net gpio[31] LOC = AA9  | IOSTANDARD = LVCMOS33;    # JA4
+net gpio[32] LOC = AB11 | IOSTANDARD = LVCMOS33;    # JA7
+net gpio[33] LOC = AB10 | IOSTANDARD = LVCMOS33;    # JA8
+net gpio[34] LOC = AB9  | IOSTANDARD = LVCMOS33;    # JA9
+net gpio[35] LOC = AA8  | IOSTANDARD = LVCMOS33;    # JA10
+
+# Pmod JB
+net gpio[36] LOC = W12 | IOSTANDARD = LVCMOS33; # JB1
+net gpio[37] LOC = W11 | IOSTANDARD = LVCMOS33; # JB2
+net gpio[38] LOC = V10 | IOSTANDARD = LVCMOS33; # JB3
+net gpio[39] LOC = W8  | IOSTANDARD = LVCMOS33; # JB4
+net gpio[40] LOC = V12 | IOSTANDARD = LVCMOS33; # JB7
+net gpio[41] LOC = W10 | IOSTANDARD = LVCMOS33; # JB8
+net gpio[42] LOC = V9  | IOSTANDARD = LVCMOS33; # JB9
+net gpio[43] LOC = V8  | IOSTANDARD = LVCMOS33; # JB10
+
+# Pmod JC
+net gpio[44] LOC = AB7 | IOSTANDARD = LVCMOS33; # JC1_P (JC1)
+net gpio[45] LOC = AB6 | IOSTANDARD = LVCMOS33; # JC1_N (JC2)
+net gpio[46] LOC = Y4  | IOSTANDARD = LVCMOS33; # JC2_P (JC3)
+net gpio[47] LOC = AA4 | IOSTANDARD = LVCMOS33; # JC2_N (JC4)
+net gpio[48] LOC = R6  | IOSTANDARD = LVCMOS33; # JC3_P (JC7)
+net gpio[49] LOC = T6  | IOSTANDARD = LVCMOS33; # JC3_N (JC8)
+net gpio[50] LOC = T4  | IOSTANDARD = LVCMOS33; # JC4_P (JC9)
+net gpio[51] LOC = U4  | IOSTANDARD = LVCMOS33; # JC4_N (JC10)
+
+# Pmod JD
+net gpio[52] LOC = V7  | IOSTANDARD = LVCMOS33; # JD1_P (JD1)
+net gpio[53] LOC = W7  | IOSTANDARD = LVCMOS33; # JD1_N (JD2)
+net gpio[54] LOC = V5  | IOSTANDARD = LVCMOS33; # JD2_P (JD3)
+net gpio[55] LOC = V4  | IOSTANDARD = LVCMOS33; # JD2_N (JD4)
+net gpio[56] LOC = W6  | IOSTANDARD = LVCMOS33; # JD3_P (JD7)
+net gpio[57] LOC = W5  | IOSTANDARD = LVCMOS33; # JD3_N (JD8)
+net gpio[58] LOC = U6  | IOSTANDARD = LVCMOS33; # JD4_P (JD9)
+net gpio[59] LOC = U5  | IOSTANDARD = LVCMOS33; # JD4_N (JD10)

@@ -1,0 +1,7 @@
+setMode -bs
+setCable -p auto 
+identify
+assignFile -p 2 -file build/platform.bit
+program -p 2 -e
+quit
+

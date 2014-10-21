@@ -1,0 +1,72 @@
+Node (microbench) {
+	# This is a micro benchmark for the JVM 
+	Modules = "debug:microbench";
+
+	Target = "linux_josek";
+#	Target = "tricore";
+#	ProcessorType = "tc1796";
+
+	OsekOS (KesoOS) {
+		# Enable extended error status reporting
+		# Possible values: STANDARD, EXTENDED
+		STATUS = "EXTENDED";
+
+		ERRORHOOK = false {}
+		SHUTDOWNHOOK = false {}
+		PRETASKHOOK = false {}
+		POSTTASKHOOK = false {}
+
+		USEGETSERVICEID = "FALSE";
+		USEPARAMETERACCESS = "FALSE";
+		STACKCHECK = "TRUE";
+
+		# Use RES_SCHEDULER resource within application (boolean)
+		USERESSCHEDULER = "FALSE";
+
+		MICROCONTROLLER = "TC1796";
+		TRICORE_RT_CLOCK = "NOT_USED";
+		TRICORE_NUM_CSA = "200";
+		CC = "AUTO";
+	}
+
+	Domain (dom1) {
+
+		Heap = CoffeeBreak {
+			HeapSizeKB=100;
+			SlotSize=16;
+		}
+
+		Task (vtask1) {
+			MainClass="benchmark/VoidTask1";
+			Priority = "3";
+			Schedule = "full";
+			Type = "extended";
+			CallScheduler = "yes";
+			Activation = "1";
+			Stacksize = "512";
+			Autostart = false {}
+		}
+
+		Task (vtask2) {
+			MainClass="benchmark/VoidTask2";
+			Priority = "2";
+			Schedule = "full";
+			Type = "extended";
+			Activation = "1";
+			Stacksize = "512";
+			Autostart = false {}
+		}
+
+		Task (maintask) {
+			MainClass="benchmark/MicroBench";
+			Priority = "1";
+			Type = "extended";
+			Schedule = "full";
+			Activation = "1";
+			Stacksize = "512";
+			Autostart = true { 
+				Appmode = "OSDEFAULTAPPMODE";
+			}
+		}
+	}
+}

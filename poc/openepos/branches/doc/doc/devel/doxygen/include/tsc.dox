@@ -1,0 +1,16 @@
+/*! @class System::TSC_Common
+    @ingroup med_tsc
+
+    @brief This class defines the interface to the Timestamp Counter
+
+    <!-- *********************************************************************** -->
+
+    @fn static Hertz System::TSC_Common::frequency()
+    @return Returns the TSC frequency in Hertz
+
+    <!-- *********************************************************************** -->
+
+    @fn static Time_Stamp System::TSC_Common::time_stamp()
+    @return Returns the current Timestamp
+
+*/

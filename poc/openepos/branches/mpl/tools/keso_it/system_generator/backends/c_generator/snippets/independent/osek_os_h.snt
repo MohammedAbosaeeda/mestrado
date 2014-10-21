@@ -1,0 +1,14 @@
+#ifndef __osek_os_h
+#define __osek_os_h
+
+#include <osek_defs.h>
+#include <osek_task.h>
+#include <system/config.h>
+#include <timer.h>
+
+
+//+ CH_EO_C_osek_os_h_hookPrototypes
+
+//+ CH_EO_C_osek_os_h_taskDecs
+
+#endif

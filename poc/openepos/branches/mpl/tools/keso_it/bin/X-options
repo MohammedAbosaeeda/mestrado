@@ -1,0 +1,6 @@
+#!/bin/sh
+find ${KESOSRCPATH}/builder/ -name "*.java" | xargs grep "\.hasOption" | sed 's/.*\.hasOption("\([^)]*\)").*/\1/' | sort | uniq
+echo 
+echo "rc: ${KESORC}"
+echo setenv JINOFLAGS \"${JINOFLAGS}\"
+echo export JINOFLAGS=\"${JINOFLAGS}\"

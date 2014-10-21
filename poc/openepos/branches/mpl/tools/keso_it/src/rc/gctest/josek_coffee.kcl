@@ -1,0 +1,197 @@
+Cluster (keso) {
+	Node (gctest) {
+
+		Target = "linux_josek";
+	
+		# configuration for the IRR heap test
+	
+		# Sourcepaths for this system, relative to libs/  or filenames.
+		# Multiple Sourcepaths options may be specified, and each
+		# option may contain multiple paths/files seperated by :
+		Modules = "debug:test_gc";
+	
+		OsekOS (KesoOS) {
+			# Enable extended error status reporting
+			# Possible values: STANDARD, EXTENDED
+			STATUS = "EXTENDED";
+			
+			STARTUPHOOK = false {}
+ 
+			ERRORHOOK = false {}
+			SHUTDOWNHOOK = false {}
+			PRETASKHOOK = false {}
+			POSTTASKHOOK = false {}
+	
+			USEGETSERVICEID = "FALSE";
+			USEPARAMETERACCESS = "FALSE";
+			
+			# Use RES_SCHEDULER resource within application (boolean)
+			USERESSCHEDULER = "FALSE";
+			
+			# (PO) Target Microcontroller (TC1796, TC1795B, TC10GP)
+			MICROCONTROLLER = "TC1796";
+	
+			# (PO) Choose a timer for the realtime clock feature
+			# (GPTU{0,1}_T{0,1}, STM_T{0,1})
+			TRICORE_RT_CLOCK = "NOT_USED";
+	
+			# (PO) Number of Context Save Areas used by the application
+			TRICORE_NUM_CSA = "200";
+			
+			# (PO) OSEK conformance class. (BCC1,BCC2,ECC1,ECC2,AUTO)
+			CC = "AUTO";
+			
+			# (PO) Overall Scheduling policy (NON,FULL,MIXED,AUTO)
+			SCHEDULE = "AUTO";
+			
+			# (PO) size of tracebuffer, 0 disables tracing
+			# TRACEBUFFER = "100";
+	
+			# (PO) Use user defined main function (boolean)
+			USERMAIN = "FALSE";
+	
+			# (PO) Enable support for Stackchecking
+			STACKCHECK = "TRUE";
+	
+			# (PO) Additional RT checks (boolean)
+			# checking initialization of variables, checks if TerminateTask() called at
+			# the end of each Task etc.
+			EXTRA_RUNTIME_CHECKS = "FALSE";
+	
+			
+			# (PO) Allow ORTI aware debuggers to trace syscalls (boolean)
+			SERVICETRACE = "FALSE";
+			
+			# (PO) Allow ORTI aware debuggers to access last !=E_OK error code returned
+			USELASTERROR = "FALSE";
+		
+			# (PO) PREISRHOOK and POSTISRHOOK routines
+			PREISRHOOK = false {}
+			POSTISRHOOK = false {}
+		}
+		
+		Domain (dom1) {
+			# (KESO) Type of the domain's heap
+			# (RestrictedDomainScope, IdleRoundRobin, CoffeBreak)
+			Heap = CoffeeBreak {
+				# (KESO) Size of the domain's heap
+				HeapSize=2048;
+	
+				# (KESO) Size of one slot on the heap 
+				SlotSize=8;
+	
+				# (KESO) Name of the synchronization group (optional, IdleRoundRobin only)
+				Group = "Default";
+			}
+	
+			Task (task1) {
+				# (KESO) Choose MainClass and MainMethod of this task
+				# (i.e. where it is started)
+				MainClass="test/HelloWorld";
+	
+				# Specifiy if tasks is automatically set to ready on startup
+				Autostart = true {
+					# specifies in which Appmodes the task is autostarted.
+					# applies only if Autostart is enabled
+					Appmode = "OSDEFAULTAPPMODE";
+				}
+	
+				# Priority >=0, the higher the number the higher is the priority
+				Priority = "5";
+				
+				# Preemptability of the Task (NON, FULL)
+				# If NON, no internal resources may be assigned to this task
+				Schedule = "full";
+	
+				# Max number of recorded activation requests for this task
+				Activation = "1";
+	
+				# (PO) Used for optimization. Specifies if the Schedule() call is
+				# used by this task. (YES, NO)
+				CallScheduler = "NO";
+				
+				# (PO) BASIC or EXTENDED TASK? (BASIC have no WAITING state)
+				Type = "extended";
+	
+				# (PO) Stacksize in bytes required for this task. System will add
+				# additional space for calling system functions
+				# Should include space required by Pre/PostTaskHooks if used
+				Stacksize = "100";
+	
+				# (PO) Number of Context Save Areas used by this task
+				# TRICORE_NUM_CSA = "20";
+	
+				UseEvent = "Wakeup";
+			}
+			
+			# Alarms may also be declared as global objects
+			Alarm (alarm1) {
+				# Counter that serves as base for this alarm
+				UseCounter = "counter1";
+	
+				# Action to take upon expiration of this alarm
+				# (ACTIVATETASK, SETEVENT, ALARMCALLBACK)
+				Action = SETEVENT {
+					# Task to activate/set an event for
+					# applicable only if Action is either ACTIVATETASK or SETEVENT
+					UseTask = "task1";
+	
+					# Event to set for the Task specified by Task
+					# applicable only if Action is SETEVENT
+					UseEvent = "Wakeup";
+	
+					# (KESO) name and class of the callback method if Action is
+					# ALARMCALLBACK
+					#AlarmCallbackClass = "test/Callbacks";
+					#AlarmCallbackMethod = "alarm1handler()V";
+				}
+	
+				# Specifies if this alarms is automatically startet on system startup
+				# based on the given application modes.
+				Autostart = true {
+					# Application modes to automatically start this alarm in
+					Appmode = "OSDEFAULTAPPMODE";
+	
+					# time when this alarm shall expire first
+					Alarmtime = "1";
+	
+					# cycle time of a cyclic alarm
+					Cycletime = "1";
+				}
+			}
+		}
+	
+		# Counters are always declared globally but may be used by different Alarms
+		# which may be locally or globally defined
+		Counter (counter1) {
+			# Maximum allowed counter value. When reached the counter will roll over.
+			MAXALLOWEDVALUE = "10";
+	
+			# Minimum cycle time for associated alarms in counter ticks
+			MINCYCLE = "1";
+	
+			# Number of ticks required to reach a counter specific unit
+			TICKSPERBASE = "1";
+	
+			# (PO) Hardware timer used for this counter or USERCOUNTER if application
+			# increases the counter
+			# (GPTU{0,1}_T{0,1}, STM_T{0,1})
+			TRICORE_TIMER = "STM_T0";
+	
+			# (PO) Relative interrupt level of this counter
+			TRICORE_IRQLEVEL = "2";
+	
+			# (PO) Ticktime in ns for this counter, if not limited by hardware
+			#TIME_IN_NS = "1000000000";
+			TIME_IN_NS = "100000000";
+		}
+		# Events are always declared globally but may only be set/queried for tasks
+		# within the same domain (restricted due to getTaskByName)
+		Event (Wakeup) {
+			# The MASK attribute must either be a power of 2 or auto. In case of auto
+			# KESO will automatically generate a valid mask for the event
+			# numbers prefixed with 0x are considered as hexadecimal numbers
+			Mask = "Auto";
+		}
+	}
+}

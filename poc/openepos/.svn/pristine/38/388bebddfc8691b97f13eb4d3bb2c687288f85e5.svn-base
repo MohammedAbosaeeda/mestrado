@@ -1,0 +1,174 @@
+\documentclass[a4paper,10pt]{article}   % list options between brackets
+\usepackage[utf8]{inputenc}	% for Latin languages
+\usepackage[T1]{fontenc}	% for ISO and UTF characters
+\usepackage[english]{babel}	% for multilingual support
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{bytefield}
+
+\usepackage{listings}
+\lstset{keywordstyle=\bfseries, flexiblecolumns=true}
+\lstloadlanguages{C,[ANSI]C++,HTML}
+\lstdefinestyle{prg}{
+	  basicstyle=\small\sffamily,
+	  %  lineskip=-0.2ex, 	% use this in case you're short of space %
+	    showspaces=false
+	}
+\newcommand{\fig}[3][width=\columnwidth]{
+  \begin{figure}[ht]
+    {\centering{\includegraphics[#1]{#2}}\par}
+    \caption{#3}
+    \label{fig:#2}
+  \end{figure}
+	}
+
+\title{EPOS' Secure Communication Support}
+\author{Davi Resner\\
+Software/Hardware Integration Lab\\
+Federal University of Santa Catarina\\
+davir@lisha.ufsc.br}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\begin{abstract}
+	Communication security is an important concern in Wireless Sensor Networks. In many scenarios, there is the need to make sure that exchanged messages have the properties of authentication, confidentiality and integrity. This report shows how to use EPOS' secure communication classes to enable sensors to establish a symmetric key with a central server and then use this key to communicate with the aforementioned principles granted transparently. Each parameter comes followed by the filename and line number in which it is set. This document is meant to go along with the secure\_nic\_master.cc and secure\_nic\_slave.cc applications.\\
+\textit{Keywords: Internet of Things; Wireless Sensor Networks; Trustfulness; Security; Key Establishment; Confidentiality; Authentication; Integrity}
+\end{abstract}
+
+\section{Overview}
+\indent	EPOS' Secure Key Bootstrapping and Authentication protocol is based on the Elliptic Curve version of Diffie-Hellman. It enables sensors to establish a symmetric key with a trusted server and used it to encrypt messages and communicate securely. The protocol relies on unique sensor IDs known beforehand only by the server and the corresponding sensor.\\
+\indent	AES is used as an encryption engine; PTP \cite{PTP} is used to synchronize clocks and thus be able to use timestamps to prevent replay attacks; Poly1305-AES \cite{POLY} is the One-Time-Password generation engine.\\
+\indent	To use the protocol, a number of parameters need to be set the same on each node, which are explained throughout this document.\\
+\indent	For a good yet not dense explanation of the Diffie-Hellman protocol and Elliptic Curves, refer to \cite{STALLINGS}. The implementation of the required arithmetic was greatly based on \cite{Brown:2001} \cite{HAC}. EPOS' PTP implementation is explained in \cite{PTP}. A little information about the protocol explained here can be found at \cite{SEUS}.\\
+
+\section{Machine-specific parameters}
+	You can tweak these two parameters to optimize the implementation to a particular machine. If your machine has a 32-bit architecture, you shouldn't need to change these.\\
+
+		\textbf{Bignum base (or digit size): include/traits.h:230} \\
+		\indent The base in which the bignums are represented. For best performance, this should be set to the native processor's word size (usually unsigned int). The digit size is defined as the size of the type of the base (e.g. sizeof unsigned int). Always use an unsigned type.\\
+
+		\textbf{Double-digit: include/traits.h:231} \\
+		\indent A type of size two times larger than the one defined as digit. Should also be unsigned.\\
+
+\section{Network Parameters}
+	These parameters are public and define the elliptic curve to be used by the Diffie-Hellman algorithm for this specific network. These values should be set equally in every node to enter the network. You may use the values provided as comments in the model applications without a problem.\\
+
+		\textbf{Modulo (or Prime):\\app/secure\_nic\_master.cc:30\\app/secure\_nic\_slave.cc:31} \\
+		\indent This should be a big prime number. It is written in little-endian, digit-by-digit format. In general, the bigger this number is, the more secure the network becomes, but the complexity of the Bignum operations grow accordingly. You can use SECV \cite{SECV2} recommendations of elliptic curve parameters.\\ %The following command can be used to generate a safe prime to be used as modulo:
+%		\begin{lstlisting}
+%		openssl dhparam -C <desired_size_in_bits>
+%		\end{lstlisting}
+%		\underline{Remember to convert the output to little-endian, digit representation.} Also, you can use SECV recommendations of elliptic curve parameters \cite{SECV2}.\\
+
+		\textbf{Bignum size: include/traits.h:232} \\
+		\indent The size in digits of each bignum. This should be the same size as the defined modulo. The bigger this value is, the more complex each bignum operation gets, but the network security increases accordingly. NIST suggests \cite{NSA} that, to provide the same security as a 128-bit symmetric key, a 256-bit prime should be used. You can adjust this value to your processing constraints.\\
+		
+		\textbf{Barrett $\mu$:\\app/secure\_nic\_master.cc:31\\app/secure\_nic\_slave.cc:32} \\
+		\indent The modular reduction after multiplication is implemented with the Barrett Reduction \cite{Brown:2001} algorithm. This is a constant used by the method to accelerate reduction, and is defined as:
+		\begin{equation}
+			\mu = \left \lfloor b^{2*k} / p \right \rfloor
+		\end{equation}
+		Where $b$ is the base (usually $2^{32}$), $k$ is the size in digits of the prime, and $p$ is the prime (defined in \textbf{Modulo}). $\mu$ will always be one digit larger than the prime. It is written in little-endian, digit-by-digit format.\\
+
+		\textbf{Base point:\\app/secure\_nic\_master.cc:28,29\\app/secure\_nic\_slave.cc:29,30} \\
+		\indent A little-endian, byte-by-byte representation of the elliptic curve point used as Base Point by Diffie-Hellman. You can use SECV \cite{SECV2} recommendations of elliptic curve parameters.\\
+
+		\textbf{Time window: include/traits.h:256} \\
+		\indent Every time a time stamp is used by the security module, it is rounded up to a multiple of this value. This is effectively the time window in which any given secure message will be considered valid. Replay attacks are possible within the same time window, so you should not set this value too high. A value too low might make it impossible to send valid messages due to duty cycling in the network, so you should take that into account.\\
+
+
+\section{User's Guide}
+	This guide is divided in two: one for the server and one for the sensor nodes. Each of these is subdivided in three phases, that must be followed in order: 1) Initialization; 2) Key Establishment and Authentication; 3) Secure Communication.
+	\subsection{Deploying a Server}
+	\subsubsection{Initialization}
+		These values characterize this particular node and prepare for execution. For the server, the following parameters need to be set:\\
+
+		\textbf{NIC Address: app/secure\_nic\_master.cc:158} \\
+		\indent The MAC address of the server. This value should be known by every node.\\
+
+		\textbf{PTP role: app/secure\_nic\_master.cc:117-119} \\
+		\indent Tells the PTP object that this is a master node, which will be used as a reference clock by the other nodes, and will issue synchronization messages.\\
+
+
+		\textbf{Random seed: app/secure\_nic\_master.cc:123} \\
+		\indent It is important to make sure that each node has its own seed, because Diffie-Hellman private parameters are chosen at random, and two nodes ideally shouldn't have the same private keys.\\
+
+		\textbf{PTP: app/secure\_nic\_master.cc:120,145} \\
+		\indent Line 120 tells the PTP object to initialize its internal parameters. Line 145 sets up a periodic thread which will issue a PTP synchronization message every configured time period.\\
+
+		\textbf{Secure\_NIC: app/secure\_nic\_master.cc:125} \\
+		\indent The Secure\_NIC constructor will calculate this node's Diffie-Hellman keypair. This is a costly process and might take a few seconds, depending on the prime size in use. It takes as parameters a boolean which is true \textit{iff} this is a server, the cipher to be used, the Poly1305 implementation and the NIC used as the lower layer.\\
+
+		\textbf{Trusted IDs: app/secure\_nic\_master.cc:128-136}\\
+		\indent The ID of every node to be trusted by this server should be informed via the insert\_trusted\_id method. Any node with an ID not registered will \emph{not} be able to authenticate.\\
+
+	\subsubsection{Key Establishment and Authentication}
+	The server just needs to start accepting authentication requests. The authentication process is then carried out automatically when requests arrive.\\
+
+		\textbf{Start accepting requests: app/secure\_nic\_master.cc:139}\\
+		\indent The server will \emph{not} try to authenticate any node unless this value is set. You can write to this variable anytime to start/stop accepting connections. It starts as false by default.\\
+
+	\subsubsection{Secure Communication}
+	Nodes that are authenticated with the server can send and receive secure messages to/from it. If a destination node is \emph{not} authenticated with this server, calling the send method will result in no message being sent.\\
+
+		\textbf{Receiving secure messages: app/secure\_nic\_master.cc:69,74,76,142}\\
+		\indent You can receive secure messages by registering an observer to the secure nic. Every time a secure message arrives, the update method will be called. Decryption is handled transparently, and the message is delivered already decrypted.\\
+
+		\textbf{Sending secure messages: app/secure\_nic\_master.cc:81}\\
+		\indent You can send secure messages by just calling the send method. If the destination node is authenticated, the message will be encrypted and sent.\\
+
+	\subsection{Deploying a Sensor}
+	\subsubsection{Initialization}
+		These values characterize this particular node and prepare for execution. For the sensors, the following parameters need to be set:\\
+
+		\textbf{Server's NIC Address: app/secure\_nic\_slave.cc:19} \\
+		\indent The MAC address of the server. This value should be known by every node.\\
+
+		\textbf{NIC Address: app/secure\_nic\_slave.cc:20,161} \\
+		\indent The MAC address of this sensor. Every node in the network should have a unique MAC address. If this is not the case, the authentication process may go wrong.\\
+
+		\textbf{PTP role: app/secure\_nic\_slave.cc:97,98} \\
+		\indent Tells the PTP object that this is a slave node, which will respond to synchronization messages and adjust its clock according to the server's.\\
+
+		\textbf{Random seed: app/secure\_nic\_slave.cc:106} \\
+		\indent It is important to make sure that each node has its own seed, because Diffie-Hellman private parameters are chosen at random, and two nodes ideally shouldn't have the same private keys.\\
+
+		\textbf{PTP: app/secure\_nic\_slave.cc:100} \\
+		\indent Tell the PTP object to initialize its internal parameters.\\ 
+
+		\textbf{Secure\_NIC: app/secure\_nic\_slave.cc:111} \\
+		\indent The Secure\_NIC constructor will calculate this node's Diffie-Hellman keypair. This is a costly process and might take a few seconds, depending on the prime size in use. It takes as parameters a boolean which is true \textit{iff} this is a server, the cipher to be used, the Poly1305 implementation and the NIC used as the lower layer.\\
+
+		\textbf{IDs app/secure\_nic\_slave.cc:112}\\
+		\indent Every trusted node must have an unique ID, known to the gateway. Use the set\_id method to set the ID of this node in the Secure\_NIC object.\\
+
+	\subsubsection{Key Establishment and Authentication}
+	The sensor nodes need to ask the server for authentication.\\ 
+
+		\textbf{Request authentication from server: app/secure\_nic\_slave.cc:121}\\
+		\indent Use this method to send the first message in the authentication protocol. The rest of the messages will be handled automatically.\\ 
+
+		\textbf{Poll for authentication: app/secure\_nic\_slave.cc:124}\\
+		\indent The authenticated() method will return true only when this node finishes the protocol correctly, thus being authenticated to the server and sharing a symmetric key with it.\\
+
+	\subsubsection{Secure Communication}
+	Nodes that are authenticated with the server can send and receive secure messages to/from it. If the server is \emph{not} authenticated with this node, calling the send method will result in no message being sent.\\
+
+		\textbf{Receiving secure messages: app/secure\_nic\_slave.cc:75-80,134}\\
+		\indent You can receive secure messages by registering an observer to the secure nic. Every time a secure message arrives, the update method will be called. Decryption is handled transparently, and the message is delivered already decrypted.\\
+
+		\textbf{Sending secure messages: app/secure\_nic\_slave.cc:141}\\
+		\indent You can send secure messages by just calling the send method. If the destination node is authenticated, the message will be encrypted and sent.\\
+
+		\section{Using Bignums with different moduli}
+		If you need to operate on several finite fields in the same application, this is possible. If the fields use moduli of the same size, you can just use the set\_mod method in Bignum to set a different modulo per-object. Keep in mind that \emph{you} must handle allocation of the modulo data (the data is \underline{not} copied).\\
+		\indent If you need to use moduli of different sizes, you can create a class that extends Bignum and overwrite the word and sz\_word parameters, as well as the modulo and Barrett $\mu$. This is exactly what is done by Poly1305-AES, so check out the files include/poly1305.h and src/abstraction/poly1305.cc.\\
+
+	\section{Questions?}
+		Feel free to contact me via email: davir@lisha.ufsc.br.
+
+		\bibliographystyle{IEEEtran}
+		\bibliography{references}
+\end{document}

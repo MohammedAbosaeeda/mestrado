@@ -1,0 +1,7 @@
+
+##################################################
+# IP Sources
+##################################################
+MACH_RTSNOC_VMACH_SC_SRCS = $(abspath $(addprefix $(BASE_DIR)/hw/mach/rtsnoc/vmach/, \
+))
+

@@ -1,0 +1,16 @@
+/*! @class System::MC146818
+    @ingroup med_rtc
+
+    @brief Motorola MC146818 RTC
+
+    The class MC146818 is an abstraction of the Motorola MC146818 RTC. This RTC Features an alarm and a batery-backup RAM (CMOS) too.
+
+    <!-- *********************************************************************** -->
+
+    @class System::PC_RTC
+    @ingroup med_rtc
+
+    @brief PC Real time clock abstraction
+
+    Provides a clear interface to PC RTC.
+*/

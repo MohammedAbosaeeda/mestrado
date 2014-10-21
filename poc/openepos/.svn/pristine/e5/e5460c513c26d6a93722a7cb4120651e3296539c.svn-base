@@ -1,0 +1,28 @@
+#include <TRICODE_OS.oil>
+
+CPU TricoreGCTest {
+	OS KesoOS {
+		STATUS = EXTENDED;
+		SCHEDULE = AUTO;
+	};
+	
+	ISR RXInterrupt {
+		CATEGORY = 2;
+		PRIORITY = 40;
+		STACKSIZE = 32768;
+		SIGNAL = IO;
+		IRQLEVEL = 0;
+	};
+
+	TASK Setup {
+		AUTOSTART = TRUE;
+		PRIORITY = 1;
+	};
+
+	TASK Receive {
+		AUTOSTART = FALSE;
+		PRIORITY = 2;
+	};
+
+};
+

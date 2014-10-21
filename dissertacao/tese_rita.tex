@@ -45,7 +45,7 @@
 \acro{DMEC}{\textit{Distributed Motion Estimation Component}}
 \acro{DID}{\textit{Discovery Interface Device}}
 \acro{EPOS}{\textit{Embedded Parallel Operating System}}
-\acro{GCC}{\textit{GNU project C and C ++ compiler}}
+\acro{GCC}{\textit{GNU Compiler Collection}}
 \acro{GDB}{\textit{GNU Project Debugger}}
 \acro{ICE}{\textit{In-circuit emulator}}
 \acro{IDD}{\textit{Iterative Delta Debugging}}
@@ -96,13 +96,33 @@
 
 \epigrafe{How often have I said to you that when you have eliminated the impossible, whatever remains, however improbable, must be the truth?}{ Sherlock Holmes}
 
-\textoResumo {The process of testing and debugging embedded software is non-trivial, once it needs a thorough inspection of the entire source code to make sure that there is no behavior beyond expectations. Perform these activities on embedded software is even more defiant, once developers need to find out how to optimize the use of the scarce resources since the test itself will compete with the application under test by the scarce system resources. This paper presents \texttt{TAP}, a tool for helping developers in the process of testing and debugging embedded systems. The main idea of this tool is emulating various possible system configurations to try to find errors in the application. Once detected an unspecified behavior, \texttt{TAP} automatically perform compilation, emulation and debugging accordingly to a XML specification file. }
+\textoResumo {O número de sistemas embarcados já superam a quantidade de habitantes do nosso planeta e este número continua crescendo em ritmo acelerado. Ademais, o projeto de \textit{hardware} e \textit{software} está cada vez mais sofisticado e com requisitos mais rígidos para atender o exigente mercado.
 
-\palavrasChave {chave 1. chave 2. ... chave n.}
+O aumento da complexidade do sistema dificulta a validação e verificação dos sistemas embarcados. As consequências desta sofisticação afetam muito o desenvolvimento de \textit{software} embarcado que, mesmo representando uma parcela minoritária  do sistema, tornou-se responsável por cerca de 80\% dos erros encontrados nos sistemas.
 
-\textAbstract {The process of testing and debugging embedded software is non-trivial, once it needs a thorough inspection of the entire source code to make sure that there is no behavior beyond expectations. Perform these activities on embedded software is even more defiant, once developers need to find out how to optimize the use of the scarce resources since the test itself will compete with the application under test by the scarce system resources. This paper presents \texttt{TAP}, a tool for helping developers in the process of testing and debugging embedded systems. The main idea of this tool is emulating various possible system configurations to try to find errors in the application. Once detected an unspecified behavior, \texttt{TAP} automatically perform compilation, emulation and debugging accordingly to a XML specification file.}
+Teste e depuração de \textit{software} não é trivial, uma vez que é necessária a inspeção completa de todo o código fonte para se certificar de que o comportamento não difere das expectativas. Realizar essas atividades em sistemas embarcados é ainda mais desafiador, uma vez que os desenvolvedores precisam para descobrir como otimizar o uso dos recursos, pois o teste em si tende a competir com o aplicativo sob teste pelos escassos recursos do sistema.
 
-\keywords {key 1. key 2. ... key n.}
+Esta monografia apresenta uma maneira de ajudar os desenvolvedores no processo de testar e depurar sistemas embarcados. Ela apresenta a ferramenta \ac{TAP}, cuja ideia consiste em emular as possíveis configurações do sistema a fim de tentar encontrar erros na aplicação. Uma vez detectado um comportamento não especificado, \ac{TAP} automaticamente executa a compilação, depuração e emulação de acordo com um arquivo de especificação.
+
+\ac{TAP} é avaliada de maneira quantitativa para os critérios de tentativas realizadas \textit{versus} a configuração de granularidade, o consumo de tempo para realizar o teste/depuração e o consumo de memória para suportar a ferramenta. A ferramenta também foi avaliada de maneira qualitativa em um comparativo com ferramentas e técnicas correlatas. 
+
+Os resultados mostraram que a estratégia proposta resultou em uma ferramenta flexível e com grande cobertura dos desafios propostos para atingir os desafios associados à automação de testes de \textit{software}. Além disso, \ac{TAP} apresenta soluções equivalentes às de outras ferramentas e cobre inclusive características que não faziam parte do escopo inicialmente proposto.}
+
+\palavrasChave {Execução de testes automática, testes de \textit{software} embarcado, depuração de \textit{software}embarcado}
+
+\textAbstract {The number of embedded systems already exceed the number of inhabitants of this planet and this number continues to grow. Moreover, the design of \textit {hardware} and \textit {software} are increasingly sophisticated and more stringent requirements to meet the demanding market.
+
+Increasing system complexity hampers validation and verification of embedded systems. The consequences of this sophistication greatly affect the development of the embedded software, even representing a minority of the system, became responsible for about 80 \% of the errors found.
+
+Testing and debugging embedded software is non-trivial, once it needs a thorough inspection of the entire source code to make sure that there is no behavior beyond expectations. Perform these activities on embedded systems are even more defiant, once developers need to find out how to optimize the use of the scarce resources since the test itself will compete with the application under test by the scarce system resources. 
+
+This monograph presents a way to help the developers to test and debug embedded system process. It features the \ac{TAP} tool, whose the basic idea is to emulate various possible system configurations to try to find errors in the application. Once detected an unspecified performance, \texttt{TAP} automatically perform compilation, emulation and debugging accordingly to the specification file.
+
+\ac{TAP} is evaluated quantitatively for the criteria of trials performed \textit{versus} the granularity, the time consumption for testing/debugging and memory consumption to support the tool. The tool was evaluated in a qualitative manner in comparison with related tools and techniques.
+
+Results showed that the proposed strategy has resulted in a flexible and extensive coverage of the challenges faced tool to achieve the challenges associated with testing automation of software. Moreover, \ac{TAP} presents equivalent solutions to the other tools and even covers features that were not part of the originally intended scope.}
+
+\keywords {Automatic testing execution, embedded software testing, embedded system debugging}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Início do documento
@@ -114,7 +134,7 @@
 \folhaderosto % Se nao quiser imprimir a ficha, é só não usar o parâmetro
 \folhaaprovacao
 \paginadedicatoria
-\paginaagradecimento
+%\paginaagradecimento
 \paginaepigrafe
 \paginaresumo
 \paginaabstract
@@ -126,7 +146,7 @@
 
 \chapter{Introdução}
 \label{cap:introducao}
-Sistemas embarcados podem ser apresentados como uma combinação de \textit{hardware} e \textit{software} concebida para realizar uma tarefa específica. Estes sistemas estão amplamente acoplados a inúmeros dispositivos e suas funcionalidades estão cada vez mais intrínsecas no cotidiano das pessoas~\cite{carro2003sistemas}. Stualmente interagimos com mais de um sistema embarcado por dia e o número destes sistemas já superam o número de habitantes do nosso planeta, ainda, este número continua crescendo em ritmo acelerado~\cite{Marcondes:MSC:2009}.
+Sistemas embarcados podem ser apresentados como uma combinação de \textit{hardware} e \textit{software} concebida para realizar uma tarefa específica. Estes sistemas estão amplamente acoplados a inúmeros dispositivos e suas funcionalidades estão cada vez mais intrínsecas no cotidiano das pessoas~\cite{carro2003sistemas}. Atualmente interagimos com mais de um sistema embarcado por dia e o número destes sistemas já superam o número de habitantes do nosso planeta, ainda, este número continua crescendo em ritmo acelerado~\cite{Marcondes:MSC:2009}.
 
 Como em qualquer sistema computacional, as soluções embarcadas também basearam-se na premissa de que cada componente utilizado está efetuando corretamente as suas atividades e que a integração entre os mesmos não se desvia do comportamento esperado. Caso contrário, o sistema pode apresentar erros. 
 
@@ -262,7 +282,8 @@ A classificação de níveis baseada na maturidade do processo de teste propõe que 
  \item \textbf{Nível 4} - o teste é considerado como uma ferramenta que auxilia no desenvolvimento de um \textit{software} com maior qualidade. O ato de testar não é um simples ato, mas sim uma maneira de produzir um \textit{software} de baixo risco com pouco esforço. Neste nível, a geração de código é realizada de maneira a suportar a concepção e o desenvolvimento de testes, facilitando também o reuso e manutenção do sistema.
 \end{itemize}
 
-\subsection{Testes de \textit{software} embarcado}
+%\subsection{Teste de \textit{software} embarcado *** estou fazendo}
+
 
 \section{Depuração de \textit{software} embarcado}
 A depuração é a arte de diagnosticar erros em sistemas e determinar a melhor forma de corrigi-los. Em geral, o ponto de partida para a depuração de um sistema é a ocorrência de algum erro, portanto, é muito comum que a depuração ocorra como consequência de um teste bem sucedido (isto, que encontrou erros).
@@ -543,17 +564,19 @@ A ferramenta $JINSI$ foi utilizada para corroborar a técnica, que além de captur
 
 \chapter{Ambiente compartilhado de teste e depuração}
 \label{ref:ambiente}
-Este capítulo apresenta o ambiente compartilhado de teste e depuração, demostrando de onde as ideias foram extraídas, adaptadas e, em alguns casos, melhoradas. Além disso, serão apresentas instruções para integrar a execução de testes com os possíveis ambientes de depuração, gerando o ambiente compartilhado de desenvolvimento. 
+Este capítulo apresenta o ambiente compartilhado de teste e depuração, demostrando de onde as ideias foram extraídas, adaptadas e, em alguns casos, melhoradas. Além disso, serão apresentas instruções para integrar a execução de testes com os possíveis ambientes de depuração, gerando o ambiente compartilhado de desenvolvimento.
 
-Para definir a infraestrutura do ambiente foram analisados vários ambientes de execução automática de testes e de depuração, ambos com foco em sistemas embarcados. Estes sistemas são conhecidos por realizar tarefas específicas e possuírem apenas os recursos essenciais para desempenhá-la. 
+Para definir a infraestrutura do ambiente foram analisados vários ambientes de execução automática de testes e de depuração, ambos com foco em sistemas embarcados. Esta especialização tornou-se necessária pois estas atividades compartilharão os recursos do \ac{SUT}, o que no caso de sistemas embarcados é crítico pois geralmente possuem apenas os recursos essenciais para desempenhar uma determinada função. 
 
-As \ac{RSSF}, por exemplo, podem ser formadas por vários sensores espalhados por uma grande área de monitoramento. Em geral estes sensores possuem pouco poder de processamento e contam com uma memória de poucos \textit{kilobytes}~\cite{pottie2000wireless}. Logo, torna-se fundamental ressaltar que apesar do teste do \textit{software} embarcado compartilhar recursos com as aplicações do sistema, ele não deve influenciar sua operação.
+Um exemplo de sistema embarcado com um alto grau de dificuldade para atividades de teste e depuração é a \ac{RSSF}. Este tipo de rede pode ser composta por vários sensores que, além de permanecerem espalhados geograficamente por uma grande área de monitoramento, geralmente possuem pouco poder de processamento e apenas alguns \textit{kilobytes} de armazenamento~\cite{pottie2000wireless}.
 
-A emulação é uma opção é interessante quando o \ac{SUT} possui difícil acesso. No caso da \ac{RSSF} seria impraticável coletar todos os sensores para realizar um testes. Além da quantidade e da dificuldade de acesso às áreas em que os sensores atuam, as atividades de monitoramento teriam que sofrer uma pausa até o término do teste.
+No caso de muitas \ac{RSSF} é impraticável coletar todos os sensores para realizar testes, pois além da dificuldade de acesso às áreas em que os sensores atuam, as atividades de monitoramento teriam que sofrer uma pausa até o término do teste. A solução mais comum nestes casos é realizar os testes de \textit{software} e \textit{hardware} separadamente, utilizando-se simulação.
 
-Em sistemas embarcados é comum que componentes de \textit{software} e \textit{hardware} trabalhem em conjunto para desempenhar uma tarefa. Contudo, grande parte das falhas nos testes de um \textit{software} embarcado são oriundos da integração de componentes heterogêneos~\cite{seo}. Uma das alternativas para se atenuar este efeito é utilizar emulação, que possibilita a visualização do estado do software além de permitir o controle de sua execução\cite{KiSCL08}. Desta maneira, é possível analisar a intersecção entre componentes e monitorar a execução dos testes através da tabela de símbolos.
+Contudo, simular separadamente as componentes não garante o funcionamento de sua integreção. Em sistemas embarcados é comum que \textit{software} e \textit{hardware} trabalhem em conjunto para desempenhar uma tarefa. Aliás, grande parte das falhas nos testes de um \textit{software} embarcado são oriundos da integração de componentes heterogêneos~\cite{seo}. 
 
-O processo de teste para sistemas heterogênicos é uma tarefa trabalhosa, principalmente quando não se sabe qual ambiente de implantação será utilizado~\cite{universal:2013}. Existem várias alternativas para ajudar na tarefa e aprimorar a qualidade dos testes, como utilizar oráculo como um repositório de testes~\cite{priyaneural}, selecionar \textit{checkpoints} baseados na interfaces dos componentes~\cite{KiSCL08}, módulos de pré-processamento com análise de código fonte~\cite{atemes}.
+Uma das alternativas para se atenuar este efeito é utilizar emulação completa do sistema, que possibilita a visualização do estado do \textit{software} além de permitir o controle de sua execução\cite{KiSCL08}. Desta maneira, é possível analisar a intersecção entre componentes e monitorar a execução dos testes através da tabela de símbolos.
+
+O processo de teste para sistemas heterogênicos é uma tarefa trabalhosa, principalmente quando não se sabe qual ambiente de implantação será utilizado~\cite{universal:2013}. Existem várias alternativas para ajudar na tarefa e aprimorar a qualidade dos testes, como utilizar oráculo como um repositório de testes~\cite{priyaneural}, selecionar \textit{checkpoints} baseados na interfaces dos componentes~\cite{KiSCL08}, módulos de pré-processamento com análise de código fonte~\cite{atemes}, entre outros.
 
 Sabe-se que o processo de depuração também precisa de ferramentas específicas para auxiliar no monitoramento da execução de um programa. O sucesso das técnicas que focam em automação da depuração não dependem apenas dos algoritmos ou dados coletados, mas também da estabilidade fornecida pelo ambiente para desempenhar tais atividades. Por exemplo, nas ferramentas de captura e reprodução~\cite{orso2005selective, orso2006isolating, qi2011locating} é essencial que a etapa de captura grave todas as operações que levam ao erro.
 
@@ -713,7 +736,7 @@ A ferramenta então foi configurada para adicionar pontos de interrupção depois d
 
 Para a configuração \texttt{NUM\_WORKERS} com o valor 60 não houve nenhuma resposta positiva de \textit{continue}. Conforme pode ser observado na Figura~\ref{fig:gdb_dmec_60_workers} não há nenhuma resposta da aplicação e que nem mesmo a função principal foi atingida. 
 
-\fig{gdb_dmec_60_workers}{Execução da depuração do DMEC com a configuração \texttt{NUM\_WORKERS} = 60}{scale=.4}
+\fig{gdb_dmec_60_workers}{Execução da depuração da aplicação DMEC com a configuração \texttt{NUM\_WORKERS} = 60}{scale=.4}
 
 Ainda, observando-se o relatório final emitido pela ferramenta foi possível descobrir que sempre que a configuração \texttt{NUM\_WORKERS} apresentava um número maior que 10 a aplicação se comportava de maneira anômala. Após a execução da ferramenta e análise do relatório foi possível determinar que existia um limite máximo de trabalhadores, informação esta que ajudou no desenvolvimento do componente.
 

@@ -1,0 +1,3 @@
+#!/usr/bin/tcsh
+
+${JAVA} -cp ${KESOROOTPATH}/system_generator/classes:${JDKTOOLS} josek.JOsek $*

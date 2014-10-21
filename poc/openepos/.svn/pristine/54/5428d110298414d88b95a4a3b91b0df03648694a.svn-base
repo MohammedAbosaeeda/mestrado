@@ -1,0 +1,41 @@
+/*! @class System::PPC32_MMU
+    @ingroup med_mmu
+
+    @brief The PPC32_MMU extends the System::MMU_Common as a 0-level page system.
+    For futher details, consult the System::MMU_Common documentation.
+
+    <!--************************************************************************************************-->
+    @fn static void flush_tlb()
+
+    <!--************************************************************************************************-->
+    @fn static void flush_tlb(Log_Addr addr)
+
+    <!--************************************************************************************************-->
+    @fn static Phy_Addr alloc(unsigned int bytes = 1)
+    @brief Allocate some amount of memory
+
+    <!--************************************************************************************************-->
+    @fn static Phy_Addr calloc(unsigned int bytes = 1)
+    @brief Allocate and zero some amount of memory
+
+    <!--************************************************************************************************-->
+    @fn static void free(Phy_Addr addr, int n = 1)
+    @brief Free some amount of memory
+
+    <!--************************************************************************************************-->
+    @fn static Page_Directory * volatile current()
+    @returns Returns a pointer to current page directory
+
+    <!--************************************************************************************************-->
+    @fn static Phy_Addr physical(Log_Addr addr)
+    @brief Converts a Logical Address to Physical Address
+
+    <!--************************************************************************************************-->
+    @fn static void init()
+    @brief Performes the initialization of the MMU component.
+
+    This functions initialize the free spaces list accordingly to the values presented by the SystemInfo object.
+
+    <!--************************************************************************************************-->
+
+*/

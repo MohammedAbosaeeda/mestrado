@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="94">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name="canneal">
+        <df name="src">
+          <in>annealer_thread.cc</in>
+          <in>epos_wrappers.cc</in>
+          <in>math.cc</in>
+          <in>netlist.cc</in>
+          <in>netlist_elem.cc</in>
+          <in>pthread.cc</in>
+          <in>rgn.cc</in>
+        </df>
+      </df>
+      <df name="courses">
+        <df name="emote-basic">
+          <in>01_hello.cc</in>
+          <in>02_sensor.cc</in>
+          <in>03_radio.cc</in>
+          <in>03_radio_sink.cc</in>
+          <in>04_threads.cc</in>
+          <in>04_threads_sink.cc</in>
+        </df>
+      </df>
+      <df name="dmec">
+        <df name="src">
+          <in>dmec_abst_assert.cc</in>
+          <in>dmec_abst_random.cc</in>
+          <in>dmec_abst_synchronizer.cc</in>
+          <in>dmec_block.cc</in>
+          <in>dmec_block_mode.cc</in>
+          <in>dmec_block_mode_factory.cc</in>
+          <in>dmec_block_mode_type.cc</in>
+          <in>dmec_dmec_picture.cc</in>
+          <in>dmec_error.cc</in>
+          <in>dmec_flat_h264_pmc_node.cc</in>
+          <in>dmec_full_search_match_algorithm.cc</in>
+          <in>dmec_h264_modes_partitioner.cc</in>
+          <in>dmec_lazy_flat_h264_pmc.cc</in>
+          <in>dmec_lazy_picture.cc</in>
+          <in>dmec_macroblock.cc</in>
+          <in>dmec_pc_pme_worker_proxy_db_sth.cc</in>
+          <in>dmec_pc_synchronizer.cc</in>
+          <in>dmec_picture.cc</in>
+          <in>dmec_picture_motion_estimator_coordinator.cc</in>
+          <in>dmec_picture_motion_estimator_worker.cc</in>
+          <in>dmec_picture_partitioner.cc</in>
+          <in>dmec_plane.cc</in>
+          <in>dmec_reference_full_search_bma.cc</in>
+          <in>dmec_reference_picture_motion_counterpart.cc</in>
+          <in>dmec_util_test_support.cc</in>
+          <in>dmec_vectorial_pmc.cc</in>
+        </df>
+      </df>
+      <df name="home_automation">
+        <in>ac_control.cc</in>
+        <in>co2_sensor.cc</in>
+        <in>home_gw.cc</in>
+        <in>home_sniffer.cc</in>
+        <in>lamp_actuator.cc</in>
+      </df>
+      <df name="linkgraph_app_gui">
+        <in>CommandMonitor.cpp</in>
+        <in>CommandParser.cpp</in>
+        <in>Serial.cpp</in>
+        <in>emote2-demo.cpp</in>
+      </df>
+      <df name="photoboat">
+        <in>battery_monitor_relay.cc</in>
+        <in>motor_control_digital.cc</in>
+        <in>motor_control_pwm.cc</in>
+      </df>
+      <in>StringUtil.cc</in>
+      <in>adxl345.cc</in>
+      <in>at90can128_app.cc</in>
+      <in>atmega1281_app.cc</in>
+      <in>atmega128_app.cc</in>
+      <in>atmega16_app.cc</in>
+      <in>axi4lite_app.cc</in>
+      <in>canneal_app.cc</in>
+      <in>constants.h</in>
+      <in>dmec_app.cc</in>
+      <in>emote2_test.cc</in>
+      <in>integratorcp_app.cc</in>
+      <in>linkgraph_app.cc</in>
+      <in>mc13224v_app.cc</in>
+      <in>ml310_app.cc</in>
+      <in>parser.cc</in>
+      <in>parser.h</in>
+      <in>pc_app.cc</in>
+      <in>plasma_app.cc</in>
+      <in>scada.cc</in>
+      <in>sensor.cc</in>
+      <in>sensorOld.cc</in>
+      <in>sink.cc</in>
+      <in>testeMultiple.cc</in>
+      <in>testeSergio.cc</in>
+      <in>timetrigger.cc</in>
+      <in>udp_demo.cc</in>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>../makefile</itemPath>
+    </logicalFolder>
+    <itemPath>../makedefs</itemPath>
+    <itemPath>../makefile</itemPath>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>../makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>..</buildCommandWorkingDir>
+          <buildCommand>${MAKE} APPLICATION=testeMultiple.cc</buildCommand>
+          <cleanCommand>${MAKE} veryclean</cleanCommand>
+          <executablePath></executablePath>
+          <ccTool>
+            <incDir>
+              <pElem>.</pElem>
+              <pElem>../include</pElem>
+            </incDir>
+          </ccTool>
+        </makeTool>
+      </makefileType>
+      <item path="../makedefs" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../makefile" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="StringUtil.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="adxl345.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="at90can128_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="atmega1281_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="atmega128_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="atmega16_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="axi4lite_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="canneal/src/annealer_thread.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="canneal/src/epos_wrappers.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="canneal/src/math.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="canneal/src/netlist.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="canneal/src/netlist_elem.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="canneal/src/pthread.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="canneal/src/rgn.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="canneal_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="constants.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="courses/emote-basic/01_hello.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="courses/emote-basic/02_sensor.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="courses/emote-basic/03_radio.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="courses/emote-basic/03_radio_sink.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="courses/emote-basic/04_threads.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="courses/emote-basic/04_threads_sink.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_abst_assert.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_abst_random.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_abst_synchronizer.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_block.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_block_mode.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_block_mode_factory.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_block_mode_type.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_dmec_picture.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_error.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_flat_h264_pmc_node.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_full_search_match_algorithm.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_h264_modes_partitioner.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_lazy_flat_h264_pmc.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_lazy_picture.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_macroblock.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_pc_pme_worker_proxy_db_sth.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_pc_synchronizer.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_picture.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_picture_motion_estimator_coordinator.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_picture_motion_estimator_worker.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_picture_partitioner.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_plane.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_reference_full_search_bma.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_reference_picture_motion_counterpart.cc"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_util_test_support.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="dmec/src/dmec_vectorial_pmc.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="dmec_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="emote2_test.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="home_automation/ac_control.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="home_automation/co2_sensor.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="home_automation/home_gw.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="home_automation/home_sniffer.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="home_automation/lamp_actuator.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="integratorcp_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="linkgraph_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="linkgraph_app_gui/CommandMonitor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="linkgraph_app_gui/CommandParser.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="linkgraph_app_gui/Serial.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="linkgraph_app_gui/emote2-demo.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="mc13224v_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="ml310_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="parser.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="parser.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="pc_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="photoboat/battery_monitor_relay.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="photoboat/motor_control_digital.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="photoboat/motor_control_pwm.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="plasma_app.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="scada.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="sensor.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="sensorOld.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="sink.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="testeMultiple.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="testeSergio.cc" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="timetrigger.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="udp_demo.cc" ex="false" tool="1" flavor2="4">
+      </item>
+    </conf>
+    <conf name="qemu-system-i386" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>/usr/bin</buildCommandWorkingDir>
+          <buildCommand>${MAKE}</buildCommand>
+          <cleanCommand>${MAKE} clean</cleanCommand>
+          <executablePath>/usr/bin/qemu-system-i386</executablePath>
+        </makeTool>
+      </makefileType>
+      <item path="../makedefs" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../makefile" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="constants.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="parser.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="timetrigger.cc" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

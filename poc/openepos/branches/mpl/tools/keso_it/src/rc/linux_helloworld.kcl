@@ -1,0 +1,20 @@
+System (helloworld) {
+	# Default Hello World system
+	Modules = "debug:posix:helloworld";
+
+	Target="Linux";
+	#Target="avr";
+
+	Domain (dom1) {
+		Heap = RestrictedDomainScope {
+			#HeapSizeKB=64;
+			HeapSize=100;
+		}
+
+		Task (task1) {
+			MainClass="test/HelloWorld";
+			MainMethod="launch()V";
+			HelloString = "Hello World";
+		}
+	}
+}

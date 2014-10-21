@@ -1,0 +1,14 @@
+
+##################################################
+# IP Sources
+##################################################
+ARCH_MIPS32_VARCH_SC_SRCS = $(abspath $(addprefix $(BASE_DIR)/hw/arch/mips32/varch/, \
+decoder.cc \
+exec.cc \
+fetch.cc \
+mem.cc \
+wb.cc \
+))
+
+
+

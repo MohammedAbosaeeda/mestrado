@@ -1,0 +1,110 @@
+#!/usr/bin/tcsh
+
+if ( ! -d "../bin" ) then
+	echo "call compiler_test in src-directory!"
+	exit;
+endif
+
+if ( -d "tmp" ) then 
+  	mv tmp tmp.bak
+endif
+
+cd ..
+source bin/setup.tcsh
+cd src
+
+rm -rf compiler_tmp
+mkdir compiler_tmp
+
+setenv KESORC rc/compiler_tests/vt.kcl
+
+make ; ( cd tmp/keso_helloworld/ ; make ; ./keso_main_g )
+mv tmp compiler_tmp/default1
+ 
+#setenv JINOFLAGS ""
+#make ; ( cd tmp/keso_helloworld/ ; make ; ./keso_main_g )
+#mv tmp compiler_tmp/default2
+ 
+#setenv JINOFLAGS "-X:vt_comp"
+#make ; ( cd tmp/keso_helloworld/ ; make ; ./keso_main_g )
+#mv tmp compiler_tmp/vt_comp
+# 
+#setenv JINOFLAGS "-X:vt_switch"
+#make ; ( cd tmp/keso_helloworld/ ; make ; ./keso_main_g )
+#mv tmp compiler_tmp/vt_switch
+ 
+setenv JINOFLAGS "-OF -X:ssa:omit_fields:omit_unused_methods"
+make ; ( cd tmp/keso_helloworld/ ; make ; ./keso_main_g )
+mv tmp compiler_tmp/ssa
+
+setenv JINOFLAGS "-OF -X:ssa:ssa_alias_prop:omit_fields:omit_unused_methods"
+#setenv JINOFLAGS "-OF -X:ssa:ssa_buggy_safechk:omit_fields:omit_unused_methods"
+#setenv JINOFLAGS "-X:fast_prune:nollrefs:vt_full:if128"
+make ; ( cd tmp/keso_helloworld/ ; make ; ./keso_main_g )
+mv tmp compiler_tmp/fast_prune
+
+#setenv JINOFLAGS "-noinline -X:O0:noconst:nopure:fast_prune:vt_full:if128"
+#make ; ( cd tmp/keso_helloworld/ ; make ; ./keso_main_g )
+#mv tmp compiler_tmp/fast_prune_O0
+
+#setenv JINOFLAGS "-noinline -noprune -X:O0:noconst:nopure:vt_comp"
+#make ; ( cd tmp/keso_helloworld/ ; make ; ./keso_main_g )
+#mv tmp compiler_tmp/no_prune_O0
+
+cd compiler_tmp
+
+set file="default1/keso_helloworld/keso_main"
+if ( ! -f "$file" ) then 
+	echo " $file failed "
+else
+	size $file
+endif
+
+set file="default2/keso_helloworld/keso_main"
+if ( ! -f "$file" ) then 
+	echo " $file failed "
+else
+	size $file
+endif
+
+set file="vt_comp/keso_helloworld/keso_main"
+if ( ! -f "$file" ) then 
+	echo " $file failed "
+else
+	size $file
+endif
+
+set file="vt_switch/keso_helloworld/keso_main"
+if ( ! -f "$file" ) then 
+	echo " $file failed "
+else
+	size $file
+endif
+
+set file="ssa/keso_helloworld/keso_main"
+if ( ! -f "$file" ) then 
+	echo " $file failed "
+else
+	size $file
+endif
+
+set file="fast_prune/keso_helloworld/keso_main"
+if ( ! -f "$file" ) then 
+	echo " $file failed "
+else
+	size $file
+endif
+
+set file="fast_prune_O0/keso_helloworld/keso_main"
+if ( ! -f "$file" ) then 
+	echo " $file failed "
+else
+	size $file
+endif
+
+set file="no_prune_O0/keso_helloworld/keso_main"
+if ( ! -f "$file" ) then 
+	echo " $file failed "
+else
+	size $file
+endif

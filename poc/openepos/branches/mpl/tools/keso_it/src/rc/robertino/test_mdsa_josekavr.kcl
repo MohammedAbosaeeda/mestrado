@@ -1,0 +1,90 @@
+Cluster (Keso) {
+
+	#
+	# Rev: 971
+	#
+	# JINOFLAGS
+	#
+	# -X:ssa:ssa_alias_prop:omit_fields:int16:inline_checkcast:iface_store:comp_cls_store
+	#
+
+	Network (robertino_can) {
+		Protocol="keso/driver/can/CanPacketStream";
+		DriverInterface="keso/driver/can/CanPort";
+		Baudrate = 125000;
+	}
+
+	Node (client) {
+		#Modules = "serialport:avr:can:can_i82527:robertino";
+		Modules = "can_i82527:robertino";
+
+		Target = "AVR";
+		ProcessorType = "atmega8535";
+		Frequency = 8000000;
+
+		Domain (domain0) {
+			Heap = RestrictedDomainScope {
+				HeapSize=128;
+			}
+
+			Task (task1) {
+				MainClass="robertino/mdsa/MDSA0Task";
+			}
+
+			Service (drive0) {
+				ServiceClass="robertino/mdsa/MDSA";
+				ServiceInterface="robertino/mdsa/MDSAService";
+
+				Access="robertino_can";
+				Drivers="keso/driver/can/i82527/ATMega8535CanDriver";
+				WriteTimeout=500000; 
+				AllocTimeout=-1;
+			}
+
+			ISR(TIMER0_OVF_vect) {
+				HandlerClass="robertino/mdsa/MotorDriver";
+				HandlerMethod="control()V";
+			}
+
+			ISR(INT0_vect) {
+				HandlerClass="keso/driver/can/i82527/ATMega8535CanDriver";
+				HandlerMethod="canInterrupt()V";
+			}
+
+		}
+	}
+
+	Node (server) {
+		Modules = "can_emu:robertino";
+
+		Target = "Linux_josek";
+		Frequency = 8000000;
+
+		Domain (domain2) {
+			Heap = CoffeeBreak {
+				HeapSize=65536;
+			}
+
+			Task (task1) {
+				MainClass="robertino/TestMain";
+			}
+
+			Service (drivex) {
+				ServiceClass="robertino/mdsa/MDSA";
+				ServiceInterface="robertino/mdsa/MDSAService";
+			}
+
+			Import (drivex) {
+				# do
+			}
+
+			Import (drive0) {
+				Access="robertino_can";
+				Driver="keso/driver/emulation/CanDriver";
+				ReadTimeout=500000;
+				WriteTimeout=500000;
+				AllocTimeout=-1; 
+			}
+		}
+	}
+}

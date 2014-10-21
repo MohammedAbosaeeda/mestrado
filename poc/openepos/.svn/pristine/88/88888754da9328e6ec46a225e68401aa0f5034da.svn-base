@@ -1,0 +1,49 @@
+PROGRAM := linux_app.elf
+
+all: app
+
+CC := g++
+
+CFLAGS := -Wall -Werror -O0 -g
+# CFLAGS := -Wall -Werror -O3
+
+.SUFFIXES: .o .cc .componentobject
+
+LUAINCLUDES := -I /usr/include/lua5.1
+
+LIBS := -llua -llualib
+# Set your libraries here
+LIBS += -lm -lpthread -lssl
+
+# old -- Currently, aways compiles all bindings
+# old -- BINDING_FILES := $(shell find bindings -name "*.cc" -type f)
+# Set your binding files here
+BINDING_FILES := bindings/dmec_app_lua_bindings.cc
+OBJECTS := $(subst .cc,.o,$(BINDING_FILES))
+
+# If you wish to compile other C++ files, set COMPONENT_PATH accordingly. 
+COMPONENT_PATH := ../../../linux
+COMPONENT_SRC := $(shell find $(COMPONENT_PATH)/src -name "*.cc")
+COMPONENT_OBJS := $(subst .cc,.componentobject,$(COMPONENT_SRC))
+OBJECTS += $(COMPONENT_OBJS)
+COMPONENTINCLUDES := -I $(COMPONENT_PATH)/include
+
+# ---
+
+OBJECTS += linux_app.o
+
+
+app: $(OBJECTS)
+	$(CC) $(OBJECTS) $(LIBS) -o $(PROGRAM)	
+
+
+.cc.componentobject :
+	$(CC) -DCOMPILEFORLINUX $(COMPONENTINCLUDES) $(CFLAGS) -c -o $@ $<
+
+
+.cc.o :
+	$(CC) -DCOMPILEFORLINUX $(LUAINCLUDES) $(CFLAGS) -c -o $@ $<
+
+clean:
+	rm -f $(PROGRAM) $(OBJECTS) *~
+

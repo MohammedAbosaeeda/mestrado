@@ -1,0 +1,2 @@
+#!/usr/bin/tcsh
+wget --proxy=off -O - -o /dev/null "http://t32power/sw?u=admin&p=admin&o=1&f=$1" | sed "s/<br>/ /g" 

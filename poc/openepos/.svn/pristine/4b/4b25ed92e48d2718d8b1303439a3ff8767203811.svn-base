@@ -1,0 +1,69 @@
+#include <TRICODE_OS.oil>
+#include "lokal.oil"
+
+CPU TricoreGCTest {
+	OS KesoOS {
+		STATUS = EXTENDED;
+		USEGETSERVICEID = FALSE;
+		USEPARAMETERACCESS = FALSE;
+		USERESSCHEDULER = FALSE;
+		MICROCONTROLLER = TC1796;
+		TRICORE_RT_CLOCK = NOT_USED;
+		TRICORE_NUM_CSA = 0x200;
+		CC = AUTO;
+		SCHEDULE = AUTO;
+		USERMAIN = FALSE;
+		STACKCHECK = TRUE;
+		EXTRA_RUNTIME_CHECKS = FALSE;
+		SERVICETRACE = FALSE;
+		USELASTERROR = FALSE;
+		STARTUPHOOK = TRUE;
+		PRETASKHOOK = TRUE;
+		ERRORHOOK = FALSE;
+		SHUTDOWNHOOK = FALSE;
+		POSTTASKHOOK = FALSE;
+		PREISRHOOK = FALSE;
+		meinfloat = 34.999;
+		meinandererfloat = 4e5;
+		negativerfloat = -1e1;
+		POSTISRHOOK = FALSE;
+	};
+
+	TASK WorldWithoutGarbage_TricoreGCTest_d_dom1_t_task1 {
+		EVENT = WorldWithoutGarbage_TricoreGCTest_e_Wakeup;
+		PRIORITY = 5;
+		SCHEDULE = FULL;
+		ACTIVATION = 1;
+		CALLSCHEDULER = NO;
+		TYPE = EXTENDED;
+		STACKSIZE = 100;
+	};
+
+	ALARM WorldWithoutGarbage_TricoreGCTest_d_dom1_a_alarm1 {
+		COUNTER = WorldWithoutGarbage_TricoreGCTest_c_counter1;
+	};
+
+	EVENT WorldWithoutGarbage_TricoreGCTest_e_Wakeup {
+		MASK = 1;
+	};
+
+	COUNTER WorldWithoutGarbage_TricoreGCTest_c_counter1 {
+		MAXALLOWEDVALUE = 10;
+		MINCYCLE = 1;
+		TICKSPERBASE = 1;
+		TRICORE_TIMER = STM_T0;
+		TRICORE_IRQLEVEL = 2;
+		TIME_IN_NS = 1000000000;
+	};
+
+	TASK keso_coffee_gc {
+		AUTOSTART = FALSE;
+		PRIORITY = 0;
+		SCHEDULE = FULL;
+		TYPE = BASIC;
+		STACKSIZE = 200;
+		CALLSCHEDULER = NO;
+		ACTIVATION = 1;
+	};
+
+};

@@ -1,0 +1,10 @@
+/*! @class System::ML310_UART
+    @ingroup med_uart
+
+    @brief ML310_UART class definition.
+
+    The ML310_UART abstraction is a member of the UART mediators family. This is the UART controller used in Xilinx ML310 board.
+
+    <!-- *********************************************************************** -->
+
+*/

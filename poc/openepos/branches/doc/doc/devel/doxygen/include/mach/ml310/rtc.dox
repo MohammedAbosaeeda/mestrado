@@ -1,0 +1,11 @@
+/*! @class System::ML310_RTC
+    @ingroup med_rtc
+
+    @brief ML310_RTC Place-holder for implementation
+
+    This member isn't implemented yet and exists just for handle the dependency of
+    Alarm with the Microseconds definition on RTC.
+
+    <!-- *********************************************************************** -->
+
+*/

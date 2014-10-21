@@ -1,0 +1,101 @@
+# Application Modes
+filter_1_1 = Filter(GET_PARENT_OF_CLASSTYPE, Node);
+filter_1_2 = Filter(filter_1_1, GET_ALL);
+filter_appmodes = Filter(filter_1_2, FILTER_BY_CLASSTYPE, {Appmode});
+
+# Resources
+filter_2_1 = Filter(GET_PARENT_OF_CLASSTYPE, Domain);
+filter_2_2 = Filter(GET_PARENT_OF_CLASSTYPE, Node);
+filter_2_3 = Filter(filter_2_1, GET_ALL);
+filter_2_4 = Filter(filter_2_3, FILTER_BY_CLASSTYPE, {Resource});
+filter_2_5 = Filter(filter_2_2, GET_NEXT_CHILDREN);
+filter_2_6 = Filter(filter_2_5, FILTER_BY_CLASSTYPE, {PublicDomain});
+filter_2_7 = Filter(filter_2_6, GET_ALL);
+filter_2_8 = Filter(filter_2_7, FILTER_BY_CLASSTYPE, {Resource});
+filter_2_9 = CombinedFilter(filter_2_4, filter_2_8, UNITE);
+filter_resources = Filter(filter_2_9, DELETE_REDUNDANT_NAMES);
+
+# Counter
+filter_3_1 = Filter(GET_PARENT_OF_CLASSTYPE, Node);
+filter_3_2 = Filter(filter_3_1, GET_ALL);
+filter_counter = Filter(filter_3_2, FILTER_BY_CLASSTYPE, {Counter});
+
+# Event
+filter_4_1 = Filter(GET_PARENT_OF_CLASSTYPE, Node);
+filter_4_2 = Filter(filter_4_1, GET_ALL);
+filter_events = Filter(filter_4_2, FILTER_BY_CLASSTYPE, {Event});
+
+# Networks
+filter_5_1 = Filter(GET_PARENT_OF_CLASSTYPE, World);
+filter_5_2 = Filter(filter_5_1, GET_NEXT_CHILDREN);
+filter_networks = Filter(filter_5_2, FILTER_BY_CLASSTYPE, {Network});
+
+# Localy
+filter_6_1 = Filter(GET_NEXT_PARENT);
+filter_localy = Filter(filter_6_1, GET_NEXT_CHILDREN);
+
+# Globaly
+filter_7_1 = Filter(GET_PARENT_OF_CLASSTYPE, World);
+filter_globaly = Filter(filter_7_1, GET_ALL);
+
+# Services
+filter_8_1 = Filter(GET_PARENT_OF_CLASSTYPE, World);
+filter_8_2 = Filter(filter_8_1, GET_ALL);
+filter_services = Filter(filter_8_2, FILTER_BY_CLASSTYPE, {Service});
+
+# Imports
+filter_9_1 = Filter(GET_PARENT_OF_CLASSTYPE, World);
+filter_9_2 = Filter(filter_8_1, GET_ALL);
+filter_imports = Filter(filter_9_2, FILTER_BY_CLASSTYPE, {Import});
+
+# Local Services
+filter_10_1 = Filter(GET_PARENT_OF_CLASSTYPE, Node);
+filter_10_2 = Filter(filter_10_1, GET_ALL);
+filter_local_services = Filter(filter_10_2, FILTER_BY_CLASSTYPE, {Service});
+
+# Local Imports
+filter_local_imports = Filter(filter_10_2, FILTER_BY_CLASSTYPE, {Import});
+
+# All Imports and Services
+filter_11_1 = Filter(GET_PARENT_OF_CLASSTYPE, World);
+filter_11_2 = Filter(filter_11_1, GET_ALL);
+filter_imports_and_services = Filter(filter_11_2, FILTER_BY_CLASSTYPE, {Import, Service});
+
+# All Elements
+filter_12_1 = Filter(GET_PARENT_OF_CLASSTYPE, World);
+filter_all = Filter(filter_12_1, GET_ALL);
+
+# Localy 2
+filter_13_1 = Filter(GET_NEXT_PARENT);
+filter_13_2 = Filter(filter_13_1, GET_NEXT_CHILDREN);
+filter_13_3 = Filter(GET_ALL_CHILDREN);
+filter_localy_advanced = CombinedFilter(filter_13_2, filter_13_3, UNITE);
+
+# All Imports and Services of Selected Data
+filter_14_1 = Filter(GET_ALL);
+filter_selected_imports_and_services = Filter(filter_14_1, FILTER_BY_CLASSTYPE, {Import, Service});
+
+# All Services and Networks of Selected Data
+filter_15_1 = Filter(GET_ALL);
+filter_selected_services_and_networks = Filter(filter_15_1, FILTER_BY_CLASSTYPE, {Service, Network});
+
+# All Imports and Networks of Selected Data
+filter_16_1 = Filter(GET_ALL);
+filter_selected_imports_and_networks = Filter(filter_16_1, FILTER_BY_CLASSTYPE, {Import, Network});
+
+# All Services and Networks
+filter_17_1 = Filter(GET_PARENT_OF_CLASSTYPE, World);
+filter_17_2 = Filter(filter_17_1, GET_ALL);
+filter_all_services_and_networks = Filter(filter_17_2, FILTER_BY_CLASSTYPE, {Service, Network});
+
+# All Imports, Services and Networks of Selected Data
+filter_18_1 = Filter(GET_ALL);
+filter_selected_imports_services_and_networks = Filter(filter_18_1, FILTER_BY_CLASSTYPE, {Import, Service, Network});
+
+# Local Tasks
+filter_19_1 = Filter(GET_PARENT_OF_CLASSTYPE, Domain);
+filter_19_2 = Filter(filter_19_1, GET_ALL);
+filter_tasks = Filter(filter_19_2, FILTER_BY_CLASSTYPE, {Task});
+
+# Parent Node
+filter_parent_node = Filter(GET_PARENT_OF_CLASSTYPE, Node);

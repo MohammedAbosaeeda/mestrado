@@ -566,19 +566,35 @@ A ferramenta $JINSI$ foi utilizada para corroborar a técnica, que além de captur
 \label{ref:ambiente}
 Este capítulo apresenta o ambiente compartilhado de teste e depuração, demostrando de onde as ideias foram extraídas, adaptadas e, em alguns casos, melhoradas. Além disso, serão apresentas instruções para integrar a execução de testes com os possíveis ambientes de depuração, gerando o ambiente compartilhado de desenvolvimento.
 
-Para definir a infraestrutura do ambiente foram analisados vários ambientes de execução automática de testes e de depuração, ambos com foco em sistemas embarcados. Esta especialização tornou-se necessária pois estas atividades compartilharão os recursos do \ac{SUT}, o que no caso de sistemas embarcados é crítico pois geralmente possuem apenas os recursos essenciais para desempenhar uma determinada função. 
+A atividade de teste é necessária para manter a qualidade do produto oferecido e verificar se seu comportameto não desvia do esperado. No caso de \textit{software} embarcado, o teste na plataforma alvo e no ambiente de produção é necessário, entretanto nem sempre é possível ou praticável. Felizmente existem alternativas para realizar esta atividade, como por exemplo executar o \textit{software} em um simulador, aravés um protótipo limitado de \textit{hardware}, ou até utilizando o próprio ambiente de desenvolvimento.~\cite{progressBeforeHardware}.
+
+A idéia de prover um bom ambiente em que testes e depuração possam compartilhar a infraestrutura e dados entre si se formou a partir da observação e estudo de vários ambientes de execução automática das atividades testes e de depuração. 
+
+Além do foco em prover uma estrutura compartilhada, também foi necessária uma atenção especial ao suporte para sistemas embarcados. Esta especialização tornou-se necessária pois o teste e depuração realizados na infraestrutura compartilharão os recursos do \ac{SUT}, o que no caso de sistemas embarcados é crítico pois geralmente possuem apenas os recursos essenciais para desempenhar uma determinada função.
 
 Um exemplo de sistema embarcado com um alto grau de dificuldade para atividades de teste e depuração é a \ac{RSSF}. Este tipo de rede pode ser composta por vários sensores que, além de permanecerem espalhados geograficamente por uma grande área de monitoramento, geralmente possuem pouco poder de processamento e apenas alguns \textit{kilobytes} de armazenamento~\cite{pottie2000wireless}.
 
 No caso de muitas \ac{RSSF} é impraticável coletar todos os sensores para realizar testes, pois além da dificuldade de acesso às áreas em que os sensores atuam, as atividades de monitoramento teriam que sofrer uma pausa até o término do teste. A solução mais comum nestes casos é realizar os testes de \textit{software} e \textit{hardware} separadamente, utilizando-se simulação.
 
-Contudo, simular separadamente as componentes não garante o funcionamento de sua integreção. Em sistemas embarcados é comum que \textit{software} e \textit{hardware} trabalhem em conjunto para desempenhar uma tarefa. Aliás, grande parte das falhas nos testes de um \textit{software} embarcado são oriundos da integração de componentes heterogêneos~\cite{seo}. 
+Contudo, simular separadamente as componentes não garante o funcionamento de sua integração. Em sistemas embarcados é comum que \textit{software} e \textit{hardware} trabalhem em conjunto para desempenhar uma tarefa. Aliás, grande parte das falhas nos testes de um \textit{software} embarcado são oriundos da integração de componentes heterogêneos~\cite{seo}. 
 
-Uma das alternativas para se atenuar este efeito é utilizar emulação completa do sistema, que possibilita a visualização do estado do \textit{software} além de permitir o controle de sua execução\cite{KiSCL08}. Desta maneira, é possível analisar a intersecção entre componentes e monitorar a execução dos testes através da tabela de símbolos.
+Uma das alternativas para se atenuar este efeito é utilizar emulação completa do sistema, que possibilita a visualização do estado do \textit{software} além de permitir o controle de sua execução~\cite{KiSCL08}. Desta maneira, é possível analisar a intersecção entre componentes e monitorar a execução dos testes através da tabela de símbolos.
 
 O processo de teste para sistemas heterogênicos é uma tarefa trabalhosa, principalmente quando não se sabe qual ambiente de implantação será utilizado~\cite{universal:2013}. Existem várias alternativas para ajudar na tarefa e aprimorar a qualidade dos testes, como utilizar oráculo como um repositório de testes~\cite{priyaneural}, selecionar \textit{checkpoints} baseados na interfaces dos componentes~\cite{KiSCL08}, módulos de pré-processamento com análise de código fonte~\cite{atemes}, entre outros.
 
 Sabe-se que o processo de depuração também precisa de ferramentas específicas para auxiliar no monitoramento da execução de um programa. O sucesso das técnicas que focam em automação da depuração não dependem apenas dos algoritmos ou dados coletados, mas também da estabilidade fornecida pelo ambiente para desempenhar tais atividades. Por exemplo, nas ferramentas de captura e reprodução~\cite{orso2005selective, orso2006isolating, qi2011locating} é essencial que a etapa de captura grave todas as operações que levam ao erro.
+
+
+========================
+Falta dizer alguma coisa sobre debug
+=======================
+
+
+
+
+
+
+
 
 \section{Configuração do ambiente remoto}
 As ferramentas utilizadas para a construção deste ambiente remoto podem ser substituídas por qualquer outra equivalente, contudo, a configuração completa será tecnicamente apresentada para que seja possível a reprodução do experimento.
@@ -600,6 +616,12 @@ Este passo realiza uma compilação simbólica e sem otimizações. A otimização corr
 Como entrada é necessário o código-fonte do \textit{software} e como saída esperada encontra-se o código compilado com informações de depuração. O \ac{GCC} realiza esta atividade quando acrescentada a opção $-g$ para compilar. 
 	
 \item [2. Emular o sistema utilizando um emulador] \hfill \\
+============hese emulat
+ors simulate the hardware
+environments to facilitate the development and checking so
+ftware applications.
+The emulator approach is quite laborious since extensive pr
+ior profiling is required=============
 É um passo necessário para executar a \textit{software} na arquitetura alvo correta. É importante ressaltar que o \textit{software} a ser emulado não deve iniciar a execução antes que o depurador esteja conectado. Caso isso ocorra, não será possível inspecionar todos os detalhes da execução.
 
 Para executar este passo utilizamos o $QEMU$, que deve ser inicializado com os argumentos $-s -S$. A primeira opção ativa o \textit{stub} para conectar um depurador, a fim de abrir a comunicação entre o emulador e o depurador. A opção $-S$ é utilizada para forçar que o $QEMU$ espere a conexão do depurador antes da inicialização do sistema.
@@ -621,7 +643,34 @@ Encontrar e corrigir erros é uma atividade depende do programa a ser depurado. A
 Existem vários trabalhos com o foco em ajudar a encontrar os erros através da automação de alguns pontos, como a gerarão automática de \textit{breakpoints}~\cite{JSWjsw0803603616} e o controle do fluxo de execução \cite{Chern:2007}.
 \end{description}
 
-Após a definição da infraestrutura compartilhada para testes e depuração também foi necessário dividir as funções para cada uma das atividades. A ideia é utilizar o emulador para a automação da execução do \textit{software} e de seus casos de teste. A depuração será iniciadas somente no caso de sucesso em um teste, ou seja, quando um erro é detectado.
+Após a definição da infraestrutura compartilhada para testes e depuração também é necessário dividir as funções para cada uma das atividades. A ideia é utilizar o emulador para a automação da execução do \textit{software} e de seus casos de teste. A depuração será iniciadas somente no caso de sucesso em um teste, ou seja, quando um erro é detectado.
+
+\subsection{Discussão}
+
+Muitas vezes as configurações do \ac{SUT} devem ser alteradas para poder executar determinados tipos de teste ou melhorar a efcácia da depuração. Estas adaptações podem influenciar no funcionamento normal do \ac{SUT} e ocultar determinados tipos de erros.
+
+A configuração do ambiente remoto não exceção e, inclusive
+
+Como exemplo de adaptação
+
+Inclusive, um dos primeiros passos para a configuração do ambiente remoto 
+
+
+é compilar o \textit{software} ativando **a  compilação simbólica** e retirando as otimizações.
+
+Configuração do ambiente remoto
+
+
+======================
+
+1. Compilar com informações de depuração
+Este passo realiza uma compilação simbólica e sem otimizações. A otimização correta é importante para a execução do \textit{software}, mas quando o foco é a depuração o ideal é que não haja muita diferença entre o código-fonte e as instruções geradas.
+
+Como entrada é necessário o código-fonte do \textit{software} e como saída esperada encontra-se o código compilado com informações de depuração. O \ac{GCC} realiza esta atividade quando acrescentada a opção $-g$ para compilar. 
+
+
+
+======================
 
 \chapter{Troca automática dos parâmetros de \textit{software}}
 \label{sec:tap}

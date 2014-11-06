@@ -568,9 +568,7 @@ Este capítulo apresenta o ambiente compartilhado de teste e depuração, demostran
 
 A atividade de teste é necessária para manter a qualidade do produto oferecido e verificar se seu comportameto não desvia do esperado. No caso de \textit{software} embarcado, o teste na plataforma alvo e no ambiente de produção é necessário, entretanto nem sempre é possível ou praticável. Felizmente existem alternativas para realizar esta atividade, como por exemplo executar o \textit{software} em um simulador, aravés um protótipo limitado de \textit{hardware}, ou até utilizando o próprio ambiente de desenvolvimento.~\cite{progressBeforeHardware}.
 
-A idéia de prover um bom ambiente em que testes e depuração possam compartilhar a infraestrutura e dados entre si se formou a partir da observação e estudo de vários ambientes de execução automática das atividades testes e de depuração. 
-
-Além do foco em prover uma estrutura compartilhada, também foi necessária uma atenção especial ao suporte para sistemas embarcados. Esta especialização tornou-se necessária pois o teste e depuração realizados na infraestrutura compartilharão os recursos do \ac{SUT}, o que no caso de sistemas embarcados é crítico pois geralmente possuem apenas os recursos essenciais para desempenhar uma determinada função.
+A idéia de prover um bom ambiente em que testes e depuração possam compartilhar a infraestrutura se formou a partir da observação e estudo de vários ambientes de execução automática das atividades testes e de depuração. Seu desenvolvimento envolveu uma atenção especial ao suporte para sistemas embarcados, visto que os testes/depuração realizados tentem a compartilhar os escassos recursos do \ac{SUT}. O compartilhamento é crítico no caso de sistemas embarcados porque geralmente possuem apenas os recursos essenciais para desempenhar uma determinada função.
 
 Um exemplo de sistema embarcado com um alto grau de dificuldade para atividades de teste e depuração é a \ac{RSSF}. Este tipo de rede pode ser composta por vários sensores que, além de permanecerem espalhados geograficamente por uma grande área de monitoramento, geralmente possuem pouco poder de processamento e apenas alguns \textit{kilobytes} de armazenamento~\cite{pottie2000wireless}.
 
@@ -645,18 +643,17 @@ Existem vários trabalhos com o foco em ajudar a encontrar os erros através da au
 
 Após a definição da infraestrutura compartilhada para testes e depuração também é necessário dividir as funções para cada uma das atividades. A ideia é utilizar o emulador para a automação da execução do \textit{software} e de seus casos de teste. A depuração será iniciadas somente no caso de sucesso em um teste, ou seja, quando um erro é detectado.
 
-\subsection{Discussão}
+\section{Reflexão sobre o uso do ambiente compartilhado}
+Muitas vezes as configurações do \ac{SUT} devem ser alteradas para poder executar determinados tipos de teste ou melhorar a eficácia da depuração. Estas adaptações podem influenciar no funcionamento normal do \ac{SUT} e ocultar determinados tipos de erros.
 
-Muitas vezes as configurações do \ac{SUT} devem ser alteradas para poder executar determinados tipos de teste ou melhorar a efcácia da depuração. Estas adaptações podem influenciar no funcionamento normal do \ac{SUT} e ocultar determinados tipos de erros.
+A presente proposta de ambiente compartilhado não é uma exceção e, inclusive, um dos primeiros passos para utilizar o ambiente de maneira adequada está em executar uma compilação simbólica do \textit{software} e sem otimizações. A desvantagem da compilação simbólica está no consumo extra de memória, entretanto, este incoveniente deixa o \textit{software} mais preparado para extrair informações valiosas na deuração. Contudo, o fator mais crítico advém de retirar as otimizações da compilação.
 
-A configuração do ambiente remoto não exceção e, inclusive
+%Uma compilação simbólica deixa o código com mais informações para a depuração, o que facilita a extração de dados e análise do funcionamento do \textit{software}, entretanto, o consumo de memória extra para adicionar estas informações pode não ser o ideal
 
-Como exemplo de adaptação
+Vale lembrar que ao se retirar as otimizações do \textit{software}, estamos assumindo vários riscos, dentre eles:
 
-Inclusive, um dos primeiros passos para a configuração do ambiente remoto 
+um risco de inserir/adicionar complexidade
 
-
-é compilar o \textit{software} ativando **a  compilação simbólica** e retirando as otimizações.
 
 Configuração do ambiente remoto
 

@@ -1,8 +1,7 @@
 <test>
    <application name="exemplo">
       <configuration>
-         <trait>	
-            <id>ARCH</id>
+         <trait id="ARCH">	
             <value>IA32</value>
 	    <value>AVR8</value>
          </trait>	

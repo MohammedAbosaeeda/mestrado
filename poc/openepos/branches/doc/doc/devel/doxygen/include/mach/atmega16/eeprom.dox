@@ -1,7 +1,0 @@
-/*! @class System::ATMega16_EEPROM
-    @brief ATMega16 EEPROM Mediator Declarations
-
-    @fn unsigned char System::ATMega16_EEPROM::read(const Address & a)
-    @fn void System::ATMega16_EEPROM::write(const Address & a, unsigned char d)
-    @fn int System::ATMega16_EEPROM::size() const
-*/

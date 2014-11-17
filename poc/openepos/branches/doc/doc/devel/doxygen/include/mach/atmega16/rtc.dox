@@ -1,8 +1,0 @@
-/*! @class System::ATMega16_RTC
-    @brief ATMega16 RTC Mediator Declarations
-
-    @fn System::ATMega16_RTC::ATMega16_RTC()
-    @fn static Date System::ATMega16_RTC::date()
-    @fn static void System::ATMega16_RTC::date(const Date & d)
-    @fn static Second System::ATMega16_RTC::seconds_since_epoch()
-*/

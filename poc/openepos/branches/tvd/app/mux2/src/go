@@ -1,4 +1,0 @@
-#!/bin/sh
-
-/usr/local/cross-ia32/bin/gcc -ansi -fno-exceptions --no-exceptions --no-rtti --no-use-cxa-atexit -O2 -I../includes/ -c main.c utils.c ts.c psi.c config.c crc32.c queue.c mux.c pat.c pmt.c output.c es.c
-

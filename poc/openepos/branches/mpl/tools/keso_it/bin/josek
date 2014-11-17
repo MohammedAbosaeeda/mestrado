@@ -1,7 +1,0 @@
-#!/usr/bin/tcsh
-
-if (! -f "${KESOSRCPATH}/../josek/classes/josek/JOsek.class" ) then
-	( cd ${KESOSRCPATH}/../josek/ ;  make )
-endif
-
-${JAVA} -cp ${KESOSRCPATH}/../josek/classes/:${JDKTOOLS} josek/JOsek $* 

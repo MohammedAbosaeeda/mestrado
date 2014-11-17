@@ -12,14 +12,14 @@ sh ../poc.sh `pwd`
 echo "Tem o enderessu da Tinha? $address"
 
 cd $epos/log
-zip -r report.zip *
+zip -r $epos/report.zip *
 
 sendmail -oi -t << EOF 
 From: RITA@lisha.ufsc.br
 To: ${address}
-Subject: Resultado dos testes `date` 
+Subject: Tests results on `date` 
 
-`cat report.log`
+`cat $epos/report.log`
 
 EOF
 

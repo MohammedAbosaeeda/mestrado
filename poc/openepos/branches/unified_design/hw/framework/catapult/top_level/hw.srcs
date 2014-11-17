@@ -1,6 +1,0 @@
-##################################################
-# IP Sources
-##################################################
-FRAMEWORK_CATAPULT_TOP_SRCS = \
-$(addsuffix /hls/rtl.v, $(HLS_COMPONENTS)) \
-$(addsuffix /rtl.v, $(HLS_COMPONENTS))

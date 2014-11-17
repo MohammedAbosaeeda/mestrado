@@ -1,0 +1,7 @@
+set logging on
+target remote:1234
+continue
+
+
+#qemu-system-i386 -fda /home/tinha/mestrado/poc/openepos/branches/teaching/img/thread_test.img -serial stdio -s -S
+#/mestrado/poc/openepos/branches/teaching/img$ gdb --batch -x ~/mestrado/AEP/breakpoint.sh

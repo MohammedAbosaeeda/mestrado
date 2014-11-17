@@ -1,0 +1,58 @@
+<test>
+   <configuration>
+     <trait scope="application" id="STACK_SIZE">	
+         <value>512</value>
+         <value>1024</value>
+         <value>2048</value>
+         <value>3072</value>
+         <value>4096</value>
+      <trait>
+
+      <trait scope="application" id="HEAP_SIZE">	
+         <value>512</value>
+         <value>1024</value>
+         <value>2048</value>
+         <value>3072</value>
+         <value>4096</value>
+      <trait>
+
+      <trait scope="System" id="STACK_SIZE">	
+         <value>512</value>
+         <value>1024</value>
+         <value>2048</value>
+         <value>3072</value>
+         <value>4096</value>
+      <trait>
+
+      <trait scope="System" id="HEAP_SIZE">	
+         <value>512</value>
+         <value>1024</value>
+         <value>2048</value>
+         <value>3072</value>
+         <value>4096</value>
+      <trait>
+
+      <trait scope="System" id="QUANTUM">	
+         <value>10000</value>
+         <value>20000</value>
+         <value>50000</value>
+         <value>100000</value>
+         <value>200000</value>
+         <value>500000</value>
+      <trait>
+
+     <trait scope="Thread" id="QUANTUM">	
+         <value>10000</value>
+         <value>20000</value>
+         <value>50000</value>
+         <value>100000</value>
+         <value>200000</value>
+         <value>500000</value>
+      <trait>
+
+     <trait id="Scheduling_Criteria">	
+         <value>"RR"</value>
+         <value>"FCFS"</value>
+      <trait>
+   </configuration>
+<test>

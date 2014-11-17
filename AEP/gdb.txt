@@ -1,0 +1,6 @@
+gdb_script(1).sh:2: Error in sourced command file:
+:1234: Connection refused.
+gdb_script(2).sh:2: Error in sourced command file:
+:1234: Connection timed out.
+/home/tinha/mestrado/AEP/breakpoint.sh:2: Error in sourced command file:
+:1234: Connection refused.

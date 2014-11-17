@@ -1,9 +1,0 @@
-#!/usr/bin/tcsh
-
-set remote=$1
-
-cd ${KESOSRCPATH}
-tar cf upload.tar `find tmp/ trace32/ -not -type d | grep -v .svn`
-scp upload.tar ${remote}:keso-faui42c
-echo "=> ${remote}"
-ssh -x -T $remote "cd keso-faui42c; rm -rf tmp/ trace32/; tar xf upload.tar"

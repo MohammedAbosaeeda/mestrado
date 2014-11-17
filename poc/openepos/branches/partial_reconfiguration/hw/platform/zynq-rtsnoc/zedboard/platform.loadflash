@@ -1,7 +1,0 @@
-setMode -bs 
-setCable -p auto 
-loadCdf -file platform.cdf 
-attachflash -position 2 -bpi S25FL256S
-assignfiletoattachedflash -position 2 -file build/platform.mcs
-program -p 2 -dataWidth 16 -rs1 NONE -rs0 NONE -bpionly -e -v-loadfpga 
-quit

@@ -6,6 +6,11 @@ qemu -fda img/pc_app.img -serial stdio -s -S
 
 em outra janela
 gdb
-target remote:1234
+target remote localhost:1234
 file app/pc_app
 setar breakpoints, ligar o logging e dar continue.
+
+qemu-system-i386 -serial stdio -fda img/concurrent_philosophers_dinner.img -s -S
+
+#qemu-system-i386 -fda /home/tinha/mestrado/poc/openepos/branches/teaching/img/thread_test.img -serial stdio -s -S
+#/mestrado/poc/openepos/branches/teaching/img$ gdb --batch -x ~/mestrado/AEP/breakpoint.sh

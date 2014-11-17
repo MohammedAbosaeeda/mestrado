@@ -1,0 +1,119 @@
+<Location /home/rita/svn/grupo1>
+      DAV svn
+      SVNPath /home/rita/svn/grupo1
+      AuthzSVNAccessFile /home/rita/svn/grupo1/conf/authz
+      AuthType Basic
+      AuthName "Grupo1"
+      AuthUserFile /home/rita/svn/grupo1/conf/svn-authz-file
+      Require valid-user
+</Location>
+
+<Location /home/rita/svn/grupo2>
+      DAV svn
+      SVNPath /home/rita/svn/grupo2
+      AuthzSVNAccessFile /home/rita/svn/grupo2/conf/authz
+      AuthType Basic
+      AuthName "Grupo2"
+      AuthUserFile /home/rita/svn/grupo2/conf/svn-authz-file
+      Require valid-user
+</Location>
+
+<Location /home/rita/svn/grupo3>
+      DAV svn
+      SVNPath /home/rita/svn/grupo3
+      AuthzSVNAccessFile /home/rita/svn/grupo3/conf/authz
+      AuthType Basic
+      AuthName "Grupo3"
+      AuthUserFile /home/rita/svn/grupo3/conf/svn-authz-file
+      Require valid-user
+</Location>
+
+<Location /home/rita/svn/grupo4>
+      DAV svn
+      SVNPath /home/rita/svn/grupo4
+      AuthzSVNAccessFile /home/rita/svn/grupo4/conf/authz
+      AuthType Basic
+      AuthName "Grupo4"
+      AuthUserFile /home/rita/svn/grupo4/conf/svn-authz-file
+      Require valid-user
+</Location>
+
+<Location /home/rita/svn/grupo5>
+      DAV svn
+      SVNPath /home/rita/svn/grupo5
+      AuthzSVNAccessFile /home/rita/svn/grupo5/conf/authz
+      AuthType Basic
+      AuthName "Grupo5"
+      AuthUserFile /home/rita/svn/grupo5/conf/svn-authz-file
+      Require valid-user
+</Location>
+
+<Location /home/rita/svn/grupo6>
+      DAV svn
+      SVNPath /home/rita/svn/grupo6
+      AuthzSVNAccessFile /home/rita/svn/grupo6/conf/authz
+      AuthType Basic
+      AuthName "Grupo6"
+      AuthUserFile /home/rita/svn/grupo6/conf/svn-authz-file
+      Require valid-user
+</Location>
+
+<Location /home/rita/svn/grupo7>
+      DAV svn
+      SVNPath /home/rita/svn/grupo7
+      AuthzSVNAccessFile /home/rita/svn/grupo7/conf/authz
+      AuthType Basic
+      AuthName "Grupo7"
+      AuthUserFile /home/rita/svn/grupo7/conf/svn-authz-file
+      Require valid-user
+</Location>
+
+<Location /home/rita/svn/grupo8>
+      DAV svn
+      SVNPath /home/rita/svn/grupo8
+      AuthzSVNAccessFile /home/rita/svn/grupo8/conf/authz
+      AuthType Basic
+      AuthName "Grupo8"
+      AuthUserFile /home/rita/svn/grupo8/conf/svn-authz-file
+      Require valid-user
+</Location>
+
+<Location /home/rita/svn/grupo9>
+      DAV svn
+      SVNPath /home/rita/svn/grupo9
+      AuthzSVNAccessFile /home/rita/svn/grupo9/conf/authz
+      AuthType Basic
+      AuthName "Grupo9"
+      AuthUserFile /home/rita/svn/grupo9/conf/svn-authz-file
+      Require valid-user
+</Location>
+
+<Location /home/rita/svn/grupo10>
+      DAV svn
+      SVNPath /home/rita/svn/grupo10
+      AuthzSVNAccessFile /home/rita/svn/grupo10/conf/authz
+      AuthType Basic
+      AuthName "Grupo10"
+      AuthUserFile /home/rita/svn/grupo10/conf/svn-authz-file
+      Require valid-user
+</Location>
+
+<Location /home/rita/svn/grupo11>
+      DAV svn
+      SVNPath /home/rita/svn/grupo11
+      AuthzSVNAccessFile /home/rita/svn/grupo11/conf/authz
+      AuthType Basic
+      AuthName "Grupo11"
+      AuthUserFile /home/rita/svn/grupo11/conf/svn-authz-file
+      Require valid-user
+</Location>
+
+<Location /home/rita/svn/grupo12>
+      DAV svn
+      SVNPath /home/rita/svn/grupo12
+      AuthzSVNAccessFile /home/rita/svn/grupo12/conf/authz
+      AuthType Basic
+      AuthName "Grupo12"
+      AuthUserFile /home/rita/svn/grupo12/conf/svn-authz-file
+      Require valid-user
+</Location>

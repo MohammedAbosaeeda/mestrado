@@ -1,4 +1,0 @@
-#!/usr/bin/tcsh
-setenv JAVA "jdb"
-jdb -classpath ${KESOSRCPATH}/builder/classes/:${JDKTOOLS} keso.compiler.Main ${JINOFLAGS} -sp ${KESOSRCPATH}/classes -kesosrcpath ${KESOSRCPATH} $*
-

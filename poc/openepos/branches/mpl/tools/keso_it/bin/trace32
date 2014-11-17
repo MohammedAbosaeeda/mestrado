@@ -1,3 +1,0 @@
-#! /bin/sh
-# exec t32mtcd $1 (old)
-exec t32mtc $1

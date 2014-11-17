@@ -1,7 +1,0 @@
-agility \
-    --repeated-conditional-rewriting 1 \
-    --pipeline-ram-access 1 \
-    --retiming 1 \
-    --no-hierarchy \
-    --warning-level 4 \
-    --vhdl \

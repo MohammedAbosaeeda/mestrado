@@ -1,6 +1,0 @@
-setMode -bs 
-setCable -p auto 
-loadCdf -file platform.cdf 
-assignFile -p 2 -file build/platform.bit
-program -p 2 -e -v
-quit

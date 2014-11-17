@@ -1,0 +1,15 @@
+Roteiro
+
+make veryclean all
+qemu -fda img/pc_app.img -serial stdio -s -S
+> se quiser colocar o output em um arquivo, é só colocar -serial "arquivo.txt"
+
+em outra janela
+gdb
+target remote localhost:1234
+file app/pc_app
+setar breakpoints, ligar o logging e dar continue.
+
+
+#qemu-system-i386 -fda /home/tinha/mestrado/poc/openepos/branches/teaching/img/thread_test.img -serial stdio -s -S
+#/mestrado/poc/openepos/branches/teaching/img$ gdb --batch -x ~/mestrado/AEP/breakpoint.sh

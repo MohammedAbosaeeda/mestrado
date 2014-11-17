@@ -1,5 +1,0 @@
-#!/bin/sh
-avr-nm $1 | grep -E '^0080' | sort | grep -v ' __' | grep -v ' _edata' | awk 'BEGIN { LAST=-1 } // {ADDR=strtonum("0x" $1) - strtonum("0x800000"); if (LAST != -1) printf("%d\n", ADDR-LAST); printf("0x%-4x %5d  |  0x%-4x %5d  %s  %20s  ", ADDR, ADDR, ADDR-0x60, ADDR-0x60, $2, $3); LAST=ADDR; } END { printf("\n"); }'
-#avr-nm $1 | grep -E '^0080'
-
-

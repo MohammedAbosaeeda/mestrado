@@ -1,1 +1,0 @@
-"Adder = {} function Adder:new(o)     o = o or {}     setmetatable(o, self)     self.__index = self     return o end  function Adder:sum(a, b)     return a + b end   function main()     a = Adder:new{}     s = a:sum(2,9)     print('sum: ', s)     end   main()"

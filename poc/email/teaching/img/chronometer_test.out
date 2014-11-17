@@ -1,0 +1,16 @@
+Setting up this machine as follows: 
+  Processor:    IA32 at 2496 MHz (BUS clock = 125 MHz)
+  Memory:       262144 Kbytes [0x00000000:0x10000000]
+  User memory:  261816 Kbytes [0x00000000:0x0ffae000]
+  PCI aperture: 45064 Kbytes [0xfc000000:0xfec02000]
+  Node Id:      will get from the network!
+  Setup:        21344 bytes
+  APP code:     20768 bytes	data: 736 bytes
+Chronometer test
+Chronometer start.
+Chronometer stop.
+
+Elapsed time = 1501589 us
+****TAP - test successful
+The last thread has exited!
+Rebooting the machine ...

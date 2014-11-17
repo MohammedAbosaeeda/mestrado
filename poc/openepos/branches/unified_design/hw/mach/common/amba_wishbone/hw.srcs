@@ -1,7 +1,0 @@
-##################################################
-# IP Sources
-##################################################
-MACH_COMMON_AXI_WB_SRCS = \
-axi4lite_to_wishbone.v \
-wishbone_to_axi4lite.vhd
-

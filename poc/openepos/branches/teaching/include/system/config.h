@@ -27,14 +27,14 @@
 #define MACH pc
 #define __MACH_TRAITS_H	        __HEADER_MACH(traits)
 
-#define APPLICATION semaphore_test
+#define APPLICATION ping
 #define __APPLICATION_TRAITS_H  __HEADER_APPLICATION(APPLICATION)
 
 //============================================================================
 // ASSERT (for pre and post conditions)
 //============================================================================
-//#define assert(expr)    ((expr) ? static_cast<void>(0) : Assert::fail (#expr, __FILE__, __LINE__, __PRETTY_FUNCTION__))
-#define assert(expr)    (static_cast<void>(0))
+#define assert(expr)    ((expr) ? static_cast<void>(0) : Assert::fail (#expr, __FILE__, __LINE__, __PRETTY_FUNCTION__))
+//#define assert(expr)    (static_cast<void>(0))
 
 //============================================================================
 // CONFIGURATION

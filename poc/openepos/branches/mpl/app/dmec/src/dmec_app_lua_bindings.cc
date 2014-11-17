@@ -1,1 +1,0 @@
-../../lua_applications/bindings/dmec_app_lua_bindings.cc

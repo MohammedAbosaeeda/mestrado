@@ -1,3 +1,0 @@
-#!/usr/bin/tcsh
-
-${JAVA} -cp ${KESOROOTPATH}/EPOS-OSEK/classes:${JDKTOOLS} josek.JOsek $*

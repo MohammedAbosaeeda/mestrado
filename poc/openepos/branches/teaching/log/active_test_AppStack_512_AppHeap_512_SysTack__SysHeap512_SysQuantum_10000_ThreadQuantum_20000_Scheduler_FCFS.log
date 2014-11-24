@@ -1,0 +1,5 @@
+install /home/tinha/mestrado/poc/openepos/branches/teaching/src/abstraction/active_test.cc /home/tinha/mestrado/poc/openepos/branches/teaching/app
+install /home/tinha/mestrado/poc/openepos/branches/teaching/src/abstraction/active_test_traits.h /home/tinha/mestrado/poc/openepos/branches/teaching/app
+make --no-print-directory --silent clean1 run1
+make[1]: *** [clean1] Interrupt
+make: *** [automated_test] Interrupt

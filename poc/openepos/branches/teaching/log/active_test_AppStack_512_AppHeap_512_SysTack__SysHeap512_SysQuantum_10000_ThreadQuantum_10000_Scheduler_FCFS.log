@@ -1,0 +1,9 @@
+install /home/tinha/mestrado/poc/openepos/branches/teaching/src/abstraction/active_test.cc /home/tinha/mestrado/poc/openepos/branches/teaching/app
+install /home/tinha/mestrado/poc/openepos/branches/teaching/src/abstraction/active_test_traits.h /home/tinha/mestrado/poc/openepos/branches/teaching/app
+make --no-print-directory --silent clean1 run1
+active_test.o: In function `main':
+active_test.cc:(.text+0xf1): undefined reference to `EPOS::Scheduling_Criteria::FCFS::FCFS(int)'
+active_test.cc:(.text+0x2ee): undefined reference to `EPOS::Scheduling_Criteria::FCFS::FCFS(int)'
+make[2]: *** [active_test] Error 1
+make[1]: *** [app] Error 2
+make: *** [automated_test] Error 2

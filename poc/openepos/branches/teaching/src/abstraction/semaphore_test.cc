@@ -103,5 +103,5 @@ int main()
     cout << "The end!" << endl;
     cout << "****TAP - test successful" <<endl;
 
-    return 0;
+    cout << "****TAP - test successful" <<endl;cout << "****TAP - test successful" <<endl;cout << "****TAP - test successful" <<endl;cout << "****TAP - test successful" <<endl;cout << "****TAP - test successful" <<endl;cout << "****TAP - test successful" <<endl;cout << "****TAP - test successful" <<endl;return 0;
 }

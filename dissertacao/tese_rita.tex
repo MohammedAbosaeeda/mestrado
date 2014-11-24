@@ -33,7 +33,7 @@
 
 \titulo{Automação da execução de testes de software embarcado} % Titulo do trabalho
 \autor{Rita de Cássia Cazu Soldi} % Nome do autor
-\data{16}{maio}{2014} % Data da publicação do trabalho
+\data{19}{novembro}{2014} % Data da publicação do trabalho
 
 \orientador{Prof. Dr. Antônio Augusto Medeiros Fröhlich} % Nome do orientador e (opcional)
 %\departamento[a]{Faculdade de Ciências do Mar}
@@ -74,7 +74,7 @@
  \end{figure}
 }
 
-\newcommand{\progxml}[3][h]{
+\newcommand{\progxml}[3][hp]{
  \begin{figure}[#1]
      \lstinputlisting[language=XML,style=prg]{fig/#2.xml}
    \caption{#3\label{progxml:#2}}
@@ -83,16 +83,18 @@
 
 
 %%% Sobre a Banca
-\numerodemembrosnabanca{3} % Isso decide se haverá uma folha adicional
-\orientadornabanca{sim} % Se faz parte da banca definir como sim
-\bancaMembroA{Prof. Presidente da banca} %Nome do presidente da banca
-\bancaMembroB{Prof.  membro1} % Nome do membro da Banca
-\bancaMembroC{Prof.  membro2} % Nome do membro da Banca
-%\bancaMembroD{Prof.  membro3} % Nome do membro da Banca
+%\numerodemembrosnabanca{4} % Isso decide se haverá uma folha adicional
+%\orientadornabanca{nao} % Se faz parte da banca definir como sim
+%\bancaMembroA{Prof. Dr. Antônio Augusto Medeiros Fröhlich}[Orientador] %Nome do presidente da banca
+\bancaMembroA{} % Nome do membro da Banca
+\bancaMembroB{} % Nome do membro da Banca
+\bancaMembroC{} % Nome do membro da Banca
 
 \dedicatoria{Dedico este trabalho à minha familia: meus amados pais Célia Regina Cazu Soldi e Luis Carlos Soldi, minha irmãzinha Luiza Helena Cazu Soldi e meu companheiro para todas as horas, Marcelo Ribeiro Xavier da Silva.}
 
-\agradecimento{Ainda não escrevi.}
+\agradecimento{
+Ao meu orientador, prof. Dr. Antônio Augusto Medeiros Fröhlich (Guto), muito obrigada por ter traçado um caminho sólido e por me guiar no desenvolvimento desta monografia. As nossas discussões, trocas de e-mails e conhecimento com certeza foram imprescindíveis para o trabalho.
+}
 
 \epigrafe{How often have I said to you that when you have eliminated the impossible, whatever remains, however improbable, must be the truth?}{ Sherlock Holmes}
 
@@ -104,7 +106,7 @@ Teste e depuração de \textit{software} não é trivial, uma vez que é necessária a
 
 Esta monografia apresenta uma maneira de ajudar os desenvolvedores no processo de testar e depurar sistemas embarcados. Ela apresenta a ferramenta \ac{TAP}, cuja ideia consiste em emular as possíveis configurações do sistema a fim de tentar encontrar erros na aplicação. Uma vez detectado um comportamento não especificado, \ac{TAP} automaticamente executa a compilação, depuração e emulação de acordo com um arquivo de especificação.
 
-\ac{TAP} é avaliada de maneira quantitativa para os critérios de tentativas realizadas \textit{versus} a configuração de granularidade, o consumo de tempo para realizar o teste/depuração e o consumo de memória para suportar a ferramenta. A ferramenta também foi avaliada de maneira qualitativa em um comparativo com ferramentas e técnicas correlatas. 
+\ac{TAP} é avaliada de maneira quantitativa para os critérios de tentativas realizadas \textit{versus} a configuração de granularidade, o consumo de tempo para realizar o teste e depuração e o consumo de memória para suportar a ferramenta. A ferramenta também foi avaliada de maneira qualitativa em um comparativo com ferramentas e técnicas correlatas. 
 
 Os resultados mostraram que a estratégia proposta resultou em uma ferramenta flexível e com grande cobertura dos desafios propostos para atingir os desafios associados à automação de testes de \textit{software}. Além disso, \ac{TAP} apresenta soluções equivalentes às de outras ferramentas e cobre inclusive características que não faziam parte do escopo inicialmente proposto.}
 
@@ -140,7 +142,7 @@ Results showed that the proposed strategy has resulted in a flexible and extensi
 \paginaabstract
 \listadefiguras
 \listadetabelas
-\listadeabreviaturas
+%\listadeabreviaturas
 %\listadesimbolos
 \sumario
 
@@ -196,40 +198,31 @@ Para atender o objetivo geral, os seguintes objetivos específicos devem ser conc
 
 \chapter{Conceitos básicos}
 \label{cap:conceitosBasicos}
-%%%%%%%%%%%%%%%%%%%%%
-\begin{comment}
-%%%%%%%%%%%%%%%%%%%%%
+
 \section{Terminologia}
 Nesta seção serão apresentados alguns termos e conceitos que serão necessários para a completa compreensão da proposta.
 
 \subsection{Defeitos, erros e falhas}
-Estes três termos estão diretamente relacionados ao teste de \textit{software} e seus termos foram definidos pela \ac{IEEE}.
+Os termos defeito, erro e falha estão diretamente relacionados ao teste de \textit{software} e suas designações foram estabelicidas, em inglês, pela \ac{IEEE}~\cite{ieee}. 
+
+A padronização destas expressões em português ainda é motivo de discussões, principalmente porque os termos podem ser consideradas sinônimos. Por isso, para a leitura deste texto os termos serão estabelecidos abaixo (ilustrados pela Figura~\ref{fig:defeito_erro_falha}).
+
+\fig{defeito_erro_falha}{Defeito \textit{versus} erro \textit{versus} falha~\cite{neto2012introduccao}}{scale=.6}
 
 \begin{itemize}
- \item \textbf{Defeito} é um ato cometido por um indivíduo ao tentar entender uma determinada informação, resolver um problema ou utilizar um método ou uma ferramenta. Por exemplo, uma instrução ou comando incorreto.
- \item \textbf{Erro} é uma manifestação concreta de um defeito num artefato de \textit{software}. A diferença entre o valor obtido e o valor esperado, ou seja, qualquer estado intermediário incorreto ou resultado inesperado na execução de um programa constitui um erro.
- \item \textbf{Falha} é um comportamento operacional do \textit{software} diferente do esperado pelo usuário. Uma falha pode ter sido causada por diversos erros e alguns erros podem nunca causar uma falha.
+ \item \textbf{Defeito} é caracterizado como um passo, processo, ou definições que são realizadas por um indivíduo de maneira equivocada. O defeito é a causa de um erro, e normalmente ocorre em um nível base, no universo físico, ao abstrair informações, definir um requisito, ao inserir uma linha de código fonte.
+ \item \textbf{Erro} é uma manifestação concreta de um defeito num artefato de \textit{software}. Eles ocorrem no universo da informação, e se sobressaem durante a execução do \textit{software}. Caracterizam-se pela divergência entre os valores obtidos e os valores esperados de um \textit{software}, pois geram um resultado inesperado na execução de um \textit{software}.
+ \item \textbf{Falha} é um desvio da especificação e surge quando existe um processamento incoreto que leva a um comportamento diferente do esperado pelo usuário. Uma falha pode ser considerada com uma deficiência do \textit{software} em cumprir determinados requisitos funcionais devido à ocorrência de um ou mais erros.
 \end{itemize}
+\\
 
-Defeito é um ato inconsistente cometido por um indivíduo ao tentar entender uma determinada informação, resolver um problema ou utilizar um método ou uma ferramenta. Por exemplo, uma instrução ou comando incorreto.
-
-Erro é uma manifestação concreta de um defeito num artefato de software. Diferença entre o valor obtido e o valor esperado, ou seja, qualquer estado intermediário incorreto ou resultado inesperado na execução de um programa constitui um erro.
-
-Falha é o comportamento operacional do software diferente do esperado pelo usuário. Uma falha pode ter sido causada por diversos erros e alguns erros podem nunca causar uma falha.
-
-Apesar de contemplarem ideias parecias, os termos não são sinônimos e são utilizados para designar conceitos distintos. A Figura~\ref{defeito_erro_falha} apresenta um resumo visual dos conceitos de defeito, erro e falha.
-
-\fig{defeito_erro_falha}{Defeito versus erro versus falha \cite{neto2012introduccao}}{scale=.8}
-%%%%%%%%%%%%%%%%%%%%%
-\end{comment}
-%%%%%%%%%%%%%%%%%%%%%
 
 \section{Teste de \textit{software}}
 A primeira conferência com foco em teste de \textit{software} ocorreu há apenas 42 anos, em junho de 1972~\cite{Gelperin:1988}. Desde então há um esforço para definir melhor os conceitos relacionados à área e também para chegar-se a um consenso sobre a pontos chave como nomenclatura, documentação, especificação e execução de testes.
 
 A definição com maior aceitação apresenta o teste de \textit{software} como o processo de análise de um item de \textit{software} para detectar as diferenças entre as condições existentes e exigidas (isto é, os erros), e avaliar as características do item de software~\cite{ieee87}. Sendo assim, esta atividade é amplamente utilizada para assegurar que o \textit{software} contempla as funcionalidades especificadas e quem todas elas estão funcionando corretamente.
 
-Segundo Myers, os objetivos do teste de \textit{software} podem ser expressos a partir da observação de três regras\cite{Myers:2004:AST:983238}:
+Segundo Myers, os objetivos do teste de \textit{software} podem ser expressos a partir da observação de três regras~\cite{Myers:2004:AST:983238}:
 \begin{itemize}
  \item A atividade de teste é o processo de executar um programa com a intenção de descobrir um erro.
  \item Um bom caso de teste é aquele que apresenta uma elevada probabilidade de revelar um erro ainda não descoberto.
@@ -238,7 +231,7 @@ Segundo Myers, os objetivos do teste de \textit{software} podem ser expressos a 
 
 Estas três regras ressaltam o objetivo do teste de \textit{software}, que visa salientar a presença dos erros e não sua ausência. Isto significa que o sucesso de um teste em encontrar um desvio de comportamento em um determinado \textit{software} não garante que todas as possíveis falhas tenham sido encontradas. O teste que não encontra erros é meramente inconclusivo, pois não se sabe se há ou não desvio no comportamento do \textit{software} analisado.
 
-Segundo Pressman, muitas estratégias de testes já foram propostas na literatura e todas fornecem um modelo para o teste com as seguintes características genéricas ~\cite{pressman}:
+Segundo Pressman, muitas estratégias de testes já foram propostas na literatura e todas fornecem um modelo para o teste com as seguintes características genéricas~\cite{pressman}:
 \begin{itemize}
  \item Para executar um teste de maneira eficaz, deve-se fazer revisões técnicas eficazes. Fazendo isso, muitos erros serão eliminados antes do começo do teste.
  \item O teste começa no nível de componente e progride em direção à integração do sistema computacional como um todo.
@@ -252,7 +245,7 @@ Testar um \textit{software} é essencial para revelar o número máximo de erros a 
 Os testes devem ser adotados desde o início do projeto de \textit{software} a partir da definição dos requisitos a serem testados, escolha da abordagem utilizada, da política de testes, critérios para a conclusão do teste, entre outros. Para que o processo de teste alcance seu objetivo é necessária uma estratégia de testes, suficientemente flexível para modelar-se às peculiaridades do \textit{software} e rígida o bastante para um acompanhamento satisfatório do projeto.
 
 \subsection{Classificação dos níveis de teste}
-As atividades de teste de \textit{software} são normalmente classificados em níveis. Dentre os mais tradicionais estão a categorização baseada no processo de processo de \textit{software} e a categorização baseada na maturidade de pensamento testadores\cite{Ammann:2008:softwareTestig}.
+As atividades de teste de \textit{software} são normalmente classificados em níveis. Dentre os mais tradicionais estão a categorização baseada no processo de processo de \textit{software} e a categorização baseada na maturidade de pensamento testadores~\cite{Ammann:2008:softwareTestig}.
 
 \subsubsection{Modelo V}
 A classificação baseada no processo genérico do desenvolvimento do \textit{software} e incentiva o projeto dos testes simultâneo com cada etapa de desenvolvimento, mesmo que o software só possa ser executado após a fase de implementação~\cite{Rook:vMovel}. Nela cada atividade do processo de construção de um \textit{software} é acompanhado de uma atividade de teste, ou seja, a informação de entrada do teste é normalmente derivada de uma atividade de desenvolvimento do \textit{software}. 
@@ -360,7 +353,7 @@ Esta ferramenta de testes de \textit{software} embarcado é capaz de detectar aut
 $Justitia$ possui a hipótese de que a interface é um critério essencial para um teste de \textit{software} embarcado, e para defendê-la utiliza uma solução que une as seguintes técnicas:
 \begin{itemize}
 	\item{\textbf{Técnica de teste de interface}},  na qual os casos de teste são gerados através da análise do arquivo (imagem) executável do sistema. Como o próprio nome sugere, a técnica foca nas interfaces do sistema embarcado, em especial as referentes às camadas do sistema operacional e às camadas do \textit{hardware}. Quando teste é executado são extraídas as informações de depuração, tais como símbolos,  relações entre os componentes, informações do \textit{driver} de dispositivo, etc.
-	\item{\textbf{Técnica de emulação dos casos de teste}}, uma combinação entre o monitoramento e a depuração do sistema. A ideia é definir \textit{breakpoints} para os casos de teste da interface e monitorar  as variáveis ??de interface para definir o sucesso ou falha do teste. As variáveis de interface desempenham o papel de indicador para o funcionamento do sistema embarcado,verificando se alguma camada está instável e encapsulando a influência do \textit{hardware} sobre falhas em \textit{software} embarcado
+	\item{\textbf{Técnica de emulação dos casos de teste}}, uma combinação entre o monitoramento e a depuração do sistema. A ideia é definir \textit{breakpoints} para os casos de teste da interface e monitorar  as variáveis de interface para definir o sucesso ou falha do teste. As variáveis de interface desempenham o papel de indicador para o funcionamento do sistema embarcado,verificando se alguma camada está instável e encapsulando a influência do \textit{hardware} sobre falhas em \textit{software} embarcado
 \end{itemize}
 
 A solução foi analisada sob três pontos de vista: a densidade da interface, a complexidade do \textit{software} e a relação interface \textit{versus} falhas. Os pontos de análise surgiram de uma premissa que aponta o forte acoplamento entre \textit{hardware} e \textit{software} como a razão para aumento de dificuldades no teste de \textit{software} embarcado. 
@@ -508,7 +501,7 @@ Nesta abordagem é comum trabalhar com o teste e a depuração em conjunto, inclusi
 \subsection{Depuração por delta com hierarquias}
 A técnica genérica de \ac{DD} utiliza os algoritmos de simplificação e isolamento para fornecer um subconjunto onde encontra-se a mudança que possivelmente causou o erro. Porém, em casos mais complexos o \ac{DD} perde um pouco de eficácia e aponta para vários subconjuntos com falha nos testes e cujas entradas não são tão simplificadas.
 
-O HDD - \textit{Hierarchical Delta Debugging} \cite{Misherghi:2006} surgiu para melhorar o desempenho dos algoritmos do \ac{DD}, principalmente quando o código fonte analisado possui uma estrutura hierárquica e semântica, ou seja, o \ac{SUT} não é apenas uma estrutura de linhas desconexas e independentes. 
+O HDD - \textit{Hierarchical Delta Debugging}~\cite{Misherghi:2006} surgiu para melhorar o desempenho dos algoritmos do \ac{DD}, principalmente quando o código fonte analisado possui uma estrutura hierárquica e semântica, ou seja, o \ac{SUT} não é apenas uma estrutura de linhas desconexas e independentes. 
 
 A ideia é aproveitar a estrutura hierárquica da entrada para reduzir o número de tentativas inválidas, pois explorando a estrutura dos dados de entrada é possível melhorar a convergência e chegar mais rápido à estrutura simplificada.
 
@@ -568,7 +561,7 @@ Este capítulo apresenta o ambiente compartilhado de teste e depuração, demostran
 
 A atividade de teste é necessária para manter a qualidade do produto oferecido e verificar se seu comportamento não desvia do esperado. No caso de \textit{software} embarcado, o teste na plataforma alvo e no ambiente de produção é necessário, entretanto nem sempre é possível ou praticável. Felizmente existem alternativas para realizar esta atividade, como por exemplo executar o \textit{software} em um simulador, através um protótipo limitado de \textit{hardware}, ou até utilizando o próprio ambiente de desenvolvimento.~\cite{progressBeforeHardware}.
 
-A ideia de prover um bom ambiente em que testes e depuração possam compartilhar a infraestrutura se formou a partir da observação e estudo de vários ambientes de execução automática das atividades testes e de depuração. Seu desenvolvimento envolveu uma atenção especial ao suporte para sistemas embarcados, visto que os testes/depuração realizados tentem a compartilhar os escassos recursos do \ac{SUT}. O compartilhamento é crítico no caso de sistemas embarcados porque geralmente possuem apenas os recursos essenciais para desempenhar uma determinada função.
+A ideia de prover um bom ambiente em que testes e depuração possam compartilhar a infraestrutura se formou a partir da observação e estudo de vários ambientes de execução automática das atividades testes e de depuração. Seu desenvolvimento envolveu uma atenção especial ao suporte para sistemas embarcados, visto que os testes e depuração realizados tentem a compartilhar os escassos recursos do \ac{SUT}. O compartilhamento é crítico no caso de sistemas embarcados porque geralmente possuem apenas os recursos essenciais para desempenhar uma determinada função.
 
 Um exemplo de sistema embarcado com um alto grau de dificuldade para atividades de teste e depuração é a \ac{RSSF}. Este tipo de rede pode ser composta por vários sensores que, além de permanecerem espalhados geograficamente por uma grande área de monitoramento, geralmente possuem pouco poder de processamento e apenas alguns \textit{kilobytes} de armazenamento~\cite{pottie2000wireless}.
 
@@ -587,6 +580,7 @@ Sabe-se que o processo de depuração também precisa de ferramentas específicas pa
 %=======================
 
 \section{Configuração do ambiente remoto}
+\label{ref:configAmbiente}
 As ferramentas utilizadas para a construção deste ambiente remoto podem ser substituídas por qualquer outra equivalente, contudo, a configuração completa será tecnicamente apresentada para que seja possível a reprodução do experimento.
 
 O ambiente compartilhado proposto utiliza o $QEMU$ para emular a máquina com a aplicação alvo a partir de outra máquina, usando tradução dinâmica. Desta forma torna-se possível utilizar-se um computador pessoal para testar aplicações compiladas para algum outro sistema embarcado. O \ac{GDB} encaixou-se no papel de depurador, pois nele é possível especificar qualquer regra que possa afetar o comportamento do \ac{SUT} de maneira estática.
@@ -634,12 +628,13 @@ Muitas vezes as configurações do \ac{SUT} devem ser alteradas para poder executa
 
 A presente proposta de ambiente compartilhado não é uma exceção e, inclusive, um dos primeiros passos para utilizar o ambiente de maneira adequada está em executar uma compilação simbólica do \textit{software} e sem otimizações. 
 
-Para um compilador, a diferença entre utilizar ou não alguma otimização ativa é o foco da compilação do \textit{software}. Ao utilizar uma compilação sem otimização, o objetivo do compilador será de reduzir o custo da compilação e da depuração a fim de sempre produzir os resultados esperados. Ao ativar alguma otimização sua função será compilar com o intuito de melhorar o desempenho e/ou o tamanho do código à custa do tempo de compilação e, possivelmente, da capacidade para depurar o programa~\cite{gcc:optimization}.
+Para um compilador, a diferença entre utilizar ou não alguma otimização ativa é o foco da compilação do \textit{software}. Ao utilizar uma compilação sem otimização, o objetivo do compilador será de reduzir o custo da compilação e da depuração a fim de sempre produzir os resultados esperados. Ao ativar alguma otimização sua função será compilar com o intuito de melhorar o desempenho e/ou o tamanho do código à custa do tempo de compilação e, possivelmente, da capacidade para depurar o programa~\cite{gccOptimization}.
 
 Uma compilação sem otimizações deixa o \textit{software} mais preparado para extrair informações valiosas na depuração. Contudo, além de aumentar a quantidade de memória necessária, o fato de retirar as otimizações da compilação pode ocultar erros e distorcer as condições de corrida de um \textit{software}. 
 
-As otimizações utilizadas por um \ac{SUT} podem definir o sucesso do teste e da depuração e devem ser muito bem avaliadas para não gerarem resultados falsos. Para corroborar este fato, discutiram sobre como as otimizações podem influenciar \textit{software} com múltiplas \textit{threads}~\cite{jia2013compiler}. Ainda, existem vários estudos~\cite{effinger2012ifrit, 5544315, 6821096} que tentam fornecer alternativas para o teste e depuração de \textit{software} com o mínimo de influência no sistema, para não ocultar erros de simultaneidade.
+Estas alterações podem, em alguns casos, gerar erros que provavelmente não existiriam em uma compilação com as otimizações. Isto implica em falsos positivos que podem a vir ser apontados por \ac{TAP}. Porém, os relatórios gerados por \ac{TAP}, independende de falsos positivos, necessitam de interpretação. Isto é, a ferramenta não substitui o desenvolvedor, ela auxilia no desenvolvimento, e cabe ao desenvolvedor considerar ou não mudanças de acordo com o relatório. Em suma, é uma questão de hermenêutica.
 
+As otimizações utilizadas por um \ac{SUT} podem definir o sucesso do teste e da depuração e devem ser muito bem avaliadas para não gerarem resultados falsos. Para corroborar este fato, existem trabalhos que discutem como as otimizações podem influenciar \textit{softwares} com múltiplas \textit{threads} ~\cite{jia2013compiler} e sugestões~\cite{effinger2012ifrit, 5544315, 6821096} para o teste e depuração de \textit{software} com o mínimo de influência no sistema, com foco em não ocultar erros de simultaneidade.
 
 \chapter{Troca automática dos parâmetros de \textit{software}}
 \label{sec:tap}
@@ -668,9 +663,11 @@ O algoritmo de \ac{TAP} foi desenvolvido para aproveitar estas vantagens. Assim,
 \section{Algoritmo de troca de parâmetros}
 O algoritmo de troca de parâmetros foi idealizado de acordo com os conceitos de abstrações de dados e com foco no desenvolvimento e teste de sistemas embarcados.
 
-A ideia é poder aplicar um único conjunto de testes para todas as implementações que seguem uma mesma especificação, especializando apenas a configuração desejada. Desta forma, é possível executar o mesmo conjunto de testes para atender uma maior variabilidade de configurações um componente de \textit{software} ou \textit{hardware}.
+A ideia é poder aplicar um único conjunto de testes para todas as implementações que seguem uma mesma especificação, especializando apenas a configuração desejada. Desta forma, é possível executar o mesmo conjunto de testes para atender uma maior variabilidade de configurações de um componente de \textit{software} ou \textit{hardware}.
 
-No Algoritmo~\ref{algoritmo_AEP} são apresentados os passos realizados a partir do momento em que se tem um \ac{SUT} até o retorno do relatório para o usuário. A entrada do algoritmo é o arquivo de configuração que possui o caminho do \ac{SUT} e de sua configuração - que neste caso são os \textit{traits}. A partir destas informações o algoritmo flui no sentido de tentar encontrar a característica desejada, trocá-la por uma valor predeterminado, executar a nova aplicação e recolher o retorno da aplicação.
+A especificação é consubstanciada em um arquivo de configuração, no qual são discriminadas as aplicações que deseja-se realizar os testes, as propriedades que devem ser trocadas e os valores. O padrão de preenchimento e as demilitações do arquivo de configuração serão descritos na Seção~\ref{sec:implementacaoTAP}. Contudo, para o entendimento do algoritmo em um nível mais abstrato, será considerado que neste arquivo contém apenas o caminho do \ac{SUT} e de seu \textit{trait} - um arquivo com as propriedades da aplicação.
+
+No Algoritmo~\ref{algoritmo_AEP} são apresentados os passos realizados a partir do momento em que se tem um \ac{SUT} até o retorno do relatório para o usuário. A entrada do algoritmo é o arquivo de configuração e a partir das especificações contidas nele, o algoritmo flui no sentido de tentar encontrar a característica desejada, trocá-la por uma valor predeterminado, executar a nova aplicação e recolher o retorno da aplicação.
 
 \begin{algorithm}
 \caption{Algoritmo de troca dos parâmetros de configuração}\label{algoritmo_AEP}
@@ -702,12 +699,13 @@ propriedades $\Leftarrow$ pegarPropriedadeDoArquivo(arquivo)\;
 \Return relat\'{o}rio;
 \end{algorithm}
 
-Vale lembrar que o algoritmo não leva em conta a semântica da aplicação os das trocas realizadas. Se o aquivo de configuração não trouxer sugestões de propriedades a serem modificadas e dos valores semanticamente válidos, a ferramenta apenas selecionará valores estruturalmente válidos. 
+Vale lembrar que o algoritmo não leva em conta a semântica da aplicação nas trocas realizadas. Se o aquivo de configuração não trouxer sugestões de propriedades a serem modificadas e valores cuja semântica é adequada, a ferramenta apenas selecionará valores estruturalmente válidos.
 
 \section{Detalhes da implementação}
+\label{sec:implementacaoTAP}
 \ac{TAP} é a ferramenta que implementa o algoritmo de troca de parâmetros de execução e utiliza o ambiente compartilhado para realizar a automação da execução dos testes e depuração de sistemas embarcados. 
 
-A implementação do algoritmo deve utiliza como base um sistema operacional com uma grande capacidade de configuração do sistema. O \ac{EPOS} é \ac{EPOS} é um \textit{framework} baseado em componentes que fornece todas as abstrações tradicionais de sistemas operacionais e serviços como: gerenciamento de memória, comunicação e gestão do tempo~\cite{Froehlich:2001}. Além disso, possui vários projetos industriais e acadêmicos que o utilizam como base~\footnote{http://www.lisha.ufsc.br/pub/index.php?key=EPOS}.
+A implementação do algoritmo deve utiliza como base um sistema operacional com uma grande capacidade de configuração do sistema. O \ac{EPOS} é um \textit{framework} baseado em componentes que fornece todas as abstrações tradicionais de sistemas operacionais e serviços como: gerenciamento de memória, comunicação e gestão do tempo~\cite{Froehlich:2001}. Além disso, possui vários projetos industriais e acadêmicos que o utilizam como base~\footnote{http://www.lisha.ufsc.br/pub/index.php?key=EPOS}.
 
 Este sistema operacional foi concebido com \ac{ADESD} e é instanciado apenas com o suporte básico para sua aplicação dedicada. É importante salientar que todas as características dos componentes também são características da aplicação, desta maneira, a escolha dos valores destas propriedades tem influência direta no comportamento final da aplicação. 
 
@@ -719,20 +717,28 @@ Cada aplicação gerada possui um arquivo próprio de configuração de abstrações pa
 
 Para melhorar a usabilidade da ferramenta, é possível definir um arquivo de configuração com as informações necessárias para executar os testes unitários e de tipagem. O uso de arquivos \ac{XML} para definir as configurações de teste se deu pela facilidade e legibilidade para definir todas as regras necessárias para executar o algoritmo e, além disso, também é facilmente interpretado pelo computador.
 
-A Figura~\ref{progxml:philosopherxml} traz um exemplo do arquivo de configuração de \ac{TAP} para uma aplicação exemplo.
+O arquivo do configuração é responsável pelo teste, então seu conteúdo deve estar sempre atualizado e em concordância com os requisitos da aplicação. O ajuste inicial é manual e simples, uma vez que este arquivo pode ser lido quase como um texto.
+
+A Figura~\ref{progxml:philosopherxml} traz um exemplo do arquivo de configuração de \ac{TAP} para uma aplicação chamada "$exemplo$". Dentro dela deseja-se especificar duas propriedades: a primeira é identificada como "$ARCH$" e pode assumir os valores "$IA32$" ou "$AVR8$", já a segunda propriedade está relacionada à depuração e é um arquivo que contém \textit{breakpoints} que está no seguinte caminho:\\ "$/home/breakpoints.txt$".
 
 \progxml{philosopherxml}{Exemplo do arquivo de configuração do teste para a \ac{TAP}.}
 
-O arquivo do configuração é responsável pelo teste, então seu conteúdo deve estar sempre atualizado e em concordância com os requisitos da aplicação. O ajuste inicial é manual e simples, uma vez que este arquivo pode ser lido quase como um texto: há um teste para a aplicação "exemplo", dentro dela deseja-se especificar duas propriedades. A primeira é identificada como \textit{ARCH} e seus valores são semanticamente válidos para a aplicação apenas se assumirem os valores \textit{IA32} ou \textit{AVR8}. A segunda está relacionada à depuração, é um arquivo que contém \textit{breakpoints} que está no seguinte caminho: "\textit{/home/breakpoints.txt}".
+O arquivo de \textit{breakpoints} é opcional e deve conter uma sequência de passos de depuração. A Figura~\ref{fig:breakpoint} apresenta um exemplo de arquivo, o qual inicia-se o ligando o \textit{log} do \ac{GDB} ($set$ $logging$ $on$) para poder salvar a todos os passos da depuração e poder analisá-los posteriormente, caso necessário. Com esta opção esteja ativa no \textit{script} de depuração os passos executados no \ac{GDB} também serão anexados ao relatório final de \ac{TAP}.
+
+\fig{breakpoint}{Exemplo do arquivo de breakpoint.}{scale=.3}
+
+O comando "$target$ $remote:1234$"$ $refere-se ao passo 3 da configuração do ambiente compartilhado, apresentado na Seção~\ref{ref:configAmbiente} e em seguida encontra-se o comando que adiciona \textit{breakpoints} nas funções desejadas ($break$). As linhas com $continue$ se referem, respectivamente, ao sinal de liberação da execução do sistema pelo $QEMU$ e ao sinal de continuar a execução após acionar o \textit{brekpoint} desejado ($main$).
 
 \section{Configuração da execução}
-Cada configuração do teste interfere diretamente no tempo e eficácia da ferramenta. Prevendo este comportamento, \ac{TAP} oferece três granularidades de configuração para o teste: determinada, parcialmente aleatória e aleatória. Elas devem ser escolhidas de acordo com a finalidade do usuário ao executar a \ac{TAP}, do tipo de teste e das características de aplicação.
+Cada configuração do teste interfere diretamente no tempo e eficácia da ferramenta. Prevendo este comportamento, \ac{TAP} oferece três granularidades de configuração para o teste: aleatória, parcialmente aleatória e determinada. Elas devem ser escolhidas de acordo com a finalidade do usuário ao executar a \ac{TAP}, do tipo de teste e das características de aplicação.
 
-Quando se deseja testar uma especificação bem definida, é possível determinar qual valor uma propriedade deve atingir. Toda a especificação pode ser traduzida no arquivo de configuração e \ac{TAP} só considerará sucesso no teste as execuções que seguirem fielmente o descrito. O modo determinado também é interessante quando se deseja otimizar uma configuração, pois uma vez que o comportamento da aplicação e todas suas configurações sejam conhecidas, a única variável do sistema afetará o resultado final.
+Teste aleatório foi desenvolvido para quando deseja-se testar valores fora do convencional para verificar a robustez da aplicação. Também é útil caso a aplicação falhe ao passar nos testes e não se tenha dica alguma sobre onde poderia estar o erro no momento de iniciar a depuração. Através dele pode-se encontrar valores errados de configuração e ajudar os desenvolvedores menos experientes a depurar pequenas aplicações.
 
 Testes parcialmente aleatórios são usados para verificar as configurações do sistema que não possuem um valor determinado, ou seja, mais de um valor pode ser considerado correto. Neste caso, a informação faltante na configuração será atribuída pelo \textit{script} no momento do teste. Sem nenhuma informação prévia, o algoritmo não garante que os valores gerados serão válidos e distintos uns dos outros, desta forma pode ser que o teste seja repetido e gere resultados com falsos negativos.
 
-Teste aleatório foi desenvolvido como o pior caso. Ele só deve ser usado quando deseja-se testar valores fora do convencional para verificar a robustez da aplicação. Também é útil caso a aplicação falhe ao passar nos testes e não se tenha dica alguma sobre onde poderia estar o erro no momento de iniciar a depuração. Através dele pode-se encontrar valores errados de configuração e ajudar os desenvolvedores menos experientes a depurar pequenas aplicações.
+Quando se deseja testar uma especificação bem definida, é possível determinar qual valor uma propriedade deve atingir. Toda a especificação pode ser traduzida no arquivo de configuração e \ac{TAP} só considerará sucesso no teste as execuções que seguirem fielmente o descrito. O modo determinado também é interessante quando se deseja otimizar uma configuração, pois uma vez que o comportamento da aplicação e todas suas configurações sejam conhecidas, a única variável do sistema afetará o resultado final.
+
+A diferença fundamental entre os três modos é a quantidade de regras que são inseridas no arquivo de configuração: o modo aleatório não possui regras, já o parcialmente aleatório tem alguma definição de valor ou propriedade a ser considerada, e o modo determinado possui tanto a propriedade quanto os valores a serem trocados.
 
 \chapter{Resultados experimentais e análise}
 \label{sec:case_study}
@@ -742,7 +748,7 @@ Os experimentos foram elaborados para salientar os pontos positivos da proposta 
 
 O primeiro experimento teve como objetivo averiguar se o algoritmo era robusto o suficiente para contribuir no ciclo de desenvolvimento de ferramentas complexas. Para tal, \ac{TAP} realizou a troca de parâmetros de uma ferramenta utilizada na estimativa de movimento - que é um dos passos da codificação de vídeo bruto em H.264.
 
-Já o segundo experimento foi aplicado a desenvolvedores inexperientes na implementação e manutenção de \textit{software} embarcado, e focou na facilidade de utilização e na efetividade dos resultados. Neste caso, o experimento foi desenvolvido como base no o código produzido por alunos do curso de bacharelado em ciências da computação. Os alunos tiveram o seu primeiro contato com o \ac{EPOS} durante as aulas e seus exercícios práticos consistiam em realizavam uma manutenção evolutiva do sistema.
+Já o segundo experimento foi aplicado a códigos fonte gerados por desenvolvedores com pouca experiência em implementação e manutenção de \textit{software} embarcado e seu foco é na viabilização da ferramenta como auxiliadora no aprendizado.
 
 \section{Experimento 1 - Ciclo de desenvolvimento}
 Este experimento foi desenvolvido com o intuito de medir a robustez de algoritmo durante o ciclo de desenvolvimento e manutenção de \textit{software}. A aplicação escolhida para este experimento foi a \ac{DMEC}, que simula um componente de estimativa de movimento distribuída.
@@ -762,43 +768,47 @@ A troca de parâmetros gerou todas as configurações de \texttt{NUM\_WORKERS} de 1
 
 \fig{qemu_dmec_6_workers}{Teste do DMEC com configuração \texttt{NUM\_WORKERS} = 6}{scale=.4} \fig{qemu_dmec_60_workers}{Teste do DMEC com configuração \texttt{NUM\_WORKERS} = 60}{scale=.4}
 
-As Figuras ~\ref{fig:qemu_dmec_6_workers} e~\ref{fig:qemu_dmec_60_workers} conseguiram produzir uma imagem executável após a compilação, entretanto, mesmo sem haver erro na compilação a execução com \texttt{NUM\_WORKERS} igual a 60 retornou um resultado inválido. Desta forma, torna-se visível que apenas compilar o código não garante que a aplicação é livre de \textit{bugs}. 
+As Figuras ~\ref{fig:qemu_dmec_6_workers} e~\ref{fig:qemu_dmec_60_workers} mostram que foi possível produzir uma imagem executável após a compilação, entretanto, mesmo sem haver erro na compilação a execução com \texttt{NUM\_WORKERS} igual a 60 retornou um resultado inválido, mais adiante discute-se o porquê. O aprendizado que pode-se tirar destes casos é que apenas compilar o código não garante uma aplicação livre de \textit{bugs}. 
 
-Para os casos nos quais a execução da aplicação não foi bem sucedida \ac{TAP} automaticamente aciona o depurador para que se possa descobrir o porquê deste comportamento. Sendo assim, foi necessário incluir na configuração da ferramenta um arquivo com \textit{breakpoints} para poder verificar-se o problema. Foram adicionados pontos de interrupção em cada uma das funções da aplicação, inclusive na função principal. A execução do \ac{GDB} com os \textit{breakpoints} é demonstrada na Figura~\ref{fig:gdb_dmec_60_workers}.
+Para os casos nos quais a execução da aplicação não foi bem sucedida, \ac{TAP} automaticamente aciona o depurador para que se possa descobrir o porquê deste comportamento. Sendo assim, foi necessário incluir na configuração da ferramenta um arquivo com \textit{breakpoints} para poder verificar-se o problema. Foram adicionados pontos de interrupção em cada uma das funções da aplicação, inclusive na função principal. A execução do \ac{GDB} com os \textit{breakpoints} é demonstrada na Figura~\ref{fig:gdb_dmec_60_workers}.
 
 \fig{gdb_dmec_60_workers}{Depuração do DMEC com a configuração \texttt{NUM\_WORKERS} = 60}{scale=.4}
 
-Com esta configuração apenas execuções que chamaram ao menos um vez cada uma das funções foram consideradas execuções corretas da aplicação. Note-se que após o comando \texttt{continue} não houve mais nenhuma parada em qualquer uma das funções. Insto significa que para a configuração \texttt{NUM\_WORKERS} com o valor 60 não houve nenhuma resposta da aplicação e que, inclusive, não conseguiu nem atingir a função principal.
+Com esta configuração apenas execuções que chamaram ao menos um vez cada uma das funções foram consideradas execuções corretas da aplicação. Note-se que após o comando \texttt{continue} não houve mais nenhuma parada em qualquer uma das funções. Isto significa que para a configuração \texttt{NUM\_WORKERS} com o valor 60 não houve nenhuma resposta da aplicação e que, inclusive, não conseguiu nem atingir a função principal.
 
-Ainda, observando-se o relatório final emitido pela ferramenta foi possível descobrir que sempre que a configuração \texttt{NUM\_WORKERS} apresentava um número maior que 10 a aplicação se comportava de maneira anômala. 
+Após a execução da ferramenta e análise do relatório, foi possível determinar que sempre que a configuração \texttt{NUM\_WORKERS} apresentava um número maior que 6 a aplicação se comportava de maneira anômala, surgindo a hipótese de que existia um limite máximo de trabalhadores. 
 
-Após a execução da ferramenta e análise do relatório foi possível determinar que existia um limite máximo de trabalhadores, informação esta que ajudou no desenvolvimento do componente. A partir desta descoberta foi possível maximizar o paralelismo das estimativas sem que houvesse efeitos colaterais no funcionamento da aplicação.
+Descobriu-se que, embora o particionamento da imagem seja fixo, dependendo do número de \textit{threads} era realizado um particionamento das imagens diferente. Para um número de \textit{threads} maior que 6 havia uma falha na aplicação devido a um erro cometido pela \textit{thread} coordenadora e que impossibilitava que o \ac{SUT} atingisse a função \texttt{main}.
 
-Entretanto, a qualidade da informação de retorno é inerente à qualidade de informação à priori que é repassada na configuração de \ac{TAP}. A Figura~\ref{fig:comp_report_partial} apresenta um trecho de relatório com algumas configurações geradas.
+A partir desta descoberta foi possível maximizar o paralelismo das estimativas sem que houvesse efeitos colaterais no funcionamento da aplicação. Esta informação ajudou no desenvolvimento do componente, uma vez que descobriu-se que 6 \textit{threads} é o limite máximo de \textit{threads} suportado por este tipo de particionamento, e que para supotar um número maior que este seria necessário criar novas formas de particionamento.
 
-\fig{comp_report_partial}{Trecho do relatório com a troca da propriedade \texttt{NUM\_WORKERS} por valores gerados aleatoriamente.}{scale = 0.55}
+Apesar da ferramenta ter fornecido dados importantes para verificar uma falha na execução do \ac{SUT}, vale lembrar que a qualidade da informação de retorno é inerente à qualidade de informação à priori que é repassada na configuração de \ac{TAP}. A Figura~\ref{fig:comp_report_partial} apresenta um trecho de relatório com algumas configurações geradas.
+
+\fig{comp_report_partial}{Trecho do relatório com a troca da propriedade \texttt{NUM\_WORKERS} por valores gerados aleatoriamente.}{scale = 0.5}
 
 Em casos como o do teste aleatório qualquer propriedade pode mudar, por exemplo, o tamanho da pilha de aplicativos, o valor de um \textit{quantum}, a quantidade de ciclos de relógio, etc. Relatórios gerados com mais dados tendem a ser mais concisos e menos repetitivos, já os oriundos de testes aleatórios tendem a uma menor organização e maior redundância nas informações.
 
-Outro ponto de interesse científico encontra-se na razão entre o consumo de tempo para executar os testes versus a qualidade da informação que pode ser extraída. As Figuras \ref{fig:dmec_results} e \ref{fig:dmec_time_results} apresentam, respectivamente, os resultados dos experimentos relacionados à qualidade da informação devolvida para o usuário e ao consumo de tempo. Neste experimento foram realizadas 50 tentativas para cada tipo de granularidade. Para o teste parcialmente aleatório, foi modificada a propriedade \texttt{NUM\_WORKERS} com valores em aberto e para o teste determinado foi alterada esta mesma propriedade com valores de 1 a 60.
+Outro ponto de interesse científico encontra-se na razão entre o consumo de tempo para executar os testes versus a qualidade da informação que pode ser extraída. As Figuras \ref{fig:dmec_results} e \ref{fig:dmec_time_results} apresentam, respectivamente, os resultados dos experimentos relacionados à qualidade da informação devolvida para o usuário e ao consumo de tempo.
 
-\fig{dmec_results}{Classificação das tentativas realizadas versus a configuração da granularidade.}{scale = 0.7}
+\fig{dmec_results}{Classificação das tentativas realizadas versus a configuração da granularidade.}{scale = 0.65}
 \fig{dmec_time_results}{Classificação das tentativas realizadas versus o consumo de tempo.}{scale = 0.4}
+
+Neste experimento foram realizadas 50 tentativas para cada tipo de granularidade. Para o teste parcialmente aleatório, foi modificada a propriedade \texttt{NUM\_WORKERS} com valores em aberto e para o teste determinado foi alterada esta mesma propriedade com valores de 1 a 60.
 
 A diferença entre as tentativas totalmente aleatórias e as outras duas granularidades foi grande. Este resultado já era esperado, visto que a depuração de uma aplicação sem informação nenhuma à priori tem a sua efetividade ligada à probabilidade de encontrar tanto a falha quanto a sua causa.
 
 Entretanto não houve muita alteração entre os tipos determinado e parcialmente aleatório. Isto ocorreu devido à limitação na quantidade de propriedades e de seus possíveis valores de troca da aplicação, ou seja, com tal restrição as trocas com sucesso foram semelhantes nas duas configurações.
 
+\fig{dmec_size_results}{Consumo de memória extra para armazenar as informações de depuração.}{scale = 0.65}
+
 Conforme apresentado na Figura~\ref{fig:dmec_size_results}, a aplicação não tem uma imagem grande, mas quando adicionamos a informação extra em tempo de compilação, o consumo de memória foi aumentado em cerca de 200\%. Em um sistema embarcado real, o tamanho desta nova imagem seria proibitivo.
 
-\fig{dmec_size_results}{Consumo de memória extra para armazenar as informações de depuração.}{scale = 0.7}
+\section{Experimento 2 - Utilização em disciplina e efetividade dos resultados}
+Este experimento foi elaborado para verificar a utilização da ferramenta como artifício para estudo de disciplinas que envolvem codificação de \textit{software} embarcado. Além disso, este experimento tem como objetivo secundário a avaliação da ferramenta e da efetividade dos seus resultados. 
 
-\section{Experimento 2 - Facilidade de uso e efetividade dos resultados}
-Este experimento foi elaborado para verificar a facilidade de utilização do algoritmo, do ambiente compartilhado de teste e depuração de \textit{software} e dos resultados apresentados pela ferramenta. 
+Para verificar a viabilidade do uso em disciplinas o experimento foi aplicado em códigos fonte de desenvolvedores inexperientes na produção de \textit{software} embarcado. A ideia é entender como a ferramenta pode ser introduzida em disciplinas de desenvolvimento de \textit{software} considerando a facilidade de uso, abrangêcia dos testes e ajuste fino do relatório gerado.
 
-Para verificar a facilidade do uso o experimento deveria ser aplicado à desenvolvedores inexperientes na produção de \textit{software} embarcado. A ideia é apresentar a ferramenta para desenvolvedores inexperientes e configurá-la para que o algoritmo de troca de parâmetros seja capaz de apontar que um determinado teste apresentou um comportamento errado por causa de determinada configuração.
-
-\ac{TAP} foi avaliada através do código fonte produzido por estudantes do curso de bacharelado em ciências da computação e que estavam cursando a disciplina de sistemas operacionais II. A escolha da turma se deu devido ao fato de ser uma disciplina com muitos exercícios práticos, os quais são baseados em um sistema operacional (\ac{EPOS}) cuja disponibilidade é controlada por senha, ou seja, sabe-se de antemão quais estudantes já tiveram contato com o sistema.
+\ac{TAP} foi avaliada através do código fonte produzido por estudantes do curso de bacharelado em ciências da computação e que estavam cursando a disciplina de sistemas operacionais II. A escolha da turma se deu devido ao fato de ser uma disciplina com muitos exercícios práticos, desenvolvidos no sistema operacional \ac{EPOS} - cuja disponibilidade é controlada por senha, ou seja, sabe-se de antemão quais estudantes já tiveram contato com o sistema.
 
 No início desta disciplina os alunos tem acesso a um \ac{EPOS} incompleto e cada exercício realizado tem o intuito de implementar uma parte deste \textit{software}. Todos os exercícios tem um escopo fechado e sabe-se quais testes devem ser executados corretamente para cada uma das fases. 
 
@@ -806,25 +816,84 @@ O \ac{EPOS} permite que cada aplicação gerada possua um arquivo próprio de confi
 
 Se existem várias configurações válidas de uma mesma aplicação, todas elas devem ser atendidas pelas soluções dos exercícios. Entretanto, devido à inexperiência, alguns alunos não utilizam esta troca de parâmetros como ferramenta de apoio.
 
-Para fornecer dicas sobre as configurações mais importantes, \ac{TAP} foi configurada para realizar a troca das seguintes configurações: tipo de escalonamento de processos, o quantum de tempo e tamanhos da \textit{stack} e \textit{heap}. O arquivo de configuração desenvolvido para a disciplina pode ser observado na Figura~\ref{progxml:so2}.
 
-\progxml{so2}{Configuração de \ac{TAP} para as aplicações do \ac{EPOS} da disciplina.}
+\subsection{Configuração do experimento e execução dos testes}
+%A turma foi dividida em 12 grupos para a execução de exercícios práticos e de um projeto final. Os exercícios práticos servem para que os alunos consigam atingir a maturidade necessária para realizar um projeto final.
 
-\subsection{Os exercícios e a execução dos testes}
-A turma foi dividida em 12 grupos para a execução de exercícios práticos e de um projeto final. Os exercícios práticos servem para que os alunos consigam atingir a maturidade necessária para realizar um projeto final, que normalmente ocupa 50\% da disciplina e apresenta complexidade compatível à união de todos os exercícios realizados.
+Para fornecer dicas sobre as configurações mais importantes, \ac{TAP} foi configurada para realizar a troca das seguintes configurações: tipo de escalonamento de processos, o quantum de tempo e tamanhos da \textit{stack} e \textit{heap}. As propriedades do arquivo de configuração desenvolvido para a disciplina podem ser observadas na Tabela~\ref{ref:tabConfiguracaoSo2}.
 
-\subsubsection{Exercício 1 - XXX}
-XXXXX
-Tem que executar com sucesso o teste do semáforo.
-Resultados do execício 1
+%\progxml{so2}{Configuração de \ac{TAP} para as aplicações do \ac{EPOS} da disciplina.}
 
+\begin{table*}[h]
+\begin{center}
+\caption{Configuração de \ac{TAP} para as aplicações do \ac{EPOS} da disciplina.}
+\begin{tabular}{|l|c|c|c|}
+\hline 
+& \multicolumn{3}{c|}{\textbf{Namespace}} \\ 
+\hline 
+\textbf{Propriedades} & \textbf{Aplicação} & \textbf{Sistema} & \textbf{Thread} \\ 
+\hline 
+\textbf{STACK\_SIZE} & 512MB & 512MB & - \\ 
+& 1GB & 1GB & - \\ 
 
+\hline 
+\textbf{HEAP\_SIZE} & 512MB & 512MB & - \\ 
+& 1GB & 1GB & - \\ 
 
-\subsubsection{O projeto final}
-O projeto final consistem em transformar o \ac{EPOS} em um \textit{microkernel}. Deve-se então realizar uma evolução no sistema, mas agora o escopo aumenta e todos os testes devem ser executados com sucesso. O sistema final deverá suportar a criação de múltiplos processos e garantir o princípio de não interferência entre as \textit{threads} e delas para com o \textit{kernel}.
+\hline 
+\textbf{QUANTUM} & - & 10ms & 10ms \\ 
+& - & 20ms & 20ms \\ 
+& - & 50ms & 50ms \\ 
+& - & 100ms & 100ms \\ 
+& - & 200ms & 200ms \\ 
+& - & 500ms & 500ms \\ 
 
-Como este projeto é extenso, ele foi separado em várias entregas parciais, a fim de acompanhar o desempenho dos alunos. Os dados retirados da execução dos testes do projeto final podem ser observados na Figura X.
+\hline 
+\textbf{Scheduling\_Criteria} & - & - & RM \\ 
+& - & - & EDF \\ 
+\hline 
+\end{tabular} 
+\label{ref:tabConfiguracaoSo2} 
+\end{center}
+\end{table*}
 
+A configuração da ferramenta para a disciplina focou em algumas configurações, mas com alta variabilidade de valores candidatos para a substituição. \ac{TAP} foi configurada desta forma para que seja possível apresentar aos alunos a quantidade de aplicações que devem funcionar corretamente após a implementação de um determinado exercício.
+
+Quando o foco é o aprendizado, é justo que esta configuração seja bem abrangente, visto que esta variedade pode ampliar a visão para cenários que talvez sejam importantes e que podem ter sido negligenciados durante a fase de concepção, incluindo a idealização dos requisitos não funcionais.
+
+Inicialmente o \ac{EPOS} conta com 42 aplicações de teste e em cada uma foram realizadas $648$ trocas, ou seja, \ac{TAP} trocou as configurações destas aplicações e gerou um total de $27.216$ variações, as quais foram automaticamente executadas e depuradas. Para cada aplicação (e suas variações) foram necessárias cerca de $180$ horas de processamento.
+
+Esta abrangência no resultado gera uma grande quantidade de dados, portanto, para simplificar o estudo da execução dos testes, o relatório fornecido por \ac{TAP} apresenta informações resumidas, com a opção de verificar os arquivos de \textit{log} das execuções falhas. Na Figura~\ref{progxml:report_so2} encontra-se um trecho de relatório gerado pela ferramenta.
+
+\progxml{report_so2}{Trecho de relatório gerado por \ac{TAP} para as aplicações do \ac{EPOS} da disciplina.}
+
+Os arquivos com as execuções falhas contém informações desde o momento de compilação até o relatório final da depuração com o \ac{GDB}. Cada execução tem seu próprio arquivo, identificado pelo próprio nome concatenado com as configurações que foram trocadas. 
+
+Utilizando como exemplo a Figura~\ref{progxml:report_so2}, nota-se que a aplicação $active\_test$ continha algumas execuções falhas, sendo assim, dentre os anexos devemos encontrar $736$ arquivos cujo nome iniciam-se com esta aplicação. Por exemplo, o arquivo  $active\_test\_Scheduler\_FCFS.log$ é um relatório de falha da execução dos testes da aplicação $active\_test$ para quando a configuração $Scheduler$ estava com o valor $FCFS$.
+
+%A Figura~\ref{fig:so2_falha} apresenta um resumo das execuções de falha dos exercícios $E1$ a $E7$ através da solução dos grupos ($G1$ a $G12$). Nela é possível notar que o número de execuções com falha começa a diminuir conforme são entregues os exercícios.
+
+Através dos dados é possível notar que o número de execuções com falha começa a diminuir conforme são entregues os exercícios.Este resultado era esperado se for considerado o aumento da familiaridade com o sistema operacional. Outro fato crucial para este resultado está na realização incremental dos trabalhos, em que o aluno precisa ter a implementação do trabalho $n$ para entregar corretamente o trabalho $n+1$. %apagar este parágrafo inteiro e descomentar os outros
+
+%\fig{so2_falha}{Execuções dos exercícios que resultaram em falha.}{scale = 0.5}
+
+%Este resultado era esperado se for considerado o aumento da familiaridade com o sistema operacional. Outro fato crucial para este resultado está na realização incremental dos trabalhos, em que o aluno precisa ter a implementação do trabalho $n$ para entregar corretamente o trabalho $n+1$.
+
+%Os casos de falha apresentados na Figura~\ref{fig:so2_falha} pode-se perceber que houve uma a grande tendência de redução da quantidade de execuções com falha no início da disciplina, que começou a estabilizar e seguir com mais uma leve redução. Isto ocorreu porque os exercícios de $E1$ até $E3$ relacionam-se diretamente com o assunto \textit{threads}, criando uma certa zona de estabilidade. Esta estabilidade se quebrou à partir do $E4$, cuja avaliação envolve o conceitos como o de eventos programados e rotina de tratamento de interrupções. 
+
+Houve uma a grande tendência de redução da quantidade de execuções com falha no início da disciplina, que começou a estabilizar e seguir com mais uma leve redução. Isto ocorreu porque os exercícios de $E1$ até $E3$ relacionam-se diretamente com o assunto \textit{threads}, criando uma certa zona de estabilidade. Esta estabilidade se quebrou à partir do $E4$, cuja avaliação envolve o conceitos como o de eventos programados e rotina de tratamento de interrupções. 
+
+A distribuição dos erros através dos exercícios pode ser observada na Figura~\ref{fig:dist_falha}. Considerando os percentuais de falha fica claro que quando iniciou-se um assunto mais aprofundado houveram maiores dificuldades de aprendizado. Se focarmos em uma análise exercício por exercício, os relatórios de teste gerados por \ac{TAP} podem servir para analisar tendências do aprendizado e ajudar o responsável pelas turmas a conduzir aulas focadas nas dificuldades dos alunos.
+
+\fig{dist_falha}{Distribuição percentual das falhas.}{scale = 0.5}
+
+A partir dos erros mais comuns dentre os alunos da turma é possível gerar discussões saudáveis sobre a área de sistemas operacionais de modo a facilitar o aprendizado e desenvolvimento dos próximos exercícios práticos. 
+
+Como os experimentos possuem um escopo fechado, o relatório da execução dos testes pode ser utilizado para verificar se os requisitos dos exercícios foram atendidos. Entretanto, deve ser considerado que a ferramenta serve para auxiliar a identificar padrões dos erros e dificuldades na hora de implementar um \textit{software} embarcado, mas é imprescindível a intervenção manual e o discernimento pessoal para utilizá-la corretamente. 
+
+Como planos futuros consideramos utilizar esta ferramenta de maneira integrada ao serviço de controle de versão (\textit{svn}, \textit{git}, \textit{mercurial}, etc). Através disso os alunos podem receber relatórios que vão auxiliá-los durante o aprendizado e que servem também para a geração de \textit{feedback} para a ferramenta. 
+
+Inclusive, este tipo de insumo é extremamente valioso para a melhoria da ferramenta em si pois os resultados gerados podem servir de base para realizar quantos ajustes forem necessários para manipular a execução dos testes e a depuração.
 
 \chapter{Análise qualitativa das ferramentas de teste e depuração de \textit{software}}
 No Capítulo \ref{cap:trabalhosRelacionados} foram apresentados vários estudos focados em apresentar soluções práticas para os diversos pontos de melhoria na área de teste e depuração de sistemas. Os mesmos trabalhos serão agora o foco de um estudo qualitativo de suas características.
@@ -934,7 +1003,7 @@ Apesar do foco de \ac{TAP} permanecer na execução dos testes, sua  concepção e a
 
 Nesta primeira análise observa-se que a ferramenta atende a todos os desafios proposto, exceto o desafio de evidências empíricas. Não foi possível realizar a execução de testes de um repositório devido à utilização da modelagem \ac{ADESD}, que possui especificidades que ainda não estão contempladas nos \textit{testbeds} disponíveis. Um ponto de melhoria seria compartilhar o modelo de testes aplicado no Capítulo~\ref{sec:case_study} em outros repositórios, aumentando o volume de dados para a avaliação de outras propostas.
 
-Considerando as mesmas metas e objetivos, vários dos trabalhos relacionados atendem os mesmos quesitos que \ac{TAP} e com a mesma intensidade. Dentre a técnicas que mais se assemelha à \ac{TAP} estão as ferramentas de depuração como as de depuração estatística e depuração delta. Isto ocorre porquê ferramentas que implementam estas técnicas não são voltadas para a geração de casos de teste e  utilizam-se de hipóteses explícitas como dados de entrada para posteriormente realizar a depuração. A eficácia da execução dos testes/depuração são normalmente aferidas levando-se em conta a execução das ferramentas e confrontando-as com modelos aleatórios.
+Considerando as mesmas metas e objetivos, vários dos trabalhos relacionados atendem os mesmos quesitos que \ac{TAP} e com a mesma intensidade. Dentre a técnicas que mais se assemelha à \ac{TAP} estão as ferramentas de depuração como as de depuração estatística e depuração delta. Isto ocorre porquê ferramentas que implementam estas técnicas não são voltadas para a geração de casos de teste e  utilizam-se de hipóteses explícitas como dados de entrada para posteriormente realizar a depuração. A eficácia da execução dos testes e depuração são normalmente aferidas levando-se em conta a execução das ferramentas e confrontando-as com modelos aleatórios.
 
 A análise de $Justitia$  também aponta semelhanças na declaração parcial de hipóteses explícitas para os dados de entrada de teste - que são representadas pelas interface do sistema - e na eficácia dos testes. A vantagem de $Justitia$ está nos testes de composição, que não são amplamente contemplados em \ac{TAP} por ser uma características voltada para a geração de casos de testes.
 
@@ -1102,7 +1171,7 @@ A Tabela~\ref{ref:tabQuestao3TAP} mostra a relação de \ac{TAP} com a meta de aut
 
 Para ser considerada uma ferramenta 100\% automática \ac{TAP}, ainda deve-se investir em técnicas para receber a entrada dos dados, seja a partir da extração de valores do modelo ou através de algum tipo de inteligência artificial. Ao integrar \ac{TAP} ferramentas como, por exemplo, a \textit{ADESDTool}~\cite{Cancian:PHD:2011} pode-se fornecer melhores configurações para o próprio sistema embarcado.
 
-A geração de dados de entrada é uma característica que muitas vezes é preterida por ferramentas que não realizam a geração dos casos de teste. Técnicas como a Partição de \textit{software} e Captura e reprodução empregam o modelo do \textit{software} como dado de entrada para o teste/depuração e não são capazes incluir mutabilidade coerente ao modelo.
+A geração de dados de entrada é uma característica que muitas vezes é preterida por ferramentas que não realizam a geração dos casos de teste. Técnicas como a Partição de \textit{software} e Captura e reprodução empregam o modelo do \textit{software} como dado de entrada para o teste e depuração e não são capazes incluir mutabilidade coerente ao modelo.
 
 Conjuntamente, a abordagem específica de domínio também exerce bastante influência para uma automação total dos testes. Existem trabalhos totalmente focados para uma abordagem específica de domínio, como é o caso da Execução de testes por sistema alvo. Nesta técnica considera que cada sistema embarcado possui propriedades que o definem e, portanto, devem ser levadas em conta na escolha do modelo de testes a ser utilizado.
 
@@ -1155,9 +1224,11 @@ Neste trabalho foi introduzida \ac{TAP}, uma ferramenta para a troca automática 
 
 O ambiente de desenvolvimento integrado fornece independência em relação à plataforma física de destino. Desta forma, os desenvolvedores não precisam gastar tempo compreendendo uma nova plataforma de desenvolvimento sempre que alguma característica do sistema embarcado for atualizada. Este é um passo importante, pois alguns sistemas embarcados podem não ser capazes de armazenar os dados adicionais necessários para apoiar a depuração. 
 
-Os experimentos realizados apontaram valores quantitativos do tempo consumido para realizar os teses e da efetividade dos ensaios. Foi confirmada que a eficácia do algoritmo está intimamente ligada à efetividade da configuração dos valores e da granularidade apresentadas à ferramenta. 
+Os experimentos realizados apontaram valores quantitativos do tempo consumido para realizar os testes e da efetividade dos ensaios. Foi confirmada que a eficácia do algoritmo está intimamente ligada à efetividade da configuração dos valores e da granularidade apresentadas à ferramenta. 
 
 Foram avaliados os impactos inerentes ao uso da ferramenta para verificar se existiam pontos de melhoria, que devem ser tratados em trabalhos futuros. Dentre eles estão a redução do uso de memória e do tempo utilizados para recuperar as informações de depuração, que atualmente apresenta um aumento de mais de 500\% no tamanho do código da aplicação e a uma sobrecarga de 60\% para o tempo de execução do teste.
+
+O segundo experimento comprovou a efetividade da utilização de \ac{TAP} como uma ferramenta de auxílio em disciplinas de desenvolvimento de \textit{software} embarcado. Com alguns ajustes é possível extrair relatórios que podem facilitar tanto os professores em suas avaliações, quanto os alunos em discussões e no seu aprendizado. Entretanto, em trabalhos futuros, se faz necessária a integração da ferramenta com serviçoes de versionamento e o envio automático dos relatórios para os alunos.
 
 Também foi realizada a análise qualitativa da ferramenta, levando-se em conta os desafios ainda presentes no teste de \textit{software} e metas que necessitam ser atingidas. Os resultados demonstram o comprometimento da ferramenta com o avanço do estado da arte, pois procura oferecer uma solução viável a pelo menos 80\% dos desafios propostos. 
 
@@ -1170,9 +1241,12 @@ Durante o desenvolvimento deste trabalho foram identificados pontos que podem se
 	\item Verificar formas de melhorar a configuração de \ac{TAP} e dos dados de entrada do algoritmo.
 	\item Realizar um maior número de experimentos para verificar o desempenho da ferramenta em ambientes com restrições e que apresentem testes mais complexos.
 	\item Aprimorar a ferramenta para conseguir atingir os desafios identificados na área de teste e depuração de \textit{software}.
+	\item Criar interface de integração de \ac{TAP} com serviços de versionamento de \textit{software}.
+	\item Criar mecanismo de envio de e-mail automático dos relatórios de \ac{TAP}
+	\item Propor a inclusão da ferramenta em disciplinas de desenvolvimento de \textit{software} embarcado.
 \end{itemize}
 
-O desenvolvimento deste trabalho resultou em artigos publicados em eventos, e que contribuirão para o estado da arte nas áreas de verificação de \textit{software} e de construção de sistemas embarcados. Como perspectiva futura também encontra-se a produção de mais artigos.
+O desenvolvimento deste trabalho resultou em artigos publicados em eventos, e que contribuirão para o estado da arte nas áreas de verificação de \textit{software} e de construção de sistemas embarcados. Como perspectiva futura também encontra-se a produção de mais artigos que corroborem a efetividade da ferramenta e que abranjam as novas funcionalidades.
 
 \bibliographystyle{ufscThesis/ufsc-alf}
 \bibliography{bibliografia}

@@ -1,9 +1,9 @@
 #!/bin/bash
+START=`date +%H:%M`
+ 
+echo $EPOS
+ 
+END=`date +%H:%M`
 
-grep 
-
-if !grep -xq "****TAP - test successful" $EPOS/log/task_test.log; then
- echo "encontrei"
-else
- echo "eita, falho"
-fi
+diff=$(  echo "$END - $START"  | sed 's%:%+(1/60)*%g' | bc -l )
+echo $diff hours

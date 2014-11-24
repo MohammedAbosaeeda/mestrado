@@ -3,33 +3,21 @@
      <trait scope="application" id="STACK_SIZE">	
          <value>512</value>
          <value>1024</value>
-         <value>2048</value>
-         <value>3072</value>
-         <value>4096</value>
       <trait>
 
       <trait scope="application" id="HEAP_SIZE">	
          <value>512</value>
          <value>1024</value>
-         <value>2048</value>
-         <value>3072</value>
-         <value>4096</value>
       <trait>
 
       <trait scope="System" id="STACK_SIZE">	
          <value>512</value>
          <value>1024</value>
-         <value>2048</value>
-         <value>3072</value>
-         <value>4096</value>
       <trait>
 
       <trait scope="System" id="HEAP_SIZE">	
          <value>512</value>
          <value>1024</value>
-         <value>2048</value>
-         <value>3072</value>
-         <value>4096</value>
       <trait>
 
       <trait scope="System" id="QUANTUM">	
@@ -51,8 +39,8 @@
       <trait>
 
      <trait id="Scheduling_Criteria">	
-         <value>"RR"</value>
-         <value>"FCFS"</value>
+         <value>"RM"</value>
+         <value>"EDF"</value>
       <trait>
    </configuration>
 <test>

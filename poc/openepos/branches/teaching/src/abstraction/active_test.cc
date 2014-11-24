@@ -60,5 +60,5 @@ int main()
     
     cout << "I'm also done, bye!" << endl;
 
-    return 0;
+    cout << "****TAP - test successful" <<endl;cout << "****TAP - test successful" <<endl;cout << "****TAP - test successful" <<endl;return 0;
 }

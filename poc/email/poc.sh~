@@ -4,12 +4,15 @@ EPOS_DIR=$1
 cd $EPOS_DIR/src/abstraction
 
 email_body=$EPOS_DIR/report.log
-storage_options=(512)
-#storage_options=(512 1024 2048 3072 4096)
+storage_options=(512 1024 2048 3072 4096)
 quantum_options=(10000 20000 50000 100000 200000 500000);
 scheduling_options=('RR' 'FCFS');
+failure=0;
+success=0;
 
-sed -i "s/include makedefs/include makedefs \n\nautomated_test: \n\t\$\(INSTALL\) \$\(SRC\)\/abstraction\/\$\(APPLICATION\).cc \$\(APP\) \n\t\$\(INSTALL\) \$\(SRC\)\/abstraction\/\$\(APPLICATION\)_traits.h \$\(APP\) \n\t\$\(MAKETEST\) clean1 run1 \n\t\$\(CLEAN\) \$\(APP\)\/\$\(APPLICATION\)\* \n/g" makefile
+#sed -i "s/include makedefs/include makedefs \n\nautomated_test: \n\t\$\(INSTALL\) \$\(SRC\)\/abstraction\/\$\(APPLICATION\).cc \$\(APP\) \n\t\$\(INSTALL\) \$\(SRC\)\/abstraction\/\$\(APPLICATION\)_traits.h \$\(APP\) \n\t\$\(MAKETEST\) clean1 run1 \n\t\$\(CLEAN\) \$\(APP\)\/\$\(APPLICATION\)\* \n/g" makefile
+
+#sed -i "s/$(MACH_PC)_CC_FLAGS.*/(MACH_PC)_CC_FLAGS     := -g -Wa,--32/g" makedefs
 
 #Para cada arquivo de tese, monte o nome do traits.
 #Se o arquivo existir, modifique-o, senão modifique o arquivo base, que fica na pasta raiz
@@ -19,13 +22,15 @@ echo "= Configurations =">> ${email_body}
 echo "Quantum: 10ms, 20ms, 50ms, 100ms, 200ms, 500ms">> ${email_body}
 echo "Stack: 512MB, 1GB, 2GB,3GB 4GB">> ${email_body}
 echo "Heap: 512MB, 1GB, 2GB,3GB 4GB">> ${email_body}
-echo "Schedulers: RR, FCFS " & echo .>> ${email_body}
+echo "Schedulers: RR, FCFS " >> ${email_body} 
+echo "">> ${email_body}
 
 for test_file in *_test.cc 
 do
    application=`echo ${test_file} | cut -d'.' -f 1`
    trait=`echo ${application}_traits.h`
-   failure=0;
+   failure=0
+   success=0
    echo "${application}_traits.h"
 
    sed -i '/main()/,/return *;*}/ {s/return/cout << "****TAP - test successful" <<endl;return/g}' ${application}.cc
@@ -54,7 +59,7 @@ do
             for sys_heap in "${storage_options[@]}"
             do
                if [ "$sys_heap" -gt "$sys_stack" ]; then
-                  sed -i "/template <> struct Traits<Application>: public Traits<void>/,/template <> struct/ {s/static const unsigned int STACK_SIZE.*/static const unsigned int STACK_SIZE = $sys_heap;/g}" $trait
+                  sed -i "/template <> struct Traits<Application>: public Traits<void>/,/template <> struct/ {s/static const unsigned int HEAP_SIZE.*/static const unsigned int HEAP_SIZE = $sys_heap;/g}" $trait
             fi
 
 	       for sys_quantum in "${quantum_options[@]}"
@@ -63,7 +68,7 @@ do
 
    	          for thread_quantum in "${quantum_options[@]}"
 	          do
-	             sed -i "s/static const unsigned int QUANTUM.*/static const unsigned int QUANTUM = $thread_quantum;/g" $trait
+	             sed -i "/template <> struct Traits<Thread>: public Traits<void>/,/template <> struct/ {s/static const unsigned int QUANTUM.*/static const unsigned int QUANTUM = $thread_quantum;/g}" $trait
 
 		     for scheduler in "${scheduling_options[@]}"
 	             do
@@ -77,9 +82,10 @@ do
 	                `make automated_test APPLICATION=${application} 3>&1 1>>log/${log_name} 2>&1`
 		      
                          if grep -q '****TAP - test successful' log/${log_name}; then
-			    success=${success}+1
+			    success=$((success+1))
+			    rm log/${log_name}
 		         else
-			    failure=${failure}+1
+			    failure=$((failure+1))
 		         fi
 
 	                cd $EPOS_DIR/src/abstraction
@@ -91,9 +97,10 @@ do
       done
    done
 
-   echo "= = "${application}" = =">> ${email_body}
+   echo "">> ${email_body}
+   echo "= Application: "${application}" =">> ${email_body}
    echo "Successful tests:${success} - Failed tests:${failure}" >> ${email_body}
-   if [ "${failure}" -gt 0 ]; then
-      echo "Loading QEMU for failed tests. Execution log and debugging information on attachment." >> ${email_body}
-   fi
+   #if [ "${failure}" -gt 0 ]; then
+    #  echo "Failed tests execution log and debugging information on attachment." >> ${email_body}
+   #fi
 done

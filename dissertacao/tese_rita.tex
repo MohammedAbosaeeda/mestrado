@@ -83,7 +83,7 @@
 
 
 %%% Sobre a Banca
-%\numerodemembrosnabanca{4} % Isso decide se haverá uma folha adicional
+\numerodemembrosnabanca{3} % Isso decide se haverá uma folha adicional
 %\orientadornabanca{nao} % Se faz parte da banca definir como sim
 %\bancaMembroA{Prof. Dr. Antônio Augusto Medeiros Fröhlich}[Orientador] %Nome do presidente da banca
 \bancaMembroA{} % Nome do membro da Banca
@@ -207,7 +207,7 @@ Os termos defeito, erro e falha estão diretamente relacionados ao teste de \text
 
 A padronização destas expressões em português ainda é motivo de discussões, principalmente porque os termos podem ser consideradas sinônimos. Por isso, para a leitura deste texto os termos serão estabelecidos abaixo (ilustrados pela Figura~\ref{fig:defeito_erro_falha}).
 
-\fig{defeito_erro_falha}{Defeito \textit{versus} erro \textit{versus} falha~\cite{neto2012introduccao}}{scale=.6}
+\fig{defeito_erro_falha}{Defeito \textit{vs} erro \textit{vs} falha~\cite{neto2012introduccao}}{scale=.6}
 
 \begin{itemize}
  \item \textbf{Defeito} é caracterizado como um passo, processo, ou definições que são realizadas por um indivíduo de maneira equivocada. O defeito é a causa de um erro, e normalmente ocorre em um nível base, no universo físico, ao abstrair informações, definir um requisito, ao inserir uma linha de código fonte.
@@ -861,7 +861,7 @@ A configuração da ferramenta para a disciplina focou em algumas configurações, m
 
 Quando o foco é o aprendizado, é justo que esta configuração seja bem abrangente, visto que esta variedade pode ampliar a visão para cenários que talvez sejam importantes e que podem ter sido negligenciados durante a fase de concepção, incluindo a idealização dos requisitos não funcionais.
 
-Inicialmente o \ac{EPOS} conta com 42 aplicações de teste e em cada uma foram realizadas $648$ trocas, ou seja, \ac{TAP} trocou as configurações destas aplicações e gerou um total de $27.216$ variações, as quais foram automaticamente executadas e depuradas. Para cada aplicação (e suas variações) foram necessárias cerca de $180$ horas de processamento.
+Inicialmente o \ac{EPOS} conta com $18$ aplicações de teste e em cada uma foram realizadas $648$ trocas, ou seja, \ac{TAP} trocou as configurações destas aplicações e gerou um total de $11.664$ variações, as quais foram automaticamente executadas e depuradas. Para cada aplicação (e suas variações) foram necessárias cerca de $20$ horas de processamento.
 
 Esta abrangência no resultado gera uma grande quantidade de dados, portanto, para simplificar o estudo da execução dos testes, o relatório fornecido por \ac{TAP} apresenta informações resumidas, com a opção de verificar os arquivos de \textit{log} das execuções falhas. Na Figura~\ref{progxml:report_so2} encontra-se um trecho de relatório gerado pela ferramenta.
 
@@ -869,7 +869,7 @@ Esta abrangência no resultado gera uma grande quantidade de dados, portanto, par
 
 Os arquivos com as execuções falhas contém informações desde o momento de compilação até o relatório final da depuração com o \ac{GDB}. Cada execução tem seu próprio arquivo, identificado pelo próprio nome concatenado com as configurações que foram trocadas. 
 
-Utilizando como exemplo a Figura~\ref{progxml:report_so2}, nota-se que a aplicação $active\_test$ continha algumas execuções falhas, sendo assim, dentre os anexos devemos encontrar $736$ arquivos cujo nome iniciam-se com esta aplicação. Por exemplo, o arquivo  $active\_test\_Scheduler\_FCFS.log$ é um relatório de falha da execução dos testes da aplicação $active\_test$ para quando a configuração $Scheduler$ estava com o valor $FCFS$.
+Utilizando como exemplo a Figura~\ref{progxml:report_so2}, nota-se que a aplicação $active\_test$ continha algumas execuções falhas, sendo assim, dentre os anexos devemos encontrar $400$ arquivos cujo nome iniciam-se com esta aplicação. Por exemplo, o arquivo  $active\_test\_Scheduler\_EDF.log$ é um relatório de falha da execução dos testes da aplicação $active\_test$ para quando a configuração $Scheduler$ estava com o valor $EDF$.
 
 %A Figura~\ref{fig:so2_falha} apresenta um resumo das execuções de falha dos exercícios $E1$ a $E7$ através da solução dos grupos ($G1$ a $G12$). Nela é possível notar que o número de execuções com falha começa a diminuir conforme são entregues os exercícios.
 
@@ -896,9 +896,13 @@ Como planos futuros consideramos utilizar esta ferramenta de maneira integrada a
 Inclusive, este tipo de insumo é extremamente valioso para a melhoria da ferramenta em si pois os resultados gerados podem servir de base para realizar quantos ajustes forem necessários para manipular a execução dos testes e a depuração.
 
 \chapter{Análise qualitativa das ferramentas de teste e depuração de \textit{software}}
-No Capítulo \ref{cap:trabalhosRelacionados} foram apresentados vários estudos focados em apresentar soluções práticas para os diversos pontos de melhoria na área de teste e depuração de sistemas. Os mesmos trabalhos serão agora o foco de um estudo qualitativo de suas características.
+No Capítulo \ref{cap:trabalhosRelacionados} foram discutidos vários estudos focados em apresentar soluções práticas para os diversos pontos de melhoria na área de teste e depuração de sistemas. Os mesmos trabalhos serão agora o foco de um estudo qualitativo de suas características.
 
-A definição das características a serem analisadas foram inspiradas na pesquisa de Antonia Bertolino~\cite{bertolino:07}, no qual são explicitados os conceitos mais relevantes para a área de testes de \textit{software}, separados em realizações passadas e em metas ainda não atingidas. 
+Existem vários trabalhos~\cite{bertolino:07, 6065143, 6200204, 6228988} que apontam o passado, estado atual e futuro do teste e depuração de \textit{software}. Pesquisadores como Bertolino~\cite{bertolino:07} apontaram metas e desafios relevantes para o avanço da área, enquanto trabalhos mais recentes procuram definir o estado da arte, verificando quais desafios estão sendo atendidos e apontando as dívidas técnicas remanescentes.
+
+Assim como o presente trabalho, grande parte da produção de conhecimento e pesquisa na área (mais de 46\%) está focada em desenvolver ferramentas que automatizam uma ou várias atividades de teste de \textit{software}~\cite{6065143}. 
+
+Para que os trabalhos possam ser efetivamente comparados, a definição das características que serão analisadas qualitativamente foram inspiradas na pesquisa de Bertolino~\cite{bertolino:07}, no qual são explicitados os conceitos mais relevantes para a área de testes de \textit{software}, separados em realizações passadas e em metas ainda não atingidas.
 
 \section{Metas}
 Dentre as metas para a pesquisa em teste de \textit{software}, as relacionadas diretamente com o escopo deste trabalho são: teoria de testes universal, modelagem baseada em teste e testes 100\% automatizados. Cada meta é composta por um conjunto de desafios essenciais para o avanço do estado da arte.

@@ -3,8 +3,8 @@
 Quantum: 10ms, 20ms, 50ms, 100ms, 200ms, 500ms
 Stack: 512MB, 1GB
 Heap: 512MB, 1GB
-Schedulers: RM, EDF 
+Schedulers: EDM, RM 
 
-= Application: active_test=
-Successful tests:5160 - Failed tests:11040
+= Application: active_test =
+Successful tests:248 - Failed tests:400
 Failed tests execution log and debugging information on attachment.

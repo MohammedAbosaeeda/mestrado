@@ -1,0 +1,68 @@
+This is BibTeX, Version 0.99d (TeX Live 2012)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: qualificacao.aux
+The style file: ufscThesis/ufsc-alf.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated field_info (elt_size=4) to 11210 items from 5000.
+Database file #1: abnt-options.bib
+Database file #2: bibliografia.bib
+Warning--I didn't find a database entry for "abnt-url-package=html"
+Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=20001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
++---------------------------------------------------------+
+| Estilo bibliográfico abnt-alf.bst versão 1.45.2.1           |
+| Em caso de dúvidas ou problemas com este estilo procure |
+| http://abntex.codigolivre.org.br                        |
++---------------------------------------------------------+
+You've used 89 entries,
+            6480 wiz_defined-function locations,
+            1600 strings with 23441 characters,
+and the built_in function-call counts, 80620 in all, are:
+= -- 6128
+> -- 3270
+< -- 176
++ -- 1282
+- -- 968
+* -- 6176
+:= -- 10466
+add.period$ -- 327
+call.type$ -- 91
+change.case$ -- 1092
+chr.to.int$ -- 202
+cite$ -- 86
+duplicate$ -- 3773
+empty$ -- 5846
+format.name$ -- 4664
+if$ -- 19269
+int.to.chr$ -- 4
+int.to.str$ -- 0
+missing$ -- 1593
+newline$ -- 401
+num.names$ -- 430
+pop$ -- 2122
+preamble$ -- 1
+purify$ -- 392
+quote$ -- 0
+skip$ -- 4231
+stack$ -- 1
+substring$ -- 3398
+swap$ -- 1952
+text.length$ -- 137
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 7
+warning$ -- 0
+while$ -- 705
+width$ -- 0
+write$ -- 1430
+(There was 1 warning)

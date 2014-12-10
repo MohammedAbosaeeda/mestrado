@@ -1,0 +1,16 @@
+Setting up this machine as follows: 
+  Processor:    IA32 at 1224 MHz (BUS clock = 125 MHz)
+  Memory:       262144 Kbytes [0x00000000:0x10000000]
+  User memory:  261788 Kbytes [0x00000000:0x0ffa7000]
+  PCI aperture: 45064 Kbytes [0xfc000000:0xfec02000]
+  Node Id:      will get from the network!
+  Setup:        23968 bytes
+  APP code:     40384 bytes	data: 992 bytes
+[2JThe Philosopher's Dinner:
+Philosophers are alife and hungry!
+The dinner is served ...
+[007;044<1>: IC::exc_gpf(i=13)[err=0,ctx={cs
+=0x000091b8,ip=0x00000000,fl=0x00000020}] :<1>
+<1>: The running thread will now be terminated! :<1>
+<1>: IC::exc_pf(i=14) => [address=0x53e58961,err={},ctx={cs=0,ip=0,fl=0}] :<1>
+<1>: The running thread will now be terminated! :<1>

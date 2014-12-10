@@ -1,0 +1,834 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Universidade Federal de Santa Catarina             
+% Biblioteca Universitária                     
+%                                                           
+% (c)2010 Roberto Simoni (roberto.emc@gmail.com)
+%         Carlos R Rocha (cticarlo@gmail.com)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\PassOptionsToPackage{abnt-etal-cite=1, abnt-etal-list=0}{abntcite}
+\documentclass{ufscThesis}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pacotes usados especificamente para este documento
+% Definidos pelo criador do documento
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}
+\usepackage{CJK}
+\usepackage{pinyin}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pacote que permite o uso de múltiplas linhas em uma tabela
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{multirow}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pacote que permite a criação de algoritmos computacionais
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[lined,boxed]{algorithm2e}
+
+%\renewcommand{\theequation}{\arabic{equation}} %se desejar tirar o capitulo
+
+%\usepackage[labelsep=period]{caption} % O separador de legenda é um .
+\usepackage[labelsep=endash]{caption} % O separador de legenda é um -
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Identificadores do trabalho
+% Usados para preencher os elementos pré-textuais
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titulo{AEP: Uma ferramenta de automação de teste de software para sistemas embarcados} % Titulo do trabalho
+%\subtitulo{Estilo \LaTeX~ padrão}                % Subtitulo do trabalho (opcional)
+\autor{Rita de Cássia Cazu Soldi}           % Nome do autor
+\data{10}{Junho}{2013}                           % Data da publicação do trabalho
+
+\orientador{Prof. Dr. Antônio Augusto Fröhlich }                    % Nome do orientador e (opcional) seu título
+
+%%% Sobre a Banca
+\numerodemembrosnabanca{3} % Isso decide se haverá uma folha adicional
+\orientadornabanca{sim} % Se faz parte da banca definir como sim
+%\coorientadornabanca{sim} % Se faz parte da banca definir como sim
+\bancaMembroA{Prof. Dr Thiago Ramos dos Santos}     % Nome do membro da Banca
+\bancaMembroB{Prof. Dr. Rafael Luiz Cancian} %Nome do presidente da banca
+\bancaMembroC{Me. Giovani Gracioli}      % Nome do membro da Banca
+
+%\bancaMembroD{Prof. quarto membro}       % Nome do membro da Banca
+%\bancaMembroE{Prof. quinto membro}       % Nome do membro da Banca
+%\bancaMembroF{Prof. sexto membro}        % Nome do membro da Banca
+%\bancaMembroG{Prof. sétimo membro}       % Nome do membro da Banca
+
+%\dedicatoria{A quem o trabalho é dedicado, se é que o é (opcional)}
+
+%\agradecimento{Agradecimentos opcionais, caso existam pessoas ou entidades a quem se deve apoio ou suporte ao trabalho ora apresentado.}
+
+%\epigrafe{Um bonito pensamento ou citação, se for o caso}{autor do pensamento}
+
+%\textoResumo {Aqui é redigido o resumo do documento...  blabla blablablabla blabla ipsum loren e a sophia também blab ablablabl ablbalbalblab lablablbalb lab lab lab labl a blab lablablab la blab alballbalba lba lba }
+
+%\palavrasChave {chave 1. chave 2. ... chave n.}
+
+%\textAbstract {Here is written the abstract of the document}
+
+%\keywords {key 1. key 2. ... key n.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Início do documento                                
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%--------------------------------------------------------
+% Elementos pré-textuais
+\capa  
+%\folhaderosto[comficha] % Se nao quiser imprimir a ficha, é só não usar o parâmetro
+%\folhaaprovacao
+%\paginadedicatoria
+%\paginaagradecimento
+%\paginaepigrafe
+\paginaresumo
+\paginaabstract
+\listadefiguras
+\listadetabelas 
+%\listadeabreviaturas
+%\listadesimbolos
+\sumario
+
+%-------------------------------------------------------------------------------
+% Para listagens de algoritmos e de código, recomenda-se consultar os
+% pacotes algorithms e lstlistings, que são usados para definir esses
+% dois tipos de elementos de texto e possuem os comandos
+% \listofalgorithms e \lstlistoflistings, respectivamente.
+%-------------------------------------------------------------------------------
+
+%--------------------------------------------------------
+% Elementos textuais
+
+
+%\chapter{Introdução} 
+%\section{Contextualização e definição do problema} 
+ 
+\section{Abordagem proposta} 
+O trabalho aqui presente traz uma solução para tolerância a faltas bizantinas baseada na técnica de replicação de máquina de estados, sobre um modelo híbrido de sistema que utiliza virtualização e uma abstração de memória compartilhada emulada para criar um componente inviolável e capaz de suportar o consenso bizantino. 
+ 
+Assim como foi proposto em  \cite{correia2004tolerate} nós propomos uma abordagem híbrida em que a ordenação de requisições de cliente seja feita utilizando-se um componente inviolável, mantendo o sistema com a resiliência de $2f + 1$ réplicas para tolerar $f$ faltosas. Porém, diferentemente do trabalho acima citado, na abordagem que propomos não existe acoplamento de nenhum trecho do sistema ao \textit{kernel} do sistema operacional, nem necessidade de criação ou modificação do \textit{hardware} da máquina hospedeira. A inviolabilidade do componente de ordenação é obtida através de isolamento por máquina virtual, permitido pelo \textit{hypervisor} presente em tecnologias de virtualização, e o meio para suportar o consenso é obtido através do Registrador Compartilhado Distribuído, uma abstração de memória compartilhada emulada, que é implantado na máquina hospedeira e também isolado pela virtualização.\ 
+ 
+O modelo prevê que o serviço disponibilizado aos clientes esteja apenas no \textit{guest} da máquina virtual e o Registrador Compartilhado Distribuído na máquina hospedeira. Desta maneira é possível criar duas redes totalmente separadas, a rede de \textit{payload}, onde ocorrem as comunicações cliente-servidor, e a rede controlada, onde ocorrem as comunicações servidor-servidor. 
+ 
+\section{Objetivos} 
+O principal objetivo do presente trabalho é investigar um modelo híbrido tolerante a faltas bizantinas baseado em replicação de máquina de estados. Este modelo visa trazer uma solução simples para a criação de um componente inviolável. Além disso, com este modelo, queremos criar o primeiro algoritmo não especulativo a equiparar-se com algoritmos especulativos em relação à latência. 
+Através do modelo, o presente trabalho pretende apresentar a especificação de um protocolo, aqui denominado de RegPaxos, para execução de serviços replicados. 
+Finalmente, a partir  do protocolo RegPaxos pretende-se desenvolver um servidor \textit{web} tolerante a faltas bizantinas. 
+ 
+De acordo com o objetivo geral acima, alguns objetivos específicos se fazem necessários: 
+\begin{enumerate} 
+\item Levantamento e estudo de referências teóricas, de modo a formar uma base sólida de conceitos relacionados ao estudo de sistemas tolerantes a intrusão. 
+\item Especificação de um protocolo de consenso baseado na arquitetura descrita acima, bem como a elaboração de suas provas de correção. 
+\item Implementação de um protótipo de servidor \textit{web} baseado na arquitetura e no protocolo propostos. 
+\item Testes de execução e avaliação do desempenho obtido com o protótipo. 
+\item Especificação e implementação de protocolos que, juntamente ao protocolo de consenso, garantam a execução segura de serviços no modelo proposto. 
+\end{enumerate} 
+ 
+\section{Organização do texto} 
+O restante do documento está organizado conforme segue. O capítulo \ref{concepts} apresenta os principais conceitos  da literatura que servem de contextualização e embasamento para a proposta. O capítulo \ref{related} apresenta os trabalhos que se relacionam diretamente com o assunto da proposta.  
+ 
+ 
+\chapter{Conceitos básicos em computação distribuída}\label{concepts} 
+\section{Ambiente de computação distribuída} 
+\subsection{Modelo de sistema} 
+Um modelo de arquitetura de sistema define a forma como seus componentes interagem e a maneira pela qual estão mapeados em redes subjacentes. O seu objetivo global é garantir que a estrutura atenda as demandas atuais e, provavelmente, as futuras impostas sobre ela. As maiores preocupações são tornar o sistema confiável, gerenciável, adaptável e rentável. 
+ 
+Para descrever melhor os modelos fundamentais este texto baseia-se em \cite{coulouris2005distributed}, no qual é feita a subdivisão em três outros modelos: 
+\begin{itemize} 
+\item O modelo de interação, que trata do desempenho e da dificuldade em lidar com limites de tempo nos sistemas distribuídos. 
+\item O modelo de falha que, especifica detalhadamente quais são as possíveis falhas que os componentes e os canais de comunicação podem sofrer. É neste modelo também que se define a noção de comunicação confiável e da correção de processos. 
+\item O modelo de segurança, que discute as principais ameaças aos processos e os canais de comunicação. Aqui é definido o conceito de canal seguro. 
+\end{itemize} 
+ 
+Todos os modelos de arquitetura de sistemas distribuídos são compostos por processos que se comunicam por meio do envio de mensagens através de uma rede de computadores. Um modelo de sistema precisa definir (1) quais são as entidades presentes no sistema, (2) como elas interagem e (3) quais são as características que afetam seus comportamentos individualmente e coletivamente. 
+ 
+Um modelo precisa tornas explícitas todas as suposições relevantes sobre os sistemas que modela, fazendo generalizações a respeito do que é possível (ou impossível) diante delas. As propriedades garantidas pelo modelo dependem da análise lógica e, em alguns casos, de provas matemáticas. 
+ 
+\subsubsection{Modelo de interação} 
+\textbf{No modelo de interação são definidas questões de limite de tempos e sincronismo}. As medidas de desempenho em uma rede de computadores são: 
+\begin{itemize} 
+\item A Latência, que representa o atraso decorrido entre o início da transmissão de uma mensagem no processo $p$ e o início da sua recepção pelo processo $p'$. 
+\item A Largura de banda, que é o volume total de informações que pode ser transmitido em determinado momento. 
+\item \textit{Jitter}, que é a variação estatística do atraso na entrega de dados. 
+\end{itemize} 
+ 
+Um fator inerente aos sistemas distribuídos é a dificuldade em se estabelecer limites para os tempos de execução de um processo, das trocas de mensagens e para as taxas de desvio dos relógios. Dois pontos de vista diferentes fornecem modelos simples, são eles: 
+\begin{itemize} 
+\item Sistemas distribuídos síncronos - Nos quais, segundo \cite{hadzilacos1994modular}, (i) o tempo para executar cada etapa de um processo tem limites inferior e superior conhecidos; (ii) cada mensagem transmitida em um canal é recebida dentro de um tempo limitado e conhecido; (iii) cada processo tem um relógio local cuja taxa de desvio do tempo real tem um limite conhecido. 
+\item Sistemas distribuídos assíncronos - Nos quais, segundo \cite{coulouris2005distributed}, não existem considerações sobre: (i) as velocidades de execução de processos, a única afirmação válida é que cada etapa pode demorar um tempo arbitrariamente longo; (ii) os atrasos na transmissão das mensagens, em outras palavras, uma mensagem pode ser recebida após um tempo arbitrariamente longo; (iii) as taxas de desvio de relógio, a taxa de desvio de um relógio é arbitrária. 
+\end{itemize} 
+ 
+Em \ref{synchronism} é apresentado o problema de sincronismo. 
+ 
+\subsubsection{Modelo de falhas} 
+\textbf{O modelo de falhas define como as falhas podem vir a ocorrer proporcionando um entendimento dos seus efeitos e consequências}. Em sistemas distribuídos tanto os processos quanto os canais de comunicação podem divergir do comportamento correto (ou desejável), caracterizando uma falha. 
+ 
+Em \cite{hadzilacos1994modular}  é fornecida uma taxonomia que distingue as falhas em: 
+\begin{itemize} 
+\item Falhas por omissão - Casos onde um processo ou um canal de comunica- ção deixa de executar as ações que deveria. 
+\item Falhas arbitrárias (ou bizantina) - Descreve uma semântica onde qualquer tipo de erro pode ocorrer.  
+\item Falhas de sincronização (ou temporização) - Aplicáveis aos sistemas distribuídos síncronos onde limites de tempo são estabelecidos para o tempo de execução dos processos. Estas falhas podem ser no: 
+\begin{itemize} 
+\item Processo, por exemplo, o relógio local ultrapassa os limites de sua taxa de desvio em relação ao tempo físico. 
+\item Canal, por exemplo, a transmissão de uma mensagem demora mais do que o limite definido. 
+\end{itemize} 
+\end{itemize} 
+ 
+Em \ref{failure}  é discutido mais profundamente os tipos de falhas. 
+ 
+\subsubsection{Modelo de segurança} 
+O modelo de segurança, segundo \cite{coulouris2005distributed}, é baseado no princípio de que a segurança de um sistema distribuído pode ser obtida tornando seguros os processos e os canais usados para suas interações e protegendo contra acesso não autorizado os objetos que encapsulam. Em suma, \textbf{o modelo de segurança define políticas de acesso e mecanismos de proteção para as entidades e canais do sistema}. 
+ 
+Faz parte do modelo de segurança o detalhamento de como os objetos do sistema serão protegidos, isto é, os mecanismos que serão utilizados para que usuários e processos não acessem regiões do sistema às quais não tem permissão de acesso. Para tal, os usuários e processos precisam de autorizações. A verificação das autorizações deve ser modelada. 
+ 
+O modelo de segurança deve definir claramente como as interações vão ocorrer e quais são os mecanismos de segurança sob o qual residem. Em sistemas distribuídos a comunicação, em geral, ocorre através da troca de mensagens entre os processos. Estas mensagens carregam informações importantes para o bom funcionamento do sistema. Os sistemas distribuídos costumam ser implantados de maneira que exista acesso externo aos mesmos, o que torna tanto os processos quanto as suas interações vulneráveis a ataques. De forma sucinta, o modelo de segurança traz uma discussão detalhada sobre como o sistema se protege contra invasores, ameaças aos processos e aos canais de comunicação. Deve detalhar quais técnicas serão utilizadas, código de autenticação de mensagem (\textit{message authentication code}), criptografia e compartilhamento de segredos, autenticação, utilização de canais seguros (vide \ref{channels}), etc. 
+ 
+Os modelos de segurança precisam ter provas do funcionamento correto quando necessário e precisam considerar o custo de processamento e gerenciamento necessário na utilização de algumas técnicas, como por exemplo, criptografia. Já que estas decisões podem ser importantes para a segurança do sistema, mas podem ser custosas para o resto do modelo, tornando-se impraticáveis.
+ 
+\subsubsection{Processos} 
+Um processo corresponde à execução de um algoritmo em um processador \cite{attiya2004distributed} \cite{nancy1996distributed}.  Processos em sistemas distribuídos podem ser abstraídos como unidades capazes de executar computações através da noção de processo  \cite{guerraoui2006introduction}. Isto é, um processo deve ser entendido como uma entidade independente, com seu próprio contador de programa e estado interno \cite{tanenbaum1992modern}, este estado, ou este conjunto de estados, evolui na medida em que os passos descritos no processo são executados. O estado global do sistema distribuído é composto pelo estado local de cada um dos processos e pelo estado dos canais de comunicação  \cite{chandy1985distributed}. As comunicações interprocessos são feitas através dos \textit{links} ou canais de comunicação. A inicialização de um sistema distribuído ocorre quando os processos se encontram em seus estados iniciais (arbitrários) e os canais estão vazios \cite{nancy1996distributed}. 
+ 
+\subsubsection{Sincronismo}\label{synchronism} 
+ 
+Todo computador possui seu próprio relógio interno, o qual pode ser usado pelos processos locais. Dois processos sendo executados em diferentes computadores podem associar indicações de tempo aos seus eventos. Entretanto, mesmo que estes dois processos leiam seus relógios locais ao mesmo tempo, nada garante que os valores serão iguais. Isso ocorre por que seus relógios possuem taxas de desvio diferentes \cite{lamport1985synchronizing}. Isto é, mesmo que todos os relógios de um sistema distribuído fossem inicialmente ajustados com o mesmo horário, com o passar do tempo eles variariam entre si significativamente, a não ser que fossem periodicamente reajustados \cite{coulouris2005distributed}. 
+
+Parte da solução destes problemas está na utilização de relógios com melhor precisão, isto é, com taxa de atraso menores. Existem várias estratégias para corrigir os tempos nos relógios em computadores, como por exemplo, o uso de receptores de rádio que oferecem a precisão em 1 microssegundo \cite{coulouris2005distributed} ou então, os relógios atômicos que oferecem precisão de até 1 zepta segundo ($1$ x $10^-$$^2$$^1$) \cite{backe2012zepto}. Entretanto, quanto mais precisos estes relógios são, mais custosos do ponto de vista de obtenção e manutencão. Uma solução prática é a sincronização periódica dos relógios \cite{lamport1978time}. Esta solução não é simples, pois o problema da sincronização em sistemas distribuídos precisa lidar com a troca de mensagens em canais de comunicação onde não se pode assumir tempo de entrega.
+
+Se em qualquer momento a diferença $\Delta$  entre os valores retornados por dois relógios respeitar a regra $\Delta \leq \epsilon$, então pode-se dizer que eles estão $\epsilon$-sincronizados \cite{defago2003total}. Se $\epsilon = 0$, então os relógios estão perfeitamente sincronizados.
+
+A sincronização de relógios tem sido estudada há décadas, e dentre as abordagens mais conhecidas para efetuá-la estão, o método de Cristian \cite{cristian1989probabilistic}, o método de Berkeley \cite{gusella1989accuracy} e Network Time Protocol \cite{mills1995improved}. Estes métodos visam ajustar os relógios através de troca de mensagens entre diferentes computadores. Nestes modelos, é preciso entender que o tempo de entrega da mensagem para sincronização e o tempo de processamento influenciam no desvio dos relógios. Por este fato, a precisão atingida nem sempre é satisfatória.
+
+Em \cite{lamport1978time} é discutido o mecanismo de relógios lógicos que servem para ordenação de eventos ao invés de lidar com a sincronização de relógios das máquinas. Neste algoritmo, cada processo mantém um contador crescente e monotônico $C$ e cada evento $a$ possui uma marca temporal $C(a)$ com a qual todos os processos concordam. Assim, os eventos estão sujeitos às seguintes propriedades derivadas da relação \textit{happens-before}:  
+\begin{itemize} 
+\item Se, em um processo, $a$ acontece antes de $b$, então $C(a) < C(b)$. 
+\item Se $a$ e $b$ representam, respectivamente, o envio e o recebimento de uma mensagem, então $C(a) < C(b)$. 
+\item Sejam $a$ e $b$ eventos quaisquer, então $C(a) \neq C(b)$ 
+\end{itemize} 
+ 
+Um aspecto importante da caracterização dos sistemas distribuídos está relacionado ao comportamento de seus processos com o passar do tempo  \cite{guerraoui2006introduction}. De maneira sucinta, determinando quando podemos ou não fazer suposições sobre sincronismo. Usualmente o sincronismo de um sistema distribuído é definido através de três características básicas \cite{hadzilacos1994modular} \cite{cristian1995atomic}: 
+\begin{enumerate} 
+\item Tempo de processamento; 
+\item Tempo de entrega de mensagem; 
+\item Desvio do relógio local onde está se executando o processo. 
+\end{enumerate} 
+ 
+Os sistemas distribuídos podem ser considerados assíncronos ou síncronos, tudo depende das suposições que se pode fazer sobre eles com relação ao tempo.  
+Sistemas assíncronos são aqueles em que não se pode assumir nenhuma hipótese sobre tempo físico com relação aos processos e canais de comunicação. Os sistemas síncronos, por outro lado, permitem que se assuma as seguintes propriedades \cite{guerraoui2006introduction}: 
+\begin{itemize} 
+\item Computação síncrona, onde se tem os limites superiores no tempo de processamento. Isto é, dado qualquer processamento, esse limite nunca será superado. 
+\item Comunicação síncrona, onde se tem os limites superiores no tempo de transmissão. Isto é, dado qualquer envio e entrega de mensagem, esse limite nunca será superado. 
+\item Relógio físicos síncronos, onde se tem os limites superiores da taxa de desvio do relógio. 
+\end{itemize} 
+ 
+As suposições em sistemas assíncronos são mais fracas que em sistemas síncronos \cite{verissimo2006travelling}.  É mais simples supor que não existem limites de tempo para determinadas tarefas do que supor, por exemplo, o limite superior de tempo de entrega de mensagens no sistema.
+Porém, alguns problemas só podem ser resolvidos em sistemas síncronos, Fischer, Lynch e Paterson (FLP) mostraram que qualquer protocolo para sistemas assíncronos tem a possibilidade de não terminação se qualquer processo puder sofrer \textit{crash} \cite{fischer1985impossibility}. Então, segundo FLP, nenhum protocolo determinístico pode resolver o problema de consenso (vide \ref{consensus}) em um sistema assíncrono. 
+ 
+Existem ainda, os sistemas parcialmente síncronos. Em  \cite{guerraoui2006introduction}, os sistemas parcialmente síncronos são definidos como aqueles em que as suposições de tempo ocorrem eventualmente, sem definir exatamente quando. Sistemas reais são parcialmente síncronos \cite{verissimo2006travelling}, pois, em geral é fácil de definir limites físicos de tempo, entretanto, existem alguns momentos em que estas suposições não se encaixam. Um exemplo de suposição seria, na ausência de faltas, uma mensagem é entregue de um processo a outro em até 5ms.
+
+
+ 
+\subsubsection{Tipos de falhas}\label{failure} 
+Uma falha de sistema ocorre quando o serviço prestado se desvia de cumprir a função do sistema. Falhas são causadas por erros. Erros ocorrem em tempo de execução quando alguma parte do sistema entra em um estado inesperado devido à ativação de uma falta. Faltas são defeitos, um passo incorreto, processo ou definição de dados que faz com que o sistema passe a se comportar de forma não intencional ou imprevista. Faltas podem ser um \textit{bug} em um programa, um problema de configuração e/ou uma interação originada de um sistema externo ou um usuário. Um erro não necessariamente provocará uma falha, por exemplo, uma exceção pode ser lançada e o funcionamento global do sistema continuará em conformidade com a especificação.
+De maneira geral, uma falta, quando ativada, pode levar a um erro que pode levar ou a outro erro ou a uma falha
+
+Um processo que executa corretamente sua especificação é chamado \textbf{correto}, em contrapartida, um processo que não executa corretamente o algoritmo especificado é denominado \textbf{não-correto} ou \textbf{faltoso}. 
+Guerraoui \cite{guerraoui2006introduction} define que, a menos que falhe, espera-se de um processo que ele execute o algoritmo a ele atribuído, através de um conjunto de componentes que implementam este algoritmo dentro do processo. Guerraoui ainda afirma que quando um processo falha assume-se que todos os componentes também falharão, e ao mesmo tempo. 
+As falhas dos processos podem ocorrer tanto no domínio do tempo quanto no domínio dos valores. Os tipos de falhas no domínio do tempo, de acordo com a literatura\cite{hadzilacos1994modular, defago2004total}, são: 
+\begin{itemize} 
+\item \textbf{Parada:} o processo para de funcionar de maneira antecipada. Ex.: Desligamento da máquina onde ocorria o processamento; 
+\item \textbf{Omissão de Envio:} o processo incorre em omissão, aleatória ou eventual, de envio de mensagens; 
+\item \textbf{Omissão de Recepção:} o processo deixa de receber mensagens a ele enviadas de maneira aleatória ou eventual;  
+\item \textbf{Falha de temporização:} o processo viola uma das suposições de sincronismo. Este tipo de falha é irrelevante para sistemas assíncronos.
+\end{itemize} 
+ 
+\begin{figure}[ht] 
+\centering 
+\includegraphics[width=.8\textwidth]{figs/figSeveridade.png} 
+\caption{Grafo de tipos de falhas de acordo com a severidade.} 
+\label{figSeveridade} 
+\end{figure} 
+ 
+Estas falhas ocorrem no domínio do tempo e são mais simples de se tratar. Falhas que ocorrem no domínio dos valores são chamadas arbitrárias ou bizantinas  \cite{lamport1982byzantine}. À rigor, estas falhas englobam as anteriores, portanto, elas podem ocorrer tanto no domínio do tempo quando no domínio dos valores: 
+\begin{itemize} 
+\item \textbf{Bizantina, maliciosa ou arbitrária}: O processo faltoso pode apresentar qualquer tipo de comportamento. Isto é, pode se comportar como as falhas anteriormente citadas ou apresentar qualquer tipo de comportamento arbitrário. Estas falhas podem ser intencionais ou não; 
+\item \textbf{Bizantina com Autenticação:} Semelhante à bizantina, entretanto possui autenticação não forjável que permite a detecção do comportamento bizantino.  
+\end{itemize} 
+ 
+As falhas arbitrárias são as mais custosas para se tolerar, mas esta é a única opção aceitável quando se requer uma cobertura extremamente elevada ou quando existe o risco de algum processo ser controlado por usuários maliciosos que deliberadamente tentam corromper o funcionamento correto do sistema \cite{guerraoui2006introduction}. 
+ 
+É importante ressaltar que um comportamento arbitrário não é necessariamente malicioso e intencional, sua ocorrência pode ser devido a um erro de implementação, da linguagem de programação ou mesmo do compilador  \cite{guerraoui2006introduction}. 
+ 
+A figura \ref{figSeveridade} representa o nível sequencial da  severidade das falhas em um modelo. Por exemplo, falhas arbitrárias são mais severas que falhas arbitrárias com autenticação. 
+ 
+\subsubsection{Canais de comunicação}\label{channels} 
+A comunicação em sistemas distribuídos ocorre, de maneira geral, através da troca de mensagens entre processos. Para tanto, é necessário que aja coordenação entre os processos \cite{coulouris2005distributed}. 
+Na comunicação em sistemas distribuídos os canais de comunicação ou \textit{links} \cite{guerraoui2006introduction} representam o sistema subjacente de comunicação e fornecem uma topologia de conectividade completa entre os elementos do sistema. 
+A comunicação entre processos é também passível de falhas, por isso podem ocorrer perdas, duplicação e corrupção de mensagens. Com respeito à confiabilidade dos canais de comunicação, duas propriedades podem ser consideradas \cite{charron2002broadcasting}: 
+\begin{itemize} 
+\item \textbf{Sem Perdas}: Se um processo envia uma mensagem a outro processo correto, então a mensagem será recebida; 
+\item \textbf{Perda Justa}: Se um primeiro processo envia um número infinito de mensagens a um segundo processo correto, então um número infinito de mensagens do primeiro processo será recebido pelo segundo processo. 
+\end{itemize} 
+Os canais que não admitem perdas são conhecidos na literatura como canais confiáveis \cite{basu1996simulating}. Já os canais que admitem perda são denominados \textit{Fair-lossy links} \cite{basu1996simulating}. 
+Estes canais são caracterizados por três propriedades \cite{guerraoui2006introduction}: 
+\begin{enumerate} 
+\item Perda justa (\textit{fair-loss}): Se uma mensagem $m$ é enviada infinitas vezes pelo processo $p_i$ ao processo $p_j$, e dado que nem $p_i$ nem $p_j$ sofreram \textit{crash}, então $m$ é entregue infinitas vezes à $p_j$. 
+\item Duplicação finita (\textit{finite duplication}): Se uma mensagem $m$ é enviada finitas vezes pelo processo $p_i$ ao processo $p_j$, então $m$ não pode ser entregue infinitas vezes à $p_j$. 
+\item Nenhuma criação (\textit{no creation}): Se uma mensagem $m$ é entregue a um processo $p_j$, então $m$ foi anteriormente enviada para $p_j$ por algum processo $p_i$. 
+\end{enumerate} 
+
+É possível atingir primitivas de difusão e recepção mais robustas semelhantes as dos canais confiáveis a partir dos \textit{Fair-lossy links} , basta empregar mecanismos de reconhecimento e retransmissão \cite{charron2002broadcasting}. 
+ 
+\subsection{Problemas de acordo}\label{agreement} 
+\subsubsection{Difusão com ordem total} 
+A difusão com ordem total (ou difusão atômica) força a confiabilidade na difusão de mensagens e também que todos os processos receptores entreguem as mensagens na mesma ordem. 
+O problema pode ser definido através de duas primitivas básicas:  
+\begin{enumerate} 
+\item $TO$-$multicast(G,m)$: A mensagem $m$ é difundida para todos os processos pertencentes ao grupo G;  
+\item $TO$-$deliver(m)$: A mensagem $m$ é entregue pelo processo $p_i$ para a aplicação com ordem total. 
+\end{enumerate} 
+ 
+Para que se obtenha a difusão com ordem total deve-se satisfazer as seguintes propriedades \cite{defago2004total}: 
+\begin{itemize} 
+\item Validade: Se um processo correto difunde uma mensagem em seu grupo, então algum processo correto pertencente ao mesmo grupo entregará a mensagem ou nenhum processo do grupo esta correto; 
+\item Acordo: Se um processo correto em determinado grupo entrega uma mensagem, então todos os processos corretos pertencentes ao mesmo grupo entregarão esta mensagem; 
+\item Integridade: Para qualquer mensagem enviada dentro de um determinado grupo, cada processo correto pertencente ao mesmo grupo a entregará apenas uma vez; 
+\item Ordenação total local: Se dois processos corretos $p$ e $q$ entregam as mensagens $m$ e $m'$ difundidas em G, então ambos entregarão $m$ e $m'$ na mesma ordem. 
+\end{itemize} 
+ 
+No escopo de sistemas distribuídos, em função da possibilidade de um processo poder participar de mais de um grupo, são verificadas duas primitivas na validação da difusão, isto é, além da ordenação total local é verificada a ordenação total global \cite{hadzilacos1994modular}, que garante que a ordem de entrega de mensagens é correta mesmo sob a gerência de múltiplos grupos. 
+ 
+\begin{figure}[ht] 
+\centering 
+\includegraphics[width=.5\textwidth]{figs/figRelProbDifusao.png} 
+\caption{Relacionamento entre problemas de difusão.} 
+\label{figRelProbDifusao} 
+\end{figure} 
+
+
+ 
+\subsubsection{Consenso}\label{consensus} 
+O problema do consenso \cite{pease1980reaching} é uma generalização do problema do acordo em sistemas distribuídos. Ele consiste em garantir que os processos corretos em um sistema distribuído entrarão em concordância em relação a um valor proposto por algum destes processos. Formalmente o problema é definido por: 
+\begin{itemize} 
+\item $propose(G, v)$: o valor $v$ é proposto dentro do grupo $G$; 
+\item $decide(v)$: o valor $v$ é decido. 
+\end{itemize} 
+O problema se resume em proposições de valor $v \in V$ e na decisão unânime dos processos em função do $v$ proposto. Em sua definição, as seguintes propriedades precisam ser satisfeitas:  
+\begin{itemize} 
+\item \textbf{acordo} - todos os processos corretos decidirão pelo mesmo $v$; 
+\item \textbf{validade} - se algum processo correto decide por um $v \in V$ então $v$ foi proposto por outro processo; 
+\item \textbf{terminação} - todos os processos corretos acabarão por decidir. 
+\end{itemize} 
+ 
+A validade, da maneira definida anteriormente,  é comumente descartada em sistemas distribuídos sujeitos a faltas bizantinas, pois a mesma permite que um valor proposto por um processo faltoso seja decidido. Em geral implementa-se a \textbf{validade fraca} ou \textbf{não trivialidade} \cite{correia2005low} \cite{nancy1996distributed} que estipula que se todos os processos corretos propõe inicialmente $v \in V$, então $v$ é a única decisão possível para os processos corretos. 
+Esta condição evita a implementação de protocolos que decidem sempre o mesmo valor independentemente das proposições dos processos. Entretanto há autores que a descartam na prática, já que quando os processos propõe valores diferentes, o valor decidido não precisa ter ligação com a entrada \cite{baldoni2003consensus}. 
+ 
+\subsubsection{Acordo bizantino} 
+Em ambientes onde é possível a ocorrência de faltas bizantinas, o problema de consenso ou acordo, do ponto de vista teórico, necessita que mais de dois terços dos participantes entrem em acordo \cite{lamport1982byzantine} considerando-se $f$ faltas e $3f + 1$ participantes. 
+ 
+Em  \cite{lamport1982byzantine}, usando o conceito de generais bizantinos, os autores provam que esta proporção é válida, e é em função deste trabalho que surge o termo faltas bizantinas. As figuras \ref{figGeneralTraidor} e \ref{figTenenteTraidor} mostram a impossibilidade de acordo bizantino descrita no artigo.   
+ 
+\begin{figure}[ht] 
+\centering 
+\includegraphics[width=.6\textwidth]{figs/figGeneralTraidor.png} 
+\caption{General traidor.} 
+\label{figGeneralTraidor} 
+\end{figure} 
+ 
+\begin{figure}[ht] 
+\centering 
+\includegraphics[width=.6\textwidth]{figs/figTenenteTraidor.png} 
+\caption{Tenente traidor.} 
+\label{figTenenteTraidor} 
+\end{figure} 
+ 
+O problema é descrito da seguinte maneira: Dado um exército com um general e seus tenentes,  o general envia uma ordem aos tenentes. Esta ordem pode ser atacar ou recuar, os tenentes trocam entre si a informação que cada um recebeu do general para validá-las. No primeiro caso (figura \ref{figGeneralTraidor}) o general traidor emite ordens diferentes aos tenentes. Ao trocarem informações, os tenentes não chegarão a um consenso, desta forma, não saberão como agir. No segundo caso  (figura \ref{figTenenteTraidor}) quem forja uma ordem é um dos tenentes, gerando o mesmo impasse. Como não existe nenhuma maneira de validar quem é o traidor, o processo simplesmente estagna. A impossibilidade de acordo bizantino com $n$ menor que $3f + 1$ é válida tanto para sistemas síncronos e assíncronos. 
+ 
+A figura \ref{figGeneralTraidor_n4} demonstra que com acréscimo de mais um participante, isto é, aumentando-se de $2f + 1$ para $3f +1$ e, neste exemplo considerando-se $f = 1$, é possível prosseguir com a ordem, mesmo que haja até $f$ traidores no exército. Isto é possível em função da segunda etapa do processo, onde os tenentes trocam informações entre si. Pois, segundo a figura, ao final do processo, cada tenente terá pelos duas ordens para atacar conseguindo uma predominância da ordem para atacar, isto é, entrando em consenso. Este fato prova que com pelo menos $3f + 1$ participantes é possível resolver o problema de acordo bizantino. 
+ 
+A literatura apresenta soluções práticas que conseguem diminuir o número de participantes \cite{dolev1983authenticated} \cite{juniorsmit} \cite{veronese2011efficient}, entretanto ainda existe bastante espaço para pesquisas. 
+ 
+\begin{figure}[ht] 
+\centering 
+\includegraphics[width=1\textwidth]{figs/figGeneralTraidor_n4.png} 
+\caption{Possibilidade de acordo bizantino com $3f + 1$ participantes.} 
+\label{figGeneralTraidor_n4} 
+\end{figure} 
+ 
+\subsection{Replicação de máquinas de estados (RME)} 
+O modelo mais simples para tolerância a faltas bizantinas em sistemas distribuídos é replicação ativa ou replicação por máquinas de estado \cite{lamport1978time}. Neste modelo, o sistema é composto por réplicas que oferecem o mesmo serviço, estas máquinas possuem estados deterministas em que processam as requisições como suas entradas e tem o resultado deste processamento como as suas respostas ou saídas \cite{schneider1990implementing}. 
+ 
+Uma máquina de estados está sempre em único estado, chamado de estado atual, e este estado representa a memória da máquina. Isso significa que uma máquina de estados depende apenas do seu estado inicial e das entradas para definir seu estado atual \cite{anderson2006automata}. Um modelo de máquinas de estados não pode representar processos não deterministas, uma vez que nestes casos o estado agrega mais informação ou depende de fatores mais complexos do que apenas o estado inicial e a sequência de entradas. Esta característica está relacionada ao determinismo de réplicas \cite{schneider1990implementing}, isto é, réplicas iniciadas no mesmo estado e submetidas às mesmas entradas devem obrigatoriamente atingir o mesmo estado final. 
+ 
+O modelo de replicação de máquinas de estado tem como requisito a \textbf{coordenação de réplicas} \cite{schneider1990implementing} que pode ser dividida da seguinte maneira: 
+\begin{enumerate} 
+\item Acordo - Todas as réplicas recebem o mesmo conjunto de requisições. 
+\item Ordem - Todas as réplicas corretas executam as requisições na mesma ordem. 
+\end{enumerate} 
+ 
+Em resumo, todas as réplicas corretas em um modelo de máquina de estados iniciam no mesmo estado e processam a mesma sequência de requisições. Este requisito pode ser atendido se utilizarmos algum protocolo de difusão com ordem total (vide \ref{agreement}) no envio de requisições dos clientes para as réplicas. 
+ 
+O funcionamento de sistemas baseados neste modelo é simples. A requisição do cliente chega a todas as réplicas que processam e enviam suas respostas. Quando o cliente recebe um determinado número de respostas iguais entre si e de diferentes servidores o cliente aceita a resposta como correta. Ressaltando que o número de respostas iguais depende do modelo e da quantidade de faltas toleradas pelo sistema. 
+ 
+Um conceito bastante empregado no uso da abordagem de RME é a diversidade \cite{obelheiro2006practical} \cite{garcia2011diversity}. Esta técnica consiste em criar ambientes diferentes para cada réplica fazendo com que suas especificações sejam a mesma, porém seus desenvolvimentos totalmente independentes das demais, variando sistemas operacionais, \textit{hardware}, linguagem de programação, equipe de desenvolvimento, paradigmas, etc. Isso diminui a probabilidade das réplicas apresentarem as mesmas falhas de vulnerabilidades, diminuindo não somente as chances de erros, mas também as chances de um ataque ser bem sucedido, além de contribuir na independência de faltas \cite{rodrigues2001base} \cite{obelheiro2005analisando}. 
+ 
+\subsection{Memória compartilhada emulada} 
+ 
+Guerraoui \cite{guerraoui2006reliable} define memória compartilhada emulada como a construção de uma abstração de registro de um conjunto de processos que se comunicam através da troca de mensagens. Ainda segundo esta definição, não existe memória compartilhada física. De acordo com o autor, esta abordagem é bastante atraente porque, geralmente, é mais simples programar sobre uma memória compartilhada do que usar troca de mensagens, precisamente, o programador pode ignorar os problemas de consistência advindos da distribuição de dados.  
+ 
+Esta definição torna-se muito interessante quando se deseja utilizar modelos híbridos para sistemas distribuídos (vide \ref{hybrid-model}), já que a memória emulada pode ser construída sob aspectos e suposições diferentes do restante do sistema. Isto é, a memória emulada pode ser construída sob as premissas de ser síncrona o bastante para que se possa conhecer seus limites de tempo inferior e superior, taxas de entrega além de garantir confiabilidade. Estas premissas podem ser asseguradas através da separação da rede da memória emulada das demais redes do sistema, rede controlada, e utilização de difusão confiável com garantia de tempo para entrega da mensagem \cite{correia2002efficient}. 
+ 
+Uma memória compartilhada, emulada ou não, pode ser vista como um \textit{array} de registros compartilhados. Consideramos aqui a definição sob uma ótica de programação, ou do programador. O tipo do registro compartilhado especifica quais operações podem ser efetuadas e os valores retornados pela operação \cite{attiya2004distributed}. Os tipos mais comuns são registros de leitura/escrita. As operações de um registro são invocadas por processos do sistema para troca de informações.  
+A operação de leitura não precisa de parâmetros de entrada e tem apenas um parâmetro como saída. A operação de escrita por sua vez tem apenas um parâmetro como entrada e a saída é apenas uma confirmação se a operação foi concluída com sucesso. 
+ 
+Se um registro é utilizado por um único processo, e assumindo-se que não há falhas, podemos especificá-lo pelas seguintes propriedades  \cite{guerraoui2006reliable}: 
+\begin{enumerate} 
+\item Vivacidade (\textit{liveness}) - toda operação eventualmente termina. 
+\item Segurança (\textit{safety}) - toda leitura retorna o último valor escrito. 
+\end{enumerate} 
+ 
+ Mesmo que não seja apenas um processo acessando o registro, se o acesso for sequencial e se nenhum processo sofrer \textit{crash}, então é possível manter a especificação através das propriedades antes citadas. Novamente, através do uso de modelo híbrido, é possível assegurar esta sequencialidade. Uma possível abordagem é garantir que para cada registro, apenas um processo $p$ tem acesso de escrita e apenas outro processo $p'$ tem acesso de leitura. Além disso, garante-se que se houver concorrência de escrita e leitura, a escrita tem precedência sobre a leitura, isto garante que o registro a ser lido será o último registro já escrito. 
+ 
+ \subsection{Modelo híbrido de tolerância a faltas}\label{hybrid-model} 
+Antes de falarmos do modelo híbrido de tolerância a faltas, cabe uma breve discussão sobre sistemas síncronos e assíncronos. 
+ 
+Fischer, Lynch e Paterson (FLP) mostraram que qualquer protocolo para sistemas assíncronos tem a possibilidade de não terminação se qualquer processo puder sofrer \textit{crash} \cite{fischer1985impossibility}. Isto trouxe à tona questionamentos sobre os modelos assíncronos em que são baseadas muitas das soluções de sistemas distribuídos \cite{verissimo2006travelling}. Alguns autores contornaram o FLP fazendo com que seus sistemas fiquem síncronos o bastante para suportar o consenso \cite{chandra1996unreliable} \cite{cristian1999timed}.  
+ 
+Outro fator importante é que o sincronismo de um sistema varia na dimensão do tempo e do espaço \cite{verissimo2002timely}. Isto significa que durante o tempo de vida de um sistema, ele pode estar ou não síncrono, considerando a janela de tempo no qual ele é observado. Além disso, existe uma variação de acordo com a dimensão do espaço, isto é, considerando trechos do sistema, é mais simples predizer quais componentes são mais rápidos ou tem limites de tempo menores que outros na execução das tarefas.  
+ 
+Levanto em conta estes fatores, um modelo de faltas com hipóteses de falhas híbridas é aquele em que se assume que a presença e severidade de vulnerabilidades, ataques e intrusões variam de componente para componente \cite{correia2002design}. Portanto, os princípios que embasam sistemas híbridos são  \cite{verissimo2006travelling}: 
+\begin{itemize} 
+\item Sistemas podem ter domínios com diferentes propriedades não-funcionais, como sincronismo, comportamento defeituoso, qualidade de serviço, etc. 
+\item As propriedades de cada domínio são obtidas pela construção do(s) subsistema(s) em que se encontram. 
+\item Estes subsistemas tem encapsulamento bem definido e interfaces por meio das quais as propriedades anteriores manifestam-se. 
+\end{itemize}  
+Este princípios reforçam a ideia de que as dimensões de tempo e espaço dentro dos sistemas tem variações e definições dependentes do(s) subsistema(s) que se analisa. 
+ 
+Em \cite{verissimo2006travelling} os autores afirmam que estes modelos permitem-nos tirar o melhor de ambas às dimensões. Eles mostram que modelos híbridos são: 
+\begin{itemize} 
+\item Expressivos, por considerarem cada componente isoladamente, isto é, diferentes velocidades e premissas de funcionamento. Em modelos homogêneos não é possível explorar essas vantagens dado que o pior caso vai nivelar todo o sistema. 
+\item Simples para provas de correção, já que o sistema é avaliado por cada trecho que o compõe. Isto nos obriga a fazer provas para cada parte integrante dele. 
+\item  Naturalmente suportados por arquiteturas híbridas. Estas arquiteturas consideram a existência de componentes ou subsistemas com características diferentes. Modelo e arquiteturas híbridas fornecem condições de se alcançar abstrações poderosas que, em grande parte, não podem ser implementadas em modelos canônicos (homogêneos) assíncronos, por exemplo, detectores de falhas, canais ad-hoc síncronos, \textit{triggers} disparados por tempo, etc. 
+\item Viabilizadores de conceitos para a construção de algoritmos totalmente novos. Como nos modelos híbridos as premissas dos componentes são diferentes, podemos ter trechos síncronos implementados em ambientes assíncronos, permitindo a criação de novos algoritmos. 
+\end{itemize} 
+ 
+Em \cite{correia2002efficient} foi apresentada uma abordagem de modelo híbrido de falhas que descreve um sistema distribuído que possui um componente inviolável local aos servidores. Este componente está sujeito apenas a falhas de \textit{crash} e está interconectado aos componentes locais de outros membros através de uma rede controlada. Através deste componente são realizadas operações para o estabelecimento de acordo e consenso. O sistema é dividido entre àqueles componentes que estão sujeitos as faltas bizantinas e aqueles que não estão. Este trabalho abriu precedentes para outros trabalhos com abordagem semelhante \cite{veronese2011efficient, chun2007attested, levin2009trinc, correia2004tolerate}. Em \ref{related:hybrid}, é feita uma discussão sobre alguns destes trabalhos. 
+ 
+Em  \cite{verissimo2006travelling} é discutido o modelo de \textit{wormholes}. Este modelo é bi-modal com uma rede de \textit{payload} e um subsistema \textit{wormhole}. Em termos práticos, \textit{wormhole} é um artefato privilegiado para ser usado somente quando necessário, e, supostamente, implementa funcionalidades difícil de alcançar sobre o sistema de \textit{payload}. O sistema de \textit{payload}, por sua vez, deve executar a maior parte da atividades de computação e comunicação. O subsistema do \textit{wormhole} segue um conjunto de suposições de falhas e sincronismo normalmente mais fortes do que suposições do subsistema de \textit{payload}, tais como processamento e comunicação sendo síncronos, e comportamento faltoso de \textit{crash} apenas. 
+ 
+\section{Tecnologia de virtualização}\label{virtualization}
+ 
+O conceito de máquina virtual (VM - do inglês \textit{Virtual Machine}) surgiu em meados da década de 1960 \cite{goldberg1974survey} e sua concepção inicial visava o particionamento lógico de \textit{mainframes} em vários sistemas virtuais. A discussão teve retorno quando foram lançadas tecnologias de virtualização capazes de funcionar sob plataforma x86 \cite{rosenblum2004reincarnation}. Atualmente sistemas virtualizados são bastante aplicados até mesmo em computadores pessoais. Popek \cite{popek1974formal}  define máquina virtual como uma cópia isolada 
+e eficiente de uma máquina real e, Parmelee \cite{parmelee1972virtual}, como um sistema de computação no qual as instruções emitidas por um programa podem ser diferentes daquelas realmente executadas pelo hardware. Essas definições estão fortemente ligadas ao seu objetivo inicial diminuir a subutilização de recursos de \textit{hardware}, o que era comum nos antigos \textit{mainframes}. 
+ 
+Processadores atuais já vem preparados para suportar virtualização. Aliando-se isto às capacidades computacionais oferecidas por eles, fez com que o mercado de virtualização de sistemas voltasse ser bastante atrativo \cite{rosenblum2004reincarnation}. As aplicações de virtualização tornaram-se mais abrangentes do que apenas otimizar os recursos oferecidos, vindo a ser aplicados a outras áreas como gerenciamento de servidores de rede \cite{padala2007performance} e segurança de sistemas computacionais \cite{laureano2004intrusion, rosenblum2005virtual}. 
+ 
+Existem duas categorias de virtualização, \cite{smith2005architecture}  as definiram como: 
+\begin{enumerate} 
+\item Máquina Virtual de Processo: é uma plataforma que executa um processo individual. Tal máquina virtual é instanciada unicamente para suporte ao processo, sendo criada e terminada juntamente ao processo. Exemplo: Java Virtual Machine \cite{lindholm1999java}. 
+\item Máquina Virtual de Sistema: provê um ambiente completo e persistente que suporta um sistema operacional completo e seus processos. Fornece ao sistema convidado um conjunto de recursos que compõem o hardware virtual. Exemplo: Xen \cite{barham2003xen}. 
+\end{enumerate} 
+Aqui discutiremos apenas a segunda categoria.  
+ 
+O processo o ou sistema que é executado dentro da VM é chamado de convidado (\textit{guest}), enquanto o sistema que suporta a VM é chamada de anfitrião (\textit{host}) \cite{smith2005architecture}. Entre o \textit{hardware}  e o sistema operacional do convidado existe uma camada de abstração chamada de monitor da máquina virtual (VMM - \textit{Virtual Machine Monitor}).  O VMM ou \textit{hypervisor} basicamente esconde os recursos físicos da plataforma computacional dos sistemas operacionais convidados \cite{sahoo2010virtualization}. 
+ 
+De acordo com \cite{popek1974formal} um VMM deve possuir as seguintes propriedades: 
+\begin{itemize} 
+\item Eficiência: toda e qualquer instrução inofensiva deve ser executada diretamente pelo hardware, sem intervenção do hypervisor. 
+\item Controle de Recursos: o VMM possui total controle sobre os recursos a serem oferecidos para as máquinas virtuais. 
+\item Equivalência: qualquer programa $K$, executando com um VMM, deve apresentar comportamento idêntico à sua execução quando não há a presença do VMM. 
+\end{itemize} 
+ 
+Posteriormente, em \cite{garfinkel2003virtual}, foram descritas outras propriedades desejáveis: 
+\begin{itemize} 
+\item Isolamento: O VMM não deve ser acessível nem modificável por \textit{softwares} executados em uma VM. 
+\item Inspeção: Todo o estado das VMs deve estar disponível ao VMM.  
+\item Interposição: A VMM deve intervir em determinadas operações realizadas por máquinas virtuais, como a execução de instruções privilegiadas. 
+\end{itemize} 
+ 
+Em \cite{king2003operating}, os monitores de máquinas virtuais são categorizados como: 
+\begin{itemize} 
+\item Tipo I: Quando são executados diretamente sobre o \textit{hardware}. 
+\item Tipo II: Quando são executados sobre um sistema operacional anfitrião comum. 
+\end{itemize} 
+ 
+A maior vantagem dos VMMs do Tipo I em relação ao Tipo II está no desempenho, já que se interfaceamento é direto com o \textit{hardware}. 
+Entretanto, o Tipo II apresenta algumas vantagens sobre o Tipo I também. Como o VMM é executado como um processo comum do sistema operacional anfitrião, isto possibilita a utilização da computação do anfitrião para realização de tarefas de depuração e monitoramento do VMM e das VMs executando sobre ele. E é possível transformar o sistema convidado em uma \textit{sandbox} do sistema anfitrião, fornecendo um ambiente seguro e restringindo a execução de certos códigos \cite{keahey2004sandbox}. É possível criar sistemas sobre o convidado de uma máquina virtual de comunicação em que o anfitrião fica invisível e inacessível para agentes externos. 
+ 
+O isolamento, é uma importante propriedade é ressaltada em \textit{garfinkel2003terra}. Um VMM permite que múltiplas aplicações sejam executada em diferentes máquinas virtuais. Cada máquina virtual tem seu próprio domínio de proteção de \textit{hardware}, provendo um forte isolamento entre as máquinas virtuais. Isolamento seguro é essencial para fornecer confidencialidade e integridade.  
+ 
+Uma técnica interessante provida por várias tecnologias é a virtualização completa \cite{li2010survey}.  
+Nesta abordagem, códigos de \textit{kernel} são traduzidos para substituir instruções por novas sequências de instruções que tem o efeito requerido no \textit{hardware} virtual. O sistema convidado não tem conhecimento de estar virtualizado e não precisa ser modificado. O \textit{hypervisor} simula várias instâncias completamente independentes de computadores virtuais possuindo seus próprios recursos virtuais. Ele traduz todas as instruções do sistema operacional em tempo real e armazena os resultados para futuras utilizações. Por disponibilizar os recursos virtuais, isso permite que a máquina virtual possa executar qualquer sistema operacional que seja suportado pelo \textit{hardware} subjacente. 
+A virtualização completa pode oferecer o melhor isolamento e segurança para máquinas virtuais \cite{li2010survey}.  
+ 
+ 
+\chapter{Trabalhos correlatos} \label{related} 
+Desde a formulação do Problema dos Generais Bizantinos por Lamport \cite{lamport1982byzantine} (vide \ref{agreement}), muitos estudos surgiram com as mais variadas soluções para resolver o consenso bizantino. 
+Os principais problemas que estes trabalhos tentam resolver é tolerar faltas bizantinas com baixa latência, melhorando \textit{throughput} e diminuindo a quantidade de recursos necessários \cite{veronese2011efficient, castro1998practical, kotla2008zyzzyva, clement2009making, correia2004tolerate, chun2007attested}. Dentre as técnicas utilizadas, destaca-se a replicação de máquinas de estados.  
+ 
+O uso da técnica que replicação por máquina de estados foi introduzida por Lamport \cite{lamport1978time}, antes mesmo da formulação do Problema dos Generais Bizantinos. Entretanto, neste trabalho, considerava-se que os sistemas propostos estavam livres da ocorrência de faltas. Mais tarde, em 1982, esta abordagem foi generalizada por Schneider \cite{schneider1982synchronization} considerando que o sistema modelado era suscetível a faltas de \textit{crash}. O trabalho proposto por Schneider serviu de base para \cite{reiter1995rampart} e para uma variedade de outros modelos BFT. 
+ 
+A abordagem de RME tem sido utilizada para tolerar faltas bizantinas (arbitrárias) \cite{reiter1995rampart, castro2002practical}, mantendo o funcionamento correto do sistema ainda que tenha havido intrusões. A partir desta abordagem é possível projetar serviços confiáveis como sistemas de arquivos em rede, \textit{backup} cooperativo, serviços de coordenação, autoridades certificadoras, banco de dados, sistemas de gerenciamento de chaves \cite{castro2002practical, yin2003separating, aiyer2005bar, bessani2008depspace, clement2009upright, garcia2011efficient, reiter1996omega, zhou2002coca}. 
+ 
+Como foi citado, estes trabalhos focam em várias melhorias, dentre elas a diminuição de recursos para tolerar as intrusões, isto é, melhorar a relação entre o número de faltas toleradas e a resiliência do sistema \cite{sousa2005resilient}.
+A resiliência de um sistema tolerante a intrusão é dada pelo número mínimo de réplicas que o compõe. Na maioria dos algoritmos BFT são necessárias no mínimo de $3f + 1$ réplicas \cite{castro2002practical, reiter1995rampart} \cite{kotla2008zyzzyva} para tolerar $f$ faltosas. Em \cite{yin2003separating} foi mostrado que esse número de réplicas é necessário apenas para se atingir o acordo bizantino, mas, quando usada para tolerar faltas de \textit{crash}, a redundância de máquinas de estado necessita apenas $2f + 1$ réplicas \cite{schneider1990implementing}. Considerando este fato, alguns trabalhos focam na separação do acordo bizantino da execução do serviço \cite{yin2003separating, luiz2008repeats}
+ 
+Trabalhos recentes conseguem melhorar a resiliência dos sistemas BFT tolerando faltas com apenas $2f + 1$ réplicas. Neste trabalhos é utilizada uma abordagem híbrida que considera diferentes suposições para diferentes partes do sistema. Em geral, nestes trabalhos, os sistemas possuem um componente (que poder ser uma rede controlada) com premissa de inviolabilidade, ficando sujeito apenas as faltas de \textit{crash}, enquanto o resto do sistema está sujeito a faltas bizantinas (vide \ref{hybrid-model}). Estes sistemas podem ser feitos utilizado várias abordagens, através do uso de um componentes de \textit{hardware}, implementações que rodam internamente ao \textit{kernel}  do sistema operacional base, separação de redes utilizando mais de uma placa de comunicação, virtualização, etc \cite{veronese2011efficient, chun2007attested, levin2009trinc, correia2004tolerate, reiser2007vm, juniorsmit, stumm2010intrusion}. 
+ 
+Como nossa abordagem trata-se de um modelo com hipóteses híbridas e faz uso da técnica de replicação de máquinas de estado, neste capítulo subdividimos os trabalhos correlatos em duas seções: \ref{related:hom} abordagens homogêneas e \ref{related:hybrid} abordagens híbridas. 
+ 
+Existe ainda uma terceira seção que relaciona este trabalho com a literatura de criação de servidor \textit{web} tolerante a intrusões. 
+ 
+\section{Abordagens homogêneas}\label{related:hom} 
+ 
+\subsection{Practical Byzantine Fault Tolerance} 
+\textit{Practical Byzantine Fault Tolerance} (PBFT) \cite{castro1998practical} é um dos trabalhos pioneiros em apresentar uma solução prática para BFT baseada em replicação de máquina de estados. 
+
+Em PBFT um serviço é colocado à disposição para um conjunto de clientes e fica replicado em um conjunto de servidores. O conjunto de servidores precisa ser composto por, pelo menos, $3f + 1$ réplicas sendo que $f$ delas podem ser faltosas. Os servidores movem-se através de uma sucessão de configurações chamadas de visões. Em cada visão uma réplica do serviço é chamada de primária e as demais são seus \textit{backups}. Assume-se que o modelo do sistema é parcialmente síncrono para que se garanta a vivacidade (\textit{liveness}) do algoritmo. A autenticidade das mensagens trocadas pelo algoritmo é protegida com assinaturas baseadas em criptografia de chave pública ou através de condensações de mensagens produzidas com funções \textit{hash} resistentes a colisões. 
+ 
+O algoritmo segue as seguintes fases: 
+\begin{enumerate} 
+\item Um cliente envia uma requisição de operação para todos os servidores; 
+\item O servidor primário envia para as réplicas a requisição em uma mensagem do tipo PRE-PREPARE; 
+\item Quando uma réplica $r$ recebe uma mensagem do tipo PRE-PREPARE, $r$ valida à mensagem e, ao aceitar, envia uma mensagem do tipo PREPARE; 
+\item Quanto uma réplica correta recebe $2f + 1$ mensagens PREPARE, ela envia uma mensagem COMMIT para as demais réplicas; 
+\item Cada réplica que recebe $2f + 1$ mensagens COMMIT aceita a ordem e executa a requisição; 
+\item O cliente aguarda por $f + 1$ respostas iguais entre si, e de diferentes réplicas, para então aceitar o resultado. 
+\end{enumerate} 
+A validação de uma mensagem PRE-PREPARE é feita (i) através da comparação entre a sua assinatura e a assinatura da mensagem do cliente e (ii) se a mensagem foi criada pela réplica primária da visão. 
+As fases PRE-PREPARE e PREPARE servem para assegurar a ordem total das requisições, mesmo que a primária sendo faltosa. As fases PREPARE e COMMIT  são usadas para garantir que os pedidos são totalmente ordenados através das visões. 
+ 
+A réplica primária define a ordem em que as requisições dos clientes serão executadas por todas as réplicas. Quando existe suspeita de que a primária está faltosa é executado o protocolo de mudança de visão para garantir a vivacidade, permitindo o progresso do sistema. As mudanças de visão são disparadas por \textit{timeouts} que previnem que as réplicas fiquem esperando indefinidamente para executar as requisições. 
+Periodicamente as réplicas trocam mensagens de CHECKPOINT com uma prova do seu estado atual. Quando uma réplica $r$ recebe $2f + 1$ mensagens de CHECKPOINT com o mesmo estado e assinadas por diferentes réplicas, $r$ entende que $2f + 1$ réplicas progrediram e descarta todas as mensagens com requisições anteriores. 
+ 
+Ao suspeitar que a réplica primária esteja corrompida, cada réplica \textit{backup} envia uma mensagem VIEW-CHANGE para todas as réplicas, contendo o identificador da próxima visão ($v + 1$), número de sequência $n$ do último \textit{checkpoint} estável, conjunto de $2f + 1$ mensagens válidas de \textit{checkpoint} para provar a validade de $n$, um conjunto com todas as mensagens que, antes do início da mudança de visão, estavam com a fase PREPARE completa e que possuem um número de sequência maior que $n$. Ao receber $2f$ mensagens VIEW-CHANGE, o novo primário (calculado por $p = (v + 1) mod ||R||$), emite uma mensagem NEW-VIEW para as réplicas restantes, composta pelo número da nova visão, o conjunto de mensagens de VIEW-CHANGE recebidas, para provar a veracidade da mudança de visão, e uma mensagem PRE-PREPARE para cada mensagem cujo processamento foi interrompido pela mudança de visão. Ao receber uma mensagem de NEW-VIEW, as réplicas realizam a troca de visão, desde que a mensagem esteja correta. 
+ 
+\textbf{Conclusão} 
+ 
+O PBFT tem grande destaque por ser um dos modelos práticos pioneiros na área de tolerância a faltas bizantinas. Vários outros trabalhos derivam de seu modelo \cite{kotla2008zyzzyva, clement2009making}. Apesar da quantidade de passos e de réplicas necessárias para sua execução terem sido superadas em trabalhos mais recentes, o PBFT é considerado o estado da arte na área de tolerância a faltas bizantinas através da abordagem de replicação de máquina de estados. 
+ 
+\subsection{Zyzzyva} 
+% Neste a Rita comentou que a ordem 4a, 4b, 4c e 4d estão confusas, que ela não entende pra onde vai cada um destes estados.
+
+Zyzzyva, apresentado em \cite{kotla2008zyzzyva}, é um algoritmo de replicação de máquinas de estado tolerante a faltas bizantinas que explora especulação para reduzir o \textit{overhead} em protocolos de consenso.  
+No Zyzzyva as réplicas, de maneira otimista, adotam os número de ordenação proposto por uma réplica primária e respondem imediatamente para o cliente, sem entrar em acordo sobre a ordem das requisições. Em função disso, as réplicas podem ficar inconsistentes quando a primária é faltosa. Nestes casos, o cliente detecta estas inconsistências e auxilia as réplicas a atingirem a ordem total das requisições. 
+ 
+Em sua execução o Zyzzyva necessita de $3f + 1$ réplicas divididas em visões. Em cada visão existe uma primária e as demais réplicas servem apenas de \textit{backup} para ela. A operação na ausência de faltas ocorre em quatro passos: (1) o cliente envia uma requisição para a primária, (2) a primaria ao receber a requisição designa um número de ordenação para a mesma e envia junto com a requisição para todas as réplicas pertencentes à sua visão; (3) as réplicas recebem a requisição com o número de ordenação e, de maneira especulativa, executam e enviam para o cliente as repostas, (4a)footnotemark[1]\footnotetext[1]{Usamos aqui a mesma sequência de passos apresentada no artigo original, onde o passo 4 pode tomar quatro formas diferentes.} o cliente verifica se existem $3f + 1$ respostas iguais entre si e, em caso positivo, aceita a resposta.
+ 
+A resposta dos servidores incluem o resultado da requisição e um histórico com a sequência de todas as requisições executadas anteriormente incluindo a qual o resultado se refere. O cliente espera por um tempo determinado pelas respostas. Se o cliente receber entre $2f + 1$ e $3f$ respostas iguais entre si então ele executa o passo (4b)  ao invés de (4a), onde são reenviados as respostas para as réplicas. Este conjunto de mensagens representa um certificado de comprometimento que prova que $2f + 1$ réplicas concordaram com a ordem em que as requisições foram executadas. O passo (5) é referente ao recebimento do certificado pelas réplicas. No passo (6) o cliente aguarda que $2f + 1$ réplicas retornem que receberam o certificado de comprometimento, para então aceitar o resultado. 
+ 
+Caso o cliente receba menos de $2f + 1$ respostas iguais entre si, o protocolo avança para o passo (4c) ao invés do (4a). Nesta etapa o cliente reenvia o seu pedido para todas as réplicas, que encaminham a requisição para a primária, a fim de garantir que o será atribuído um número de ordem para que a mesma seja executada. Se após um intervalo de tempo a requisição não for ordenada as réplicas irão suspeitar da primária e vão, eventualmente, efetuar uma mudança de visão trocando de primária. 
+ 
+Caso o cliente receba respostas indicando ordenação inconsistente pela primária, ele envia uma prova de mau comportamento para as réplicas, que iniciam uma mudança de visão para trocar a primária. Este passo é o (4d) e ocorre no lugar do (4a). 
+ 
+Como os cliente auxiliam na convergência para a ordem total, algumas réplicas precisam fazer \textit{rollback} de algumas requisições já executadas. Para tanto, existe um mecanismo de \textit{checkpoint} que guarda informações sobre o estado em cada réplica, este mecanismo ajuda também a reduzir o custo para troca de visão. 
+ 
+\textbf{Conclusão}
+ 
+Ao explorar sistematicamente as especulações, Zyzzyva apresenta melhorias significativas de desempenho através de protocolos BFT já existentes. O \textit{overhead} de \textit{throughput} e latência do Zyzzyva é aproximado dos limites teóricos mais baixos para qualquer protocolo de replicação de máquina de estados BFT. Porém, o mecanismo de \textit{rollback} não pode ser utilizado em alguns tipos de aplicações, como por exemplo sistemas com transações bancárias. Além do mais, se houver na rede utilizada heterogeneidade, na latência, isto pode afetar o desempenho do algoritmo, já que a variação no tempo de resposta para um cliente pode fazer com que o mesmo reenvie sua requisição para todas as réplicas. 
+ 
+\subsection{Separando o acordo da execução} 
+ 
+\subsubsection{Separating agreement from execution for byzantine fault tolerant services} 
+Em \cite{yin2003separating} é proposto um algoritmo de replicação tolerante a faltas bizantinas que endereça dois problemas que, segundo os autores, limitam o uso de algoritmos BFT em larga escala. Primeiro deles é que, mesmo existindo algoritmos que melhoram integridade e disponibilidade, o comprometimento de uma simples réplica é o bastante para por em risco a confidencialidade. E o segundo, é que algoritmos BFT requerem $3f + 1$ réplicas, o que é um custo significativo mesmo com diminuição dos custos de \textit{hardware}. 
+ 
+O princípio chave desta arquitetura é separar o acordo da execução. Replicação de máquinas de estado primeiro entram em acordo sobre a ordem de execução das requisições para só depois executá-las. O sistema precisa de $3f + 1$ réplicas para o consenso de ordenação, entretanto para a execução das requisições são necessárias apenas $2f + 1$ réplicas. Essa distinção é crucial, pois para a execução de tarefas espera-se que seja necessário muito mais recurso computacional do que para o acordo.  
+ 
+Os servidores são divididos em \textit{cluster} de acordo e \textit{cluster} de execução. O cliente envia uma requisição para o \textit{cluster} de acordo que executa o algoritmo PBFT para obter um certificado de acordo que define a ordem de execução da requisição. Na sequência, o \textit{cluster} de acordo encaminha a requisição do cliente juntamente com o certificado de acordo para o \textit{cluster} de execução. O \textit{cluster} de execução implementa uma máquina de estados de aplicação específica para processar as requisições de acordo com a ordem determinada pelo \textit{cluster} de acordo. 
+ 
+A separação do acordo e execução leva a uma arquitetura de \textit{firewall} privada para proteger a confidencialidade através de replicação bizantina. Em arquiteturas de replicação de máquinas de estado existentes, a operação de votação é executada pelos clientes que esperam por $f+1$ respostas iguais entre si para aceitar o resultado. Este tipo de arquitetura permite que um cliente malicioso observe informação confidencial que servidores faltosos deixaram vazar, e isto não pode ocorrer se a confidencialidade for um requerimento. Os autores propõe um conjunto redundante de nodos de \textit{firewall} privado para restringir a comunicação dos nodos, filtrando respostas incorretas antes que elas sejam devolvidas para os nodos de acordo ou até mesmo o cliente. 
+O \textit{firewall} privado atua entre o \textit{cluster} de execução e os clientes, passando apenas informações enviadas por servidores de execução corretos. O sistema restringe comunicação fazendo com que (1) nodos de \textit{firewall} sejam conectados apenas a nodos diretamente acima e abaixo deles e (2) requisições e respostas sejam criptografadas. Com estas restrições, a comunicação sempre passará por pelo menos um \textit{firewall} correto e garante que o corpo das mensagens ficará protegido contra leituras indevidas. O uso do \textit{firewall} aumenta a confidencialidade, mas diminui a performance de maneira considerável.
+
+\textbf{Conclusão}
+
+Este trabalho tem grande destaque na área por mostrar que o custo adicional para se tolerar faltas bizantinas reside na necessidade de se atingir o acordo bizantino. Quando esta distinção é colocada em prática em um modelo de replicação de máquina de estados, o resultado é a queda do custo computacional, já que as máquinas que são utilizadas para o consenso necessitam de menos processamento que aquelas usadas na execução das requisições.
+ 
+\subsubsection{Espaço aumentado de tuplas e protegido por políticas} 
+ 
+Em \cite{luiz2008repeats} os autores, motivados pelo progresso nos estudos na área de tolerância a faltas com uso de replicação de máquinas de estados, apresentam RePEATS (\textit{Replication over Policy-Enforced Augmented Tuple Space}). 
+ 
+Os autores sugerem uma solução para tolerância a faltas bizantinas através da abordagem de replicação de máquina de estados (RME),  que combina  
+uma série de mecanismos que contribuem para a manutenção da disponibilidade e integridade das aplicações, bem como dos ambientes de execução. 
+ 
+REPEATS (\textit{Replication over Policy-Enforced Augmented Tuple Space}) é uma arquitetura de RME tolerante a faltas bizantinas fundamentada no modelo PEATS (\textit{Replication over Policy-Enforced Augmented Tuple Space}) \cite{bessani2009sharing}, onde os processos (tanto clientes quanto as réplicas do serviço) coordenam-se através de uma abstração de alto nível: um espaço de tuplas resistente a faltas bizantinas.  
+ 
+O uso desta abstração permite também a separação das entidades responsáveis pelo acordo, implementado pelo espaço de tuplas, 
+daquelas responsáveis pela execução das requisições enviadas pelos clientes, com a vantagem de se ter algoritmos de replicação modulares e muito mais simples.  
+ 
+O modelo de execução requer apenas $2f + 1$ réplicas para um serviço, e é genérico o suficiente para comportar diversos conjuntos de serviços (com diferentes aplicações) compartilhando o mesmo suporte de comunicação e coordenação (o espaço de tuplas), de modo que as particularidades de um  
+serviço não interferem nas outras. 
+ 
+O espaço de tuplas é uma abstração de memória compartilhada útil para a coordenação de processos, bem como para o armazenamento de dados. Esta 
+abstração é oriunda do modelo de coordenação generativa e teve sua primeira implementação na linguagem LINDA. No espaço de tuplas é possível realizar o armazenamento e a recuperação de estruturas de dados genéricas sob a forma 
+de tuplas. Uma tupla $t = (f1 , f2 , ..., fn )$ é composta por uma sequência de campos. Um campo $fi$ de uma tupla pode conter um valor definido, um formal(variável) "?" ou ainda um símbolo especial "*". Um campo formal é usado para extrair conteúdos individuais dos campos de uma tupla, já os símbolos especiais são usados para representar campos sem valor definido. Uma tupla $t$ cujos campos têm valores definidos é denominada de entrada. Uma tupla que possui algum campo formal e/ou um campo especial é denominada molde, e é representada por $t$. Um molde $t$ combina uma entrada $t$ se ambas as tuplas têm o mesmo número de campos e todos os campos com valores definidos de $t$ contém o mesmo valor do campo correspondente em $t$. Por exemplo, uma tupla $["RePEATS", 2008]$ combina com os moldes $["RePEATS", *], [*, 2008]$ e $[*, *]$ mas não com $[*, 2007]$.  
+ 
+O modelo clássico de coordenação por espaço de tuplas não provê mecanismos capazes de lidar com processos maliciosos acessando o espaço de tuplas. Este problema foi resolvido com a introdução do PEATS, que consiste em um espaço de tuplas onde as interações entre os processos são reguladas por políticas de acesso de granularidade fina. Estas políticas, que são usadas como mecanismo de controle de acesso ao espaço de tuplas, são compostas por um conjunto de regras padrão para a invocação de operações no espaço de tuplas e condições que devem ser satisfeitas para que estas invocações possam ser executadas, ou negadas. Para isto, o PEATS considera os dados advindos da invocação (o processo invocador e os parâmetros da invocação) e o estado atual do espaço. 
+ 
+O RePEATS consiste em uma concretização de replicação de máquina de estados tendo como elemento de comunicação entre os processos envolvidos em um PEATS, dando origem então a uma arquitetura de suporte à replicação tolerante a faltas bizantinas. 
+ 
+Os clientes inserem suas requisições na forma de tuplas no PEATS e as réplicas do serviço que está sendo acessado leem estas tuplas do PEATS para obter as requisições à serem executadas. Em seguida, os serviços replicados processam as requisições e enviam os resultados também na forma de tuplas dentro do PEATS, para que os clientes possam obter as respostas. 
+ 
+Uma premissa do RePEATS é o determinismo de réplica. Este requisito define que réplicas partindo de um mesmo estado inicial e sujeitas à execução de uma mesma sequência de operações, devem chegar ao mesmo estado final. Assim, em um sistema onde as réplicas implementam um serviço determinista, esta propriedade é implementada por meio do uso de protocolos de difusão com ordem total que garantem que todas as operações enviadas ao sistema são processadas por todas as réplicas (acordo) em uma mesma ordem (ordem total). A partir daí cada réplica executa a operação, atualiza seu estado e envia ao cliente o resultado obtido. O cliente aceita o resultado da operação caso receba $f + 1$ respostas iguais de diferentes réplicas considerando $f$ o número máximo de servidores faltosos. O PEATS implementa o algoritmo de difusão com ordem total. 
+ 
+O controle de acesso é o mecanismo que permite que o RePEATS seja tolerante a faltas. Este controle de acesso se dá através das políticas de granularidade fina suportadas pelo PEATS. Quando uma operação é invocada no PEATS, as regras especificadas nestas políticas são verificadas tomando como base o identificados do processo que invoca a operação, a operação que está sendo invocada e o estado atual do espaço de tuplas para negar ou permitir a execução da operação. 
+ 
+O funcionamento do algoritmo no lado do cliente é iniciado quando um cliente deseja enviar um comando $C$ qualquer. Este cliente tenta inserir uma tupla REQUEST no espaço com um número de sequência igual ao seu último acrescido de uma unidade, sendo que seu valor inicial é zero. A chamada $cas$ insere esta tupla caso já não esteja inserida, caso contrário o cliente incrementa seu número de sequência e tenta novamente. Após inserir a tupla, o cliente fica em modo espera aguardando por $f + 1$ respostas iguais entre si vindas de réplicas diferentes. 
+ 
+O algoritmo no lado do servidor também é iniciado com o valor zero para o número de sequência. As réplicas processam as tuplas REQUEST respeitando a ordem ascendente de chegada, isto é, são processadas primeiro as requisições com número de sequência mais próximo daquele que foi processado na última execução. Ao processar a requisição do cliente o servidor, por questões de desempenho, envia a resposta diretamente ao cliente que fez a requisição. 
+ 
+A política de acesso do PEATS utilizada pelos autores serve para evitar que processos maliciosos quebrem a ordem total, inserindo tuplas REQUEST fora do intervalo de sequência no espaço. Para isso, a inclusão de requisições só pode ser efetuada através da instrução $cas$, na condição de que a tupla REQUEST com número sequencial anterior ao que está sendo incluído esteja presente no espaço. A operação $rd$ é permitida somente para tuplas REQUEST, desde que os campos 3 e 4 do molde sejam formais. 
+ 
+Para correção do protocolo, algumas premissas são admitidas: (i) cada requisição do cliente tem um identificador único e crescente; (ii) o cliente só envia uma requisição após ter recebido a resposta da requisição anterior; (iii) um temporizador é associado a cada requisição enviada, e caso ocorra um \textit{timeout} e a resposta da requisição ainda não tenha sido obtida, o cliente reenvia a requisição. 
+ 
+A abordagem traz também um algoritmo de \textit{checkpointing}. Sua função é guardar o estado das réplicas corretas do serviço no espaço de tuplas a cada $N$ requisições executadas, sendo $N$ um parâmetro configurável e igual em todas as réplicas corretas do serviço. No entanto alguns cuidados são tomados para que réplicas maliciosas não criem \textit{checkpoints} com estados incorretos. 
+ 
+Como as requisições são armazenadas no espaço de tuplas, os autores exploraram esta facilidade para fins de definição de um mecanismo de \textit{logging}. Este mecanismo é necessário para a recuperação das réplicas que venham a falhar. As requisições perduram no espaço ate o momento da gravação de um \textit{checkpoint} posterior, que sinaliza que as requisições anteriores não são mais necessárias durante o processo de recuperação de réplicas. Deste modo, para a recuperação pontual de uma réplica, o processo restaura os checkpoints necessários e se houver requisições após o último \textit{checkpoint}, estas são recuperadas diretamente do espaço. 
+ 
+\textbf{Conclusão} 
+
+
+Os autores apresentaram uma arquitetura para replicação tolerante a faltas bizantinas baseada no modelo de coordenação por espaço de tuplas cuja contribuição é importante por conseguir uma configuração que diminui a quantidade de recursos para atender uma requisição para $2f + 1$, apesar da necessidade de um espaço de tuplas com $3f + 1$ recursos. Como um mesmo espaço de tuplas pode ser utilizado para uma grande variedade de serviços a quantidade de recursos total se aproxima de $2f + 1$. 
+ 
+\section{Abordagens híbridas}\label{related:hybrid} 
+Nesta seção iremos discutir apenas os trabalhos que usam componentes ou redes invioláveis. Eles possuem mais de um subsistema com premissas de tolerância a faltas e sincronismo diferentes (vide \ref{hybrid-model}). 
+ 
+\subsection{Attested append-only memory: Making adversaries stick to their word} 
+A abstração de registro confiável \textit{Attested Append-Only Memory} (A2M) \cite{chun2007attested} foi idealizada para ser pequena, de fácil implementação e consequentemente muito verificável. Um registro A2M oferece métodos para anexar e buscar valores dentro de um registro. O A2M também provê um método para se obter o fim do registro e fazer avançar o sufixo armazenado na memória, utilizado para saltar por múltiplos números sequenciais. Não existem métodos para substituir os valores que já foram atribuídos. 
+
+Algoritmos tolerantes a faltas bizantinas têm que lidar com servidores faltosos que podem prover informações falsas ou inconsistentes de inúmeras maneiras para diferentes clientes ou servidores. O A2M foi especialmente concebido para restringir esse tipo de comportamento. Ele atenua os efeitos de falhas bizantinas nos componentes não confiáveis, baseando-se no histórico de operações providas pelo A2M, que não pode ser violado. 
+ 
+O A2M foi aplicado no algoritmo PBFT (\textit{Practical Byzantine Fault Tolerance}) \cite{castro1998practical} com o intuito de reduzir o número de réplicas de $3f + 1$ para $2f + 1$, originando o algoritmo A2M-PBFT-EA. Cada réplica foi equipada com o A2M e todas as mensagens trocadas entre as réplicas foram anexadas a registros A2M antes de serem enviadas às outras réplicas. O A2M fornece atestados para proteger as mensagens contra ataques de integridade e as torna não repudiáveis. Com base nisto, certificados para requisições preparadas (\textit{PREPARE}), comprometidas (\textit{COMMIT}), para mudanças de visão e \textit{CHECKPOINT}, em A2M-PBFT-EA, tem tamanho $f + 1$ contra $2f + 1$ do PBFT.  
+ 
+Para a implementação do A2M-PBFT-EA foram necessários cinco arquivos de \textit{log}: PREPARE (que também contém PRE-PREPARE) e COMMIT para os três passo do acordo, CHECKPOINT para a coleta de lixo (\textit{garbage collection}), e VIEW-CHANGE e NEW-VIEW para mudanças de visão. 
+ 
+\textbf{Conclusão} 
+ 
+O facilitador para sistemas confiáveis A2M provê uma abstração de programação de registro confiável onde é possível criar protocolos imunes a faltas. Através da utilização do A2M é possível produzir variações do trabalho de Castro e Liskov \cite{castro1998practical} para tolerância a faltas bizantinas via replicação de máquina de estados. Com A2M o sistema mantém sua vivacidade e corretude mesmo que metade das réplicas estejam faltosas. Esta abordagem é de fácil entendimento e conseguiu, também, atingir a melhor resiliência prática. Entretanto, sua implementação requer o gerenciamento de cinco \textit{logs}, fazendo com que em sua aplicação prática o A2M precise de mais armazenamento, tornando-o mais complexo do que seus autores assumiram. Além disso, são necessário mais passos para a comunicação do que no RegPaxos, já que, por implementar o PBFT, precisa de cinco passos.
+ 
+\subsection{Componente inviolável através do uso de \textit{Hardware}} 
+ 
+O ponto chave por trás do A2M foi a observação de que uma única propriedade em faltas bizantinas é responsável pela necessidade de $3f +1$ réplicas para tolerar faltas bizantinas. Esta propriedade é a equivocação \cite{chun2007attested}, que significa a capacidade de fazer declarações contraditórias por diferentes participantes. 
+Nos últimos anos algumas soluções alternativas foram introduzidas para prevenir a equivocação, o que possibilita a redução do número de réplicas em sistemas tolerantes a faltas bizantinas, indo de $3f + 1$ para $2f + 1$ réplicas \cite{chun2007attested, correia2004tolerate}. 
+Em \cite{levin2009trinc} é mostrado que é suficiente um contador monotônico crescente para se conseguir um subsistema confiável. Nesta abordagem, o subsistema assina, de maneira segura, um valor único de contagem para cada mensagem e garante que este valor nunca será atribuído a outra mensagem diferente. Assim, quando uma réplica recebe uma mensagem, ela sabe com certeza que nenhuma outra mensagem com conteúdo diferente possui este número de contagem. Como cada réplica não faltosa valida que a sequência de valores do contador de mensagens recebidas de outra réplica não contém lacunas, réplicas maliciosas não podem criar equívocos nas mensagens. Este contador confiável foi utilizado para construir A2M, a partir do qual um sistema BFT com $2f + 1$ réplicas foi alcançado. 
+ 
+\subsubsection{CheapBFT: Resource-efficient Byzantine Fault Tolerance} 
+ 
+Baseando-se na mesma ideia de contador confiável, em \cite{kapitza2012cheapbft} os autores apresentam um sistema que possui um contador confiável que assegura que um valor de contagem nunca será atribuído para duas mensagens diferentes. Com base neste contador propõe-se uma replicação de máquina de estados passiva para criar um BFT chamado CheapBFT. 
+ 
+ 
+Nesta abordagem, cada máquina é equipada com um subsistema CASH (\textit{Counter Assignment Service in Hardware}) que é inicializado com uma chave secreta e identificado unicamente com um id de subsistema que corresponde à réplica que o hospeda. A chave secreta é compartilhada entre os subsistemas de todas as réplicas. Além da chave secreta, o estado interno de um subsistema assim como o algoritmo utilizado para autenticar mensagens precisa ser conhecido publicamente 
+ 
+CASH possui duas funções, a primeira (createMC) é utilizada para criar certificados e outra para verificar (checkMC) a validade dos certificados. Quando a função createMC é chamada com uma mensagem $m$, ela incrementa o valor do seu contador local e usa a chave secreta $K$ para gerar um MAC (\textit{Message Authentication Code}) $b$ que cobre o $id$ do subsistema local $S$, o valor corrente do contador $c$, e a mensagem. O certificado $mc$ é criado com $S$, $c$ e $b$ anexados a ele. Para atestar o certificado gerado por outro subsistema $s$, a função checkMC verifica o MAC e usa a função isNext() para validar que não existem lacunas na sequência do outro subsistema. A função isNext() guarda os últimos valores de contagem de todos os subsistemas.  
+ 
+O algoritmo CheapBFT usa apenas $f + 1$ réplicas em caso normal (CheapTiny), as demais réplicas são passivas. As réplicas ativas participam do estágio de acordo e do estágio de execução, enquanto as réplicas passivas apenas recebem atualizações de estado das réplicas ativas. 
+ 
+\textbf{Estágio de acordo}. Ao iniciar o protocolo, um conjunto de $f + 1$ réplicas ativas é selecionado de forma determinística. A réplica ativa com o menor id se torna o líder. À semelhança de outros protocolos de acordo inspirados no PBFT, o líder em CheapTiny é responsável por propor a ordem de execução das requisições. Quando todas as $f + 1$ réplicas ativas aceitam o valor proposto, o pedido torna-se comprometido (\textit{commited}) e pode ser processado de forma segura. Ao receber a mensagem $m$ do cliente, o líder verifica sua autenticidade e a envia numa mensagem PREPARE à todas as réplicas, juntamente com a mensagem de certificação  $mc$ emitida pelo subsistema CASH. As réplicas ativas, ao receberem a mensagem de PREPARE, verificam se a mensagem do cliente é autentica. Se a mensagem do líder é autentica e se o valor de ordenação não contém lacunas. Se estiver tudo correto, a réplica emite um certificado para a mensagem do líder e envia numa mensagem COMMIT juntamente com os parâmetros recebidos na 
+mensagem PREPARE. Quando uma réplica ativa recebe uma mensagem COMMIT ela verifica a autenticidade. Ao receber $f + 1$ mensagens COMMIT corretas para a mensagem $m$ a réplica encaminha a requisição para o estágio de execução. 
+ 
+\textbf{Estágio de execução}. O processamento de uma requisição $m$ no CheapBft requer que a aplicação forneça dois objetos, a reposta $r$ para o cliente e uma atualização de estado $u$ que reflete as mudanças no estado da aplicação em função da execução de $m$. Ao processar uma requisição, uma réplica ativa solicita ao CASH que crie um certificado de atualização $u_c$ para $r$, $u$ e o conjunto de COMMITs $C$ confirmando que houve comprometimento com $m$. Em seguida, a réplica envia uma mensagem de UPDATE para todas as réplicas passivas e entao envia a resposta para o cliente. Uma réplica passiva atualiza seu estado quando recebe $f + 1$ mensagens de UPDATE vindas das réplicas ativas e verificadas como corretas para uma mesma resposta.
+ 
+\textbf{Conclusão}
+ 
+CheapBFT é o primeiro sistema tolerante a faltas bizantinas que, apesar de necessitar de $2f + 1$ réplicas, utiliza apenas $f + 1$ tanto para o acordo quanto para a execução. É um importante passo para a área de tolerância a intrusão. O único porém é a necessidade de se criar o componente em \textit{hardware}, que, mesmo com a diminuição de um recurso do ponto de vista de computacional, torna mais complexa sua viabilização prática. 
+ 
+\subsubsection{Efficient Byzantine Fault Tolerance} 
+ 
+Em \cite{veronese2011efficient} os autores, através de melhorias em trabalhos anteriores, criam dois algoritmos tolerantes a faltas bizantinas (BFT). 
+ 
+O artigo mostra como melhorar os trabalhos BFT e Zyzzyva considerando-se três métricas para isto: número de réplicas, simplicidade de serviço confiável e número de passos de comunicação. Os autores afirmam que os algoritmos são eficientes por serem tão bom ou melhores que os anteriores, levando-se em conta as mesmas métricas. 
+ 
+\textbf{Número de réplicas.} Geralmente  os algoritmos de BFT requerem $3f + 1$ réplicas para tolerar $f$ servidores bizantinos. Com o uso de um componente inviolável, os autores foram capazes de diminuir essa resiliência para $2f + 1$.
+
+ 
+\textbf{Simplicidade de serviço confiável.} Trabalhos anteriores mostram que é possível reduzir o número de réplicas de $3f + 1$ para $2f + 1$ estendendo os servidores com componentes invioláveis, isto é, com componentes que fornecem um serviço correto mesmo que os servidores a que pertencem sejam faltosos. Portanto, um aspecto importante para chegar à $2f + 1$ é a arquitetura destes componentes invioláveis. Um objetivo fundamental é fazer com que o componente seja verificável, o que requer simplicidade. 
+A eficiência do algoritmo proposto é também baseada na simplicidade do componente inviolável se comparada às propostas anteriormente (TTCB \cite{correia2004tolerate}, A2M \textit{Attested Append-Only Memory}). 
+ 
+\textbf{Número de passos de comunicação.} É uma importante métrica para algoritmos distribuídos, pelo fato do atraso na comunicação tender a ter mais impacto na latência do algoritmo. 
+O primeiro algoritmo proposto - MinBFT - segue um padrão de troca de mensagens similar ao PBFT. As réplicas se movimentam através de uma sucessão de configurações chamadas de visões. Cada visão tem uma réplica primária e as demais são apoio (\textit{backups}). Quando algumas réplicas suspeitam que a primária é faltosa, é feita a troca de primária, permitindo o progresso do sistema. Em cada visão existem passos de comuni- cação onde a primária envia mensagens para todas as réplicas de apoio, e existem passos em que todas as réplicas enviam mensagens entre si. A ideia fundamental do MinBFT é a utilização de um contador, por parte da primária, para assinar números de sequência para as requisições de clientes. Porém, mais do que assinar números, o componente inviolável gera um certificado que prova de maneira inequívoca que o número assinado pertence apenas aquela mensagem.
+ 
+O segundo algoritmo proposto - MinZyzzyva - é baseado em especula- ção, isto é, na tentativa de execução de requisições de clientes sem acordo inicial sobre a ordem de execução. MinZyzzyva é uma versão modificada de Zyzzyva, o primeiro algoritmo BFT especulativo. O padrão de comunicação do Zyzzyva é similar ao PBFT, exceto pela especulação: quando as réplicas de apoio recebem uma requisição da primária, de maneira especulativa executam a requisição e enviam uma resposta ao cliente. 
+ 
+ 
+O \textit{Unique Sequential Identifier Generator} (USIG) é um serviço local que existe em todos os servidores. O serviço é responsável por fornecer o valor do contador para mensagens e por assinar esta mensagem ao valor passado. Os identificadores são únicos, monotônicos, e sequenciais para o servidor. Estas três propriedades garantem que o USIG (1) nunca irá assinar o mesmo identificador para duas mensagens distintas, (2) nunca assinará um identificador menor que o anterior, e (3) nunca assinará um identificador que não é o sucessor do anterior. Estas propriedades são garantidas mesmo que o servidor esteja comprometido, fazendo com que o serviço tenha que ser implementado em um componente inviolável. A interface do serviço tem duas funções: 
+\begin{itemize} 
+\item $createUI(m)$ - retorna um certificado USIG que contém um identificador único e a certificação de que este identificador foi criado pelo componente inviolável para a mensagem $m$. O identificador é a leitura do contador monotônico, que é incrementado sempre que a função $createUI$ é chamada. 
+\item $VerifyUI(PK, UI, m)$ - verifica se o identificador único ($UI$)  é válido para a mensagem $m$, isto é, se o certificado USIG foi gerado através da mensagem e demais dados em $UI$. 
+\end{itemize} 
+Existem duas maneira de se implementar o serviço: 
+\begin{itemize} 
+\item USIG-Hmac: um certificado contém um código de autenticação de mensagem baseado em \textit{hash} (Hmac - acrônimo do inglês) obtido através da mensagem e da chave secreta do USIG. A chave de cada USIG é conhecida pelos demais USIG, assim todos são capazes de verificar os certificados gerados. 
+\item USIG-sign: o certificado contém uma assinatura obtida usando a mensagem e a chave privada do USIG. 
+\end{itemize} 
+ 
+No USIG-Hmac as propriedades do serviço são baseadas na chaves compartilhadas.  Em USIG-Sign as propriedades são baseadas nas chaves privadas. Para o USIG-Hmac ambas as funções $createUI$ e $verifyUI$ precisam ser implementadas dentro do componente inviolável. No USIG-Sign a verificação necessita apenas da chave pública do USIG que criou o certificado, em função disso, esta operação pode ser executada fora do componente. Em ambas as implementações, as chaves precisam ser compartilhadas para que as verificações sejam executadas. 
+ 
+Os autores implementam o serviço confiável USIG através do \textit{chip} TPM (acrônimo do inglês para \textit{Trusted Platform Module}). Isto é, a inviolabilidade do USIG se dá pelo fato do mesmo estar implementado no \textit{hardware} de cada máquina servidora. 
+ 
+O MinBFT é um algoritmo não especulativo $2f + 1$ que segue um padrão de troca de mensagens similar ao PBFT. 
+Na operação normal a sequência de eventos do MinBFT é a seguinte: (1) o cliente envia uma requisição para todos os servidores; (2) a réplica primária assina o número de sequência para a requisição e envia para todos os servidores numa mensagem $PREPARE$; (3) cada servidor difunde uma mensagem de $COMMIT$ para os demais, assim que recebe um $PREPARE$ da primária; (4) quando um servidor aceita uma requisição, ele executa a operação correspondente e retorna uma resposta para o cliente; (5) o cliente espera por $f + 1$ respostas iguais para a requisição e completa a operação. 
+Quando $f + 1$ réplicas de apoio suspeitam que a primária esteja faltosa, uma mudança de visão  é executada, e um novo servidor se torna o primário. Este mecanismo garante \textit{liveness} permitindo que o sistema faça progresso quando a primária é faltosa. 
+ 
+O MinZyzzyva tem características similares ao MinBFT, entretanto tem o número de passos de comunicação reduzidos em uma execução de caso normal por ser especulativo. 
+A ideia da especulação é que os servidores respondem para os cliente sem primeiro concordar sobre a ordem em que as requisições devem ser executadas. Os servidores adotam, de maneira otimista, a ordem proposta pelo servidor primário, executam a requisição, e respondem imediatamente ao cliente. Esta execução é especulativa porque pode não ser a ordem real em que a requisição deveria ser executada. Se alguns servidores tornam-se inconsistentes em relação aos outros, os clientes detectam a inconsistência e ajudam os servidores à convergirem numa única ordem total de requisições, possivelmente tendo que fazer o \textit{rollback} de algumas execuções. Os cliente só confiam nas respostas que estiverem consistentes com esta ordem total. 
+O MinZyzzyva usa o serviço USIG para constranger o comportamento da réplica primária, permitindo a redução do número de réplicas de $3f + 1$ para $2f + 1$, preservando as propriedades de segurança (\textit{safety}) e vivacidade (\textit{liveness}). As réplicas \textit{backup} só aceitam da uma requisição repassada pela primária se o identificador único gerado pelo USIG for válido e se a mensagem estiver respeitando a ordem FIFO (o primeiro que entra é o primeiro que sai). 
+
+\textbf{Conclusão} 
+ 
+Os algoritmos MinBFT e MinZyzzyva  melhoram algoritmos anteriores requerendo apenas $2f + 1$ ao invés $3f + 1$ réplicas. O algoritmo é muito simples e usa o \textit{chip} TPM como componente inviolável para implementar o serviço USIG que designa números de ordenação para as mensagens vindas dos clientes, assim, toda réplica correta executa as requisições na ordem designada pelo USIG. A contribuição deste trabalho vêm em termos de custo, resiliência e complexidade de gerenciamento, ficando mais próximo dos algoritmos de replicação tolerantes a faltas catastróficas. Entretanto, para a criação do serviço inviolável são necessárias modificações na máquina servidora que precisa possuir o \textit{chip} TPM, em nível de \textit{hardware}, tornando sua implementação mais complexa do que utilizar-se de tecnologias que estão disponíveis como virtualização e memória compartilhada emulada. 
+ 
+\subsection{Abordagens com virtualização}
+Um parâmetro importante endereçado pela maioria das abordagens BFT da literatura é a quantidade de réplicas necessárias para tolerar $f$ faltosas, também conhecido como resiliência. Muitas soluções BFT estão limitadas ao problema do consenso bizantino, necessitando de $3f + 1$ réplicas para executar o consenso \cite{castro2002practical, reiter1995rampart, kotla2008zyzzyva}. Trabalhos recentes conseguiram atingir um mínimo de $2f + 1$ réplicas. A diminuição da quantidade de réplicas é obtida de várias maneiras, abstração de \textit{hardware}, tecnologia de virtualização e/ou canais confiáveis.
+O uso da tecnologia de virtualização, além de facilitar na melhoria da resiliência, abre muitas possibilidades de melhorias, como o uso de imagens de sistema para regeneração do mesmo em caso de detecção de faltas, redundância de \textit{hardware}, migração de \textit{hardware} em caso de falta do equipamento, maior controle de acesso a rede da réplica, menor quantidade de recursos físicos, dentre outras  \cite{cully2008remus, reiser2007vm, reiser2008fault, chun2008diverse, wood2008zz}
+Em nosso trabalho optamos por utilizar esta tecnologia para aproveitar da sua propriedade de isolamento entre as réplicas e as máquinas físicas. Desta maneira, podemos obter uma parte do sistema com segurança de acesso. Nesta seção trazemos algumas das abordagens de virtualização importantes para a área.
+
+
+As abordagens que se baseiam em virtualização em sua maioria utilizam para diminuir a quantidade de máquinas físicas e/ou para fazerem uso do isolamento que o \textit{hypervisor} provê.
+
+\subsubsection{VM-FIT: Supporting intrusion tolerance with virtualisation technology} 
+Virtual Machine - Fault and Intrusion Tolerance (VM-FIT) apresentado em \cite{reiser2007vm} foi um dos primeiros trabalhos da literatura a apresentar uma solução baseada em máquinas virtuais. 
+ 
+Em sua primeira versão, Redundant Execution on Single Host (RESH), os autores se aproveitaram da arquitetura das máquinas virtuais para fazer o consenso bizantino. Para atingir isto, foi modificado o domínio que provê \textit{drivers} de \textit{hardware}, separando-o em duas máquinas virtuais, criando assim um domínio chamado de NV.  A proposta é uma arquitetura com uma única máquina suportando várias máquinas virtuais  para oferecer o serviço replicado. As réplicas virtuais servem apenas para executar as requisições, sem participar da ordenação. A responsabilidade de efetuar a ordenação, ou o consenso, fica à cargo do domínio NV, que tem total acesso a abstração de rede e, por sua vez, à todas as requisições que vem do cliente. Como o domínio NV é o único responsável pela votação, a execução não mais tem necessidade de utilizar $3f + 1$ máquinas, fazendo o número decrescer para $2f + 1$. Os autores consideram que, por se tratar também do \textit{hypervisor} da máquina virtual, o domínio NV é inviolável. O 
+problema com esta versão do modelo é a não tolerância a \textit{crash} por parte do sistema anfitrião, já que era apenas uma máquina.
+ 
+Os autores sugeriram então a abordagem Redundant Execution on Multiple Hosts (REMH) \cite{reiser2008fault}, realizando a replicação do sistema anfitrião. Assim, REMH é capaz de tolerar até $f$ faltas de \textit{crash} em um total de $2f + 1$ máquinas anfitriãs. 
+ 
+Fazendo um modelo muito semelhante ao que foi proposto por Castro e Liskov em \cite{castro2002practical}, surgiu Virtual Machine - Fault and Intrusion Tolerance (VM-FIT), estudo composto pelas abordagens RESH e REMH.  
+Neste novo modelo os autores sugerem uma recuperação proativa. Estas recuperações são disparadas periodicamente para que sistemas corrompidos sejam recuperados e iniciados a partir de uma base de código segura. Em VM-FIT a recuperação das réplicas fica à cargo do \textit{hypervisor}. Como o VMM tem total controle sobre as máquinas virtuais, isso permite que um novo sistema seja iniciado antes que outro seja desligado. Contudo, o estado da nova réplica é diferente do estado das réplicas já iniciadas. Para solucionar este problema,é utilizado um esquema de \textit{checkpoint} das réplicas, desta maneira, para que uma réplica recém iniciada emparelhe com as demais, são usadas $f + 1$ mensagens de CHECKPOINT iguais que possuem o estado a ser transferido. 3A transferência de estado pode ser feita através de um simples remapeamento de blocos de memória, caso a réplica recuperada apresente comportamento correto. 
+ 
+\textbf{Conclusão} 
+ 
+Por se tratar de um dos primeiros trabalhos a utilizar virtualização, o VM-FIT tem grande importância na área de tolerância a intrusão. Através de sua arquitetura, foi possível a proposta de um protocolo de consenso simples, baseado em um domínio confiável, além disso, o esquema para recuperação ficou simples e direto. Entretanto a criação do domínio NV traz alguma complexidade e dependência para seu código, já que lida com a modificação do \textit{hypervisor}. 
+
+\subsubsection{Remus: High Availability via Asynchronous Virtual Machine Replication} 
+Em \cite{cully2008remus} é apresentada uma abordagem que, apesar de não focar em dependabilidade, e sim em disponibilidade, traz uma solução interessante que, com poucas modificações, pode ser adaptada para BFT. Com base nisto, cabe uma breve discussão sobre sua arquitetura chamada Remus.
+ 
+Remus utiliza uma arquitetura de servidores em par, um ativo e outro \textit{backup}, ambos com o mesmo sistema. Ele alcança alta disponibilidade por meio da propagação frequente de \textit{checkpoints} de uma máquina virtual ativa a um \textit{host} físico de \textit{backup}. No \textit{backup}, a imagem da máquina virtual é armazenada em disco e pode iniciar sua execução imediata, se for detectada alguma falha no sistema ativo. Pelo fato do \textit{backup}  ser consistente apenas periodicamente com a réplica primária (ativa), toda saída de rede precisa ser guardada em \textit{buffer} até que o estado da réplica de \textit{backup} seja sincronizado. Quando uma imagem completa e consistente do \textit{host} é recebida, o \textit{buffer}  é liberado para clientes, deixando o estado do sistema externamente visível.
+A réplica de \textit{backup} fica inativa em seu \textit{host}  até que seja detectada uma falha na máquina virtual ativa. Enquanto inativa, a réplica de \textit{backup} apenas serve de receptora para os \textit{checkpoints} 
+
+O objetivo do Remus é assegurar a recuperação, completamente transparente, de falhas de paradas de um único \textit{host} físico. Para tanto, o Remus provê as seguintes propriedades:
+\begin{enumerate}
+\item Tolerância a falhas de paradas em qualquer \textit{host};
+\item Se ambos os \textit{hosts}, primário e \textit{backup}, falharem simultaneamente, os dados protegidos do sistema ficarão em estado consistente contra paradas;
+\item Nenhuma saída ficará externamente visível até que o estado do sistema não tenha sido recebido pela réplica de backup.
+\end{enumerate}
+ 
+ \textbf{Conclusão} 
+ 
+Por se tratar de um trabalho com foco em disponibilidade e que preocupa-se apenas com falhas de paradas, este trabalho não está fortemente relacionado com nossa proposta. Todavia, a sua solução traz uma arquitetura que pode ser adaptada para serviços BFT, já que apresenta alta disponibilidade, que é muito importante para dependabilidade. Através do uso da solução por eles adotada e com a replicação das máquinas físicas, é possível criar um sistema BFT em que as réplicas, sempre que detectadas faltosas, pudessem se recuperar proativamente, diminuindo os danos do sistema em casos de faltas arbitrárias.
+ 
+\subsubsection{ZZ: Cheap practical BFT using virtualization} 
+ZZ é proposto em \cite{wood2008zz} e apresenta uma arquitetura com virtualização e replicação de máquina de estados que utiliza $3f + 1$ réplicas no consenso e $f + 1$ réplicas para execução das requisições em casos livres de faltas. 
+ 
+A configuração do ZZ permite que sejam colocadas até $N(f + 1)$ máquinas virtuais em casa máquina física, considerando-se $N$ como o número de aplicações em execução. 
+ 
+ZZ é baseado em duas compreensões,  1) se um sistema é construído para ser correto em ambientes assíncronos, ele precisa funcionar corretamente mesmo que algumas réplicas sejam arbitrariamente lentas. 2) Durante um período livre de faltas, um sistema construído para ser correto na presença de $f$ faltas não deve ser afetado se $f$ replicas suas estiverem desligadas. ZZ aproveita a segunda compreensão para desligar $f$ réplicas em períodos livres de faltas, necessitando apenas $f + 1$ réplicas para executar as requisições. Quando faltas ocorrem, ZZ aproveita-se da primeira compreensão e se comporta exatamente como se as $f$ réplicas ociosas estivessem muito lentas, mas ainda assim, corretas. 
+ 
+A execução em caso normal do protocolo inicia com o envio de uma requisição de cliente com uma estampilha de tempo anexada e a identificação deste cliente. Esta requisição chega ao \textit{cluster}  de acordo que 1) define um número de ordenação para a requisição, 2) envia requisições comprometidas para o \textit{cluster} de execução, 3) recebe relatórios de execução do \textit{cluster} de execução, e 4) retransmite certificados para o cliente quando necessário. 
+Ao receber a requisição de um cliente, cada réplica de acordo envia uma mensagem ORDER para todas as réplica de execução com a visão e o número de ordem. 
+Uma réplica de execução, ao receber uma mensagem ORDER assinada por $2g + 1$ réplicas de acordo, verifica se já executou todas as requisições com valor de ordem anterior ao desta mensagem, para então executar a nova requisição do cliente. A réplica de execução então envia uma mensagem contendo um relatório da execução da mensagem para as réplicas de acordo e uma mensagem contendo a resposta para o cliente. O cliente aceita, ao receber $f + 1$ respostas iguais de diferentes réplicas. 
+ 
+Se o \textit{cluster} de acordo detectar faltas no \textit{cluster} de execução, isto é, se alguma réplica de acordo não receber os relatórios de execução ou se os relatórios não estiverem em acordo uns com os outros, ela envia uma mensagem de RECOVER para um subconjunto de \textit{hypervisors} que controlam as $f$ réplicas de execução ociosas. Quando um \textit{hypervisor} recebe $g + 1$ mensagens de RECOVER válidas e de réplicas diferentes, ele inicia a réplica ociosa. O \textit{hypervisor}  é considerado confiável neste modelo. 
+Para recuperar as réplicas ociosas, o ZZ confia numa abordagem de \textit{checkpoint}, assim as réplicas que estavam antes ociosas podem agora ter seus estados igualados aos daquelas que estavam ativas. Entretanto o \textit{checkpoint} pode estar desatualizado em relação às requisições pendentes, portanto, para reduzir o custo da recuperação da réplica ociosa, ZZ usa um esquema diferente.  Uma réplica $k$ sendo recuperada primeiramente obtém do \textit{cluster}  de acordo um \textit{log} ordenado de requisições já comprometidas (\textit{commited}) desde o \textit{checkpoint} mais recente. Seja $m$ o número de sequência mais recente no \textit{checkpoint} e $n \geq m + 1$ o número de ordenação mais recentemente comprometido. E sabendo que requisições no intervalo $[m + 1, n]$ envolvem escritas no estado da aplicação, enquanto outras não. Então a réplica $k$ começa a reexecutar as requisições neste intervalo, mas, somente, as que envolvem escritas no estado da aplicação. Desta maneira, ganha-se tempo na 
+recuperação. 
+ 
+ 
+\textbf{Conclusão} 
+ 
+A abordagem apresentada em ZZ é vantajosa por manter parte do recurso, pelo menos do ponto de vista de processamento, ocioso. Com isto é possível se chegar a uma quantidade de réplicas de execução de $f + 1$ para $f$ faltosas. O esquema de recuperação de réplicas traz uma maneira econômica por fazer com que as réplicas só executem requisições que mudam o estado do sistema, diminuindo o tempo para trazer de volta o sistema a um estado correto. Entretanto, por utilizar mais de uma réplica por máquina física, esta abordagem transforma a máquina real em um gargalo e a quantidade de máquinas necessárias para criar o consenso ainda necessita de $3f + 1$ réplicas, o que aumenta consideravelmente a quantidade de recursos computacionais necessários.  
+ 
+\subsubsection{Diverse replication for single-machine byzantine-fault tolerance} 
+ 
+Em \cite{chun2008diverse} foi proposta uma abordagem que foca na utilização de replicação em um sistema com servidor único. Os autores sugerem a colocação de várias instâncias do serviço replicado na mesma máquina física para criar um sistema BFT. Este trabalho não apresenta protótipos, seu foco é teórico e traz algumas discussões interessantes sobre os desafios do BFT e como seria possível resolvê-los através do uso de virtualização. Os autores focam em dois desafios. A diversidade de réplicas, através do uso de diferentes tecnologias, sistemas operacionais, linguagens de programação, codificação, etc. E a independência de faltas.
+ 
+Para resolver o problema da independência de faltas, é preciso garantir isolamento entre as réplicas, assegurando assim que uma não vai inferir em outras. 
+Os autores sugerem que o uso de virtualização pode auxiliar no isolamento através do VMM (\textit{Virtual Machine Monitor}), já que ele provê isolamento de computação, memória, e disco. De maneira adicional, o \textit{hypervisor} deveria fornecer um mecanismo de comunicação protegido entre as máquinas virtuais. 
+
+Os autores trazem uma discussão rica sobre o papel do VMM mostrando que ele escalona o processador de maneira justa entre as múltiplas máquinas virtuais. O VMM deve assegurar vivacidade e disponibilidade não deixando as máquinas virtuais sem ter acesso ao processador.  
+Além disso, o VMM deve proteger a páginas da memória física, não permitindo que uma máquina virtual acesse o espaço de outra. 
+É sua responsabilidade também isolar discos virtuais das convidadas garantindo que não vai haver sobreposição nem acessos indevidos. 
+E por final, o \textit{hypervisor} deve assegurar que a comunicação entre duas máquinas virtuais não seja violada por uma terceira máquina virtual. O VMM deve mediar as comunicações protegendo qualquer comunicação. 
+ 
+Assegurado o papel do \textit{hypervisor}, o isolamento é possível.
+ 
+\textbf{Conclusão} 
+ 
+Neste artigo os autores fazem um panorama sobre o estado em que a área de BFT se encontrava. Os autores trazem algumas discussões ricas sobre os principais desafios de da área de tolerância a faltas bizantinas focando em diversidade e independência de faltas. Os autores propõe o uso de tecnologias de virtualização para conseguir colocar em prática novas abordagens que consigam sanar estes problemas de maneira satisfatória. 
+ 
+ 
+ 
+\subsection{Usando canal confiável} 
+
+O problema do consenso \cite{pease1980reaching}, consiste em garantir que os processos corretos em um sistema distribuído entrarão em concordância em relação a um valor proposto por algum destes processos. O problema se resume em proposições de valor $v \in V$ e na decisão unânime dos processos corretos em função do $v$ proposto. Fischer, Lynch e Paterson \cite{fischer1985impossibility} provaram que em sistemas assíncronos é impossível se atingir consenso, pois qualquer processo pode sofrer faltas de \textit{crash} inviabilizando o acordo.
+ Algumas abordagens fazem uso de um canal confiável com premissas de sincronia para atingir o consenso de maneira protegida. É uma maneira de tornar o consenso seguro, permitindo ainda que a resiliência do sistema seja melhorada. Nossa abordagem também faz uso de um canal confiável, portanto, se encaixa nesta subárea.
+ 
+\subsubsection{How to tolerate half less one byzantine nodes in practical distributed systems} 
+Em \cite{correia2004tolerate} é apresentada uma solução através do uso do \textit{wormhole} TTCB (\textit{Trusted Timely Computing Base}).  O TTCB é um componente inviolável distribuído utilizado na implementação de um serviço BFT de replicação de máquina de estados que reduz o número de réplicas necessárias para $2f + 1$ com até $f$ faltosas. 
+
+O modelo do sistema é composto por um conjunto de servidores conectados via rede. O TTCB tem seu próprio canal de comunicação e é distribuído tendo partes locais em alguns servidores. O conjunto de serviços que é provido pelo TTCB é limitado e muito simples. O primeiro serviço provido é o serviço de autenticação local que garante a integridade da comunicação entre o servidor e seu TTCB local. O segundo serviço é TMO \textit{The Multicast Ordering} que é implementado dentro do TTCB e, por ser um serviço de ordenação, é utilizado para implementar um protocolo de difusão atômica (vide \ref{agreement}) que é a base para o esquema de replicação. 
+ 
+A fim de contornar a impossibilidade de resultado Fischer, Lynch e Paterson (FLP)\footnotemark[1]\footnotetext[1]{FLP diz que nenhum protocolo determinístico é capaz de resolver o problema de consenso em um sistema síncrono se um simples processo pode parar de funcionar.} a versão original da TTCB foi síncrona, mas se outra solução for utilizada com esta finalidade, por exemplo, detectores de falhas, o TTCB pode ser implementado como um componente confiável sem premissa de tempo real. Para aumentar a proteção do TTCB, ele precisa ser implementado em um módulo de \textit{hardware} e seus canais de comunicação precisam ser completamente separados um do outro. Isso obriga que cada servidor possua duas placas de rede. Na primeira é feita a comunicação entre os clientes e os servidores (rede de \textit{payload}). E na segunda a comunicação onde será efetuado o processo de consenso (rede controlada segura).
+ 
+O algoritmo de replicação de máquina de estados que utiliza o TTCB opera basicamente da seguinte maneira: 1) um cliente envia um comando para um dos servidores; 2) o servidor envia o comando para todos os demais servidores usando o protocolo de difusão total; 3) cada servidor executa o comando e envia uma resposta para o cliente; 4) o cliente aguarda por $f + 1$ respostas iguais entre si de diferentes servidores. 
+ 
+O cerne do algoritmo executado por cada servidor é o protocolo de difusão atômica que garante que se uma réplica que enviou as ordenações de mensagem para os demais servidores for correta, então todas as réplicas corretas irão executar as mensagens na mesma ordem. O serviço TMO é quem dá embasamento para o protocolo de difusão atômica, designando um número de ordenação para as mensagens. Quando um processo $p$ quer enviar uma mensagem para os outros processos, ele entrega ao TTCB um \textit{hash} da mensagem e difunde a mensagem através da rede. Quando outro processo $q$ recebe a mensagem, ele também entrega ao TTCB um \textit{hash} da mensagem; Quando um certo número de processos tiver efetuado esta operação, o TTCB designará um número de ordenação para a mensagem e enviará este número aos processos. Todo processo correto vai processar as mensagens de acordo com a ordem definida pelo TTCB. 
+ 
+Em \cite{correia2002design} é explicado mais a fundo como foi implementado o TTCB. Na conclusão abaixo é feita uma discussão mais profunda sobre o assunto.
+          
+ 
+\textbf{Conclusão} 
+ 
+ O trabalho apresentado é de grande importância, pois foi um dos primeiros a apresentar uma solução prática para a melhoria da resiliência em sistemas BFT. Além disso, é um dos pioneiros a colocar em prática a utilização de \textit{wormhole} para criar uma arquitetura híbrida. Porém  a implementação do TTCB necessita da utilização de um \textit{hardware} à parte, como pode ser visto em \cite{correia2002design}. Este componente dificulta sua aplicação prática,  além disso, é preciso blindar este \textit{hardware} com um componente de \textit{software} responsável por separar as operações do TTCB das operações do sistema operacional. Os autores fazem essa blindagem através da criação de módulos para o \textit{kernel} do RT-Linux. Essa dependência com o \textit{kernel}  do RT-Linux implica diretamente em: 
+\begin{enumerate} 
+\item Dependência de versão do \textit{kernel}, o que pode fazer com que esteja defasado em relação às versões mais recentes, principalmente sob o aspecto das medidas de segurança. No uso do RegPaxos isto não é um problema, pois o sistema operacional da máquina hospedeira pode ser qualquer um, respeitando a premissa de heterogeneidade \cite{garcia2011diversity, obelheiro2006practical}. 
+\item As bibliotecas de acesso ao TTCB precisam ser implementadas para cada linguagem de programação.  Isso limita o uso da técnica de diversidade, e com o surgimento de linguagens e paradigmas o TTCB tem que ser adaptado. O Registrador Distribuído Compartilhado do RegPaxos tem seu acesso independente da linguagem de programação, permitindo que o serviço seja implementado através de diversos paradigmas e linguagens. 
+\item As limitações do TTCB impostas a um atacante são em termos de remoção de privilégios do super usuário do sistema operacional. Portanto, o atacante tem acesso ao sistema hospedeiro e, como o TTCB protege apenas o ID/GID 0 (\textit{root}), o acesso local é suficiente para técnicas de escalamento de privilégio ou \textit{exploits} locais, que são aqueles que são executados diretamente na máquina e que, normalmente, exploram falhas do tipo \textit{buffer/stack/heap overflow} ou erros de configuração. No RegPaxos o isolamento é feito através da máquina virtual, portanto o atacante terá que invadir primeiramente a máquina virtual e, só então, achar vulnerabilidades no \textit{hypervisor} para acessar o sistema hospedeiro. 
+\end{enumerate} 
+Além do mais, a separação entre as redes segura e de \textit{payload} é feita com a separação de placas de rede, o que implica na necessidade de pelo menos duas placas de rede por servidor TTCB. No RegPaxos  a separação das redes é feita através do isolamento da máquina virtual diminuindo a quantidade de recursos. 
+ 
+\begin{table*}[ht] 
+\label{tab:comparison} 
+\caption{Comparação entre as propriedades dos protocolos avaliados} 
+\scalebox{0.567}{ 
+    \begin{tabular}{|c|c|c|c|c|c|c|c|} 
+    \hline 
+    & PBFT & Zyzzyva & TTCB & A2M-PBFT-EA & MinBFT & MinZyzzyva & RegPaxos \\ \hline  
+    Número de réplicas & $3f + 1$ & $3f + 1$   & $2f + 1$   & $2f + 1$   & $2f + 1$   & $2f + 1$   & $2f + 1$ \\ \hline  
+    Réplicas com o estado & $2f + 1$  \cite{yin2003separating} & $2f + 1$   & $2f + 1$   & $2f + 1$   & $2f + 1$   & $2f + 1$   & $2f + 1$ \\ \hline  
+    Número de processos & $2f + 1$ \cite{yin2003separating} & $2f + 1$   & $2f + 1$   & $2f + 1$   & $2f + 1$   & $2f + 1$   & $2f + 1$ \\ \hline  
+    Número de Máq. Físicas & $3f + 1$ & $3f + 1$   & $2f + 1$   & $2f + 1$   & $2f + 1$   & $2f + 1$   & $2f + 1$ \\ \hline  
+    Passos de Comunicação & 5 & 3 & 5 & 5   & 4   & 3   & 3 \\ \hline  
+    Especulativo/Otimista & não & sim  & não   & não   & não   & sim & não \\ \hline  
+    \end{tabular} 
+} 
+\end{table*} 
+ 
+\section{Servidor \textit{web}  tolerante a intrusões}\label{related:web-server} 
+ 
+O estudo de técnicas de tolerância a intrusão é sempre embasado por necessidades reais de melhorias nas técnicas atuais. Não basta apenas comprovar em \textit{benchmarks}  a sua funcionalidade, pois em casos reais o resultado pode ser diferente. Por isso, ao se estudar técnicas BFT, é comum a utilização de protótipos para validá-las. Dentre estes protótipos, encontram-se:
+Sistemas de arquivos em rede, \textit{backup} cooperativo, serviços de coordenação, autoridades certificadoras, banco de dados, sistemas de gerenciamento de chaves, etc \cite{castro2002practical, yin2003separating, aiyer2005bar, bessani2008depspace, clement2009upright, garcia2011efficient, reiter1996omega, zhou2002coca}. Um protótipo interessante e que pode ser colocado em prática em problemas reais é a criação de um servidor \textit{web} BFT. Neste trabalho seguiremos esta linha e nesta seção apresentamos a literatura relacionada.
+ 
+Em \cite{ferraz2004intrusiontolerant} é apresentada DISTRACT (\textit{Deterministic IntruSion ToleRance ArChiTecture}), uma arquitetura de suporte a serviços tolerantes a intrusão baseada em replicação de máquina de estados. Este artigo reporta a primeira implementação completa de um serviço tolerante a intrusão baseado em \textit{wormhole}, mais especificamente, baseada no TTCB (\textit{Trusted Timely Computing Base})  \cite{correia2002design}. 
+ 
+A arquitetura do sistema é composta pelos clientes, pelos \textit{proxies}  e pelos servidores. No modelo do servidor \textit{web}, os clientes são processos que se comunicam através do protocolo HTTP \cite{fielding1999hypertext}, por exemplo, \textit{web browser}. Os \textit{proxies} são servidores intermediários que servem para esconder a replicação dos clientes. Os servidores são de fato aqueles que possuem o serviço replicado. Tanto os \textit{proxies} quanto os servidores são munidos do TTCB. Todo o sistema está sujeito a faltas arbitrárias, com exceção dos \textit{proxies}, que estão sujeito apenas a paradas (\textit{crash}). Cada servidor é dividido em duas partes, \textit{skeleton}, que é o serviço tolerante a intrusão e o servidor original do serviço, que é quem processa a requisição do cliente gerando uma resposta. No artigo os autores utilizaram um conjunto de protocolos em que se fazem necessárias $3f + 1$ réplicas com $f$ faltosas. 
+ 
+De maneira simples, o processo ocorre com um cliente enviando uma requisição para um \textit{proxy}. Este  \textit{proxy} envia a requisição para cada \textit{skeleton} de cada servidor. Cada \textit{skeleton}, por sua vez, chama o servidor original que processa e envia a resposta para o \textit{proxy}. Quando o \textit{proxy} tem um certo número de respostas iguais entre si, ele responde para o cliente. 
+ 
+Os \textit{proxies} e servidores se comunicam através de canais seguros que garantem que as mensagens não serão corrompidas na rede e que serão eventualmente recebidas. Quando um \textit{proxy} recebe uma requisição $R$, ele usa o TTCB para tirar um uma estampilha de tempo $t$ e, em seguida, envia a mensagem com a estampilha de tempo para todos os servidores. A ordenação das mensagens é feita através da estampilha de tempo, porém, os servidores também precisam concordar com o conjunto de mensagens a ser ordenado e entregue.  O servidor possui dois estados: Normal e acordo. Se o servidor está ocioso, então ele está em modo normal. O segundo estado corresponde ao acordo sobre entrega das mensagens. 
+ 
+Um servidor usa dois critérios para decidir se participará do protocolo acordo: quando ele recebe uma ou mais mensagens e já se passou um tempo $T$ desde o  último acordo. 
+ 
+Quando o protocolo de acordo termina, cada servidor executa as requisições de acordo com a ordem de suas estampilhas de tempo. Assim que todas as requisições são executadas por todos os servidores, cada um deles envia uma resposta para o \textit{proxy}. Ao receber $f + 1$ respostas idênticas entre si e de diferentes servidores, o \textit{proxy} encaminha a resposta para o cliente. 
+ 
+DISTRACT usa \textit{Domain Name System} (DNS) \cite{mockapetris1987domain} para devolver um \textit{proxy} para os clientes. Isto é, o serviço de DNS permite que mais de um endereço IP esteja associado a um domínio, estes IPs são devolvidos de acordo com algumas políticas definidas no serviço. 
+Se um cliente recebe um IP de um servidor inacessível por qualquer razão, basta que seja reenviada a requisição (\textit{refresh}) para que o DNS devolva um outro IP. 
+ 
+Um problema que os autores relatam é que pacotes HTTP gerados para uma mesma requisição podem ter valores diferentes em seu cabeçalho, isto afetaria o determinismo da máquina de estados, portanto, os autores descartam as três primeiras linhas do cabeçalho HTTP (pois são as que variam) no momento de comparar as $f + 1$ respostas. 
+ 
+\textbf{Conclusão} 
+
+A solução apresentada mostra vários benefícios interessantes, pois  cria um sistema de servidores \textit{web}  tolerantes a faltas bizantinas sem que haja necessidade de se modificar os clientes ou os servidores originais. A diversidade de servidores é suportada de maneira transparente. Por ser o primeiro, e pela literatura o único, trabalho a criar um servidor \textit{web} tolerante a faltas, seu destaque é inegável. Entretanto, é possível melhorar sua resiliência utilizando modelos híbridos e \textit{wormholes} mais recentes. Além disso seria interessante eliminar a necessidade do uso de intermediários (\textit{proxies}) na comunicação. Ou seja, é possível estudar outras abordagens, como, por exemplo, criação de \textit{add-ons} para \textit{browsers} como o Mozilla Firefox\footnotemark[1]\footnotetext[1]{http://www.mozilla.org/en-US/firefox/new/} fazendo com que o mesmo espere $f + 1$ respostas para um requisição ao invés de uma. 
+ 
+ 
+\bibliographystyle{ufscThesis/ufsc-alf}
+\bibliography{bibliografia}
+
+\end{document}

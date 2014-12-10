@@ -1,0 +1,40 @@
+====Hipóteses explicitas
+Normalmente os testes são baseados em aproximaçãoo de uma amostra de dados inicial, suprimindo as demais informações. Estes pressupostos são de suma importância, pois podem elucidar o porquê de observamos algumas execuções
+
+====Efcácia dos testes
+Porquê?Como?Quantos são necessários para descobrir um determinado tipo de erro. Existe uma padrão de provar eficácia que pa a controvérsia convencional entre a técnica proposta versus técnicas
+aleatórias, mas seria interessante propor novas técnicas.
+
+=====Testes de composição 
+Complexidade de teste tem sido abordada pela decomposição do teste em ensaios que testam separadamente alguns aspectos do sistema. Entretanto, ainda é preciso descobrir se a composição destes
+ensaios é equivalente ao teste do sistema todo.
+
+=====Evidências empíricas
+Na pesquisa de teste de software, estudos empíricos são essenciais
+para avaliar as técnicas e práticas propostas, entender como elas funcionam e aperfeiçoa-las. Infelizmente, grande parte do conhecimento de tecnicas de teste existentes são desprovida de qualquer fundamento formal.
+A idéia aquié realizar experimentos mais robustos e significativos, contruindo por exemplo um repositório de dados compartilhados, ou um banco de dados de ensaios experimentais.
+
+
+
+&&&&&&&&&&& testes baseados em modelos
+Temos hoje sistemas bem complexos e heterogêneos, e é comum que se utilize mais de um tipo de modelagem para definir suas funcionalidades. A
+meta desse desafio é garantir que o projeto do software possa ser expresso em uma unica anotação, que seja possível extrair os casos de teste a partir disso.
+
+&&&&&&&&&&& testes baseados em anti-modelo
+Este desafio surgiu da hipótese de que pode não existir um modelo do software. Então foca em coletar informaçãoo da execução do programa para tentar sintetizar as propriedades do sistema em um novo modelo ao invés de elaborar um plano de teste e comparar os resultados do teste com o modelo original.
+
+&&&&&&&&&&& oráculos de teste
+Heurística para emitir um veredito para aporvar ou reporvar a saída de um determinado teste. Este desafio pretende solucionar o problema de derivar os casos de teste e de como decidir se um resultado do teste é aceitável ou não.
+
+
+%%%%%%%%%%%Geração de dados de entrada
+Sempre foi um tópico de pesquisa muito ativo e utilizado academicamente, mas este esforço ainda não chegou na indústria - que ainda são feitos de forma manual. Os resultados mais promissores são as abordagens baseadas em modelo e a geraçãoo aleatória acrescida de alguma inteligência
+
+%%%%%%%%%%%Abordagens de teste específicas para o domínio
+Encontrar métodos e ferramentas específicas de domínio e poder aprimorar a automação de teste. Neste sentido, alguns trabalhos já conseguiram demonstrar a extração automática de requisitos para o teste a partir de um modelo escrito em uma linguagem fortemente tipada e
+específica de um domínio.
+
+%%%%%%%%%%%testes online
+Monitorar o comportamento de um sistema em pleno funcionamento, com o software executando e recebendo todas as interferências reais.
+É um desafio importante e complexo, pois nem sempre é possível realizar este tipo de teste, especialmente para aplicações embarcadas implantados em um ambiente de recursos limitados, onde a sobrecarga exigida pela instrumentação do teste pode não ser viável.
+

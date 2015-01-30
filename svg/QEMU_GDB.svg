@@ -1,0 +1,793 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="QEMU_GDB.svg"
+   inkscape:export-filename="/home/tinha/Desktop/DADOS/Rita/LISHA/Mestrado/Script.png"
+   inkscape:export-xdpi="47.453705"
+   inkscape:export-ydpi="47.453705">
+  <defs
+     id="defs4">
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lend"
+       style="overflow:visible;">
+      <path
+         id="path4197"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none;"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective10" />
+    <inkscape:perspective
+       id="perspective2832"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2832-1"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2872"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2872-3"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2918"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2944"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2995"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3021"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3047"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3047-2"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3047-0"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3107"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3132"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3154"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3154-1"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3289"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3348"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3385"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4657"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-4"
+       style="overflow:visible">
+      <path
+         id="path4197-4"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective4685"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-7"
+       style="overflow:visible">
+      <path
+         id="path4197-7"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective4733"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-1"
+       style="overflow:visible">
+      <path
+         id="path4197-2"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective4761"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-71"
+       style="overflow:visible">
+      <path
+         id="path4197-71"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective4789"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4817"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-2"
+       style="overflow:visible">
+      <path
+         id="path4197-9"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective4863"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4893"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-0"
+       style="overflow:visible">
+      <path
+         id="path4197-0"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective4921"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4956"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-8"
+       style="overflow:visible">
+      <path
+         id="path4197-03"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective5012"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-13"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4197-3"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-76"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4197-8"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-04"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4197-85"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="147.81217"
+     inkscape:cy="594.25471"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1301"
+     inkscape:window-height="744"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <sodipodi:guide
+       orientation="0,1"
+       position="501.03566,697.00525"
+       id="guide4352" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="744.48242,486.89352"
+       id="guide4450" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2.35360956;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Lend)"
+       d="m -388.1171,-20.469751 -3.37792,328.491061"
+       id="path3417"
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705" />
+    <rect
+       style="opacity:0.98999999;fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect2816-7"
+       width="564.86627"
+       height="159.7114"
+       x="-650.43988"
+       y="52.610088"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705" />
+    <rect
+       style="opacity:0.98999999;fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect2816-4"
+       width="564.86627"
+       height="159.7114"
+       x="-298.57974"
+       y="172.53076"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705"
+       transform="matrix(0.85519677,-0.51830346,0.51830346,0.85519677,0,0)" />
+    <rect
+       style="opacity:0.98999999;fill:#ffccaa;fill-opacity:1;stroke:#e31800;stroke-width:0.91682422;stroke-linejoin:bevel;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2816"
+       width="564.86627"
+       height="159.7114"
+       x="-661.40057"
+       y="-173.57307"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705" />
+    <text
+       xml:space="preserve"
+       style="font-size:88.66650391px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+       x="-656.35541"
+       y="-62.028061"
+       id="text2818"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705"><tspan
+         sodipodi:role="line"
+         id="tspan2820"
+         x="-656.35541"
+         y="-62.028061">Source Code</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3.1109271;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Lend)"
+       d="M -111.81454,370.35846 162.04131,212.32144 350.4664,103.58492"
+       id="path3417-9-7-3"
+       sodipodi:nodetypes="ccc"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705" />
+    <text
+       xml:space="preserve"
+       style="font-size:56.48662567px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+       x="-376.65262"
+       y="101.33531"
+       id="text4639"
+       sodipodi:linespacing="125%"
+       transform="matrix(0.9999916,-0.00409977,0.00409977,0.9999916,0,0)"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705"><tspan
+         sodipodi:role="line"
+         x="-367.88229"
+         y="101.33531"
+         id="tspan4643"
+         style="font-size:55.09698486px;font-weight:normal;-inkscape-font-specification:DejaVu Sans">1.Compile with </tspan><tspan
+         sodipodi:role="line"
+         x="-376.65262"
+         y="170.20654"
+         id="tspan3314"
+         style="font-size:55.09698486px;font-weight:normal;-inkscape-font-specification:DejaVu Sans">debug information</tspan></text>
+    <rect
+       style="opacity:0.98999999;fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect2816-49"
+       width="477.96396"
+       height="265.17603"
+       x="-83.728783"
+       y="510.15204"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705"
+       transform="matrix(0.92541373,0.37895836,-0.08965698,0.9959727,0,0)" />
+    <rect
+       style="opacity:0.98999999;fill:#ffccaa;fill-opacity:1;stroke:#e31800;stroke-width:0.97627157;stroke-linejoin:bevel;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2816-07"
+       width="564.86627"
+       height="181.09435"
+       x="-659.47198"
+       y="311.06543"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705" />
+    <rect
+       style="opacity:0.98999999;fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect2816-8"
+       width="564.86627"
+       height="159.7114"
+       x="250.44325"
+       y="489.09134"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2.62295532;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Lend)"
+       d="m -169.42509,602.67377 304.80033,98.75966 209.71624,67.9511"
+       id="path3417-9-7-3-7"
+       sodipodi:nodetypes="ccc"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705" />
+    <rect
+       style="opacity:0.98999999;fill:#ff9955;fill-opacity:1;stroke:#e31800;stroke-width:3.37015438;stroke-linejoin:bevel;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2979-2-6"
+       width="448.92819"
+       height="209.73643"
+       x="-609.11517"
+       y="495.94769"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705" />
+    <text
+       xml:space="preserve"
+       style="font-size:81.60047913px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+       x="-414.22055"
+       y="535.03076"
+       id="text3384"
+       sodipodi:linespacing="125%"
+       transform="scale(0.92030787,1.0865929)"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705"><tspan
+         sodipodi:role="line"
+         id="tspan3386"
+         x="-414.22058"
+         y="535.03076">Debug</tspan><tspan
+         sodipodi:role="line"
+         x="-414.22055"
+         y="637.03137"
+         id="tspan3388">Information</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:88.66650391px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+       x="-621.47632"
+       y="417.90311"
+       id="text2818-0"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705"><tspan
+         sodipodi:role="line"
+         id="tspan2820-1"
+         x="-621.47632"
+         y="417.90311">Application</tspan></text>
+    <rect
+       style="opacity:0.98999999;fill:#ff7f2a;fill-opacity:1;stroke:#dd4130;stroke-width:3.71382117;stroke-linejoin:bevel;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2816-0-5-6"
+       width="454.90213"
+       height="197.02577"
+       x="347.15286"
+       y="15.186998"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705" />
+    <text
+       xml:space="preserve"
+       style="font-size:88.66650391px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+       x="376.4581"
+       y="125.29971"
+       id="text3474"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705"><tspan
+         sodipodi:role="line"
+         id="tspan3476"
+         x="376.4581"
+         y="125.29971">Emulator</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:56.48662567px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+       x="-40.503796"
+       y="251.77754"
+       id="text4639-4-0"
+       sodipodi:linespacing="125%"
+       transform="matrix(0.86333269,-0.50463518,0.50463518,0.86333269,0,0)"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705"><tspan
+         sodipodi:role="line"
+         id="tspan4943-2"
+         x="-31.733473"
+         y="251.77754"
+         style="font-size:55.09698486px">2.Emulate </tspan><tspan
+         sodipodi:role="line"
+         x="-40.503796"
+         y="320.64877"
+         id="tspan3528"
+         style="font-size:55.09698486px" /></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2.35360956;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Lend)"
+       d="m 803.33377,911.6919 86.30828,0.38029 1.97188,-807.15149 -84.20459,0.43599"
+       id="path3417-9-7-3-4"
+       sodipodi:nodetypes="cccc"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705" />
+    <rect
+       style="opacity:0.98999999;fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect2816-42"
+       width="564.86627"
+       height="159.7114"
+       x="552.57751"
+       y="282.00964"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705" />
+    <text
+       xml:space="preserve"
+       style="font-size:56.48662567px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+       x="835.86652"
+       y="359.35388"
+       id="text4639-4-0-2"
+       sodipodi:linespacing="125%"
+       transform="matrix(0.99998883,-0.00472739,0.00472739,0.99998883,0,0)"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705"><tspan
+         sodipodi:role="line"
+         x="844.63684"
+         y="359.35388"
+         id="tspan4508"
+         style="font-size:55.09698486px">4.Connect </tspan><tspan
+         sodipodi:role="line"
+         x="835.86652"
+         y="428.2251"
+         style="font-size:55.09698486px"
+         id="tspan3082">emulator and debugger</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:56.48662567px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+       x="305.15375"
+       y="610.35388"
+       id="text4639-4-0-1"
+       sodipodi:linespacing="125%"
+       transform="matrix(0.94774678,0.31902359,-0.31902359,0.94774678,0,0)"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705"><tspan
+         sodipodi:role="line"
+         x="313.92407"
+         y="610.35388"
+         id="tspan4512"
+         style="font-size:55.09698486px">5.Recovery </tspan><tspan
+         sodipodi:role="line"
+         x="313.92407"
+         y="679.2251"
+         id="tspan4516"
+         style="font-size:55.09698486px">debug </tspan><tspan
+         sodipodi:role="line"
+         x="305.15375"
+         y="748.09637"
+         style="font-size:55.09698486px"
+         id="tspan3084">information</tspan></text>
+    <rect
+       style="opacity:0.98999999;fill:#ff7f2a;fill-opacity:1;stroke:#dd4130;stroke-width:4.56990719;stroke-linejoin:bevel;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2816-0-5-6-0"
+       width="451.59616"
+       height="300.51315"
+       x="350.63123"
+       y="653.51965"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705" />
+    <text
+       xml:space="preserve"
+       style="font-size:88.66650391px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+       x="351.04385"
+       y="763.61481"
+       id="text3474-9"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705"><tspan
+         sodipodi:role="line"
+         id="tspan3476-8"
+         x="351.04385"
+         y="763.61481">Debugger</tspan></text>
+    <rect
+       style="opacity:0;fill:#ff0000;fill-opacity:1;stroke:#dd4130;stroke-width:2.35360956;stroke-linejoin:bevel;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect4452"
+       width="161.67033"
+       height="90.345169"
+       x="478.09814"
+       y="842.36005"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705" />
+    <rect
+       style="opacity:0.98999999;fill:#d45500;fill-opacity:1;stroke:#dd4130;stroke-width:1.63063514;stroke-linejoin:bevel;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2816-0-5-6-0-3"
+       width="166.2515"
+       height="103.93146"
+       x="583.62372"
+       y="849.83209"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705" />
+    <text
+       xml:space="preserve"
+       style="font-size:84.91991425px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+       x="654.09961"
+       y="843.80286"
+       id="text4474"
+       sodipodi:linespacing="125%"
+       transform="scale(0.89568029,1.1164698)"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705"><tspan
+         sodipodi:role="line"
+         id="tspan4476"
+         x="654.09961"
+         y="843.80286">stub</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:56.48662567px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+       x="558.47363"
+       y="636.237"
+       id="text4639-4-0-1-7"
+       sodipodi:linespacing="125%"
+       transform="matrix(0.99987042,-0.0160982,0.0160982,0.99987042,0,0)"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705"><tspan
+         sodipodi:role="line"
+         x="558.47363"
+         y="636.237"
+         id="tspan4424-1"
+         style="font-size:55.09000015px">3.Start debugger</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3086"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       transform="matrix(1.3774246,0,0,1.3774246,-439.60427,-360.07546)"
+       inkscape:export-filename="/home/tinha/mestrado/defesa/imagens/emulator_debugger.png"
+       inkscape:export-xdpi="47.453705"
+       inkscape:export-ydpi="47.453705"><flowRegion
+         id="flowRegion3088"><rect
+           id="rect3090"
+           width="1668.772"
+           height="1006.1119"
+           x="-444.4671"
+           y="68.47361" /></flowRegion><flowPara
+         id="flowPara3092" /></flowRoot>  </g>
+</svg>

@@ -1,0 +1,16 @@
+<test>
+   <application name="semaphore_test">
+      <configuration>
+        <trait id="NUM_WORKERS">
+	   <min>1</min>
+	   <max>15</max>
+         </trait>
+      </configuration>
+   </application>
+
+   <application name="semaphore_2">
+   </application>
+
+   <application name="test_3">
+   </application>
+<test>

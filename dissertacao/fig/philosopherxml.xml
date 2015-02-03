@@ -4,21 +4,10 @@
          <trait id="ARCH">	
             <value>IA32</value>
 	    <value>AVR8</value>
-         </trait>	
-
+         </trait>
          <debug>
             <path>"/home/breakpoints.txt"<path>
          </debug>
       </configuration>
    </application>
 <test>
-
-
-
-
-
-
-
-
-
-

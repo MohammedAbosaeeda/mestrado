@@ -1,0 +1,3 @@
+#!/bin/bash
+EPOS_DIR=$1
+cd $EPOS_DIR/src/abstraction

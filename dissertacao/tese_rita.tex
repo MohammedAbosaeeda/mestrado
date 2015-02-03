@@ -31,9 +31,9 @@
 \SetKwFor{ForEach}{para cada}{fa\c{c}a}{fim}
 \SetKwRepeat{Repeat}{repita}{at\'{e}}
 
-\titulo{Automação da execução de testes de software embarcado} % Titulo do trabalho
+\titulo{AUTETESE: Automação da execução de testes de software embarcado} % Titulo do trabalho
 \autor{Rita de Cássia Cazu Soldi} % Nome do autor
-\data{19}{novembro}{2014} % Data da publicação do trabalho
+\data{10}{dezembro}{2014} % Data da publicação do trabalho
 
 \orientador{Prof. Dr. Antônio Augusto Medeiros Fröhlich} % Nome do orientador e (opcional)
 %\departamento[a]{Faculdade de Ciências do Mar}
@@ -41,6 +41,7 @@
 
 \begin{acronym}
 \acro{ADESD}{\textit{Application-Driven Embedded System Design}}
+\acro{AUTETESE}{Automação da execução de testes de \textit{software} embarcado}
 \acro{DD}{\textit{Delta Debugging}}
 \acro{DMEC}{\textit{Distributed Motion Estimation Component}}
 \acro{DID}{\textit{Discovery Interface Device}}
@@ -53,6 +54,7 @@
 \acro{JTAG}{\textit{Joint Test Access Group}}
 \acro{MCO}{\textit{The Mars Climate Orbiter}}
 \acro{MPL}{\textit{The Mars Polar Lander}}
+\acro{QEMU}{\textit{Quick Emulator}}
 \acro{RSSF}{Redes de Sensores Sem Fio}
 \acro{TAP}{Troca Automática de Parâmetros de \textit{Software}}
 \acro{TBT}{\textit{Target Based embedded system Testing}}
@@ -90,10 +92,14 @@
 \bancaMembroB{} % Nome do membro da Banca
 \bancaMembroC{} % Nome do membro da Banca
 
-\dedicatoria{Dedico este trabalho à minha familia: meus amados pais Célia Regina Cazu Soldi e Luis Carlos Soldi, minha irmãzinha Luiza Helena Cazu Soldi e meu companheiro para todas as horas, Marcelo Ribeiro Xavier da Silva.}
-
 \agradecimento{
-Ao meu orientador, prof. Dr. Antônio Augusto Medeiros Fröhlich (Guto), muito obrigada por ter traçado um caminho sólido e por me guiar no desenvolvimento desta monografia. As nossas discussões, trocas de e-mails e conhecimento com certeza foram imprescindíveis para o trabalho.
+Agradeço à Universidade Federal de Santa Catarina (UFSC) e ao Programa de Pós-Graduação em Ciência da Computação (PPGCC) pelo apoio institucional para a realização deste trabalhos. Obrigada aos servidores e professores, em especial à Katiana de Castro Silva e ao Prof. Dr. Ronaldo dos Santos Mello, que me trataram com simpatia, respeito e solidariedade. Agradeço também:
+
+Ao meu orientador, Prof. Dr. Antônio Augusto Medeiros Fröhlich (Guto). Muito obrigada pela oportunidade de fazer parte do Laboratório de Integração de Software e Hardware (LISHA) e por me guiar no desenvolvimento deste trabalho. As nossas discussões, trocas de e-mails e conhecimento foram imprescindíveis para o meu crescimento profissional e pessoal.
+
+Aos meus colegas e amigos do LISHA, em especial o Mateus Krepsky Ludwich e o João Gabriel Reis. O apoio e a preocupação de vocês na realização deste trabalho foi fundamental, bem como as nossas discussões técnicas e científicas durante todos estes anos.
+
+À minha família: meus amados pais Célia Regina Cazu Soldi e Luis Carlos Soldi, minha irmãzinha Luiza Helena Cazu Soldi e o meu companheiro para todas as horas, Marcelo Ribeiro Xavier da Silva. Muito obrigada pelo amor incondicional, paciência infinita e incansável dedicação ao meu sucesso e à minha felicidade durante todos os momentos de nossas vidas.
 }
 
 \epigrafe{How often have I said to you that when you have eliminated the impossible, whatever remains, however improbable, must be the truth?}{ Sherlock Holmes}
@@ -175,6 +181,7 @@ Trabalhos recentes apontam que mais de 80\% dos erros de um sistema embarcado pr
 O principal objetivo deste trabalho é identificar o estado da arte do processo de teste e depuração de \textit{software} de sistemas embarcados. A partir deste estudo, será proposta uma ferramenta para execução automatizada de testes de \textit{software}. Além disso, esta ferramenta deve integrar-se automaticamente com um sistema de depuração de maneira simples e produzir informações que auxiliem na manutenção da qualidade do \textit{software}.
 
 \subsection{Delimitações}
+\label{sec:delimitacoes}
 O presente trabalho não tem como objetivo a geração de casos de teste para um determinado \textit{software}, limitando-se apenas em executá-los de maneira automatizada. Sendo assim, qualquer erro presente nos testes recebidos pelo protótipo para execução automática serão considerados como erro do próprio \textit{software}.
 
 \subsection{Objetivos Específicos}
@@ -198,31 +205,49 @@ Para atender o objetivo geral, os seguintes objetivos específicos devem ser conc
 
 \chapter{Conceitos básicos}
 \label{cap:conceitosBasicos}
+A evolução tecnológica e o crescente uso de sistemas computacionais culminou na produção de sistemas mais sofisticados e complexos, que exigem um projeto sistemático e rigoroso. Porém, o desenvolvimento de sistemas, por mais cauteloso que seja, está sujeito a erros. O teste de \textit{software} é aplicado para tentar eliminar os erros inseridos durante a elaboração de um sistema~\cite{pressman}.
 
-\section{Terminologia}
-Nesta seção serão apresentados alguns termos e conceitos que serão necessários para a completa compreensão da proposta.
+\section{Testabilidade de um sistema}
+A testabilidade de um sistema é o grau de facilidade para se estabelecer critérios de teste e para executar os testes, a fim de determinar se os critérios foram atendidos~\cite{ieee610.12:1990}. O conceito de testabilidade de um componente de \textit{software} foi primordialmente introduzido por Freedman~\cite{freedman1991testability} como uma combinação de controlabilidade e observabilidade. 
 
-\subsection{Defeitos, erros e falhas}
-Os termos defeito, erro e falha estão diretamente relacionados ao teste de \textit{software} e suas designações foram estabelicidas, em inglês, pela \ac{IEEE}~\cite{ieee}. 
+A controlabilidade e observabilidade interferem diretamente na viabilidade do projeto, da execução e da automação de testes. Além destas duas características iniciais, outras quatro foram elencadas como sugestões de como projetar um \textit{software} para se atingir um alto grau de testabilidade~\cite{bach2003heuristics, 4815358, pressman}:
 
-A padronização destas expressões em português ainda é motivo de discussões, principalmente porque os termos podem ser consideradas sinônimos. Por isso, para a leitura deste texto os termos serão estabelecidos abaixo (ilustrados pela Figura~\ref{fig:defeito_erro_falha}).
+\begin{description}
+\item[Controlabilidade] - capacidade de controlar o processo, conduzir os testes e estados das variáveis. Um sistema é controlável quando é possível, à partir de uma determinada entrada, transferir o sistema de um estado inicial $X_{t_0}$ para um outro estado $X_{t_f}$ durante o intervalo finito de tempo ($t_f - t_0$). 
 
-\fig{defeito_erro_falha}{Defeito \textit{vs} erro \textit{vs} falha~\cite{neto2012introduccao}}{scale=.6}
+\item[Observabilidade] - examinar os registros dos estados do sistema, de visualizar todos os elementos que afetam os estados do sistema e de identificar saídas incorretas. Um sistema é observável quando uma determinada condição inicial do estado $X_{t_0}$ pode ter seu comportamento relatado durante o intervalo finito de tempo $t$, onde $t_0 \leq t \geq  t_f$.
+
+\item[Disponibilidade] - facilidade de acesso ao sistema para poder aplicar os testes. Em um sistema disponível deve fornecer acesso ao código fonte e, principalmente, não conter defeitos impeditivos para a execução dos testes.
+
+\item[Operabilidade] - execução do sistema deve ocorrer de maneira simples e clara. Um sistema operável é desenvolvido para atender os requisitos com a maior simplicidade possível, à partir de componentes coesas e com baixo acoplamento.
+
+\item[Estabilidade] - resiliência à mudanças. Um sistema possui estabilidade quando as alterações não são frequentes, e as manutenções necessárias realizadas de maneira controlada e sem invalidar os testes já existentes.
+
+\item[Compreensível] - facilidade de compreensão do sistema. Existem algumas características que podem deixar um sistema mais fácil de ser assimilado. Alguns exemplos são: a escolha de tecnologias adequadas para auxiliar no desenvolvimento do sistema, documentação acessível e detalhada, o uso de padrões de projeto e desenvolvimento, etc.
+\end{description}
+
+\section{Teste de \textit{software}}
+A primeira conferência com foco em teste de \textit{software} ocorreu há 42 anos, em junho de 1972~\cite{Gelperin:1988}. Desde então há um esforço para definir melhor os conceitos relacionados à área e também para chegar-se a um consenso sobre pontos chave como: nomenclatura, documentação, especificação e execução de testes.
+
+Esta seção traz os principais pontos de discussão e definições na área de teste de \textit{software}.
+
+\subsection{Defeito, erro e falha}
+Os termos defeito, erro e falha estão diretamente relacionados ao teste de \textit{software} e suas designações foram estabelecidas pela \ac{IEEE}~\cite{ieee}. Estes termos são semelhantes aos utilizados para designar erros de programação, entretanto, as expressões não são sinônimas entre si e são usadas para expressar conceitos distintos~\cite{koscianski2007qualidade}. Nos escopo deste trabalho os termos ficam estabelecidos - e ilustrados pela Figura~\ref{fig:defeito_erro_falha} - como:
+
+\fig{defeito_erro_falha}{Defeito \textit{vs} erro \textit{vs} falha~\cite{neto2012introduccao}}{scale=.25}
 
 \begin{itemize}
  \item \textbf{Defeito} é caracterizado como um passo, processo, ou definições que são realizadas por um indivíduo de maneira equivocada. O defeito é a causa de um erro, e normalmente ocorre em um nível base, no universo físico, ao abstrair informações, definir um requisito, ao inserir uma linha de código fonte.
- \item \textbf{Erro} é uma manifestação concreta de um defeito num artefato de \textit{software}. Eles ocorrem no universo da informação, e se sobressaem durante a execução do \textit{software}. Caracterizam-se pela divergência entre os valores obtidos e os valores esperados de um \textit{software}, pois geram um resultado inesperado na execução de um \textit{software}.
- \item \textbf{Falha} é um desvio da especificação e surge quando existe um processamento incoreto que leva a um comportamento diferente do esperado pelo usuário. Uma falha pode ser considerada com uma deficiência do \textit{software} em cumprir determinados requisitos funcionais devido à ocorrência de um ou mais erros.
+
+ \item \textbf{Erro} é uma manifestação concreta de um defeito num artefato de \textit{software}. Eles ocorrem no universo da informação, e se sobressaem durante a execução do \textit{software}. Caracterizam-se pela divergência entre os resultados obtidos e os esperados de um \textit{software}, pois geram um resultado inesperado na execução de um \textit{software}.
+
+ \item \textbf{Falha} é um desvio da especificação e surge quando existe um processamento incorreto que leva a um comportamento diferente do esperado pelo usuário. Uma falha pode ser considerada com uma deficiência do \textit{software} em cumprir determinados requisitos funcionais devido à ocorrência de um ou mais erros.
 \end{itemize}
-\\
 
+\subsection{Objetivos do teste de \textit{software}}
+A definição com maior aceitação apresenta o teste de \textit{software} como o processo de análise de um item de \textit{software} para detectar as diferenças entre as condições existentes e exigidas (isto é, os erros), e avaliar as características do item de software~\cite{ieee87}. Sendo assim, esta atividade é amplamente utilizada para assegurar que o \textit{software} contempla as funcionalidades especificadas de maneira correta.
 
-\section{Teste de \textit{software}}
-A primeira conferência com foco em teste de \textit{software} ocorreu há apenas 42 anos, em junho de 1972~\cite{Gelperin:1988}. Desde então há um esforço para definir melhor os conceitos relacionados à área e também para chegar-se a um consenso sobre a pontos chave como nomenclatura, documentação, especificação e execução de testes.
-
-A definição com maior aceitação apresenta o teste de \textit{software} como o processo de análise de um item de \textit{software} para detectar as diferenças entre as condições existentes e exigidas (isto é, os erros), e avaliar as características do item de software~\cite{ieee87}. Sendo assim, esta atividade é amplamente utilizada para assegurar que o \textit{software} contempla as funcionalidades especificadas e quem todas elas estão funcionando corretamente.
-
-Segundo Myers, os objetivos do teste de \textit{software} podem ser expressos a partir da observação de três regras~\cite{Myers:2004:AST:983238}:
+Segundo Myers~\cite{Myers:2004:AST:983238}, os objetivos do teste de \textit{software} podem ser expressos a partir da observação de três regras:
 \begin{itemize}
  \item A atividade de teste é o processo de executar um programa com a intenção de descobrir um erro.
  \item Um bom caso de teste é aquele que apresenta uma elevada probabilidade de revelar um erro ainda não descoberto.
@@ -231,7 +256,7 @@ Segundo Myers, os objetivos do teste de \textit{software} podem ser expressos a 
 
 Estas três regras ressaltam o objetivo do teste de \textit{software}, que visa salientar a presença dos erros e não sua ausência. Isto significa que o sucesso de um teste em encontrar um desvio de comportamento em um determinado \textit{software} não garante que todas as possíveis falhas tenham sido encontradas. O teste que não encontra erros é meramente inconclusivo, pois não se sabe se há ou não desvio no comportamento do \textit{software} analisado.
 
-Segundo Pressman, muitas estratégias de testes já foram propostas na literatura e todas fornecem um modelo para o teste com as seguintes características genéricas~\cite{pressman}:
+Segundo Pressman~\cite{pressman}, muitas estratégias de testes já foram propostas na literatura e todas fornecem um modelo para o teste com as seguintes características genéricas:
 \begin{itemize}
  \item Para executar um teste de maneira eficaz, deve-se fazer revisões técnicas eficazes. Fazendo isso, muitos erros serão eliminados antes do começo do teste.
  \item O teste começa no nível de componente e progride em direção à integração do sistema computacional como um todo.
@@ -240,80 +265,157 @@ Segundo Pressman, muitas estratégias de testes já foram propostas na literatura 
  \item O teste e a depuração são atividades diferentes, mas depuração deve ser associada a alguma estratégia de teste.
 \end{itemize}
 
-Testar um \textit{software} é essencial para revelar o número máximo de erros a partir do menor esforço, ou seja, quanto antes forem detectadas divergências entre o que foi requisitado e o que foi entregue menor será o desperdício tempo e esforço do retrabalho para adequar o \textit{software}. 
+Testar um \textit{software} é essencial para revelar o número máximo de erros a partir do menor esforço, ou seja, quanto antes forem detectadas divergências entre o que foi requisitado e o que foi entregue menor será o desperdício de tempo e esforço de retrabalho para adequar o \textit{software}. 
 
-Os testes devem ser adotados desde o início do projeto de \textit{software} a partir da definição dos requisitos a serem testados, escolha da abordagem utilizada, da política de testes, critérios para a conclusão do teste, entre outros. Para que o processo de teste alcance seu objetivo é necessária uma estratégia de testes, suficientemente flexível para modelar-se às peculiaridades do \textit{software} e rígida o bastante para um acompanhamento satisfatório do projeto.
+\subsection{Técnicas de teste de \textit{software}}
+A escolha da abordagem e da seleção dos casos de testes de \textit{software} podem ser categorizados conforme a fonte de informações em que se baseiam~\cite{pezze2008teste}. Tomando por base estes critérios, os diferentes tipos de testes de \textit{software} podem ser classificados em dois grandes grupos: o dos testes funcionais e o dos testes estruturais~\cite{franzen2005arte}.
+
+\subsubsection{Teste funcional}
+O teste funcional, também conhecido como teste de caixa preta ou teste comportamental, é baseado em especificações do \textit{software} e suas entradas são selecionadas à partir de uma análise das funcionalidades do sistema.
+
+Neste tipo de teste a estrutura de controle do sistema é propositalmente desconsiderada e concentra-se os esforços do teste no domínio da informação. Sendo assim, os casos de teste devem ser derivados dos requisitos funcionais do sistema.
+
+Os dados de entrada para os casos de teste podem ser obtidos de maneira aleatória, através de especificações  ou através das funções do \textit{software}, gerando um conjunto de equivalências entre os valores de entrada e os valores de saída. Já a identificação dos erros é feita inserindo um determinado valor de entrada e contrastando o resultado esperado com o resultado obtido.
+
+Existem alguns métodos de teste funcional e dentre os principais estão:
+\begin{description}
+\item[Método de teste com base em grafo] - consiste em abstrair o sistema como um grafo, onde os nodos são as possíveis entradas e saídas do sistema, e suas conexões expressam algum tipo de ação ou requisito para deslocar-se de um nodo para o outro. Este grafo será organizado em forma de tabelas de causa-efeito e utilizado como base para a geração dos casos de teste.
+
+\item[Particionamento de equivalência] - classifica as entradas do sistema em grupos que tendem a utilizar uma determinada função do \textit{software} e a partir deste grupo são derivados os casos de teste. Estes casos de teste são elaborados para um representante de cada classe ao invés de realizar testes exaustivos com todos os membros. O foco é verificar o máximo de atributos da classe de equivalência ao mesmo tempo.
+
+\item[Análise do valor limite] - investiga a capacidade do sistema em manipular os dados dentro de seu limite. Este método concentra-se em injetar valores que estão nas fronteiras do sistema, onde os erros ocorrem com maior frequência. Este método é bastante utilizado em conjunto com o particionamento de equivalência, extrapolando os valores limites de cada agrupamento.
+
+\item[Matriz ortogonal] - tem como objetivo a construção de casos de teste utilizando-se de uma visualização geométrica do domínio de entradas de um \textit{software}. Com a matriz, as entradas ficam dispersas de maneira uniforme por todo o domínio do teste. Este modelo é utilizado quando a quantidade de dados de entradas, apesar de limitada, é muito grande para realizar testes exaustivos.
+\end{description}
+
+Para utilizar-se desta técnica, o ideal seria conter casos de teste que contemplem todas as entradas permitidas para o sistema, entretanto, na maioria dos sistemas isto pode não ser possível~\cite{Myers:2004:AST:983238}.
+
+O teste funcional possui êxito em investigar alguns tipos de erros mas, como o modo de identificação do erro desconsidera o estado interno do sistema, os casos de teste podem não ser suficientes para identificar certos riscos num projeto de \textit{software}. Este tipo de técnica atinge erros nas seguintes categorias~\cite{pressman}:
+
+\begin{itemize}
+\item Funções incorretas ou defectivas
+\item Erros de interface
+\item Erros em estrutura de dados
+\item Deficiência no acesso em bases de dados ou serviços externos
+\item Comportamento anômalo do sistema
+\item Problemas com desempenho
+\item Erros na inicialização ou término do \textit{software}
+\end{itemize}
+
+\subsubsection{Teste estrutural}
+O teste estrutural (ou teste de caixa branca) possui como estratégia a derivação dos dados de teste a partir de uma análise da lógica do \textit{software}~\cite{Myers:2004:AST:983238}. Ou seja, esta técnica baseia-se na estrutura interna do sistema, analisando os dados do \textit{software}, o estado interno dos módulos e o fluxo de controle.
+
+O projeto de casos de teste é dependente da implementação do sistema e utiliza a estrutura de controle descritas como parte do projeto no nível de componentes. Com a técnica de testes estruturais os casos de testes focam nos seguintes aspectos~\cite{pressman}:
+
+\begin{itemize}
+\item Garantir que todos os caminhos independentes do sistema sejam exercitados pelo menos uma vez
+\item Exercitar todas as decisões lógicas, investigando os estados verdadeiro e falso
+\item Executar todos os ciclos dentro de seus limites e nas fronteiras operacionais
+\item Analisar as estruturas de dados internos, a fim de assegurar a validade
+\end{itemize}
+
+Hetzel indica o teste caixa branca como "teste no pequeno", pois são tipicamente desenvolvidos para pequenos componentes do sistema~\cite{Hetzel:1988:CGS:42384, pressman}. Isto ocorre devido ao nível de detalhismo necessário para desenvolver os testes estruturais. Dentre os principais métodos utilizados para gerar casos de teste estão:
+
+\begin{description}
+\item[Caminho básico] - projeto de casos de teste para considerar que todas as instruções do \textit{software} são executadas pelo menos uma vez. O primeiro passo deste método é desenhar um grafo de fluxo representando o \textit{software}, onde os nós representam os processos e as arestas são o fluxo de controle. A partir deste grafo determina-se a complexidade ciclomática e os conjuntos de caminhos básicos, linearmente independentes. Os casos de teste são derivados do conjunto de caminhos básicos de acordo com um critério de cobertura que  irá assegurar que cada declaração foi exercitada, mas isso não significa que todos os resultados da decisão foram executados~\cite{farrell2008manage}.
+
+\item[Estrutura de controle] - projeto de casos de teste derivado de características do fluxo de execução do \textit{software} como, por exemplo, laços, condições, comandos e desvios. Existem algumas variações de testes de estrutura de controle: (i) testes de condição, que verifica as condições lógicas contidas no código fonte do \textit{software}; (ii) teste de fluxo de dados, que elege os caminhos de teste de acordo com o uso de variáveis e dados internos; (iii) teste de laços, que valida a construção dos laços de repetição.
+\end{description}
+
+Independente da técnica utilizada, os testes devem ser adotados desde o início do projeto do \textit{software}, considerando a definição dos requisitos a serem testados, a política de testes, os critérios para a conclusão do teste, entre outros. 
+
+Para que o processo de teste alcance seu objetivo é necessária uma estratégia de testes, suficientemente flexível para modelar-se às peculiaridades do \textit{software} e rígida o bastante para um acompanhamento satisfatório do projeto.
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{comment}
+
+\subsection{Automação de testes}
+O processo de automação de testes é do que repassar para o computador as atividades de teste que normalmene são realizadas de forma manual~\cite{}. Sendo assim, para que haja a automação, é necessário que o processo de teste seja suficientemente maduro e bem definido~\cite{}.
+
+A automação surgiu como solução para a redução do envolvimento humano em atividades manuais e repetitivas. No caso da automação de testes de \textit{software}, uma das principais motivações é o volume de testes que devem ser realizados ao longo de todo o processo de produção do sistema. Segundo Caetano~\cite{}, uma abordagem de testes baseada puramente em testes manuais normalmente não consegue acompanhar as demandas.
+
 
 \subsection{Classificação dos níveis de teste}
 As atividades de teste de \textit{software} são normalmente classificados em níveis. Dentre os mais tradicionais estão a categorização baseada no processo de processo de \textit{software} e a categorização baseada na maturidade de pensamento testadores~\cite{Ammann:2008:softwareTestig}.
 
 \subsubsection{Modelo V}
-A classificação baseada no processo genérico do desenvolvimento do \textit{software} e incentiva o projeto dos testes simultâneo com cada etapa de desenvolvimento, mesmo que o software só possa ser executado após a fase de implementação~\cite{Rook:vMovel}. Nela cada atividade do processo de construção de um \textit{software} é acompanhado de uma atividade de teste, ou seja, a informação de entrada do teste é normalmente derivada de uma atividade de desenvolvimento do \textit{software}. 
+O Movelo V é uma classificação baseada no processo genérico do desenvolvimento do \textit{software} e incentiva o projeto dos testes simultâneo com cada etapa de desenvolvimento, mesmo que o software só possa ser executado após a fase de implementação~\cite{Rook:vMovel}. Nela cada atividade do processo de construção de um \textit{software} é acompanhado de uma atividade de teste, ou seja, a informação de entrada do teste é normalmente derivada de uma atividade de desenvolvimento do \textit{software}~\cite{craig2002systematic}. 
 
 A Figura~\ref{fig:modeloV} apresenta um mapeamento típico entre as atividades \textit{Modelo V}, nela é possível visualizar como cada tipo de teste se relaciona com o processo genérico do desenvolvimento de \textit{software}.
-\fig{modeloV}{Mapeamento entre as atividades de desenvolvimento e teste de \textit{software}.}{scale=.3}
+\fig{modeloV}{Mapeamento entre as atividades de desenvolvimento e teste de \textit{software}~\cite{neto2012introduccao}.}{scale=.25}
 
-\textbf{Análise de requisitos e Teste de aceitação}: No desenvolvimento de \textit{software}, a fase de análise de requisitos é quando se captura as necessidades do cliente, sendo assim, o teste de aceitação foi concebido para determinar se o \textit{software} atingiu o objetivo e realmente satisfaz estas necessidades. Este tipo de teste geralmente são executados por um grupo restrito de usuários que simulam operações de rotina do sistema, de modo a verificar se seu comportamento está de acordo com o solicitado.
+\textbf{Especificação de requisitos e Teste de aceitação}: O planejamento da produção de um \textit{software} inicia-se na fase de análise de requisitos, que consiste em analisar, capturar e documentar as necessidades do cliente e as regras do sistema. A especificação dos requisitos é essencial para planejar o teste de aceitação, que é concebido para determinar se o \textit{software} atingiu o objetivo e realmente satisfaz estas necessidades. Este tipo de teste geralmente é executado por um grupo restrito de usuários que simulam operações de rotina do sistema, de modo a verificar se o comportamento está de acordo com o solicitado.
  
-\textbf{Especificação funcional e Teste de sistema} - A fase de especificação funcional é quando arquitetura e os componentes são selecionados e, juntos, vão compor o \textit{software}. Então, o teste de sistema é projetado para determinar se o sistema funciona conforme estipulado. Este nível de teste procura erros no projeto e na especificação do \textit{software} através de sua execução nos mesmos ambientes e nas mesmas condições que um usuário final o utilizaria.
+\textbf{Projeto de alto nível e Teste de sistema} - O projeto de alto nível ocorre quando arquitetura e os componentes são selecionados e, juntos, vão compor o \textit{software}. Esta especificação funcional auxilia no planejamento dos testes de sistema, os quais são projetados para determinar se o sistema opera coretamente. Este nível de teste procura executar o sistema no mesmo ambiente e condições que um usuário final o utilizaria, a fim de descobrir erros no projeto e na especificação do \textit{software}.
  
-\textbf{Especificação técnica e Teste de integração} - A fase de especificação técnica é voltada para o projeto da arquitetura do \textit{software}, definindo a estrutura, comportamento e papel dos subsistemas que compõem a arquitetura geral do \textit{software}. Seguindo a mesma linha, o teste de integração é projetado para avaliar se as interfaces entre subsistemas são consistentes e se a comunicação ocorre corretamente. Este teste geralmente é de responsabilidade dos membros da equipe de desenvolvimento e visa provocar erros de comunicação entre os módulos integrados para construir o \textit{software}.
+\textbf{Projeto detalhado e Teste de integração} - Na fase de detalhamento do projeto, a especificação é voltada para a arquitetura do \textit{software}, definindo sua estrutura, comportamento e papel dos subsistemas que compõem a arquitetura geral do \textit{software}. Seguindo a mesma linha, o teste de integração é projetado para avaliar se as interfaces entre subsistemas são consistentes e se a comunicação ocorre corretamente. Este teste geralmente é de responsabilidade dos membros da equipe de desenvolvimento e visa provocar erros de comunicação entre os módulos integrados para construir o \textit{software}.
  
-\textbf{Implementação e Teste de unidade} - Implementação é a fase do desenvolvimento de  \textit{software} que realmente produz o código fonte. Portanto, o teste de unidade tem como alvo o código desenvolvido, ou seja, métodos, procedimentos (\textit{procedures}) ou até mesmo mesmo pequenos trechos de código. Tanto a implementação quanto o teste são de responsabilidade dos membros da equipe de desenvolvimento.
+\textbf{Codificação e Teste de unidade} - Codificação é a fase do desenvolvimento de \textit{software} que realmente produz o código fonte. Portanto, o teste de unidade tem como alvo o código desenvolvido, ou seja, métodos, procedimentos (\textit{procedures}) ou até mesmo mesmo pequenos trechos de código. Tanto a implementação quanto o teste são de responsabilidade dos membros da equipe de desenvolvimento.
+
+O planejamento dos testes é essencial para fornecer um \textit{software} com maior qualidade e deve ser idealizado em conjunto com as atividades de desenvolvimento do sistema. Cada tipo de teste possui características que auxiliam a elaboração de uma das fases do processo genérico de desenvolvimento. Na Seção~\ref{sec:tap} veremos que este trabalho se encaixa nos tipos de teste de sistema e integração.
  
 \subsubsection{Modelo de maturidade}
 A classificação de níveis baseada na maturidade do processo de teste propõe que o nível dos testes seja derivado do objetivo do teste, que podem ser ~\cite{Beizer:1990}:
 \begin{itemize}
- \item \textbf{Nível 0} - Não há nenhuma diferença entre teste e depuração. Um teste com o nível zero não tem um propósito específico.
+ \item \textbf{Nível 0} - não há nenhuma diferença entre teste e depuração. Um teste com o nível zero não tem um propósito específico.
  
  \item \textbf{Nível 1} - possui o objetivo de mostrar que o \textit{software} funciona. Normalmente este nível é utilizado quando a corretude do \textit{software} ainda não foi alcançada/demonstrada, então é selecionado um conjunto de dados de teste que faz o \textit{software} passar em determinados testes e falhar em outros. Apesar de ser uma técnica menos ingênua que o \textit{Nível 0}, este tipo de teste pode não propiciar a descoberta de defeitos.
  
  \item \textbf{Nível 2} - possui o objetivo de mostrar que o \textit{software} não funciona. Normalmente se seleciona um conjunto de dados para chegar pontos específicos do sistema como, por exemplo,  checar a fronteira superior e inferior de um determinado dado de entrada. A transição do \textit{Nível 1} para o \textit{Nível 2} demanda cautela, pois apesar da descoberta de erros fazer parte linha raciocínio dos testadores, grande parte dos desenvolvedores possui linha de raciocínio mais próxima do nível anterior. Ou seja, esta mudança de nível pode gerar conflitos e afetar negativamente a moral da equipe.
  
- \item \textbf{Nível 3} - não possui o objetivo de reduzir o risco de utilizar \textit{software}, sem provar que o \textit{software} funciona ou não. Ao atingir a consciência de que testes não mostram ausência de erros no \textit{software} percebe-se também que sempre há um risco do \textit{software} não funcionar corretamente. A partir deste nível, desenvolvedores e testadores compartilham o objetivo de reduzir o risco de utilizar o sistema, pois compreendem que embora o ideal seja testar todas as possibilidades, isto pode não ser possível.
+ \item \textbf{Nível 3} - possui o objetivo de reduzir para um valor aceitável o risco da utilização do \textit{software}. Não inclui em seu objetivo provar que o \textit{software} funciona. Ao atingir a consciência de que testes não comprovam a ausência de erros no \textit{software} percebe-se também que sempre há um risco do \textit{software} não funcionar corretamente. A partir deste nível, desenvolvedores e testadores compartilham o objetivo de reduzir o risco de utilizar o sistema, pois compreendem que embora o ideal seja testar todas as possibilidades, isto pode não ser possível.
  
  \item \textbf{Nível 4} - o teste é considerado como uma ferramenta que auxilia no desenvolvimento de um \textit{software} com maior qualidade. O ato de testar não é um simples ato, mas sim uma maneira de produzir um \textit{software} de baixo risco com pouco esforço. Neste nível, a geração de código é realizada de maneira a suportar a concepção e o desenvolvimento de testes, facilitando também o reuso e manutenção do sistema.
 \end{itemize}
 
-%\subsection{Teste de \textit{software} embarcado *** estou fazendo}
+O nível de maturidade do processo de teste afetam diretamente no planejamento, implementação e execução dos testes. Embora o presente trabalho não tem como objetivo o planejamento e implementação dos testes, estas duas atividades influenciam na qualidade dos resultados obtidos na execução dos testes.
 
+\end{comment}
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Depuração de \textit{software} embarcado}
-A depuração é a arte de diagnosticar erros em sistemas e determinar a melhor forma de corrigi-los. Em geral, o ponto de partida para a depuração de um sistema é a ocorrência de algum erro, portanto, é muito comum que a depuração ocorra como consequência de um teste bem sucedido (isto, que encontrou erros).
+A depuração é o processo de diagnosticar erros em sistemas e determinar a melhor forma de corrigi-los~\cite{pressman}. Em geral, o ponto de partida para a depuração de um sistema é a ocorrência de algum erro, portanto, é muito comum que a depuração ocorra como consequência de um teste bem sucedido, isto é, de um teste que encontrou erros. 
 
-Erros podem ser encontrados por qualquer pessoa em qualquer etapa do ciclo de vida do \textit{software}. Isto implica que tanto o formato do relatório de um resultado inesperado, quanto as características dos erros podem variar de acordo com o conhecimento do autor do relato. Sendo assim, para realizar uma depuração eficaz deve-se ser capaz de identificar a técnica apropriada para analisar diferentes tipos de relatórios e obter as informações necessárias para eliminar o problema.
+Erros podem ser encontrados por qualquer pessoa e em qualquer etapa do ciclo de vida do \textit{software}. Isto implica que tanto o formato do relatório de um resultado inesperado, quanto as características dos erros podem variar de acordo com o conhecimento do autor do relato. Sendo assim, para realizar uma depuração eficaz deve-se ser capaz de identificar a técnica apropriada para analisar diferentes tipos de relatórios e obter as informações necessárias para eliminar o problema.
 
-A depuração \textit{software} embarcado é uma tarefa complexa, cuja dificuldade varia de acordo com o ambiente de desenvolvimento, linguagem de programação, tamanho do sistema e disponibilidade de ferramentas disponíveis para auxiliar o processo. Para um suporte de depuração eficaz, existem algumas diretrizes a serem seguidas~\cite{debugSuport}:
+A depuração de \textit{software} embarcado é uma tarefa complexa, cuja dificuldade varia de acordo com o ambiente de desenvolvimento, linguagem de programação, tamanho do sistema e disponibilidade de ferramentas disponíveis para auxiliar o processo. No trabalho de Hopkins e McDonald-Maier~\cite{debugSuport} são definidas as seguintes diretrizes para suporte a uma depuração eficaz:
+
 \begin{itemize}
-	\item O suporte à depuração não deve alterar e nem interferir no comportamento do sistema sob teste (em inglês, \ac{SUT}).
-	\item Deve existir uma infraestrutura de observação do estado interno do sistema e de possíveis pontos críticos.
-	\item Garantia de acesso externo para controlar o estado interno do sistema e de seus recursos (incluindo periféricos).
-	\item O impacto do custo do sistema deve ser o mínimo possível, principalmente quando são necessárias mudanças no \textit{hardware}.
+	\item O suporte à depuração não deve interferir no comportamento do sistema.
+	\item Deve existir uma infraestrutura para observar o estado do sistema e de possíveis pontos críticos.
+	\item Garantia de acesso para controlar o estado interno do sistema e de seus recursos (incluindo periféricos).
+	\item O sistema deve ser minimamente impactado, principalmente quando são necessárias mudanças no \textit{hardware}.
 \end{itemize}
 
 O apoio à depuração de \textit{software} normalmente ocorre a partir do monitoramento do \textit{software} compilado e instrumentado. A instrumentação pode ser aplicada e suportada de várias maneiras, dentre as mais frequentes estão a execução do \textit{software} em modo de depuração, o uso de tratadores de interrupções e o uso de instruções de suporte à depuração.
 
 \subsection{Imprimir dados em dispositivos de saída}
-Um exemplo de instrumentação \textit{software} é utilizar instruções de impressão para exibir/registrar variáveis, informações sobre o estado do sistema ou até o seu progresso através do código do programa. 
-Esta técnica de depuração é um tanto primitiva e bastante intrusiva, pois normalmente está associada à mudanças no código fonte e recompilação do \textit{software}.
+Imprimir dados em dispositivos de saída pode ser considerada como uma técnica de instrumentação e depuração, principalmente quando é utilizada com o intuiuto de exibir/registrar variáveis, coletar informações sobre o estado do sistema ou até o progresso da execução do \textit{software} através do código do programa. 
 
-Para realizar este tipo de depuração é necessário que o erro possa ser reproduzido e que ele não se altere com as impressões. Dependendo de como utilizada, esta técnica pode retardar a execução do sistema, modificando inclusive requisitos do próprio \ac{SUT}. 
+Esta técnica de depuração é primitiva e intrusiva, pois normalmente está associada à mudanças no código fonte e recompilação do \textit{software}. Dependendo de como utilizada, pode-se retardar a execução do sistema, modificando inclusive requisitos do próprio \ac{SUT}. Portanto, para depurar utilizando a impressão de dados em dispositivos de saída, é necessário que o erro possa ser reproduzido e que ele não se altere com as impressões.
 
-Como a própria tentativa encontrar erros pode apresentar efeitos colaterais que mascaram o verdadeiro problema, torna-se difícil identificar erros relacionados com operações temporais, paralelismo e alocação de recursos.
+Esta maneira de depuração pode introduzir efeitos colaterais que mascarem o verdadeiro problema. Isto torna ainda mais difícil a identificação de erros relacionados à operações temporais, de paralelismo e de alocação de recursos.
+
 
 \subsection{Emulador em circuito}
 \ac{ICE} é um \textit{hardware} utilizado em depuração de projeto de sistemas embarcados, fornecendo recursos e conectividade que ajudam a superar as limitações de teste e depuração tanto do \textit{software} quanto do \textit{hardware}. 
 
-Este equipamento é específico para cada microprocessador, por isso permite controle total do processador e fornece a observação das operações do sistema de maneira consistente e eficaz. A informação coletada por ele fica disponível em tempo de execução e, a princípio, o equipamento extra não exerce nenhum impacto sobre o comportamento do \ac{SUT}. 
+Este equipamento é específico para cada microprocessador, por isso permite controle total do processador e viabiliza a observação das operações do sistema de maneira consistente e eficaz. A informação coletada por ele fica disponível em tempo de execução e, a princípio, o equipamento extra não exerce nenhum impacto sobre o comportamento do \ac{SUT}. 
 
-As placas \ac{ICE} conseguem integrar o controle de execução do microprocessador, acesso à memória e monitoração em tempo real. Por isso é uma estratégia muito utilizada no início do desenvolvimento dos sistemas embarcados. Entretanto, o aumento da complexidade do sistema pode exigir adaptações no projeto de integração dos \ac{ICE}s ao sistema. No caso de sistemas complexos o esforço e o custo para realizar tal adaptação pode ser tão grande que tornam a depuração proibitiva~\cite{debugSuport}.
+As placas \ac{ICE} conseguem integrar o controle de execução do microprocessador, acesso à memória e monitoração em tempo real. Por isso é uma estratégia muito utilizada no início do desenvolvimento dos sistemas embarcados. Entretanto, o aumento da complexidade do sistema pode exigir adaptações no projeto de integração das \ac{ICE}s ao sistema. No caso de sistemas complexos o esforço e o custo para realizar tal adaptação pode ser tão grande que tornam a depuração proibitiva~\cite{debugSuport}.
 
 \subsection{Depuradores}
 Depuradores são ferramentas que auxiliam no monitoramento da execução de um programa, incluindo opções como: executar o programa passo a passo, pausar/reiniciar a execução e, em alguns casos, até voltar no tempo e desfazer a execução de uma determinada instrução.
 
 A conexão entre o programa e o depurador pode ocorrer localmente ou remotamente. Ambas possuem vantagens e pontos de melhoria que devem ser considerados na construção de um ambiente de depuração estável.
 
-No método local o programa é executado na mesma máquina que o depurador, isto implica em um processo com latência menor e com grande influência entre ambos. Por exemplo, se um processo provoca um \textit{crash} no sistema, o depurador perde grande parte das informações de deputação, pois pertence ao mesmo ambiente que sofreu a parada e só poderia formar a hipótese de \textit{crash} porque ele mesmo realizou um comportamento inesperado (travar ou reiniciar).
+No método local o programa é executado na mesma máquina que o depurador. Isto implica em um processo com latência menor e com grande influência entre ambos. Por exemplo, se um processo provoca um \textit{crash} no sistema, o depurador perde grande parte das informações de deputação, pois pertence ao mesmo ambiente que sofreu a parada e só poderia formar a hipótese de \textit{crash} porque ele mesmo realizou um comportamento inesperado (travar ou reiniciar).
 
 Já na depuração remota não ocorre este tipo de interferência, uma vez que a aplicação sob depuração e o depurador encontram-se em máquinas separadas. Do ponto de vista do ambiente de depuração, a depuração remota é semelhante a uma depuração local com duas telas conectadas em um único sistema.
 
@@ -329,7 +431,7 @@ Esta metodologia permite manter o foco nas aplicações que utilizarão o sistema d
 	Utilizados para aplicar os aspectos de forma transparente às abstrações do sistema. Eles funcionam como uma membrana, que envolve uma determinada abstração e se torna um intermediário na comunicação dessa abstração, inserindo as adaptações necessárias para cada requisição que seja dependente de um cenário.
 		
 	\item[Características Configuráveis]  \hfill \\
-	Utilizadas quando uma determinada característica pode ser aplicada a todos os membros de uma família, mas com valores diferentes. Então, ao invés de aumentar a família modelando novos membros, esta característica compartilhada é modelada como uma configurável. Desta forma é possível definir o comportamento desejado e aplicá-lo às abstrações de forma semelhante aos aspectos de cenário.
+	Utilizadas quando uma determinada característica pode ser aplicada a todos os membros de uma família, mas com valores diferentes. Então, ao invés de aumentar a família modelando novos membros, esta característica compartilhada é modelada como configurável. Desta forma é possível definir o comportamento desejado e aplicá-lo às abstrações de forma semelhante aos aspectos de cenário.
 	
 	\item[Interfaces infladas]  \hfill \\
 	Resumem as características de todos os membros da família em um único componente de interface, permitindo que a implementação dos componentes de \textit{software} considerem sempre uma interface bem abrangente e, desta forma, postergando a decisão sobre qual membro da família utilizar. Esta decisão pode ser automatizada através de ferramentas que identificam quais características da família foram utilizadas e selecionam o membro dessa família que implementa o subconjunto da interface inflada.
@@ -343,7 +445,7 @@ A arquitetura do sistema é capturada pelos \textit{frameworks} dos componentes m
 
 \chapter{Trabalhos relacionados}
 \label{cap:trabalhosRelacionados}
-Desde a formulação da área de testes de \textit{software}, muitos estudos surgiram com as mais variadas soluções para a automação deste processo. Apesar de existir uma vasta literatura de apoio, a maior parte dela relaciona-se à sistemas de propósito geral e, portanto, apenas alguns conceitos podem ser aplicados à sistemas embarcados. 
+Desde a formulação da área de testes de \textit{software}, muitos estudos surgiram com as mais variadas soluções para a automação deste processo. Apesar de existir uma vasta literatura de apoio, a maior parte dela relaciona-se à sistemas cujo o propósito geral e, portanto, apenas alguns conceitos podem ser aplicados à sistemas embarcados. 
 
 Os trabalhos que focam na automação de teste de \textit{software} embarcado procuram soluções em que o teste não prejudique a execução do \ac{SUT} e ainda consiga contornar as restrições inerentes ao próprio sistema embarcado.
 
@@ -363,7 +465,7 @@ Sendo assim, $Justitia$ apresenta uma análise da densidade da interface, na qual
 O primeiro protótipo apresentou resultados satisfatórios para as questões acima e chegou-se a conclusão de que a interface deve ser utilizada como um \textit{checkpoint} para encontrar falhas. A solução foi novamente corroborada por uma versão mais recente~\cite{KiSCL08}, agora aplicada ao teste de um \textit{driver} de um dispositivo embarcado e com a capacidade de suportar um número ainda maior de testes.
 
 \begin{description}
-\item[Resumo]  \hfill \\
+\item[Conclusão]  \hfill \\
 Este trabalho ganhou destaque ao apontar que a maior parte das falhas nos testes de \textit{software} embarcados são oriundos da integração de componentes heterogêneos e ao propor que a interface seja um ponto de intersecção entre os testes de \textit{software} e \textit{hardware}.
 
 Outro diferencial encontra-se na infraestrutura de execução dos testes baseada em emulação, na qual tanto o resultado da execução do \ac{SUT} quanto o monitoramento da tabela de símbolos são utilizados para determinar o sucesso ou falha do teste.
@@ -388,7 +490,7 @@ A partir destes componentes é possível executar os testes em uma plataforma alvo
 As atividades são gravadas em um registro, dentre estes registros estão os dados de execução do sistema, o tempo de utilização de cada núcleo da CPU durante a execução dos testes, o resultado de saída, entre outros. O registro pode ser passado para o lado \textit{host} em tempo de execução, onde pode ser armazenado, processado e até apresentado de maneira visual através de uma interface.
 
 \begin{description}
-\item[Resumo]  \hfill \\
+\item[Conclusão]  \hfill \\
 Ao explorar sistematicamente a automação de testes de \textit{software} embarcado e componentizar cada operação necessária, $ATEMES$ apresenta uma solução de grande desempenho para sistemas multiprocessados. A ferramenta é tão robusta que é possível inclusive automatizar a geração de casos de testes à partir da análise do código fonte.
 
 Conforme será visto no Capítulo~\ref{ref:ambiente}, a abordagem de execução automática de testes  de $ATEMES$ é similar ao deste presente trabalho. Ambos utilizam depuração cruzada para compilar o código fonte para uma determinada arquitetura de \textit{hardware} e monitoram a execução desta imagem à partir de uma conexão remota. O registro dos dados de execução dos testes e a apresentação de um relatório para o usuário também é uma semelhança notória.
@@ -410,7 +512,7 @@ Em uma nova versão da abordagem~\cite{priyaneural} o mecanismo de teste foi adap
 Quando novas versões do sistema original forem lançadas, o \textit{software} é novamente executado e sua saída é incorporado através da retroalimentação. O resultado obtido pelo ensaio deve ser comparado com a saída do oráculo para determinar se está correto ou não.
 
 \begin{description}
-\item[Resumo]  \hfill \\
+\item[Conclusão]  \hfill \\
 O destaque desta abordagem está na escolha de técnicas para teste de sistemas heterogêneos. A \textit{framework} apresenta uma característica que pode facilitar muito a automação de testes para sistemas embarcados, pois desenvolver testes específicos para um sistema embarcado e que ainda sejam independentes do ambiente de implantação (\textit{deploy}) não é uma tarefa trivial. 
 	
 A adaptação do mecanismo de testes para o uso de um oráculo composto por uma rede neural é com certeza outro diferencial, tornando possível que a \textit{framework} aprenda com os próprios resultados e consiga generalizar ou especializar uma determinada configuração de testes.
@@ -432,8 +534,8 @@ Na partição dinâmica, as informações do critério de corte tradicional não são su
 Além dos tipos base de partição, também existem modelos que são variações de um dos dois principais ou até gerados pela união de modelos~\cite{Venkatesh:1991,binkley2005minimal,Sridharan:2007:TS:1250734.1250748,Chebaro:2012}, proporcionando uma maior configurabilidade de depuração e atendendo melhor às características do \ac{SUT}.
 
 \begin{description}
-\item[Resumo]  \hfill \\
-A automação da partição do código deriva de uma abstração tradicionalmente utilizada por seres humanos durante a depuração. Desde que foi computacionalmente implementado, surgiram inúmeras variações no critério de partição, tamanho da fatiar o programa e alternativas para o cálculo das fatias. A principal razão desta diversidade está na peculiaridade de cada \textit{software}, onde cada característica requer uma maneira diferenciada de realizar a partição.
+\item[Conclusão]  \hfill \\
+A automação da partição do código deriva de uma abstração tradicionalmente utilizada por seres humanos durante a depuração. Desde que foi computacionalmente implementado, surgiram inúmeras variações no critério de partição, tamanho da fatia o programa e alternativas para o cálculo das fatias. A principal razão desta diversidade está na peculiaridade de cada \textit{software}, onde cada característica requer uma maneira diferenciada de realizar a partição.
 
 Independente da abordagem selecionada, a partição do código é uma técnica versátil e muito utilizada, principalmente porque necessita apenas de uma execução com falhas para ser capaz de simplificar o \textit{software} em \textit{slices}, cujo grupo de entradas a serem examinadas é bem reduzido. Poder selecionar pequenos componentes do código fonte para seres testadas e depuradas em partes é uma das principais características da ferramenta apresentada no capítulo~\ref{sec:tap}.
 \end{description}
@@ -475,7 +577,7 @@ Depois de cada execução um predicado pode receber tanto um voto completo quando 
 %\cite{chilimbi2009holmes}
 
 \begin{description}
-\item[Resumo]  \hfill \\
+\item[Conclusão]  \hfill \\
 Os trabalhos que utilizam-se de depuração estatística necessitam de um grande volume de dados para realizar uma análise confiável das informações e retornar resultados válidos. Este técnica é de difícil implementação em um sistema embarcado real por não estarem preparados para tal armazenamento. Entretanto, conforme será demonstrado nos capítulos seguintes, é possível coletar e armazenar estes dados no caso da depuração remota.
 
 A depuração estatística baseada em amostras contribui com a discussão sobre a necessidade de ativar todos os possíveis estados do \textit{software} em todas as execuções do sistema para que seja possível descobrir a origem do erro. Sabe-se que ao inserir declarações aleatórias no \textit{software} é possível reduzir a quantidade de dados a serem analisados, visto que apenas uma parte é executada a cada rodada. 
@@ -517,7 +619,7 @@ Durante a comparação, sempre que a execução do \textit{software} não alcança o s
 Para garantir que os algoritmos do \ac{DD} não remova trechos de código que contribuem para o valor do resultado do teste, o \ac{IDD} também automatizou o monitoramento de dados importantes da execução, dos arquivos de log, consumo de memória e o tempo necessário para executar o \textit{software} tanto para ambas versões do delta.
 
 \begin{description}
-\item[Resumo]  \hfill \\
+\item[Conclusão]  \hfill \\
 A base da \ac{DD} está em analisar a diferença entre duas versões do sistema e isolar/analisar as possíveis causas do comportamento inesperado automaticamente quando alguma divergência é identificada na execução da nova versão.
 
 Se o delta for bem aplicado, a estrutura que resta aponta apenas para os elementos relevantes no fracasso do teste do \textit{software}. Entretanto, no caso de grandes mudanças, a estrutura restante pode ser complexa e apresentar um grande número de dados para explorar. 
@@ -547,7 +649,7 @@ Neste aspecto, a solução de tirar um \textit{snapshot} do contexto de execução q
 %\cite{qi2011locating}
 
 \begin{description}
-\item[Resumo]  \hfill \\
+\item[Conclusão]  \hfill \\
 Captura e Reprodução sempre foi muito utilizada para testes de interface, em que a interação do usuário com o \textit{software} era armazenada para poder servir como caso de testes. Desta forma torna-se possível realizar testes de funcionalidade do sistema de acordo com o estímulo do usuário.
 
 Já a depuração é um caso mais específico, pois nem todo erro pode ser reproduzido, mesmo que todas as ações sejam reexecutadas na mesma ordem. Contudo, para um erro determinístico em que se tem todas as operações que podem ter causado de um determinado erro, é possível realizar uma investigação baseada no fluxo de controle do \textit{software}.
@@ -555,124 +657,147 @@ Já a depuração é um caso mais específico, pois nem todo erro pode ser reproduzid
 A ferramenta $JINSI$ foi utilizada para corroborar a técnica, que além de capturar e reproduzir o \textit{software}, agora também incorporou os algoritmos de \ac{DD} para isolar o subconjunto de interações relevantes para simular o erro.
 \end{description}
 
-\chapter{Ambiente compartilhado de teste e depuração}
-\label{ref:ambiente}
-Este capítulo apresenta o ambiente compartilhado de teste e depuração, demostrando de onde as ideias foram extraídas, adaptadas e, em alguns casos, melhoradas. Além disso, serão apresentas instruções para integrar a execução de testes com os possíveis ambientes de depuração, gerando o ambiente compartilhado de desenvolvimento.
+\chapter{Automação da execução de testes de \textit{software} embarcado}
+A automação é uma solução para reduzir de envolvimento humano nas atividades manuais e repetitivas. No contexto de execução de testes, a automação ocorre em decorrêcia do volume de testes que devem ser realizados ao longo da produção de um sistema.
 
-A atividade de teste é necessária para manter a qualidade do produto oferecido e verificar se seu comportamento não desvia do esperado. No caso de \textit{software} embarcado, o teste na plataforma alvo e no ambiente de produção é necessário, entretanto nem sempre é possível ou praticável. Felizmente existem alternativas para realizar esta atividade, como por exemplo executar o \textit{software} em um simulador, através um protótipo limitado de \textit{hardware}, ou até utilizando o próprio ambiente de desenvolvimento.~\cite{progressBeforeHardware}.
+Segundo Pfleeger~\cite{pfleeger2004engenharia} \textit{"[...] o teste sempre envolverá o esforço manual requerido para rastrear um problema até sua causa original. A automação auxilia, mas não necessariamente substitui a função humana.}
 
-A ideia de prover um bom ambiente em que testes e depuração possam compartilhar a infraestrutura se formou a partir da observação e estudo de vários ambientes de execução automática das atividades testes e de depuração. Seu desenvolvimento envolveu uma atenção especial ao suporte para sistemas embarcados, visto que os testes e depuração realizados tentem a compartilhar os escassos recursos do \ac{SUT}. O compartilhamento é crítico no caso de sistemas embarcados porque geralmente possuem apenas os recursos essenciais para desempenhar uma determinada função.
+O processo de execução de testes consiste em executar a implementação em paralelo com os testes, sincronizando a ação de entrada da aplicação com a saída do teste~\cite{gaudel2010software}. O sucesso ou falha da execução do testes ocorre em função das observações feitas: ações realizadas, resultados obtidos, ausência de resultados, etc.
 
-Um exemplo de sistema embarcado com um alto grau de dificuldade para atividades de teste e depuração é a \ac{RSSF}. Este tipo de rede pode ser composta por vários sensores que, além de permanecerem espalhados geograficamente por uma grande área de monitoramento, geralmente possuem pouco poder de processamento e apenas alguns \textit{kilobytes} de armazenamento~\cite{pottie2000wireless}.
 
-No caso de muitas \ac{RSSF} é impraticável coletar todos os sensores para realizar testes, pois além da dificuldade de acesso às áreas em que os sensores atuam, as atividades de monitoramento teriam que sofrer uma pausa até o término do teste. A solução mais comum nestes casos é realizar os testes de \textit{software} e \textit{hardware} separadamente, utilizando-se simulação.
+\section{Modelo conceitual e arquitetura}
+\label{sec:modeloConceitual}
+\ac{AUTETESE} é um ambiente de execução automática de testes de \textit{software} embarcado. A execução dos testes é realizada com o intuito de verificar se o \textit{software} está em conformidade com sua especificação. Em função disto, assume-se que os dados utilizados como entrada para o ambiente estão corretos. A corretude do modelo de dados pode ser garantida através de mecanismos como, por exemplo, revisões ou inspeções~\cite{pressman}.
 
-Contudo, simular separadamente as componentes não garante o funcionamento de sua integração. Em sistemas embarcados é comum que \textit{software} e \textit{hardware} trabalhem em conjunto para desempenhar uma tarefa. Aliás, grande parte das falhas nos testes de um \textit{software} embarcado são oriundos da integração de componentes heterogêneos~\cite{seo}. 
+O \ac{AUTETESE} possui cinco fases conceituais: (i) importar informações do modelo e casos de teste; (ii) executar os testes de conformidade com a especificação através de testes caixa preta; (iii) executar os testes estruturais se foram encontrados erros na fase anterior; (iv) disponibilizar interação com o ambiente de depuração no caso de sucesso dos testes estruturais; (v) sintetizar os resultados dos testes em um relatório.
 
-Uma das alternativas para se atenuar este efeito é utilizar emulação completa do sistema, que possibilita a visualização do estado do \textit{software} além de permitir o controle de sua execução~\cite{KiSCL08}. Desta maneira, é possível analisar a intersecção entre componentes e monitorar a execução dos testes através da tabela de símbolos.
+A primeira fase tem como objetivo extrair os dados necessários sobre os requisitos do sistema. Eles são utilizadas para configurar a excução do \textit{software}, a emulação do \textit{hardware}, os casos de teste do sistema, entre outros. O usuário do ambiente é o responsável pelo preenchimento correto do arquivo de configuração de \ac{AUTETESE}, que deve conter requisitos do sistema e a variedade de valores que este requisito pode assumir. Além disso, são definidas neste arquivo as customizações das funcionalidades do ambiente, como: quantos testes serão executados, se o ambiente executará os testes estruturais, se haverá interação com o usuário para depuração, entre outros.
 
-O processo de teste para sistemas heterogênicos é uma tarefa trabalhosa, principalmente quando não se sabe qual ambiente de implantação será utilizado~\cite{universal:2013}. Existem várias alternativas para ajudar na tarefa e aprimorar a qualidade dos testes, como utilizar oráculo como um repositório de testes~\cite{priyaneural}, selecionar \textit{checkpoints} baseados na interfaces dos componentes~\cite{KiSCL08}, módulos de pré-processamento com análise de código fonte~\cite{atemes}, entre outros.
+Vale ressaltar que a variação de requisito no escopo de \ac{AUTETESE} é entendida como o intervalo de valores válidos para determinada configuração, por exemplo: a quantidade de número de núcleos de processamento, tamanho da memória, arquitetura alvo, tipo de escalonamento, ou qualquer particularidade do \textit{software} embarcado.
 
-Sabe-se que o processo de depuração também precisa de ferramentas específicas para auxiliar no monitoramento da execução de um programa. O sucesso das técnicas que focam em automação da depuração não dependem apenas dos algoritmos ou dados coletados, mas também da estabilidade fornecida pelo ambiente para desempenhar tais atividades. Por exemplo, nas ferramentas de captura e reprodução~\cite{orso2005selective, orso2006isolating, qi2011locating} é essencial que a etapa de captura grave todas as operações que levam ao erro.
+Durante a fase de execução dos testes de conformidade, é da competência do ambiente proposto executar os testes caixa preta e relatar para quais combinações de requisitos obtiveram êxito e para quais houve falha. Isto significa que se novas funcionalidades forem introduzidas ou se o sistema for alterado, o ambiente acusará se algum requisito deixou de ser atendido. Não está na competência do ambiente a integridade dos testes, mas conferir se o \textit{software} mantém sua execução correta mesmo que haja variação dos requisitos, plataformas, arquiteturas, etc. 
 
-%========================
-%Falta dizer alguma coisa sobre debug
-%=======================
+As fases 3 e 4 são opcionais e devem ser customizadas pelo usuário durante a primeira fase. Se o ambiente estiver configurado para executar os testes funcionais (fase 3), o usuário obrigatoriamente deve informar um arquivo contendo os comandos necessários para a execução destes testes. Uma ferramenta, com cujo objetivo original é depuração, teve seu uso adaptado para executar os testes estruturais (vide Seção~\ref{sec:arquiteturaAUTETESE}). Portanto, cabe ao usuário traduzir os passos do teste estrutural para a linguagem do depurador escolhido.
 
-\section{Configuração do ambiente remoto}
-\label{ref:configAmbiente}
-As ferramentas utilizadas para a construção deste ambiente remoto podem ser substituídas por qualquer outra equivalente, contudo, a configuração completa será tecnicamente apresentada para que seja possível a reprodução do experimento.
+A fase 4 foca em disponibilizar interação com uma ferramenta de depuração, para que seja posível investigar os erros do \textit{software}. \ac{AUTETESE} não contempla a automação da depuração do \textit{software}, apenas sua execução automática. Cabe ao usuário informar no arquivo de configuração da fase 1 se deseja realizar a depuração de forma manual ou com execução automática dos comandos de depuração. Se configurado como intervenção manual, o ambiente disponibiliza acesso para a entrada de comandos de depuração por parte do usuário. Caso contrário, o usuário deve obrigatoriamente configurar o ambiente com um arquivo contendo os comandos necessários para a depuração. 
 
-O ambiente compartilhado proposto utiliza o $QEMU$ para emular a máquina com a aplicação alvo a partir de outra máquina, usando tradução dinâmica. Desta forma torna-se possível utilizar-se um computador pessoal para testar aplicações compiladas para algum outro sistema embarcado. O \ac{GDB} encaixou-se no papel de depurador, pois nele é possível especificar qualquer regra que possa afetar o comportamento do \ac{SUT} de maneira estática.
+Em ambos os casos o usuário é o responsável pela geração dos comandos de depuração do \textit{software}, mas o existem ferramentas que podem auxiliar na depuração, como a gerarão automática de \textit{breakpoints}~\cite{JSWjsw0803603616} e o controle do fluxo de execução \cite{Chern:2007}. 
 
-A integração da execução dos testes e da depuração é particular para cada máquina hospedeira e alvo, portanto, talvez alguns passos aqui apresentados devam ser adaptados para a arquitetura alvo. 
+A conclusão da automação dos testes culmina em síntese dos resultados obtidos por todas as fases anteriores em um relatório. O relatório é composto de informações como: resumo quantitativo dos testes executados (total, sucesso e erro), identificação dos testes que evidenciaram o erro, \textit{log} obtido através dos testes estruturais e \textit{trace} da execução do \textit{software}.
 
-A Figura~\ref{fig:emulator_debugger_gray} apresenta as atividades necessárias para executar a depuração remota em conjunto com a simulação dos testes.
+Em contraste com o modelo conceitual do ambiente, a arquitetura de \ac{AUTETESE} é mais exuta e contém apenas quatro fases. A Figura~\ref{fig:autetese} ilustra uma visão macro da arquitetura, dos passos realizados e das saídas de cada fase presente no processo de automação da execução de testes \textit{software} com \ac{AUTETESE}.
 
-\fig{emulator_debugger_gray}{Atividades de integração entre emulador e depurador}{scale=.25}
+\fig{autetese}{Visão geral da arquitetura de \ac{AUTETESE}}{scale=.1}
 
-Uma explicação adicional das técnicas e ferramentas utilizadas neste processo estão listados abaixo:
+O início do processo é realizado pelo usuário ao exportar os dados relevantes para a execução dos testes da aplicação em um arquivo \ac{XML} e iniciar o ambiente. Neste arquivo de configuração devem ser discriminadas, principalmente, em qual \textit{software} deseja-se realizar os testes, quais as funcionalidades a serem verificadas e os valores que podem assumir. Uma melhor definição do formato da configuração do ambiente, delimitações e cofigurações da excução dos testes serão apresentados na Seção~\ref{sec:exportarConfiguracoes}.
+
+O próximo passo ocorre dentro de \ac{AUTETESE}, no qual o ambiente os dados do \ac{XML} de configuração e utiliza-se do módulo \ac{TAP} para traduzir os casos de teste em scripts de execução do \textit{software}. A Seção~\ref{sec:importarConfiguracoes} possui mais informações sobre a idealização e implementação de \ac{TAP}.
+
+Após completar o desenvolvimento do script de automação da execução, \ac{AUTETESE} executa os testes utilizando um ambiente compartilhado para o teste e depuração de \textit{software}, que é apresentado na Seção~\ref{sec:executarTestes}. Finalmente, os resultados da execução dos casos de testes são sintetizados em um relatório apresentado ao usuário. As informações sobre a disposição dos dados e os tipos de resultados apresentados pelo relatório são obtidas na Seção~\ref{sec:relatorio}
+
+
+\section{Exportar configurações}
+\label{sec:exportarConfiguracoes}
+O arquivo de configuração é o ponto de entrada para \ac{AUTETESE} e funciona como uma interface de comunicação entre o projeto de casos de teste e a execução destes testes no ambiente.
+
+O uso de arquivos \ac{XML} para definir as configurações de teste se deu pela facilidade e legibilidade para definir todas as regras necessárias para executar os testes. O ajuste inicial é manual e simples, uma vez que este arquivo pode ser lido quase como um texto. 
+
+A Figura~\ref{progxml:philosopherxml} traz um exemplo do arquivo de configuração para uma aplicação chamada "$exemplo$". Dentro do arquivo estão descritas duas configurações: a primeira é identificada como "$ARCH$" e pode assumir os valores "$IA32$" ou "$AVR8$", já a segunda propriedade está relacionada com a depuração e é um arquivo que contém \textit{breakpoints} e está no seguinte caminho:\\ "$/home/breakpoints.txt$".
+
+\progxml{philosopherxml}{Exemplo do arquivo de configuração do teste para a \ac{TAP}.}
+
+No arquivo de configuração de \ac{AUTETESE}, cada execução de teste deve iniciar com a \textit{tag} \texttt{<test>}, que identifica qu um novo caso de teste será especificado. A partir desta \textit{tag} raiz, é possível acrescentar as opções de ajustes na execução do teste. Elas estão:
 
 \begin{description}
-\item[1. Compilar com informações de depuração] \hfill \\
-Este passo realiza uma compilação simbólica e sem otimizações. A otimização correta é importante para a execução do \textit{software}, mas quando o foco é a depuração o ideal é que não haja muita diferença entre o código fonte e as instruções geradas.
-
-Como entrada é necessário o código fonte do \textit{software} e como saída esperada encontra-se o código compilado com informações de depuração. O \ac{GCC} realiza esta atividade quando acrescentada a opção $-g$ para compilar. 
+	\item[\textbf{$<$application$>$}] - esta \textit{tag}, juntamente com o existe o descritor \texttt{name}, deve ser preenchida com o nome do \textit{software} no qual serão executados os testes. No caso da aplicação da Figura~\ref{progxml:philosopherxml}, a \textit{tag} é a \texttt{<application name=$"$exemplo$"$>}. É possível apontar mais de um \ac{SUT} em um mesmo arquivo, mas cada um deve possuir seus próprios parâmetros de execução. Ou seja, todas as definições de \texttt{<application>} devem ser filhas de uma \textit{tag} \texttt{<test>}.
 	
-\item [2. Executar o sistema utilizando um emulador] \hfill \\
-É um passo necessário para executar a \textit{software} na arquitetura alvo correta. É importante ressaltar que o \textit{software} a ser emulado não deve iniciar a execução antes que o depurador esteja conectado. Caso isso ocorra, não será possível inspecionar todos os detalhes da execução.
-
-Para executar este passo utilizamos o $QEMU$, que deve ser inicializado com os argumentos $-s -S$. A primeira opção ativa o \textit{stub} para conectar um depurador, a fim de abrir a comunicação entre o emulador e o depurador. A opção $-S$ é utilizada para forçar que o $QEMU$ espere a conexão do depurador antes da inicialização do sistema.
-Por exemplo, se uma aplicação compilada com informações de depuração ($app.img$) imprime algo na tela ($stdio$), a chamada do $QEMU$ deve ser semelhante à: $qemu-[arch]$ $-serial$ $stdio$ $-fda$ $app.img$ $-s$ $-S$
+	\item[\textbf{$<$configuration$>$}] - é uma agrupadora para todas as configurações de um caso de teste. Com esta separação estrutural dos casos de tese é possível especificar vários casos de teste para uma mesma aplicação.
 	
-\item [3. Conectar-se com o depurador] \hfill \\
-Esta conexão é importante para fornecer ações ao usuário, tais como: executar o programa passo a passo, pausar/reiniciar a execução, entre outras. Para fornecer a estabilidade necessária para a infraestrutura gerada, a conexão do depurador será realizada de maneira remota.
-
-Para que a depuração seja remota a sessão do depurador deve ser inicializada em um ambiente separado. Então, para se conectar ao depurador ao $QEMU$ o desenvolvedor deve explicitar que o alvo a ser examinado é remoto e informar o endereço da máquina alvo e porta em que se encontra o alvo a ser examinado. Utilizando-se o \ac{GDB}, a tela será iniciada a partir do comando: $target$ $remote$ $[endereço\_alvo]:[porta\_alvo]$
-
-\item [4. Recuperar as informações de depuração] \hfill \\
-O arquivo gerado no primeiro passo   contém todas as informações que podem ser retiradas da compilação, como por exemplo o endereço de uma variável, ou os nomes contidos na tabela de símbolos. Então este passo é importante para ajudar os desenvolvedores a encontrarem erros.
-
-O arquivo usado para manter as informações de depuração deverá ser informado para o \ac{GDB} usando o comando: $file$ $[caminho\_do\_arquivo]$
+	\item[\textbf{$<$trait$>$}] - é onde define-se o parâmetro do sistema que será analisado. Ela possui o descritor \texttt{id} para armazenar o nome da configuração e o descritor \texttt{scope} para os casos em que o parâmetro deve ser verificado dentro de um escopo específico da aplicação. Por exemplo, o valor de uma fatia de tempo (\texttt{QUANTUM}) pode ser aplicada em vários contextos (\textit{threads}, \textit{CPUs}), mas deseja-se verificar apenas o valor no contexto de \textit{threads}. Desta forma, a configuração deve ser:\\
+	 \texttt{<trait scope="Thread" id="QUANTUM">}
 	
-\item [5. Encontrar origem dos erros] \hfill \\
-Encontrar e corrigir erros é uma atividade depende do programa a ser depurado. A partir desta etapa, o desenvolvedor pode definir \textit{breakpoints}, \textit{watchpoints}, controlar a execução do programa e até mesmo permitir \textit{logs}. 
-
-Existem vários trabalhos com o foco em ajudar a encontrar os erros através da automação de alguns pontos, como a gerarão automática de \textit{breakpoints}~\cite{JSWjsw0803603616} e o controle do fluxo de execução \cite{Chern:2007}.
+	\item[\textbf{$<$min$>$}, \textbf{$<$max$>$}, \textbf{$<$value$>$}] - são \textit{tags} filhas de \texttt{<trait>} e são utilizadas na definição dos valores dos parâmetros. As \textit{tags} \texttt{<min>} e \texttt{<max>} representam, respectivamente, o valor mínimo e máximo que a cofiguração pode atingir, ou seja, qualquer valor neste intervalo é considerado válido. Já a \textit{tag} \texttt{<value>} identifica um possível valor para a configuração. Caso o usuário deseje discriminar todos os possíves valores para uma configuração, cada um deles deve ser apresentado em uma nova definição de \texttt{<value>}. Pode-se usar como exemplo a definição de valores para a configuração \texttt{ARCH} da Figura~\ref{progxml:philosopherxml}, descritas como \texttt{<value>IA32</value>} e \texttt{<value>AVR8</value>}.
+	
+	\item[\textbf{$<$structural$>$}, \textbf{$<$debug$>$}] - são as \textit{tags} que definem onde encontram-se, respectivamente, o arquivo com os testes caixa branca e o arquivo de depuração. O caminho até o arquivo é representado em \texttt{<path>} e deve ser definido com o caminho absoluto do arquivo, ou seja, inicia-se com a referência o diretório raiz ($/$) e a partir dele apresenta uma árvore de diretórios até alcanção o arquivo. No caso da \textit{tag} \texttt{<debug>}, o usuário pode optar pela forma manual configurando a \textit{tag} sem um arquivo de depuração. A Figura~\ref{progxml:philosopherxml} apresenta um exemplo da \textit{tag} \texttt{<debug>}, com referência para o arquivo \texttt{breakpoints.txt}. 
 \end{description}
 
-Após a definição da infraestrutura compartilhada para testes e depuração também é necessário dividir as funções para cada uma das atividades. A ideia é utilizar o emulador para a automação da execução do \textit{software} e de seus casos de teste. A depuração será iniciadas somente no caso de sucesso em um teste, ou seja, quando um erro é detectado.
+\ac{AUTETESE} oferece três granularidades de configuração para o teste caixa preta: aleatória, parcialmente aleatória e determinada. Elas são selecionadas de acordo com a quantidade de informações fornecidas pelo usuário sobre os casos de teste e das características do \ac{SUT}. São elas:
 
-\section{Reflexão sobre o uso do ambiente compartilhado}
-Muitas vezes as configurações do \ac{SUT} devem ser alteradas para poder executar um tipo específico de teste ou melhorar a eficácia da depuração. Estas adaptações podem influenciar no funcionamento normal do \ac{SUT} e ocultar determinados tipos de erros.
+\begin{description}
+\item[\textbf{Execução aleatória}] - utilizada para testar valores fora do convencional, a fim de verificar a robustez da aplicação. Nele o usuário informa apenas os requisitos do sistema através dos arquivo de \textit{traits}, sem fornecer valores para requisito do \textit{software}. Cabe então ao ambiente inferir os requisitos à partir do arquivo de \textit{traits} e gerar valores válidos, respeitando sua tipagem. A geração destes valores não segue o modelo do \textit{software}, apenas gera valores arbitrários para requisitos aleatórios. \\
+Este teste foi desenvolvido como um pior caso para comparações estatísticas, pois o ambiente pode gerar  testes repetidos e fora do limite de modelagem do \textit{software}, que ocasionariam distorções nos resultados obtidos. \\
+A execução aleatória possui utilidade quando sabe-se que o \textit{software} possui erros e não existem indícios para descobrir a origem deste erro ao iniciar a depuração. Através deste tipo de execução pode-se encontrar valores errados de configuração e auxiliar os desenvolvedores com pouco conhecimento dos requisitos do \textit{software} a depurar pequenas aplicações.
 
-A presente proposta de ambiente compartilhado não é uma exceção e, inclusive, um dos primeiros passos para utilizar o ambiente de maneira adequada está em executar uma compilação simbólica do \textit{software} e sem otimizações. 
+\item[\textbf{Execução parcialmente aleatória}] - utilizada para executar testes em que apenas algumas informações são fornecidas à priori e para verificar os requisitos do sistema que não possuem um valor determinado, ou seja, mais de um valor pode ser considerado correto. Neste caso, o usuário informa um intervalo de valores válidos para os casos de teste na configuração. \\
+Por exemplo, sabe-se que o requisito $X$ pode assumir valores de $1$ a $10$, sendo assim, o ambiente seria configurado da seguinte maneira:
+\lstset{language=XML}
+\begin{lstlisting}
+<trait id="X">	
+	<min>1</min>
+	<max>10</max>
+</trait>
+\end{lstlisting}
 
-Para um compilador, a diferença entre utilizar ou não alguma otimização ativa é o foco da compilação do \textit{software}. Ao utilizar uma compilação sem otimização, o objetivo do compilador será de reduzir o custo da compilação e da depuração a fim de sempre produzir os resultados esperados. Ao ativar alguma otimização sua função será compilar com o intuito de melhorar o desempenho e/ou o tamanho do código à custa do tempo de compilação e, possivelmente, da capacidade para depurar o programa~\cite{gccOptimization}.
+Se apenas o requisito for informado, cabe ao ambiente inferir os valores dos requisitos à partir do arquivo de \textit{traits}, da mesma maneira que a o teste aleatório. Desta forma, o ambiente não garante que os valores gerados sejam distintos uns dos outros e existe a possibilidade da execução de testes apresentar resultados com falsos negativos.
 
-Uma compilação sem otimizações deixa o \textit{software} mais preparado para extrair informações valiosas na depuração. Contudo, além de aumentar a quantidade de memória necessária, o fato de retirar as otimizações da compilação pode ocultar erros e distorcer as condições de corrida de um \textit{software}. 
+\item[\textbf{Execução determinada}] - utilizada quando os casos de teste estão bem definidos e todos os requisitos podem ser traduzidos no arquivo de configuração. \ac{AUTETESE} só considerará sucesso nos testes se as execuções que seguirem fielmente o descrito. \\
+Por exemplo, para que o requisito $X$ assuma apenas os valores $1$ ou $10$ o ambiente deve ser configurado da seguinte maneira:
+\lstset{language=XML}
+\begin{lstlisting}
+<trait id="X">	
+	<value>1</value>
+	<value>10</value>
+</trait>
+\end{lstlisting}
 
-Estas alterações podem, em alguns casos, gerar erros que provavelmente não existiriam em uma compilação com as otimizações. Isto implica em falsos positivos que podem a vir ser apontados por \ac{TAP}. Porém, os relatórios gerados por \ac{TAP}, independende de falsos positivos, necessitam de interpretação. Isto é, a ferramenta não substitui o desenvolvedor, ela auxilia no desenvolvimento, e cabe ao desenvolvedor considerar ou não mudanças de acordo com o relatório. Em suma, é uma questão de hermenêutica.
+O modo determinado também é interessante quando se deseja otimizar uma configuração, pois uma vez que o comportamento da aplicação e todas suas configurações sejam conhecidas, a única variável do sistema afetará o resultado final. \\
+\end{description}
 
-As otimizações utilizadas por um \ac{SUT} podem definir o sucesso do teste e da depuração e devem ser muito bem avaliadas para não gerarem resultados falsos. Para corroborar este fato, existem trabalhos que discutem como as otimizações podem influenciar \textit{softwares} com múltiplas \textit{threads} ~\cite{jia2013compiler} e sugestões~\cite{effinger2012ifrit, 5544315, 6821096} para o teste e depuração de \textit{software} com o mínimo de influência no sistema, com foco em não ocultar erros de simultaneidade.
 
-\chapter{Troca automática dos parâmetros de \textit{software}}
-\label{sec:tap}
+A diferença fundamental entre os três modos de execução dos testes funcionais é a quantidade de regras que são inseridas no arquivo de configuração: o modo aleatório não possui regras, o parcialmente aleatório contém definição de valor ou propriedade a ser considerada, e o modo determinado possui tanto a propriedade quanto os valores a serem trocados.
+
+\ac{AUTETESE} também suporta a execução de testes estruturais e da depuração de maneira primária. Os testes de caixa branca será importado através do aquivo de configuração, que contém uma sequência de comandos que representam os casos de teste. Para a depuração, o usuário pode optar pela foma manual ou execução automatizada. Na forma manual, \ac{AUTETESE} fornece ao usuário a interação com o depurador, na qual será possível inserir os comandos desejados. Já na depuração automatizada, o sistema é configurado com um arquivo que comtém uma sequência de passos de depuração. Um exemplo deste tipo de arquivo utilizando a ferramenta \ac{GDB} é ilustado na Figura~\ref{fig:breakpoint}.
+
+\fig{breakpoint}{Exemplo do arquivo de breakpoint.}{scale=.3}
+
+A sequência de passos inicia-se ao ligando o \textit{log} do \ac{GDB} ($set$ $logging$ $on$) para poder salvar a todos os passos da depuração e poder analisá-los posteriormente, caso necessário. Com esta opção esteja ativa no \textit{script} de depuração os passos executados no \ac{GDB} também serão anexados ao relatório final de \ac{AUTETESE}. O comando $break$ adiciona \textit{breakpoints} nas funções desejadas, que neste caso é a função $main$ e o comando $continue$ é um sinal de liberação da execução do sistema para inicial a depuração.
+
+\section{Importar configurações}
+\label{sec:importarConfiguracoes}
 Existe uma demanda crescente de desenvolvimento de novos sistemas ou adaptações em \textit{softwares} já existentes. Novos requisitos de \textit{software} e \textit{hardware} surgem diariamente e estão cada vez mais complexos, fazendo com que os sistemas tenham que ser adaptados para que atendam a necessidades dos usuários~\cite{pressman}.
 
 Para que o esforço de desenvolver (ou manter) um \textit{software} seja o mínimo possível, é essencial que seu código fonte seja bem projetado e estruturado, facilitando a adição/adaptação de funcionalidades~\cite{kerievsky2008refatoraccao}. 
 
 No desenvolvimento para sistemas embarcados é comum que uma especificação seja reutilizada, diferenciando apenas alguns requisitos não funcionais. Esta estratégia visa utilizar a propriedade intelectual já adquirida para reduzir o tempo para que um novo produto entre no mercado.%~\cite{gupta1997introducing}.
 
-Normalmente o núcleo do sistema é formado por componentes previamente concebidos e verificados, que posteriormente são conectados à extensões~\cite{743146}. Estas extensões não as adaptações/implementações de  componentes de \textit{software} ou \textit{hardware} que atendem à um determinado requisito. Para cada nova extensão, um novo conjunto de testes é gerado para garantir o novo sistema.
+Normalmente o núcleo do sistema é formado por componentes previamente concebidos e verificados, que posteriormente são conectados à extensões~\cite{743146}. Estas extensões são as adaptações e novas implementações de componentes de \textit{software} ou \textit{hardware} que atendem à um determinado requisito. Para cada nova extensão, um novo conjunto de testes é gerado para garantir o novo sistema.
 
 Além do reuso, o desenvolvimento deste tipo de sistemas costuma ter o baixo consumo de recursos como um requisito essencial. Logo, meios que possibilitam tanto o reuso de código quanto a menor sobrecarga possível sobre o sistema, são desejáveis~\cite{1704131}. 
 
-O teste de um sistema embarcado deve seguir a mesma linha de raciocínio, para tanto, o algoritmo de \ac{TAP} procura atender estes requisitos ao extrapolar os conceitos da metodologia de projeto orientado aplicação e técnicas de abstração de dados para o universo dos testes. 
+O teste de um sistema embarcado deve seguir a mesma linha de raciocínio. Desta forma \ac{AUTETESE} possui um algoritmo que procura atender estes requisitos ao extrapolar os conceitos da metodologia de projeto orientado aplicação e técnicas de abstração de dados para o universo dos testes. 
 
 Em um projeto orientado à aplicação o sistema é desenvolvido a partir de componentes especificamente adaptados e configurados de acordo com os requisitos da aplicação alvo. Ou seja, o próprio projeto do sistema oferece a opção de conter somente os componentes essenciais ao funcionamento da aplicação.
 
-Os conceitos de \ac{ADESD} na concepção do \textit{software} podem reduzir o tempo gasto com o teste e a depuração do sistema, pois a partir deste tipo de projeto pode-se considerar que a entrada do sistema já está simplificada, sendo equivalente à técnicas de depuração delta. Desta forma, não é necessário utilizar técnicas como, por exemplo, partições do código para diminuir a complexidade do sistema. 
+Os conceitos de \ac{ADESD} na concepção do \textit{software} podem reduzir o tempo gasto com o teste e a depuração do sistema, pois a partir deste tipo de projeto podemos considerar que a entrada do sistema já está simplificada, sendo equivalente à técnicas de depuração delta. Desta forma, não é necessário utilizar técnicas como, por exemplo, partições do código para diminuir a complexidade do sistema. 
 
 Ademais, no desenvolvimento de \textit{software} é importante que cada funcionalidade significativa seja implementada em apenas um lugar no código fonte. Caso existam funções semelhantes espalhadas pelo código, é interessante e benéfico combiná-las em uma única abstração e derivar suas peculiaridades em funções diferentes~\cite{abelson1996structure}. 
 
 O reuso do projeto do sistema embarcado permite que todo o sistema seja reaproveitado, exigindo apenas um conjunto de testes complementar para cada extensão anexada. A abstração de casos de teste deve ser composta por testes da própria abstração e testes relacionados ao comportamento específico de cada requisito não funcional. 
 
-O algoritmo de \ac{TAP} foi desenvolvido para aproveitar estas vantagens. Assim, cada \ac{SUT} que possua um conjunto de requisitos que possam ser refinadas de acordo com o propósito da aplicação pode utilizar \ac{TAP} para trocar automaticamente as configurações por uma abstração equivalente.
+O algoritmo de troca de parâmetros de configuração do sistema foi desenvolvido para aproveitar estas vantagens. Assim, cada \ac{SUT} que possua um conjunto de requisitos que possam ser refinadas de acordo com o propósito da aplicação pode utilizar \ac{TAP} para trocar automaticamente as configurações por uma abstração equivalente.
 
-\section{Algoritmo de troca de parâmetros}
-O algoritmo de troca de parâmetros foi idealizado de acordo com os conceitos de abstrações de dados e com foco no desenvolvimento e teste de sistemas embarcados.
+\subsection{Troca de parâmetros de configuração do sistema}
+\ac{TAP} foi idealizado de acordo com os conceitos de abstrações de dados e com foco no desenvolvimento e teste de sistemas embarcados.
 
-A ideia é poder aplicar um único conjunto de testes para todas as implementações que seguem uma mesma especificação, especializando apenas a configuração desejada. Desta forma, é possível executar o mesmo conjunto de testes para atender uma maior variabilidade de configurações de um componente de \textit{software} ou \textit{hardware}.
+A ideia é poder aplicar um único conjunto de testes para todas as implementações que compartilham uma mesma especificação base, especializando apenas a configuração desejada. Desta forma, é possível executar o mesmo conjunto de testes para atender uma maior variabilidade de configurações de um componente de \textit{software} ou \textit{hardware}.
 
-A especificação é consubstanciada em um arquivo de configuração, no qual são discriminadas as aplicações que deseja-se realizar os testes, as propriedades que devem ser trocadas e os valores. O padrão de preenchimento e as demilitações do arquivo de configuração serão descritos na Seção~\ref{sec:implementacaoTAP}. Contudo, para o entendimento do algoritmo em um nível mais abstrato, será considerado que neste arquivo contém apenas o caminho do \ac{SUT} e de seu \textit{trait} - um arquivo com as propriedades da aplicação.
-
-No Algoritmo~\ref{algoritmo_AEP} são apresentados os passos realizados a partir do momento em que se tem um \ac{SUT} até o retorno do relatório para o usuário. A entrada do algoritmo é o arquivo de configuração e a partir das especificações contidas nele, o algoritmo flui no sentido de tentar encontrar a característica desejada, trocá-la por uma valor predeterminado, executar a nova aplicação e recolher o retorno da aplicação.
+No Algoritmo~\ref{algoritmo_AEP} são apresentados os passos realizados a partir do momento em que se tem um \ac{SUT} até o retorno do relatório para o usuário. A entrada do algoritmo é o arquivo de configuração e a partir das especificações contidas nele, o algoritmo flui no sentido de tentar encontrar a característica desejada, trocá-la por um valor predeterminado, executar a nova aplicação e recolher o retorno da aplicação.
 
 \begin{algorithm}
 \caption{Algoritmo de troca dos parâmetros de configuração}\label{algoritmo_AEP}
-\KwIn{arquivo}
-\KwOut{relat\'{o}rio}
+\KwIn{arquivo de configuração do ambiente}
+\KwOut{relat\'{o}rio com resultado da execução dos testes funcionais}
+
 propriedades $\Leftarrow$ pegarPropriedadeDoArquivo(arquivo)\;
 \eIf{ o arquivo possui valor para configura\c{c}\~{a}o }{
   \ForEach{configura\c{c}\~{a}o no arquivo}{
@@ -703,43 +828,112 @@ Vale lembrar que o algoritmo não leva em conta a semântica da aplicação nas troc
 
 \section{Detalhes da implementação}
 \label{sec:implementacaoTAP}
-\ac{TAP} é a ferramenta que implementa o algoritmo de troca de parâmetros de execução e utiliza o ambiente compartilhado para realizar a automação da execução dos testes e depuração de sistemas embarcados. 
-
-A implementação do algoritmo deve utiliza como base um sistema operacional com uma grande capacidade de configuração do sistema. O \ac{EPOS} é um \textit{framework} baseado em componentes que fornece todas as abstrações tradicionais de sistemas operacionais e serviços como: gerenciamento de memória, comunicação e gestão do tempo~\cite{Froehlich:2001}. Além disso, possui vários projetos industriais e acadêmicos que o utilizam como base~\footnote{http://www.lisha.ufsc.br/pub/index.php?key=EPOS}.
+A implementação do algoritmo utiliza como base um sistema operacional com uma grande capacidade de configuração do sistema. O \ac{EPOS} é um \textit{framework} baseado em componentes que fornece todas as abstrações tradicionais de sistemas operacionais e serviços como: gerenciamento de memória, comunicação e gestão do tempo~\cite{Froehlich:2001}. Além disso, possui vários projetos industriais e acadêmicos que o utilizam como base~\cite{lisha}.
 
 Este sistema operacional foi concebido com \ac{ADESD} e é instanciado apenas com o suporte básico para sua aplicação dedicada. É importante salientar que todas as características dos componentes também são características da aplicação, desta maneira, a escolha dos valores destas propriedades tem influência direta no comportamento final da aplicação. 
-
-Neste contexto, a troca automatizada destes parâmetros pode ser utilizada tanto para a descoberta de um \textit{bug} no programa quanto para melhorar o desempenho para a aplicação através da seleção de uma melhor configuração.
 
 Cada aplicação gerada possui um arquivo próprio de configuração de abstrações para definir o seu comportamento. A Figura~\ref{progcpp:traitbuild} mostra um trecho desta configuração, que neste caso foi configurada para executar no modo biblioteca para a arquitetura $IA-32$ (\textit{Intel Architecture, 32-bit}), através de um $PC$ (\textit{Personal Computer}).
 
 \progcpp{traitbuild}{Trecho do \textit{trait} da aplicação \ac{DMEC}.}
 
-Para melhorar a usabilidade da ferramenta, é possível definir um arquivo de configuração com as informações necessárias para executar os testes unitários e de tipagem. O uso de arquivos \ac{XML} para definir as configurações de teste se deu pela facilidade e legibilidade para definir todas as regras necessárias para executar o algoritmo e, além disso, também é facilmente interpretado pelo computador.
+Como a execução do algoritmo de troca de parâmetros ocorre dentro do ambiente de \ac{AUTETESE}, os \textit{traits} desta aplicação devem ser adaptados para o arquivo de cofiguração de \ac{XML} do ambiente. Neste contexto, a troca automatizada destes parâmetros pode ser utilizada tanto para a descoberta de um \textit{bug} no programa quanto para melhorar o desempenho para a aplicação através da seleção de uma melhor configuração.
 
-O arquivo do configuração é responsável pelo teste, então seu conteúdo deve estar sempre atualizado e em concordância com os requisitos da aplicação. O ajuste inicial é manual e simples, uma vez que este arquivo pode ser lido quase como um texto.
+\section{Executar testes e depuração}
+\label{sec:executarTestes}
+A atividade de teste é necessária para manter a qualidade do produto oferecido e verificar se seu comportamento não desvia do esperado. No caso de \textit{software} embarcado, o teste na plataforma alvo no ambiente de produção é necessário, entretanto nem sempre é possível ou praticável. Felizmente existem alternativas para realizar esta atividade, como por exemplo: executar o \textit{software} em um simulador, testar o sistema com um protótipo limitado do \textit{hardware}, ou até utilizando o próprio ambiente de desenvolvimento~\cite{progressBeforeHardware}.
 
-A Figura~\ref{progxml:philosopherxml} traz um exemplo do arquivo de configuração de \ac{TAP} para uma aplicação chamada "$exemplo$". Dentro dela deseja-se especificar duas propriedades: a primeira é identificada como "$ARCH$" e pode assumir os valores "$IA32$" ou "$AVR8$", já a segunda propriedade está relacionada à depuração e é um arquivo que contém \textit{breakpoints} que está no seguinte caminho:\\ "$/home/breakpoints.txt$".
+A ideia de prover um bom ambiente em que testes e depuração possam compartilhar a infraestrutura se formou a partir da observação e estudo de vários ambientes de execução automática das atividades testes e de depuração. Seu desenvolvimento envolveu uma atenção especial ao suporte para sistemas embarcados, visto que o teste e a depuração compartilham os escassos recursos do \ac{SUT}. O compartilhamento é crítico no caso de sistemas embarcados porque geralmente possuem apenas os recursos essenciais para desempenhar uma determinada função.
 
-\progxml{philosopherxml}{Exemplo do arquivo de configuração do teste para a \ac{TAP}.}
+Um exemplo de sistema embarcado com um alto grau de dificuldade para atividades de teste e depuração é a \ac{RSSF}. Este tipo de rede pode ser composta por vários sensores que, além de permanecerem espalhados geograficamente por uma grande área de monitoramento, geralmente possuem pouco poder de processamento e apenas alguns \textit{kilobytes} de armazenamento~\cite{pottie2000wireless, margi2009segurancca, dantas2010desro}.
 
-O arquivo de \textit{breakpoints} é opcional e deve conter uma sequência de passos de depuração. A Figura~\ref{fig:breakpoint} apresenta um exemplo de arquivo, o qual inicia-se o ligando o \textit{log} do \ac{GDB} ($set$ $logging$ $on$) para poder salvar a todos os passos da depuração e poder analisá-los posteriormente, caso necessário. Com esta opção esteja ativa no \textit{script} de depuração os passos executados no \ac{GDB} também serão anexados ao relatório final de \ac{TAP}.
+No caso de muitas \ac{RSSF} é impraticável coletar todos os sensores para realizar testes, pois além da dificuldade de acesso às áreas em que os sensores atuam, as atividades de monitoramento teriam que sofrer uma pausa até o término do teste. A solução mais comum nestes casos é realizar os testes de \textit{software} e \textit{hardware} separadamente, utilizando-se simulação.
 
-\fig{breakpoint}{Exemplo do arquivo de breakpoint.}{scale=.3}
+Contudo, simular separadamente as componentes não garante o funcionamento de sua integração. Em sistemas embarcados é comum que \textit{software} e \textit{hardware} trabalhem em conjunto para desempenhar uma tarefa. Aliás, grande parte das falhas nos testes de um \textit{software} embarcado são oriundos da integração de componentes heterogêneos~\cite{seo}. 
 
-O comando "$target$ $remote:1234$"$ $refere-se ao passo 3 da configuração do ambiente compartilhado, apresentado na Seção~\ref{ref:configAmbiente} e em seguida encontra-se o comando que adiciona \textit{breakpoints} nas funções desejadas ($break$). As linhas com $continue$ se referem, respectivamente, ao sinal de liberação da execução do sistema pelo $QEMU$ e ao sinal de continuar a execução após acionar o \textit{brekpoint} desejado ($main$).
+Uma das alternativas para se atenuar este efeito é utilizar uma emulação completa do sistema, que possibilite a visualização do estado do \textit{software}, além de permitir o controle de sua execução~\cite{KiSCL08}. Desta maneira, é possível analisar a intersecção entre componentes e monitorar a execução dos testes através da tabela de símbolos.
 
-\section{Configuração da execução}
-Cada configuração do teste interfere diretamente no tempo e eficácia da ferramenta. Prevendo este comportamento, \ac{TAP} oferece três granularidades de configuração para o teste: aleatória, parcialmente aleatória e determinada. Elas devem ser escolhidas de acordo com a finalidade do usuário ao executar a \ac{TAP}, do tipo de teste e das características de aplicação.
+O processo de teste para sistemas heterogêneos é uma tarefa trabalhosa, principalmente quando não se sabe qual ambiente de implantação será utilizado~\cite{universal:2013}. Existem várias alternativas para ajudar na tarefa e aprimorar a qualidade dos testes, como utilizar oráculo como um repositório de testes~\cite{priyaneural}, selecionar \textit{checkpoints} baseados na interfaces dos componentes~\cite{KiSCL08}, módulos de pré-processamento com análise de código fonte~\cite{atemes}, entre outros.
 
-Teste aleatório foi desenvolvido para quando deseja-se testar valores fora do convencional para verificar a robustez da aplicação. Também é útil caso a aplicação falhe ao passar nos testes e não se tenha dica alguma sobre onde poderia estar o erro no momento de iniciar a depuração. Através dele pode-se encontrar valores errados de configuração e ajudar os desenvolvedores menos experientes a depurar pequenas aplicações.
+Sabe-se que o processo de depuração também precisa de ferramentas específicas para auxiliar no monitoramento da execução de um programa. O sucesso das técnicas que focam em automação da depuração não dependem apenas dos algoritmos ou dados coletados, mas também da estabilidade fornecida pelo ambiente para desempenhar tais atividades. Por exemplo, nas ferramentas de captura e reprodução~\cite{orso2005selective, orso2006isolating, qi2011locating} é essencial que a etapa de captura grave todas as operações que levam ao erro.
 
-Testes parcialmente aleatórios são usados para verificar as configurações do sistema que não possuem um valor determinado, ou seja, mais de um valor pode ser considerado correto. Neste caso, a informação faltante na configuração será atribuída pelo \textit{script} no momento do teste. Sem nenhuma informação prévia, o algoritmo não garante que os valores gerados serão válidos e distintos uns dos outros, desta forma pode ser que o teste seja repetido e gere resultados com falsos negativos.
+\subsection{Execução dos testes e da depuração}
+****ESTOU TRABALHANDO NISSO****
+execução dos testescaixa preta vem de tap
 
-Quando se deseja testar uma especificação bem definida, é possível determinar qual valor uma propriedade deve atingir. Toda a especificação pode ser traduzida no arquivo de configuração e \ac{TAP} só considerará sucesso no teste as execuções que seguirem fielmente o descrito. O modo determinado também é interessante quando se deseja otimizar uma configuração, pois uma vez que o comportamento da aplicação e todas suas configurações sejam conhecidas, a única variável do sistema afetará o resultado final.
+execução dos caixa branca vem do arquivo de configuração
 
-A diferença fundamental entre os três modos é a quantidade de regras que são inseridas no arquivo de configuração: o modo aleatório não possui regras, já o parcialmente aleatório tem alguma definição de valor ou propriedade a ser considerada, e o modo determinado possui tanto a propriedade quanto os valores a serem trocados.
+é por causa deles que precia ser remoto. se o erro do software comprometer o ambiente de testes, nunca vamos saber o que aconteceu.
 
+execução da depuração tbm vem do arquiv, mas pode ser uma janelinha do gdb.
+******** FIM********
+
+\subsection{Detalhes da implementação}
+\label{ref:configAmbiente}
+As ferramentas utilizadas para a construção deste ambiente remoto podem ser substituídas por qualquer outra equivalente, contudo, a configuração completa será tecnicamente apresentada para que seja possível a reprodução do experimento.
+
+O ambiente compartilhado proposto utiliza o \ac{QEMU} para emular a máquina com a aplicação alvo a partir de outra máquina, usando tradução dinâmica. Desta forma torna-se possível utilizar-se um computador pessoal para testar aplicações compiladas para algum outro sistema embarcado. O \ac{GDB} encaixou-se no papel de depurador, pois nele é possível especificar qualquer regra que possa afetar o comportamento do \ac{SUT} de maneira estática.
+
+A integração da execução dos testes e da depuração é particular para cada máquina hospedeira e alvo. Portanto, talvez alguns passos aqui apresentados devam ser adaptados para a arquitetura alvo. 
+
+A Figura~\ref{fig:emulator_debugger_gray} apresenta as atividades necessárias para executar a depuração remota em conjunto com a simulação dos testes.
+
+\fig{emulator_debugger_gray}{Atividades de integração entre emulador e depurador}{scale=.25}
+
+Uma explicação adicional das técnicas e ferramentas utilizadas neste processo estão listados abaixo:
+
+\begin{description}
+\item[1. Compilar com informações de depuração] \hfill \\
+Este passo realiza uma compilação simbólica e sem otimizações. A otimização correta é importante para a execução do \textit{software}, mas quando o foco é a depuração o ideal é que não haja muita diferença entre o código fonte e as instruções geradas.
+
+Como entrada é necessário o código fonte do \textit{software} e como saída esperada encontra-se o código compilado com informações de depuração. O \ac{GCC} realiza esta atividade quando acrescentada a opção $-g$ para compilar. 
+	
+\item [2. Executar o sistema utilizando um emulador] \hfill \\
+É um passo necessário para executar a \textit{software} na arquitetura alvo correta. É importante ressaltar que o \textit{software} a ser emulado não deve iniciar a execução antes que o depurador esteja conectado. Caso isso ocorra, não será possível inspecionar todos os detalhes da execução.
+
+Para executar este passo utilizamos o \ac{QEMU}, que deve ser inicializado com os argumentos $-s -S$. A primeira opção ativa o \textit{stub} para conectar um depurador, a fim de abrir a comunicação entre o emulador e o depurador. A opção $-S$ é utilizada para forçar que o \ac{QEMU} espere a conexão do depurador antes da inicialização do sistema.
+Por exemplo, se uma aplicação compilada com informações de depuração ($app.img$) imprime algo na tela ($stdio$), a chamada do \ac{QEMU} deve ser semelhante à: $qemu-[arch]$ $-serial$ $stdio$ $-fda$ $app.img$ $-s$ $-S$
+	
+\item [3. Conectar-se com o depurador] \hfill \\
+Esta conexão é importante para fornecer ações ao usuário, tais como: executar o programa passo a passo, pausar/reiniciar a execução, entre outras. Para fornecer a estabilidade necessária para a infraestrutura gerada, a conexão do depurador será realizada de maneira remota.
+
+Para que a depuração seja remota a sessão do depurador deve ser inicializada em um ambiente separado. Então, para se conectar ao depurador ao \ac{QEMU} o desenvolvedor deve explicitar que o alvo a ser examinado é remoto e informar o endereço da máquina alvo e porta em que se encontra o alvo a ser examinado. Utilizando-se o \ac{GDB}, a tela será iniciada a partir do comando: $target$ $remote$ $[endereço\_alvo]:[porta\_alvo]$
+
+\item [4. Recuperar as informações de depuração] \hfill \\
+O arquivo gerado no primeiro passo   contém todas as informações que podem ser retiradas da compilação, como por exemplo o endereço de uma variável, ou os nomes contidos na tabela de símbolos. Então este passo é importante para ajudar os desenvolvedores a encontrarem erros.
+
+O arquivo usado para manter as informações de depuração deverá ser informado para o \ac{GDB} usando o comando: $file$ $[caminho\_do\_arquivo]$
+	
+\item [5. Encontrar origem dos erros] \hfill \\
+Encontrar e corrigir erros é uma atividade depende do programa a ser depurado. A partir desta etapa, o desenvolvedor pode definir \textit{breakpoints}, \textit{watchpoints}, controlar a execução do programa e até mesmo permitir \textit{logs}. 
+
+Existem vários trabalhos com o foco em ajudar a encontrar os erros através da automação de alguns pontos, como a gerarão automática de \textit{breakpoints}~\cite{JSWjsw0803603616} e o controle do fluxo de execução \cite{Chern:2007}.
+\end{description}
+
+Após a definição da infraestrutura compartilhada para testes e depuração também é necessário dividir as funções para cada uma das atividades. A ideia é utilizar o emulador para a automação da execução do \textit{software} e de seus casos de teste. A depuração será iniciadas somente no caso de sucesso em um teste, ou seja, quando um erro é detectado.
+
+\section{Considerações sobre o uso do ambiente compartilhado}
+Muitas vezes as configurações do \ac{SUT} devem ser alteradas para poder executar um tipo específico de teste ou melhorar a eficácia da depuração. Estas adaptações podem influenciar no funcionamento normal do \ac{SUT} e ocultar determinados tipos de erros.
+
+A presente proposta de ambiente compartilhado não é uma exceção e, inclusive, um dos primeiros passos para utilizar o ambiente de maneira adequada está em executar uma compilação simbólica do \textit{software} e sem otimizações.
+
+Para um compilador, a diferença entre utilizar ou não alguma otimização ativa é o foco da compilação do \textit{software}. Ao utilizar uma compilação sem otimização, o objetivo do compilador será de reduzir o custo da compilação e da depuração a fim de sempre produzir os resultados esperados. Ao ativar alguma otimização sua função será compilar com o intuito de melhorar o desempenho e/ou o tamanho do código à custa do tempo de compilação e, possivelmente, da capacidade para depurar o programa~\cite{gccOptimization}.
+
+Uma compilação sem otimizações deixa o \textit{software} mais preparado para extrair informações valiosas na depuração. Contudo, além de aumentar a quantidade de memória necessária, o fato de retirar as otimizações da compilação pode ocultar erros e distorcer as condições de corrida de um \textit{software}.
+
+Estas alterações podem, em alguns casos, gerar erros que provavelmente não existiriam em uma compilação com as otimizações. Isto implica em falsos positivos que podem a vir ser apontados por \ac{TAP}. Porém, os relatórios gerados por \ac{TAP}, independende de falsos positivos, necessitam de interpretação. Isto é, a ferramenta não substitui o desenvolvedor, ela auxilia no desenvolvimento, e cabe ao desenvolvedor considerar ou não mudanças de acordo com o relatório. Em suma, é uma questão de hermenêutica.
+
+As otimizações utilizadas por um \ac{SUT} podem definir o sucesso do teste e da depuração e devem ser muito bem avaliadas para não gerarem resultados falsos. Para corroborar este fato, existem trabalhos que discutem como as otimizações podem influenciar \textit{softwares} com múltiplas \textit{threads}~\cite{jia2013compiler} e sugestões~\cite{effinger2012ifrit, 5544315, 6821096} para o teste e depuração de \textit{software} com o mínimo de influência no sistema, com foco em não ocultar erros de simultaneidade.
+
+
+\section{Sintetizar os dados}
+\label{sec:relatorio}
+
+****ESTOU TRABALHANDO NISSO****
+Quando o software passa nos testes?
+ Registro da troca efetuada no relatório
+ Não há erros de compilação
+ Variável de controle de sucesso
+ 
 \chapter{Resultados experimentais e análise}
 \label{sec:case_study}
 Para validar o algoritmo proposto, foi implementada uma ferramenta de automação da execução da a troca de parâmetros de configuração, que utiliza o ambiente compartilhado para a execução do teste e depuração de sistemas. 

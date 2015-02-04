@@ -252,24 +252,6 @@
          offset="1"
          id="stop5986" />
     </linearGradient>
-    <filter
-       color-interpolation-filters="sRGB"
-       inkscape:collect="always"
-       id="filter5938">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="1.9526749"
-         id="feGaussianBlur5940" />
-    </filter>
-    <filter
-       color-interpolation-filters="sRGB"
-       id="filter3542"
-       inkscape:collect="always">
-      <feGaussianBlur
-         id="feGaussianBlur3544"
-         stdDeviation="1.56"
-         inkscape:collect="always" />
-    </filter>
     <radialGradient
        gradientUnits="userSpaceOnUse"
        r="136.00369"
@@ -470,19 +452,6 @@
          d="M 17.000001,8 17,120 l 57.5,0 c 1.675283,0 3.914297,-0.56468 7,-3.6 8.870045,-8.72523 20.24047,-19.851805 27.49904,-27.175957 C 111.4396,86.761431 112,84.752873 112,82.5 L 112,8 z"
          style="fill:#ffffff;fill-opacity:1" />
     </clipPath>
-    <filter
-       color-interpolation-filters="sRGB"
-       inkscape:collect="always"
-       id="filter6171-8"
-       x="-0.47870937"
-       width="1.9574188"
-       y="-0.51275069"
-       height="2.0255013">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="10.140743"
-         id="feGaussianBlur6173-8" />
-    </filter>
     <clipPath
        clipPathUnits="userSpaceOnUse"
        id="clipPath3716">
@@ -493,19 +462,6 @@
          d="M 17.000001,8 17,120 l 57.5,0 c 1.675283,0 3.914297,-0.56468 7,-3.6 8.870045,-8.72523 20.24047,-19.851805 27.49904,-27.175957 C 111.4396,86.761431 112,84.752873 112,82.5 L 112,8 z"
          style="fill:#ffffff;fill-opacity:1" />
     </clipPath>
-    <filter
-       color-interpolation-filters="sRGB"
-       inkscape:collect="always"
-       id="filter6118-4"
-       x="-0.1126375"
-       width="1.225275"
-       y="-0.12064722"
-       height="1.2412944">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="2.3860572"
-         id="feGaussianBlur6120-3" />
-    </filter>
     <linearGradient
        id="linearGradient3897-7">
       <stop
@@ -562,15 +518,6 @@
          d="m 112,82.502986 c 0,4.465301 -2.79749,6.409952 -5.27972,8.093625 -5.10854,3.46508 -14.939114,3.32536 -20.720284,3.40638 -0.081,5.781159 0.16586,15.504599 -3.29922,20.613139 -1.68367,2.48224 -5.29051,5.38687 -8.20078,5.38687 2.31803,0 4.74284,-1.33476 7.58402,-4.08481 9.14197,-8.84873 17.36714,-16.13535 25.673154,-25.297529 C 109.67612,88.503916 112,86.97878 112,82.502986 z"
          style="fill:url(#linearGradient3893);fill-opacity:1;stroke:none" />
     </clipPath>
-    <filter
-       color-interpolation-filters="sRGB"
-       inkscape:collect="always"
-       id="filter3909-6">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.43040059"
-         id="feGaussianBlur3911-9" />
-    </filter>
     <radialGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3913-5"
@@ -1097,15 +1044,6 @@
          inkscape:connector-curvature="0"
          sodipodi:nodetypes="ccssscccccc" />
     </clipPath>
-    <filter
-       color-interpolation-filters="sRGB"
-       id="filter3542-0"
-       inkscape:collect="always">
-      <feGaussianBlur
-         id="feGaussianBlur3544-6"
-         stdDeviation="1.56"
-         inkscape:collect="always" />
-    </filter>
     <radialGradient
        gradientUnits="userSpaceOnUse"
        r="136.00369"
@@ -1206,19 +1144,6 @@
          d="M 17.000001,8 17,120 l 57.5,0 c 1.675283,0 3.914297,-0.56468 7,-3.6 8.870045,-8.72523 20.24047,-19.851805 27.49904,-27.175957 C 111.4396,86.761431 112,84.752873 112,82.5 L 112,8 z"
          style="fill:#ffffff;fill-opacity:1" />
     </clipPath>
-    <filter
-       color-interpolation-filters="sRGB"
-       inkscape:collect="always"
-       id="filter6171-8-3"
-       x="-0.47870937"
-       width="1.9574188"
-       y="-0.51275069"
-       height="2.0255013">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="10.140743"
-         id="feGaussianBlur6173-8-6" />
-    </filter>
     <clipPath
        clipPathUnits="userSpaceOnUse"
        id="clipPath3714">
@@ -1229,19 +1154,6 @@
          d="M 17.000001,8 17,120 l 57.5,0 c 1.675283,0 3.914297,-0.56468 7,-3.6 8.870045,-8.72523 20.24047,-19.851805 27.49904,-27.175957 C 111.4396,86.761431 112,84.752873 112,82.5 L 112,8 z"
          style="fill:#ffffff;fill-opacity:1" />
     </clipPath>
-    <filter
-       color-interpolation-filters="sRGB"
-       inkscape:collect="always"
-       id="filter6118-4-7"
-       x="-0.1126375"
-       width="1.225275"
-       y="-0.12064722"
-       height="1.2412944">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="2.3860572"
-         id="feGaussianBlur6120-3-5" />
-    </filter>
     <linearGradient
        id="linearGradient3897-7-3">
       <stop
@@ -1298,15 +1210,6 @@
          d="m 112,82.502986 c 0,4.465301 -2.79749,6.409952 -5.27972,8.093625 -5.10854,3.46508 -14.939114,3.32536 -20.720284,3.40638 -0.081,5.781159 0.16586,15.504599 -3.29922,20.613139 -1.68367,2.48224 -5.29051,5.38687 -8.20078,5.38687 2.31803,0 4.74284,-1.33476 7.58402,-4.08481 9.14197,-8.84873 17.36714,-16.13535 25.673154,-25.297529 C 109.67612,88.503916 112,86.97878 112,82.502986 z"
          style="fill:url(#linearGradient3893);fill-opacity:1;stroke:none" />
     </clipPath>
-    <filter
-       color-interpolation-filters="sRGB"
-       inkscape:collect="always"
-       id="filter3909-6-2">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.43040059"
-         id="feGaussianBlur3911-9-7" />
-    </filter>
     <radialGradient
        r="18.750002"
        fy="110.25299"
@@ -2060,7 +1963,7 @@
        width="545.49304"
        height="827.35181"
        x="-1309.8894"
-       y="-20.116646"
+       y="-88.116653"
        inkscape:export-filename="/home/tinha/mestrado/dissertacao/fig/autetese.png"
        inkscape:export-xdpi="47.453705"
        inkscape:export-ydpi="47.453705" />
@@ -2068,7 +1971,7 @@
        xml:space="preserve"
        style="font-size:87.21883392px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
        x="-1201.147"
-       y="47.825329"
+       y="-20.349415"
        id="text2818"
        sodipodi:linespacing="125%"
        transform="scale(1.0025698,0.99743679)"
@@ -2078,7 +1981,7 @@
          sodipodi:role="line"
          id="tspan2820"
          x="-1201.147"
-         y="47.825329"
+         y="-20.349415"
          style="font-size:72px">Aplicação</tspan></text>
     <rect
        style="opacity:0.98999999;fill:#ffb380;fill-opacity:1;stroke:#e31800;stroke-width:3.50885201;stroke-linejoin:bevel;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
@@ -2086,7 +1989,7 @@
        width="391.92096"
        height="263.84918"
        x="-1228.7927"
-       y="104.84085"
+       y="36.840851"
        inkscape:export-filename="/home/tinha/mestrado/dissertacao/fig/autetese.png"
        inkscape:export-xdpi="47.453705"
        inkscape:export-ydpi="47.453705" />
@@ -2094,7 +1997,7 @@
        xml:space="preserve"
        style="font-size:46.30363464px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
        x="-1193.92"
-       y="143.99271"
+       y="75.817841"
        id="text2855"
        sodipodi:linespacing="100%"
        transform="scale(1.0025698,0.99743679)"
@@ -2104,7 +2007,7 @@
          sodipodi:role="line"
          id="tspan2857"
          x="-1193.92"
-         y="143.99271"
+         y="75.817841"
          style="font-size:46.30363464px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans">Componente A</tspan></text>
     <rect
        style="opacity:0.98999999;fill:#ffca80;fill-opacity:1;stroke:#e31800;stroke-width:2.02200937;stroke-linejoin:bevel;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
@@ -2112,7 +2015,7 @@
        width="207.69353"
        height="165.33601"
        x="-1140.9646"
-       y="186.60855"
+       y="118.60855"
        inkscape:export-filename="/home/tinha/mestrado/dissertacao/fig/autetese.png"
        inkscape:export-xdpi="47.453705"
        inkscape:export-ydpi="47.453705" />
@@ -2120,7 +2023,7 @@
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
        x="-1037.4269"
-       y="230.64789"
+       y="162.64789"
        id="text4024"
        sodipodi:linespacing="125%"
        inkscape:export-filename="/home/tinha/mestrado/dissertacao/fig/autetese.png"
@@ -2129,16 +2032,16 @@
          sodipodi:role="line"
          id="tspan4026"
          x="-1037.4269"
-         y="230.64789"
+         y="162.64789"
          style="text-align:center;text-anchor:middle">Trait A</tspan><tspan
          sodipodi:role="line"
          x="-1037.4269"
-         y="280.64789"
+         y="212.64789"
          id="tspan4028"
          style="text-align:center;text-anchor:middle">Trait B</tspan><tspan
          sodipodi:role="line"
          x="-1037.4269"
-         y="330.64789"
+         y="262.64789"
          id="tspan4032"
          style="text-align:center;text-anchor:middle">Trait C</tspan></text>
     <rect
@@ -2147,7 +2050,7 @@
        width="392.67981"
        height="161.75089"
        x="-1224.9114"
-       y="392.34387"
+       y="324.34387"
        inkscape:export-filename="/home/tinha/mestrado/dissertacao/fig/autetese.png"
        inkscape:export-xdpi="47.453705"
        inkscape:export-ydpi="47.453705" />
@@ -2155,7 +2058,7 @@
        xml:space="preserve"
        style="font-size:46.30363464px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
        x="-1189.6699"
-       y="432.6152"
+       y="364.44089"
        id="text2855-9"
        sodipodi:linespacing="100%"
        transform="scale(1.0025698,0.99743679)"
@@ -2165,7 +2068,7 @@
          sodipodi:role="line"
          id="tspan2857-6"
          x="-1189.6699"
-         y="432.6152"
+         y="364.44089"
          style="font-size:46.30363464px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans">Componente B</tspan></text>
     <rect
        style="opacity:0.98999999;fill:#ffca80;fill-opacity:1;stroke:#e31800;stroke-width:1.2805599;stroke-linejoin:bevel;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
@@ -2173,7 +2076,7 @@
        width="208.43497"
        height="66.077461"
        x="-1137.0746"
-       y="474.1203"
+       y="406.1203"
        inkscape:export-filename="/home/tinha/mestrado/dissertacao/fig/autetese.png"
        inkscape:export-xdpi="47.453705"
        inkscape:export-ydpi="47.453705" />
@@ -2181,7 +2084,7 @@
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
        x="-1033.166"
-       y="518.5304"
+       y="450.5304"
        id="text4024-6"
        sodipodi:linespacing="125%"
        inkscape:export-filename="/home/tinha/mestrado/dissertacao/fig/autetese.png"
@@ -2190,11 +2093,11 @@
          sodipodi:role="line"
          id="tspan4026-6"
          x="-1033.166"
-         y="518.5304"
+         y="450.5304"
          style="text-align:center;text-anchor:middle">Trait A</tspan><tspan
          sodipodi:role="line"
          x="-1033.166"
-         y="568.5304"
+         y="500.5304"
          id="tspan4032-4"
          style="text-align:center;text-anchor:middle" /></text>
     <rect
@@ -2203,7 +2106,7 @@
        width="392.29837"
        height="209.94087"
        x="-1216.1492"
-       y="578.82031"
+       y="510.82031"
        inkscape:export-filename="/home/tinha/mestrado/dissertacao/fig/autetese.png"
        inkscape:export-xdpi="47.453705"
        inkscape:export-ydpi="47.453705" />
@@ -2211,7 +2114,7 @@
        xml:space="preserve"
        style="font-size:46.30363464px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
        x="-1181.1204"
-       y="619.37976"
+       y="551.20544"
        id="text2855-7"
        sodipodi:linespacing="100%"
        transform="scale(1.0025698,0.99743679)"
@@ -2221,7 +2124,7 @@
          sodipodi:role="line"
          id="tspan2857-62"
          x="-1181.1204"
-         y="619.37976"
+         y="551.20544"
          style="font-size:46.30363464px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans">Componente C</tspan></text>
     <rect
        style="opacity:0.98999999;fill:#ffca80;fill-opacity:1;stroke:#e31800;stroke-width:1.64007413;stroke-linejoin:bevel;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
@@ -2229,7 +2132,7 @@
        width="208.07545"
        height="108.57509"
        x="-1128.3235"
-       y="660.58575"
+       y="592.58575"
        inkscape:export-filename="/home/tinha/mestrado/dissertacao/fig/autetese.png"
        inkscape:export-xdpi="47.453705"
        inkscape:export-ydpi="47.453705" />
@@ -2237,7 +2140,7 @@
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
        x="-1024.5947"
-       y="704.81604"
+       y="636.81604"
        id="text4024-4"
        sodipodi:linespacing="125%"
        inkscape:export-filename="/home/tinha/mestrado/dissertacao/fig/autetese.png"
@@ -2245,19 +2148,19 @@
        inkscape:export-ydpi="47.453705"><tspan
          sodipodi:role="line"
          x="-1024.5947"
-         y="704.81604"
+         y="636.81604"
          id="tspan4028-0"
          style="text-align:center;text-anchor:middle">Trait B</tspan><tspan
          sodipodi:role="line"
          x="-1024.5947"
-         y="754.81604"
+         y="686.81604"
          id="tspan4032-5"
          style="text-align:center;text-anchor:middle">Trait C</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
        x="-435.24524"
-       y="-5.0664215"
+       y="6.9335785"
        id="text6402"
        sodipodi:linespacing="125%"
        inkscape:export-filename="/home/tinha/mestrado/dissertacao/fig/autetese.png"
@@ -2266,11 +2169,11 @@
          sodipodi:role="line"
          id="tspan6404"
          x="-422.72961"
-         y="-5.0664215"
+         y="6.9335785"
          style="font-size:72px;font-weight:bold;-inkscape-font-specification:Sans Bold">Exportar </tspan><tspan
          sodipodi:role="line"
          x="-422.72961"
-         y="84.933578"
+         y="96.933578"
          id="tspan6406"
          style="font-size:72px;font-weight:bold;-inkscape-font-specification:Sans Bold">configurações </tspan></text>
     <rect
@@ -2410,22 +2313,27 @@
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
        x="244.90631"
-       y="-4.2092438"
+       y="-68.209244"
        id="text6402-0"
        sodipodi:linespacing="125%"
        inkscape:export-filename="/home/tinha/mestrado/dissertacao/fig/autetese.png"
        inkscape:export-xdpi="47.453705"
        inkscape:export-ydpi="47.453705"><tspan
          sodipodi:role="line"
-         id="tspan6404-7"
-         x="244.90631"
-         y="-4.2092438"
-         style="font-size:72px;font-weight:bold;-inkscape-font-specification:Sans Bold">Importar</tspan><tspan
+         x="257.42194"
+         y="-68.209244"
+         style="font-size:72px;font-weight:bold;-inkscape-font-specification:Sans Bold"
+         id="tspan3610">Interpretar </tspan><tspan
+         sodipodi:role="line"
+         x="257.42194"
+         y="21.790756"
+         style="font-size:72px;font-weight:bold;-inkscape-font-specification:Sans Bold"
+         id="tspan3588">dados </tspan><tspan
          sodipodi:role="line"
          x="244.90631"
-         y="85.790756"
-         id="tspan6406-0"
-         style="font-size:72px;font-weight:bold;-inkscape-font-specification:Sans Bold">informações</tspan></text>
+         y="111.79076"
+         style="font-size:72px;font-weight:bold;-inkscape-font-specification:Sans Bold"
+         id="tspan3608">de entrada</tspan></text>
     <path
        inkscape:connector-curvature="0"
        style="fill:#000000"
@@ -2506,7 +2414,7 @@
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
        x="1222.3347"
-       y="2.3621826"
+       y="4.3621826"
        id="text6402-0-9"
        sodipodi:linespacing="125%"
        inkscape:export-filename="/home/tinha/mestrado/dissertacao/fig/autetese.png"
@@ -2514,12 +2422,12 @@
        inkscape:export-ydpi="47.453705"><tspan
          sodipodi:role="line"
          x="1234.8503"
-         y="2.3621826"
+         y="4.3621826"
          style="font-size:72px;font-weight:bold;-inkscape-font-specification:Sans Bold"
          id="tspan7130">Executar testes </tspan><tspan
          sodipodi:role="line"
          x="1222.3347"
-         y="92.362183"
+         y="94.362183"
          style="font-size:72px;font-weight:bold;-inkscape-font-specification:Sans Bold"
          id="tspan4356"> e depuração</tspan></text>
     <g
@@ -2802,7 +2710,7 @@
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
        x="2059.2534"
-       y="-0.27172947"
+       y="19.728271"
        id="text6402-0-9-7"
        sodipodi:linespacing="125%"
        inkscape:export-filename="/home/tinha/mestrado/dissertacao/fig/autetese.png"
@@ -2810,12 +2718,12 @@
        inkscape:export-ydpi="47.453705"><tspan
          sodipodi:role="line"
          x="2059.2534"
-         y="-0.27172947"
+         y="19.728271"
          style="font-size:72px;font-weight:bold;-inkscape-font-specification:Sans Bold"
          id="tspan7130-8">Sintetizar</tspan><tspan
          sodipodi:role="line"
          x="2059.2534"
-         y="89.728271"
+         y="109.72827"
          style="font-size:72px;font-weight:bold;-inkscape-font-specification:Sans Bold"
          id="tspan7400">dados</tspan></text>
     <rect

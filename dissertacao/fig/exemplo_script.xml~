@@ -1,0 +1,15 @@
+<test>
+   <application name="Exemplo">
+      <configuration>
+         <trait scope="application" id="STACK_SIZE">	
+            <value>512</value>
+            <value>1024</value>
+         <trait>
+
+         <trait scope="application" id="HEAP_SIZE">	
+            <value>512</value>
+            <value>1024</value>
+         <trait>
+      </configuration>
+   </application>
+<test>

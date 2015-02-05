@@ -1,0 +1,15 @@
+<test>
+   <application name="Exemplo">
+      <configuration>
+         <trait id="Escalonador">	
+            <value>E1</value>
+            <value>E2</value>
+         <trait>
+
+         <trait id="NumeroThreads">	
+            <min>2</min>
+            <max>5</max>
+         <trait>
+      </configuration>
+   </application>
+<test>

@@ -1,0 +1,50 @@
+Totalmete aleatório
+
+.*.*.*.*.* TEST REPORT .*.*.*.*.*
+APPLICATION = exemplo1
+
+ORIGINAL TRAITS LINE = echo_reply = true; 
+MODIFYED TRAITS LINE = echo_reply = false; 
+
+ORIGINAL TRAITS LINE = THREADS = 3;
+MODIFYED TRAITS LINE = THREADS = 24;
+------------------ FAILURE
+
+ORIGINAL TRAITS LINE = QUANTUM = 10000;
+MODIFYED TRAITS LINE = QUANTUM = 30109;
+
+
+
+
+
+Parcialmente aleatório
+
+.*.*.*.*.* TEST REPORT .*.*.*.*.*
+APPLICATION = exemplo1
+
+ORIGINAL TRAITS LINE = echo_reply = true; 
+VALUES= true, false
+
+ORIGINAL TRAITS LINE = THREADS = 3;
+VALUES= 6, 67, 72, 40, 10
+
+Successful tests:4 - Failed tests:6
+Failed tests execution. 
+Log and debugging information on attachment.
+
+
+Determinado
+
+
+.*.*.*.*.* TEST REPORT .*.*.*.*.*
+= Configurations =
+QUANTUM: 10000, 20000, 50000, 100000
+THREADS: 1, 2, 4, 8, 16, 32
+
+APPLICATION = exemplo1
+Successful tests:16 - Failed tests:8
+Failed tests execution. 
+Log and debugging information on attachment.
+
+
+

@@ -759,19 +759,19 @@ A sequência de passos inicia-se ao ativar o \textit{log} do \ac{GDB} ($set$ $log
 
 \section{Interpretar dados de entrada}
 \label{sec:importarConfiguracoes}
-Na fase de interpretar os dados de entrada ocorre o processamento as informações e a transformação dos dados em ações a serem executadas de maneira automática. Para realizar este processo,\ac{AUTETESE} utiliza-se de um algoritmo que extrai as informações necessárias para a realização dos testes e realiza a troca de valores de configuração.
+Na fase de interpretar os dados de entrada ocorre o processamento das informações e a transformação dos dados em ações a serem executadas de maneira automática. Para realizar este processo \ac{AUTETESE} utiliza-se de um algoritmo que extrai as informações necessárias para a realização dos testes e realiza a troca de valores de configuração.
  
 O algoritmo de troca de parâmetros, conforme ilustrado na Figura~\ref{fig:script}, verifica as configurações disponíveis no arquivo \ac{XML} e seleciona as trocas a serem realizadas, de acordo com a especificação. O valor da propriedade é modificado diretamente no arquivo de configuração da aplicação (\textit{traits}) e é compilado e executado em cada nova troca de parâmetros.
 
 \fig{script}{Algoritmo para troca de valores de configuração do \textit{software}}{scale=.15}
 
-A troca de parâmetros é realizada à partir de uma combinação entre as propriedades e seus possíveis valores, de acordo com a fórmula de combinação matemática: $C^n_s={n\choose s} =\frac{n!}{s!\cdot\left(n-s\right)!}\,\!$. Sendo $n$ a quantidade de formas distintas em que é possível escolher os elementos de um conjunto de entrada, e $n$ é o tamanho do conjunto de entradas. 
+A troca de parâmetros é realizada a partir de uma combinação entre as propriedades e seus possíveis valores, de acordo com a fórmula de combinação matemática: $C^n_s={n\choose s} =\frac{n!}{s!\cdot\left(n-s\right)!}\,\!$. Sendo $n$ a quantidade de formas distintas em que é possível escolher os elementos de um conjunto de entrada, e $n$ é o tamanho do conjunto de entradas. 
 
 No caso de \ac{AUTETESE}, o tamanho do conjunto de entradas varia de acordo com o arquivo de configuração do ambiente. Por exemplo, quando a configuração aponta para uma execução determinada, o número de entradas é igual à quantidade de \textit{tags} $<value>$ da configuração.
 
-O tipo de execução de testes presente no \ac{XML} possui grande influência na troca dos parâmetros. No caso de uma execução aleatória, em que apenas o arquivo \textit{traits} é informado, o algoritmo deve selecionar tanto uma configuração quanto um valor para realizar a troca. Já em casos de execução determinada, o algoritmo limita-se a realizar as trocas propostas. Na execução parcialmente aleatória ambas condições estão presentes, sendo assim, este tipo de execução será utilizada para exemplificar a troca de parâmetros.
+O tipo de execução de testes presente no \ac{XML} possui grande influência na troca dos parâmetros. No caso de uma execução aleatória, em que apenas o arquivo \textit{traits} é informado, o algoritmo deve selecionar tanto uma configuração quanto um valor para realizar a troca. Já em casos de execução determinada, o algoritmo limita-se a realizar as trocas propostas. Na execução parcialmente aleatória ambas as condições estão presentes, sendo assim, este tipo de execução será utilizada para exemplificar a troca de parâmetros.
 
-Suponha a execução de testes para a aplicação exemplo que contém as propriedades: (i) \texttt{Escalonador}, que assume valores fixos e (ii) \texttt{NumeroThreads}, cujo valor é variável. A Figura~\ref{fig:resultado_script} apresenta um exemplo do arquivo de configuração \ac{XML} e das aplicações originadas à partir da troca de parâmetros.
+Suponha a execução de testes para a aplicação exemplo que contém as propriedades: (i) \texttt{Escalonador}, que assume valores fixos; e (ii) \texttt{NumeroThreads}, cujo valor é variável. A Figura~\ref{fig:resultado_script} apresenta um exemplo do arquivo de configuração \ac{XML} e das aplicações originadas à partir da troca de parâmetros.
 
 \fig{resultado_script}{Configuração de \ac{AUTETESE} e os resultados das trocas de valores de configuração da aplicação \texttt{Exemplo}}{scale=.095}
 
@@ -782,35 +782,33 @@ O conjunto de resultados obtidos é referente à combinação dos dois possíveis val
 
 \section{Executar testes e depuração}
 \label{sec:executarTestes}
-\ac{AUTETESE} possui o suporte para executar tanto os testes funcionais e quanto os estruturais. A execução dos testes funcionais é realizada automaticamente após obter as aplicações geradas pelo algoritmo de troca de parâmetros. Já a execução dos testes esruturais, só ocorre em caso de falha na execução dos testes funcionais e se houver configuração explícita no arquivo \ac{XML} do ambiente. 
-
-A Figura~\ref{fig:fluxo_execucao_testes_depuracao} ilustra o fluxo das atividades de teste. Adicionalmente, se ambos testes apresentarem falha na execução, \ac{AUTETESE} inicia a execução da depuração.
+\ac{AUTETESE} possui suporte para executar tanto os testes funcionais, quanto os estruturais. Adicionalmente, se ambos os testes apresentarem falha na execução, inicia-se a execução da depuração. A Figura~\ref{fig:fluxo_execucao_testes_depuracao_svg} ilustra o fluxo das atividades de teste. 
 
 \fig{fluxo_execucao_testes_depuracao_svg}{Fluxo de execução dos testes e da depuração da aplicação com \ac{AUTETESE}}{scale=.3}
 
-Os testes funcionais 
+A execução dos testes funcionais é realizada automaticamente após obter as aplicações compiladas pelo algoritmo de troca de parâmetros. Já a execução dos testes estruturais ocorre somente em caso de falha na execução dos testes funcionais e se houver sido explicitada a 	configuração no arquivo \ac{XML} do ambiente. 
 
-Os testes funcionais
+A depuração da aplicação ocorre após as execuções de ambos os teste e, somente se, resultarem em falha. Este processo é opcional e pode ser configurado no \ac{XML} como manual ou automático. Na depuração manual, o ambiente fornece uma entrada de dados para que o usuário possa depurar a aplicação. Para a depuração automática, o arquivo \ac{XML} deve conter o caminho para um outro arquivo que contém um roteiro da depuração e \ac{AUTETESE} apenas executará os comandos que estiverem neste roteiro.
 
-****ESTOU TRABALHANDO NISSO****
-execução dos testescaixa preta vem de tap
+O projeto do ambiente para que testes e depuração compartilhem uma infraestrutura iniciou-se a partir da observação e estudo de vários ambientes de execução de ambas atividades em separado. O desenvolvimento de \ac{AUTETESE} focou no suporte para sistemas embarcados, pois estes sistemas geralmente possuem apenas os recursos essenciais para desempenhar sua função e as atividades de teste e depuração compartilham os escassos recursos do \ac{SUT}.
 
-execução dos caixa branca vem do arquivo de configuração
+A execução dos testes e depuração em \ac{AUTETESE} é realizada utilizando-se um emulador e um depurador. A emulação do sistema possibilita a visualização do estado do \textit{software} e proporciona maior liberdade para controlar a execução da aplicação. Sua função principal para o ambiente é auxiliar o teste do \textit{software} embarcado sem o \textit{hardware} físico. 
 
-é por causa deles que precia ser remoto. se o erro do software comprometer o ambiente de testes, nunca vamos saber o que aconteceu.
-
-execução da depuração tbm vem do arquiv, mas pode ser uma janelinha do gdb.
-******** FIM********
-
+A função do depurador é de auxiliar em encontrar os erros do \textit{software}, facilitando sua correção. Eventualmente, o ambiente de depuração também será utilizado como ferramenta auxiliar para os testes de caixa branca, visto que sua conexão com o emulador fornece dados atualizados sobre o sistema em execução.
 
 \section{Sintetizar os dados}
 \label{sec:relatorio}
+A síntese dos dados e emissão do relatório para o usuário ocorre após a execução dos casos de teste e da depuração do sistema. Este documento apresenta diferentes configurações que dependem do tipo de execução dos testes. A Figura~\ref{fig:tipos_de_relatorio} apresenta um exemplo dos tipos de relatórios que podem ser gerados por \ac{AUTETESE}.
 
-****ESTOU TRABALHANDO NISSO****
-Quando o software passa nos testes?
- Registro da troca efetuada no relatório
- Não há erros de compilação
- Variável de controle de sucesso
+\fig{tipos_de_relatorio}{Exemplo de apresentação do relatório conforme tipo de execução dos testes.}{scale=.2}
+
+No caso de uma execução determinada, o usuário sabe quais configurações foram trocadas e por quais valores. Desta forma, o relatório não precisa explicitar todas as trocas realizadas, apresentando apenas um resumo da execução. 
+
+Para a execução parcialmente aleatória sabe-se a configuração que será trocada, entretanto, não conhece os valores, uma vez que estes foram gerados por \ac{AUTETESE}. Sendo assim, no relatório são informados todos os valores utilizados nas trocas. 
+
+No caso do relatório para uma execução aleatória, devem ser descritas todas as configurações que foram trocadas pelo ambiente, juntamente com seus respectivos valores e o resultado da execução.
+
+Todos os relatórios possuem um resumo da quantidade de testes executados, quantos obtiveram sucesso e quantos falharam. Um arquivo de \textit{log} de execução é armazenado para cada falha da aplicação na execução dos testes. Este \textit{log} fica anexado ao relatório e contém os dados específicos sobre a compilação, execução dos testes (funcionais e estruturais) e depuração.
  
 \section{Implementação de \ac{AUTETESE}}
 Existe uma demanda crescente de desenvolvimento de novos sistemas ou adaptações em \textit{softwares} já existentes. Novos requisitos de \textit{software} e \textit{hardware} surgem diariamente e estão cada vez mais complexos, fazendo com que os sistemas tenham que ser adaptados para que atendam as necessidades dos usuários~\cite{pressman}.
@@ -885,10 +883,8 @@ Cada aplicação gerada possui um arquivo próprio de configuração de abstrações pa
 
 Como a execução do algoritmo de troca de parâmetros ocorre dentro do ambiente de \ac{AUTETESE}, os \textit{traits} desta aplicação devem ser adaptados para o arquivo de cofiguração de \ac{XML} do ambiente. Neste contexto, a troca automatizada destes parâmetros pode ser utilizada tanto para a descoberta de um \textit{bug} no programa quanto para melhorar o desempenho para a aplicação através da seleção de uma melhor configuração.
 
-
+\subsection{Ambiente compartilhado de testes e depuração}
 A atividade de teste é necessária para manter a qualidade do produto oferecido e verificar se seu comportamento não desvia do esperado. No caso de \textit{software} embarcado, o teste na plataforma alvo no ambiente de produção é necessário, entretanto nem sempre é possível ou praticável. Felizmente existem alternativas para realizar esta atividade, como por exemplo: executar o \textit{software} em um simulador, testar o sistema com um protótipo limitado do \textit{hardware}, ou até utilizando o próprio ambiente de desenvolvimento~\cite{progressBeforeHardware}.
-
-A ideia de prover um bom ambiente em que testes e depuração possam compartilhar a infraestrutura se formou a partir da observação e estudo de vários ambientes de execução automática das atividades testes e de depuração. Seu desenvolvimento envolveu uma atenção especial ao suporte para sistemas embarcados, visto que o teste e a depuração compartilham os escassos recursos do \ac{SUT}. O compartilhamento é crítico no caso de sistemas embarcados porque geralmente possuem apenas os recursos essenciais para desempenhar uma determinada função.
 
 Um exemplo de sistema embarcado com um alto grau de dificuldade para atividades de teste e depuração é a \ac{RSSF}. Este tipo de rede pode ser composta por vários sensores que, além de permanecerem espalhados geograficamente por uma grande área de monitoramento, geralmente possuem pouco poder de processamento e apenas alguns \textit{kilobytes} de armazenamento~\cite{pottie2000wireless, margi2009segurancca, dantas2010desro}.
 
@@ -901,9 +897,6 @@ Uma das alternativas para se atenuar este efeito é utilizar uma emulação complet
 O processo de teste para sistemas heterogêneos é uma tarefa trabalhosa, principalmente quando não se sabe qual ambiente de implantação será utilizado~\cite{universal:2013}. Existem várias alternativas para ajudar na tarefa e aprimorar a qualidade dos testes, como utilizar oráculo como um repositório de testes~\cite{priyaneural}, selecionar \textit{checkpoints} baseados na interfaces dos componentes~\cite{KiSCL08}, módulos de pré-processamento com análise de código fonte~\cite{atemes}, entre outros.
 
 Sabe-se que o processo de depuração também precisa de ferramentas específicas para auxiliar no monitoramento da execução de um programa. O sucesso das técnicas que focam em automação da depuração não dependem apenas dos algoritmos ou dados coletados, mas também da estabilidade fornecida pelo ambiente para desempenhar tais atividades. Por exemplo, nas ferramentas de captura e reprodução~\cite{orso2005selective, orso2006isolating, qi2011locating} é essencial que a etapa de captura grave todas as operações que levam ao erro.
-
-
-
 
 
 \subsection{Detalhes da implementação}

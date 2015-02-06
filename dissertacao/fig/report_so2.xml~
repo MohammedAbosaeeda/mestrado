@@ -1,4 +1,4 @@
-= = = = = TEST REPORT = = = = =
+.*.*.*.*.* TEST REPORT .*.*.*.*.*
 = Configurations =
 Quantum: 10ms, 20ms, 50ms, 100ms, 200ms, 500ms
 Stack: 512MB, 1GB
@@ -6,5 +6,5 @@ Heap: 512MB, 1GB
 Schedulers: EDM, RM 
 
 = Application: active_test =
-Successful tests:228 - Failed tests:400
-Failed tests execution log and debugging information on attachment.
+Successful tests:248 - Failed tests:400
+Failed tests execution. log and debugging information on attachment.

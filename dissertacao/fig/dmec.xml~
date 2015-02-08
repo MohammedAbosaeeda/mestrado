@@ -1,0 +1,10 @@
+<test>
+   <application name="dmec_app">
+      <configuration>
+         <trait id="NUM_WORKERS">	
+            <min>1</min>
+            <max>60</max>
+         <trait>
+      </configuration>
+   </application>
+<test>

@@ -93,7 +93,7 @@
 \bancaMembroC{} % Nome do membro da Banca
 
 \agradecimento{
-Agradeço à Universidade Federal de Santa Catarina (UFSC) e ao Programa de Pós-Graduação em Ciência da Computação (PPGCC) pelo apoio institucional para a realização deste trabalhos. Obrigada aos servidores e professores, em especial à Katiana de Castro Silva e ao Prof. Dr. Ronaldo dos Santos Mello, que me trataram com simpatia, respeito e solidariedade. Agradeço também:
+Agradeço à Universidade Federal de Santa Catarina (UFSC) e ao Programa de Pós-Graduação em Ciência da Computação (PPGCC) pelo apoio institucional para a realização deste trabalho. Obrigada aos servidores e professores, em especial à Katiana de Castro Silva e ao Prof. Dr. Ronaldo dos Santos Mello, que me trataram com simpatia, respeito e solidariedade. Agradeço também:
 
 Ao meu orientador, Prof. Dr. Antônio Augusto Medeiros Fröhlich (Guto). Muito obrigada pela oportunidade de fazer parte do Laboratório de Integração de Software e Hardware (LISHA) e por me guiar no desenvolvimento deste trabalho. As nossas discussões, trocas de e-mails e conhecimento foram imprescindíveis para o meu crescimento profissional e pessoal.
 
@@ -102,11 +102,11 @@ Aos meus colegas e amigos do LISHA, em especial o Mateus Krepsky Ludwich e o Joã
 À minha família: meus amados pais Célia Regina Cazu Soldi e Luis Carlos Soldi, minha irmãzinha Luiza Helena Cazu Soldi e o meu companheiro para todas as horas, Marcelo Ribeiro Xavier da Silva. Muito obrigada pelo amor incondicional, paciência infinita e incansável dedicação ao meu sucesso e à minha felicidade durante todos os momentos de nossas vidas.
 }
 
-\epigrafe{How often have I said to you that when you have eliminated the impossible, whatever remains, however improbable, must be the truth?}{Arthur Conan Doyle}
+\epigrafe{How often have I said to you that when you have eliminated the impossible, whatever remains, however improbable, must be the truth?}{Sir Arthur Conan Doyle}
 
 \textoResumo {O número de sistemas embarcados já supera a quantidade de habitantes do nosso planeta e este número continua crescendo em ritmo acelerado. Ademais, o projeto de \textit{hardware} e \textit{software} está cada vez mais sofisticado e com requisitos mais rígidos para atender o exigente mercado.
 
-O aumento da complexidade do sistema dificulta a validação e verificação dos sistemas embarcados. As consequências desta sofisticação afetam muito o desenvolvimento de \textit{software} embarcado que. Mesmo representando uma parcela minoritária do sistema embarcado, o \textit{software} tornou-se responsável por cerca de 80\% dos erros encontrados nos sistemas.
+As consequências desta sofisticação afetam muito o desenvolvimento de \textit{software} embarcado. Mesmo representando uma parcela minoritária do sistema embarcado, o \textit{software} tornou-se responsável por cerca de 80\% dos erros encontrados nos sistemas~\cite{ebert2009embedded}.
 
 Teste e depuração de \textit{software} não é trivial, uma vez que é necessária a inspeção de todo o código fonte para se certificar de que o comportamento não difere das expectativas. Realizar essas atividades em sistemas embarcados é ainda mais desafiador, uma vez que os desenvolvedores precisam descobrir como otimizar o uso dos recursos, pois o teste em si tende a competir com o aplicativo sob teste pelos escassos recursos do sistema.
 
@@ -118,7 +118,7 @@ O $AUTETESE$ é avaliado de maneira quantitativa para os critérios de tentativas 
 
 \textAbstract {The number of embedded systems already exceed the number of inhabitants of this planet and this number continues to grow. Moreover, the design of hardware and software are increasingly sophisticated and more stringent requirements to meet the demanding market.
 
-Increasing system complexity hinders validation and verification of embedded systems. The consequences of this sophistication greatly affect the development of the embedded software development. Even representing a minority of the embedded system, the software became responsible for about 80\% of the errors found in the systems.
+The consequences of this sophistication greatly affect the development of the embedded software development. Even representing a minority of the embedded system, the software became responsible for about 80\% of the errors found in the systems~\cite{ebert2009embedded}.
 
 Software testing and debugging is not trivial, once it needs a inspection of the entire source code to make sure that the behavior does not differ from expectations. Perform these activities in embedded systems is even more challenging, since developers need to figure out how to optimize the use of resources because the test itself tends to compete with the application under test for scarce system resources.
 
@@ -135,8 +135,8 @@ $AUTETESE$ is evaluated quantitatively for the criteria of attempts \textit{vers
 %--------------------------------------------------------
 % Elementos pré-textuais
 \capa
-\folhaderosto[comficha] % Se nao quiser imprimir a ficha, é só não usar o parâmetro
-\folhaaprovacao
+%\folhaderosto[comficha] % Se nao quiser imprimir a ficha, é só não usar o parâmetro
+%\folhaaprovacao
 \paginadedicatoria
 \paginaagradecimento
 \paginaepigrafe
@@ -625,7 +625,7 @@ Para resolver o problema de execução de teste do \textit{software} sem descartar
 
 \ac{AUTETESE} utiliza emulação completa do sistema para a execução dos casos de teste, no entanto, foca em simplicidade para a configuração do ambiente, execução dos testes de forma transparente e legibilidade nos resultados obtidos. O ambiente apresentado neste trabalho também explora a emulação do \textit{hardware} para fornecer flexibilidade e portabilidade aos casos de teste, que podem ser executados em mais de uma plataforma alvo. Adicionalmente, integrou-se a emulação completa do sistema à uma ferramenta de depuração, fornecendo um ambiente mais completo para a execução dos testes e depuração de sistemas embarcados.
 
-São detalhados na Seção~\ref{sec:modeloConceitual}  a arquitetura e o modelo conceitual do sistema, com as suposições necessárias para o correto uso e funcionamento do ambiente. Em seguida, na Seção~\cite{sec:implementacaoAutetese} é discutida a implementação do ambiente de \ac{AUTETESE}, considerando as razões para a escolha da abordagem, de cada tecnologia e ferramentas utilizadas.
+São detalhados na Seção~\ref{sec:modeloConceitual}  a arquitetura e o modelo conceitual do sistema, com as suposições necessárias para o correto uso e funcionamento do ambiente. Em seguida, na Seção~\ref{sec:implementacaoAutetese} é discutida a implementação do ambiente de \ac{AUTETESE}, considerando as razões para a escolha da abordagem, de cada tecnologia e ferramentas utilizadas.
 
 \section{Modelo conceitual e arquitetura}
 \label{sec:modeloConceitual}
@@ -937,14 +937,14 @@ Como a execução do algoritmo de troca de parâmetros ocorre dentro do ambiente de
 \label{sec:case_study}
 \ac{AUTETESE} é um ambiente desenvolvido para a execução dos testes funcionais, dos testes estruturais e da depuração de sistemas embarcados. Para validar o ambiente proposto, os experimentos foram elaborados de forma a salientar os pontos positivos da proposta e também seus pontos de melhoria. 
 
-O primeiro experimento teve como objetivo averiguar se o algoritmo era robusto o suficiente para contribuir no ciclo de desenvolvimento de ferramentas complexas. Para tal, \ac{TAP} realizou a troca de parâmetros de uma ferramenta utilizada na estimativa de movimento - que é um dos passos da codificação de vídeo bruto em H.264.
+O primeiro experimento teve como objetivo averiguar se o algoritmo era robusto o suficiente para contribuir no ciclo de desenvolvimento de ferramentas complexas. Para tal, foi testada através de \ac{AUTETESE} um componente cuja função é fazer a estimativa de movimento em videos que seguem o padrão de compressão H.264.
 
-Já o segundo experimento foi aplicado a códigos fonte gerados por desenvolvedores com pouca experiência em implementação e manutenção de \textit{software} embarcado e seu foco é na viabilização do ambiente como ferramenta auxiliar no aprendizado.
+Já o segundo experimento foi aplicado a códigos fonte gerados por desenvolvedores com pouca experiência em implementação e manutenção de \textit{software} embarcado. Seu foco está na viabilização do ambiente como ferramenta auxiliar no aprendizado.
 
 \section{Experimento 1 - Ciclo de desenvolvimento}
-Este experimento foi desenvolvido com o intuito de verificar o comportamento de \ac{AUTETESE} durante o ciclo de desenvolvimento e manutenção de \textit{software}. A aplicação escolhida para este experimento foi a \ac{DMEC}, que simula um componente de estimativa de movimento distribuída.
+Este experimento foi desenvolvido com o intuito de verificar o comportamento de \ac{AUTETESE} durante o ciclo de desenvolvimento e manutenção de \textit{software}. 
 
-Este componente executa uma estimativa de movimento explorando a semelhança entre imagens adjacentes numa sequência de vídeo que permite que as imagens sejam codificadas diferencialmente, aumentando a taxa de compressão da sequência de \textit{bits} gerada. Estimativa de movimento é uma fase importante para codificação H.264, já que consome cerca de 90\% do tempo total do processo de codificação~\cite{DMEC}.
+A aplicação escolhida para este experimento foi a \ac{DMEC}~\cite{DMEC}, que executa uma estimativa de movimento explorando a semelhança entre imagens adjacentes numa sequência de vídeo. Esta aplicação permite que as imagens sejam codificadas diferencialmente, aumentando a taxa de compressão da sequência de \textit{bits} gerada. A estimativa de movimento é uma fase importante para codificação H.264, já que consome cerca de 90\% do tempo total do processo de codificação.
 
 A Figura~\ref{fig:dmec} apresenta a interação que ocorre na aplicação: o coordenador é responsável por definir o particionamento de imagem, fornecer a imagem a ser processada e retornar resultados gerados para o codificador, enquanto cada trabalhador deve calcular o custo de movimento e os vetores de movimento.
 
@@ -953,15 +953,17 @@ A Figura~\ref{fig:dmec} apresenta a interação que ocorre na aplicação: o coorden
 \subsection{Execução dos testes e depuração}
 A aplicação de teste de \ac{DMEC} verifica o desempenho de estimativa de movimento usando uma estratégia de particionamento de dados, enquanto os trabalhadores ($Workers$) realizam a estimativa e o coordenador ($Coordinator$) processa os resultados.
 
-Um dos requisitos desta aplicação é a produção de estimativas consumindo o menor tempo possível. Desta forma, a \ac{TAP} foi configurada para trocar a configuração do número de trabalhadores(\texttt{NUM\_WORKERS}), a fim de paralelizar o trabalho da estimativa. A configuração inicial de número de trabalhadores da aplicação era 6 e decidiu-se aumentar em dez vezes este número.
+Um dos requisitos desta aplicação é a produção de estimativas consumindo o menor tempo possível. Desta forma, \ac{AUTETESE} foi configurado para trocar a configuração do número de trabalhadores (\texttt{NUM\_WORKERS}), a fim de paralelizar o trabalho da estimativa. A Figura~\ref{progxml:dmecApp} ilustra o arquivo de configuração para a troca de parâmetros do número de \textit{threads} trabalhadoras.
 
-A troca de parâmetros gerou todas as configurações de \texttt{NUM\_WORKERS} de 1 até 60 em nenhuma delas houve erro de compilação. O teste do limite inferior e superior são demonstrados, respectivamente, na Figura~\ref{fig:qemu_dmec_6_workers} e na Figura~\ref{fig:qemu_dmec_60_workers}.
+\progxml{dmecApp}{Configuração de $AUTETESE$ para as aplicações $DMEC$.}
 
-\fig{qemu_dmec_6_workers}{Teste do $DMEC$ com configuração \texttt{NUM\_WORKERS} = 6}{scale=.4} \fig{qemu_dmec_60_workers}{Teste do $DMEC$ com configuração \texttt{NUM\_WORKERS} = 60}{scale=.4}
+\ac{AUTETESE} gerou todas as configurações de \texttt{NUM\_WORKERS} de 1 até 60. Em nenhuma destas configurações houve erro de compilação, mas algumas diferenças foram encontradas durante a execução das aplições. Para exemplificar a diferença, são apresentadas as Figuras~\ref{fig:qemu_dmec_6_workers} e \ref{fig:qemu_dmec_60_workers} que ilustram, respectivamente, a execução do caso de teste do limite inferior e do limite superior.
 
-As Figuras ~\ref{fig:qemu_dmec_6_workers} e~\ref{fig:qemu_dmec_60_workers} mostram que foi possível produzir uma imagem executável após a compilação, entretanto, mesmo sem haver erro na compilação a execução com \texttt{NUM\_WORKERS} igual a 60 retornou um resultado inválido, mais adiante discute-se o porquê. O aprendizado que pode-se tirar destes casos é que apenas compilar o código não garante uma aplicação livre de \textit{bugs}. 
+\fig{qemu_dmec_6_workers}{Teste do $DMEC$ com configuração \texttt{NUM\_WORKERS} = 1}{scale=.4} \fig{qemu_dmec_60_workers}{Teste do $DMEC$ com configuração \texttt{NUM\_WORKERS} = 60}{scale=.4}
 
-Para os casos nos quais a execução da aplicação não foi bem sucedida, \ac{TAP} automaticamente aciona o depurador para que se possa descobrir o porquê deste comportamento. Sendo assim, foi necessário incluir na configuração do ambiente um arquivo com \textit{breakpoints} para poder verificar-se o problema. Foram adicionados pontos de interrupção em cada uma das funções da aplicação, inclusive na função principal. A execução do \ac{GDB} com os \textit{breakpoints} é demonstrada na Figura~\ref{fig:gdb_dmec_60_workers}.
+A diferença entre as execuções apresentadas pelas Figuras~\ref{fig:qemu_dmec_6_workers} e \ref{fig:qemu_dmec_60_workers} está na informação impressa pela aplicação no dispositivo de saída. Para a a configuração \texttt{NUM\_WORKERS} igual a 1, a aplicação imprimiu os detalhes da execução, como: \textit{numPartitions}, \textit{partitionModel}, \textit{macroblocks}, etc. Porém, na Figura~\ref{fig:qemu_dmec_60_workers} não é evidenciada a interação da aplicação com o dispositivo de saída, ou seja, comparando as duas aplicações é possível ter indícios que de uma das configurações não está correta.
+
+Para os casos nos quais a execução da aplicação não foi bem sucedida, \ac{AUTETESE} automaticamente aciona o depurador para que se possa descobrir o porquê deste comportamento. Sendo assim, foi necessário incluir na configuração do ambiente um arquivo com \textit{breakpoints} para poder verificar-se o problema. Foram adicionados pontos de interrupção em cada uma das funções da aplicação, inclusive na função principal. A execução do \ac{GDB} com os \textit{breakpoints} é demonstrada na Figura~\ref{fig:gdb_dmec_60_workers}.
 
 \fig{gdb_dmec_60_workers}{Depuração do $DMEC$ com a configuração \texttt{NUM\_WORKERS} = 60}{scale=.4}
 
@@ -969,15 +971,19 @@ Com esta configuração apenas execuções que chamaram ao menos um vez cada uma das
 
 Após a execução dos casos de teste e análise do relatório, foi possível determinar que sempre que a configuração \texttt{NUM\_WORKERS} apresentava um número maior que 6 a aplicação se comportava de maneira anômala, surgindo a hipótese de que existia um limite máximo de trabalhadores. 
 
-Descobriu-se que, embora o particionamento da imagem seja fixo, dependendo do número de \textit{threads} era realizado um particionamento das imagens diferente. Para um número de \textit{threads} maior que 6 havia uma falha na aplicação devido a um erro cometido pela \textit{thread} coordenadora e que impossibilitava que o \ac{SUT} atingisse a função \texttt{main}.
+Descobriu-se que, embora o particionamento da imagem seja estático, o tamanho das partições é compatível com a dimensão dos macroblocos, ou seja, o número de \textit{threads} influencia no particionamento das imagens. A Figura~\ref{fig:tiposParticao} apresenta os tipos de partição implementados para o \ac{DMEC}.
 
-A partir desta descoberta foi possível maximizar o paralelismo das estimativas sem que houvesse efeitos colaterais no funcionamento da aplicação. Esta informação ajudou no desenvolvimento do componente, uma vez que descobriu-se que 6 \textit{threads} é o limite máximo de \textit{threads} suportado por este tipo de particionamento, e que para supotar um número maior que este seria necessário criar novas formas de particionamento.
+\fig{tiposParticao}{Tipos de particionamento das imagens em $DMEC$}{scale=.15}
 
-Apesar do ambiente ter fornecido dados importantes para verificar uma falha na execução do \ac{SUT}, vale lembrar que a qualidade da informação de retorno é inerente à qualidade de informação à priori que é repassada na configuração de \ac{TAP}. A Figura~\ref{fig:comp_report_partial} apresenta um trecho de relatório com algumas configurações geradas.
+A imagem é dividida de acordo com os tipos de particionamento para evitar que blocos adjacentes da imagem fiquem divididos entre duas partições adjacentes. Como o número máximo de fatias é alcançado com a configuração $2x3$, consequentemente, o número de \textit{threads} trabalhadoras também está limitado por este valor. Ou seja, para um número de \textit{threads} maior que 6 havia uma falha na aplicação devido a um erro cometido pela \textit{thread} coordenadora e que impossibilitava que o \ac{SUT} atingisse a função \texttt{main}.
+
+A partir desta descoberta foi possível maximizar o paralelismo das estimativas sem que houvesse efeitos colaterais no funcionamento da aplicação. Esta informação ajudou no desenvolvimento do componente, uma vez que descobriu-se que 6 \textit{threads} é o limite máximo de \textit{threads} suportado por este tipo de particionamento, e que para suportar um número maior que este seria necessário criar novas formas de particionamento.
+
+Apesar do ambiente ter fornecido dados importantes para verificar uma falha na execução do \ac{SUT}, vale lembrar que a qualidade da informação de retorno é inerente à qualidade de informação à priori que é repassada no arquivo \ac{XML} de configuração de \ac{AUTETESE}. A Figura~\ref{fig:comp_report_partial} apresenta um trecho de relatório com algumas configurações geradas.
 
 \fig{comp_report_partial}{Trecho do relatório com a troca da propriedade \texttt{NUM\_WORKERS} por valores gerados aleatoriamente.}{scale = 0.5}
 
-Em casos como o do teste aleatório qualquer propriedade pode mudar, por exemplo, o tamanho da pilha de aplicativos, o valor de um \textit{quantum}, a quantidade de ciclos de relógio, etc. Relatórios gerados com mais dados tendem a ser mais concisos e menos repetitivos, já os oriundos de testes aleatórios tendem a uma menor organização e maior redundância nas informações.
+Em casos como o do teste aleatório qualquer propriedade pode ter seu valor modificado como, por exemplo, o tamanho da pilha de aplicativos, o valor de um \textit{quantum}, a quantidade de ciclos de relógio, etc. Relatórios gerados com mais dados tendem a ser mais concisos e menos repetitivos, já os oriundos de testes aleatórios tendem a uma menor organização e maior redundância nas informações.
 
 Outro ponto de interesse científico encontra-se na razão entre o consumo de tempo para executar os testes versus a qualidade da informação que pode ser extraída. As Figuras \ref{fig:dmec_results} e \ref{fig:dmec_time_results} apresentam, respectivamente, os resultados dos experimentos relacionados à qualidade da informação devolvida para o usuário e ao consumo de tempo.
 
@@ -988,22 +994,22 @@ Neste experimento foram realizadas 50 tentativas para cada tipo de granularidade
 
 A diferença entre as tentativas totalmente aleatórias e as outras duas granularidades foi grande. Este resultado já era esperado, visto que a depuração de uma aplicação sem informação nenhuma à priori tem a sua efetividade ligada à probabilidade de encontrar tanto a falha quanto a sua causa.
 
-Entretanto não houve muita alteração entre os tipos determinado e parcialmente aleatório. Isto ocorreu devido à limitação na quantidade de propriedades e de seus possíveis valores de troca da aplicação, ou seja, com tal restrição as trocas com sucesso foram semelhantes nas duas configurações.
+Não houve, entretanto, muita alteração entre os tipos determinado e parcialmente aleatório. Isto ocorreu devido à limitação na quantidade de propriedades e de seus possíveis valores de troca da aplicação, ou seja, com tal restrição as trocas com sucesso foram semelhantes nas duas configurações.
 
 \fig{dmec_size_results}{Consumo de memória extra para armazenar as informações de depuração.}{scale = 0.65}
 
-Conforme apresentado na Figura~\ref{fig:dmec_size_results}, a aplicação não tem uma imagem grande, mas quando adicionamos a informação extra em tempo de compilação, o consumo de memória foi aumentado em cerca de 200\%. Em um sistema embarcado real, o tamanho desta nova imagem seria proibitivo.
+Conforme a Figura~\ref{fig:dmec_size_results} ilustra, a aplicação não tem uma imagem grande, mas quando adicionamos a informação extra em tempo de compilação, o consumo de memória foi aumentado em cerca de 200\%. Em um sistema embarcado real, o tamanho desta nova imagem seria proibitivo.
 
 \section{Experimento 2 - Utilização em disciplina e efetividade dos resultados}
-Este experimento foi elaborado para verificar a utilização do ambiente como artifício para estudo de disciplinas que envolvem codificação de \textit{software} embarcado. Além disso, este experimento tem como objetivo secundário a avaliação de \ac{AUTETESE} e da efetividade dos seus resultados. 
+Este experimento foi elaborado para verificar a utilização do ambiente como artifício para estudo de disciplinas que envolvem codificação de \textit{software} embarcado. Além disto, este experimento tem como objetivo secundário a avaliação de \ac{AUTETESE} e da efetividade dos seus resultados. 
 
-Para verificar a viabilidade do uso em disciplinas o experimento foi aplicado em códigos fonte de desenvolvedores inexperientes na produção de \textit{software} embarcado. A ideia é entender como a ferramenta\ac{AUTETESE} pode ser introduzido em disciplinas de desenvolvimento de \textit{software} considerando a facilidade de uso, abrangêcia dos testes e ajuste fino do relatório gerado.
+Para verificar a viabilidade do uso em disciplinas o experimento foi aplicado em códigos fonte de desenvolvedores inexperientes na produção de \textit{software} embarcado. A ideia é entender como  \ac{AUTETESE} pode ser introduzido em disciplinas de desenvolvimento de \textit{software} considerando a facilidade de uso, abrangêcia dos testes e ajuste fino do relatório gerado.
 
-\ac{TAP} foi avaliada através do código fonte produzido por estudantes do curso de bacharelado em ciências da computação e que estavam cursando a disciplina de sistemas operacionais II. A escolha da turma se deu devido ao fato de ser uma disciplina com muitos exercícios práticos, desenvolvidos no sistema operacional \ac{EPOS} - cuja disponibilidade é controlada por senha, ou seja, sabe-se de antemão quais estudantes já tiveram contato com o sistema.
+\ac{AUTETESE} foi avaliado através do código fonte produzido por estudantes do curso de bacharelado em ciências da computação e que estavam cursando a disciplina de \textit{Sistemas Operacionais II}. A escolha da turma se deu devido ao fato de ser uma disciplina com muitos exercícios práticos, desenvolvidos no sistema operacional \ac{EPOS}, cuja disponibilidade é controlada e sabe-se de antemão quais estudantes já tiveram contato com o sistema.
 
-No início desta disciplina os alunos tem acesso a um \ac{EPOS} incompleto e cada exercício realizado tem o intuito de implementar uma parte deste \textit{software}. Todos os exercícios tem um escopo fechado e sabe-se quais testes devem ser executados corretamente para cada uma das fases. 
+No início dessa disciplina os alunos têm acesso a um \ac{EPOS} incompleto e cada exercício realizado tem o intuito de implementar uma parte deste \textit{software}. Todos os exercícios têm um escopo fechado e sabe-se quais testes devem ser executados corretamente para cada uma das fases. 
 
-O \ac{EPOS} permite que cada aplicação gerada possua um arquivo próprio de configuração de abstrações para definir o seu comportamento. Dentre estas configurações encontram-se definições como, por exemplo, o tipo de escalonamento, que podem afetar um determinado comportamento da aplicação sem modificar seu propósito. 
+O \ac{EPOS} possui um arquivo de \textit{traits} para a configuração de abstrações e propriedades de cada aplicação. Dentre estas configurações encontram-se definições que podem afetar um determinado comportamento da aplicação sem modificar seu propósito, como, por exemplo, o tipo de escalonamento. 
 
 Se existem várias configurações válidas de uma mesma aplicação, todas elas devem ser atendidas pelas soluções dos exercícios. Entretanto, devido à inexperiência, alguns alunos não utilizam esta troca de parâmetros como ferramenta de apoio.
 
@@ -1011,13 +1017,13 @@ Se existem várias configurações válidas de uma mesma aplicação, todas elas devem
 \subsection{Configuração do experimento e execução dos testes}
 %A turma foi dividida em 12 grupos para a execução de exercícios práticos e de um projeto final. Os exercícios práticos servem para que os alunos consigam atingir a maturidade necessária para realizar um projeto final.
 
-Para fornecer dicas sobre as configurações mais importantes, \ac{TAP} foi configurada para realizar a troca das seguintes configurações: tipo de escalonamento de processos, o quantum de tempo e tamanhos da \textit{stack} e \textit{heap}. As propriedades do arquivo de configuração desenvolvido para a disciplina podem ser observadas na Tabela~\ref{ref:tabConfiguracaoSo2}.
+Para fornecer sugestões sobre as configurações mais importantes, \ac{AUTETESE} foi configurado para realizar a troca das seguintes configurações: tipo de escalonamento de processos, o quantum de tempo e tamanhos da \textit{stack} e \textit{heap}. As propriedades do arquivo de configuração desenvolvido para a disciplina podem ser observadas na Tabela~\ref{ref:tabConfiguracaoSo2}.
 
 %\progxml{so2}{Configuração de \ac{TAP} para as aplicações do \ac{EPOS} da disciplina.}
 
 \begin{table*}[h]
 \begin{center}
-\caption{Configuração de \ac{TAP} para as aplicações do \ac{EPOS} da disciplina.}
+\caption{Configuração de $AUTETESE$ para as aplicações do $EPOS$ da disciplina.}
 \begin{tabular}{|l|c|c|c|}
 \hline 
 & \multicolumn{3}{c|}{\textbf{Namespace}} \\ 
@@ -1048,13 +1054,13 @@ Para fornecer dicas sobre as configurações mais importantes, \ac{TAP} foi config
 \end{center}
 \end{table*}
 
-A configuração do ambiente para a disciplina focou em algumas configurações, mas com alta variabilidade de valores candidatos para a substituição. \ac{TAP} foi configurada desta forma para que seja possível apresentar aos alunos a quantidade de aplicações que devem funcionar corretamente após a implementação de um determinado exercício.
+A configuração do ambiente para a disciplina focou em apenas algumas propriedades, mas com alta variabilidade de valores candidatos para a substituição. \ac{AUTETESE} foi configurada desta forma para que seja possível apresentar aos alunos a quantidade de aplicações que devem funcionar corretamente após a implementação de um determinado exercício.
 
 Quando o foco é o aprendizado, é justo que esta configuração seja bem abrangente, visto que esta variedade pode ampliar a visão para cenários que talvez sejam importantes e que podem ter sido negligenciados durante a fase de concepção, incluindo a idealização dos requisitos não funcionais.
 
-Inicialmente o \ac{EPOS} conta com $18$ aplicações de teste e em cada uma foram realizadas $648$ trocas, ou seja, \ac{TAP} trocou as configurações destas aplicações e gerou um total de $11.664$ variações, as quais foram automaticamente executadas e depuradas. Para cada aplicação (e suas variações) foram necessárias cerca de $20$ horas de processamento.
+Inicialmente o \ac{EPOS} conta com $18$ aplicações de teste e em cada uma foram realizadas $648$ trocas, ou seja, \ac{AUTETESE} trocou as configurações destas aplicações e gerou um total de $11.664$ variações, as quais foram automaticamente executadas e depuradas. Para cada aplicação (e suas variações) foram necessárias cerca de $20$ horas de processamento.
 
-Esta abrangência no resultado gera uma grande quantidade de dados, portanto, para simplificar o estudo da execução dos testes, o relatório fornecido por \ac{TAP} apresenta informações resumidas, com a opção de verificar os arquivos de \textit{log} das execuções falhas. Na Figura~\ref{progxml:report_so2} encontra-se um trecho de relatório gerado por $AUTEESE$.
+Esta abrangência no resultado gera uma grande quantidade de dados, portanto, para simplificar o estudo da execução dos testes, o relatório fornecido apresenta informações resumidas, com a opção de verificar os arquivos de \textit{log} das execuções falhas. Na Figura~\ref{progxml:report_so2} encontra-se um trecho de relatório gerado por $AUTEESE$.
 
 \progxml{report_so2}{Trecho de relatório gerado por $AUTETESE$ para as aplicações do $EPOS$ da disciplina.}
 
@@ -1064,7 +1070,7 @@ Utilizando como exemplo a Figura~\ref{progxml:report_so2}, nota-se que a aplicaç
 
 %A Figura~\ref{fig:so2_falha} apresenta um resumo das execuções de falha dos exercícios $E1$ a $E7$ através da solução dos grupos ($G1$ a $G12$). Nela é possível notar que o número de execuções com falha começa a diminuir conforme são entregues os exercícios.
 
-Através dos dados é possível notar que o número de execuções com falha começa a diminuir conforme são entregues os exercícios.Este resultado era esperado se for considerado o aumento da familiaridade com o sistema operacional. Outro fato crucial para este resultado está na realização incremental dos trabalhos, em que o aluno precisa ter a implementação do trabalho $n$ para entregar corretamente o trabalho $n+1$. %apagar este parágrafo inteiro e descomentar os outros
+Através dos dados é possível notar que o número de execuções com falha começa a diminuir conforme são entregues os exercícios. Este resultado era esperado se for considerado o aumento da familiaridade com o sistema operacional. Outro fato crucial para este resultado está na realização incremental dos trabalhos, em que o aluno precisa ter a implementação do trabalho $n$ para entregar corretamente o trabalho $n+1$. %apagar este parágrafo inteiro e descomentar os outros
 
 %\fig{so2_falha}{Execuções dos exercícios que resultaram em falha.}{scale = 0.5}
 
@@ -1072,19 +1078,17 @@ Através dos dados é possível notar que o número de execuções com falha começa a 
 
 %Os casos de falha apresentados na Figura~\ref{fig:so2_falha} pode-se perceber que houve uma a grande tendência de redução da quantidade de execuções com falha no início da disciplina, que começou a estabilizar e seguir com mais uma leve redução. Isto ocorreu porque os exercícios de $E1$ até $E3$ relacionam-se diretamente com o assunto \textit{threads}, criando uma certa zona de estabilidade. Esta estabilidade se quebrou à partir do $E4$, cuja avaliação envolve o conceitos como o de eventos programados e rotina de tratamento de interrupções. 
 
-Houve uma a grande tendência de redução da quantidade de execuções com falha no início da disciplina, que começou a estabilizar e seguir com mais uma leve redução. Isto ocorreu porque os exercícios de $E1$ até $E3$ relacionam-se diretamente com o assunto \textit{threads}, criando uma certa zona de estabilidade. Esta estabilidade se quebrou à partir do $E4$, cuja avaliação envolve o conceitos como o de eventos programados e rotina de tratamento de interrupções. 
-
-A distribuição dos erros através dos exercícios pode ser observada na Figura~\ref{fig:dist_falha}. Considerando os percentuais de falha fica claro que quando iniciou-se um assunto mais aprofundado houveram maiores dificuldades de aprendizado. Se focarmos em uma análise exercício por exercício, os relatórios de teste gerados por \ac{TAP} podem servir para analisar tendências do aprendizado e ajudar o responsável pelas turmas a conduzir aulas focadas nas dificuldades dos alunos.
+Houve uma a grande tendência de redução da quantidade de execuções com falha no início da disciplina. Isto ocorreu porque os exercícios de $E1$ até $E3$ relacionam-se diretamente com o assunto \textit{threads}, criando uma certa zona de estabilidade. Esta estabilidade se quebrou a partir do $E4$, cuja avaliação envolve o conceitos como o de eventos programados e rotina de tratamento de interrupções. A distribuição dos erros através dos exercícios pode ser observada na Figura~\ref{fig:dist_falha}.
 
 \fig{dist_falha}{Distribuição percentual das falhas.}{scale = 0.5}
 
+Considerando os percentuais de falha fica claro que quando iniciou-se um assunto mais aprofundado houveram maiores dificuldades de aprendizado. Se focarmos em uma análise exercício por exercício, os relatórios de teste gerados podem servir para descobrir tendências do aprendizado e ajudar o responsável pelas turmas a conduzir aulas focadas nas dificuldades dos alunos.
+
 A partir dos erros mais comuns dentre os alunos da turma é possível gerar discussões saudáveis sobre a área de sistemas operacionais de modo a facilitar o aprendizado e desenvolvimento dos próximos exercícios práticos. 
 
-Como os experimentos possuem um escopo fechado, o relatório da execução dos testes pode ser utilizado para verificar se os requisitos dos exercícios foram atendidos. Entretanto, deve ser considerado que o ambiente serve para auxiliar a identificar padrões dos erros e dificuldades na hora de implementar um \textit{software} embarcado, mas é imprescindível a intervenção manual e o discernimento pessoal para utilizá-la corretamente. 
+Como os experimentos possuem um escopo fechado, o relatório da execução dos testes pode ser utilizado para verificar se os requisitos dos exercícios foram atendidos. Deve-se considerar que o ambiente auxilia a identificação de padrões dos erros e dificuldades na hora de implementar um \textit{software} embarcado.
 
-Como planos futuros consideramos utilizar \ac{AUTETESE} de maneira integrada ao serviço de controle de versão (\textit{svn}, \textit{git}, \textit{mercurial}, etc). Através disso os alunos podem receber relatórios que vão auxiliá-los durante o aprendizado e que servem também para a geração de \textit{feedback} para o ambiente. 
-
-Inclusive, este tipo de insumo é extremamente valioso para a melhoria de \ac{AUTETESE} pois os resultados gerados podem servir de base para realizar quantos ajustes forem necessários para manipular a execução dos testes e a depuração.
+Como planos futuros consideramos utilizar \ac{AUTETESE} de maneira integrada ao serviço de controle de versão (\textit{svn}, \textit{git}, \textit{mercurial}, etc). Através disso os alunos podem receber relatórios que vão auxiliá-los durante o aprendizado e que servem também para a geração de \textit{feedback} para o ambiente. Inclusive, este tipo de insumo é importante na melhoria de \ac{AUTETESE}, pois os resultados gerados podem servir como base para realizar os ajustes necessários para manipular a execução dos testes e a depuração.
 
 \chapter{Análise qualitativa das ferramentas de teste e depuração de \textit{software}}
 \label{cap:analiseQualitativa}

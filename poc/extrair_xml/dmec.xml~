@@ -1,0 +1,13 @@
+<test>
+   <application name="semaphore_test">
+      <configuration>
+        <trait id="NUM_WORKERS">
+	   <min>1</min>
+	   <max>10</max>
+         </trait>
+        <trait id="QUANTUM">
+	   <value>10000</value>
+         </trait>
+      </configuration>
+   </application>
+</test>

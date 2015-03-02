@@ -1,0 +1,234 @@
+= = = = = TEST REPORT = = = = =
+= Configurations =
+Quantum: 10ms, 20ms, 50ms, 100ms, 200ms
+Stack: 512MB, 1GB
+Heap: 512MB, 1GB
+Schedulers: EDM, RM 
+
+
+= Application: active_test =
+Successful tests:0 - Failed tests:0
+
+= Application: alarm_test =
+Successful tests:0 - Failed tests:0
+
+= Application: arp_test =
+Successful tests:0 - Failed tests:0
+
+= Application: chronometer_test =
+Successful tests:0 - Failed tests:0
+
+= Application: ip_test =
+Successful tests:0 - Failed tests:0
+
+= Application: mutex_test =
+Successful tests:0 - Failed tests:0
+
+= Application: scheduler_cpu_affinity_test =
+Successful tests:0 - Failed tests:0
+
+= Application: scheduler_dm_test =
+Successful tests:0 - Failed tests:0
+
+= Application: scheduler_edf_test =
+Successful tests:0 - Failed tests:0
+
+= Application: scheduler_rm_test =
+Successful tests:0 - Failed tests:0
+
+= Application: segment_test =
+Successful tests:0 - Failed tests:0
+
+= Application: semaphore_test =
+Successful tests:0 - Failed tests:0
+
+= Application: synchronizer_test =
+Successful tests:0 - Failed tests:0
+
+= Application: task_test =
+Successful tests:0 - Failed tests:0
+
+= Application: thread_test =
+Successful tests:0 - Failed tests:0
+Elapsed time: -1425134881.20000000000000000032 hours
+= = = = = TEST REPORT = = = = =
+= Configurations =
+Quantum: 10ms, 20ms, 50ms, 100ms, 200ms
+Stack: 512MB, 1GB
+Heap: 512MB, 1GB
+Schedulers: EDM, RM 
+
+
+= Application: active_test =
+Successful tests:0 - Failed tests:0
+
+= Application: alarm_test =
+Successful tests:0 - Failed tests:0
+
+= Application: arp_test =
+Successful tests:0 - Failed tests:0
+
+= Application: chronometer_test =
+Successful tests:0 - Failed tests:0
+
+= Application: ip_test =
+Successful tests:0 - Failed tests:0
+
+= Application: mutex_test =
+Successful tests:0 - Failed tests:0
+
+= Application: scheduler_cpu_affinity_test =
+Successful tests:0 - Failed tests:0
+
+= Application: scheduler_dm_test =
+Successful tests:0 - Failed tests:0
+
+= Application: scheduler_edf_test =
+Successful tests:0 - Failed tests:0
+
+= Application: scheduler_rm_test =
+Successful tests:0 - Failed tests:0
+
+= Application: segment_test =
+Successful tests:0 - Failed tests:0
+
+= Application: semaphore_test =
+Successful tests:0 - Failed tests:0
+
+= Application: synchronizer_test =
+Successful tests:0 - Failed tests:0
+
+= Application: task_test =
+Successful tests:0 - Failed tests:0
+
+= Application: thread_test =
+Successful tests:0 - Failed tests:0
+Elapsed time: 1.63333333333333333268 hours
+= = = = = TEST REPORT = = = = =
+= Configurations =
+Quantum: 10ms, 20ms, 50ms, 100ms, 200ms
+Stack: 512MB, 1GB
+Heap: 512MB, 1GB
+Schedulers: EDM, RM 
+
+
+= Application: active_test =
+Successful tests:0 - Failed tests:0
+
+= Application: alarm_test =
+Successful tests:0 - Failed tests:0
+
+= Application: arp_test =
+Successful tests:0 - Failed tests:0
+
+= Application: chronometer_test =
+Successful tests:0 - Failed tests:0
+
+= Application: ip_test =
+Successful tests:0 - Failed tests:0
+
+= Application: mutex_test =
+Successful tests:0 - Failed tests:0
+
+= Application: scheduler_cpu_affinity_test =
+Successful tests:0 - Failed tests:0
+
+= Application: scheduler_dm_test =
+Successful tests:0 - Failed tests:0
+
+= Application: scheduler_edf_test =
+Successful tests:0 - Failed tests:0
+
+= Application: scheduler_rm_test =
+Successful tests:0 - Failed tests:0
+
+= Application: segment_test =
+Successful tests:0 - Failed tests:0
+
+= Application: semaphore_test =
+Successful tests:0 - Failed tests:0
+
+= Application: synchronizer_test =
+Successful tests:0 - Failed tests:0
+
+= Application: task_test =
+Successful tests:0 - Failed tests:0
+
+= Application: thread_test =
+Successful tests:0 - Failed tests:0
+Elapsed time: .02777777777777777700 hours
+= = = = = TEST REPORT = = = = =
+= Configurations =
+Quantum: 10ms, 20ms, 50ms, 100ms, 200ms
+Stack: 512MB, 1GB
+Heap: 512MB, 1GB
+Schedulers: EDM, RM 
+
+
+= Application: active_test =
+Successful tests:0 - Failed tests:0
+
+= Application: alarm_test =
+Successful tests:0 - Failed tests:0
+
+= Application: arp_test =
+Successful tests:0 - Failed tests:0
+
+= Application: chronometer_test =
+Successful tests:0 - Failed tests:0
+
+= Application: ip_test =
+Successful tests:0 - Failed tests:0
+
+= Application: mutex_test =
+Successful tests:0 - Failed tests:0
+
+= Application: scheduler_cpu_affinity_test =
+Successful tests:0 - Failed tests:0
+
+= Application: scheduler_dm_test =
+Successful tests:0 - Failed tests:0
+
+= Application: scheduler_edf_test =
+Successful tests:0 - Failed tests:0
+
+= Application: scheduler_rm_test =
+Successful tests:0 - Failed tests:0
+
+= Application: segment_test =
+Successful tests:0 - Failed tests:0
+
+= Application: semaphore_test =
+Successful tests:0 - Failed tests:0
+
+= Application: synchronizer_test =
+Successful tests:0 - Failed tests:0
+
+= Application: task_test =
+Successful tests:0 - Failed tests:0
+
+= Application: thread_test =
+Successful tests:0 - Failed tests:0
+Elapsed time: .00048148148148148048 hours
+= = = = = TEST REPORT = = = = =
+= Configurations =
+Quantum: 10ms, 20ms, 50ms, 100ms, 200ms
+Stack: 512MB, 1GB
+Heap: 512MB, 1GB
+Schedulers: EDM, RM 
+
+= = = = = TEST REPORT = = = = =
+= Configurations =
+QUANTUM: 10000
+NUM_WORKERS: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+
+= = = = = TEST REPORT = = = = =
+= Configurations =
+QUANTUM: 10000
+NUM_WORKERS: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+
+= = = = = TEST REPORT = = = = =
+= Configurations =
+QUANTUM: 10000
+NUM_WORKERS: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+

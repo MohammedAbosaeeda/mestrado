@@ -1,0 +1,18 @@
+= = = = = TEST REPORT = = = = =
+= Configurations =
+QUANTUM: 10000
+NUM_WORKERS: 1, 2, 3, 4, 5
+
+
+= Application: semaphore_test =
+Successful tests:5 - Failed tests:0
+Elapsed time:  hours
+= = = = = TEST REPORT = = = = =
+= Configurations =
+QUANTUM: 10000
+NUM_WORKERS: 1, 2, 3, 4, 5
+
+
+= Application: semaphore_test =
+Successful tests:5 - Failed tests:0
+Elapsed time: .00008333333333333316 hours

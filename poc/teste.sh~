@@ -1,9 +1,16 @@
 #!/bin/bash
-START=`date +%H:%M:%s:%N`
- 
+START=`date +%H:%M` 
 echo $EPOS
  
-END=`date +%H:%M:%s:%N`
+END=`date +%H:%M`
 
 diff=$(  echo "$END - $START"  | sed 's%:%+(1/60)*%g' | bc -l )
 echo $diff hours
+
+sed -i "s/include makedefs/include makedefs \n\nautomated_test: \n\t\$\(INSTALL\) \$\(SRC\)\/abstraction\/\$\(APPLICATION\).cc \$\(APP\) \n\t\$\(INSTALL\) \$\(SRC\)\/abstraction\/\$\(APPLICATION\)_traits.h \$\(APP\) \n\t\$\(MAKETEST\) clean1 run1 \n\t\$\(CLEAN\) \$\(APP\)\/\$\(APPLICATION\)\* \n/g" makefile
+
+grep -q -F 'include "/configs/projectname.conf"' foo.bar || echo 'include "/configs/projectname.conf"' >> foo.bar
+
+
+
+===============================

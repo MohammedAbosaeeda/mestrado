@@ -1,0 +1,7 @@
+install /home/tinha/mestrado/poc/8.extrair_xml/teaching/ine5424-20141/src/abstraction/active_test.cc /home/tinha/mestrado/poc/8.extrair_xml/teaching/ine5424-20141/app 
+install /home/tinha/mestrado/poc/8.extrair_xml/teaching/ine5424-20141/src/abstraction/active_test_traits.h /home/tinha/mestrado/poc/8.extrair_xml/teaching/ine5424-20141/app 
+make --no-print-directory --silent clean1 run1 
+make[3]: *** [eposmkbi] Interrupt
+make[2]: *** [eposmkbi] Interrupt
+make[1]: *** [tools] Interrupt
+make: *** [automated_test] Interrupt

@@ -31,7 +31,7 @@
 \SetKwFor{ForEach}{para cada}{fa\c{c}a}{fim}
 \SetKwRepeat{Repeat}{repita}{at\'{e}}
 
-\titulo{AUTETESE: Automação da execução de testes de software embarcado} % Titulo do trabalho
+\titulo{AUTETESE: Uma abordagem de automação da execução de testes de software embarcado} % Titulo do trabalho
 \autor{Rita de Cássia Cazu Soldi} % Nome do autor
 \data{10}{dezembro}{2014} % Data da publicação do trabalho
 
@@ -1069,22 +1069,30 @@ Os arquivos com as execuções falhas contém informações desde o momento de compil
 Utilizando como exemplo a Figura~\ref{progxml:report_so2}, nota-se que a aplicação $active\_test$ continha algumas execuções falhas, sendo assim, dentre os anexos devemos encontrar $400$ arquivos cujo nome iniciam-se com esta aplicação. Por exemplo, o arquivo  $active\_test\_Scheduler\_EDF.log$ é um relatório de falha da execução dos testes da aplicação $active\_test$ para quando a configuração $Scheduler$ estava com o valor $EDF$.
 
 %A Figura~\ref{fig:so2_falha} apresenta um resumo das execuções de falha dos exercícios $E1$ a $E7$ através da solução dos grupos ($G1$ a $G12$). Nela é possível notar que o número de execuções com falha começa a diminuir conforme são entregues os exercícios.
+\subsection{Identificando falhas nas entregas}
 
-Através dos dados é possível notar que o número de execuções com falha começa a diminuir conforme são entregues os exercícios. Este resultado era esperado se for considerado o aumento da familiaridade com o sistema operacional. Outro fato crucial para este resultado está na realização incremental dos trabalhos, em que o aluno precisa ter a implementação do trabalho $n$ para entregar corretamente o trabalho $n+1$. %apagar este parágrafo inteiro e descomentar os outros
+    A aplicação de teste de \textit{threads} verifica se as operações comuns a este tipo de abstração estão corretamente implementadas. Ela inicia-se com a \textit{thread} $m$, que cria mais duas \textit{threads} ($a$ e $b$), espera que ambas finalizem e depois exclui todas as \textit{threads}, realizando inclusive uma auto deleção.
+    Figura~\ref{fig:thread_test_app}
+    Figura~\ref{fig:thread_test_certo}
 
-%\fig{so2_falha}{Execuções dos exercícios que resultaram em falha.}{scale = 0.5}
+\fig{thread_test_app}{Trecho de código da aplicação \textit{thread\_test}}{scale = 0.4}
+\fig{thread_test_certo}{Exemplo da execução da aplicação \textit{thread\_test}}{scale = 0.4}
 
-%Este resultado era esperado se for considerado o aumento da familiaridade com o sistema operacional. Outro fato crucial para este resultado está na realização incremental dos trabalhos, em que o aluno precisa ter a implementação do trabalho $n$ para entregar corretamente o trabalho $n+1$.
+\ac{AUTETESE} revelou que esta aplicação possui o processamento incorreto, pois no arquivo de \textit{log} da execução não poderia aparecer a frase \textit{"It should not be shown on the display!"}. Na Figura x encontra-se o resultado da execução da aplicação, que continuou mesmo depois da \textit{thread} $m$ executar o comando de auto deleção.
 
-%Os casos de falha apresentados na Figura~\ref{fig:so2_falha} pode-se perceber que houve uma a grande tendência de redução da quantidade de execuções com falha no início da disciplina, que começou a estabilizar e seguir com mais uma leve redução. Isto ocorreu porque os exercícios de $E1$ até $E3$ relacionam-se diretamente com o assunto \textit{threads}, criando uma certa zona de estabilidade. Esta estabilidade se quebrou à partir do $E4$, cuja avaliação envolve o conceitos como o de eventos programados e rotina de tratamento de interrupções. 
+Quando a aplicação foi considerada falha, uma instância do \ac{GDB} é automaticamente é disponibilizada para que o usuário possa encontrar o erro. Para esta aplicação, foram inseridos os seguintes breakpoints x, x e x
 
-Houve uma a grande tendência de redução da quantidade de execuções com falha no início da disciplina. Isto ocorreu porque os exercícios de $E1$ até $E3$ relacionam-se diretamente com o assunto \textit{threads}, criando uma certa zona de estabilidade. Esta estabilidade se quebrou a partir do $E4$, cuja avaliação envolve o conceitos como o de eventos programados e rotina de tratamento de interrupções. A distribuição dos erros através dos exercícios pode ser observada na Figura~\ref{fig:dist_falha}.
+Como conclusão da depuração, descobriu-se que o erro ocorreu no tratamento do término da última \textit{thread} de usuário do sistema, que não considera o caso de haver uma \textit{thread} esperando na fila de um sincronizador.
+
+ 
+\subsection{Distribuição dos exercícios com falhas}
+Além de identificar comportamentos inesperados do código fonte dos alunos com \ac{AUTETESE}, também é possível retirar dados para compor indicadores de desempenho. Estes indicadores podem ser direcionados a vários aspectos da disciplina, como auxiliar a monitorar da evolução das entregas, servir de referência para tomada de decisões, identificar pontos de melhoria, entre outros. Um exemplo de monitoramento da evolução das entregas encontra-se na Figura~\ref{fig:dist_falha}.
 
 \fig{dist_falha}{Distribuição percentual das falhas.}{scale = 0.5}
 
-Considerando os percentuais de falha fica claro que quando iniciou-se um assunto mais aprofundado houveram maiores dificuldades de aprendizado. Se focarmos em uma análise exercício por exercício, os relatórios de teste gerados podem servir para descobrir tendências do aprendizado e ajudar o responsável pelas turmas a conduzir aulas focadas nas dificuldades dos alunos.
+Na distribuição percentual das falhas verifica-se que no ínicio da disciplina existe uma redução na quantidade de falhas nas entregas, e que este declínio se sustenta até a entrega do exercício $E3$. Ao monitorar o desempenho da turma, identifica-se que no $E4$ o percental de falhas se manteve. Isto ocorreu porque os exercícios de $E1$ até $E3$ relacionam-se diretamente com o assunto \textit{threads}, criando uma zona de estabilidade. Já o $E4$ envolve o conceitos como o de eventos programados e rotina de tratamento de interrupções. 
 
-A partir dos erros mais comuns dentre os alunos da turma é possível gerar discussões saudáveis sobre a área de sistemas operacionais de modo a facilitar o aprendizado e desenvolvimento dos próximos exercícios práticos. 
+Focando-se na análise exercício por exercício, os relatórios de \ac{AUTETESE} podem servir para descobrir tendências do aprendizado e ajudar o responsável pelas turmas a conduzir aulas focadas nas dificuldades dos alunos. Pois a partir dos erros mais comuns dentre os alunos da turma é possível gerar discussões saudáveis sobre a área de sistemas operacionais de modo a facilitar o aprendizado e desenvolvimento dos próximos exercícios práticos. 
 
 Como os experimentos possuem um escopo fechado, o relatório da execução dos testes pode ser utilizado para verificar se os requisitos dos exercícios foram atendidos. Deve-se considerar que o ambiente auxilia a identificação de padrões dos erros e dificuldades na hora de implementar um \textit{software} embarcado.
 

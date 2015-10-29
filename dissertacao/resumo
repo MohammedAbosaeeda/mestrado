@@ -1,0 +1,85 @@
+Guto,
+tentei sumarizar os pontos que você mandou no e-mail e os principais pontos que os professores colocaram no rascunho que me entregaram. Espero que te ajude a escrever o resumo :)
+Qualquer dúvida estou a disposição!
+
+~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~
+Leandro
+~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~
+
+- Contextualização do trabalho no cenário de engenharia de testes
+
+- Não existe uma formalização das especificações de entrada
+
+- Configuração dos testes
+
+Acredito que no caso do Leandro as perguntas de cima foram as mesmas que ele colocou no rascunho. Separei elas por capítulos:
+
+- Capítulo 1 -
+
+* Organização do texto no capítulo de introdução???
+
+Foi adicionada a seção 1.3 - Organização do texto, com um resumo sobre cada capítulo do texto.
+
+- Capítulo 2 -
+
+* Não falou nada sobre testes!!
+
+O Capítulo 2 foi reestruturado. Foi adicionada a seção 2.1 - Testabilidade de um sistema, que apresenta definições para determinar os critérios de teste e da execução destes testes. A seção 2.2 foi modificada para que fiquem mais explícitos os objetivos do teste de software e as técnicas para desenvolver/executar os testes de software.
+
+- Capítulo 4 -
+
+* Muito blá blá blá e não explica a proposta. Entendi pouco da proposta.
+
+Este capítulo foi reformulado. A introdução deste capítulo ficou mais direta e ele foi separado em duas seções. 4.1 - Modelo conceitual e arquitetura apresenta as fases conceituais do ambiente, como está organizada a arquitetura e as delimitações das responsabilidades do ambiente. Na seção 4.2 - Implementação do ambiente AUTETESE são apresentados os detalhes da implementação e da escolha das ferramentas utilizadas.
+
+- Capítulo 6 -
+
+* Capítulo 6.1.1 - Execução dos testes e depuração tem um questionamento: Como e quando é gerado o relatório? O que ele contém?
+
+A seção 4.1 - Modelo conceitual e arquitetura apresenta a sequência de fases conceituais do ambiente, nela está delimitado o momento em que o relatório é desenvolvido. As informações dobre o que o relatório contém está presenta na seção 4.1.4 Sintetizar os dados, onde existem exemplos de cada tipo de relatório e os dados presentes em cada um deles.
+
+* Capítulo 6.2.1 - Configuração do experimento e execução dos testes:
+Como? Variações? Depurar?
+As informações conceituais estão na seção seção 4.1 - Modelo conceitual e arquitetura. Uma explicação sobre como os dados são interpretados e como são feitas as variações encontram-se na seção 4.1.2 Interpretar dados de entrada. Já os detalhes sobre a execução e depuração encontram-se na seção 4.1.3 Executar testes e depuração
+
+- Capítulo 8 -
+*Deveria citar os artigos publicados
+O texto agora contém referência aos artigos que já foram publicados
+
+~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~
+
+Ricardo
+
+~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~
+
+- Não há discussão sobre as especificações dos testes e nem sobre a origem dos testes em si.
+
+- Linguagem inadequada -> revisão linguística completa
+
+- Conceitos referenciados indiretamente -> buscar autores dos trabalhos seminais
+
+- Revisar Pressman ou Sommerville
+
+- Contribuição não está definida e nem alinhada com os objetivos
+
+~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~
+
+Dantas
+~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~
+
+- Título não expressa a contribuição
+
+O trabalho foi batizado conforme a sugestão do professor e agora é AUTETESE - AUTomação da Execução de TEstes para Software Embarcado. Com este batismo tornou-se mais fácil delimitar o que é contribuição da Rita e o que foi
+
+- Reestruturar o documento
+
+Conforme solicitado, os capítulos
+
+ 
+
+* TODOS
+
+- Pelo texto, não se identifica com clareza o que foi feito (implementado), como pode ser usado e quais contribuições pode trazer.
+
+Rita de Cássia Cazu Soldi
+

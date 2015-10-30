@@ -62,7 +62,7 @@
 \acro{XML}{\textit{eXtensible Markup Language}}
 \end{acronym}
 
-\newcommand{\fig}[4][h]{
+\newcommand{\fig}[4][h!]{
   \begin{figure}[#1] {\centering{\includegraphics[#4]{fig/#2}} \par}
     \caption{#3\label{fig:#2}}
   \end{figure}
@@ -1069,6 +1069,7 @@ Os arquivos com as execuções falhas contém informações desde o momento de compil
 Utilizando como exemplo a Figura~\ref{progxml:report_so2}, nota-se que a aplicação $thread\_test$ contém execuções falhas, sendo assim, dentre os anexos devemos encontrar $1152$ arquivos cujos nomes iniciam-se com esta aplicação. Por exemplo, o arquivo  $thread\_test\_Scheduler\_EDF.log$ é um relatório de falha da execução dos testes da aplicação $trhead\_test$ quando a configuração $Scheduler$ foi modificada para $EDF$.
 
 %A Figura~\ref{fig:so2_falha} apresenta um resumo das execuções de falha dos exercícios $E1$ a $E7$ através da solução dos grupos ($G1$ a $G12$). Nela é possível notar que o número de execuções com falha começa a diminuir conforme são entregues os exercícios.
+
 \subsection{Identificando os defeitos}
 Conforme apresentado no relatório de \ac{AUTETESE}, a aplicação $thread\_test$ falhou em todas execuções, independente das configurações apresentadas. Desta forma, a entrega do trabalho não é satisfatória e o grupo responsável deve descobrir o defeito inserido e corrigir a implementação. 
 
@@ -1082,13 +1083,16 @@ Na Figura~\ref{fig:thread_test_errado} encontra-se o resultado da execução da ap
 
 Quando a aplicação é reprovada, uma instância do \ac{GDB} é automaticamente é disponibilizada para que o usuário possa encontrar o erro. Para esta aplicação foram inseridos \textit{breakpoints} e \textit{watchpoints} conforme a Figura~\ref{fig:thread_test_breakpoints}. 
 
-\fig{thread_test_breakpoints}{Depuração da aplicação \textit{thread\_test}.}{scale = 0.4}
+\fig{thread_test_breakpoints}{Depuração da aplicação \textit{thread\_test}.}{scale = 0.5}
 
-A chamada do método de destrução das \textit{threads} foi executada para todas as \textit{threads}, entretanto, apenas as \textit{threads} $a$ e $b$ foram realmente deletadas. Analisando o código fonte, notou-se que a \textit{thread} $m$ ficou esperando na fila  de um sincronizador e não entrou em nenhuma das condições da destrução.
+A depuração ocorreu no modo \textit{step} e foi possível verificar que chamada do método de destrução das \textit{threads} foi executado para todas as \textit{threads}, entretanto, apenas $a$ e $b$ foram realmente deletadas. Analisando o código fonte, notou-se que a \textit{thread} $m$ não entrou em nenhuma das condições da destrução. Analisando a implementação do destrutor da \textit{thread}, descobriu-se que o erro ocorreu no tratamento do término da última \textit{thread}, que não considerou o caso de haver uma \textit{thread} esperando na fila de um sincronizador.
 
+Para resolver este problema, os alunos responsáveis optaram dor desenvolver uma lista de recursos que cada abstração do sistema deve gerenciar. Sendo assim, quando a \textit{thread} for deletada é necessário liberar todos os sincronizadores em que ela possa estar. Além disso, agora a \textit{thread} não pode de auto deletar. O novo trecho de código fonte está ilustrado na Figura~\ref{fig:thread_test_codigo_corrigido}.
 
- Como conclusão da depuração, descobriu-se que o erro ocorreu no tratamento do término da última \textit{thread} de usuário do sistema, que não considerou o caso de haver uma \textit{thread} esperando na fila de um sincronizador.
+\fig{thread_test_codigo_corrigido}{Código fonte do destrutor da \textit{thread} após correção.}{scale = 0.4}
 
+Após a correção do código fonte, a aplicação \textit{thread\_test} foi novamente executada por \ac{AUTETESE} e, desta vez, foi aprovada. Este resultado não signfica que o código não possui erros e, inclusive, a correção não realiza o tratamento da auto destrução da \textit{thread}. Uma solução mais completa depende de outros aspectos que não foram completamente abordados na aplicação de teste como, por exemplo, perda do contexto de execução e a não liberação da pilha. Este defeito na auto deleção não foi exclusivo de um grupo, pois mais de 25\% da turma não se atentou ao tratamento desta situação e não realizou a entrega corretamente.
+%4 grupos não implementaram, 5 grupos não entregaram e 3 entregaram ok
  
 \subsection{Distribuição dos exercícios com falhas}
 Além de identificar comportamentos inesperados do código fonte dos alunos com \ac{AUTETESE}, também é possível retirar dados para compor indicadores de desempenho. Estes indicadores podem ser direcionados a vários aspectos da disciplina, como auxiliar o monitoramento da evolução das entregas, servir de referência para tomada de decisões, identificar pontos de melhoria, entre outros. Um exemplo de monitoramento da evolução das entregas encontra-se na Figura~\ref{fig:dist_falha}.
@@ -1099,7 +1103,7 @@ Na distribuição percentual das falhas verifica-se que no ínicio da disciplina ex
 
 Focando-se na análise exercício por exercício, os relatórios de \ac{AUTETESE} podem servir para descobrir tendências do aprendizado e ajudar o responsável pelas turmas a conduzir aulas focadas nas dificuldades dos alunos. Pois a partir dos erros mais comuns dentre os alunos da turma é possível gerar discussões saudáveis sobre a área de sistemas operacionais de modo a facilitar o aprendizado e desenvolvimento dos próximos exercícios práticos. 
 
-Como os experimentos possuem um escopo fechado, o relatório da execução dos testes pode ser utilizado para verificar se os requisitos dos exercícios foram atendidos. Deve-se considerar que o ambiente auxilia a identificação de padrões dos erros e dificuldades na hora de implementar um \textit{software} embarcado.
+Como os experimentos possuem um escopo fechado, o relatório da execução dos testes pode ser utilizado para verificar se os requisitos dos exercícios foram atendidos. Deve-se considerar que o ambiente auxilia a identificação de padrões dos erros e dificuldades na hora de implementar um \textit{software} embarcado, mas que o discernimento do responsável pela turma é imprescindível.
 
 Como planos futuros consideramos utilizar \ac{AUTETESE} de maneira integrada ao serviço de controle de versão (\textit{svn}, \textit{git}, \textit{mercurial}, etc). Através disso os alunos podem receber relatórios que vão auxiliá-los durante o aprendizado e que servem também para a geração de \textit{feedback} para o ambiente. Inclusive, este tipo de insumo é importante na melhoria de \ac{AUTETESE}, pois os resultados gerados podem servir como base para realizar os ajustes necessários para manipular a execução dos testes e a depuração.
 
